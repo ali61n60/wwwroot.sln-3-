@@ -1,0 +1,4 @@
+﻿<%@ ServiceHost Service="WcfService.Services.AdvertisementTransportationService" %>
+
+
+

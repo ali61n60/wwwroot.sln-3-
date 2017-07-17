@@ -1,0 +1,759 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{43F5599E-C0D2-42E1-AC07-41CF565A3067}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebUIMain</RootNamespace>
+    <AssemblyName>WebUIMain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PublishDatabases>false</PublishDatabases>
+    <DeployEncryptKey>Encryption password is used only if any deployment setting is marked as secure</DeployEncryptKey>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Moq, Version=4.5.22.0, Culture=neutral, PublicKeyToken=69f491c39445e920, processorArchitecture=MSIL">
+      <HintPath>..\packages\Moq.4.5.22\lib\net45\Moq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StructureMap, Version=4.4.1.451, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\StructureMap.4.4.1\lib\net45\StructureMap.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AdvertisementImages\0a559a29-f176-4f1d-b9e6-032d919f3955\test.txt" />
+    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\0.jpeg" />
+    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\1.jpeg" />
+    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\2.jpeg" />
+    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\3.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\0.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\1.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\2.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\3.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\4.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\5.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\6.jpeg" />
+    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\7.jpeg" />
+    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\0.jpeg" />
+    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\1.jpeg" />
+    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\2.jpeg" />
+    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\3.jpeg" />
+    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\0.jpeg" />
+    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\1.jpeg" />
+    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\2.jpeg" />
+    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\3.jpeg" />
+    <Content Include="AdvertisementImages\3fdd9167-40ed-4f59-a306-d47cce5b406d\0.jpeg" />
+    <Content Include="AdvertisementImages\3fdd9167-40ed-4f59-a306-d47cce5b406d\1.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\0.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\1.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\2.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\3.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\4.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\5.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\6.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\7.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\8.jpeg" />
+    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\9.jpeg" />
+    <Content Include="AdvertisementImages\7528e8d6-35c3-411b-bdc1-d7df991ac973\0.jpeg" />
+    <Content Include="AdvertisementImages\7528e8d6-35c3-411b-bdc1-d7df991ac973\1.jpeg" />
+    <Content Include="AdvertisementImages\780a8014-f027-4a73-aa36-7662575dac5d\0.jpeg" />
+    <Content Include="AdvertisementImages\780a8014-f027-4a73-aa36-7662575dac5d\1.jpeg" />
+    <Content Include="AdvertisementImages\8c13a62b-8dc3-405c-86fa-96334bf31271\0.jpeg" />
+    <Content Include="AdvertisementImages\8c13a62b-8dc3-405c-86fa-96334bf31271\1.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\0.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\1.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\2.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\3.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\4.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\5.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\6.jpeg" />
+    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\7.jpeg" />
+    <Content Include="AdvertisementImages\a29d2202-366e-433c-9a3a-91fa6f83bb03\0.jpeg" />
+    <Content Include="AdvertisementImages\a29d2202-366e-433c-9a3a-91fa6f83bb03\1.jpeg" />
+    <Content Include="AdvertisementImages\b1c8e9e6-ee11-4c25-9a3c-edc317029b4d\0.jpeg" />
+    <Content Include="AdvertisementImages\b1c8e9e6-ee11-4c25-9a3c-edc317029b4d\1.jpeg" />
+    <Content Include="AdvertisementImages\b462026b-aaff-4301-a09c-7d7e52e98d30\0.jpeg" />
+    <Content Include="AdvertisementImages\b462026b-aaff-4301-a09c-7d7e52e98d30\1.jpeg" />
+    <Content Include="AdvertisementImages\b6ce4c2c-15d6-44b6-b301-2ca7897ec277\0.jpeg" />
+    <Content Include="AdvertisementImages\b6ce4c2c-15d6-44b6-b301-2ca7897ec277\1.jpeg" />
+    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\0.jpeg" />
+    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\1.jpeg" />
+    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\2.jpeg" />
+    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\3.jpeg" />
+    <Content Include="AdvertisementImages\c11172b2-6cdb-48b1-a8f5-1f30aaa0bae1\0.jpeg" />
+    <Content Include="AdvertisementImages\c11172b2-6cdb-48b1-a8f5-1f30aaa0bae1\1.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\0.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\1.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\2.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\3.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\4.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\5.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\6.jpeg" />
+    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\7.jpeg" />
+    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\0.jpeg" />
+    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\1.jpeg" />
+    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\2.jpeg" />
+    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\3.jpeg" />
+    <Content Include="AdvertisementImages\d134b2dc-bab7-4c80-b205-3df63b929e10\0.jpeg" />
+    <Content Include="AdvertisementImages\d134b2dc-bab7-4c80-b205-3df63b929e10\1.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\067d08345422ad31cef8ed8d74d60319.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\0c2cde93dfc70bf94cffd8935844de05.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\1074fb3298151d4c19623b657ebacda3.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\1e75ef213e92264b380203deaaff9d64.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\24f1bd6488e28fe142bab3564837dc0a.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\28189870552edb1bc449a3592a79ce98.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\39c7a7e5c65ad056ef38525bac2511d9.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\3ac6c0c579bfdda04bda38b89a8ba5b8.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\44eeb871bd3791cdaa8fc70d5076eb34.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\44f1c1a48057d82fb147d066610a2a0a.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\4a38a3e86a366998759bf0cfc48cb5a2.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\4c1dd93618d5db43f95c42bc0d56c494.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\54c4a573eaa7392aefe1ebb15052f1f6.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\56c394ef5ae75efda1d5fe20c29337a9.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\67941bb43a496537025d235449aab46a.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\87fe03ca1a75af127114ccb579b7934e.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\92e8f572dd8ff3cc9cb488b029e67a68.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\94c06a09b9ec7275103d80e958345191.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\95e48d359c26b10cc38476d8b776ecc6.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\96c9aed880847f60168968e83bc3b576.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\9b202eb1dd6a0c04061863d2362e5b53.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\9c4cb5cd525807dde117b49066247518.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\a0baaf138416f4e20822948958f99fa4.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\a3fc8a1c88acbbeccc146b964469689f.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\ab379bd160df1bfdc7772bada4172a63.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\bd5c41743d39bf3afcf4e817a2a0ffa3.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\bf62bcbcf69b4eccf5ac3e582ab51715.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\ca51840b1fa5aa0f2674f2114cd798f3.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\d5c0ecf78448b68bf363478e989b7429.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\d78360a86cf86b4941cdbac361b9a036.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\e62819e938fd4cf20c968dbb727d3740.jpeg" />
+    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\f11499403b2934e072ee1f1342b601b3.jpeg" />
+    <Content Include="AdvertisementImages\d71ae427-8f76-4c28-827e-cbe8d7301d09\0.jpeg" />
+    <Content Include="AdvertisementImages\d71ae427-8f76-4c28-827e-cbe8d7301d09\1.jpeg" />
+    <Content Include="Advertisement\AddNewAdvertisement.aspx" />
+    <Content Include="Advertisement\Advertisement.aspx" />
+    <Content Include="Advertisement\EditAdvertisement.aspx" />
+    <Content Include="Advertisement\NotifyMe.aspx" />
+    <Content Include="Advertisement\UserAdvertisements.aspx" />
+    <Content Include="Samples\CallWcfFromJQuery\WebForm1.aspx" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\Enumeration.aspx" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\Enumeration.js" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\Inheritance.aspx" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\Inheritance.js" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\Interface.aspx" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\Interface.js" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\MicrosoftAjax.js" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\NameSpace.aspx" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\NameSpace.js" />
+    <Content Include="Samples\MicrosoftAjaxLibrary\Reflection.aspx" />
+    <Content Include="Registration\UserInfo.aspx" />
+    <Content Include="bootstrap-3.3.5-dist\css\bootstrap-theme.css" />
+    <Content Include="bootstrap-3.3.5-dist\css\bootstrap-theme.min.css" />
+    <Content Include="bootstrap-3.3.5-dist\css\bootstrap.css" />
+    <Content Include="bootstrap-3.3.5-dist\css\bootstrap.min.css" />
+    <Content Include="bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="bootstrap-3.3.5-dist\js\bootstrap.js" />
+    <Content Include="bootstrap-3.3.5-dist\js\bootstrap.min.js" />
+    <Content Include="bootstrap-3.3.5-dist\js\npm.js" />
+    <Content Include="General\AbousUs.aspx" />
+    <Content Include="Manager\ManageAdvertisements\SetSmsMessages.aspx" />
+    <Content Include="Manager\ManageAdvertisements\VerifyAdvertisements.aspx" />
+    <Content Include="Manager\ManagerOnly.aspx" />
+    <Content Include="Registration\ForgottenPassword.aspx" />
+    <Content Include="General\loader.gif" />
+    <Content Include="Search\AjaxTest2.aspx" />
+    <Content Include="Search\WebService1.asmx" />
+    <Content Include="Services\RegistrationService.svc" />
+    <Content Include="Services\LocationService.svc" />
+    <Content Include="Services\RepositoryService.svc" />
+    <Content Include="Services\SmsService.svc" />
+    <Content Include="Services\CryptoService.svc" />
+    <Content Include="Services\AdvertisementCommonService.svc" />
+    <Content Include="Default.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="Registration\CreateNewUser.aspx" />
+    <Content Include="Registration\Login.aspx" />
+    <Content Include="Search\AdDetail\AdDetail.aspx" />
+    <Content Include="Search\Search.aspx" />
+    <Content Include="Search\urlError.aspx" />
+    <Content Include="Services\CategoryService.svc" />
+    <Content Include="Services\AdvertisementTransportationService.svc" />
+    <Content Include="Services\Service1.svc" />
+    <Content Include="StyleScript\jquery-1.11.3.js" />
+    <Content Include="StyleScript\lightslider.js" />
+    <Content Include="StyleScript\mustache.js" />
+    <Content Include="style\css\lightslider.css" />
+    <Content Include="style\css\style.css" />
+    <Content Include="style\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="style\sass\currentProject\SingleAdItem.css">
+      <DependentUpon>SingleAdItem.scss</DependentUpon>
+    </Content>
+    <Content Include="style\sass\currentProject\SingleAdItem.min.css">
+      <DependentUpon>SingleAdItem.css</DependentUpon>
+    </Content>
+    <Content Include="style\sass\style.css">
+      <DependentUpon>style.scss</DependentUpon>
+    </Content>
+    <Content Include="style\sass\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
+    <Content Include="TempAdmin.aspx" />
+    <Content Include="TestTransactionScope.aspx" />
+    <Content Include="UserControls\AdDetail\AdDetailCommonControl.ascx" />
+    <Content Include="UserControls\AdDetail\AdDetailTransportationControl.ascx" />
+    <Content Include="UserControls\CategoryControl\CategorySelector.ascx" />
+    <Content Include="UserControls\CategoryControl\SingleCategoryItem.ascx" />
+    <Content Include="UserControls\CommonControls\CategoryControl.ascx" />
+    <Content Include="UserControls\CommonControls\CategorySelectControl.ascx" />
+    <Content Include="UserControls\NewAd\CategoryControl\NewAdCategorySelector.ascx" />
+    <Content Include="UserControls\NewAd\ImageWebUserControl\ImageWebUserControl.ascx" />
+    <Content Include="StyleScript\NewAdTransportation.js" />
+    <Content Include="UserControls\NewAd\NewAdTransportationControl.ascx" />
+    <Content Include="UserControls\NewAd\NewAdCommonControl.ascx" />
+    <Content Include="UserControls\SearchCritetria\CommonSearchCriteriaControl.ascx" />
+    <Content Include="UserControls\SearchCritetria\SearchCriteriaAdTransportationControl.ascx" />
+    <Content Include="UserControls\SearchCritetria\searchCriteriaTrasportation.js" />
+    <Content Include="UserControls\SingleAdItem.ascx" />
+    <Content Include="UserControls\SingleUserAdItem.ascx" />
+    <Content Include="UserControls\VerifyAd\VerifyAdControl.ascx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Advertisement\AddNewAdvertisement.aspx.cs">
+      <DependentUpon>AddNewAdvertisement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Advertisement\AddNewAdvertisement.aspx.designer.cs">
+      <DependentUpon>AddNewAdvertisement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Advertisement\Advertisement.aspx.cs">
+      <DependentUpon>Advertisement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Advertisement\Advertisement.aspx.designer.cs">
+      <DependentUpon>Advertisement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Advertisement\EditAdvertisement.aspx.cs">
+      <DependentUpon>EditAdvertisement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Advertisement\EditAdvertisement.aspx.designer.cs">
+      <DependentUpon>EditAdvertisement.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Advertisement\NotifyMe.aspx.cs">
+      <DependentUpon>NotifyMe.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Advertisement\NotifyMe.aspx.designer.cs">
+      <DependentUpon>NotifyMe.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Advertisement\UserAdvertisements.aspx.cs">
+      <DependentUpon>UserAdvertisements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Advertisement\UserAdvertisements.aspx.designer.cs">
+      <DependentUpon>UserAdvertisements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\CallWcfFromJQuery\WebForm1.aspx.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\CallWcfFromJQuery\WebForm1.aspx.designer.cs">
+      <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Enumeration.aspx.cs">
+      <DependentUpon>Enumeration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Enumeration.aspx.designer.cs">
+      <DependentUpon>Enumeration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Inheritance.aspx.cs">
+      <DependentUpon>Inheritance.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Inheritance.aspx.designer.cs">
+      <DependentUpon>Inheritance.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Interface.aspx.cs">
+      <DependentUpon>Interface.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Interface.aspx.designer.cs">
+      <DependentUpon>Interface.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\NameSpace.aspx.cs">
+      <DependentUpon>NameSpace.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\NameSpace.aspx.designer.cs">
+      <DependentUpon>NameSpace.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Reflection.aspx.cs">
+      <DependentUpon>Reflection.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Samples\MicrosoftAjaxLibrary\Reflection.aspx.designer.cs">
+      <DependentUpon>Reflection.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\UserInfo.aspx.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration\UserInfo.aspx.designer.cs">
+      <DependentUpon>UserInfo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="General\AbousUs.aspx.cs">
+      <DependentUpon>AbousUs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="General\AbousUs.aspx.designer.cs">
+      <DependentUpon>AbousUs.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ManageAdvertisements\SetSmsMessages.aspx.cs">
+      <DependentUpon>SetSmsMessages.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\ManageAdvertisements\SetSmsMessages.aspx.designer.cs">
+      <DependentUpon>SetSmsMessages.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ManageAdvertisements\VerifyAdvertisements.aspx.cs">
+      <DependentUpon>VerifyAdvertisements.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\ManageAdvertisements\VerifyAdvertisements.aspx.designer.cs">
+      <DependentUpon>VerifyAdvertisements.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Manager\ManagerOnly.aspx.cs">
+      <DependentUpon>ManagerOnly.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Manager\ManagerOnly.aspx.designer.cs">
+      <DependentUpon>ManagerOnly.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MasterPage.Master.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MasterPage.Master.designer.cs">
+      <DependentUpon>MasterPage.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\CreateNewUser.aspx.cs">
+      <DependentUpon>CreateNewUser.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration\CreateNewUser.aspx.designer.cs">
+      <DependentUpon>CreateNewUser.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\ForgottenPassword.aspx.cs">
+      <DependentUpon>ForgottenPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration\ForgottenPassword.aspx.designer.cs">
+      <DependentUpon>ForgottenPassword.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Registration\Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registration\Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search\AdDetail\AdDetail.aspx.cs">
+      <DependentUpon>AdDetail.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search\AdDetail\AdDetail.aspx.designer.cs">
+      <DependentUpon>AdDetail.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search\AjaxTest2.aspx.cs">
+      <DependentUpon>AjaxTest2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search\Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search\Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search\urlError.aspx.cs">
+      <DependentUpon>urlError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search\urlError.aspx.designer.cs">
+      <DependentUpon>urlError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search\WebService1.asmx.cs">
+      <DependentUpon>WebService1.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TempAdmin.aspx.cs">
+      <DependentUpon>TempAdmin.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TempAdmin.aspx.designer.cs">
+      <DependentUpon>TempAdmin.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TestTransactionScope.aspx.cs">
+      <DependentUpon>TestTransactionScope.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TestTransactionScope.aspx.designer.cs">
+      <DependentUpon>TestTransactionScope.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdDetail\AdDetailCommonControl.ascx.cs">
+      <DependentUpon>AdDetailCommonControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdDetail\AdDetailCommonControl.ascx.designer.cs">
+      <DependentUpon>AdDetailCommonControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdDetail\AdDetailTransportationControl.ascx.cs">
+      <DependentUpon>AdDetailTransportationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdDetail\AdDetailTransportationControl.ascx.designer.cs">
+      <DependentUpon>AdDetailTransportationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\AdDetail\CustomAdDetailCreator.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\AdDetail\IAdDetailOperations.cs" />
+    <Compile Include="UserControls\CategoryControl\CategorySelector.ascx.cs">
+      <DependentUpon>CategorySelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CategoryControl\CategorySelector.ascx.designer.cs">
+      <DependentUpon>CategorySelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CategoryControl\SingleCategoryItem.ascx.cs">
+      <DependentUpon>SingleCategoryItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CategoryControl\SingleCategoryItem.ascx.designer.cs">
+      <DependentUpon>SingleCategoryItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CommonControls\CategoryControl.ascx.cs">
+      <DependentUpon>CategoryControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CommonControls\CategoryControl.ascx.designer.cs">
+      <DependentUpon>CategoryControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\CommonControls\CategorySelectControl.ascx.cs">
+      <DependentUpon>CategorySelectControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\CommonControls\CategorySelectControl.ascx.designer.cs">
+      <DependentUpon>CategorySelectControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewAd\CategoryControl\CategoryHandler.ashx.cs">
+      <DependentUpon>CategoryHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewAd\CategoryControl\NewAdCategorySelector.ascx.cs">
+      <DependentUpon>NewAdCategorySelector.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\NewAd\CategoryControl\NewAdCategorySelector.ascx.designer.cs">
+      <DependentUpon>NewAdCategorySelector.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewAd\ImageWebUserControl\ImageWebUserControl.ascx.cs">
+      <DependentUpon>ImageWebUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\NewAd\ImageWebUserControl\ImageWebUserControl.ascx.designer.cs">
+      <DependentUpon>ImageWebUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewAd\ImageWebUserControl\ImageWebUserControlHandler.ashx.cs">
+      <DependentUpon>ImageWebUserControlHandler.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewAd\NewAdTransportationControl.ascx.cs">
+      <DependentUpon>NewAdTransportationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\NewAd\NewAdTransportationControl.ascx.designer.cs">
+      <DependentUpon>NewAdTransportationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewAd\NewAdCommonControl.ascx.cs">
+      <DependentUpon>NewAdCommonControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\NewAd\NewAdCommonControl.ascx.designer.cs">
+      <DependentUpon>NewAdCommonControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\NewAd\CustomNewAdCreator.cs">
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\NewAd\INewAdOperations.cs" />
+    <Compile Include="UserControls\SearchCritetria\CommonSearchCriteriaControl.ascx.cs">
+      <DependentUpon>CommonSearchCriteriaControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchCritetria\CommonSearchCriteriaControl.ascx.designer.cs">
+      <DependentUpon>CommonSearchCriteriaControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SearchCritetria\SearchCriteriaAdTransportationControl.ascx.cs">
+      <DependentUpon>SearchCriteriaAdTransportationControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\SearchCritetria\SearchCriteriaAdTransportationControl.ascx.designer.cs">
+      <DependentUpon>SearchCriteriaAdTransportationControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SingleAdItem.ascx.cs">
+      <DependentUpon>SingleAdItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\SingleAdItem.ascx.designer.cs">
+      <DependentUpon>SingleAdItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\SingleUserAdItem.ascx.cs">
+      <DependentUpon>SingleUserAdItem.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\SingleUserAdItem.ascx.designer.cs">
+      <DependentUpon>SingleUserAdItem.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserControls\VerifyAd\VerifyAdControl.ascx.cs">
+      <DependentUpon>VerifyAdControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UserControls\VerifyAd\VerifyAdControl.ascx.designer.cs">
+      <DependentUpon>VerifyAdControl.ascx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Advertisement\Web.config" />
+    <Content Include="bootstrap-3.3.5-dist\css\bootstrap-theme.css.map" />
+    <Content Include="bootstrap-3.3.5-dist\css\bootstrap.css.map" />
+    <Content Include="bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="bootstrap-3.3.5-dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Manager\Web.config" />
+    <Content Include="MasterPage.Master" />
+    <Content Include="packages.config" />
+    <None Include="Properties\PublishProfiles\LocalIIS.pubxml" />
+    <None Include="Properties\PublishProfiles\MyWebAyoob.pubxml" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
+    <Content Include="Web.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Properties\PublishProfiles\testnew.pubxml" />
+    <Content Include="style\sass\base\_grid.scss" />
+    <Content Include="style\sass\base\_reset.scss" />
+    <Content Include="style\sass\base\_typography.scss" />
+    <Content Include="style\sass\components\_buttons.scss" />
+    <Content Include="style\sass\components\_dropdown.scss" />
+    <Content Include="style\sass\components\_navigation.scss" />
+    <Content Include="style\sass\helpers\_mixins.scss" />
+    <Content Include="style\sass\helpers\_variables.scss" />
+    <Content Include="style\sass\layout\_footer.scss" />
+    <Content Include="style\sass\layout\_forms.scss" />
+    <Content Include="style\sass\layout\_header.scss" />
+    <Content Include="style\sass\layout\_sidebar.scss" />
+    <Content Include="style\sass\style.scss" />
+    <Content Include="style\sass\currentProject\SingleAdItem.scss" />
+    <Content Include="style\sass\currentProject\_oldStyle.scss" />
+    <Content Include="style\sass\base\_normalize.scss" />
+    <Content Include="style\sass\components\_images.scss" />
+    <Content Include="style\sass\base\_screenReader.scss" />
+    <Content Include="style\sass\base\_headings.scss" />
+    <Content Include="style\sass\components\_lists.scss" />
+    <Content Include="style\sass\components\_tables.scss" />
+    <Content Include="style\sass\base\_print.scss" />
+    <Content Include="style\sass\base\_fonts.scss" />
+    <Content Include="style\sass\components\_carousel.scss" />
+    <Content Include="style\sass\components\_popover.scss" />
+    <Content Include="style\sass\components\_tooltip.scss" />
+    <Content Include="style\sass\components\_modal.scss" />
+    <Content Include="style\sass\components\_well.scss" />
+    <Content Include="style\sass\components\_close.scss" />
+    <Content Include="style\sass\components\_embed.scss" />
+    <Content Include="style\sass\components\_panel.scss" />
+    <Content Include="style\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="style\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="style\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="style\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="style\sass\components\_media.scss" />
+    <Content Include="style\sass\components\_progressbar.scss" />
+    <Content Include="style\sass\components\_alert.scss" />
+    <Content Include="style\sass\components\_thumbnail.scss" />
+    <Content Include="style\sass\components\_jumbotron.scss" />
+    <Content Include="style\sass\components\_badge.scss" />
+    <Content Include="style\sass\components\_label.scss" />
+    <Content Include="style\sass\components\_pager.scss" />
+    <Content Include="style\sass\components\_pagination.scss" />
+    <Content Include="style\sass\components\_breadcrumb.scss" />
+    <Content Include="style\sass\components\_navbar.scss" />
+    <Content Include="style\sass\components\_nav.scss" />
+    <Content Include="style\sass\components\_input.scss" />
+    <Content Include="UserControls\NewAd\ImageWebUserControl\ImageWebUserControlHandler.ashx" />
+    <Content Include="UserControls\NewAd\CategoryControl\CategoryHandler.ashx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Login.aspx.fa.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="App_LocalResources\Login.aspx.resx">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{942e6802-f2e4-42ab-84e4-3f6d8e2bccf3}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyServerControls\MyServerControls\MyServerControls.csproj">
+      <Project>{6f5b2578-39c1-4af3-9ff5-dd80dea16448}</Project>
+      <Name>MyServerControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Presentation\Presentation.csproj">
+      <Project>{70577d6f-da8d-425d-a9b8-4c6a108a46b8}</Project>
+      <Name>Presentation</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{67d19860-9041-4509-94f7-e93915da5278}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WcfService\WcfService.csproj">
+      <Project>{15B3E0D2-6217-493A-A690-158C497F5318}</Project>
+      <Name>WcfService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AdvertisementImages\f5dfc294-416b-456f-89bb-7c1689766aa9\" />
+    <Folder Include="App_Code\" />
+    <Folder Include="App_WebReferences\" />
+    <Folder Include="bin\" />
+    <Folder Include="Images\" />
+    <Folder Include="style\img\" />
+    <Folder Include="WebConfigServer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>4744</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://127.0.0.1/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

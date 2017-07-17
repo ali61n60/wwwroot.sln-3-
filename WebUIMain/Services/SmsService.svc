@@ -1,0 +1,6 @@
+﻿<%@ ServiceHost Service="WcfService.Services.SmsService" %>
+
+
+
+
+

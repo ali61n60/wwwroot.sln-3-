@@ -1,0 +1,138 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MasterPage.master.cs" Inherits="WebUIMain.MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head id="Head1" runat="server">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="<%= Page.ResolveClientUrl("~/StyleScript/jquery-1.11.3.js") %>"></script>
+   <%-- <script src="<%= Page.ResolveClientUrl("~/bootstrap-3.3.5-dist/js/bootstrap.min.js") %>"></script>--%>
+    
+    <link href="bootstrap-3.3.5-dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="style/css/style.css" rel="stylesheet" />
+    <!-- CDN
+         <meta charset="utf-8">
+         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+         <meta name="viewport" content="width=device-width, initial-scale=1">
+         <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        -->
+
+    
+
+    <title></title>
+
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+
+
+</head>
+<body>
+    <asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" />
+    <form id="form1" runat="server">
+
+        <div class="container-fluid">
+            <div class="row page-header header">
+                <div class="col-sm-12 page-header">
+                    <h1 style="float: right">
+                        <bdi>Main Header</bdi></h1>
+                    <asp:SiteMapPath ID="SiteMapPath1" runat="server" Font-Names="Verdana" Font-Size="0.8em" PathSeparator=" \\">
+                        <CurrentNodeStyle ForeColor="#333333" />
+                        <NodeStyle Font-Bold="True" ForeColor="#990000" />
+                        <PathSeparatorStyle Font-Bold="True" ForeColor="#990000" />
+                        <RootNodeStyle Font-Bold="True" ForeColor="#FF8000" />
+                    </asp:SiteMapPath>
+                    <br />
+                    <asp:LoginStatus ID="LoginStatus1" runat="server" />
+                    <br />
+                    <asp:Label ID="LabelSayHello" runat="server" Text="Hello"></asp:Label>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="menubar ">
+                        <ul>
+                            <li id="AboutUs">
+                                <asp:HyperLink ID="HyperLinkAboutUs" runat="server" NavigateUrl="~/General/AboutUs.aspx"><bdi>درباره ما</bdi></asp:HyperLink>
+                            </li>
+                            <li id="manager">
+                                <asp:HyperLink ID="HyperLinkManager" runat="server" NavigateUrl="~/Registration/Login.aspx"><bdi>ورود</bdi></asp:HyperLink>
+                            </li>
+                            <li>
+                                <asp:HyperLink ID="HyperLinkDefault2" runat="server" NavigateUrl="~/Search/Search.aspx"><bdi>جستجو</bdi></asp:HyperLink>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <br />
+            <div class="row body">
+
+                <div class="col-md-2 col-md-push-10  menu">
+                    <ul>
+                        <li class="text-right">
+                            <span>Hello</span>
+                        </li>
+                        <li class="text-right">
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Default.aspx">صفحه اصلی</asp:HyperLink>
+                        </li>
+                        <li class="text-right" dir="rtl" >
+                            <asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1" ImageSet="Simple" ShowLines="True" Width="104px">
+                                <HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+                                <NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="0px" NodeSpacing="0px" VerticalPadding="0px"  />
+                                <ParentNodeStyle Font-Bold="False" />
+                                <SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px" VerticalPadding="0px" />
+                            </asp:TreeView>                            
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-8">
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                </div>
+
+                <div class="col-md-2 col-md-pull-10 col-md-push-0 text-right">
+                    <div class="row">
+                        <asp:ContentPlaceHolder ID="ContentAsideLeft" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+
+                    <div class="row">
+                        <div class="aside">
+                            <h2>
+                                <bdi>خرید کالا بدون واسطه</bdi></h2>
+                            <p>
+                                <bdi>سایتی جهت معرفی مستقیم فروشنده به خریدار</bdi>
+                            </p>
+                            <h2>
+                                <bdi>چرا واسطه</bdi></h2>
+                            <p>
+                                <bdi>فروش مستقیم به خریدار نهایی</bdi>
+                            </p>
+                            <h2>
+                                <bdi>راحتتر زندگی کنیم</bdi></h2>
+                            <p>
+                                <bdi>کاهش در وقت و هزینه برای جستجو</bdi>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row footer">
+                <div class="col-sm-12">
+                    <p>گامی کوچک در راستای زندگی راحت تر</p>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

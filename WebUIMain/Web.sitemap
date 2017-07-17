@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode url="~/Default.aspx" title="Contents" >   
+    <siteMapNode url="~/General/AboutUs.aspx" title="About Us"/>
+    <siteMapNode title="آگهی">
+      <siteMapNode url="~/Advertisement/Advertisement.aspx" title="مدیریت آگهی"/>
+      <siteMapNode url="~/Advertisement/AddNewAdvertisement.aspx" title="آگهی جدید"/>
+      <siteMapNode url="~/Advertisement/UserAdvertisements.aspx" title="آگهی های من"/>
+    </siteMapNode>
+    <siteMapNode title="Admin">
+      <siteMapNode url="~/Manager/ManageAdvertisements/VerifyAdvertisements.aspx" title="تایید آگهی"/>
+      <siteMapNode url="~/Manager/ManageAdvertisements/SetSmsMessages.aspx" title="تنظیمات اس ام اس"/>
+    </siteMapNode>
+    <siteMapNode title="جستجو">
+      <siteMapNode url="~/Search/Search.aspx" title="جستجو"/>
+    </siteMapNode>   
+  </siteMapNode>
+</siteMap>

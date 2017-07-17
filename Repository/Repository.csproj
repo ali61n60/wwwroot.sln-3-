@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{67D19860-9041-4509-94F7-E93915DA5278}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Repository</RootNamespace>
+    <AssemblyName>Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.4.1\lib\net40\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="QueryPattern\SearchField\SearchFieldIntegerArray.cs" />
+    <Compile Include="Repository\AdvertisementCommonRepository.cs" />
+    <Compile Include="AdvertisementDataClass.cs" />
+    <Compile Include="Repository\AdvertisementTransportationRepository.cs" />
+    <Compile Include="CategoryRepositoryDataBase.cs" />
+    <Compile Include="CategoryRepositoryInCode.cs" />
+    <Compile Include="DataLayer\MessageData.cs" />
+    <Compile Include="DataLayer\VisitorsStatistic.cs" />
+    <Compile Include="ImageRepositoryFileSystem.cs" />
+    <Compile Include="Messages\RepositoryResponse.cs" />
+    <Compile Include="Messages\RepositoryResponseBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryPattern\BaseQueryTest\BaseQueryAdCommonTest.cs" />
+    <Compile Include="QueryPattern\BaseQueryTest\BaseQueryAdTransportTest.cs" />
+    <Compile Include="QueryPattern\BaseQueryTest\BaseQueryTest.cs" />
+    <Compile Include="QueryPattern\BaseQueryTest\SearchFieldTest.cs" />
+    <Compile Include="QueryPattern\BaseQuery\BaseQuery.cs" />
+    <Compile Include="QueryPattern\BaseQuery\BaseQueryAdCommon.cs" />
+    <Compile Include="QueryPattern\BaseQuery\BaseQueryAdTransportation.cs" />
+    <Compile Include="QueryPattern\SearchField\SearchField.cs" />
+    <Compile Include="QueryPattern\SearchField\SearchFieldAbstract.cs" />
+    <Compile Include="QueryPattern\SearchField\SearchFieldBool.cs" />
+    <Compile Include="QueryPattern\SearchField\SearchFieldDecimal.cs" />
+    <Compile Include="QueryPattern\SearchField\SearchFieldInteger.cs" />
+    <Compile Include="QueryPattern\SearchField\SearchFieldString.cs" />
+    <Compile Include="QueryPattern\CriteriaOperator.cs" />
+    <Compile Include="QueryPattern\OrderBy.cs" />
+    <Compile Include="QueryPattern\ProperyNameColumnName.cs" />
+    <Compile Include="RegistrationRepository.cs" />
+    <Compile Include="SmsRepository.cs" />
+    <Compile Include="Tests\AdvertisementCommonRepositoryTest.cs" />
+    <Compile Include="Repository\TransportationRepository\TransportationRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Model\Model.csproj">
+      <Project>{942e6802-f2e4-42ab-84e4-3f6d8e2bccf3}</Project>
+      <Name>Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
