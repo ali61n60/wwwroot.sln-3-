@@ -13,6 +13,9 @@ namespace WcfService.Services
        [OperationContract]
         CompositeType GetDataUsingDataContract(CompositeType composite);
 
+        [OperationContract]
+        string SayHello();
+
         // TODO: AddCriterias your service operations here
     }
 

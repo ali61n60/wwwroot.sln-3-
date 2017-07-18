@@ -27,6 +27,11 @@ namespace WcfService.Services
             }
             return composite;
         }
+
+        public string SayHello()
+        {
+            return "Hello Mvc core";
+        }
     }
 }
 
