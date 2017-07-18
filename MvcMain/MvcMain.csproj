@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Connected Services\" />
     <Folder Include="Views\Home\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
