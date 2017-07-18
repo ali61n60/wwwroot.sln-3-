@@ -30,7 +30,12 @@ namespace WcfService.Services
 
         public string SayHello()
         {
-            return "Hello Mvc core";
+            return "Hello Mvc core again";
+        }
+
+        public string SayHello2()
+        {
+            return "Hello Mvc core again in SayHello2";
         }
     }
 }

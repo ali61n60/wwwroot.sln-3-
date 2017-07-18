@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace s1
+namespace S1
 {
     using System.Runtime.Serialization;
     
@@ -50,28 +50,159 @@ namespace s1
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="s1.IService1")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="S1.IService1")]
     public interface IService1
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetRootPath", ReplyAction="http://tempuri.org/IService1/GetRootPathResponse")]
-        System.Threading.Tasks.Task<string> GetRootPathAsync();
+        System.Threading.Tasks.Task<S1.GetRootPathResponse> GetRootPathAsync(S1.GetRootPathRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetDataUsingDataContract", ReplyAction="http://tempuri.org/IService1/GetDataUsingDataContractResponse")]
-        System.Threading.Tasks.Task<s1.CompositeType> GetDataUsingDataContractAsync(s1.CompositeType composite);
+        System.Threading.Tasks.Task<S1.GetDataUsingDataContractResponse> GetDataUsingDataContractAsync(S1.GetDataUsingDataContractRequest request);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SayHello", ReplyAction="http://tempuri.org/IService1/SayHelloResponse")]
-        System.Threading.Tasks.Task<string> SayHelloAsync();
+        System.Threading.Tasks.Task<S1.SayHelloResponse> SayHelloAsync(S1.SayHelloRequest request);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/SayHello2", ReplyAction="http://tempuri.org/IService1/SayHello2Response")]
+        System.Threading.Tasks.Task<S1.SayHello2Response> SayHello2Async(S1.SayHello2Request request);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRootPath", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetRootPathRequest
+    {
+        
+        public GetRootPathRequest()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetRootPathResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetRootPathResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string GetRootPathResult;
+        
+        public GetRootPathResponse()
+        {
+        }
+        
+        public GetRootPathResponse(string GetRootPathResult)
+        {
+            this.GetRootPathResult = GetRootPathResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDataUsingDataContract", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetDataUsingDataContractRequest
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public S1.CompositeType composite;
+        
+        public GetDataUsingDataContractRequest()
+        {
+        }
+        
+        public GetDataUsingDataContractRequest(S1.CompositeType composite)
+        {
+            this.composite = composite;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetDataUsingDataContractResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class GetDataUsingDataContractResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public S1.CompositeType GetDataUsingDataContractResult;
+        
+        public GetDataUsingDataContractResponse()
+        {
+        }
+        
+        public GetDataUsingDataContractResponse(S1.CompositeType GetDataUsingDataContractResult)
+        {
+            this.GetDataUsingDataContractResult = GetDataUsingDataContractResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SayHello", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class SayHelloRequest
+    {
+        
+        public SayHelloRequest()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SayHelloResponse", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class SayHelloResponse
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string SayHelloResult;
+        
+        public SayHelloResponse()
+        {
+        }
+        
+        public SayHelloResponse(string SayHelloResult)
+        {
+            this.SayHelloResult = SayHelloResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SayHello2", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class SayHello2Request
+    {
+        
+        public SayHello2Request()
+        {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="SayHello2Response", WrapperNamespace="http://tempuri.org/", IsWrapped=true)]
+    public partial class SayHello2Response
+    {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://tempuri.org/", Order=0)]
+        public string SayHello2Result;
+        
+        public SayHello2Response()
+        {
+        }
+        
+        public SayHello2Response(string SayHello2Result)
+        {
+            this.SayHello2Result = SayHello2Result;
+        }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
-    public interface IService1Channel : s1.IService1, System.ServiceModel.IClientChannel
+    public interface IService1Channel : S1.IService1, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("dotnet-svcutil", "0.5.0.0")]
-    public partial class Service1Client : System.ServiceModel.ClientBase<s1.IService1>, s1.IService1
+    public partial class Service1Client : System.ServiceModel.ClientBase<S1.IService1>, S1.IService1
     {
         
     /// <summary>
@@ -107,19 +238,24 @@ namespace s1
         {
         }
         
-        public System.Threading.Tasks.Task<string> GetRootPathAsync()
+        public System.Threading.Tasks.Task<S1.GetRootPathResponse> GetRootPathAsync(S1.GetRootPathRequest request)
         {
-            return base.Channel.GetRootPathAsync();
+            return base.Channel.GetRootPathAsync(request);
         }
         
-        public System.Threading.Tasks.Task<s1.CompositeType> GetDataUsingDataContractAsync(s1.CompositeType composite)
+        public System.Threading.Tasks.Task<S1.GetDataUsingDataContractResponse> GetDataUsingDataContractAsync(S1.GetDataUsingDataContractRequest request)
         {
-            return base.Channel.GetDataUsingDataContractAsync(composite);
+            return base.Channel.GetDataUsingDataContractAsync(request);
         }
         
-        public System.Threading.Tasks.Task<string> SayHelloAsync()
+        public System.Threading.Tasks.Task<S1.SayHelloResponse> SayHelloAsync(S1.SayHelloRequest request)
         {
-            return base.Channel.SayHelloAsync();
+            return base.Channel.SayHelloAsync(request);
+        }
+        
+        public System.Threading.Tasks.Task<S1.SayHello2Response> SayHello2Async(S1.SayHello2Request request)
+        {
+            return base.Channel.SayHello2Async(request);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

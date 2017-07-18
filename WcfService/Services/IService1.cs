@@ -15,6 +15,8 @@ namespace WcfService.Services
 
         [OperationContract]
         string SayHello();
+        [OperationContract]
+        string SayHello2();
 
         // TODO: AddCriterias your service operations here
     }
