@@ -12,6 +12,7 @@ namespace MvcMain.Controllers
 {
     public class AccountController:Controller
     {
+        //TODO Error messages are in English, Try to make them Persian
         private UserManager<AppUser> _userManager;
         private SignInManager<AppUser> _signInManager;
         private ConfigurationRoot _appConfiguration;
@@ -73,12 +74,14 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> PasswordForget(PasswordForgetModel detail, string returnUrl)
         {
             //TODO Email user password or do appropriate action
+            //TODO Make your action as an API to be able to use that from android app
             return RedirectToAction("Login",new { returnUrl =returnUrl?? "/" });
         }
 
         [AllowAnonymous]
-        public ViewResult Create()
+        public ViewResult Create(string returnUrl)
         {
+            ViewBag.returnUrl = returnUrl;
             return View();
         }
 
@@ -86,17 +89,26 @@ namespace MvcMain.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(CreateModel model)
+        public async Task<IActionResult> Create(CreateModel model, string returnUrl)
         {
+            //TODO Make your action as an API to be able to use that from android app
+            //TODO Check password and repeatPassword are equal
+            //TODO Check EmailConfiremed AND PhoneNumberConfiremed Are Flase
+            ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)
             {
+                if (model.Password != model.RepeatPassword)
+                {
+                    ModelState.AddModelError("","Password and Repeated Password are not equal.");
+                    return View(model);
+                }
                 AppUser user = new AppUser
                 {
                     UserName = model.Name,
-                    Email = model.Email
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
                 };
-                IdentityResult result
-                    = await _userManager.CreateAsync(user, model.Password);
+                IdentityResult result= await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     return RedirectToRoute("/");

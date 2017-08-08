@@ -18,13 +18,25 @@
                 </div>
             </div>
             <div class="row form-group">
+                <div class="col-sm-2">
+                    <label asp-for="PhoneNumber">تلفن همراه</label>
+                </div>
+                <div class="col-sm-10">
+                    <input asp-for="PhoneNumber" class="form-control" placeholder="09121234567" />
+                </div>
+            </div>
+            <div class="row form-group">
                 <div class="col-sm-2"><label asp-for="Password">رمز ورود</label></div>
                 <div class="col-sm-10"><input asp-for="Password" class="form-control" placeholder="رمز ورود" /></div>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-2"><label asp-for="RepeatPassword">تکرار رمز ورود</label></div>
+                <div class="col-sm-10"><input asp-for="RepeatPassword" class="form-control" placeholder="تکرار رمز ورود" /></div>
             </div>
             <div class="row">
                 <div class="col-sm-2"></div>
                 <div class="col-sm-10">
-                    <button class="btn btn-primary btn-lg btn-block" type="submit">ارسال کلمه عبور به ایمیل</button>
+                    <button class="btn btn-primary btn-lg btn-block" type="submit">ایجاد کاربر جدید</button>
                 </div>
             </div>
         </form>
@@ -33,78 +45,12 @@
             <form asp-action="Login" method="get">
                 <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
                 <div class="col-sm-2"></div>
-                <div class="col-sm-4">
-                    <button class="btn btn-warning btn-block" type="submit">ورود</button>
-                </div>
+                <div class="col-sm-4"><button class="btn btn-warning btn-block" type="submit">ورود</button></div>
             </form>
             <form asp-action="PasswordForget" method="get">
                 <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
                 <div class="col-sm-2"></div>
-                <div class="col-sm-4">
-                    <button class="btn btn-success btn-block" type="submit">ایجاد کاربر جدید</button>
-                </div>
+                <div class="col-sm-4"><button class="btn btn-success btn-block" type="submit">ارسال کلمه عبور به ایمیل</button></div>
             </form>
         </div>
     </div>
-
-
-
-
-
-    <br />
-    <div class="row">
-        <div class="col-sm-2">
-            <asp:Label ID="LabelPassword" runat="server" Text="رمز ورود"></asp:Label>
-        </div>
-        <div class="col-sm-10">
-            <asp:TextBox ID="TextBoxPassword" CssClass="form-control" runat="server" placeholder="رمز ورود" TextMode="Password" Width="100%"></asp:TextBox>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-sm-2">
-            <asp:Label ID="Label1" runat="server" Text="تکرار رمز ورود"></asp:Label>
-        </div>
-        <div class="col-sm-10">
-            <asp:TextBox ID="TextBoxPasswordRepeat" CssClass="form-control" runat="server" placeholder="تکرار رمز عبور" TextMode="Password" Width="100%"></asp:TextBox>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-sm-2">
-            <asp:Label ID="LabelMobilePhoneNumber" runat="server" Text="تلفن همراه"></asp:Label>
-        </div>
-        <div class="col-sm-10">
-            <asp:TextBox ID="TextBoxMobilePhoneNumber" CssClass="form-control" runat="server" placeholder="شماره تلفن همراه 09121234567" Width="100%"></asp:TextBox>
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-sm-2">
-        </div>
-        <div class="col-sm-10">
-            <asp:Button ID="ButtonCreateNewUser" CssClass="btn btn-primary btn-lg btn-block" runat="server" Text="ایجاد کاربر جدید" OnClick="ButtonCreateNewUser_Click" />
-        </div>
-    </div>
-    <br />
-    <div class="row">
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4">
-            <asp:Button ID="ButtonForgottenPassword" CssClass="btn btn-warning btn-block" runat="server" Text="رمز خود را فراموش کرده ام" OnClick="ButtonForgottenPassword_Click" />
-        </div>
-        <div class="col-sm-2"></div>
-        <div class="col-sm-4">
-            <asp:Button ID="ButtonLogin" CssClass="btn btn-success btn-block" runat="server" Text="ورود" OnClick="ButtonCreateNewUserPage_Click" />
-        </div>
-    </div>
-    </div>
-    </asp:Content>
-
-
-
-
-
-
-
-
-

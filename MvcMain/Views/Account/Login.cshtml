@@ -27,16 +27,12 @@
         <form asp-action="PasswordForget" method="get">
             <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
             <div class="col-sm-2"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-warning btn-block" type="submit">رمز خود را فراموش کرده ام</button>
-            </div>
+            <div class="col-sm-4"><button class="btn btn-warning btn-block" type="submit">رمز خود را فراموش کرده ام</button></div>
         </form>
         <form asp-action="Create" method="get">
             <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
             <div class="col-sm-2"></div>
-            <div class="col-sm-4">
-                <button class="btn btn-success btn-block" type="submit">ایجاد کاربر جدید</button>
-            </div>
+            <div class="col-sm-4"><button class="btn btn-success btn-block" type="submit">ایجاد کاربر جدید</button></div>
         </form>
     </div>
 </div>
