@@ -36,7 +36,6 @@
         android:minHeight="?attr/actionBarSize"
         android:background="@color/colorDefault"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:layout_scrollFlags="scroll|enterAlways"
         android:layout_alignParentBottom="true">
         <LinearLayout
             android:orientation="horizontal"
