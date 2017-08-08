@@ -15,6 +15,7 @@ using ChiKoja.SearchAd;
 using ChiKoja.SearchAd.UserAd;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 
+
 namespace ChiKoja.NavigationDrawer
 {
     [Activity(Label = "Leftdrawerlayout", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
