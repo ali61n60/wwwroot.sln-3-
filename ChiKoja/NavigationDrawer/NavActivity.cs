@@ -27,6 +27,7 @@ namespace ChiKoja.NavigationDrawer
         DrawerLayout drawerLayout;
         private const int navigationGravity = Android.Support.V4.View.GravityCompat.End;
 
+        
         V7Toolbar toolbar;
         protected NavigationView NavigationView;
         TextView textViewMessage;
