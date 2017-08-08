@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:minHeight="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:layout_scrollFlags="scroll|enterAlways">
         <TextView
             android:id="@+id/textViewMessage"
             android:textAppearance="?android:attr/textAppearanceMedium"
