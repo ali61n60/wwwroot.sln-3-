@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeSlider.iOS.Sample", "RangeSlider.iOS.Sample.csproj", "{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Debug|iPhone.Build.0 = Debug|iPhone
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Release|iPhone.ActiveCfg = Release|iPhone
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Release|iPhone.Build.0 = Release|iPhone
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{0E14F47B-FF5C-4B99-89CE-2597A943DFDC}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Release|iPhone.Build.0 = Release|Any CPU
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{79241219-3733-4E5C-A45C-986E7077AD44}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = RangeSlider.iOS.Sample.csproj
+	EndGlobalSection
+EndGlobal

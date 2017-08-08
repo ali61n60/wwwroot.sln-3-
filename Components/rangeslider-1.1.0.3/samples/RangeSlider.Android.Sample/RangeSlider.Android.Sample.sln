@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RangeSlider.Android.Sample", "RangeSlider.Android.Sample.csproj", "{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		DebugAndroid|Any CPU = DebugAndroid|Any CPU
+		Release|Any CPU = Release|Any CPU
+		ReleaseAndroid|Any CPU = ReleaseAndroid|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.DebugAndroid|Any CPU.ActiveCfg = Debug|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.DebugAndroid|Any CPU.Build.0 = Debug|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.DebugAndroid|Any CPU.Deploy.0 = Debug|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.ReleaseAndroid|Any CPU.ActiveCfg = Release|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.ReleaseAndroid|Any CPU.Build.0 = Release|Any CPU
+		{88E8FCF2-D9A1-4C4B-BEEB-CBCC32446331}.ReleaseAndroid|Any CPU.Deploy.0 = Release|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.DebugAndroid|Any CPU.ActiveCfg = Debug|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.DebugAndroid|Any CPU.Build.0 = Debug|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.ReleaseAndroid|Any CPU.ActiveCfg = Release|Any CPU
+		{39186E1E-A67A-496E-82A8-82466CE37B55}.ReleaseAndroid|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = RangeSlider.Android.Sample.csproj
+	EndGlobalSection
+EndGlobal

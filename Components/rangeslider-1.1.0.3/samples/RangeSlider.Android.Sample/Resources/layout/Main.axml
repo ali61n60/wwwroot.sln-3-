@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:id="@+id/rootLayout">
+    <Button
+        android:id="@+id/myButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hello" />
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:max="10"
+        android:progress="3"
+        android:layout_marginTop="20dp" />
+    <rangeslider.RangeSliderView
+        android:id="@+id/rangeSlider1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        min_value="0"
+        max_value="100"
+        left_value="20"
+        right_value="80"
+        android:layout_marginTop="20dp" />
+</LinearLayout>

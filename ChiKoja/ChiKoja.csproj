@@ -1,0 +1,696 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <AndroidSdkBuildToolsVersion>23.0.2</AndroidSdkBuildToolsVersion>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v5.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{37E92A03-D6D5-40AB-B627-B98898A88AF7}</ProjectGuid>
+    <ProjectTypeGuids>{EFBA0AD7-5A72-4C68-AF49-83D382785DCF};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ChiKoja</RootNamespace>
+    <AssemblyName>ChiKoja</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <AndroidApplication>true</AndroidApplication>
+    <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
+    <TargetFrameworkVersion>v4.2</TargetFrameworkVersion>
+    <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
+    <NuGetPackageImportStamp>cd182684</NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidSupportedAbis>
+    </AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <Debugger>Xamarin</Debugger>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkSkip />
+    <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
+    <BundleAssemblies>False</BundleAssemblies>
+    <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+    <AndroidSupportedAbis>
+    </AndroidSupportedAbis>
+    <AndroidStoreUncompressedFileExtensions />
+    <MandroidI18n />
+    <Debugger>Xamarin</Debugger>
+    <AotAssemblies>False</AotAssemblies>
+    <EnableLLVM>False</EnableLLVM>
+    <AndroidEnableMultiDex>False</AndroidEnableMultiDex>
+    <EnableProguard>False</EnableProguard>
+    <DebugSymbols>False</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Java.Interop" />
+    <Reference Include="Mono.Android" />
+    <Reference Include="Mono.Data.Sqlite" />
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Xamarin.Android.Support.Animated.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Animated.Vector.Drawable.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.Animated.Vector.Drawable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v4.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v4.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.v7.AppCompat.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.Vector.Drawable, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\lib\MonoAndroid403\Xamarin.Android.Support.Vector.Drawable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Xamarin.Controls.RangeSlider.Android">
+      <HintPath>..\Components\rangeslider-1.1.0.3\lib\android\Xamarin.Controls.RangeSlider.Android.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Activity1.cs" />
+    <Compile Include="AdDetail\AdDetail.cs" />
+    <Compile Include="AdDetail\AdDetailTransportationActivity.cs" />
+    <Compile Include="AnimationTest\ActivityAnimation.cs" />
+    <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
+    <Compile Include="BroadcastReceiver\ActivityBroadcastReceiverSms.cs" />
+    <Compile Include="Category\ActivityCategory.cs" />
+    <Compile Include="CustomViews\CategoryView\ISingleCategoryView.cs" />
+    <Compile Include="CustomViews\CategoryView\SingleCategoryView.cs" />
+    <Compile Include="CustomViews\CategoryView\CheckBoxTriStates.cs" />
+    <Compile Include="CustomViews\SingleAdView\ViewGroupUserAd.cs" />
+    <Compile Include="Login\ActivityLogin.cs" />
+    <Compile Include="Login\ActivitySignIn.cs" />
+    <Compile Include="Network\Network.cs" />
+    <Compile Include="NewAd\ActivityNewAd.cs" />
+    <Compile Include="NewAd\ActivityNewAdTransportation.cs" />
+    <Compile Include="Notification\MessageShower.cs" />
+    <Compile Include="Repository\CategoryRepository.cs" />
+    <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
+    <Compile Include="Dialog\AlertDialog\AlertDialogActivity.cs" />
+    <Compile Include="GlobalApplication\GlobalApplication.cs" />
+    <Compile Include="NavigationDrawer\NavActivity.cs" />
+    <Compile Include="Notification\ActivityNotification.cs" />
+    <Compile Include="Repository\CryptoGraphy\CryptoGraphy.cs" />
+    <Compile Include="Repository\Filter\CommonFilter.cs" />
+    <Compile Include="Repository\ILocalTable.cs" />
+    <Compile Include="Repository\Location\CityRepository.cs" />
+    <Compile Include="Repository\Location\DistrictRepository.cs" />
+    <Compile Include="Repository\Location\ProvinceRepository.cs" />
+    <Compile Include="Repository\Registration.cs" />
+    <Compile Include="Repository\Repository.cs" />
+    <Compile Include="Repository\Filter\SearchFilterRepository.cs" />
+    <Compile Include="Repository\TransportationRepository\TransportationBrandRepository.cs" />
+    <Compile Include="Repository\TransportationRepository\TransportationModelRepository.cs" />
+    <Compile Include="Repository\UserMarkedAds\UserMarkedAds.cs" />
+    <Compile Include="Resources\Resource.Designer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchAd\ActivitySearchAd.cs" />
+    <Compile Include="SearchAd\ActivitySearchFilter.cs" />
+    <Compile Include="SearchAd\ActivitySortBy.cs" />
+    <Compile Include="Services\ISearchAdResult.cs" />
+    <Compile Include="SearchAd\UserAd\ActivityUserAds.cs" />
+    <Compile Include="Services\ISearchAdTransportationResult.cs" />
+    <Compile Include="Services\SearchAdService.cs" />
+    <Compile Include="SplashActivity\SplashActivity.cs" />
+    <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
+    <Compile Include="CustomViews\SingleAdView\ViewGroupSingleAd.cs" />
+    <Compile Include="ViewServer\ActivityViewServerTest.cs" />
+    <Compile Include="ViewServer\ViewServer.cs" />
+    <Compile Include="Web References\AdCommonService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\AdTransportationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\CategoryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\CryptoService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\LocationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\RegistrationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\RepositoryService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="GettingStarted.Xamarin" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Resources\AboutResources.txt" />
+    <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\layout1.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\layoutRelativeTest.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\layoutNotification.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\layoutBroadcastReceiverSms.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SearchAd.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\LocationSelection.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SingleAdView.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\layoutDynamicUI.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\layoutBatteryBroadCast.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AdTransportationDetail.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\AlertDialogLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ContactInfoLayout.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\Category.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\NewAd.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Login.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Filter.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SortBy.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\UserAds.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SingleUserAd.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\Animation.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\SingleCategory.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\NewAdTransportation.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\BrandTransportation.axml">
+      <SubType>AndroidResource</SubType>
+    </AndroidResource>
+    <None Include="Web References\AdCommonService\AdvertisementCommonService.wsdl" />
+    <None Include="Web References\AdCommonService\AdvertisementCommonService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdCommonService\AdvertisementCommonService0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdCommonService\AdvertisementCommonService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdCommonService\AdvertisementCommonService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdCommonService\AdvertisementCommonService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdCommonService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\AdCommonService\ResponseBase.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdCommonService\ResponseBaseOfArrayOfAdvertisementCommongJiz6K1p.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService.wsdl" />
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService4.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\AdTransportationService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\AdTransportationService\ResponseBase.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdTransportationService\ResponseBaseOfAdvertisementTransportationgJiz6K1p.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdTransportationService\ResponseBaseOfArrayOfTransportationBrandoKnNwMS4.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdTransportationService\ResponseBaseOfArrayOfTransportationModeloKnNwMS4.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdTransportationService\ResponseBaseOfArrayOfVehiclegJiz6K1p.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\AdTransportationService\ResponseBaseOfint.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CategoryService\CategoryService.wsdl" />
+    <None Include="Web References\CategoryService\CategoryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CategoryService\CategoryService0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CategoryService\CategoryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CategoryService\CategoryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CategoryService\CategoryService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CategoryService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\CategoryService\ResponseBaseOfArrayOfCategorygJiz6K1p.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CategoryService\ResponseBaseOfCategorygJiz6K1p.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CategoryService\ResponseBaseOfint.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CryptoService\CryptoService.wsdl" />
+    <None Include="Web References\CryptoService\CryptoService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CryptoService\CryptoService0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CryptoService\CryptoService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CryptoService\CryptoService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\CryptoService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\CryptoService\ResponseBaseOfint.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\CryptoService\ResponseBaseOfstring.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LocationService\LocationService.wsdl" />
+    <None Include="Web References\LocationService\LocationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\LocationService\LocationService0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\LocationService\LocationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\LocationService\LocationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\LocationService\LocationService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\LocationService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\LocationService\ResponseBaseOfArrayOfCity63bt_SHOU.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LocationService\ResponseBaseOfArrayOfDistrict63bt_SHOU.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LocationService\ResponseBaseOfArrayOfProvince63bt_SHOU.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\LocationService\ResponseBaseOfint.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\RegistrationService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\RegistrationService\RegistrationService.wsdl" />
+    <None Include="Web References\RegistrationService\RegistrationService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RegistrationService\RegistrationService0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RegistrationService\RegistrationService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RegistrationService\RegistrationService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RegistrationService\RegistrationService3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RegistrationService\ResponseBase.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\RegistrationService\ResponseBaseOfCustomerYgFqSxnr.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\RepositoryService\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\RepositoryService\RepositoryService.wsdl" />
+    <None Include="Web References\RepositoryService\RepositoryService.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RepositoryService\RepositoryService0.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RepositoryService\RepositoryService1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RepositoryService\RepositoryService2.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Web References\RepositoryService\ResponseBaseOfint.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://192.168.42.16/Services/AdvertisementCommonService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AdCommonService\</RelPath>
+      <UpdateFromURL>http://192.168.42.16/Services/AdvertisementCommonService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.42.16/Services/AdvertisementTransportationService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\AdTransportationService\</RelPath>
+      <UpdateFromURL>http://192.168.42.16/Services/AdvertisementTransportationService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.42.16/Services/CategoryService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\CategoryService\</RelPath>
+      <UpdateFromURL>http://192.168.42.16/Services/CategoryService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.42.16/Services/CryptoService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\CryptoService\</RelPath>
+      <UpdateFromURL>http://192.168.42.16/Services/CryptoService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.42.16/Services/LocationService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\LocationService\</RelPath>
+      <UpdateFromURL>http://192.168.42.16/Services/LocationService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.42.16/Services/RegistrationService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RegistrationService\</RelPath>
+      <UpdateFromURL>http://192.168.42.16/Services/RegistrationService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://192.168.42.16/Services/RepositoryService.svc">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\RepositoryService\</RelPath>
+      <UpdateFromURL>http://192.168.42.16/Services/RepositoryService.svc</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>
+      </CachedAppSettingsObjectName>
+      <CachedSettingsPropName>
+      </CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Xml\Preferences.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\dimens.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamarinComponentReference Include="rangeslider">
+      <Visible>False</Visible>
+      <Version>1.1.0.3</Version>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamandroidsupportdesign">
+      <Visible>False</Visible>
+      <Version>23.2.1</Version>
+    </XamarinComponentReference>
+    <XamarinComponentReference Include="xamandroidsupportv7appcompat">
+      <Visible>False</Visible>
+      <Version>23.2.1</Version>
+    </XamarinComponentReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-fa-rir\Strings.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\colors.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles.xml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\hamburger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\integers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\AdCommonService\AdvertisementCommonService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\AdTransportationService\AdvertisementTransportationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\CategoryService\CategoryService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\CryptoService\CryptoService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\LocationService\LocationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\RegistrationService\RegistrationService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\vals.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
+      <Project>{a7fe567b-d17e-4b5e-86c5-7224c753c1de}</Project>
+      <Name>ServiceLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\anim\" />
+    <Folder Include="Resources\drawable-hdpi\" />
+    <Folder Include="Resources\drawable-ldpi\" />
+    <Folder Include="Resources\drawable-mdpi\" />
+    <Folder Include="Resources\drawable-nodpi\" />
+    <Folder Include="Resources\drawable-tvdpi\" />
+    <Folder Include="Resources\drawable-xhdpi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowDown1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowDown2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowLeft2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowRight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowUp2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\RepositoryService\RepositoryService.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-v11\styles.xml" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
+  <Import Project="..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets" Condition="Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Xamarin.Android.Support.Vector.Drawable.23.2.1\build\Xamarin.Android.Support.Vector.Drawable.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+     Other similar extension points exist, see Microsoft.Common.targets.
+		<Target Name="BeforeBuild">
+		</Target>
+		<Target Name="AfterBuild">
+		</Target>
+ -->
+</Project>

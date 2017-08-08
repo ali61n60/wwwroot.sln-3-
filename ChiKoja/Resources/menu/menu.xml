@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <group android:checkableBehavior="single">
+    <item
+      android:id="@+id/nav_home"
+      android:title="@string/Home" />
+    <item
+      android:id="@+id/nav_login_logout"
+      android:title="@string/LoginLogout" />
+    <item
+      android:id="@+id/nav_newAd"
+      android:title="@string/NewAd" />
+    <item
+      android:id="@+id/nav_myAds"
+      android:title="@string/MyAds" />
+    
+  </group>
+  <group android:checkableBehavior="single">
+     <item
+      android:id="@+id/nav_synchDatabase"
+      android:title="@string/SycnhDatabase" />
+    <item
+    android:id="@+id/nav_LocationSelection"
+    android:title="@string/LocationSelection"
+    android:icon="@drawable/hamburger"/>
+   <item
+      android:id="@+id/nav_aboutUs"
+      android:title="@string/AboutUs" />
+    <item
+      android:id="@+id/nav_exitApp"
+      android:title="@string/ExitApplication"/>
+  </group>
+</menu>

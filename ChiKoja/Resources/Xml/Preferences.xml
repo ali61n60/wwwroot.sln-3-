@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <EditTextPreference
+    android:key="categoryVersionLocal"
+    android:title="CategoryVersionLocal"
+    android:summary="Category Version which is stored in local sqlite database"
+    android:numeric="integer"/>
+ 
+</PreferenceScreen>

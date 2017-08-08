@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">چی کجا</string>
+  <string name="Search">جستجو</string>
+  <string name="Return">بازگشت</string>
+  <string name="Cancel">انصراف</string>
+  <string name="Ok">تایید</string>
+  <string name="ContactInfo">اطلاعات تماس</string>
+  <string name="Call">تماس</string>
+  <string name="SendSms">ارسال اس ام اس</string>
+  <string name="Brand">برند</string>
+  <string name="MarkAd">نشان کن</string>
+  <string name="UnMarkAd">از نشان شده ها حذف کن</string>
+  <string name="SignIn">ثبت نام</string>
+  <string name="Logout">خروج</string>
+  <string name="AlreadySignInMessage">قبلا وارد شده اید</string>
+  <string name="DefaultToolbarMessage">چی کجا</string>
+  <string name="MinimumPrice">حداقل قیمت</string>
+  <string name="Price">قیمت</string>
+  <string name="From">از</string>
+  <string name="To">تا</string>
+  <string name="OnlyWithPictures">فقط عکس دار</string>
+  <string name="UrgentAdsOnly">فقط آگهی فوری</string>
+  <string name="Sort">مرتب سازی</string>
+  <string name="DateAsc">تاریخ صعودی</string>
+  <string name="DateDesc">تاریخ نزولی</string>
+  <string name="PriceAsc">قیمت صعودی</string>
+  <string name="PriceDesc">قیمت نزولی</string>
+
+   <string name="Menu">منو</string>
+  <string name="Home">خانه</string>
+  <string name="LoginLogout">ورود/خروج</string>
+  <string name="MyAds">آگهی های من</string>
+  <string name="NewAd">آگهی جدید</string>
+  <string name="LocationSelection">انتخاب مکان</string>
+  <string name="SycnhDatabase">همگام سازی دیتابیس</string>
+  <string name="Filter">فیلتر</string>
+  <string name="AboutUs">درباره ما</string>
+  <string name="ExitApplication">خروج از برنامه</string>
+
+
+  <string name="Title">عنوان</string>
+  <string name="ServerCall">ارتباط با سرور</string>
+
+  <string name="PleaseLogIn">لطفا وارد حساب کاربری خود شوید</string>
+  <string name="GoToLoginPage">انتقال به صفحه حساب کاربری</string>
+  <string name="SelectAll">انتخاب همه</string>
+  <string name="ClearAll">پاک کردن همه</string>
+  <string name="Visit">بازدید</string>
+  <string name="CheckingDatabase">بررسی دیتابیس</string>
+  <string name="DatabeseUpdated">دیتابیس بروزرسانی شد</string>
+  <string name="Category">دسته بندی</string>
+
+
+  <string name="planet_prompt">Choose a planet</string>
+  <string-array name="planets_array">
+    <item>Mercury</item>
+    <item>Venus</item>
+    <item>Earth</item>
+    <item>Mars</item>
+    <item>Jupiter</item>
+    <item>Saturn</item>
+    <item>Uranus</item>
+    <item>Neptune</item>
+  </string-array>
+
+
+</resources>

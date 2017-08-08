@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <item name="MinValuePriceFilter" format="float" type="style">0</item>
+  <item name="MaxValuePriceFilter" format="float" type="style">100000000000</item>
+</resources>

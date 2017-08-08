@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="AdvertisementCommonService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="WSHttpBinding_IAdvertisementCommonService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <wsaw:UsingAddressing />
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://192.168.42.16/Services/AdvertisementCommonService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://192.168.42.16/Services/AdvertisementCommonService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://192.168.42.16/Services/AdvertisementCommonService.svc?xsd=xsd2" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xsd:import schemaLocation="http://192.168.42.16/Services/AdvertisementCommonService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/WcfService.Messages" />
+      <xsd:import schemaLocation="http://192.168.42.16/Services/AdvertisementCommonService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Model.Advertisements" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IAdvertisementCommonService_WhatTimeIsIt_InputMessage">
+    <wsdl:part name="parameters" element="tns:WhatTimeIsIt" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_WhatTimeIsIt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:WhatTimeIsItResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_TestNameValue_InputMessage">
+    <wsdl:part name="parameters" element="tns:TestNameValue" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_TestNameValue_OutputMessage">
+    <wsdl:part name="parameters" element="tns:TestNameValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_GetAdvertisementCommon_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvertisementCommon" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_GetAdvertisementCommon_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAdvertisementCommonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_GetCustomerAdvertisementCommon_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerAdvertisementCommon" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_GetCustomerAdvertisementCommon_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCustomerAdvertisementCommonResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_RemoveAdvertisement_InputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAdvertisement" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_RemoveAdvertisement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RemoveAdvertisementResponse" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_ExtendAdvertisement_InputMessage">
+    <wsdl:part name="parameters" element="tns:ExtendAdvertisement" />
+  </wsdl:message>
+  <wsdl:message name="IAdvertisementCommonService_ExtendAdvertisement_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ExtendAdvertisementResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IAdvertisementCommonService">
+    <wsdl:operation name="WhatTimeIsIt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdvertisementCommonService/WhatTimeIsIt" message="tns:IAdvertisementCommonService_WhatTimeIsIt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdvertisementCommonService/WhatTimeIsItResponse" message="tns:IAdvertisementCommonService_WhatTimeIsIt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="TestNameValue">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdvertisementCommonService/TestNameValue" message="tns:IAdvertisementCommonService_TestNameValue_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdvertisementCommonService/TestNameValueResponse" message="tns:IAdvertisementCommonService_TestNameValue_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvertisementCommon">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdvertisementCommonService/GetAdvertisementCommon" message="tns:IAdvertisementCommonService_GetAdvertisementCommon_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdvertisementCommonService/GetAdvertisementCommonResponse" message="tns:IAdvertisementCommonService_GetAdvertisementCommon_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerAdvertisementCommon">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdvertisementCommonService/GetCustomerAdvertisementCommon" message="tns:IAdvertisementCommonService_GetCustomerAdvertisementCommon_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdvertisementCommonService/GetCustomerAdvertisementCommonResponse" message="tns:IAdvertisementCommonService_GetCustomerAdvertisementCommon_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdvertisement">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdvertisementCommonService/RemoveAdvertisement" message="tns:IAdvertisementCommonService_RemoveAdvertisement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdvertisementCommonService/RemoveAdvertisementResponse" message="tns:IAdvertisementCommonService_RemoveAdvertisement_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ExtendAdvertisement">
+      <wsdl:input wsaw:Action="http://tempuri.org/IAdvertisementCommonService/ExtendAdvertisement" message="tns:IAdvertisementCommonService_ExtendAdvertisement_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IAdvertisementCommonService/ExtendAdvertisementResponse" message="tns:IAdvertisementCommonService_ExtendAdvertisement_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WSHttpBinding_IAdvertisementCommonService" type="tns:IAdvertisementCommonService">
+    <wsp:PolicyReference URI="#WSHttpBinding_IAdvertisementCommonService_policy" />
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WhatTimeIsIt">
+      <soap12:operation soapAction="http://tempuri.org/IAdvertisementCommonService/WhatTimeIsIt" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestNameValue">
+      <soap12:operation soapAction="http://tempuri.org/IAdvertisementCommonService/TestNameValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvertisementCommon">
+      <soap12:operation soapAction="http://tempuri.org/IAdvertisementCommonService/GetAdvertisementCommon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerAdvertisementCommon">
+      <soap12:operation soapAction="http://tempuri.org/IAdvertisementCommonService/GetCustomerAdvertisementCommon" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdvertisement">
+      <soap12:operation soapAction="http://tempuri.org/IAdvertisementCommonService/RemoveAdvertisement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExtendAdvertisement">
+      <soap12:operation soapAction="http://tempuri.org/IAdvertisementCommonService/ExtendAdvertisement" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_IAdvertisementCommonService" type="tns:IAdvertisementCommonService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="WhatTimeIsIt">
+      <soap:operation soapAction="http://tempuri.org/IAdvertisementCommonService/WhatTimeIsIt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="TestNameValue">
+      <soap:operation soapAction="http://tempuri.org/IAdvertisementCommonService/TestNameValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAdvertisementCommon">
+      <soap:operation soapAction="http://tempuri.org/IAdvertisementCommonService/GetAdvertisementCommon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetCustomerAdvertisementCommon">
+      <soap:operation soapAction="http://tempuri.org/IAdvertisementCommonService/GetCustomerAdvertisementCommon" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RemoveAdvertisement">
+      <soap:operation soapAction="http://tempuri.org/IAdvertisementCommonService/RemoveAdvertisement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ExtendAdvertisement">
+      <soap:operation soapAction="http://tempuri.org/IAdvertisementCommonService/ExtendAdvertisement" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="AdvertisementCommonService">
+    <wsdl:port name="WSHttpBinding_IAdvertisementCommonService" binding="tns:WSHttpBinding_IAdvertisementCommonService">
+      <soap12:address location="http://192.168.42.16/Services/AdvertisementCommonService.svc/basic" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>http://192.168.42.16/Services/AdvertisementCommonService.svc/basic</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_IAdvertisementCommonService" binding="tns:BasicHttpBinding_IAdvertisementCommonService">
+      <soap:address location="http://192.168.42.16/Services/AdvertisementCommonService.svc/PublicService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

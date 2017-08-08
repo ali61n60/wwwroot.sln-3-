@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfService.Messages" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfService.Messages" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://192.168.42.16/Services/AdvertisementTransportationService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import schemaLocation="http://192.168.42.16/Services/AdvertisementTransportationService.svc?xsd=xsd4" namespace="http://schemas.datacontract.org/2004/07/Model.Advertisements" />
+  <xs:import schemaLocation="http://192.168.42.16/Services/AdvertisementTransportationService.svc?xsd=xsd5" namespace="http://schemas.datacontract.org/2004/07/Model.Advertisements.Transportation" />
+  <xs:complexType name="ResponseBaseOfArrayOfVehiclegJiz6K1p">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseBaseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/WcfService.Messages" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfVehicle" Namespace="http://schemas.datacontract.org/2004/07/Model.Advertisements" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomDictionary" nillable="true" type="q1:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/Model.Advertisements" minOccurs="0" name="ResponseData" nillable="true" type="q2:ArrayOfVehicle" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseBaseOfArrayOfVehiclegJiz6K1p" nillable="true" type="tns:ResponseBaseOfArrayOfVehiclegJiz6K1p" />
+  <xs:complexType name="ResponseBaseOfAdvertisementTransportationgJiz6K1p">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseBaseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/WcfService.Messages" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="AdvertisementTransportation" Namespace="http://schemas.datacontract.org/2004/07/Model.Advertisements" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomDictionary" nillable="true" type="q3:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/Model.Advertisements" minOccurs="0" name="ResponseData" nillable="true" type="q4:AdvertisementTransportation" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseBaseOfAdvertisementTransportationgJiz6K1p" nillable="true" type="tns:ResponseBaseOfAdvertisementTransportationgJiz6K1p" />
+  <xs:complexType name="ResponseBase">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseBase" nillable="true" type="tns:ResponseBase" />
+  <xs:complexType name="ResponseBaseOfArrayOfTransportationBrandoKnNwMS4">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseBaseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/WcfService.Messages" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfTransportationBrand" Namespace="http://schemas.datacontract.org/2004/07/Model.Advertisements.Transportation" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q5="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomDictionary" nillable="true" type="q5:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/Model.Advertisements.Transportation" minOccurs="0" name="ResponseData" nillable="true" type="q6:ArrayOfTransportationBrand" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseBaseOfArrayOfTransportationBrandoKnNwMS4" nillable="true" type="tns:ResponseBaseOfArrayOfTransportationBrandoKnNwMS4" />
+  <xs:complexType name="ResponseBaseOfArrayOfTransportationModeloKnNwMS4">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseBaseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/WcfService.Messages" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="ArrayOfTransportationModel" Namespace="http://schemas.datacontract.org/2004/07/Model.Advertisements.Transportation" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q7="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomDictionary" nillable="true" type="q7:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/Model.Advertisements.Transportation" minOccurs="0" name="ResponseData" nillable="true" type="q8:ArrayOfTransportationModel" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseBaseOfArrayOfTransportationModeloKnNwMS4" nillable="true" type="tns:ResponseBaseOfArrayOfTransportationModeloKnNwMS4" />
+  <xs:complexType name="ResponseBaseOfint">
+    <xs:annotation>
+      <xs:appinfo>
+        <GenericType Name="ResponseBaseOf{0}{#}" Namespace="http://schemas.datacontract.org/2004/07/WcfService.Messages" xmlns="http://schemas.microsoft.com/2003/10/Serialization/">
+          <GenericParameter Name="int" Namespace="http://www.w3.org/2001/XMLSchema" />
+        </GenericType>
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element xmlns:q9="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="CustomDictionary" nillable="true" type="q9:ArrayOfKeyValueOfstringstring" />
+      <xs:element minOccurs="0" name="ErrorCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ResponseData" type="xs:int" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ResponseBaseOfint" nillable="true" type="tns:ResponseBaseOfint" />
+</xs:schema>
