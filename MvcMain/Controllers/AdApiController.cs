@@ -23,7 +23,12 @@ namespace MvcMain.Controllers
         {
             ResponseBase<AdvertisementCommon[]> response=new ResponseBase<AdvertisementCommon[]>();
             //TODO Get data from database(repository) and put it in response.ResponseData
-            response.SetSuccessResponse("developmentPhase"+myParam?.StartIndex+" , "+myParam?.Count);
+            string resStr = "developmentPhase" + myParam?.StartIndex + " , " + myParam?.Count;
+            foreach (KeyValuePair<string, string> keyValuePair in myParam?.UserInput)
+            {
+                resStr += keyValuePair.Key + " , " + keyValuePair.Value;
+            }
+            response.SetSuccessResponse(resStr);
             response.ResponseData = null;
 
             return response;

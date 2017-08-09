@@ -106,13 +106,19 @@ namespace ChiKoja.SearchAd
         {
             // _searchAdService.GetAdFromServer(this);
             // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-            
+            MyParam myParam=new MyParam()
+            {
+                StartIndex = 123,
+                Count = 345,
+                UserInput = new Dictionary<string, string>()
+                {
+                    ["Number"]="2",
+                    ["People"]="13"
+                }
+            };
             try
             {
-                Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
-                userInputDictionary["Name"] = "Ali Nejati";
                 string url = "http://192.168.42.76/api/AdApi/GetAdvertisementCommon";
-                url += "?startIndex=5&count=2&userInput[Name]=Ali Nejati";;
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
                 request.ContentType = "application/json";
                 request.Method = "POST";
@@ -123,18 +129,18 @@ namespace ChiKoja.SearchAd
                     //     [FromQuery] int count,
                     //    [FromQuery] Dictionary<string, string> userInput
 
-                   // string jsonData = "<form>{\"startIndex\":\"5\"}</form>";
-                                      //"count:\"23\"}</form>";
-                  //  Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
-                  //  userInputDictionary["Name"] = "Ali Nejati";
+                    // string jsonData = "<form>{\"startIndex\":\"5\"}</form>";
+                    //"count:\"23\"}</form>";
+                    //  Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
+                    //  userInputDictionary["Name"] = "Ali Nejati";
                     //MethodParam myMethodParam = new MethodParam() { Name = "Ali Nejati", Phone = "0912" };
                     //string jsonData = "{\"Name\":\"Ali Nejati\"," +
                     //               "\"Phone\":\"09122012908\"}";
-                  //  jsonData += JsonConvert.SerializeObject(userInputDictionary);
-
-                  //  streamWriter.Write(jsonData);
-                  //  streamWriter.Flush();
-                 //   streamWriter.Close();
+                    //  jsonData += JsonConvert.SerializeObject(userInputDictionary);
+                    string jsonData = JsonConvert.SerializeObject(myParam);
+                    streamWriter.Write(jsonData);
+                    streamWriter.Flush();
+                    streamWriter.Close();
                 }
 
                 // Send the request to the server and wait for the response:
@@ -231,5 +237,11 @@ namespace ChiKoja.SearchAd
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
             Toast.MakeText(ApplicationContext, ex.Message, ToastLength.Short).Show();
         }
+    }
+    public class MyParam
+    {
+        public int StartIndex { get; set; }
+        public int Count { get; set; }
+        public Dictionary<string, string> UserInput { get; set; }
     }
 }
