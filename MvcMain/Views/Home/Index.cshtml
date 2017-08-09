@@ -41,16 +41,13 @@
         //    $isServerCalled = true;
        // }
         var $ajaxData = {};
-        $ajaxData.name = "Ali Nejati";
-        $ajaxData.numberOfCalls = 10;
-        var jsonData = JSON.stringify($ajaxData);
-        //$ajaxData.startIndex = $start;
-        //$ajaxData.count = $count;
+        $ajaxData.startIndex = $start;
+        $ajaxData.count = $count;
 
-        //var $myDictionary = searchCriteriaObject.getSearchOptionDictionary();
-            
-        //$myDictionary.push({ "Key": "RequestIndex", "Value": $requestIndex });
-        //$ajaxData.userInput = $myDictionary;
+        var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
+        $requestIndex++;
+        $myDictionary["RequestIndex"] = $requestIndex;
+        $ajaxData.userInput = $myDictionary;
 
         //var ajaxString = JSON.stringify($ajaxData);
         //notifyUserAjaxCallStarted();
@@ -58,17 +55,16 @@
             
         $.ajax({
             type: "GET", //GET or POST or PUT or DELETE verb
-            //url: "<%= Page.ResolveClientUrl("~/Services/AdvertisementCommonService.svc/GetAdvertisementCommon") %>", // Location of the service
-            url:"api/AdApi/SayHello",
+            url:"api/AdApi/GetAdvertisementCommon",
             data: $ajaxData, //Data sent to server
             contentType: 'application/json; charset=utf-8', // content type sent to server
             dataType: 'json', //Expected data format from server
             processdata: true, //True or False
             success: function (msg) {//On Successfull service call
-                $("#serverTime").text(msg);
+                $("#serverTime").text(msg.message);
             },
             error: function(msg) {
-                $("#serverTime").text(msg);
+                $("#serverTime").text(msg.message);
             } // When Service call fails
         });//end .ajax
     }

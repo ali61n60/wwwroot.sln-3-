@@ -18,11 +18,17 @@ namespace MvcMain.Controllers
             return Json(String.Format("Hello {0},Number is {1} current server time is: {2}", name,numberOfCalls, DateTime.Now.ToString()));
         }
 
-        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(int startIndex, int count, Dictionary<string, string> userInput)
+        [HttpGet]
+        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon([FromQuery] int startIndex,
+                                                                          [FromQuery] int count,
+                                                                          [FromQuery] Dictionary<string, string> userInput)
         {
-           ResponseBase<AdvertisementCommon[]> response=new ResponseBase<AdvertisementCommon[]>();
+            ResponseBase<AdvertisementCommon[]> response=new ResponseBase<AdvertisementCommon[]>();
+            //TODO Get data from database(repository) and put it in response.ResponseData
+            response.SetSuccessResponse("developmentPhase");
+            response.ResponseData = null;
 
+            return response;
         }
-
     }
 }
