@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using MvcMain.Infrastructure;
+using ModelStd.Advertisements;
+using ModelStd.Services;
+
 
 namespace MvcMain.Controllers
 {
@@ -18,14 +20,8 @@ namespace MvcMain.Controllers
 
         public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(int startIndex, int count, Dictionary<string, string> userInput)
         {
-            startIndex = _serviceCommonPolicy.getStart(startIndex);
-            count = _serviceCommonPolicy.getCount(count);
-            int selectedCategoryId = getSelectedCategoryId(userInput);
-            //Polymorphic dispatch of service call
-            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(selectedCategoryId);
-            _response = advertisementService.GetAdvertisements(startIndex, count, userInput);
-            setRequestIndex(userInput);
-            return _response;
+           ResponseBase<AdvertisementCommon[]> response=new ResponseBase<AdvertisementCommon[]>();
+
         }
 
     }

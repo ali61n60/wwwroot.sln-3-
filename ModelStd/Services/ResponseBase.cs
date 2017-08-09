@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace MvcMain.Infrastructure
+namespace ModelStd.Services
 {
     
     public class ResponseBase<T>
