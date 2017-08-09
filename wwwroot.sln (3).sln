@@ -41,6 +41,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7-Android", "7-Android", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{A7FE567B-D17E-4B5E-86C5-7224C753C1DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelStd", "ModelStd\ModelStd.csproj", "{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{A7FE567B-D17E-4B5E-86C5-7224C753C1DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7FE567B-D17E-4B5E-86C5-7224C753C1DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7FE567B-D17E-4B5E-86C5-7224C753C1DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +120,7 @@ Global
 		{041340D8-7A1A-4E3D-8304-95ABE317255A} = {8320FF7E-C833-473B-A534-D403364CCE32}
 		{37E92A03-D6D5-40AB-B627-B98898A88AF7} = {BDEAB301-1106-4537-B46A-D25201BCEBCE}
 		{A7FE567B-D17E-4B5E-86C5-7224C753C1DE} = {BDEAB301-1106-4537-B46A-D25201BCEBCE}
+		{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF} = {3FC1937E-C1E2-47F1-B2AA-E3D34EB3307C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35

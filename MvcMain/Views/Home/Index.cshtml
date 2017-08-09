@@ -9,6 +9,107 @@
 
 <div class="row well">
     <div class="col-sm-12">
-        <button class="btn btn-success btn-block btn-lg">جستجو</button>
+        <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
+        <label id="serverTime"></label>
     </div>
 </div>
+
+<script type="text/javascript">
+    var $initialStart = 1;
+    var $start = 1;
+    var $count = 5;
+    var $requestIndex = 0;
+    var $previousRequestIndex = -1;
+    var $isServerCalled = false;
+    var $numberOfStartServerCallNotification = 0;
+
+
+    $(document).ready(function () {
+        $("#getAdFromServer").on("click",
+            function (event) {
+                event.preventDefault();
+                getAdItemsFromServer();
+            }); //end click
+    });//end ready
+
+    //CORE
+    function getAdItemsFromServer() {
+       // if ($isServerCalled && ($previousRequestIndex===$requestIndex)) {//a call is sent but no answer yet
+        //    return;
+       // } else {
+         //   $previousRequestIndex = $requestIndex;
+        //    $isServerCalled = true;
+       // }
+        var $ajaxData = {};
+        $ajaxData.name = "Ali Nejati";
+        $ajaxData.numberOfCalls = 10;
+        var jsonData = JSON.stringify($ajaxData);
+        //$ajaxData.startIndex = $start;
+        //$ajaxData.count = $count;
+
+        //var $myDictionary = searchCriteriaObject.getSearchOptionDictionary();
+            
+        //$myDictionary.push({ "Key": "RequestIndex", "Value": $requestIndex });
+        //$ajaxData.userInput = $myDictionary;
+
+        //var ajaxString = JSON.stringify($ajaxData);
+        //notifyUserAjaxCallStarted();
+           
+            
+        $.ajax({
+            type: "GET", //GET or POST or PUT or DELETE verb
+            //url: "<%= Page.ResolveClientUrl("~/Services/AdvertisementCommonService.svc/GetAdvertisementCommon") %>", // Location of the service
+            url:"api/AdApi/SayHello",
+            data: $ajaxData, //Data sent to server
+            contentType: 'application/json; charset=utf-8', // content type sent to server
+            dataType: 'json', //Expected data format from server
+            processdata: true, //True or False
+            success: function (msg) {//On Successfull service call
+                $("#serverTime").text(msg);
+            },
+            error: function(msg) {
+                $("#serverTime").text(msg);
+            } // When Service call fails
+        });//end .ajax
+    }
+
+    function OnSuccessGetItemsFromServer(msg) {
+        $isServerCalled = false;
+        notifyUserAjaxCallFinished();
+        if (msg.Success === true) {
+            if (msg.CustomDictionary[1].Value == $requestIndex) {
+                $start += parseInt(msg.CustomDictionary[0].Value);
+                var template = $('#singleAdItem').html();
+                var data;
+                for (var i = 0; i < msg.ResponseData.length; i++) {
+                    var adImage = null;
+                    if (msg.ResponseData[i].AdvertisementImages[0] != null) {
+                        adImage = "data:image/jpg;base64," + msg.ResponseData[i].AdvertisementImages[0];
+                    } //end if
+                    data = {
+                        AdvertisementId: msg.ResponseData[i].AdvertisementId,
+                        AdvertisementCategoryId: msg.ResponseData[i].AdvertisementCategoryId,
+                        AdvertisementCategory: msg.ResponseData[i].AdvertisementCategory,
+                        adImage: adImage,
+                        adPrice: msg.ResponseData[i].AdvertisementPrice.price, //todo check the price type
+                        AdvertisementTitle: msg.ResponseData[i].AdvertisementTitle,
+                        AdvertisementStatus: msg.ResponseData[i].AdvertisementStatus
+                        //adDate: msg.ResponseData[i].AdTime
+                    } //end data
+
+                    var html = Mustache.to_html(template, data);
+                    $("#<%=AdPlaceHolder.ClientID%>").append(html);
+                } //end for
+            }//end if
+        }//end if
+        else {
+            showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+        }
+    }//end OnSuccessGetTimeFromServer
+
+    function OnErrorGetTimeFromServer(XMLHttpRequest, textStatus, errorThrown) {
+        $isServerCalled = false;
+        notifyUserAjaxCallFinished();
+        showErrorMessage(textStatus + " , " + errorThrown);
+    }//end OnErrorGetTimeFromServer
+</script>
