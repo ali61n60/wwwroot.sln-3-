@@ -12,7 +12,7 @@ namespace MvcMain.Controllers
 {
     public class HomeController : Controller
     {
-        [Authorize]
+        //[Authorize]
         public async Task<IActionResult> Index()
         {
             return View();

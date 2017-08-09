@@ -1,5 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
+using System.Json;
+using System.Net;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -14,6 +19,9 @@ using ChiKoja.AdCommonService;
 using ChiKoja.Category;
 using ChiKoja.Notification;
 using ChiKoja.Services;
+using ModelStd.Services;
+using Newtonsoft.Json;
+using AdvertisementCommon = ModelStd.Advertisements.AdvertisementCommon;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 
 
@@ -27,16 +35,19 @@ namespace ChiKoja.SearchAd
 
         View rootView;
         Button buttonFilter;
+
         Button buttonSort;
+
         //Button buttonSearchAd;
         AppCompatButton buttonSearchAd;
+
         Button buttonCategory;
         LinearLayout searchResultPlaceHolder;
-        
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            chechIntentMessage();//exit command ...
+            chechIntentMessage(); //exit command ...
             inflateView();
             initializeFields();
         }
@@ -46,24 +57,27 @@ namespace ChiKoja.SearchAd
             if (Intent.GetBooleanExtra("EXIT", false))
                 Finish();
         }
-       
+
         private void inflateView()
         {
-            FrameLayout contentFrameLayout = FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+            FrameLayout contentFrameLayout =
+                FindViewById<FrameLayout>(Resource.Id
+                    .content_frame); //Remember this is the FrameLayout area within your activity_main.xml
             rootView = LayoutInflater.Inflate(Resource.Layout.SearchAd, contentFrameLayout);
         }
+
         private void initializeFields()
         {
             _searchAdService = new SearchAdService();
-           
+
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonSearchAd.Click += buttonSearchAd_Click;
-            
+
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
             buttonFilter.Click += buttonFilter_Click;
 
             buttonSort = rootView.FindViewById<Button>(Resource.Id.buttonSort);
-            buttonSort.Click+=buttonSortBy_Click;
+            buttonSort.Click += buttonSortBy_Click;
 
             buttonCategory = FindViewById<Button>(Resource.Id.buttonCategory);
             buttonCategory.Click += buttonCategory_Click;
@@ -88,19 +102,68 @@ namespace ChiKoja.SearchAd
             StartActivityForResult(searchFilterIntent, SearchFilterRequestCode);
         }
 
-        void buttonSearchAd_Click(object sender, EventArgs e)
+        async void buttonSearchAd_Click(object sender, EventArgs e)
         {
-            _searchAdService.GetAdFromServer(this);
-            MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-        }
+            // _searchAdService.GetAdFromServer(this);
+            // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+            
+            try
+            {
+                Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
+                userInputDictionary["Name"] = "Ali Nejati";
+                string url = "http://192.168.42.76/api/AdApi/GetAdvertisementCommon";
+                url += "?startIndex=5&count=2&userInput[Name]=Ali Nejati";;
+                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+                request.ContentType = "application/json";
+                request.Method = "POST";
+                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    // [FromQuery]
+                    //  int startIndex,
+                    //     [FromQuery] int count,
+                    //    [FromQuery] Dictionary<string, string> userInput
 
-       protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+                   // string jsonData = "<form>{\"startIndex\":\"5\"}</form>";
+                                      //"count:\"23\"}</form>";
+                  //  Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
+                  //  userInputDictionary["Name"] = "Ali Nejati";
+                    //MethodParam myMethodParam = new MethodParam() { Name = "Ali Nejati", Phone = "0912" };
+                    //string jsonData = "{\"Name\":\"Ali Nejati\"," +
+                    //               "\"Phone\":\"09122012908\"}";
+                  //  jsonData += JsonConvert.SerializeObject(userInputDictionary);
+
+                  //  streamWriter.Write(jsonData);
+                  //  streamWriter.Flush();
+                 //   streamWriter.Close();
+                }
+
+                // Send the request to the server and wait for the response:
+                using (WebResponse response = await request.GetResponseAsync())
+                {
+                    
+                    // Get a stream representation of the HTTP web response:
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        // Use this stream to build a JSON document object:
+                        JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                        ResponseBase<AdvertisementCommon[]> result =
+                            JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
+                        Toast.MakeText(this, result.Message, ToastLength.Long).Show();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Toast.MakeText(this, ex.Message, ToastLength.Long).Show();
+            }
+        }
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
 
             if (requestCode == LocationSelectionRequestCode)
             {
-                if(data==null) return;
+                if (data == null) return;
                 if (data.GetBooleanExtra("locationSelectionChanged", false))
                     resetSearchCondition();
             }
@@ -139,11 +202,11 @@ namespace ChiKoja.SearchAd
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             layoutParams.SetMargins(0, 20, 0, 20);
 
-            if (response.Success)
-                foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
-                    addAdvertisementOnPage(advertisementCommon, layoutParams);
-            else
-                Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
+          //  if (response.Success)
+             //   foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
+              //      addAdvertisementOnPage(advertisementCommon, layoutParams);
+          //  else
+           //     Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
         }
         private void addAdvertisementOnPage(AdvertisementCommon advertisementCommon, LinearLayout.LayoutParams layoutParams)
         {
@@ -158,8 +221,8 @@ namespace ChiKoja.SearchAd
                 AdPrice = advertisementCommon.AdvertisementPrice.price.ToString(),
                 AdImage = advertisementCommon.AdvertisementImages[0],
                 AdCategoryId = advertisementCommon.AdvertisementCategoryId,
-                AdGuid = Guid.Parse(advertisementCommon.AdvertisementId),
-                AdNumberOfVisit=advertisementCommon.NumberOfVisit
+              //  AdGuid = Guid.Parse(advertisementCommon.AdvertisementId),
+                AdNumberOfVisit = advertisementCommon.NumberOfVisit
             };
         }
 
