@@ -41,25 +41,23 @@
         //    $isServerCalled = true;
        // }
         var $ajaxData = {};
-        $ajaxData.startIndex = $start;
-        $ajaxData.count = $count;
+        $ajaxData.StartIndex = $start;
+        $ajaxData.Count = $count;
 
         var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
         $requestIndex++;
-        $myDictionary["RequestIndex"] = $requestIndex;
-        $ajaxData.userInput = $myDictionary;
+        $myDictionary["RequestIndex"] = "hello";
+        $ajaxData.UserInput = $myDictionary;
 
         //var ajaxString = JSON.stringify($ajaxData);
         //notifyUserAjaxCallStarted();
            
             
         $.ajax({
-            type: "GET", //GET or POST or PUT or DELETE verb
+            type: "POST", //GET or POST or PUT or DELETE verb
             url:"api/AdApi/GetAdvertisementCommon",
-            data: $ajaxData, //Data sent to server
-            contentType: 'application/json; charset=utf-8', // content type sent to server
-            dataType: 'json', //Expected data format from server
-            processdata: true, //True or False
+            data: JSON.stringify($ajaxData), //Data sent to server
+            contentType: 'application/json', // content type sent to server
             success: function (msg) {//On Successfull service call
                 $("#serverTime").text(msg.message);
             },
