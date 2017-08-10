@@ -103,6 +103,16 @@
     }//end OnErrorGetTimeFromServer
 </script>
 
+<script>
+    $(document).ready(function () {
+
+        //show detail of singleAdItem when mouse over
+        $(document).on('mouseenter mouseleave', '.blockDisplay', function () {
+            $(this).find('.moreInfo').fadeToggle(250);
+        });//end on
+
+    });//end ready
+</script>
 
 <script id="singleAdItem" type="text/template">
     <div class="blockDisplay adDetail">
