@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.4</TargetFramework>
+    <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Copyright>no</Copyright>
+    <PackageLicenseUrl>no</PackageLicenseUrl>
+    <PackageProjectUrl>no</PackageProjectUrl>
+    <PackageIconUrl>no</PackageIconUrl>
+    <RepositoryUrl>no</RepositoryUrl>
+    <RepositoryType>no</RepositoryType>
+    <PackageTags>no</PackageTags>
+    <PackageReleaseNotes>no</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ModelStd\ModelStd.csproj" />
+  </ItemGroup>
+
+</Project>

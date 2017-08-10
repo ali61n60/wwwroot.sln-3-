@@ -5,7 +5,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Services;
+using MvcMain.Infrastructure.IOC;
 using MvcMain.Infrastructure.ServicePolicy;
+using MvcMain.Infrastructure.Services;
 
 
 namespace MvcMain.Controllers
@@ -31,31 +33,9 @@ namespace MvcMain.Controllers
             count = _serviceCommonPolicy.CountInRange(count);
             int selectedCategoryId = getInt("CategoryId", 0, userInput);
             //Polymorphic dispatch of service call
-            //IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(selectedCategoryId);
-            //_response = advertisementService.GetAdvertisements(startIndex, count, userInput);
-            //setRequestIndex(userInput);
-            //return _response;
-
-
-
-
-
-
-
-
-
-
-            ResponseBase<AdvertisementCommon[]> response=new ResponseBase<AdvertisementCommon[]>();
-            
-            //TODO Get data from database(repository) and put it in response.ResponseData
-            string resStr = "developmentPhase";
-            if(userInput!=null)
-                foreach (KeyValuePair<string, string> keyValuePair in userInput)
-                {
-                    resStr +=" "+ keyValuePair.Key + "=" + keyValuePair.Value;
-                }
-            response.SetSuccessResponse(resStr);
-            response.ResponseData = null;
+            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(selectedCategoryId);
+            ResponseBase<AdvertisementCommon[]> response = advertisementService.GetAdvertisements(startIndex, count, userInput);
+            setRequestIndex(userInput,response);
             return response;
         }
 
@@ -69,6 +49,21 @@ namespace MvcMain.Controllers
                 int.TryParse(userInput[key], out returnValue);
             }
             return returnValue;
+        }
+        private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<AdvertisementCommon[]> response)
+        {
+            if (userInput.ContainsKey("RequestIndex"))
+            {
+                if (response.CustomDictionary != null)
+                    response.CustomDictionary["RequestIndex"] = userInput["RequestIndex"];
+                else
+                {
+                    response.CustomDictionary = new Dictionary<string, string>
+                    {
+                        {"RequestIndex", userInput["RequestIndex"]}
+                    };
+                }
+            }
         }
     }
 

@@ -13,9 +13,7 @@ using WcfService.ServicePolicy;
 
 namespace WcfService.Services
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.PerCall)]
-    [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
-
+    
     public class AdvertisementCommonService : IAdvertisementCommonService, IAdvertisementService
     {
         ResponseBase<AdvertisementCommon[]> _response;
