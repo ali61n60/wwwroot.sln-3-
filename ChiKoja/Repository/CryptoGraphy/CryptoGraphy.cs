@@ -1,17 +1,17 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Json;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
-using Android.OS;
 using Android.Preferences;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using ChiKoja.CryptoService;
+using ChiKoja.Services;
+using ModelStd.Services;
+using Newtonsoft.Json;
+
 
 namespace ChiKoja.Repository.CryptoGraphy
 {
@@ -34,26 +34,62 @@ namespace ChiKoja.Repository.CryptoGraphy
             OperationOrder = 5;
         }
 
-        public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
+        public async void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
-            CryptoService.CryptoService cryptoService = new CryptoService.CryptoService();
-
-            ResponseBaseOfint response = cryptoService.GetKeyVersion();
-            if (response.Success)
+            string url = ServicesCommon.ServerUrl + "/api/CryptoApi/GetKeyVersion";
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+            request.ContentType = "application/json";
+            request.Method = "POST";
+            using (WebResponse webResponse = await request.GetResponseAsync())
             {
-                int serverCryptoKeyVersion = response.ResponseData;
-                if (serverCryptoKeyVersion != LocalServerCryptoKeyVersion)//local vs server version  mismatch
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = webResponse.GetResponseStream())
                 {
-                    ResponseBaseOfstring publicKeyResponse = cryptoService.GetPublicKey();
-                    if (publicKeyResponse.Success)
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                    ResponseBase<int> response =
+                        JsonConvert.DeserializeObject<ResponseBase<int>>(jsonDoc.ToString());
+                    if (response.Success)
                     {
-                        LocalServerCryptoKeyPublic = publicKeyResponse.ResponseData;
+                        int serverCryptoKeyVersion = response.ResponseData;
+                        if (serverCryptoKeyVersion != LocalServerCryptoKeyVersion) //local vs server version  mismatch
+                        {
+                            updateLocalServerCryptoKeyPublic();
+
+                        }
+                    }
+                    else
+                    {
+                        //response.Success=false
                     }
                 }
             }
-            else
+        }
+
+        private async void updateLocalServerCryptoKeyPublic()
+        {
+            string url = ServicesCommon.ServerUrl + "/api/CryptoApi/GetPublicKey";
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+            request.ContentType = "application/json";
+            request.Method = "POST";
+            using (WebResponse webResponse = await request.GetResponseAsync())
             {
-                //error in getting data from server
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = webResponse.GetResponseStream())
+                {
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                    ResponseBase<string> response =
+                        JsonConvert.DeserializeObject<ResponseBase<string>>(jsonDoc.ToString());
+                    if (response.Success)
+                    {
+                        LocalServerCryptoKeyPublic = response.ResponseData;
+                    }
+                    else
+                    {
+                        //response.Success=false
+                    }
+                }
             }
         }
 
