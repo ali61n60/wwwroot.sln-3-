@@ -14,16 +14,25 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using ModelStd.Advertisements;
+using ModelStd.IRepository;
+using MvcMain.Infrastructure.Services;
 using MvcMain.Models;
+using RepositoryStd;
+using RepositoryStd.Repository;
+using RepositoryStd.Repository.TransportationRepository;
+using StructureMap;
 
 namespace MvcMain
 {
     public class Startup
     {
         IConfigurationRoot _configuration;
+        private IHostingEnvironment _env;
 
         public Startup(IHostingEnvironment env)
         {
+            _env = env;
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json").Build();
@@ -32,6 +41,14 @@ namespace MvcMain
 
         public void ConfigureServices(IServiceCollection services)
         {
+            string directoryPath = _env.ContentRootPath + "/AdvertisementImages/";
+            services.AddTransient<IImageRepository>(provider => new ImageRepositoryFileSystem(directoryPath));
+            services.AddTransient<IRepository<AdvertisementCommon>, AdvertisementCommonRepository>();
+            services.AddTransient<IRepository<AdvertisementTransportation>, AdvertisementTransportationRepository>();
+            services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
+            services.AddTransient<ITransportaionRepository,TransportationRepository>();
+
+
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(_configuration["Data:ConnectionString"]));
 
@@ -58,8 +75,7 @@ namespace MvcMain
                         };
                 }
                 ).AddEntityFrameworkStores<AppIdentityDbContext>();
-
-
+            
             services.AddMvc();
         }
 
@@ -87,6 +103,12 @@ namespace MvcMain
             });
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
+            AppServiceProvider.Instance = app.ApplicationServices;
         }
+    }
+
+    public static class AppServiceProvider
+    {
+        public static IServiceProvider Instance { get; set; }
     }
 }

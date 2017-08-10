@@ -1,18 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using ModelStd.Services;
-using MvcMain.Infrastructure.IOC;
 using MvcMain.Infrastructure.ServicePolicy;
+using RepositoryStd.QueryPattern.BaseQuery;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace MvcMain.Infrastructure.Services
 {
     
-    public class AdvertisementCommonService : IAdvertisementService //IAdvertisementCommonService, IAdvertisementService
+    public class AdvertisementCommonService : IAdvertisementService ,IAdvertisementCommonService
     {
         ResponseBase<AdvertisementCommon[]> _response;
         ResponseBase _responseBase;
@@ -23,9 +23,6 @@ namespace MvcMain.Infrastructure.Services
 
         private readonly string NumberOfItemsKey = "numberOfItems";
         
-
-
-
         public AdvertisementCommonService
             (IRepository<AdvertisementCommon> advertisementCommonRepository, IImageRepository imageRepository)
         {
@@ -34,9 +31,13 @@ namespace MvcMain.Infrastructure.Services
           //  registrationService = new RegistrationService();
         }
 
-        public AdvertisementCommonService() :
-            this(Bootstrapper.container.GetInstance<IRepository<AdvertisementCommon>>(),
-            Bootstrapper.container.GetInstance<IImageRepository>()) { }
+        public AdvertisementCommonService()
+        {
+            _advertisementCommonRepository= AppServiceProvider.Instance.GetService<IRepository<AdvertisementCommon>>();
+            _imageRepository = AppServiceProvider.Instance.GetService<IImageRepository>();
+        }
+
+        
 
 
        
@@ -91,6 +92,70 @@ namespace MvcMain.Infrastructure.Services
             _response.CustomDictionary = customDictionary;
         }
 
+        public string WhatTimeIsIt(string name)
+        {
+            throw new NotImplementedException();
+        }
+
+        public string TestNameValue(string name, Dictionary<string, string> userDictionary)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(int startIndex, int count, Dictionary<string, string> userInput)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string userName, string password, bool userPassIsEncrypted)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase RemoveAdvertisement(AdvertisementCommon advertisementCommon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase ExtendAdvertisement(AdvertisementCommon advertisement)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase IncrementNumberOfVisit(Guid adGuid)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FillFirstImage(AdvertisementCommon[] advertisementCommons)
+        {
+            foreach (AdvertisementCommon advertisement in advertisementCommons)
+            {
+                FillFirstImage(advertisement);
+            }
+        }
+        public void FillFirstImage(AdvertisementCommon advertisementCommon)
+        {
+            advertisementCommon.AdvertisementImages[0] =
+                    _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
+        }
+
+        public void FillAllImages(AdvertisementCommon[] advertisementCommons)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FillAllImages(AdvertisementCommon advertisementCommon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
+        {
+            throw new NotImplementedException();
+        }
+
+
         //public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string username, string password, bool userPassIsEncrypted)
         //{
         //    string errorCode = "AdvertisementCommonService.GetCustomerAdvertisementCommon";
@@ -107,7 +172,7 @@ namespace MvcMain.Infrastructure.Services
         //        _response.SetFailureResponse(userPassResponseBase.Message, errorCode + ", " + userPassResponseBase.ErrorCode);
         //        return _response;
         //    }
-            
+
         //    try
         //    {
         //        advertisementCommons = _advertisementCommonRepository.GetUserAdvertisements(username).ToArray();
@@ -216,18 +281,7 @@ namespace MvcMain.Infrastructure.Services
         //    return selectedCategoryId;
         //}
 
-        //public void FillFirstImage(AdvertisementCommon[] advertisementCommons)
-        //{
-        //    foreach (AdvertisementCommon advertisement in advertisementCommons)
-        //    {
-        //        FillFirstImage(advertisement);
-        //    }
-        //}
-        //public void FillFirstImage(AdvertisementCommon advertisementCommon)
-        //{
-        //    advertisementCommon.AdvertisementImages[0] =
-        //            _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
-        //}
+
 
         //public void FillAllImages(AdvertisementCommon[] advertisementCommons)
         //{

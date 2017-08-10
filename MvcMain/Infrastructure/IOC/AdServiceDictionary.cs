@@ -19,6 +19,8 @@ namespace MvcMain.Infrastructure.IOC
         private static void InitializeDictionary()
         {
             // each catergory that is developed will have an entry here
+            //TODO here I return a singlton for advertisementService class, Maybe I should return new object for
+            //TODO each request
             _advertisementTypeDictionary.Add(0, new AdvertisementCommonService());
             _advertisementTypeDictionary.Add(100, new AdvertisementTransportationService());//AddTransportation
         }

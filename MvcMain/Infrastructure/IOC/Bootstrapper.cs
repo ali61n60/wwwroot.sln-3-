@@ -7,25 +7,25 @@ using RepositoryStd;
 
 namespace MvcMain.Infrastructure.IOC
 {
-    public  class Bootstrapper
+    public class Bootstrapper
     {
         public static Container container;
+        private static IHostingEnvironment env;
 
-       
-        public Bootstrapper(IHostingEnvironment env)
+
+        static Bootstrapper()
         {
             container = new Container(x =>
             {
                 //x.For<IRepository>().Use<Repository>();
                 //x.For<ISimpleModel>().Use<SimpleModel>().Ctor<int>().Is(250);
                 
-                string directoryPath =env.ContentRootPath+"/AdvertisementImages/";
-                x.For<IImageRepository>().Use<ImageRepositoryFileSystem>().Ctor<string>().Is(directoryPath);
-                //x.For<IRepository<AdvertisementCommon>>().Use<AdvertisementCommonRepository>();
-                //x.For<IRepository<AdvertisementTransportation>>().Use<AdvertisementTransportationRepository>();
-                //x.For<ITransportaionRepository>().Use<TransportationRepository>();
+                
+               
+                
+                
 
-                //x.For<IAdvertisementCommonService>().Use<AdvertisementCommonService>();
+                
                 //x.For<IAdvertisementTransportationService>().Use<AdvertisementTransportationService>();
                 //x.For<ICategoryRepository>().Use<CategoryRepositoryInCode>();
                 //x.For<RegistrationRepository>().Use<RegistrationRepository>();
