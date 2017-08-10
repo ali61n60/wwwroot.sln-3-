@@ -40,14 +40,12 @@
          //   $previousRequestIndex = $requestIndex;
         //    $isServerCalled = true;
        // }
-        var $ajaxData = {};
-        $ajaxData.StartIndex = $start;
-        $ajaxData.Count = $count;
+        var $userInput = {};
+        $userInput.StartIndex = $start;
+        $userInput.Count = $count;
 
-        var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
-        $requestIndex++;
-        $myDictionary["RequestIndex"] = "hello";
-        $ajaxData.UserInput = $myDictionary;
+        //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
+        $userInput.RequestIndex = "Hello";
 
         //var ajaxString = JSON.stringify($ajaxData);
         //notifyUserAjaxCallStarted();
@@ -56,7 +54,7 @@
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
             url:"api/AdApi/GetAdvertisementCommon",
-            data: JSON.stringify($ajaxData), //Data sent to server
+            data: JSON.stringify($userInput), //Data sent to server
             contentType: 'application/json', // content type sent to server
             success: function (msg) {//On Successfull service call
                 $("#serverTime").text(msg.message);

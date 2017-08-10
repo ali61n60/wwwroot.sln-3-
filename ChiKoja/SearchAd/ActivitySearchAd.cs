@@ -106,16 +106,12 @@ namespace ChiKoja.SearchAd
         {
             // _searchAdService.GetAdFromServer(this);
             // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-            MyParam myParam=new MyParam()
-            {
-                StartIndex = 123,
-                Count = 345,
-                UserInput = new Dictionary<string, string>()
-                {
-                    ["Number"]="2",
-                    ["People"]="13"
-                }
-            };
+            Dictionary<string,string> userInputDictionary=new Dictionary<string, string>();
+            userInputDictionary["StartIndex"] = "12";
+            userInputDictionary["Count"] = "4";
+            userInputDictionary["CategoryId"] = "27";
+            userInputDictionary["RequestIndex"] = "345";
+
             try
             {
                 string url = "http://192.168.42.76/api/AdApi/GetAdvertisementCommon";
@@ -137,7 +133,7 @@ namespace ChiKoja.SearchAd
                     //string jsonData = "{\"Name\":\"Ali Nejati\"," +
                     //               "\"Phone\":\"09122012908\"}";
                     //  jsonData += JsonConvert.SerializeObject(userInputDictionary);
-                    string jsonData = JsonConvert.SerializeObject(myParam);
+                    string jsonData = JsonConvert.SerializeObject(userInputDictionary);
                     streamWriter.Write(jsonData);
                     streamWriter.Flush();
                     streamWriter.Close();
@@ -146,6 +142,7 @@ namespace ChiKoja.SearchAd
                 // Send the request to the server and wait for the response:
                 using (WebResponse response = await request.GetResponseAsync())
                 {
+                    
                     
                     // Get a stream representation of the HTTP web response:
                     using (Stream stream = response.GetResponseStream())
@@ -237,11 +234,5 @@ namespace ChiKoja.SearchAd
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
             Toast.MakeText(ApplicationContext, ex.Message, ToastLength.Short).Show();
         }
-    }
-    public class MyParam
-    {
-        public int StartIndex { get; set; }
-        public int Count { get; set; }
-        public Dictionary<string, string> UserInput { get; set; }
     }
 }
