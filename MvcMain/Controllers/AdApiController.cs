@@ -19,21 +19,22 @@ namespace MvcMain.Controllers
         }
 
        
-        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon([FromBody] MyParam myParam)
+        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(
+            [FromBody] Dictionary<string, string> userInput)
         {
             ResponseBase<AdvertisementCommon[]> response=new ResponseBase<AdvertisementCommon[]>();
+            
             //TODO Get data from database(repository) and put it in response.ResponseData
-            string resStr = "developmentPhase" + myParam?.StartIndex + " , " + myParam?.Count;
-            foreach (KeyValuePair<string, string> keyValuePair in myParam?.UserInput)
-            {
-                resStr += keyValuePair.Key + " , " + keyValuePair.Value;
-            }
+            string resStr = "developmentPhase";
             response.SetSuccessResponse(resStr);
             response.ResponseData = null;
-
             return response;
         }
-    }
+
+        
+
+       
+}
 
     public class MyParam
     {
