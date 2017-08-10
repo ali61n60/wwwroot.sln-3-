@@ -5,7 +5,6 @@ using Android.Content;
 using Android.Preferences;
 using ChiKoja.LocationService;
 using Mono.Data.Sqlite;
-using ArrayOfKeyValueOfstringstringKeyValueOfstringstring = ChiKoja.AdCommonService.ArrayOfKeyValueOfstringstringKeyValueOfstringstring;
 
 namespace ChiKoja.Repository.Location
 {
@@ -202,14 +201,14 @@ namespace ChiKoja.Repository.Location
                 connection.Close();
             }
         }
-        public ArrayOfKeyValueOfstringstringKeyValueOfstringstring GetDistrictDictionary()
+        public KeyValuePair<string,string> GetDistrictDictionary()
         {
             List<District> selecteDistricts = new List<District>();
             List<City> selectedCityies = new List<City>();
             ProvinceRepository provinceRepository = new ProvinceRepository(Repository.DataBasePath);
             CityRepository cityRepository = new CityRepository(Repository.DataBasePath);
-            ArrayOfKeyValueOfstringstringKeyValueOfstringstring districtDictinary = new ArrayOfKeyValueOfstringstringKeyValueOfstringstring();
-
+           
+           
             LocationService.Province[] selectedProvinces = provinceRepository.GetSelectedProvinces();
             foreach (LocationService.Province selectedProvince in selectedProvinces)
             {
@@ -235,8 +234,8 @@ namespace ChiKoja.Repository.Location
             {
                 districtDictionaryValue = districtDictionaryValue.Substring(0, districtDictionaryValue.Length - 1);//delete last ","
             }
-            districtDictinary.Key = "DistrictId";
-            districtDictinary.Value = districtDictionaryValue;
+            KeyValuePair<string, string> districtDictinary =
+                new KeyValuePair<string, string>("DistrictId", districtDictionaryValue);
             return districtDictinary;
         }
         private District[] GetDistrictsInCity(City city)

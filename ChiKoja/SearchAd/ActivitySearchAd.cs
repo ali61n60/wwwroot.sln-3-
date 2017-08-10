@@ -1,10 +1,4 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Json;
-using System.Net;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -12,16 +6,11 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.NavigationDrawer;
-using ChiKoja.Repository;
-using ChiKoja.Repository.Location;
 using ChiKoja.CustomViews.SingleAdView;
-using ChiKoja.AdCommonService;
 using ChiKoja.Category;
-using ChiKoja.Notification;
 using ChiKoja.Services;
+using ModelStd.Advertisements;
 using ModelStd.Services;
-using Newtonsoft.Json;
-using AdvertisementCommon = ModelStd.Advertisements.AdvertisementCommon;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 
 
@@ -143,21 +132,18 @@ namespace ChiKoja.SearchAd
             _searchAdService.ResetSearchCondition();
         }
 
-        public void OnSerachAdCompleted(ResponseBaseOfArrayOfAdvertisementCommongJiz6K1p response, bool InResponseToLastRequest)
+        public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
         {
-            if (!InResponseToLastRequest)
-                return;
-
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
             LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             layoutParams.SetMargins(0, 20, 0, 20);
 
-          //  if (response.Success)
-             //   foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
-              //      addAdvertisementOnPage(advertisementCommon, layoutParams);
-          //  else
-           //     Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
+            if (response.Success)
+                foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
+                    addAdvertisementOnPage(advertisementCommon, layoutParams);
+            else
+                Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
         }
         private void addAdvertisementOnPage(AdvertisementCommon advertisementCommon, LinearLayout.LayoutParams layoutParams)
         {
@@ -176,6 +162,8 @@ namespace ChiKoja.SearchAd
                 AdNumberOfVisit = advertisementCommon.NumberOfVisit
             };
         }
+
+       
 
         public void OnSearchAdError(Exception ex)
         {

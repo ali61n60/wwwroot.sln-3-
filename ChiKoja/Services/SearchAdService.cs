@@ -6,8 +6,6 @@ using System.Net;
 using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
-using Android.Widget;
-using ChiKoja.AdCommonService;
 using ChiKoja.AdTransportationService;
 using ChiKoja.Repository;
 using ChiKoja.Repository.CryptoGraphy;
@@ -25,7 +23,7 @@ namespace ChiKoja.Services
 {
     public class SearchAdService
     {
-        AdvertisementCommonService adCommonService;
+        //AdvertisementCommonService adCommonService;
         CategoryRepository categoryRepository;
         DistrictRepository districtRepository;
         SearchFilterRepository searchFilterRepository;
@@ -35,21 +33,30 @@ namespace ChiKoja.Services
         int _currentRequestIndex = 0;
         string NumberOfItemsKey = "numberOfItems";
         string RequestIndexKey = "RequestIndex";
+        private string StartIndexKey = "StartIndex";
+        private string CountKey = "Count";
 
         public SearchAdService()
         {
             districtRepository = new DistrictRepository(Repository.Repository.DataBasePath);
             categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
             searchFilterRepository = new SearchFilterRepository();
-            adCommonService = new AdvertisementCommonService();
+            //adCommonService = new AdvertisementCommonService();
         }
 
         public async void GetAdFromServer(ISearchAdResult searchAdResult)
         {
             Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
-            userInputDictionary["StartIndex"] = "1";
-            userInputDictionary["Count"] = "5";
-            userInputDictionary["RequestIndex"] = "1";
+            _currentRequestIndex++;
+            userInputDictionary[RequestIndexKey] = _currentRequestIndex.ToString();
+            searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
+            KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
+            userInputDictionary.Add(districtPair.Key, districtPair.Value);
+            KeyValuePair<string, string> categoryIdPair = categoryRepository.GetCategoryIdDictionary();
+            userInputDictionary.Add(categoryIdPair.Key, categoryIdPair.Value);
+            userInputDictionary[StartIndexKey] = _start.ToString();
+            userInputDictionary[CountKey] = _count.ToString();
+
             try
             {
                 string url = "http://192.168.42.76/api/AdApi/GetAdvertisementCommon";
@@ -65,16 +72,34 @@ namespace ChiKoja.Services
                 }
 
                 // Send the request to the server and wait for the response:
-                using (WebResponse response = await request.GetResponseAsync())
+                using (WebResponse webResponse = await request.GetResponseAsync())
                 {
                     // Get a stream representation of the HTTP web response:
-                    using (Stream stream = response.GetResponseStream())
+                    using (Stream stream = webResponse.GetResponseStream())
                     {
                         // Use this stream to build a JSON document object:
                         JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                        ResponseBase<AdvertisementCommon[]> result =
+                        ResponseBase<AdvertisementCommon[]> response =
                             JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
-                        
+                       
+                        if (response.Success)
+                        {
+                            Dictionary<string, string> resultCustomDictionary = response.CustomDictionary;
+                            if (!localRequestIndexMatchsServerResponse(resultCustomDictionary))
+                            {
+                                return; //more request has been send to server so dismiss current server response
+                            }
+                            foreach (var keyValueOfstringstring in resultCustomDictionary)
+                            {
+                                if (keyValueOfstringstring.Key == NumberOfItemsKey)
+                                {
+                                    int numberOfItems = Parser.ParseInt(keyValueOfstringstring.Value, 0);
+                                    _start += numberOfItems;
+                                    break;
+                                }
+                            }
+                            searchAdResult.OnSerachAdCompleted(response);
+                        }
                     }
                 }
             }
@@ -83,80 +108,16 @@ namespace ChiKoja.Services
                 searchAdResult.OnSearchAdError(ex);
             }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            Handler mainHandler = new Handler(Application.Context.MainLooper);
-            _currentRequestIndex++;
-            List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput = new List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring>();
-            searchFilterRepository.InsertSearchFilters(userInput);//insert search filter into user input to be sent to server
-            userInput.Add(districtRepository.GetDistrictDictionary());
-            userInput.Add(categoryRepository.GetCategoryIdDictionary());
-            userInput.Add(new ArrayOfKeyValueOfstringstringKeyValueOfstringstring()
-            {
-                Key = RequestIndexKey,
-                Value = _currentRequestIndex.ToString()
-            });
-
-            new Thread(() =>
-            {
-                try
-                {
-                    ResponseBaseOfArrayOfAdvertisementCommongJiz6K1p response =
-                        adCommonService.GetAdvertisementCommon(_start, true, _count, true, userInput.ToArray());
-                    bool inResponseToLastRequest = false;
-                    if (response.Success)
-                    {
-                        ArrayOfKeyValueOfstringstringKeyValueOfstringstring[] resultCustomDictionary = response.CustomDictionary;
-                        if (!localRequestIndexMatchsServerResponse(resultCustomDictionary))
-                        {
-                            return;//more request has been send to server so dismiss current server response
-                        }
-                        inResponseToLastRequest = true;
-
-                        foreach (ArrayOfKeyValueOfstringstringKeyValueOfstringstring keyValueOfstringstring in resultCustomDictionary)
-                        {
-                            if (keyValueOfstringstring.Key == NumberOfItemsKey)
-                            {
-                                int numberOfItems = Parser.ParseInt(keyValueOfstringstring.Value, 0);
-                                _start += numberOfItems;
-                                break;
-                            }
-                        }
-                    }
-                    mainHandler.Post(() => { searchAdResult.OnSerachAdCompleted(response, inResponseToLastRequest); });
-
-                }
-                catch (Exception ex)
-                {
-                    mainHandler.Post(() => { searchAdResult.OnSearchAdError(ex); });
-                }
-            }).Start();
+            
         }
 
-        private bool localRequestIndexMatchsServerResponse(ArrayOfKeyValueOfstringstringKeyValueOfstringstring[] resultCustomDictionary)
+        private bool localRequestIndexMatchsServerResponse(Dictionary<string, string> resultCustomDictionary)
         {
-            foreach (ArrayOfKeyValueOfstringstringKeyValueOfstringstring keyValueOfstringstring in resultCustomDictionary)
+            foreach (KeyValuePair<string, string> keyValueOfstringstring in resultCustomDictionary)
             {
                 if (keyValueOfstringstring.Key == RequestIndexKey)
                 {
-                    int serverRequestIndex = Parser.ParseInt(keyValueOfstringstring.Value,0);
+                    int serverRequestIndex = Parser.ParseInt(keyValueOfstringstring.Value, 0);
                     return _currentRequestIndex == serverRequestIndex;
                 }
             }
@@ -164,41 +125,41 @@ namespace ChiKoja.Services
         }
 
 
-        public void GetUserAdsFromeServer(ISearchAdResult searchAdResult,string username,string password)
+        public void GetUserAdsFromeServer(ISearchAdResult searchAdResult, string username, string password)
         {
-            Handler mainHandler = new Handler(Application.Context.MainLooper);
-            CryptoGraphy cryptoGraphy=new CryptoGraphy();
-            
-            _currentRequestIndex++;
-            List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput = new List
-                <ArrayOfKeyValueOfstringstringKeyValueOfstringstring>
-            {
-                new ArrayOfKeyValueOfstringstringKeyValueOfstringstring()
-                {
-                    Key = RequestIndexKey,
-                    Value = _currentRequestIndex.ToString()
-                }
-            };
-            new Thread(() =>
-            {
-                try
-                {
-                    ResponseBaseOfArrayOfAdvertisementCommongJiz6K1p response =
-                        adCommonService.GetCustomerAdvertisementCommon(cryptoGraphy.EncryptWithServerKey(username),
-                cryptoGraphy.EncryptWithServerKey(password), true, true);
-                    mainHandler.Post(() => { searchAdResult.OnSerachAdCompleted(response, response.Success); });
-                }
-                catch (Exception ex)
-                {
-                    mainHandler.Post(() => { searchAdResult.OnSearchAdError(ex); });
-                }
-            }).Start();
+            //Handler mainHandler = new Handler(Application.Context.MainLooper);
+            //CryptoGraphy cryptoGraphy = new CryptoGraphy();
+
+            //_currentRequestIndex++;
+            //List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput = new List
+            //    <ArrayOfKeyValueOfstringstringKeyValueOfstringstring>
+            //{
+            //    new ArrayOfKeyValueOfstringstringKeyValueOfstringstring()
+            //    {
+            //        Key = RequestIndexKey,
+            //        Value = _currentRequestIndex.ToString()
+            //    }
+            //};
+            //new Thread(() =>
+            //{
+            //    try
+            //    {
+            //        ResponseBase<AdvertisementCommon[]> response =
+            //            adCommonService.GetCustomerAdvertisementCommon(cryptoGraphy.EncryptWithServerKey(username),
+            //    cryptoGraphy.EncryptWithServerKey(password), true, true);
+            //        mainHandler.Post(() => { searchAdResult.OnSerachAdCompleted(response); });
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        mainHandler.Post(() => { searchAdResult.OnSearchAdError(ex); });
+            //    }
+            //}).Start();
         }
 
-        public void GetAdTransportationDetailFromServer(ISearchAdTransportationResult searchAdResult,Guid adGuid)
+        public void GetAdTransportationDetailFromServer(ISearchAdTransportationResult searchAdResult, Guid adGuid)
         {
             Handler mainHandler = new Handler(Application.Context.MainLooper);
-            AdvertisementTransportationService adTransportationService=new AdvertisementTransportationService();
+            AdvertisementTransportationService adTransportationService = new AdvertisementTransportationService();
             new Thread(() =>
             {
                 try

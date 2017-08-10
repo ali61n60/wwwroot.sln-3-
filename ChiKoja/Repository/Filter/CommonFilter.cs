@@ -1,16 +1,7 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
 using Android.Preferences;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using ChiKoja.AdCommonService;
 
 namespace ChiKoja.Repository.Filter
 {
@@ -54,7 +45,7 @@ namespace ChiKoja.Repository.Filter
 
         public float MinimumPrice
         {
-            get { return prefs.GetFloat(MinimumPriceKey, MinimumPriceDefault); }
+            get => prefs.GetFloat(MinimumPriceKey, MinimumPriceDefault);
             set
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
@@ -65,7 +56,7 @@ namespace ChiKoja.Repository.Filter
 
         public float MaximumPrice
         {
-            get { return prefs.GetFloat(MaximumPriceKey, MaximumPriceDefault); }
+            get => prefs.GetFloat(MaximumPriceKey, MaximumPriceDefault);
             set
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
@@ -76,7 +67,7 @@ namespace ChiKoja.Repository.Filter
 
         public bool OnlyWithPictures
         {
-            get { return prefs.GetBoolean(OnlyWithPicturesKey, OnlyWithPicturesDefault); }
+            get => prefs.GetBoolean(OnlyWithPicturesKey, OnlyWithPicturesDefault);
             set
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
@@ -87,7 +78,7 @@ namespace ChiKoja.Repository.Filter
 
         public string OrderBy
         {
-            get { return prefs.GetString(OrderByKey, OrderByDateAsc); }
+            get => prefs.GetString(OrderByKey, OrderByDateAsc);
             set
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
@@ -98,7 +89,7 @@ namespace ChiKoja.Repository.Filter
 
         public bool UrgentAdsOnly
         {
-            get { return prefs.GetBoolean(UrgentAdsOnlyKey, UrgentAdsOnlyDefault); }
+            get => prefs.GetBoolean(UrgentAdsOnlyKey, UrgentAdsOnlyDefault);
             set
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
@@ -107,7 +98,7 @@ namespace ChiKoja.Repository.Filter
             }
         }
 
-        public void InsertSearchFilters(List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput)
+        public void InsertSearchFilters(Dictionary<string,string> userInput)
         {
             insertMinimumPrice(userInput);
             insertMaximumPrice(userInput);
@@ -116,53 +107,35 @@ namespace ChiKoja.Repository.Filter
             insertOrderBy(userInput);
         }
 
-        private void insertMinimumPrice(List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput)
+        private void insertMinimumPrice(Dictionary<string, string> userInput)
         {
-            ArrayOfKeyValueOfstringstringKeyValueOfstringstring MinimumPriceUserInput =
-                new ArrayOfKeyValueOfstringstringKeyValueOfstringstring();
-            MinimumPriceUserInput.Key = MinimumPriceKey;
-            MinimumPriceUserInput.Value = ((decimal) MinimumPrice).ToString();
-            userInput.Add(MinimumPriceUserInput);
+            userInput[MinimumPriceKey]= ((decimal)MinimumPrice).ToString();
         }
 
-        private void insertMaximumPrice(List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput)
+        private void insertMaximumPrice(Dictionary<string, string> userInput)
         {
-            ArrayOfKeyValueOfstringstringKeyValueOfstringstring MaximumPriceUserInput =
-                new ArrayOfKeyValueOfstringstringKeyValueOfstringstring();
-            MaximumPriceUserInput.Key = MaximumPriceKey;
-            MaximumPriceUserInput.Value = ((decimal) MaximumPrice).ToString();
-            userInput.Add(MaximumPriceUserInput);
+            userInput[MaximumPriceKey] = ((decimal)MaximumPrice).ToString(); 
         }
 
-        private void insertOnlyWithPictures(List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput)
+        private void insertOnlyWithPictures(Dictionary<string, string> userInput)
         {
             if(OnlyWithPictures)
             {
-                ArrayOfKeyValueOfstringstringKeyValueOfstringstring OnlyWithPicturesUserInput =
-                new ArrayOfKeyValueOfstringstringKeyValueOfstringstring();
-                OnlyWithPicturesUserInput.Key = OnlyWithPicturesKey;
-                OnlyWithPicturesUserInput.Value = OnlyWithPictures.ToString();
-                userInput.Add(OnlyWithPicturesUserInput);
+                userInput[OnlyWithPicturesKey] = OnlyWithPictures.ToString(); 
             }
         }
 
-        private void insertUrgentAdsOnly(List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput)
+        private void insertUrgentAdsOnly(Dictionary<string, string> userInput)
         {
             if (UrgentAdsOnly)
             {
-                ArrayOfKeyValueOfstringstringKeyValueOfstringstring UrgentAdsOnlyUserInput = new ArrayOfKeyValueOfstringstringKeyValueOfstringstring();
-                UrgentAdsOnlyUserInput.Key = UrgentAdsOnlyKey;
-                UrgentAdsOnlyUserInput.Value = Urgent.ToString();
-                userInput.Add(UrgentAdsOnlyUserInput);
+                userInput[UrgentAdsOnlyKey] = Urgent.ToString();
             }
         }
 
-         private void insertOrderBy(List<ArrayOfKeyValueOfstringstringKeyValueOfstringstring> userInput)
+         private void insertOrderBy(Dictionary<string, string> userInput)
         {
-            ArrayOfKeyValueOfstringstringKeyValueOfstringstring OrderByUserInput = new ArrayOfKeyValueOfstringstringKeyValueOfstringstring();
-            OrderByUserInput.Key = OrderByKey;
-            OrderByUserInput.Value = OrderBy;
-            userInput.Add(OrderByUserInput);
+            userInput[OrderByKey]=OrderBy;
         }
     }
 }

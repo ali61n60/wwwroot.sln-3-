@@ -10,6 +10,7 @@ using ChiKoja.Login;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository;
 using ChiKoja.Services;
+using ModelStd.Services;
 
 namespace ChiKoja.SearchAd.UserAd
 {
@@ -96,6 +97,28 @@ namespace ChiKoja.SearchAd.UserAd
                 }
             }
         }
+        
+        private void addAdvertisementOnPage(AdvertisementCommon advertisementCommon, LinearLayout.LayoutParams layoutParams)
+        {
+            ViewGroupUserAd viewGroupUserAd = cretateNewViewUserAd(advertisementCommon);
+            userAdsPlaceHolder.AddView(viewGroupUserAd, layoutParams);
+        }
+        private ViewGroupUserAd cretateNewViewUserAd(AdvertisementCommon advertisementCommon)
+        {
+            ViewGroupUserAd viewGroupUserAd=new ViewGroupUserAd(this);
+            viewGroupUserAd.AdTitle = advertisementCommon.AdvertisementTitle + ", " + advertisementCommon.CityName;
+            viewGroupUserAd.AdPrice = advertisementCommon.AdvertisementPrice.price.ToString();
+            if(advertisementCommon.AdvertisementImages!=null)
+                viewGroupUserAd.AdImage = advertisementCommon.AdvertisementImages[0];
+            viewGroupUserAd.AdCategoryId = advertisementCommon.AdvertisementCategoryId;
+            viewGroupUserAd.AdGuid = Guid.Parse(advertisementCommon.AdvertisementId);
+            return viewGroupUserAd;
+        }
+
+        public void OnSerachAdCompleted(ResponseBase<ModelStd.Advertisements.AdvertisementCommon[]> response)
+        {
+            
+        }
         public void OnSerachAdCompleted(ResponseBaseOfArrayOfAdvertisementCommongJiz6K1p response, bool InResponseToLastRequest)
         {
             if (!InResponseToLastRequest)
@@ -112,22 +135,6 @@ namespace ChiKoja.SearchAd.UserAd
                     addAdvertisementOnPage(advertisementCommon, layoutParams);
             else
                 Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
-        }
-        private void addAdvertisementOnPage(AdvertisementCommon advertisementCommon, LinearLayout.LayoutParams layoutParams)
-        {
-            ViewGroupUserAd viewGroupUserAd = cretateNewViewUserAd(advertisementCommon);
-            userAdsPlaceHolder.AddView(viewGroupUserAd, layoutParams);
-        }
-        private ViewGroupUserAd cretateNewViewUserAd(AdvertisementCommon advertisementCommon)
-        {
-            ViewGroupUserAd viewGroupUserAd=new ViewGroupUserAd(this);
-            viewGroupUserAd.AdTitle = advertisementCommon.AdvertisementTitle + ", " + advertisementCommon.CityName;
-            viewGroupUserAd.AdPrice = advertisementCommon.AdvertisementPrice.price.ToString();
-            if(advertisementCommon.AdvertisementImages!=null)
-                viewGroupUserAd.AdImage = advertisementCommon.AdvertisementImages[0];
-            viewGroupUserAd.AdCategoryId = advertisementCommon.AdvertisementCategoryId;
-            viewGroupUserAd.AdGuid = Guid.Parse(advertisementCommon.AdvertisementId);
-            return viewGroupUserAd;
         }
 
         public void OnSearchAdError(Exception ex)

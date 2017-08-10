@@ -170,13 +170,9 @@ namespace ChiKoja.Repository
         }
 
         //called for putting selected category ids to be send to server
-        public ArrayOfKeyValueOfstringstringKeyValueOfstringstring GetCategoryIdDictionary()
+        public KeyValuePair<string,string> GetCategoryIdDictionary()
         {
-            return new ArrayOfKeyValueOfstringstringKeyValueOfstringstring
-             {
-                 Key = CategoryIdKey,
-                 Value = prefs.GetString(CategoryIdKey, defaultCategoryId)
-             };
+            return new KeyValuePair<string, string>(CategoryIdKey, prefs.GetString(CategoryIdKey, defaultCategoryId));
         }
     }
 }
