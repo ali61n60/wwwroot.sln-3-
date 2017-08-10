@@ -104,61 +104,9 @@ namespace ChiKoja.SearchAd
 
         async void buttonSearchAd_Click(object sender, EventArgs e)
         {
-            // _searchAdService.GetAdFromServer(this);
+            _searchAdService.GetAdFromServer(this);
             // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-            Dictionary<string,string> userInputDictionary=new Dictionary<string, string>();
-            userInputDictionary["StartIndex"] = "12";
-            userInputDictionary["Count"] = "4";
-            userInputDictionary["CategoryId"] = "27";
-            userInputDictionary["RequestIndex"] = "345";
-
-            try
-            {
-                string url = "http://192.168.42.76/api/AdApi/GetAdvertisementCommon";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-                request.ContentType = "application/json";
-                request.Method = "POST";
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-                {
-                    // [FromQuery]
-                    //  int startIndex,
-                    //     [FromQuery] int count,
-                    //    [FromQuery] Dictionary<string, string> userInput
-
-                    // string jsonData = "<form>{\"startIndex\":\"5\"}</form>";
-                    //"count:\"23\"}</form>";
-                    //  Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
-                    //  userInputDictionary["Name"] = "Ali Nejati";
-                    //MethodParam myMethodParam = new MethodParam() { Name = "Ali Nejati", Phone = "0912" };
-                    //string jsonData = "{\"Name\":\"Ali Nejati\"," +
-                    //               "\"Phone\":\"09122012908\"}";
-                    //  jsonData += JsonConvert.SerializeObject(userInputDictionary);
-                    string jsonData = JsonConvert.SerializeObject(userInputDictionary);
-                    streamWriter.Write(jsonData);
-                    streamWriter.Flush();
-                    streamWriter.Close();
-                }
-
-                // Send the request to the server and wait for the response:
-                using (WebResponse response = await request.GetResponseAsync())
-                {
-                    
-                    
-                    // Get a stream representation of the HTTP web response:
-                    using (Stream stream = response.GetResponseStream())
-                    {
-                        // Use this stream to build a JSON document object:
-                        JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                        ResponseBase<AdvertisementCommon[]> result =
-                            JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
-                        Toast.MakeText(this, result.Message, ToastLength.Long).Show();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Toast.MakeText(this, ex.Message, ToastLength.Long).Show();
-            }
+            
         }
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {

@@ -63,7 +63,6 @@
     }
 
     function OnSuccessGetItemsFromServer(msg) {
-        $isServerCalled = false;
         //notifyUserAjaxCallFinished();
         if (msg.success == true) {
             if (msg.customDictionary["RequestIndex"] == $requestIndex) {
@@ -94,10 +93,13 @@
         else {
             //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
         }
+        $isServerCalled = false;
+        $requestIndex++;
     }//end OnSuccessGetTimeFromServer
 
     function OnErrorGetItemsFromServer(XMLHttpRequest, textStatus, errorThrown) {
         $isServerCalled = false;
+        $requestIndex++;
         //notifyUserAjaxCallFinished();
         //showErrorMessage(textStatus + " , " + errorThrown);
     }//end OnErrorGetTimeFromServer
