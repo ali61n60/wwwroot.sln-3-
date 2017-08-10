@@ -164,6 +164,7 @@
     <Compile Include="SearchAd\UserAd\ActivityUserAds.cs" />
     <Compile Include="Services\ISearchAdTransportationResult.cs" />
     <Compile Include="Services\SearchAdService.cs" />
+    <Compile Include="Services\ServicesCommon.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
     <Compile Include="CustomViews\SingleAdView\ViewGroupSingleAd.cs" />
@@ -184,22 +185,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
-    <Compile Include="Web References\CryptoService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
     <Compile Include="Web References\LocationService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
     <Compile Include="Web References\RegistrationService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\RepositoryService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -380,29 +371,6 @@
     <None Include="Web References\CategoryService\ResponseBaseOfint.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
-    <None Include="Web References\CryptoService\CryptoService.wsdl" />
-    <None Include="Web References\CryptoService\CryptoService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CryptoService\CryptoService0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CryptoService\CryptoService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CryptoService\CryptoService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CryptoService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\CryptoService\ResponseBaseOfint.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\CryptoService\ResponseBaseOfstring.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
     <None Include="Web References\LocationService\LocationService.wsdl" />
     <None Include="Web References\LocationService\LocationService.xsd">
       <SubType>Designer</SubType>
@@ -459,26 +427,6 @@
       <DependentUpon>Reference.map</DependentUpon>
     </None>
     <None Include="Web References\RegistrationService\ResponseBaseOfCustomerYgFqSxnr.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\RepositoryService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\RepositoryService\RepositoryService.wsdl" />
-    <None Include="Web References\RepositoryService\RepositoryService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RepositoryService\RepositoryService0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RepositoryService\RepositoryService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RepositoryService\RepositoryService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RepositoryService\ResponseBaseOfint.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
   </ItemGroup>
@@ -538,19 +486,6 @@
       <CachedSettingsPropName>
       </CachedSettingsPropName>
     </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.42.16/Services/CryptoService.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\CryptoService\</RelPath>
-      <UpdateFromURL>http://192.168.42.16/Services/CryptoService.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
     <WebReferenceUrl Include="http://192.168.42.16/Services/LocationService.svc">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\LocationService\</RelPath>
@@ -568,19 +503,6 @@
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\RegistrationService\</RelPath>
       <UpdateFromURL>http://192.168.42.16/Services/RegistrationService.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.42.16/Services/RepositoryService.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\RepositoryService\</RelPath>
-      <UpdateFromURL>http://192.168.42.16/Services/RepositoryService.svc</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>
       <CachedDynamicPropName>
@@ -652,9 +574,6 @@
     <None Include="Web References\CategoryService\CategoryService.disco" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Web References\CryptoService\CryptoService.disco" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Web References\LocationService\LocationService.disco" />
   </ItemGroup>
   <ItemGroup>
@@ -692,9 +611,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\arrowUp2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\RepositoryService\RepositoryService.disco" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-v11\styles.xml" />

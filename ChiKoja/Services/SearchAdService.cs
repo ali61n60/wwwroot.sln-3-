@@ -59,7 +59,7 @@ namespace ChiKoja.Services
 
             try
             {
-                string url = "http://192.168.42.76/api/AdApi/GetAdvertisementCommon";
+                string url =ServicesCommon.ServerUrl+"/api/AdApi/GetAdvertisementCommon";
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
                 request.ContentType = "application/json";
                 request.Method = "POST";

@@ -1,15 +1,21 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Json;
+using System.Net;
 using System.Threading;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Preferences;
 using ChiKoja.Repository.Location;
 using ChiKoja.Repository.TransportationRepository;
-using ChiKoja.RepositoryService;
+using ChiKoja.Services;
+using ModelStd.Advertisements;
+using ModelStd.Services;
 using Mono.Data.Sqlite;
+using Newtonsoft.Json;
 using ServiceLayer;
 using Environment = System.Environment;
 
@@ -94,37 +100,34 @@ namespace ChiKoja.Repository
         }
 
         //Called From Application Class
-        public void ManageDatabaseFileAndData(Resources resources, ICallBack callBack, int requestCode)
+        public async Task ManageDatabaseFileAndData(Resources resources, ICallBack callBack, int requestCode)
         {
-            new Thread(() =>
+            try
             {
-                try
+                if (await localTablesDataNeedUpdate())
                 {
-                    if (localTablesDataNeedUpdate())
+                    int numberOfTables = listOfLocalTables.Count + listOfLocalTablesCheckEveryTime.Count;
+                    int totalPercentForlistOfLocalTables = listOfLocalTables.Count * 100 / numberOfTables;
+                    int totalPercentForlistOfLocalTablesCheckEveryTime = 100 - totalPercentForlistOfLocalTables;
+                    FileStatus fileStatus = getDatabaseFileStatus();
+                    switch (fileStatus)
                     {
-                        int numberOfTables = listOfLocalTables.Count + listOfLocalTablesCheckEveryTime.Count;
-                        int totalPercentForlistOfLocalTables = listOfLocalTables.Count*100/numberOfTables;
-                        int totalPercentForlistOfLocalTablesCheckEveryTime = 100 - totalPercentForlistOfLocalTables;
-                        FileStatus fileStatus = getDatabaseFileStatus();
-                        switch (fileStatus)
-                        {
-                            case FileStatus.FileNotExists:
-                                createDatabaseFile_Schema_InitialData(callBack, requestCode,totalPercentForlistOfLocalTables);
-                                break;
-                            case FileStatus.FileExists:
-                                checkTablesDataVersionAndUpdateIfNedded(callBack, requestCode,totalPercentForlistOfLocalTables);
-                                break;
-                        }
-                        checkTablesThatMustBeCheckedEveryTime(callBack, requestCode,totalPercentForlistOfLocalTablesCheckEveryTime);
-                        LocalMainDataVersion = serverMainDataVersion;
+                        case FileStatus.FileNotExists:
+                            createDatabaseFile_Schema_InitialData(callBack, requestCode, totalPercentForlistOfLocalTables);
+                            break;
+                        case FileStatus.FileExists:
+                            checkTablesDataVersionAndUpdateIfNedded(callBack, requestCode, totalPercentForlistOfLocalTables);
+                            break;
                     }
-                    callBack.OnSuccess(requestCode);
+                    checkTablesThatMustBeCheckedEveryTime(callBack, requestCode, totalPercentForlistOfLocalTablesCheckEveryTime);
+                    LocalMainDataVersion = serverMainDataVersion;
                 }
-                catch (Exception ex)
-                {
-                    callBack.OnError(requestCode, ex);
-                }
-            }).Start();
+                callBack.OnSuccess(requestCode);
+            }
+            catch (Exception ex)
+            {
+                callBack.OnError(requestCode, ex);
+            }
         }
 
         private FileStatus getDatabaseFileStatus()
@@ -132,22 +135,36 @@ namespace ChiKoja.Repository
             return File.Exists(DataBasePath) ? FileStatus.FileExists : FileStatus.FileNotExists;
         }
 
-        private bool localTablesDataNeedUpdate()
+        private async Task<bool> localTablesDataNeedUpdate()
         {
-            serverMainDataVersion = getServerMainDataVersion();
+            serverMainDataVersion = await getServerMainDataVersion();
             if (LocalMainDataVersion == serverMainDataVersion)
                 return false;
             return true;
         }
-        private int getServerMainDataVersion()
+        private async Task<int> getServerMainDataVersion()
         {
-            RepositoryService.RepositoryService repositoryService = new RepositoryService.RepositoryService();
-            ResponseBaseOfint response = repositoryService.GetMainServerDataVersion();
-            if (response.Success)
-                return response.ResponseData;
-            throw new Exception(response.Message + " " + response.ErrorCode);
+            string url = ServicesCommon.ServerUrl + "/api/RepositoryApi/GetMainServerDataVersion";
+            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+            request.ContentType = "application/json";
+            request.Method = "POST";
+            using (WebResponse webResponse = await request.GetResponseAsync())
+            {
+                // Get a stream representation of the HTTP web response:
+                using (Stream stream = webResponse.GetResponseStream())
+                {
+                    // Use this stream to build a JSON document object:
+                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                    ResponseBase<int> response =
+                        JsonConvert.DeserializeObject<ResponseBase<int>>(jsonDoc.ToString());
+                    if (response.Success)
+                        return response.ResponseData;
+                    else
+                        throw new Exception(response.Message + " " + response.ErrorCode);
+                }
+            }
         }
-        private void createDatabaseFile_Schema_InitialData(ICallBack callBack, int requestCode,int totalPercent)
+        private void createDatabaseFile_Schema_InitialData(ICallBack callBack, int requestCode, int totalPercent)
         {
             SqliteConnection.CreateFile(DataBasePath);// create new database file **overwrite if exist
             createDatabaseSchema();
@@ -171,11 +188,11 @@ namespace ChiKoja.Repository
             }
         }
 
-        
+
         private void incrementProgressAndNotifyCaller(ICallBack callBack, int requestCode, double incrementProgressPercent)
         {
             totalProgressPercent += incrementProgressPercent;
-            callBack.OnProgress(requestCode,(int) totalProgressPercent);
+            callBack.OnProgress(requestCode, (int)totalProgressPercent);
         }
 
         private void createNotCategorizedTables()
