@@ -5,9 +5,75 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\lib\style\css\lightslider.css" />
+    <Content Include="wwwroot\lib\style\css\style.css" />
+    <Content Include="wwwroot\lib\style\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="wwwroot\lib\style\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="wwwroot\lib\style\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="wwwroot\lib\style\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="wwwroot\lib\style\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="wwwroot\lib\style\sass\base\_fonts.scss" />
+    <Content Include="wwwroot\lib\style\sass\base\_grid.scss" />
+    <Content Include="wwwroot\lib\style\sass\base\_headings.scss" />
+    <Content Include="wwwroot\lib\style\sass\base\_normalize.scss" />
+    <Content Include="wwwroot\lib\style\sass\base\_print.scss" />
+    <Content Include="wwwroot\lib\style\sass\base\_reset.scss" />
+    <Content Include="wwwroot\lib\style\sass\base\_screenReader.scss" />
+    <Content Include="wwwroot\lib\style\sass\base\_typography.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_alert.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_badge.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_breadcrumb.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_buttons.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_carousel.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_close.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_dropdown.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_embed.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_images.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_input.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_jumbotron.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_label.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_lists.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_media.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_modal.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_nav.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_navbar.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_navigation.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_pager.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_pagination.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_panel.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_popover.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_progressbar.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_tables.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_thumbnail.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_tooltip.scss" />
+    <Content Include="wwwroot\lib\style\sass\components\_well.scss" />
+    <Content Include="wwwroot\lib\style\sass\currentProject\SingleAdItem.css">
+      <DependentUpon>SingleAdItem.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\lib\style\sass\currentProject\SingleAdItem.min.css">
+      <DependentUpon>SingleAdItem.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\lib\style\sass\currentProject\SingleAdItem.scss" />
+    <Content Include="wwwroot\lib\style\sass\currentProject\_oldStyle.scss" />
+    <Content Include="wwwroot\lib\style\sass\helpers\_mixins.scss" />
+    <Content Include="wwwroot\lib\style\sass\helpers\_variables.scss" />
+    <Content Include="wwwroot\lib\style\sass\layout\_footer.scss" />
+    <Content Include="wwwroot\lib\style\sass\layout\_forms.scss" />
+    <Content Include="wwwroot\lib\style\sass\layout\_header.scss" />
+    <Content Include="wwwroot\lib\style\sass\layout\_sidebar.scss" />
+    <Content Include="wwwroot\lib\style\sass\style.css">
+      <DependentUpon>style.scss</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\lib\style\sass\style.min.css">
+      <DependentUpon>style.css</DependentUpon>
+    </Content>
+    <Content Include="wwwroot\lib\style\sass\style.scss" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Connected Services\" />
     <Folder Include="Views\Home\" />
-    <Folder Include="wwwroot\" />
+    <Folder Include="wwwroot\lib\style\img\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
