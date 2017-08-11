@@ -3,7 +3,9 @@ using System.Data;
 using Android.App;
 using Android.Content;
 using Android.Preferences;
-using ChiKoja.LocationService;
+using ChiKoja.Services.Server;
+using ModelStd.Advertisements.Location;
+using ModelStd.Services;
 using Mono.Data.Sqlite;
 
 namespace ChiKoja.Repository.Location
@@ -25,8 +27,8 @@ namespace ChiKoja.Repository.Location
         }
         public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
-            LocationService.LocationService locationService = new LocationService.LocationService();
-            ResponseBaseOfint response = locationService.GetLocationyVersion();
+            LocationApi locationService = new LocationApi();
+            ResponseBase<int> response = locationService.GetLocationyVersion();
             if (response.Success)
             {
                 int serverDistrictDataVersion = response.ResponseData;
@@ -77,11 +79,10 @@ namespace ChiKoja.Repository.Location
                     var r = contents.ExecuteReader();
                     while (r.Read())
                     {
-                        tempDistrict = new District();
-                        tempDistrict.DistrictId = (int)r["districtId"];
-                        tempDistrict.DistrictName = r["DistrictName"].ToString();
-                        tempDistrict.CityId = (int)r["cityId"];
-                        tempDistrict.MunicipalId = (int)r["municipalId"];
+                        tempDistrict = new District((int)r["districtId"],
+                            r["DistrictName"].ToString(),
+                            (int)r["cityId"],
+                            (int)r["municipalId"]);
                         allDistricts.Add(tempDistrict);
                     }
                 }
@@ -94,8 +95,8 @@ namespace ChiKoja.Repository.Location
             string commandText = @"INSERT INTO [Districts]
                                             ([districtId],[DistrictName],[cityId],[municipalId],[selectedByUser])
                                             VALUES (@districtId ,@DistrictName ,@cityId,@municipalId,@selectedByUser)";
-            LocationService.LocationService locationService = new LocationService.LocationService();
-            ResponseBaseOfArrayOfDistrict63bt_SHOU response = locationService.GetAllDistricts();
+            LocationApi locationApi = new LocationApi();
+            ResponseBase<District[]> response = locationApi.GetAllDistricts();
             if (response.Success)
             {
                 lock (locker)
@@ -159,11 +160,10 @@ namespace ChiKoja.Repository.Location
                     var r = contents.ExecuteReader();
                     while (r.Read())
                     {
-                        tempDistrict = new District();
-                        tempDistrict.DistrictId = (int)r["districtId"];
-                        tempDistrict.DistrictName = r["DistrictName"].ToString();
-                        tempDistrict.CityId = (int)r["cityId"];
-                        tempDistrict.MunicipalId = (int)r["municipalId"];
+                        tempDistrict = new District((int)r["districtId"],
+                            r["DistrictName"].ToString(),
+                            (int)r["cityId"],
+                            (int)r["municipalId"]);
                         selectedDistricts.Add(tempDistrict);
                     }
                 }
@@ -209,8 +209,8 @@ namespace ChiKoja.Repository.Location
             CityRepository cityRepository = new CityRepository(Repository.DataBasePath);
            
            
-            LocationService.Province[] selectedProvinces = provinceRepository.GetSelectedProvinces();
-            foreach (LocationService.Province selectedProvince in selectedProvinces)
+            Province[] selectedProvinces = provinceRepository.GetSelectedProvinces();
+            foreach (Province selectedProvince in selectedProvinces)
             {
                 City[] selectedCityiesInSelectedProvince = cityRepository.GetCitiesInProvince(selectedProvince, Repository.Locker);
                 selectedCityies.AddRange(selectedCityiesInSelectedProvince);
@@ -254,11 +254,10 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempDistrict = new District();
-                        tempDistrict.DistrictId = (int)r["districtId"];
-                        tempDistrict.DistrictName = r["DistrictName"].ToString();
-                        tempDistrict.CityId = (int)r["cityId"];
-                        tempDistrict.MunicipalId = (int)r["municipalId"];
+                        tempDistrict = new District((int) r["districtId"],
+                            r["DistrictName"].ToString(),
+                            (int) r["cityId"],
+                            (int) r["municipalId"]);
                         allCityDistricts.Add(tempDistrict);
                         
                     }

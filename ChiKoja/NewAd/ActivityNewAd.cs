@@ -3,11 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using ChiKoja.AdTransportationService;
-using ChiKoja.Repository;
-using ChiKoja.Repository.CryptoGraphy;
 using ServiceLayer;
-using ResponseBase = ChiKoja.AdTransportationService.ResponseBase;
 
 namespace ChiKoja.NewAd
 {

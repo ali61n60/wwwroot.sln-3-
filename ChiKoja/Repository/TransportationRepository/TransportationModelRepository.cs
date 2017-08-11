@@ -1,17 +1,11 @@
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
 using Android.Preferences;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using ChiKoja.AdTransportationService;
+using ChiKoja.Services.Server;
+using ModelStd.Advertisements.Transportation;
+using ModelStd.Services;
 using Mono.Data.Sqlite;
 
 namespace ChiKoja.Repository.TransportationRepository
@@ -42,9 +36,9 @@ namespace ChiKoja.Repository.TransportationRepository
         }
         public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
-            AdvertisementTransportationService transportationService = new AdvertisementTransportationService();
+            AdTransportationApi adTransportationApi = new AdTransportationApi();
 
-            ResponseBaseOfint response = transportationService.GetServerDataVersion();
+            ResponseBase<int> response = adTransportationApi.GetServerDataVersion();
             if (response.Success)
             {
                 int serverDataVersion = response.ResponseData;
@@ -84,9 +78,9 @@ namespace ChiKoja.Repository.TransportationRepository
             string commandText = @"INSERT INTO [TransportationModels] 
                                    ([modelId],[modelName],[brandId])
                                    VALUES (@modelId,@modelName,@brandId)";
-            AdvertisementTransportationService transportationService = new AdvertisementTransportationService();
-            ResponseBaseOfArrayOfTransportationModeloKnNwMS4 response =
-                transportationService.GetAllTransportationModels();
+            AdTransportationApi adTransportationApi = new AdTransportationApi();
+            ResponseBase<TransportationModel[]> response =
+                adTransportationApi.GetAllTransportationModels();
 
             if (response.Success)
             {
@@ -139,12 +133,9 @@ namespace ChiKoja.Repository.TransportationRepository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempModel = new TransportationModel()
-                        {
-                            ModelId = (int)r["modelId"],
-                            ModelName = r["modelName"].ToString(),
-                            BrandId = (int)r["brandId"]
-                        };
+                        tempModel = new TransportationModel((int)r["modelId"],
+                            r["modelName"].ToString(),
+                            (int)r["brandId"]);
                         allModels.Add(tempModel);
                     }
                 }
@@ -169,12 +160,9 @@ namespace ChiKoja.Repository.TransportationRepository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempModel = new TransportationModel()
-                        {
-                            ModelId = (int)r["modelId"],
-                            ModelName = r["modelName"].ToString(),
-                            BrandId = (int)r["brandId"]
-                        };
+                        tempModel = new TransportationModel((int)r["modelId"],
+                            r["modelName"].ToString(),
+                            (int)r["brandId"]);
                         allModels.Add(tempModel);
                     }
                 }
@@ -182,7 +170,5 @@ namespace ChiKoja.Repository.TransportationRepository
             }
             return allModels.ToArray();
         }
-
-        
     }
 }

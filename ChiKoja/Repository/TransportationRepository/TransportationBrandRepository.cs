@@ -2,10 +2,11 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Preferences;
-using ChiKoja.AdTransportationService;
 using Mono.Data.Sqlite;
 using System.Data;
-using ResponseBaseOfint = ChiKoja.AdTransportationService.ResponseBaseOfint;
+using ChiKoja.Services.Server;
+using ModelStd.Advertisements.Transportation;
+using ModelStd.Services;
 
 namespace ChiKoja.Repository.TransportationRepository
 {
@@ -37,9 +38,9 @@ namespace ChiKoja.Repository.TransportationRepository
         }
         public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
-            AdvertisementTransportationService transportationService=new AdvertisementTransportationService();
+            AdTransportationApi transportationService=new AdTransportationApi();
             
-            ResponseBaseOfint response =transportationService.GetServerDataVersion();
+            ResponseBase<int> response =transportationService.GetServerDataVersion();
             if (response. Success)
             {
                 int serverDataVersion = response.ResponseData;
@@ -77,8 +78,8 @@ namespace ChiKoja.Repository.TransportationRepository
             string commandText = @"INSERT INTO [TransportationBrands] 
                                    ([brandId], [brandName])
                                    VALUES (@brandId, @brandName)";
-            AdvertisementTransportationService transportationService=new AdvertisementTransportationService();
-            ResponseBaseOfArrayOfTransportationBrandoKnNwMS4 response = transportationService.GetAllTransportationBrands();
+            AdTransportationApi adTransportationApi=new AdTransportationApi();
+            ResponseBase<TransportationBrand[]> response = adTransportationApi.GetAllTransportationBrands();
 
             if (response.Success)
             {
@@ -130,11 +131,8 @@ namespace ChiKoja.Repository.TransportationRepository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempBrand = new TransportationBrand()
-                        {
-                            BrandId = (int)r["brandId"],
-                            BrandName = r["brandName"].ToString()
-                        };
+                        tempBrand = new TransportationBrand((int)r["brandId"],
+                            r["brandName"].ToString());
                         allBrands.Add(tempBrand);
                     }
                 }

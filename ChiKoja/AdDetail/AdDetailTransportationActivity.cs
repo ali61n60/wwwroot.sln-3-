@@ -1,15 +1,9 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ChiKoja.AdTransportationService;
 using Android.Graphics;
 using Android.Util;
 using ChiKoja.NavigationDrawer;
@@ -17,6 +11,8 @@ using ChiKoja.Notification;
 using ChiKoja.Repository.UserMarkedAds;
 using ChiKoja.Services;
 using ChiKoja.Services.Server;
+using ModelStd.Advertisements;
+using ModelStd.Services;
 using Uri = Android.Net.Uri;
 
 namespace ChiKoja.AdDetail
@@ -24,11 +20,12 @@ namespace ChiKoja.AdDetail
 
     //TODO show similar ads
     [Activity(Label = "AdTransportationActivity", Theme = "@style/Theme.Main")]
-    public class AdDetailTransportationActivity : NavActivity, ISearchAdTransportationResult
+    public class AdDetailTransportationActivity : NavActivity, ISearchAdResult<AdvertisementTransportation>
     {
         //TODO Design UI for this activity
-        AdvertisementTransportationService advertisementTransportationService;
-        ResponseBaseOfAdvertisementTransportationgJiz6K1p response;
+
+        AdTransportationApi adTransportationApi;
+        ResponseBase<AdvertisementTransportation> response;
         AdvertisementTransportation advertisementTransportation;
 
         LinearLayout linearLayoutImageContainer;
@@ -48,8 +45,8 @@ namespace ChiKoja.AdDetail
                 Finish();
             }
             adGuid = Guid.Parse(Intent.GetStringExtra(AdDetail.AdGuidKey));
-            AdApi searchAdService = new AdApi();
-            searchAdService.GetAdTransportationDetailFromServer(this,adGuid);
+            AdApi adApi = new AdApi();
+            adApi.GetAdTransportationDetailFromServer(this,adGuid);
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall),ShowMessageType.Permanent);
             userMarkedAds=new UserMarkedAds(Repository.Repository.DataBasePath);
 
@@ -113,7 +110,7 @@ namespace ChiKoja.AdDetail
             contactInfoDialog.Show();
         }
 
-        public void OnSerachAdCompleted(ResponseBaseOfAdvertisementTransportationgJiz6K1p response)
+        public void OnSerachAdCompleted(ResponseBase<AdvertisementTransportation> response)
         {
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
 

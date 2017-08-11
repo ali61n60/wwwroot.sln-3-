@@ -10,12 +10,8 @@
             ModelName = modelName;
             BrandId = brandId;
         }
-        
         public int ModelId { get; private set; }
-        
-      
         public string ModelName { get; private set; }
-        
         public int BrandId { get; private set; }
     }
 }

@@ -1,19 +1,17 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Views;
 using Android.Widget;
-using ChiKoja.AdTransportationService;
 using ChiKoja.Repository;
 using ChiKoja.Repository.CryptoGraphy;
 using ChiKoja.Repository.TransportationRepository;
+using ChiKoja.Services.Server;
+using ModelStd.Advertisements;
+using ModelStd.Advertisements.Transportation;
+using ModelStd.Services;
 
 namespace ChiKoja.NewAd
 {
@@ -119,15 +117,13 @@ namespace ChiKoja.NewAd
             };
 
             fillAdDataBasedOnUserInput();
-            AdvertisementTransportationService transportationService = new AdvertisementTransportationService();
+            AdTransportationApi adTransportationApi = new AdTransportationApi();
             Registration registration = new Registration();
             CryptoGraphy cryptoGraphy = new CryptoGraphy();
-            ResponseBase response = transportationService.AddNewAdvertisementTransportation
+            ResponseBase response = adTransportationApi.AddNewAdvertisementTransportation
                 (adTransportation, cryptoGraphy.EncryptWithServerKey(registration.UserName),
-                cryptoGraphy.EncryptWithServerKey(registration.Password), true, true);
+                cryptoGraphy.EncryptWithServerKey(registration.Password));
             Toast.MakeText(this, response.Message, ToastLength.Long).Show();
-
-
         }
 
         private void fillAdDataBasedOnUserInput()
@@ -137,28 +133,19 @@ namespace ChiKoja.NewAd
             adTransportation.Gearbox = "Automatic";
             adTransportation.InternalColor = "Whiteeeee";
             adTransportation.BrandId = 18;
-            adTransportation.BrandIdSpecified = true;
             adTransportation.ModelId = 204;
-            adTransportation.ModelIdSpecified = true;
-
             adTransportation.AdvertisementCommon.DistrictId = 29;
-            adTransportation.AdvertisementCommon.DistrictIdSpecified = true;
-
             adTransportation.AdvertisementCommon.AdvertisementCategoryId = 100;
-            adTransportation.AdvertisementCommon.AdvertisementCategoryIdSpecified = true;
             Price adPrice = new Price
             {
                 PriceType = PriceType.ForSale,
-                PriceTypeSpecified = true,
-                price = 1234,
-                priceSpecified = true
+                price = 1234
             };
             adTransportation.AdvertisementCommon.AdvertisementPrice = adPrice;
 
             adTransportation.AdvertisementCommon.AdvertisementTitle = "AndroidTestTitle";
             adTransportation.AdvertisementCommon.AdvertisementComments = "Android comment test";
             adTransportation.AdvertisementCommon.AdPrivilageId = 1;//TODO create Enum
-            adTransportation.AdvertisementCommon.AdPrivilageIdSpecified = true;
         }
     }
 

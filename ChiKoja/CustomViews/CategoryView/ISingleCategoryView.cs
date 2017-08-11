@@ -1,14 +1,7 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
+using ModelStd.Advertisements;
 
 namespace ChiKoja.CustomViews.CategoryView
 {
@@ -18,12 +11,12 @@ namespace ChiKoja.CustomViews.CategoryView
         bool IsSelected();
         void SetSelect(bool select);
         void AddChild(SingleCategoryView childSingleCategoryView, LinearLayout.LayoutParams layoutParams);
-        CategoryService.Category GetCategory();
+        Category GetCategory();
         SingleCategoryView GetParent();
         bool HasChildren();
         bool ChildrenAreVisible();
         List<SingleCategoryView> GetChildren();
     }
 
-    public delegate void CategorySelctionHandler(Object sender, CategoryService.Category category);
+    public delegate void CategorySelctionHandler(Object sender, Category category);
 }

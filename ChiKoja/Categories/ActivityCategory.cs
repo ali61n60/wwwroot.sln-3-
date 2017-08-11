@@ -8,8 +8,9 @@ using Android.Views;
 using Android.Widget;
 using ChiKoja.CustomViews.CategoryView;
 using ChiKoja.Repository;
+using ModelStd.Advertisements;
 
-namespace ChiKoja.Category
+namespace ChiKoja.Categories
 {
     [Activity(Label = "ActivityCategory", Theme = "@style/Theme.Main")]
     public class ActivityCategory : NavigationDrawer.NavActivity
@@ -60,20 +61,20 @@ namespace ChiKoja.Category
             _secondLevelCategoryViews = new List<SingleCategoryView>();
             _thirdLevelCategoryViews = new List<SingleCategoryView>();
             
-            CategoryService.Category[] allCategories = _categoryRepository.GetAll(Repository.Repository.Locker);
+            Category[] allCategories = _categoryRepository.GetAll(Repository.Repository.Locker);
             addFirstLevelCategories(allCategories, ROOT_CATEGORY_ID);
             addSecondLevelCategories(allCategories);
             addThirdLevelCategories(allCategories);
         }
-        private void addFirstLevelCategories(CategoryService.Category[] allCategories, int rootCategoryId)
+        private void addFirstLevelCategories(Category[] allCategories, int rootCategoryId)
         {
-            IEnumerable<CategoryService.Category> firstLevelCategories = from category in allCategories
+            IEnumerable<Category> firstLevelCategories = from category in allCategories
                                                                          where category.ParentCategoryId == rootCategoryId
                                                                          select category;
             LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             layoutParams.SetMargins(0, 0, 0, 10);
-            foreach (CategoryService.Category category in firstLevelCategories)
+            foreach (Category category in firstLevelCategories)
             {
                 SingleCategoryView singleCategoryView =
                     new SingleCategoryView(this, category, null);
@@ -83,11 +84,11 @@ namespace ChiKoja.Category
                 _firstLevelCategoryViews.Add(singleCategoryView);
             }
         }
-        void singleCategoryView_CategorySelectionChanged(object sender, CategoryService.Category category)
+        void singleCategoryView_CategorySelectionChanged(object sender, Category category)
         {
             updateSelectedCategoryChanged();
         }
-        private void addSecondLevelCategories(CategoryService.Category[] allCategories)
+        private void addSecondLevelCategories(Category[] allCategories)
         {
             LinearLayout.LayoutParams layoutParams =
                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
@@ -95,7 +96,7 @@ namespace ChiKoja.Category
             foreach (SingleCategoryView firstLevelCategoryView in _firstLevelCategoryViews)
             {
                 var childCategories = allCategories.Where(cat => cat.ParentCategoryId == firstLevelCategoryView.GetCategory().CategoryId);
-                foreach (CategoryService.Category childCategory in childCategories)
+                foreach (Category childCategory in childCategories)
                 {
                     SingleCategoryView singleCategoryView =
                         new SingleCategoryView(this, childCategory, firstLevelCategoryView);
@@ -105,7 +106,7 @@ namespace ChiKoja.Category
                 }
             }
         }
-        private void addThirdLevelCategories(CategoryService.Category[] allCategories)
+        private void addThirdLevelCategories(Category[] allCategories)
         {
             LinearLayout.LayoutParams layoutParams =
                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
@@ -113,7 +114,7 @@ namespace ChiKoja.Category
             foreach (SingleCategoryView secondLevelCategoryView in _secondLevelCategoryViews)
             {
                 var childCategories = allCategories.Where(cat => cat.ParentCategoryId == secondLevelCategoryView.GetCategory().CategoryId);
-                foreach (CategoryService.Category childCategory in childCategories)
+                foreach (Category childCategory in childCategories)
                 {
                     SingleCategoryView singleCategoryView =
                         new SingleCategoryView(this, childCategory, secondLevelCategoryView);

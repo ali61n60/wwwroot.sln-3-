@@ -9,29 +9,30 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ModelStd.Advertisements.Location;
+using ModelStd.Advertisements;
+using ModelStd.Advertisements.Transportation;
 using ModelStd.Services;
 
 namespace ChiKoja.Services.Server
 {
-    public class LocationApi
+    class AdTransportationApi
     {
-        public ResponseBase<int> GetLocationyVersion()
+        public ResponseBase<int> GetServerDataVersion()
         {
             throw new NotImplementedException();
         }
 
-        public ResponseBase<Province[]> GetAllProvinces()
+        public ResponseBase<TransportationModel[]> GetAllTransportationModels()
         {
             throw new NotImplementedException();
         }
 
-        public ResponseBase<District[]> GetAllDistricts()
+        public ResponseBase<TransportationBrand[]> GetAllTransportationBrands()
         {
             throw new NotImplementedException();
         }
 
-        public ResponseBase<City[]> GetAllCities()
+        public ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation adTransportation, string encryptWithServerKey, string s)
         {
             throw new NotImplementedException();
         }

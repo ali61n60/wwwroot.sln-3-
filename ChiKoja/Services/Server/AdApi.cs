@@ -2,21 +2,15 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using ChiKoja.AdTransportationService;
 using ChiKoja.Repository;
 using ChiKoja.Repository.Filter;
 using ChiKoja.Repository.Location;
+using ModelStd.Advertisements;
 using ModelStd.Services;
 using Newtonsoft.Json;
 using ServiceLayer;
@@ -174,39 +168,28 @@ namespace ChiKoja.Services.Server
             //}).Start();
         }
 
-        public void GetAdTransportationDetailFromServer(ISearchAdTransportationResult searchAdResult, Guid adGuid)
+        public void GetAdTransportationDetailFromServer(ISearchAdResult<AdvertisementTransportation> searchAdResult, Guid adGuid)
         {
-            Handler mainHandler = new Handler(Application.Context.MainLooper);
-            AdvertisementTransportationService adTransportationService = new AdvertisementTransportationService();
-            new Thread(() =>
-            {
-                try
-                {
-                    ResponseBaseOfAdvertisementTransportationgJiz6K1p response =
-                        adTransportationService.GetAdvertisementTransportation(adGuid.ToString());
-                    mainHandler.Post(() => { searchAdResult.OnSerachAdCompleted(response); });
-                }
-                catch (Exception ex)
-                {
-                    mainHandler.Post(() => { searchAdResult.OnSearchAdError(ex); });
-                }
-            }).Start();
+            //Handler mainHandler = new Handler(Application.Context.MainLooper);
+            //AdvertisementTransportationService adTransportationService = new AdvertisementTransportationService();
+            //new Thread(() =>
+            //{
+            //    try
+            //    {
+            //        ResponseBaseOfAdvertisementTransportationgJiz6K1p response =
+            //            adTransportationService.GetAdvertisementTransportation(adGuid.ToString());
+            //        mainHandler.Post(() => { searchAdResult.OnSerachAdCompleted(response); });
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        mainHandler.Post(() => { searchAdResult.OnSearchAdError(ex); });
+            //    }
+            //}).Start();
         }
 
         public void ResetSearchCondition()
         {
             _start = _initalStart;
         }
-
-
-
-
-
-
-
-
-
-
-
     }
 }

@@ -4,10 +4,10 @@ using System.Data;
 using Android.App;
 using Android.Content;
 using Android.Preferences;
-using ChiKoja.LocationService;
+using ChiKoja.Services.Server;
+using ModelStd.Advertisements.Location;
+using ModelStd.Services;
 using Mono.Data.Sqlite;
-
-using ArrayOfKeyValueOfstringstringKeyValueOfstringstring = ChiKoja.AdCommonService.ArrayOfKeyValueOfstringstringKeyValueOfstringstring;
 
 namespace ChiKoja.Repository.Location
 {
@@ -32,8 +32,8 @@ namespace ChiKoja.Repository.Location
 
         public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
-            LocationService.LocationService locationService = new LocationService.LocationService();
-            ResponseBaseOfint response = locationService.GetLocationyVersion();
+            LocationApi locationApi = new LocationApi();
+            ResponseBase<int> response = locationApi.GetLocationyVersion();
             if (response.Success)
             {
                 int serverCityDataVersion = response.ResponseData;
@@ -72,7 +72,7 @@ namespace ChiKoja.Repository.Location
         public City[] GetAll(object locker)
         {
             List<City> allCities = new List<City>();
-            LocationService.City tempCity;
+            City tempCity;
 
             lock (locker)
             {
@@ -85,10 +85,9 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempCity = new City();
-                        tempCity.CityId = (int)r["cityId"];
-                        tempCity.CityName = r["cityName"].ToString();
-                        tempCity.ProvinceId = (int)r["provinceId"];
+                        tempCity = new City((int) r["cityId"],
+                            r["cityName"].ToString(),
+                            (int) r["provinceId"]);
                         allCities.Add(tempCity);
                     }
                 }
@@ -102,8 +101,8 @@ namespace ChiKoja.Repository.Location
                                             ([cityId],[cityName],[provinceId],[selectedByUser])
                                             VALUES (@cityId ,@cityName ,@provinceId,@selectedByUser)";
             //get data from server
-            LocationService.LocationService locationService = new LocationService.LocationService();
-            ResponseBaseOfArrayOfCity63bt_SHOU response = locationService.GetAllCities();
+            LocationApi locationApi = new LocationApi();
+            ResponseBase<City[]> response = locationApi.GetAllCities();
             if (response.Success)
             {
                 //insert server data into loacal Cities Table
@@ -169,7 +168,7 @@ namespace ChiKoja.Repository.Location
         public City[] GetSelectedCities(object locker)
         {
             List<City> selectedCities = new List<City>();
-            LocationService.City tempCity;
+            City tempCity;
 
             lock (locker)
             {
@@ -184,10 +183,9 @@ namespace ChiKoja.Repository.Location
 
                         while (r.Read())
                         {
-                            tempCity = new City();
-                            tempCity.CityId = (int)r["cityId"];
-                            tempCity.CityName = r["cityName"].ToString();
-                            tempCity.ProvinceId = (int)r["provinceId"];
+                            tempCity = new City((int) r["cityId"],
+                                r["cityName"].ToString(),
+                                (int) r["provinceId"]);
                             selectedCities.Add(tempCity);
                         }
                     }
@@ -206,11 +204,10 @@ namespace ChiKoja.Repository.Location
             return selectedCities.ToArray();
         }
         
-        public ArrayOfKeyValueOfstringstringKeyValueOfstringstring GetCityDictionary()
+        public Dictionary<string,string> GetCityDictionary()
         {
-            ArrayOfKeyValueOfstringstringKeyValueOfstringstring tempKeyValueOfstringstring = new ArrayOfKeyValueOfstringstringKeyValueOfstringstring();
-            tempKeyValueOfstringstring.Key = "City";
-            tempKeyValueOfstringstring.Value = prefs.GetString(LocationKey, defaultCity);
+            Dictionary<string, string> tempKeyValueOfstringstring = new Dictionary<string, string>();
+            tempKeyValueOfstringstring["City"] = prefs.GetString(LocationKey, defaultCity);
             return tempKeyValueOfstringstring;
         }
 
@@ -245,7 +242,7 @@ namespace ChiKoja.Repository.Location
             }
         }
 
-        public City[] GetCitiesInProvince(LocationService.Province province, object locker)
+        public City[] GetCitiesInProvince(Province province, object locker)
         {
             List<City> allProvinceCities=new List<City>();
             City tempCity;
@@ -261,10 +258,9 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempCity = new City();
-                        tempCity.CityId = (int)r["cityId"];
-                        tempCity.CityName = r["cityName"].ToString();
-                        tempCity.ProvinceId = (int)r["provinceId"];
+                        tempCity = new City((int) r["cityId"],
+                            r["cityName"].ToString(),
+                            (int) r["provinceId"]);
                         allProvinceCities.Add(tempCity);
                     }
                 }
@@ -273,7 +269,5 @@ namespace ChiKoja.Repository.Location
 
             return allProvinceCities.ToArray();
         }
-
-        
     }
 }

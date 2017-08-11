@@ -2,14 +2,17 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.Preferences;
-using ChiKoja.RegistrationService;
+using ChiKoja.Services.Server;
+using ModelStd.Services;
+
 
 namespace ChiKoja.Repository
 {
+    //TODO make registration Token base
     public class Registration
     {
         ISharedPreferences prefs;
-        readonly RegistrationService.RegistrationService _registrationService;
+        readonly RegistrationApi _registrationApi;
         private readonly string userNameKey = "userNameKey";
         private readonly string defaultUserName = "NoUser";
         
@@ -23,25 +26,25 @@ namespace ChiKoja.Repository
         public Registration()
         {
             prefs = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
-            _registrationService = new RegistrationService.RegistrationService();
+            _registrationApi = new RegistrationApi();
         }
         public bool Login(string userName, string password)
         {
-            ResponseBase response;
-            try
-            {
-                response = _registrationService.ValidateUser(userName, password);
-                if (response.Success)
-                {
-                    saveUserAndPassInPreference(userName, password);
+           // ResponseBase response;
+           // try
+           // {
+               // response = _registrationApi.ValidateUser(userName, password);
+              //  if (response.Success)
+               // {
+               //     saveUserAndPassInPreference(userName, password);
                     return true;
-                }
+               // }
+             //   return false;
+           // }
+          //  catch (Exception ex)
+           // {
                 return false;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
+          //  }
         }
 
         private void saveUserAndPassInPreference(string userName,string password)
@@ -57,11 +60,11 @@ namespace ChiKoja.Repository
         {
             //TODO call server and create new user  and if Ok
             //TODO create new thread for service call 
-            ResponseBase response= _registrationService.CreateNewUser(userName, password, phoneNumber);//get user phone number
-            if (response.Success)
-            {
-                saveUserAndPassInPreference(userName, password);
-            }
+          //  ResponseBase response= _registrationApi.CreateNewUser(userName, password, phoneNumber);//get user phone number
+            //if (response.Success)
+           // {
+            //    saveUserAndPassInPreference(userName, password);
+           // }
         }
 
         public void LogOut()

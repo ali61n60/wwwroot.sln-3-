@@ -4,11 +4,11 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.Preferences;
-using ChiKoja.CategoryService;
+using ChiKoja.Services.Server;
+using ModelStd.Services;
 using Mono.Data.Sqlite;
 using ServiceLayer;
-using ArrayOfKeyValueOfstringstringKeyValueOfstringstring = ChiKoja.AdCommonService.ArrayOfKeyValueOfstringstringKeyValueOfstringstring;
-
+using ModelStd.Advertisements;
 
 namespace ChiKoja.Repository
 {
@@ -59,8 +59,8 @@ namespace ChiKoja.Repository
         }
         public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
-            CategoryService.CategoryService categoryService = new CategoryService.CategoryService();
-            ResponseBaseOfint response = categoryService.GetServerDataVersion();
+            CategoryApi categoryApi = new CategoryApi();
+            ResponseBase<int> response = categoryApi.GetServerDataVersion();
             if (response.Success)
             {
                 int serverCategoryDataVersion = response.ResponseData;
@@ -95,10 +95,10 @@ namespace ChiKoja.Repository
                 connection.Close();
             }
         }
-        public CategoryService.Category[] GetAll(object locker)
+        public Category[] GetAll(object locker)
         {
-            List<CategoryService.Category> allCategories = new List<CategoryService.Category>();
-            CategoryService.Category tempCategory;
+            List<Category> allCategories = new List<Category>();
+            Category tempCategory;
             lock (locker)
             {
                 connection.Open();
@@ -109,13 +109,10 @@ namespace ChiKoja.Repository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempCategory = new CategoryService.Category
-                        {
-                            CategoryId = (int)r["categoryId"],
-                            CategoryName = r["categoryName"].ToString(),
-                            ParentCategoryId = (int)r["categoryParentId"],
-                            EnglishCategoryName = r["categoryNameEnglish"].ToString()
-                        };
+                        tempCategory = new Category((int) r["categoryId"],
+                            (int)r["categoryParentId"],
+                            r["categoryName"].ToString(),
+                            r["categoryNameEnglish"].ToString());
                         allCategories.Add(tempCategory);
                     }
                 }
@@ -128,15 +125,15 @@ namespace ChiKoja.Repository
             string commandText = @"INSERT INTO [Categories] 
                                    ([categoryId], [categoryName],[categoryParentId],[categoryNameEnglish])
                                    VALUES (@categoryId, @categoryName,@categoryParentId,@categoryNameEnglish)";
-            CategoryService.CategoryService categoryService = new CategoryService.CategoryService();
-            ResponseBaseOfArrayOfCategorygJiz6K1p response = categoryService.GetAllCategories();
+            CategoryApi categoryApi = new CategoryApi();
+            ResponseBase<Category[]> response = categoryApi.GetAllCategories();
 
             if (response.Success)
             {
                 lock (locker)
                 {
                     connection.Open();
-                    foreach (CategoryService.Category category in response.ResponseData)
+                    foreach (Category category in response.ResponseData)
                     {
                         using (SqliteCommand c = connection.CreateCommand())
                         {

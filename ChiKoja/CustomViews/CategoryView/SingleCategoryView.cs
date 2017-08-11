@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Android.Content;
 using Android.Graphics;
 using Android.Views;
 using Android.Widget;
+using ModelStd.Advertisements;
 
 
 namespace ChiKoja.CustomViews.CategoryView
@@ -23,12 +23,12 @@ namespace ChiKoja.CustomViews.CategoryView
 
         private readonly List<SingleCategoryView> _childrenList=new List<SingleCategoryView>(); 
         private readonly SingleCategoryView _parent; 
-        private readonly CategoryService.Category _category;
+        private readonly Category _category;
         private bool _childrenAreVisible;
         
         public event CategorySelctionHandler CategorySelectionChanged;
 
-        public SingleCategoryView(Context context, CategoryService.Category category, SingleCategoryView parent)
+        public SingleCategoryView(Context context, Category category, SingleCategoryView parent)
             : base(context)
         {
             _category = category;
@@ -146,7 +146,7 @@ namespace ChiKoja.CustomViews.CategoryView
             if (HasChildren())
                 imageViewHasChildrenSign.SetImageResource(Resource.Drawable.arrowDown2);
         }
-        public CategoryService.Category GetCategory()
+        public Category GetCategory()
         {
             return _category;
         }
