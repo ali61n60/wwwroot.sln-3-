@@ -4,18 +4,19 @@ using Android.Content;
 using Android.OS;
 using Android.Views;
 using Android.Widget;
-using ChiKoja.AdCommonService;
 using ChiKoja.CustomViews.SingleAdView;
 using ChiKoja.Login;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository;
 using ChiKoja.Services;
+using ChiKoja.Services.Server;
+using ModelStd.Advertisements;
 using ModelStd.Services;
 
 namespace ChiKoja.SearchAd.UserAd
 {
     [Activity(Label = "ActivityUserAds", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class ActivityUserAds : NavActivity, ISearchAdResult
+    public class ActivityUserAds : NavActivity, ISearchAdResult<AdvertisementCommon[]>
     {
         //TODO get user ads from server and show them on page
         //TODO ad first image to single user ad
@@ -59,8 +60,8 @@ namespace ChiKoja.SearchAd.UserAd
 
         private void getUserAdsFromServerAndShowOnPage()
         {
-            SearchAdService _searchAdService = new SearchAdService();
-            _searchAdService.GetUserAdsFromeServer(this, registration.UserName, registration.Password);
+            AdApi adApi = new AdApi();
+            adApi.GetUserAdsFromeServer(this, registration.UserName, registration.Password);
         }
 
 
@@ -111,20 +112,13 @@ namespace ChiKoja.SearchAd.UserAd
             if(advertisementCommon.AdvertisementImages!=null)
                 viewGroupUserAd.AdImage = advertisementCommon.AdvertisementImages[0];
             viewGroupUserAd.AdCategoryId = advertisementCommon.AdvertisementCategoryId;
-            viewGroupUserAd.AdGuid = Guid.Parse(advertisementCommon.AdvertisementId);
+            viewGroupUserAd.AdGuid = advertisementCommon.AdvertisementId;
             return viewGroupUserAd;
         }
 
-        public void OnSerachAdCompleted(ResponseBase<ModelStd.Advertisements.AdvertisementCommon[]> response)
+        public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
         {
             
-        }
-        public void OnSerachAdCompleted(ResponseBaseOfArrayOfAdvertisementCommongJiz6K1p response, bool InResponseToLastRequest)
-        {
-            if (!InResponseToLastRequest)
-            {
-                return;//dismiss result for early requests
-            }
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
             LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
@@ -136,6 +130,7 @@ namespace ChiKoja.SearchAd.UserAd
             else
                 Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
         }
+       
 
         public void OnSearchAdError(Exception ex)
         {

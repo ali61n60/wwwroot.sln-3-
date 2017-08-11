@@ -74,7 +74,7 @@
     <Reference Include="Java.Interop" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ModelStd, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelStd.1.0.2\lib\netstandard1.4\ModelStd.dll</HintPath>
+      <HintPath>..\packages\ModelStd.1.0.7\lib\netstandard1.4\ModelStd.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Data.Sqlite" />
@@ -163,38 +163,14 @@
     <Compile Include="Services\ISearchAdResult.cs" />
     <Compile Include="SearchAd\UserAd\ActivityUserAds.cs" />
     <Compile Include="Services\ISearchAdTransportationResult.cs" />
-    <Compile Include="Services\SearchAdService.cs" />
-    <Compile Include="Services\ServicesCommon.cs" />
+    <Compile Include="Services\Server\AdApi.cs" />
+    <Compile Include="Services\Server\LocationApi.cs" />
+    <Compile Include="Services\Server\ServicesCommon.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
     <Compile Include="CustomViews\SingleAdView\ViewGroupSingleAd.cs" />
     <Compile Include="ViewServer\ActivityViewServerTest.cs" />
     <Compile Include="ViewServer\ViewServer.cs" />
-    <Compile Include="Web References\AdCommonService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\AdTransportationService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\CategoryService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\LocationService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\RegistrationService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />
@@ -275,160 +251,6 @@
     <AndroidResource Include="Resources\layout\BrandTransportation.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
-    <None Include="Web References\AdCommonService\AdvertisementCommonService.wsdl" />
-    <None Include="Web References\AdCommonService\AdvertisementCommonService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdCommonService\AdvertisementCommonService0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdCommonService\AdvertisementCommonService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdCommonService\AdvertisementCommonService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdCommonService\AdvertisementCommonService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdCommonService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\AdCommonService\ResponseBase.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\AdCommonService\ResponseBaseOfArrayOfAdvertisementCommongJiz6K1p.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService.wsdl" />
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService4.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\AdTransportationService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\AdTransportationService\ResponseBase.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\AdTransportationService\ResponseBaseOfAdvertisementTransportationgJiz6K1p.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\AdTransportationService\ResponseBaseOfArrayOfTransportationBrandoKnNwMS4.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\AdTransportationService\ResponseBaseOfArrayOfTransportationModeloKnNwMS4.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\AdTransportationService\ResponseBaseOfArrayOfVehiclegJiz6K1p.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\AdTransportationService\ResponseBaseOfint.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\CategoryService\CategoryService.wsdl" />
-    <None Include="Web References\CategoryService\CategoryService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CategoryService\CategoryService0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CategoryService\CategoryService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CategoryService\CategoryService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CategoryService\CategoryService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\CategoryService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\CategoryService\ResponseBaseOfArrayOfCategorygJiz6K1p.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\CategoryService\ResponseBaseOfCategorygJiz6K1p.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\CategoryService\ResponseBaseOfint.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\LocationService\LocationService.wsdl" />
-    <None Include="Web References\LocationService\LocationService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\LocationService\LocationService0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\LocationService\LocationService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\LocationService\LocationService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\LocationService\LocationService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\LocationService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\LocationService\ResponseBaseOfArrayOfCity63bt_SHOU.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\LocationService\ResponseBaseOfArrayOfDistrict63bt_SHOU.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\LocationService\ResponseBaseOfArrayOfProvince63bt_SHOU.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\LocationService\ResponseBaseOfint.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\RegistrationService\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\RegistrationService\RegistrationService.wsdl" />
-    <None Include="Web References\RegistrationService\RegistrationService.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RegistrationService\RegistrationService0.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RegistrationService\RegistrationService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RegistrationService\RegistrationService2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RegistrationService\RegistrationService3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\RegistrationService\ResponseBase.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\RegistrationService\ResponseBaseOfCustomerYgFqSxnr.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
@@ -445,73 +267,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://192.168.42.16/Services/AdvertisementCommonService.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\AdCommonService\</RelPath>
-      <UpdateFromURL>http://192.168.42.16/Services/AdvertisementCommonService.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.42.16/Services/AdvertisementTransportationService.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\AdTransportationService\</RelPath>
-      <UpdateFromURL>http://192.168.42.16/Services/AdvertisementTransportationService.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.42.16/Services/CategoryService.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\CategoryService\</RelPath>
-      <UpdateFromURL>http://192.168.42.16/Services/CategoryService.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.42.16/Services/LocationService.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\LocationService\</RelPath>
-      <UpdateFromURL>http://192.168.42.16/Services/LocationService.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://192.168.42.16/Services/RegistrationService.svc">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\RegistrationService\</RelPath>
-      <UpdateFromURL>http://192.168.42.16/Services/RegistrationService.svc</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>
-      </CachedAppSettingsObjectName>
-      <CachedSettingsPropName>
-      </CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\Xml\Preferences.xml">
@@ -563,21 +318,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\splash_screen.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\AdCommonService\AdvertisementCommonService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\AdTransportationService\AdvertisementTransportationService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\CategoryService\CategoryService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\LocationService\LocationService.disco" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Web References\RegistrationService\RegistrationService.disco" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\vals.xml" />

@@ -16,6 +16,7 @@ using ChiKoja.NavigationDrawer;
 using ChiKoja.Notification;
 using ChiKoja.Repository.UserMarkedAds;
 using ChiKoja.Services;
+using ChiKoja.Services.Server;
 using Uri = Android.Net.Uri;
 
 namespace ChiKoja.AdDetail
@@ -47,7 +48,7 @@ namespace ChiKoja.AdDetail
                 Finish();
             }
             adGuid = Guid.Parse(Intent.GetStringExtra(AdDetail.AdGuidKey));
-            SearchAdService searchAdService = new SearchAdService();
+            AdApi searchAdService = new AdApi();
             searchAdService.GetAdTransportationDetailFromServer(this,adGuid);
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall),ShowMessageType.Permanent);
             userMarkedAds=new UserMarkedAds(Repository.Repository.DataBasePath);

@@ -15,15 +15,14 @@ namespace MvcMain.Controllers
     [Route("api/[controller]/[action]")]
     public class AdApiController:Controller
     {
-        
+        private ServiceCommonPolicy _serviceCommonPolicy = new ServiceCommonPolicy();
+
         public JsonResult SayHello([FromQuery][FromBody] string name,int numberOfCalls)
         { 
             return Json(String.Format("Hello {0},Number is {1} current server time is: {2}", name,numberOfCalls, DateTime.Now.ToString()));
         }
 
-
-
-        private ServiceCommonPolicy _serviceCommonPolicy = new ServiceCommonPolicy();
+        
         public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(
             [FromBody] Dictionary<string, string> userInput)
         {

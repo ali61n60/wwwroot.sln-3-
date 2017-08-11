@@ -1,18 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using System.IO;
 using Android.Preferences;
-using ChiKoja.LocationService;
+using ChiKoja.Services.Server;
+using ModelStd.Advertisements.Location;
+using ModelStd.Services;
 using Mono.Data.Sqlite;
 
 namespace ChiKoja.Repository.Location
@@ -43,8 +37,8 @@ namespace ChiKoja.Repository.Location
         }
         public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
-            LocationService.LocationService locationService = new LocationService.LocationService();
-            ResponseBaseOfint response = locationService.GetLocationyVersion();
+            LocationApi locationApi = new LocationApi();
+            ResponseBase<int> response = locationApi.GetLocationyVersion();
             if (response.Success)
             {
                 int serverProvinceDataVersion = response.ResponseData;
@@ -79,10 +73,10 @@ namespace ChiKoja.Repository.Location
                 connection.Close();
             }
         }
-        public LocationService.Province[] GetAll(object locker) 
+        public Province[] GetAll(object locker) 
         {
-            List<LocationService.Province> allProvinces = new List<LocationService.Province>();
-            LocationService.Province tempProvince;
+            List<Province> allProvinces = new List<Province>();
+            Province tempProvince;
 
             lock (locker)
             {
@@ -95,10 +89,9 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempProvince = new LocationService.Province();
-                        tempProvince.ProvinceId = (int)r["provinceId"];
-                        tempProvince.ProvinceName = r["provinceName"].ToString();
-                        tempProvince.ProvinceCenter = r["provinceCenter"].ToString();
+                        tempProvince = new Province((int) r["provinceId"],
+                            r["provinceName"].ToString(),
+                            r["provinceCenter"].ToString());
                         allProvinces.Add(tempProvince);
                     }
                 }
@@ -112,14 +105,14 @@ namespace ChiKoja.Repository.Location
                                             ([provinceId],[provinceName],[provinceCenter],[selectedByUser])
                                             VALUES (@provinceId ,@provinceName ,@provinceCenter,@selectedByUser)";
             //get data from server
-            LocationService.LocationService locationService = new LocationService.LocationService();
-            ResponseBaseOfArrayOfProvince63bt_SHOU response = locationService.GetAllProvinces();
+            LocationApi locationApi = new LocationApi();
+            ResponseBase<Province[]> response = locationApi.GetAllProvinces();
             if (response.Success)
             {
                 lock (locker)
                 {
                     connection.Open();
-                    foreach (LocationService.Province province in response.ResponseData)
+                    foreach (Province province in response.ResponseData)
                     {
                         using (SqliteCommand c = connection.CreateCommand())
                         {
@@ -151,10 +144,10 @@ namespace ChiKoja.Repository.Location
                 connection.Close();
             }
         }
-        public LocationService.Province[] GetSelectedProvinces()
+        public Province[] GetSelectedProvinces()
         {
-            List<LocationService.Province> selectedProvinces = new List<LocationService.Province>();
-            LocationService.Province tempProvince;
+            List<Province> selectedProvinces = new List<Province>();
+            Province tempProvince;
             lock (Repository.Locker)
             {
                 try
@@ -167,12 +160,9 @@ namespace ChiKoja.Repository.Location
                         var r = sqliteCommand.ExecuteReader();
                         while (r.Read())
                         {
-                            tempProvince = new LocationService.Province
-                            {
-                                ProvinceId = (int)r["provinceId"],
-                                ProvinceName = r["provinceName"].ToString(),
-                                ProvinceCenter = r["provinceCenter"].ToString()
-                            };
+                            tempProvince = new Province((int) r["provinceId"],
+                                r["provinceName"].ToString(),
+                                r["provinceCenter"].ToString());
                             selectedProvinces.Add(tempProvince);
                         }
                     }
@@ -190,7 +180,7 @@ namespace ChiKoja.Repository.Location
             return selectedProvinces.ToArray();
         }
 
-        public void SetProvinceAsSelected(LocationService.Province province)
+        public void SetProvinceAsSelected(Province province)
         {
             lock (Repository.Locker)
             {
@@ -206,7 +196,7 @@ namespace ChiKoja.Repository.Location
             }
         }
 
-        public void SetProvinceAsNotSelected(LocationService.Province province)
+        public void SetProvinceAsNotSelected(Province province)
         {
             lock (Repository.Locker)
             {

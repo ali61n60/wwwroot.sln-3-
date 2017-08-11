@@ -9,18 +9,19 @@ using ChiKoja.NavigationDrawer;
 using ChiKoja.CustomViews.SingleAdView;
 using ChiKoja.Category;
 using ChiKoja.Services;
+using ChiKoja.Services.Server;
 using ModelStd.Advertisements;
 using ModelStd.Services;
-using V7Toolbar = Android.Support.V7.Widget.Toolbar;
+
 
 
 namespace ChiKoja.SearchAd
 {
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class ActivitySearchAd : NavActivity, ISearchAdResult
+    public class ActivitySearchAd : NavActivity, ISearchAdResult<AdvertisementCommon[]>
     {
         protected const int CategorySelectionRequestCode = 2;
-        SearchAdService _searchAdService;
+        AdApi _adApi;
 
         View rootView;
         Button buttonFilter;
@@ -57,7 +58,7 @@ namespace ChiKoja.SearchAd
 
         private void initializeFields()
         {
-            _searchAdService = new SearchAdService();
+            _adApi = new AdApi();
 
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonSearchAd.Click += buttonSearchAd_Click;
@@ -91,9 +92,9 @@ namespace ChiKoja.SearchAd
             StartActivityForResult(searchFilterIntent, SearchFilterRequestCode);
         }
 
-        async void buttonSearchAd_Click(object sender, EventArgs e)
+        void buttonSearchAd_Click(object sender, EventArgs e)
         {
-            _searchAdService.GetAdFromServer(this);
+            _adApi.GetAdFromServer(this);
             // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
             
         }
@@ -129,7 +130,7 @@ namespace ChiKoja.SearchAd
         private void resetSearchCondition()
         {
             searchResultPlaceHolder.RemoveAllViews();
-            _searchAdService.ResetSearchCondition();
+            _adApi.ResetSearchCondition();
         }
 
         public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)

@@ -4,9 +4,9 @@ using ModelStd.Services;
 
 namespace ChiKoja.Services
 {
-    public interface ISearchAdResult
+    public interface ISearchAdResult<T>
     {
-        void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response);
+        void OnSerachAdCompleted(ResponseBase<T> response);
         void OnSearchAdError(Exception ex);
     }
 }

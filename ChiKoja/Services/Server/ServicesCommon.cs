@@ -10,7 +10,7 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 
-namespace ChiKoja.Services
+namespace ChiKoja.Services.Server
 {
     public class ServicesCommon
     {

@@ -6,9 +6,9 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ChiKoja.LocationService;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Location;
+using ModelStd.Advertisements.Location;
 
 namespace ChiKoja.LocationSelection
 {
