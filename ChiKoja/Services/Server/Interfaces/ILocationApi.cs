@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -16,7 +16,7 @@ namespace ChiKoja.Services.Server.Interfaces
 {
     public interface ILocationApi
     {
-        ResponseBase<int> GetLocationyVersion();
+        Task<ResponseBase<int>> GetLocationyVersion();
         ResponseBase<Province[]> GetAllProvinces();
         ResponseBase<District[]> GetAllDistricts();
         ResponseBase<City[]> GetAllCities();

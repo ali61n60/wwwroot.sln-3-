@@ -30,10 +30,10 @@ namespace ChiKoja.Repository.Location
             OperationOrder = 2;//must be less than district table
         }
 
-        public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
+        public async void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
             LocationApi locationApi = new LocationApi();
-            ResponseBase<int> response = locationApi.GetLocationyVersion();
+            ResponseBase<int> response =await locationApi.GetLocationyVersion();
             if (response.Success)
             {
                 int serverCityDataVersion = response.ResponseData;

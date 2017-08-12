@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Json;
 using System.Net;
-using System.Threading;
 using System.Threading.Tasks;
-using Android.App;
-using Android.OS;
 using ChiKoja.Repository;
 using ChiKoja.Repository.Filter;
 using ChiKoja.Repository.Location;
@@ -35,15 +32,16 @@ namespace ChiKoja.Services.Server
 
         public AdApi()
         {
-            districtRepository = new DistrictRepository(Repository.Repository.DataBasePath);
-            categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
-            searchFilterRepository = new SearchFilterRepository();
-            //adCommonService = new AdvertisementCommonService();
+           // districtRepository = new DistrictRepository(Repository.Repository.DataBasePath);
+           // categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
+           // searchFilterRepository = new SearchFilterRepository();
+            
         }
         public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon(
             Dictionary<string, string> userInput)
         {
-            ResponseBase<AdvertisementCommon[]> response;
+            ResponseBase<AdvertisementCommon[]> response;//=await ServicesCommon.CallService<AdvertisementCommon[]>("", userInput);
+
             try
             {
                 string url = ServicesCommon.ServerUrl + "/api/AdApi/GetAdvertisementCommon";
@@ -64,7 +62,7 @@ namespace ChiKoja.Services.Server
                     using (Stream stream = webResponse.GetResponseStream())
                     {
                         JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                        response =JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
+                        response = JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
 
                         if (response.Success)
                         {
@@ -88,7 +86,7 @@ namespace ChiKoja.Services.Server
                             return response;
                         }
                         else
-                            throw new Exception(response.Message+" ErrorCode="+response.ErrorCode);
+                            throw new Exception(response.Message + " ErrorCode=" + response.ErrorCode);
                     }
                 }
             }
@@ -104,7 +102,7 @@ namespace ChiKoja.Services.Server
         }
 
        
-        public async void GetAdFromServer(ISearchAdResult<AdvertisementCommon[]> searchAdResult)
+        public async Task GetAdFromServer(ISearchAdResult<AdvertisementCommon[]> searchAdResult)
         {
             Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
             _currentRequestIndex++;

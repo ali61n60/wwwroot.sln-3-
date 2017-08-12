@@ -25,10 +25,10 @@ namespace ChiKoja.Repository.Location
             prefs = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
             OperationOrder = 3;
         }
-        public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
+        public async void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
             LocationApi locationService = new LocationApi();
-            ResponseBase<int> response = locationService.GetLocationyVersion();
+            ResponseBase<int> response =await locationService.GetLocationyVersion();
             if (response.Success)
             {
                 int serverDistrictDataVersion = response.ResponseData;
