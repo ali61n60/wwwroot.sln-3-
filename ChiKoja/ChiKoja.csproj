@@ -159,7 +159,6 @@
     <Compile Include="SearchAd\ActivitySearchAd.cs" />
     <Compile Include="SearchAd\ActivitySearchFilter.cs" />
     <Compile Include="SearchAd\ActivitySortBy.cs" />
-    <Compile Include="Services\ISearchAdResult.cs" />
     <Compile Include="SearchAd\UserAd\ActivityUserAds.cs" />
     <Compile Include="Services\Server\AdApi.cs" />
     <Compile Include="Services\Server\AdTransportationApi.cs" />

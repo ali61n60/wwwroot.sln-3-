@@ -20,7 +20,7 @@ using ModelStd.Services;
 namespace ChiKoja.SearchAd
 {
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class ActivitySearchAd : NavActivity, ISearchAdResult<AdvertisementCommon[]>
+    public class ActivitySearchAd : NavActivity
     {
         protected const int CategorySelectionRequestCode = 2;
         AdApi _adApi;
@@ -63,7 +63,15 @@ namespace ChiKoja.SearchAd
             _adApi = new AdApi();
 
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
-            buttonSearchAd.Click += buttonSearchAd_Click;
+            buttonSearchAd.Click +=async (sender, args) =>
+            {
+                // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+                ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdFromServer();
+                if(response.Success)
+                    OnSerachAdCompleted(response);
+                else
+                    OnSearchAdError(new Exception(response.Message+", ErrorCode:"+response.ErrorCode));
+            };
 
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
             buttonFilter.Click += buttonFilter_Click;
@@ -94,13 +102,7 @@ namespace ChiKoja.SearchAd
             StartActivityForResult(searchFilterIntent, SearchFilterRequestCode);
         }
 
-         void buttonSearchAd_Click(object sender, EventArgs e)
-        {
-            Console.WriteLine("ButtonSearch");
-           _adApi.GetAdFromServer(this);
-            // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-            
-        }
+       
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);

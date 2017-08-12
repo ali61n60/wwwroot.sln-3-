@@ -17,7 +17,7 @@ namespace ChiKoja.Services.Server
     {
         public async Task<ResponseBase<int>> GetLocationyVersion()
         {
-            ResponseBase<int> response;
+            ResponseBase<int> response = await ServicesCommon.CallService<ResponseBase<int>>("");
             try
             {
                 string url = ServicesCommon.ServerUrl + "/api/LocationApi/GetLocationyVersion";

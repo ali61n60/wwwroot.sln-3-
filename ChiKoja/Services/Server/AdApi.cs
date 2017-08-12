@@ -40,69 +40,71 @@ namespace ChiKoja.Services.Server
         public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon(
             Dictionary<string, string> userInput)
         {
-            ResponseBase<AdvertisementCommon[]> response;//=await ServicesCommon.CallService<AdvertisementCommon[]>("", userInput);
+            return  await ServicesCommon.CallService<AdvertisementCommon[]>("api/AdApi/GetAdvertisementCommon", userInput);
+            
 
-            try
-            {
-                string url = ServicesCommon.ServerUrl + "/api/AdApi/GetAdvertisementCommon";
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-                request.ContentType = "application/json";
-                request.Method = "POST";
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-                {
-                    string jsonData = JsonConvert.SerializeObject(userInput);
-                    streamWriter.Write(jsonData);
-                    streamWriter.Flush();
-                    streamWriter.Close();
-                }
 
-                // Send the request to the server and wait for the response:
-                using (WebResponse webResponse = await request.GetResponseAsync())
-                {
-                    using (Stream stream = webResponse.GetResponseStream())
-                    {
-                        JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                        response = JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
+            //try
+            //{
+            //    string url = ServicesCommon.ServerUrl + "/api/AdApi/GetAdvertisementCommon";
+            //    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+            //    request.ContentType = "application/json";
+            //    request.Method = "POST";
+            //    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+            //    {
+            //        string jsonData = JsonConvert.SerializeObject(userInput);
+            //        streamWriter.Write(jsonData);
+            //        streamWriter.Flush();
+            //        streamWriter.Close();
+            //    }
 
-                        if (response.Success)
-                        {
-                            Dictionary<string, string> resultCustomDictionary = response.CustomDictionary;
-                            if (!localRequestIndexMatchsServerResponse(resultCustomDictionary))
-                            {
-                                //more request has been send to server so dismiss current server response
-                                response.Success = false;
-                                response.Message = "more request has been send to server";
-                                return response;
-                            }
-                            foreach (var keyValueOfstringstring in resultCustomDictionary)
-                            {
-                                if (keyValueOfstringstring.Key == NumberOfItemsKey)
-                                {
-                                    int numberOfItems = Parser.ParseInt(keyValueOfstringstring.Value, 0);
-                                    _start += numberOfItems;
-                                    break;
-                                }
-                            }
-                            return response;
-                        }
-                        else
-                            throw new Exception(response.Message + " ErrorCode=" + response.ErrorCode);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                response = new ResponseBase<AdvertisementCommon[]>
-                {
-                    Success = false,
-                    Message = ex.Message
-                };
-                return response;
-            }
+            //    // Send the request to the server and wait for the response:
+            //    using (WebResponse webResponse = await request.GetResponseAsync())
+            //    {
+            //        using (Stream stream = webResponse.GetResponseStream())
+            //        {
+            //            JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+            //            response = JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
+
+            //            if (response.Success)
+            //            {
+            //                Dictionary<string, string> resultCustomDictionary = response.CustomDictionary;
+            //                if (!localRequestIndexMatchsServerResponse(resultCustomDictionary))
+            //                {
+            //                    //more request has been send to server so dismiss current server response
+            //                    response.Success = false;
+            //                    response.Message = "more request has been send to server";
+            //                    return response;
+            //                }
+            //                foreach (var keyValueOfstringstring in resultCustomDictionary)
+            //                {
+            //                    if (keyValueOfstringstring.Key == NumberOfItemsKey)
+            //                    {
+            //                        int numberOfItems = Parser.ParseInt(keyValueOfstringstring.Value, 0);
+            //                        _start += numberOfItems;
+            //                        break;
+            //                    }
+            //                }
+            //                return response;
+            //            }
+            //            else
+            //                throw new Exception(response.Message + " ErrorCode=" + response.ErrorCode);
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    response = new ResponseBase<AdvertisementCommon[]>
+            //    {
+            //        Success = false,
+            //        Message = ex.Message
+            //    };
+            //    return response;
+            //}
         }
 
        
-        public async Task GetAdFromServer(ISearchAdResult<AdvertisementCommon[]> searchAdResult)
+        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdFromServer()
         {
             Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
             _currentRequestIndex++;
@@ -116,10 +118,10 @@ namespace ChiKoja.Services.Server
             userInputDictionary[CountKey] = _count.ToString();
             
             ResponseBase<AdvertisementCommon[]> response=await GetAdvertisementCommon(userInputDictionary);
-            if (response.Success)
-                searchAdResult.OnSerachAdCompleted(response);
-            else
-                searchAdResult.OnSearchAdError(new Exception(response.Message));
+            return response;
+
+            
+
         }
 
         private bool localRequestIndexMatchsServerResponse(Dictionary<string, string> resultCustomDictionary)
@@ -136,7 +138,7 @@ namespace ChiKoja.Services.Server
         }
 
 
-        public void GetUserAdsFromeServer(ISearchAdResult<AdvertisementCommon[]> searchAdResult, string username, string password)
+        public void GetUserAdsFromeServer(string username, string password)
         {
             //Handler mainHandler = new Handler(Application.Context.MainLooper);
             //CryptoGraphy cryptoGraphy = new CryptoGraphy();
@@ -167,7 +169,7 @@ namespace ChiKoja.Services.Server
             //}).Start();
         }
 
-        public void GetAdTransportationDetailFromServer(ISearchAdResult<AdvertisementTransportation> searchAdResult, Guid adGuid)
+        public void GetAdTransportationDetailFromServer(Guid adGuid)
         {
             //Handler mainHandler = new Handler(Application.Context.MainLooper);
             //AdvertisementTransportationService adTransportationService = new AdvertisementTransportationService();

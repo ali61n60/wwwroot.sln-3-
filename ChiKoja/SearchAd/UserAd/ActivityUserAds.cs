@@ -16,7 +16,7 @@ using ModelStd.Services;
 namespace ChiKoja.SearchAd.UserAd
 {
     [Activity(Label = "ActivityUserAds", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class ActivityUserAds : NavActivity, ISearchAdResult<AdvertisementCommon[]>
+    public class ActivityUserAds : NavActivity
     {
         //TODO get user ads from server and show them on page
         //TODO ad first image to single user ad
@@ -61,7 +61,7 @@ namespace ChiKoja.SearchAd.UserAd
         private void getUserAdsFromServerAndShowOnPage()
         {
             AdApi adApi = new AdApi();
-            adApi.GetUserAdsFromeServer(this, registration.UserName, registration.Password);
+            adApi.GetUserAdsFromeServer(registration.UserName, registration.Password);
         }
 
 

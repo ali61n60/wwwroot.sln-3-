@@ -2,16 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Json;
-using System.Linq;
 using System.Net;
-using System.Text;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using ModelStd.Services;
 using Newtonsoft.Json;
 
@@ -24,7 +16,7 @@ namespace ChiKoja.Services.Server
         public static async Task<ResponseBase<T>> CallService<T>(string controllerActionUrlPart)
         {
             ResponseBase<T> response;
-
+            
             try
             {
                 string url = ServerUrl + "/" + controllerActionUrlPart;
@@ -50,7 +42,7 @@ namespace ChiKoja.Services.Server
             }
             catch (Exception ex)
             {
-                response = new ResponseBase<T>
+                response = new ResponseBase<T>()
                 {
                     Success = false,
                     Message = ex.Message
@@ -68,7 +60,7 @@ namespace ChiKoja.Services.Server
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
                 request.ContentType = "application/json";
                 request.Method = "POST";
-                using (var streamWriter = new StreamWriter(request.GetRequestStream()))
+                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
                 {
                     string jsonData = JsonConvert.SerializeObject(userInput);
                     streamWriter.Write(jsonData);

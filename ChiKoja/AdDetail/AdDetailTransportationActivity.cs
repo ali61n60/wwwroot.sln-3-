@@ -20,7 +20,7 @@ namespace ChiKoja.AdDetail
 
     //TODO show similar ads
     [Activity(Label = "AdTransportationActivity", Theme = "@style/Theme.Main")]
-    public class AdDetailTransportationActivity : NavActivity, ISearchAdResult<AdvertisementTransportation>
+    public class AdDetailTransportationActivity : NavActivity
     {
         //TODO Design UI for this activity
 
@@ -46,7 +46,7 @@ namespace ChiKoja.AdDetail
             }
             adGuid = Guid.Parse(Intent.GetStringExtra(AdDetail.AdGuidKey));
             AdApi adApi = new AdApi();
-            adApi.GetAdTransportationDetailFromServer(this,adGuid);
+            adApi.GetAdTransportationDetailFromServer(adGuid);
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall),ShowMessageType.Permanent);
             userMarkedAds=new UserMarkedAds(Repository.Repository.DataBasePath);
 
