@@ -10,6 +10,7 @@ using Android.OS;
 using ChiKoja.Repository;
 using ChiKoja.Repository.Filter;
 using ChiKoja.Repository.Location;
+using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 using Newtonsoft.Json;
@@ -18,7 +19,7 @@ using AdvertisementCommon = ModelStd.Advertisements.AdvertisementCommon;
 
 namespace ChiKoja.Services.Server
 {
-    public class AdApi
+    public class AdApi:IAdApi
     {
         CategoryRepository categoryRepository;
         DistrictRepository districtRepository;

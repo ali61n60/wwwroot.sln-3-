@@ -9,11 +9,10 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ChiKoja.Services.Server.Interfaces;
 
-namespace ChiKoja.Services.Server
+namespace ChiKoja.Services.Server.Interfaces
 {
-    public class RegistrationApi:IRegistrationApi
+    interface IRegistrationApi
     {
     }
 }

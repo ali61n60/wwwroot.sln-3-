@@ -165,6 +165,11 @@
     <Compile Include="Services\Server\AdApi.cs" />
     <Compile Include="Services\Server\AdTransportationApi.cs" />
     <Compile Include="Services\Server\CategoryApi.cs" />
+    <Compile Include="Services\Server\Interfaces\IAdApi.cs" />
+    <Compile Include="Services\Server\Interfaces\IAdTransportationApi.cs" />
+    <Compile Include="Services\Server\Interfaces\ICategoryApi.cs" />
+    <Compile Include="Services\Server\Interfaces\ILocationApi.cs" />
+    <Compile Include="Services\Server\Interfaces\IRegistrationApi.cs" />
     <Compile Include="Services\Server\LocationApi.cs" />
     <Compile Include="Services\Server\RegistrationApi.cs" />
     <Compile Include="Services\Server\ServicesCommon.cs" />

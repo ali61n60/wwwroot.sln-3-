@@ -9,12 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements.Location;
 using ModelStd.Services;
 
 namespace ChiKoja.Services.Server
 {
-    public class LocationApi
+    public class LocationApi:ILocationApi
     {
         public ResponseBase<int> GetLocationyVersion()
         {
