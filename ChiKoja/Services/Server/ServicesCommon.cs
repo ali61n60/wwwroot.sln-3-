@@ -22,7 +22,7 @@ namespace ChiKoja.Services.Server
                 string url = ServerUrl + "/" + controllerActionUrlPart;
                 HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
                 request.ContentType = "application/json";
-                request.Method = "POST";
+                request.Method = "GET";
 
                 using (WebResponse webResponse = await request.GetResponseAsync())
                 {

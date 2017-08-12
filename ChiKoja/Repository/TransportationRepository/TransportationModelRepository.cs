@@ -34,11 +34,11 @@ namespace ChiKoja.Repository.TransportationRepository
             prefs = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
             OperationOrder = 7;
         }
-        public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
+        public async void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
             AdTransportationApi adTransportationApi = new AdTransportationApi();
 
-            ResponseBase<int> response = adTransportationApi.GetServerDataVersion();
+            ResponseBase<int> response =await adTransportationApi.GetServerDataVersion();
             if (response.Success)
             {
                 int serverDataVersion = response.ResponseData;
@@ -73,13 +73,13 @@ namespace ChiKoja.Repository.TransportationRepository
                 connection.Close();
             }
         }
-        public void PopulateTableDataFromServer(object locker)
+        public async void PopulateTableDataFromServer(object locker)
         {
             string commandText = @"INSERT INTO [TransportationModels] 
                                    ([modelId],[modelName],[brandId])
                                    VALUES (@modelId,@modelName,@brandId)";
             AdTransportationApi adTransportationApi = new AdTransportationApi();
-            ResponseBase<TransportationModel[]> response =
+            ResponseBase<TransportationModel[]> response =await
                 adTransportationApi.GetAllTransportationModels();
 
             if (response.Success)

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -18,24 +18,26 @@ namespace ChiKoja.Services.Server
 {
     class AdTransportationApi:IAdTransportationApi
     {
-        public ResponseBase<int> GetServerDataVersion()
+        public async Task<ResponseBase<int>> GetServerDataVersion()
         {
-            throw new NotImplementedException();
+            return await ServicesCommon.CallService<int>("api/AdTransportationApi/GetServerDataVersion");
         }
 
-        public ResponseBase<TransportationModel[]> GetAllTransportationModels()
+        public async Task<ResponseBase<TransportationModel[]>> GetAllTransportationModels()
         {
-            throw new NotImplementedException();
+            return await ServicesCommon.CallService<TransportationModel[]>("api/AdTransportationApi/GetAllTransportationModels");
         }
 
-        public ResponseBase<TransportationBrand[]> GetAllTransportationBrands()
+        public async Task<ResponseBase<TransportationBrand[]>> GetAllTransportationBrands()
         {
-            throw new NotImplementedException();
+            return await ServicesCommon.CallService<TransportationBrand[]>("api/AdTransportationApi/GetAllTransportationBrands");
         }
 
         public ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation adTransportation, string encryptWithServerKey, string s)
         {
             throw new NotImplementedException();
         }
+
+        
     }
 }

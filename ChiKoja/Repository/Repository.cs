@@ -10,7 +10,6 @@ using Android.Content.Res;
 using Android.Preferences;
 using ChiKoja.Repository.Location;
 using ChiKoja.Repository.TransportationRepository;
-using ChiKoja.Services;
 using ChiKoja.Services.Server;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
@@ -29,7 +28,7 @@ namespace ChiKoja.Repository
         int LocalMainDataVersionDefault = -1;
         public int LocalMainDataVersion
         {
-            get { return prefs.GetInt(LocalMainDataVersionKey, LocalMainDataVersionDefault); }
+            get => prefs.GetInt(LocalMainDataVersionKey, LocalMainDataVersionDefault);
             set
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
@@ -136,33 +135,16 @@ namespace ChiKoja.Repository
 
         private async Task<bool> localTablesDataNeedUpdate()
         {
-            serverMainDataVersion = await getServerMainDataVersion();
+            RepositoryApi repositoryApi=new RepositoryApi();
+            ResponseBase<int> response= await repositoryApi.GetServerMainDataVersion();
+            if (response.Success)
+                serverMainDataVersion = response.ResponseData;
+            else throw new Exception(response.Message);
             if (LocalMainDataVersion == serverMainDataVersion)
                 return false;
             return true;
         }
-        private async Task<int> getServerMainDataVersion()
-        {
-            string url = ServicesCommon.ServerUrl + "/api/RepositoryApi/GetMainServerDataVersion";
-            HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-            request.ContentType = "application/json";
-            request.Method = "POST";
-            using (WebResponse webResponse = await request.GetResponseAsync())
-            {
-                // Get a stream representation of the HTTP web response:
-                using (Stream stream = webResponse.GetResponseStream())
-                {
-                    // Use this stream to build a JSON document object:
-                    JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                    ResponseBase<int> response =
-                        JsonConvert.DeserializeObject<ResponseBase<int>>(jsonDoc.ToString());
-                    if (response.Success)
-                        return response.ResponseData;
-                    else
-                        throw new Exception(response.Message + " " + response.ErrorCode);
-                }
-            }
-        }
+        
         private void createDatabaseFile_Schema_InitialData(ICallBack callBack, int requestCode, int totalPercent)
         {
             SqliteConnection.CreateFile(DataBasePath);// create new database file **overwrite if exist

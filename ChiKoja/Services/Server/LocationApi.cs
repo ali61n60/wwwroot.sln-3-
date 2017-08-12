@@ -9,22 +9,22 @@ namespace ChiKoja.Services.Server
     {
         public async Task<ResponseBase<int>> GetLocationyVersion()
         {
-            return await ServicesCommon.CallService<int>("/api/LocationApi/GetLocationyVersion");
+            return await ServicesCommon.CallService<int>("api/LocationApi/GetLocationyVersion");
         }
 
         public async Task<ResponseBase<Province[]>> GetAllProvinces()
         {
-            return await ServicesCommon.CallService<Province[]>("/api/LocationApi/GetAllProvinces");
+            return await ServicesCommon.CallService<Province[]>("api/LocationApi/GetAllProvinces");
         }
 
         public async Task<ResponseBase<District[]>> GetAllDistricts()
         {
-            return await ServicesCommon.CallService<District[]>("/api/LocationApi/GetAllDistricts");
+            return await ServicesCommon.CallService<District[]>("api/LocationApi/GetAllDistricts");
         }
 
         public async Task<ResponseBase<City[]>> GetAllCities()
         {
-            return await ServicesCommon.CallService<City[]>("/api/LocationApi/GetAllCities");
+            return await ServicesCommon.CallService<City[]>("api/LocationApi/GetAllCities");
         }
     }
 }

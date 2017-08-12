@@ -168,8 +168,10 @@
     <Compile Include="Services\Server\Interfaces\ICategoryApi.cs" />
     <Compile Include="Services\Server\Interfaces\ILocationApi.cs" />
     <Compile Include="Services\Server\Interfaces\IRegistrationApi.cs" />
+    <Compile Include="Services\Server\Interfaces\IRepositoryApi.cs" />
     <Compile Include="Services\Server\LocationApi.cs" />
     <Compile Include="Services\Server\RegistrationApi.cs" />
+    <Compile Include="Services\Server\RepositoryApi.cs" />
     <Compile Include="Services\Server\ServicesCommon.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />

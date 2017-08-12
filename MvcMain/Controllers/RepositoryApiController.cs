@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using ModelStd.Services;
 
 namespace MvcMain.Controllers
@@ -10,9 +6,9 @@ namespace MvcMain.Controllers
     [Route("api/[controller]/[action]")]
     public class RepositoryApiController:Controller
     {
-        public ResponseBase<int> GetMainServerDataVersion()
+        public ResponseBase<int> GetServerMainDataVersion()
         {
-            string errorCode = "RepositoryService.GetMainServerDataVersion";
+            string errorCode = "RepositoryApiController.GetServerMainDataVersion";
             ResponseBase<int> response = new ResponseBase<int>
             {
                 ResponseData = 4 //TODO create an xml-base file and read this value from xml file
