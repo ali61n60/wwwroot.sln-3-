@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -17,12 +17,12 @@ namespace ChiKoja.Services.Server
 {
     class CategoryApi:ICategoryApi
     {
-        public ResponseBase<int> GetServerDataVersion()
+        public async Task<ResponseBase<int>> GetServerDataVersion()
         {
-            throw new NotImplementedException();
+            return await ServicesCommon.CallService<int>("/api/CategoryApiController/GetServerDataVersion");
         }
 
-        public ResponseBase<Category[]> GetAllCategories()
+        public Task<ResponseBase<Category[]>> GetAllCategories()
         {
             throw new NotImplementedException();
         }

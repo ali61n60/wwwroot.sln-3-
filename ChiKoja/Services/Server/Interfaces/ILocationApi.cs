@@ -17,8 +17,8 @@ namespace ChiKoja.Services.Server.Interfaces
     public interface ILocationApi
     {
         Task<ResponseBase<int>> GetLocationyVersion();
-        ResponseBase<Province[]> GetAllProvinces();
-        ResponseBase<District[]> GetAllDistricts();
-        ResponseBase<City[]> GetAllCities();
+        Task<ResponseBase<Province[]>> GetAllProvinces();
+        Task<ResponseBase<District[]>> GetAllDistricts();
+        Task<ResponseBase<City[]>> GetAllCities();
     }
 }

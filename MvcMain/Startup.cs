@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using ModelStd.Advertisements;
@@ -47,6 +48,7 @@ namespace MvcMain
             services.AddTransient<IRepository<AdvertisementTransportation>, AdvertisementTransportationRepository>();
             services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
             services.AddTransient<ITransportaionRepository,TransportationRepository>();
+            services.AddTransient<ICategoryRepository,CategoryRepositoryInCode>();
 
 
             services.AddDbContext<AppIdentityDbContext>(options =>

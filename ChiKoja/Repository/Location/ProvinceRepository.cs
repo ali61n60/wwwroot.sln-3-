@@ -99,14 +99,14 @@ namespace ChiKoja.Repository.Location
             }
             return allProvinces.ToArray();
         }
-        public void PopulateTableDataFromServer(object locker)
+        public async void PopulateTableDataFromServer(object locker)
         {
             string commandText = @"INSERT INTO [Provinces]
                                             ([provinceId],[provinceName],[provinceCenter],[selectedByUser])
                                             VALUES (@provinceId ,@provinceName ,@provinceCenter,@selectedByUser)";
             //get data from server
             LocationApi locationApi = new LocationApi();
-            ResponseBase<Province[]> response = locationApi.GetAllProvinces();
+            ResponseBase<Province[]> response =await locationApi.GetAllProvinces();
             if (response.Success)
             {
                 lock (locker)

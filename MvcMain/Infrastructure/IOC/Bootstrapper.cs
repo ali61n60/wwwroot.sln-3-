@@ -9,16 +9,8 @@ namespace MvcMain.Infrastructure.IOC
 {
     public class Bootstrapper
     {
-        public static Container container;
-        private static IHostingEnvironment env;
-
-
-        static Bootstrapper()
-        {
-            container = new Container(x =>
-            {
-                //x.For<IRepository>().Use<Repository>();
-                //x.For<ISimpleModel>().Use<SimpleModel>().Ctor<int>().Is(250);
+        
+               
                 
                 
                
@@ -27,10 +19,9 @@ namespace MvcMain.Infrastructure.IOC
 
                 
                 //x.For<IAdvertisementTransportationService>().Use<AdvertisementTransportationService>();
-                //x.For<ICategoryRepository>().Use<CategoryRepositoryInCode>();
+                
                 //x.For<RegistrationRepository>().Use<RegistrationRepository>();
                 //x.For<IEmail>().Use<Email>();
-            });
-        }
+           
     }
 }

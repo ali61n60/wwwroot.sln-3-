@@ -57,10 +57,10 @@ namespace ChiKoja.Repository
             prefs = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
             OperationOrder = 4;
         }
-        public void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
+        public async void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
         {
             CategoryApi categoryApi = new CategoryApi();
-            ResponseBase<int> response = categoryApi.GetServerDataVersion();
+            ResponseBase<int> response =await categoryApi.GetServerDataVersion();
             if (response.Success)
             {
                 int serverCategoryDataVersion = response.ResponseData;
@@ -120,13 +120,13 @@ namespace ChiKoja.Repository
             }
             return allCategories.ToArray();
         }
-        public void PopulateTableDataFromServer(object locker)
+        public async void PopulateTableDataFromServer(object locker)
         {
             string commandText = @"INSERT INTO [Categories] 
                                    ([categoryId], [categoryName],[categoryParentId],[categoryNameEnglish])
                                    VALUES (@categoryId, @categoryName,@categoryParentId,@categoryNameEnglish)";
             CategoryApi categoryApi = new CategoryApi();
-            ResponseBase<Category[]> response = categoryApi.GetAllCategories();
+            ResponseBase<Category[]> response =await categoryApi.GetAllCategories();
 
             if (response.Success)
             {

@@ -95,14 +95,14 @@ namespace ChiKoja.Repository.Location
             }
             return allCities.ToArray();
         }
-        public void PopulateTableDataFromServer(object locker)
+        public async void PopulateTableDataFromServer(object locker)
         {
             string commandText = @"INSERT INTO [Cities]
                                             ([cityId],[cityName],[provinceId],[selectedByUser])
                                             VALUES (@cityId ,@cityName ,@provinceId,@selectedByUser)";
             //get data from server
             LocationApi locationApi = new LocationApi();
-            ResponseBase<City[]> response = locationApi.GetAllCities();
+            ResponseBase<City[]> response =await locationApi.GetAllCities();
             if (response.Success)
             {
                 //insert server data into loacal Cities Table

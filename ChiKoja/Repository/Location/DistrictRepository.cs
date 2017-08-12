@@ -90,13 +90,13 @@ namespace ChiKoja.Repository.Location
             }
             return allDistricts.ToArray();
         }
-        public void PopulateTableDataFromServer(object locker) 
+        public async void PopulateTableDataFromServer(object locker) 
         {
             string commandText = @"INSERT INTO [Districts]
                                             ([districtId],[DistrictName],[cityId],[municipalId],[selectedByUser])
                                             VALUES (@districtId ,@DistrictName ,@cityId,@municipalId,@selectedByUser)";
             LocationApi locationApi = new LocationApi();
-            ResponseBase<District[]> response = locationApi.GetAllDistricts();
+            ResponseBase<District[]> response =await locationApi.GetAllDistricts();
             if (response.Success)
             {
                 lock (locker)
