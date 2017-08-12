@@ -16,9 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Reference Include="System.Data.SqlClient">
-      <HintPath>C:\Users\test\.nuget\packages\system.data.sqlclient\4.3.1\ref\netstandard1.3\System.Data.SqlClient.dll</HintPath>
-    </Reference>
+    <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
   </ItemGroup>
 
 </Project>
