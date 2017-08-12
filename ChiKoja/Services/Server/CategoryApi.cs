@@ -9,12 +9,13 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
 namespace ChiKoja.Services.Server
 {
-    class CategoryApi
+    class CategoryApi:ICategoryApi
     {
         public ResponseBase<int> GetServerDataVersion()
         {

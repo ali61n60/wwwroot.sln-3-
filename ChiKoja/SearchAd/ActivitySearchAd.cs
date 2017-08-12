@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -10,6 +11,7 @@ using ChiKoja.NavigationDrawer;
 using ChiKoja.CustomViews.SingleAdView;
 using ChiKoja.Services;
 using ChiKoja.Services.Server;
+using Java.Util.Logging;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
@@ -92,9 +94,10 @@ namespace ChiKoja.SearchAd
             StartActivityForResult(searchFilterIntent, SearchFilterRequestCode);
         }
 
-        void buttonSearchAd_Click(object sender, EventArgs e)
+         void buttonSearchAd_Click(object sender, EventArgs e)
         {
-            _adApi.GetAdFromServer(this);
+            Console.WriteLine("ButtonSearch");
+           _adApi.GetAdFromServer(this);
             // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
             
         }

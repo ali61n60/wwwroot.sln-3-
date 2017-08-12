@@ -10,8 +10,10 @@ namespace MvcMain.Controllers
     {
         public ResponseBase<int> GetLocationyVersion()
         {
-            ResponseBase<int> response = new ResponseBase<int>();
-            response.ResponseData = 2;
+            ResponseBase<int> response = new ResponseBase<int>
+            {
+                ResponseData = 2
+            };
             response.SetSuccessResponse("OK");
             return response;
         }
