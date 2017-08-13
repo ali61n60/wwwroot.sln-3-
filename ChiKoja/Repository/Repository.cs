@@ -97,7 +97,7 @@ namespace ChiKoja.Repository
             listOfLocalTablesCheckEveryTime.Add(cryptoGraphy);
         }
 
-        //Called From Application Class
+        //Called From GlobalApplication Class
         public async Task ManageDatabaseFileAndData(Resources resources, ICallBack callBack, int requestCode)
         {
             try

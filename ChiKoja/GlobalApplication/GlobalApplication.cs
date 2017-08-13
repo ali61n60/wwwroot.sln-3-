@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Runtime;
 using Android.Widget;
+using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Notification;
 using Exception = System.Exception;
 using ServiceLayer;
@@ -92,7 +93,7 @@ namespace ChiKoja.GlobalApplication
             TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
         }
-        public void ManageDatabaseFile()
+        public async Task ManageDatabaseFile()
         {
             if (DatabaseChecked)
             {
@@ -100,9 +101,9 @@ namespace ChiKoja.GlobalApplication
                 MessageShower.GetMessageShower(this).ShowMessage("Database Already Checked", ShowMessageType.Long);
                 return;
             }
-            Repository.Repository repository = new Repository.Repository();
+            Repository.Repository repository = Bootstrapper.container.GetInstance<Repository.Repository>();
             GetMessageShower().ShowMessage(Resources.GetString(Resource.String.CheckingDatabase), ShowMessageType.Permanent);
-            repository.ManageDatabaseFileAndData(Resources, this, ManageDatabaseRequestCode);
+            await repository.ManageDatabaseFileAndData(Resources, this, ManageDatabaseRequestCode);
         }
 
         public static MessageShower GetMessageShower()

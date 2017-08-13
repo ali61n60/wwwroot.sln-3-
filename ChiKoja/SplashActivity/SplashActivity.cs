@@ -28,8 +28,7 @@ namespace ChiKoja.SplashActivity
         }
         private void checkDatabase()
         {
-            if (!GlobalApplication.GlobalApplication.GetGlobalApplication().DatabaseChecked)
-                GlobalApplication.GlobalApplication.GetGlobalApplication().ManageDatabaseFile();
+            GlobalApplication.GlobalApplication.GetGlobalApplication().ManageDatabaseFile();
         }
         private void resetSearchFilter()
         {
