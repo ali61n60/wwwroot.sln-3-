@@ -160,6 +160,8 @@
     <Compile Include="SearchAd\ActivitySearchFilter.cs" />
     <Compile Include="SearchAd\ActivitySortBy.cs" />
     <Compile Include="SearchAd\UserAd\ActivityUserAds.cs" />
+    <Compile Include="Services\Example\ServiceExampleActivity.cs" />
+    <Compile Include="Services\Example\MyService.cs" />
     <Compile Include="Services\Server\AdApi.cs" />
     <Compile Include="Services\Server\AdTransportationApi.cs" />
     <Compile Include="Services\Server\CategoryApi.cs" />
@@ -258,6 +260,7 @@
     <AndroidResource Include="Resources\layout\BrandTransportation.axml">
       <SubType>AndroidResource</SubType>
     </AndroidResource>
+    <AndroidResource Include="Resources\layout\ServiceExample.axml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
