@@ -11,6 +11,7 @@ using Android.Support.V7.App;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using ChiKoja.Infrastructure.IOC;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
 using ChiKoja.SearchAd;
@@ -26,9 +27,11 @@ namespace ChiKoja.SplashActivity
             checkDatabase();
             resetSearchFilter();
         }
-        private void checkDatabase()
+        private async void checkDatabase()
         {
-            GlobalApplication.GlobalApplication.GetGlobalApplication().ManageDatabaseFile();
+            Repository.Repository repository = Bootstrapper.container.GetInstance<Repository.Repository>();
+            await repository.ManageDatabaseFile(GlobalApplication.GlobalApplication.GetGlobalApplication(),
+                GlobalApplication.GlobalApplication.GetGlobalApplication().ManageDatabaseRequestCode);
         }
         private void resetSearchFilter()
         {

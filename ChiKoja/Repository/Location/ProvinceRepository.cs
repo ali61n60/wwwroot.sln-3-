@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Preferences;
@@ -99,7 +100,7 @@ namespace ChiKoja.Repository.Location
             }
             return allProvinces.ToArray();
         }
-        public async void PopulateTableDataFromServer(object locker)
+        public async Task PopulateTableDataFromServer(object locker)
         {
             string commandText = @"INSERT INTO [Provinces]
                                             ([provinceId],[provinceName],[provinceCenter],[selectedByUser])

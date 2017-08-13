@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Preferences;
 using Mono.Data.Sqlite;
 using System.Data;
+using System.Threading.Tasks;
 using ChiKoja.Services.Server;
 using ModelStd.Advertisements.Transportation;
 using ModelStd.Services;
@@ -73,7 +74,7 @@ namespace ChiKoja.Repository.TransportationRepository
                 connection.Close();
             }
         }
-        public async void PopulateTableDataFromServer(object locker)
+        public async Task PopulateTableDataFromServer(object locker)
         {
             string commandText = @"INSERT INTO [TransportationBrands] 
                                    ([brandId], [brandName])

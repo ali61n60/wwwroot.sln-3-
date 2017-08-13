@@ -3,7 +3,7 @@
     
     public class TransportationModel
     {
-        public TransportationModel():this(-1,"",-1){}
+        //public TransportationModel():this(-1,"",-1){}
         public TransportationModel(int modelId, string modelName, int brandId)
         {
             ModelId = modelId;

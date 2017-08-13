@@ -65,12 +65,8 @@ namespace ChiKoja.GlobalApplication
 
         private static GlobalApplication _singleton;
         private static MessageShower _messageShower;
-        private const int ManageDatabaseRequestCode = 1;
-        
+        public readonly int ManageDatabaseRequestCode = 1;
         public static int NumberOfRunningWorkerThread = 0;
-        public bool DatabaseChecked { get; private set; }
-
-
 
         public static GlobalApplication GetGlobalApplication()
         {
@@ -80,7 +76,6 @@ namespace ChiKoja.GlobalApplication
         GlobalApplication(IntPtr handle, JniHandleOwnership transfer)
             : base(handle, transfer)
         {
-            DatabaseChecked = false;
             _messageShower = MessageShower.GetMessageShower(this);
         }
 
@@ -93,18 +88,7 @@ namespace ChiKoja.GlobalApplication
             TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
             AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
         }
-        public async Task ManageDatabaseFile()
-        {
-            if (DatabaseChecked)
-            {
-                //TODO move string to resource
-                MessageShower.GetMessageShower(this).ShowMessage("Database Already Checked", ShowMessageType.Long);
-                return;
-            }
-            Repository.Repository repository = Bootstrapper.container.GetInstance<Repository.Repository>();
-            GetMessageShower().ShowMessage(Resources.GetString(Resource.String.CheckingDatabase), ShowMessageType.Permanent);
-            await repository.ManageDatabaseFileAndData(Resources, this, ManageDatabaseRequestCode);
-        }
+        
 
         public static MessageShower GetMessageShower()
         {
@@ -134,7 +118,6 @@ namespace ChiKoja.GlobalApplication
         {
             if (requestCode == ManageDatabaseRequestCode)
             {
-                DatabaseChecked = true;
                 GetMessageShower().ShowMessage(Resources.GetString(Resource.String.DatabeseUpdated), ShowMessageType.Long);
             }
         }

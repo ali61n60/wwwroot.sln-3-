@@ -8,6 +8,7 @@ using Android.App;
 using Android.Content;
 using Android.Content.Res;
 using Android.Preferences;
+using ChiKoja.Notification;
 using ChiKoja.Repository.Location;
 using ChiKoja.Repository.TransportationRepository;
 using ChiKoja.Services.Server;
@@ -37,31 +38,31 @@ namespace ChiKoja.Repository
             }
         }
         private int serverMainDataVersion;
-        double totalProgressPercent;
-
-        public static string DataBasePath { get; private set; }
-        public static object Locker { get; private set; } // private field for database access
-
-
-
+        private double totalProgressPercent;
         private readonly List<ILocalTable> listOfLocalTables;
         private readonly List<ILocalTable> listOfLocalTablesCheckEveryTime;
 
+        public static string DataBasePath { get; private set; }
+        public static object Locker { get; private set; } // private field for database access
+        public bool DatabaseChecked { get; private set; }
+        
         static Repository()
         {
+            
             string _databaseFileName = "database.db3";
             DataBasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Personal), _databaseFileName);
             Locker = new object();
         }
         public Repository()
         {
+            DatabaseChecked = false;
             prefs = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
             listOfLocalTables = new List<ILocalTable>();
             listOfLocalTablesCheckEveryTime = new List<ILocalTable>();
             populateListOfLocalTables();
             populateListOfLocalTablesCheckEveryTime();
-
         }
+        //Add Each New Table Here
         private void populateListOfLocalTables()
         {
             ProvinceRepository provinceRepository = new ProvinceRepository(DataBasePath);
@@ -91,15 +92,35 @@ namespace ChiKoja.Repository
                 return 0;
             });
         }
+
+        //Add Each New Table Here If Must Be Checked Everytime
         private void populateListOfLocalTablesCheckEveryTime()
         {
-            CryptoGraphy.CryptoGraphy cryptoGraphy = new CryptoGraphy.CryptoGraphy();
-            listOfLocalTablesCheckEveryTime.Add(cryptoGraphy);
+            //CryptoGraphy.CryptoGraphy cryptoGraphy = new CryptoGraphy.CryptoGraphy();
+           // listOfLocalTablesCheckEveryTime.Add(cryptoGraphy);
         }
 
-        //Called From GlobalApplication Class
-        public async Task ManageDatabaseFileAndData(Resources resources, ICallBack callBack, int requestCode)
+        //Called from SplashActivity
+        public async Task ManageDatabaseFile(ICallBack callBack,int ManageDatabaseRequestCode)
         {
+            if (DatabaseChecked)
+            {
+                //TODO move string to resource
+                MessageShower.GetMessageShower(Application.Context).ShowMessage("Database Already Checked", ShowMessageType.Long);
+                return;
+            }
+
+            GlobalApplication.GlobalApplication.GetMessageShower()
+                .ShowMessage(Application.Context.Resources.GetString(Resource.String.CheckingDatabase),
+                ShowMessageType.Permanent);
+            await ManageDatabaseFileAndData(Application.Context.Resources, callBack, ManageDatabaseRequestCode);
+        }
+        
+
+        
+        private async Task ManageDatabaseFileAndData(Resources resources, ICallBack callBack, int requestCode)
+        {
+            LocalMainDataVersion = -1;//for debug remove it after debug process
             try
             {
                 if (await localTablesDataNeedUpdate())
@@ -108,18 +129,20 @@ namespace ChiKoja.Repository
                     int totalPercentForlistOfLocalTables = listOfLocalTables.Count * 100 / numberOfTables;
                     int totalPercentForlistOfLocalTablesCheckEveryTime = 100 - totalPercentForlistOfLocalTables;
                     FileStatus fileStatus = getDatabaseFileStatus();
+                    fileStatus=FileStatus.FileNotExists;//for debug remove it after debug process
                     switch (fileStatus)
                     {
                         case FileStatus.FileNotExists:
-                            createDatabaseFile_Schema_InitialData(callBack, requestCode, totalPercentForlistOfLocalTables);
+                            await createDatabaseFile_Schema_InitialData(callBack, requestCode, totalPercentForlistOfLocalTables);
                             break;
                         case FileStatus.FileExists:
-                            checkTablesDataVersionAndUpdateIfNedded(callBack, requestCode, totalPercentForlistOfLocalTables);
+                            await checkTablesDataVersionAndUpdateIfNedded(callBack, requestCode, totalPercentForlistOfLocalTables);
                             break;
                     }
-                    checkTablesThatMustBeCheckedEveryTime(callBack, requestCode, totalPercentForlistOfLocalTablesCheckEveryTime);
+                    await checkTablesThatMustBeCheckedEveryTime(callBack, requestCode, totalPercentForlistOfLocalTablesCheckEveryTime);
                     LocalMainDataVersion = serverMainDataVersion;
                 }
+                DatabaseChecked = true;
                 callBack.OnSuccess(requestCode);
             }
             catch (Exception ex)
@@ -140,17 +163,18 @@ namespace ChiKoja.Repository
             if (response.Success)
                 serverMainDataVersion = response.ResponseData;
             else throw new Exception(response.Message);
+            
             if (LocalMainDataVersion == serverMainDataVersion)
                 return false;
             return true;
         }
         
-        private void createDatabaseFile_Schema_InitialData(ICallBack callBack, int requestCode, int totalPercent)
+        private async Task createDatabaseFile_Schema_InitialData(ICallBack callBack, int requestCode, int totalPercent)
         {
             SqliteConnection.CreateFile(DataBasePath);// create new database file **overwrite if exist
             createDatabaseSchema();
-            populateTablesDataFromServer(callBack, requestCode, totalPercent);
-            createNotCategorizedTables();
+            await populateTablesDataFromServerAsync(callBack, requestCode, totalPercent);
+            await createNotCategorizedTables();
         }
         private void createDatabaseSchema()
         {
@@ -159,12 +183,12 @@ namespace ChiKoja.Repository
                 localTable.CreateTable(Locker);//TODO province must be called first, cities must be called second ,districts,must be called third
             }
         }
-        private void populateTablesDataFromServer(ICallBack callBack, int requestCode, int totalPercent)
+        private async Task populateTablesDataFromServerAsync(ICallBack callBack, int requestCode, int totalPercent)
         {
             double singleStepPercent = totalPercent / listOfLocalTables.Count;
             foreach (ILocalTable localTable in listOfLocalTables)
             {
-                localTable.PopulateTableDataFromServer(Locker);//TODO province must be called first, cities must be called second ,districts,must be called third
+                await localTable.PopulateTableDataFromServer(Locker);//TODO province must be called first, cities must be called second ,districts,must be called third
                 incrementProgressAndNotifyCaller(callBack, requestCode, singleStepPercent);
             }
         }
@@ -176,14 +200,14 @@ namespace ChiKoja.Repository
             callBack.OnProgress(requestCode, (int)totalProgressPercent);
         }
 
-        private void createNotCategorizedTables()
+        private async Task createNotCategorizedTables()
         {
             //create UserMarkedAds table
             UserMarkedAds.UserMarkedAds userMarkedAds = new UserMarkedAds.UserMarkedAds(DataBasePath);
             userMarkedAds.CreateTable(Locker);
         }
 
-        private void checkTablesDataVersionAndUpdateIfNedded(ICallBack callBack, int requestCode, int totalPercent)
+        private async Task checkTablesDataVersionAndUpdateIfNedded(ICallBack callBack, int requestCode, int totalPercent)
         {
             double singleStepPercent = totalPercent / listOfLocalTables.Count;
             foreach (ILocalTable localTable in listOfLocalTables)
@@ -193,9 +217,9 @@ namespace ChiKoja.Repository
             }
         }
 
-        private void checkTablesThatMustBeCheckedEveryTime(ICallBack callBack, int requestCode, int totalPercent)
+        private async Task checkTablesThatMustBeCheckedEveryTime(ICallBack callBack, int requestCode, int totalPercent)
         {
-            double singleStepPercent = totalPercent / listOfLocalTablesCheckEveryTime.Count;
+            double singleStepPercent = 20;// totalPercent / listOfLocalTablesCheckEveryTime.Count;
             foreach (ILocalTable localTable in listOfLocalTablesCheckEveryTime)
             {
                 localTable.CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(Locker);

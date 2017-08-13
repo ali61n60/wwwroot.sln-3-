@@ -73,7 +73,7 @@
     <Reference Include="Java.Interop" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="ModelStd, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelStd.1.0.11\lib\netstandard1.4\ModelStd.dll</HintPath>
+      <HintPath>..\packages\ModelStd.1.0.13\lib\netstandard1.4\ModelStd.dll</HintPath>
     </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Data.Sqlite" />

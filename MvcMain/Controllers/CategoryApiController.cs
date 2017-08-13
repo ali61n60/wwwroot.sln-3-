@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using ModelStd.Services;
-using MvcMain.Infrastructure.IOC;
 
 namespace MvcMain.Controllers
 {
@@ -21,24 +17,19 @@ namespace MvcMain.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        public CategoryApiController():
-            this(AppServiceProvider.Instance.GetService<ICategoryRepository>())
-            
-        {
-
-        }
+        
         public ResponseBase<int> GetServerDataVersion()
         {
             string errorCode = "CategoryApiController.GetServerDataVersion";
-            ResponseBase<int> response = new ResponseBase<int>();
-            response.ResponseData = _categoryRepository.CategoryVersion;
+            ResponseBase<int> response = new ResponseBase<int>
+            { ResponseData = _categoryRepository.CategoryVersion};
             response.SetSuccessResponse();
             return response;
         }
 
         public ResponseBase<Category[]> GetAllCategories()
         {
-            string errorCode = "CategoryApiController.GatAllCategories";
+            string errorCode = "CategoryApiController.GetAllCategories";
             ResponseBase<Category[]> response = new ResponseBase<Category[]>();
             try
             {

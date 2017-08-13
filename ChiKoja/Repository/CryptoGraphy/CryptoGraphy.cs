@@ -99,7 +99,7 @@ namespace ChiKoja.Repository.CryptoGraphy
             throw new NotImplementedException();
         }
 
-        public void PopulateTableDataFromServer(object locker)
+        public Task PopulateTableDataFromServer(object locker)
         {
             throw new NotImplementedException();
         }

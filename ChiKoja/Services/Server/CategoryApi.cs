@@ -19,12 +19,12 @@ namespace ChiKoja.Services.Server
     {
         public async Task<ResponseBase<int>> GetServerDataVersion()
         {
-            return await ServicesCommon.CallService<int>("api/CategoryApiController/GetServerDataVersion");
+            return await ServicesCommon.CallService<int>("api/CategoryApi/GetServerDataVersion");
         }
 
-        public Task<ResponseBase<Category[]>> GetAllCategories()
+        public async Task<ResponseBase<Category[]>> GetAllCategories()
         {
-            throw new NotImplementedException();
+            return await ServicesCommon.CallService<Category[]>("api/CategoryApi/GetAllCategories");
         }
     }
 }
