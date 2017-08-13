@@ -81,8 +81,6 @@ namespace ChiKoja.GlobalApplication
         {
             DatabaseChecked = false;
             _messageShower = MessageShower.GetMessageShower(this);
-         //   RegisterReceiver(new NetWorkStatusReceiver(),
-             //   new IntentFilter(Android.Net.ConnectivityManager.ConnectivityAction));
         }
 
         public override void OnCreate()
@@ -98,7 +96,8 @@ namespace ChiKoja.GlobalApplication
         {
             if (DatabaseChecked)
             {
-                MessageShower.GetMessageShower(this).ShowMessage("Database Already Checked", ShowMessageType.Long);//TODO move string to resource
+                //TODO move string to resource
+                MessageShower.GetMessageShower(this).ShowMessage("Database Already Checked", ShowMessageType.Long);
                 return;
             }
             Repository.Repository repository = new Repository.Repository();
