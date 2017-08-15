@@ -46,8 +46,9 @@ namespace MvcMain
             services.AddTransient<ITransportaionRepository,TransportationRepository>();
             services.AddTransient<ICategoryRepository,CategoryRepositoryInCode>();
             services.AddTransient<ITransportaionRepository,TransportationRepository>();
+            services.AddSingleton<AdvertisementDataClass>(provider => new AdvertisementDataClass(_configuration["Data:ConnectionString"]));
 
-
+            
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(_configuration["Data:ConnectionString"]));
 

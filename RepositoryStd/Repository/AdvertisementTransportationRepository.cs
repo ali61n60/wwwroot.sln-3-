@@ -10,8 +10,8 @@ namespace RepositoryStd.Repository
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>
     {
-        private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
-        private readonly AdvertisementCommonRepository advertisementCommonRepository = new AdvertisementCommonRepository();
+        private readonly IRepository<AdvertisementCommon> _repositoryAdvertisementCommon;
+        private readonly AdvertisementCommonRepository advertisementCommonRepository;
         private readonly string _conectionString;
 
         List<AdvertisementTransportation> _searchResultItems;
@@ -20,11 +20,12 @@ namespace RepositoryStd.Repository
         RepositoryResponse _responseBase;
 
         
-        public AdvertisementTransportationRepository(IRepository<AdvertisementCommon> advertisementCommonRepository
+        public AdvertisementTransportationRepository(IRepository<AdvertisementCommon> repositoryAdvertisementCommon
                                                      , string connectionString)
         {
             _conectionString = connectionString;
-            _advertisementCommonRepository = advertisementCommonRepository;
+            _repositoryAdvertisementCommon = repositoryAdvertisementCommon;
+            advertisementCommonRepository=new AdvertisementCommonRepository(connectionString);
         }
 
         public IEnumerable<AdvertisementTransportation> FindBy(IQuery query)
@@ -272,7 +273,7 @@ namespace RepositoryStd.Repository
 
         public void IncrementNumberOfVisit(Guid adGuid)
         {
-            _advertisementCommonRepository.IncrementNumberOfVisit(adGuid);
+            _repositoryAdvertisementCommon.IncrementNumberOfVisit(adGuid);
         }
 
         private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,

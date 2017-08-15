@@ -64,9 +64,8 @@ namespace RepositoryStd.Repository.TransportationRepository
             return listOfTransportationBrands.ToArray();
         }
 
-        public TransportationModel[] GetAllModels()
+        public TransportationModel[] GetAllModels(string conectionString)
         {
-            string conectionString = AdvertisementDataClass.GetConnectionString();
             string query = " SELECT CarModel.modelId, CarModel.modelName, CarModel.brandId " +
                             " FROM CarModel " +
                             " ORDER BY modelId ";

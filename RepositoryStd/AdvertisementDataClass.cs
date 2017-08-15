@@ -11,25 +11,14 @@ namespace RepositoryStd
 {
     public class AdvertisementDataClass
     {
-        //public static string GetConnectionString()
-        //{
-        //    string exeConfigPath = System.Reflection.Assembly.GetEntryAssembly().Location;
-        //    string path = Path.GetDirectoryName(exeConfigPath);
-        //    //TODO get it from configFile
-        //    //return
-        //    //    "Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true";
+        public string ConnectionString { get; private set; }
 
+        public AdvertisementDataClass(string connectionString)
+        {
+            ConnectionString = connectionString;
+        }
 
-        //    IConfiguration configuration = new ConfigurationBuilder().AddJsonFile(path+Path.DirectorySeparatorChar+"appsettings.json").Build();
-        //    return configuration["Data:ConnectionString"];
-        //}
        
-        //Move
-        /// <summary>
-        /// calculate time passed and return appropriate string
-        /// </summary>
-        /// <param name="adTime"></param>
-        /// <returns></returns>
         private static string SetAdTimeText(DateTime adTime)
         {
 
