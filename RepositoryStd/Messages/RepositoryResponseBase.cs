@@ -1,4 +1,4 @@
-﻿namespace Repository.Messages
+﻿namespace RepositoryStd.Messages
 {
     public class RepositoryResponseBase
     {

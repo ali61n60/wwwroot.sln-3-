@@ -4,8 +4,7 @@ using System.Data;
 using System.Data.SqlClient;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
-using Repository.Messages;
-using RepositoryStd;
+using RepositoryStd.Messages;
 
 namespace RepositoryStd.Repository
 {

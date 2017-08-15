@@ -1,6 +1,6 @@
 ﻿using ModelStd;
 
-namespace Repository.Messages
+namespace RepositoryStd.Messages
 {
     
     public  class RepositoryResponse:RepositoryResponseBase

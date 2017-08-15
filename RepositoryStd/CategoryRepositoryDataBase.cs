@@ -25,7 +25,7 @@ namespace RepositoryStd
 
         public Category FindCategoryById(int CategoryId)
         {
-            Category tempCategory = new Category();
+            Category tempCategory;
             SqlDataReader dataReader;
             SqlConnection connection = new SqlConnection(_conectionString);
             SqlCommand command = new SqlCommand("SELECT  categoryId, categoryName, categoryParentId, categoryNameEnglish " +
