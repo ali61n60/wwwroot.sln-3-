@@ -26,6 +26,7 @@ namespace MvcMain
     {
         IConfigurationRoot _configuration;
         private IHostingEnvironment _env;
+        private AdvertisementDataClass _advertisementDataClass;
 
         public Startup(IHostingEnvironment env)
         {
@@ -38,16 +39,24 @@ namespace MvcMain
 
         public void ConfigureServices(IServiceCollection services)
         {
+            _advertisementDataClass=new AdvertisementDataClass(_configuration["Data:ConnectionString"]);
+            services.AddSingleton(provider => _advertisementDataClass);
+
             string directoryPath = _env.ContentRootPath + "/AdvertisementImages/";
             services.AddTransient<IImageRepository>(provider => new ImageRepositoryFileSystem(directoryPath));
-            services.AddTransient<IRepository<AdvertisementCommon>, AdvertisementCommonRepository>();
-            services.AddTransient<IRepository<AdvertisementTransportation>, AdvertisementTransportationRepository>();
-            services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
-            services.AddTransient<ITransportaionRepository,TransportationRepository>();
-            services.AddTransient<ICategoryRepository,CategoryRepositoryInCode>();
-            services.AddTransient<ITransportaionRepository,TransportationRepository>();
-            services.AddSingleton<AdvertisementDataClass>(provider => new AdvertisementDataClass(_configuration["Data:ConnectionString"]));
 
+            services.AddTransient<IRepository<AdvertisementCommon>>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString));
+            
+            services.AddTransient<IRepository<AdvertisementTransportation>>(provider => new AdvertisementTransportationRepository(
+                new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString),_advertisementDataClass.ConnectionString ));
+
+            services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
+
+            services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
+
+            services.AddTransient<ICategoryRepository,CategoryRepositoryInCode>();
+
+            services.AddTransient<ITransportaionRepository>(AppServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
             
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(_configuration["Data:ConnectionString"]));
@@ -104,6 +113,7 @@ namespace MvcMain
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
             AppServiceProvider.Instance = app.ApplicationServices;
+            
         }
     }
 

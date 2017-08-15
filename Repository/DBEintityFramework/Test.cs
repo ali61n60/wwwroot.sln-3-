@@ -1,0 +1,19 @@
+namespace Repository.DBEintityFramework
+{
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    [Table("Test")]
+    public partial class Test
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int Id { get; set; }
+
+        [Required]
+        [StringLength(150)]
+        public string name { get; set; }
+    }
+}

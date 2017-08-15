@@ -30,14 +30,22 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.3.4.1\lib\net40\nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -46,6 +54,45 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DBEintityFramework\AdAttributeTransportation.cs" />
+    <Compile Include="DBEintityFramework\AdPrivilege.cs" />
+    <Compile Include="DBEintityFramework\AdStatu.cs" />
+    <Compile Include="DBEintityFramework\Advertisement.cs" />
+    <Compile Include="DBEintityFramework\AspNetRole.cs" />
+    <Compile Include="DBEintityFramework\AspNetRoleClaim.cs" />
+    <Compile Include="DBEintityFramework\AspNetUser.cs" />
+    <Compile Include="DBEintityFramework\AspNetUserClaim.cs" />
+    <Compile Include="DBEintityFramework\AspNetUserLogin.cs" />
+    <Compile Include="DBEintityFramework\AspNetUserToken.cs" />
+    <Compile Include="DBEintityFramework\aspnet_Applications.cs" />
+    <Compile Include="DBEintityFramework\aspnet_Membership.cs" />
+    <Compile Include="DBEintityFramework\aspnet_Paths.cs" />
+    <Compile Include="DBEintityFramework\aspnet_PersonalizationAllUsers.cs" />
+    <Compile Include="DBEintityFramework\aspnet_PersonalizationPerUser.cs" />
+    <Compile Include="DBEintityFramework\aspnet_Profile.cs" />
+    <Compile Include="DBEintityFramework\aspnet_Roles.cs" />
+    <Compile Include="DBEintityFramework\aspnet_SchemaVersions.cs" />
+    <Compile Include="DBEintityFramework\aspnet_Users.cs" />
+    <Compile Include="DBEintityFramework\aspnet_WebEvent_Events.cs" />
+    <Compile Include="DBEintityFramework\Brand.cs" />
+    <Compile Include="DBEintityFramework\CarModel.cs" />
+    <Compile Include="DBEintityFramework\Category.cs" />
+    <Compile Include="DBEintityFramework\City.cs" />
+    <Compile Include="DBEintityFramework\C__EFMigrationsHistory.cs" />
+    <Compile Include="DBEintityFramework\District.cs" />
+    <Compile Include="DBEintityFramework\MobileBrand.cs" />
+    <Compile Include="DBEintityFramework\Model1.cs" />
+    <Compile Include="DBEintityFramework\Price.cs" />
+    <Compile Include="DBEintityFramework\Privilege.cs" />
+    <Compile Include="DBEintityFramework\Province.cs" />
+    <Compile Include="DBEintityFramework\SimilarAd.cs" />
+    <Compile Include="DBEintityFramework\SM.cs" />
+    <Compile Include="DBEintityFramework\sysdiagram.cs" />
+    <Compile Include="DBEintityFramework\Test.cs" />
+    <Compile Include="DBEintityFramework\test2.cs" />
+    <Compile Include="DBEintityFramework\Test3.cs" />
+    <Compile Include="DBEintityFramework\Test4.cs" />
+    <Compile Include="DBEintityFramework\UsersExtraInfo.cs" />
     <Compile Include="QueryPattern\SearchField\SearchFieldIntegerArray.cs" />
     <Compile Include="Repository\AdvertisementCommonRepository.cs" />
     <Compile Include="AdvertisementDataClass.cs" />
@@ -86,6 +133,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

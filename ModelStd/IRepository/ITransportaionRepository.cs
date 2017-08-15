@@ -4,8 +4,8 @@ namespace ModelStd.IRepository
 {
     public interface ITransportaionRepository
     {
-        Vehicle[] GetAllVehicles(string connectionString);
-        TransportationBrand[] GetAllBrands(string connectionString);
-        TransportationModel[] GetAllModels(string connectionString);
+        Vehicle[] GetAllVehicles();
+        TransportationBrand[] GetAllBrands();
+        TransportationModel[] GetAllModels();
     }
 }

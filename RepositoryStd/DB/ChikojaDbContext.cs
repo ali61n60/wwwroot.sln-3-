@@ -1,22 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 namespace RepositoryStd.DB
 {
-    public class Brand
-    {
-        public int BrandId { get; set; }
-        public string BrandName { get; set; }
-    }
+    
     public class ChikojaDbContext:DbContext
     {
 
-        public ChikojaDbContext():base()
+        public ChikojaDbContext(DbContextOptions options):base(options)
         {
-           
+          
         }
-        public DbSet<Brand> Brands { get; set; }
+        public DbSet<Price> Prices { get; set; }
+    }
+
+
+    [Table("Price")]
+    public class Price
+    {
+        [Key]
+        public Guid adId { get; set; }
+
+        [StringLength(150)]
+        public string priceType { get; set; }
+
+        [Column("price", TypeName = "money")]
+        public decimal? price1 { get; set; }
     }
 }

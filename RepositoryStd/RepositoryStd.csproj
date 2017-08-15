@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.6</TargetFramework>
+    <TargetFramework>netstandard1.4</TargetFramework>
     <PackageRequireLicenseAcceptance>False</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Copyright>no</Copyright>
@@ -12,11 +12,12 @@
     <RepositoryType>no</RepositoryType>
     <PackageTags>no</PackageTags>
     <PackageReleaseNotes>no</PackageReleaseNotes>
-    <Version>1.0.12</Version>
+    <Version>1.0.15</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>bin\Debug\netstandard1.4\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_4</DefineConstants>
   </PropertyGroup>
 
   <ItemGroup>

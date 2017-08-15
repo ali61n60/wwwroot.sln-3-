@@ -7,14 +7,19 @@ namespace RepositoryStd.Repository.TransportationRepository
 {
     public class TransportationRepository : ITransportaionRepository
     {
-        public Vehicle[] GetAllVehicles(string conectionString)
+        private string _connectionString;
+        public TransportationRepository(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+        public Vehicle[] GetAllVehicles()
         {
             string query = " SELECT CarModel.modelName,CarModel.modelId,Brands.brandName,CarModel.brandId " +
                            " FROM CarModel inner join Brands ON CarModel.brandId=Brands.brandId " +
                            " ORDER BY brandId ";
             List<Vehicle> searchResultItems = new List<Vehicle>();
 
-            using (SqlConnection connection = new SqlConnection(conectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = new SqlCommand())
                 {
@@ -38,14 +43,14 @@ namespace RepositoryStd.Repository.TransportationRepository
             return searchResultItems.ToArray();
         }
 
-        public TransportationBrand[] GetAllBrands(string conectionString)
+        public TransportationBrand[] GetAllBrands()
         {
             string query = " SELECT Brands.brandId,Brands.brandName " +
                             " FROM Brands " +
                             " ORDER BY brandId ";
             List<TransportationBrand> listOfTransportationBrands = new List<TransportationBrand>();
 
-            using (SqlConnection connection = new SqlConnection(conectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = new SqlCommand())
                 {
@@ -64,13 +69,13 @@ namespace RepositoryStd.Repository.TransportationRepository
             return listOfTransportationBrands.ToArray();
         }
 
-        public TransportationModel[] GetAllModels(string conectionString)
+        public TransportationModel[] GetAllModels()
         {
             string query = " SELECT CarModel.modelId, CarModel.modelName, CarModel.brandId " +
                             " FROM CarModel " +
                             " ORDER BY modelId ";
             List<TransportationModel> listOfTransportationModels = new List<TransportationModel>();
-            using (SqlConnection connection = new SqlConnection(conectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = new SqlCommand())
                 {
