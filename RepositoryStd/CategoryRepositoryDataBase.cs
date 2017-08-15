@@ -12,8 +12,7 @@ namespace RepositoryStd
         private readonly string _conectionString;
 
         public int CategoryVersion { get { return 1; } }
-        public CategoryRepositoryDataBase()
-            : this(AdvertisementDataClass.GetConnectionString()) { }
+       
 
 
         public CategoryRepositoryDataBase(string connectionString)

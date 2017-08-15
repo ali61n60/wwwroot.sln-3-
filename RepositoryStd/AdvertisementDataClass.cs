@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.IO;
+using Microsoft.Extensions.Configuration;
 
 //
 //using System.Web.UI;
@@ -8,12 +11,18 @@ namespace RepositoryStd
 {
     public class AdvertisementDataClass
     {
-        public static string GetConnectionString()
-        {
-            //TODO get it from configFile
-            return
-                "Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true";
-        }
+        //public static string GetConnectionString()
+        //{
+        //    string exeConfigPath = System.Reflection.Assembly.GetEntryAssembly().Location;
+        //    string path = Path.GetDirectoryName(exeConfigPath);
+        //    //TODO get it from configFile
+        //    //return
+        //    //    "Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true";
+
+
+        //    IConfiguration configuration = new ConfigurationBuilder().AddJsonFile(path+Path.DirectorySeparatorChar+"appsettings.json").Build();
+        //    return configuration["Data:ConnectionString"];
+        //}
        
         //Move
         /// <summary>

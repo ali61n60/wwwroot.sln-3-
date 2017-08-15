@@ -19,11 +19,7 @@ namespace RepositoryStd.Repository
         AdvertisementTransportation _tempAdvertisementTransportation;
         RepositoryResponse _responseBase;
 
-        public AdvertisementTransportationRepository(IRepository<AdvertisementCommon> advertisementCommonRepository) :
-            this(advertisementCommonRepository, AdvertisementDataClass.GetConnectionString())
-        { }
-
-
+        
         public AdvertisementTransportationRepository(IRepository<AdvertisementCommon> advertisementCommonRepository
                                                      , string connectionString)
         {

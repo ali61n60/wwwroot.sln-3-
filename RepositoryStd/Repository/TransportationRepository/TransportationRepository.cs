@@ -7,9 +7,8 @@ namespace RepositoryStd.Repository.TransportationRepository
 {
     public class TransportationRepository : ITransportaionRepository
     {
-        public Vehicle[] GetAllVehicles()
+        public Vehicle[] GetAllVehicles(string conectionString)
         {
-            string conectionString = AdvertisementDataClass.GetConnectionString();
             string query = " SELECT CarModel.modelName,CarModel.modelId,Brands.brandName,CarModel.brandId " +
                            " FROM CarModel inner join Brands ON CarModel.brandId=Brands.brandId " +
                            " ORDER BY brandId ";
@@ -39,9 +38,8 @@ namespace RepositoryStd.Repository.TransportationRepository
             return searchResultItems.ToArray();
         }
 
-        public TransportationBrand[] GetAllBrands()
+        public TransportationBrand[] GetAllBrands(string conectionString)
         {
-            string conectionString = AdvertisementDataClass.GetConnectionString();
             string query = " SELECT Brands.brandId,Brands.brandName " +
                             " FROM Brands " +
                             " ORDER BY brandId ";

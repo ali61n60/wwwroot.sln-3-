@@ -36,9 +36,7 @@ namespace RepositoryStd.Repository
               " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
               " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
 
-        public AdvertisementCommonRepository()
-            : this(AdvertisementDataClass.GetConnectionString()) { }
-
+        
         public AdvertisementCommonRepository(string connectionString)
         {
             _conectionString = connectionString;
