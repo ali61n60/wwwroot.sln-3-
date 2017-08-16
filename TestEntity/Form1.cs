@@ -58,20 +58,34 @@ namespace TestEntity
         private void buttonGetAdvertisement_Click(object sender, EventArgs e)
         {
             string result = "";
+            //        var fullEntries = dbContext.tbl_EntryPoint
+            //.Join(
+            //    dbContext.tbl_Entry,
+            //    entryPoint => entryPoint.EID,
+            //    entry => entry.EID,
+            //    (entryPoint, entry) => new { entryPoint, entry }
+            //)
+
+
             var list = _chikojaDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100)
-                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District)
-                .Join(_chikojaDbContext.Districts.Include(district => district.City),
-                    advertisement => advertisement.districtId,district => district.districtId,(advertisement, district) => advertisement.districtId==district.districtId);
+                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District);
+            //.Join(_chikojaDbContext.Districts.Include(district => district.City),
+            //  advertisement => advertisement.districtId,district => district.districtId,(advertisement, district) => advertisement.districtId==district.districtId);
             foreach (var b in list)
             {
-                
-            }
-            {
-                result =$"adId={advertisement.adId}, adTitle={advertisement.adTitle},adCategoryName={advertisement.Category.categoryName},"+
-                    $" AdDistrict={advertisement.District.districtName}, AdCity={advertisement.District.City.cityName}";
 
-                listBox1.Items.Add(result);
             }
+
+            //foreach (var b in list)
+            //{
+
+            //}
+            //{
+            //    result =$"adId={advertisement.adId}, adTitle={advertisement.adTitle},adCategoryName={advertisement.Category.categoryName},"+
+            //        $" AdDistrict={advertisement.District.districtName}, AdCity={advertisement.District.City.cityName}";
+
+            //    listBox1.Items.Add(result);
+            //}
         }
     }
 }
