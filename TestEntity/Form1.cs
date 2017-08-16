@@ -37,25 +37,32 @@ namespace TestEntity
             {
                 listBox1.Items.Add(ex.Message);
             }
-           
+
 
         }
 
         private void buttonGetCars_Click(object sender, EventArgs e)
         {
             string result = "";
-           IIncludableQueryable<Brand, ICollection<CarModel>> list=  _chikojaDbContext.Brands.Include(brand => brand.CarModels);
-            var carList = _chikojaDbContext.CarModels.Where(model => model.Brand.brandId == 1);
-            foreach (Brand brand in list.ToList())
+            IIncludableQueryable<Brand, ICollection<CarModel>> list = _chikojaDbContext.Brands.Include(brand => brand.CarModels);
+            var carList = _chikojaDbContext.CarModels.Where(model => model.Brand.brandId == 1).Include(model => model.Brand);
+            foreach (CarModel carModel in carList)
             {
-                ICollection<CarModel> carLists = brand.CarModels;
-                result= $"brandId={brand.brandId}, brandName={brand.brandName}";
+                result = $"CarModel={carModel.modelName}, BrandName={carModel.Brand.brandName}";
                 listBox1.Items.Add(result);
-                foreach (CarModel carModel in carLists)
-                {
-                    result = $"ModelId={carModel.modelId}, ModelName={carModel.modelName}, BrandName={carModel.Brand.brandName}";
-                    listBox1.Items.Add(result);
-                }
+            }
+
+        }
+
+        private void buttonGetAdvertisement_Click(object sender, EventArgs e)
+        {
+            string result = "";
+            var list = _chikojaDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100);
+            foreach (Advertisement advertisement in list)
+            {
+                result =$"adId={advertisement.adId}, adTitle={advertisement.adTitle},adCategoryId={advertisement.categoryId}";
+
+                listBox1.Items.Add(result);
             }
         }
     }

@@ -34,6 +34,13 @@ namespace RepositoryStd.DB
         public DbSet<Price> Prices { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
+        public DbSet<Advertisement> Advertisements { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<District> Districts { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Province> Provinces { get; set; }
+
+        
     }
 
 

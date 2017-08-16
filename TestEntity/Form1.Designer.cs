@@ -31,6 +31,7 @@
             this.buttonGetPrice = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.buttonGetCars = new System.Windows.Forms.Button();
+            this.buttonGetAdvertisement = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // buttonGetPrice
@@ -51,7 +52,7 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.Location = new System.Drawing.Point(28, 64);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(232, 186);
+            this.listBox1.Size = new System.Drawing.Size(497, 186);
             this.listBox1.TabIndex = 1;
             // 
             // buttonGetCars
@@ -64,11 +65,22 @@
             this.buttonGetCars.UseVisualStyleBackColor = true;
             this.buttonGetCars.Click += new System.EventHandler(this.buttonGetCars_Click);
             // 
+            // buttonGetAdvertisement
+            // 
+            this.buttonGetAdvertisement.Location = new System.Drawing.Point(251, 12);
+            this.buttonGetAdvertisement.Name = "buttonGetAdvertisement";
+            this.buttonGetAdvertisement.Size = new System.Drawing.Size(116, 23);
+            this.buttonGetAdvertisement.TabIndex = 3;
+            this.buttonGetAdvertisement.Text = "Get Advertisement";
+            this.buttonGetAdvertisement.UseVisualStyleBackColor = true;
+            this.buttonGetAdvertisement.Click += new System.EventHandler(this.buttonGetAdvertisement_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 262);
+            this.ClientSize = new System.Drawing.Size(549, 262);
+            this.Controls.Add(this.buttonGetAdvertisement);
             this.Controls.Add(this.buttonGetCars);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.buttonGetPrice);
@@ -83,6 +95,7 @@
         private System.Windows.Forms.Button buttonGetPrice;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.Button buttonGetCars;
+        private System.Windows.Forms.Button buttonGetAdvertisement;
     }
 }
 
