@@ -1,33 +1,35 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Infrastructure;
 
 namespace RepositoryStd.DB
 {
 
-    public class TemporaryDbContextFactory : IDbContextFactory<ChikojaDbContext>
+    public class DbContextFactory
     {
-        public ChikojaDbContext Create(DbContextFactoryOptions options)
+        private readonly string _connectionString;
+        public DbContextFactory(string connectionString)
         {
-            var builder = new DbContextOptionsBuilder<ChikojaDbContext>();
-            builder.UseSqlServer(
-                "Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true");
-            //builder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=pinchdb;Trusted_Connection=True;MultipleActiveResultSets=true");
-            return new ChikojaDbContext(builder.Options);
+            _connectionString = connectionString;
+        }
+        public T Create<T>() where T:DbContext,new()
+        {
+            var builder = new DbContextOptionsBuilder();
+            builder.UseSqlServer(_connectionString);
+            return (T)Activator.CreateInstance(typeof(T), new object[] { builder.Options });
+            
+            //return new AdCommonDbContext(builder.Options);
         }
     }
 
 
 
 
-    public class ChikojaDbContext:DbContext
+    public class AdCommonDbContext:DbContext
     {
-
-        public ChikojaDbContext(DbContextOptions options):base(options)
+        public AdCommonDbContext() { }
+        public AdCommonDbContext(DbContextOptions options):base(options)
         {
         }
       

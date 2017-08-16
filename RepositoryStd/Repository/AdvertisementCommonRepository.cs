@@ -52,17 +52,22 @@ namespace RepositoryStd.Repository
         {
             _searchResultItems = new List<AdvertisementCommon>();
 
-            using (SqlConnection connection = new SqlConnection(_conectionString))
-            {
-                using (SqlCommand command = new SqlCommand(getSelectCommandText(query), connection))
-                {
-                    query.FillCommandParameters(command);
-                    command.Parameters.Add("@start", SqlDbType.Int).Value = index;
-                    command.Parameters.Add("@end", SqlDbType.Int).Value = (index + count - 1);
 
-                    FillSearchResultItemsFromDatabase(connection, command);
-                }
-            }
+
+
+
+
+            //using (SqlConnection connection = new SqlConnection(_conectionString))
+            //{
+            //    using (SqlCommand command = new SqlCommand(getSelectCommandText(query), connection))
+            //    {
+            //        query.FillCommandParameters(command);
+            //        command.Parameters.Add("@start", SqlDbType.Int).Value = index;
+            //        command.Parameters.Add("@end", SqlDbType.Int).Value = (index + count - 1);
+
+            //        FillSearchResultItemsFromDatabase(connection, command);
+            //    }
+            //}
             return _searchResultItems;
         }
 

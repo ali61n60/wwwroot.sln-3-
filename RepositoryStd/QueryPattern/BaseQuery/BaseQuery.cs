@@ -3,7 +3,7 @@
     
     public abstract class BaseQuery
     {
-        public readonly OrderBy _defaultOrderBy = OrderBy.DateAsc;
+        public readonly OrderBy DefaultOrderBy = OrderBy.DateAsc;
 
        
         public OrderBy OredrBy;
@@ -25,7 +25,7 @@
                     OredrBy = OrderBy.PriceDesc;
                     break;
                 default:
-                    OredrBy = _defaultOrderBy;
+                    OredrBy = DefaultOrderBy;
                     break;
             }
         }

@@ -3,20 +3,19 @@ using System.Data.SqlClient;
 using ModelStd.IRepository;
 using RepositoryStd.QueryPattern.SearchField;
 
-
 namespace RepositoryStd.QueryPattern.BaseQuery
 {
     
     public class BaseQueryAdCommon : BaseQuery, IQuery
     {
-        private List<SearchFieldAbstract> _searchFieldList = new List<SearchFieldAbstract>();
+        private readonly List<SearchFieldAbstract> _searchFieldList = new List<SearchFieldAbstract>();
 
-        public SearchFieldDecimal MinimumPrice { get; private set; }
-        public SearchFieldDecimal MaximumPrice { get; private set; }
-        public SearchFieldBool OnlyWithPictures { get; private set; }
-        public SearchFieldInteger AdPrivilage { get; private set; }
-        public SearchFieldIntegerArray DistrictId { get; private set; }
-        public SearchFieldIntegerArray CategoryId { get; private set; }
+        public SearchFieldDecimal MinimumPrice { get; }
+        public SearchFieldDecimal MaximumPrice { get; }
+        public SearchFieldBool OnlyWithPictures { get; }
+        public SearchFieldInteger AdPrivilage { get; }
+        public SearchFieldIntegerArray DistrictId { get; }
+        public SearchFieldIntegerArray CategoryId { get; }
 
         public BaseQueryAdCommon(Dictionary<string, string> userInput)
         {
