@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace RepositoryStd.DB
 {
-
     public class DbContextFactory
     {
         private readonly string _connectionString;
@@ -18,13 +17,8 @@ namespace RepositoryStd.DB
             var builder = new DbContextOptionsBuilder();
             builder.UseSqlServer(_connectionString);
             return (T)Activator.CreateInstance(typeof(T), new object[] { builder.Options });
-            
-            //return new AdCommonDbContext(builder.Options);
         }
     }
-
-
-
 
     public class AdCommonDbContext:DbContext
     {

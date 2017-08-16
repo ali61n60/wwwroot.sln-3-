@@ -2,12 +2,28 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
+using RepositoryStd.DB;
 using RepositoryStd.Messages;
 
 namespace RepositoryStd.Repository
 {
+    public class FullProvince
+    {
+        public FullProvince(District district, City city, Province province)
+        {
+            FDistrict = district;
+            FCity = city;
+            FProvince = province;
+        }
+        public District FDistrict { get; set; }
+        public City FCity { get; set; }
+        public Province FProvince { get; set; }
+
+    }
 
     public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>
     {
@@ -51,8 +67,34 @@ namespace RepositoryStd.Repository
         public IEnumerable<AdvertisementCommon> FindBy(IQuery query, int index, int count)
         {
             _searchResultItems = new List<AdvertisementCommon>();
+            AdvertisementCommon tempAdvertisementCommon;
+            DbContextFactory dbContextFactory=new DbContextFactory(_conectionString);
+            AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
+            string result = "";
+            var districtList = adCommonDbContext.Districts.Include(district => district.City)
+                .Join(adCommonDbContext.Provinces,
+                    district => district.City.provinceId,
+                    province => province.provinceId,
+                    (district, province) => new FullProvince(district, district.City, province));
 
 
+
+            var list = adCommonDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100)
+                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District)
+                .Join(districtList,
+                    advertisement => advertisement.districtId,
+                    fullProvince => fullProvince.FDistrict.districtId,
+                    (advertisement, province) => new { advertisement, province });
+            foreach (var j in list)
+            {
+                tempAdvertisementCommon=new AdvertisementCommon()
+                {
+                    AdvertisementCategory = j.advertisement.Category.categoryName,
+                    AdvertisementTitle =j.advertisement.adTitle
+                };
+
+                _searchResultItems.Add(tempAdvertisementCommon);
+            }
 
 
 
