@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using RepositoryStd.DB;
 
@@ -58,34 +52,43 @@ namespace TestEntity
         private void buttonGetAdvertisement_Click(object sender, EventArgs e)
         {
             string result = "";
-            //        var fullEntries = dbContext.tbl_EntryPoint
-            //.Join(
-            //    dbContext.tbl_Entry,
-            //    entryPoint => entryPoint.EID,
-            //    entry => entry.EID,
-            //    (entryPoint, entry) => new { entryPoint, entry }
-            //)
+            var districtList = _chikojaDbContext.Districts.Include(district => district.City)
+                .Join(_chikojaDbContext.Provinces,
+                    district => district.City.provinceId,
+                    province => province.provinceId,
+                    (district, province) => new FullProvince(district.City, province));
+            
 
 
             var list = _chikojaDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100)
-                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District);
-            //.Join(_chikojaDbContext.Districts.Include(district => district.City),
-            //  advertisement => advertisement.districtId,district => district.districtId,(advertisement, district) => advertisement.districtId==district.districtId);
-            foreach (var b in list)
+                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District)
+            .Join(_chikojaDbContext.Districts.Include(district => district.City),
+              advertisement => advertisement.districtId,
+              district => district.districtId,
+              (advertisement, district) => new {advertisement,district});
+            foreach (var j in list)
             {
+                result =$"adId={j.advertisement.adId}," +
+                        $" adTitle={j.advertisement.adTitle}," +
+                        $"adCategoryName={j.advertisement.Category.categoryName},"+
+                        $" AdDistrict={j.advertisement.District.districtName}," +
+                        $" AdCity={j.advertisement.District.City.cityName}," +
+                        $"AdProvince={j.advertisement.District.City.Province.provinceName}";
 
+                listBox1.Items.Add(result);
             }
-
-            //foreach (var b in list)
-            //{
-
-            //}
-            //{
-            //    result =$"adId={advertisement.adId}, adTitle={advertisement.adTitle},adCategoryName={advertisement.Category.categoryName},"+
-            //        $" AdDistrict={advertisement.District.districtName}, AdCity={advertisement.District.City.cityName}";
-
-            //    listBox1.Items.Add(result);
-            //}
         }
+    }
+
+    public class FullProvince
+    {
+        public FullProvince(City city, Province province)
+        {
+            FCity = city;
+            FProvince = province;
+        }
+        public City FCity { get; set; }
+        public Province FProvince { get; set; }
+
     }
 }
