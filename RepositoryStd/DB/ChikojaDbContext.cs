@@ -32,6 +32,8 @@ namespace RepositoryStd.DB
         }
       
         public DbSet<Price> Prices { get; set; }
+        public DbSet<Brand> Brands { get; set; }
+        public DbSet<CarModel> CarModels { get; set; }
     }
 
 
@@ -47,4 +49,5 @@ namespace RepositoryStd.DB
         [Column("price", TypeName = "money")]
         public decimal? price1 { get; set; }
     }
+
 }

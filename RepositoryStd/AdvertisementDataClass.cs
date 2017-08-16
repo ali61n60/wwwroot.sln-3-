@@ -11,14 +11,15 @@ namespace RepositoryStd
 {
     public class AdvertisementDataClass
     {
-        public string ConnectionString { get; private set; }
+        public string ConnectionString { get;}
 
         public AdvertisementDataClass(string connectionString)
         {
             ConnectionString = connectionString;
         }
 
-       
+
+       //TODO WHat this method is donig here, refactor and remove this method
         private static string SetAdTimeText(DateTime adTime)
         {
 

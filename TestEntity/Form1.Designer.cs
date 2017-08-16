@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.buttonGetPrice = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.buttonGetCars = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // button1
+            // buttonGetPrice
             // 
-            this.button1.Location = new System.Drawing.Point(76, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.buttonGetPrice.Location = new System.Drawing.Point(76, 13);
+            this.buttonGetPrice.Name = "buttonGetPrice";
+            this.buttonGetPrice.Size = new System.Drawing.Size(75, 23);
+            this.buttonGetPrice.TabIndex = 0;
+            this.buttonGetPrice.Text = "Get Price";
+            this.buttonGetPrice.UseVisualStyleBackColor = true;
+            this.buttonGetPrice.Click += new System.EventHandler(this.button1_Click);
             // 
             // listBox1
             // 
@@ -53,13 +54,24 @@
             this.listBox1.Size = new System.Drawing.Size(232, 186);
             this.listBox1.TabIndex = 1;
             // 
+            // buttonGetCars
+            // 
+            this.buttonGetCars.Location = new System.Drawing.Point(157, 12);
+            this.buttonGetCars.Name = "buttonGetCars";
+            this.buttonGetCars.Size = new System.Drawing.Size(75, 23);
+            this.buttonGetCars.TabIndex = 2;
+            this.buttonGetCars.Text = "Get Cars";
+            this.buttonGetCars.UseVisualStyleBackColor = true;
+            this.buttonGetCars.Click += new System.EventHandler(this.buttonGetCars_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 262);
+            this.Controls.Add(this.buttonGetCars);
             this.Controls.Add(this.listBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonGetPrice);
             this.Name = "Form1";
             this.Text = "Form1";
             this.ResumeLayout(false);
@@ -68,8 +80,9 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button buttonGetPrice;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button buttonGetCars;
     }
 }
 
