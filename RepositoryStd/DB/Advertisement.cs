@@ -53,7 +53,7 @@ namespace RepositoryStd.DB
 
         public virtual AdStatu AdStatu { get; set; }
 
-        public virtual aspnet_Users aspnet_Users { get; set; }
+        //public virtual aspnet_Users aspnet_Users { get; set; }
 
         public virtual Category Category { get; set; }
 

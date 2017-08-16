@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.EntityFrameworkCore.Query;
 using RepositoryStd.DB;
 
@@ -57,10 +58,17 @@ namespace TestEntity
         private void buttonGetAdvertisement_Click(object sender, EventArgs e)
         {
             string result = "";
-            var list = _chikojaDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100);
-            foreach (Advertisement advertisement in list)
+            var list = _chikojaDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100)
+                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District)
+                .Join(_chikojaDbContext.Districts.Include(district => district.City),
+                    advertisement => advertisement.districtId,district => district.districtId,(advertisement, district) => advertisement.districtId==district.districtId);
+            foreach (var b in list)
             {
-                result =$"adId={advertisement.adId}, adTitle={advertisement.adTitle},adCategoryId={advertisement.categoryId}";
+                
+            }
+            {
+                result =$"adId={advertisement.adId}, adTitle={advertisement.adTitle},adCategoryName={advertisement.Category.categoryName},"+
+                    $" AdDistrict={advertisement.District.districtName}, AdCity={advertisement.District.City.cityName}";
 
                 listBox1.Items.Add(result);
             }
