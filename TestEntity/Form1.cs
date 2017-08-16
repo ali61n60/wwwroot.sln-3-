@@ -56,16 +56,16 @@ namespace TestEntity
                 .Join(_chikojaDbContext.Provinces,
                     district => district.City.provinceId,
                     province => province.provinceId,
-                    (district, province) => new FullProvince(district.City, province));
-            
+                    (district, province) => new FullProvince(district, district.City, province));
+
 
 
             var list = _chikojaDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100)
                 .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District)
-            .Join(_chikojaDbContext.Districts.Include(district => district.City),
-              advertisement => advertisement.districtId,
-              district => district.districtId,
-              (advertisement, district) => new {advertisement,district});
+                .Join(districtList,
+                    advertisement => advertisement.districtId,
+                    fullProvince => fullProvince.FDistrict.districtId,
+                    (advertisement, province) => new {advertisement, province});
             foreach (var j in list)
             {
                 result =$"adId={j.advertisement.adId}," +
@@ -73,7 +73,7 @@ namespace TestEntity
                         $"adCategoryName={j.advertisement.Category.categoryName},"+
                         $" AdDistrict={j.advertisement.District.districtName}," +
                         $" AdCity={j.advertisement.District.City.cityName}," +
-                        $"AdProvince={j.advertisement.District.City.Province.provinceName}";
+                        $"AdProvince={j.province.FProvince.provinceName}";
 
                 listBox1.Items.Add(result);
             }
@@ -82,11 +82,13 @@ namespace TestEntity
 
     public class FullProvince
     {
-        public FullProvince(City city, Province province)
+        public FullProvince(District district, City city, Province province)
         {
+            FDistrict = district;
             FCity = city;
             FProvince = province;
         }
+        public District FDistrict { get; set; }
         public City FCity { get; set; }
         public Province FProvince { get; set; }
 
