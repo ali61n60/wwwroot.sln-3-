@@ -22,6 +22,7 @@ using RepositoryStd.Repository.TransportationRepository;
 
 namespace MvcMain
 {
+    //Update-Package -source PackageSource RepositoryStd -ProjectName MvcMain -reinstall
     public class Startup
     {
         readonly IConfigurationRoot _configuration;
