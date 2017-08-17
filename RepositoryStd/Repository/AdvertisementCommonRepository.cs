@@ -87,10 +87,60 @@ namespace RepositoryStd.Repository
                     (advertisement, province) => new { advertisement, province });
             foreach (var j in list)
             {
-                tempAdvertisementCommon=new AdvertisementCommon()
+                /*
+                 
+                advertisementCommon.UserId = (Guid)dataReader["UserId"];
+                advertisementCommon.AdvertisementCategoryId = (int)dataReader["categoryId"];
+                advertisementCommon.DistrictId = (int)dataReader["districtId"];
+                advertisementCommon.AdvertisementTime = (DateTime)dataReader["adInsertDateTime"];
+                advertisementCommon.AdvertisementStatusId = (int)dataReader["adStatusId"];
+                if (!(dataReader["adTitle"] is DBNull))
+                {
+                    advertisementCommon.AdvertisementTitle = (string)dataReader["adTitle"];
+                }
+                if (!(dataReader["adComments"] is DBNull))
+                {
+                    advertisementCommon.AdvertisementComments = (string)dataReader["adComments"];
+
+                }
+                if (!(dataReader["adNumberOfVisited"] is DBNull))
+                {
+                    advertisementCommon.NumberOfVisit = (int)dataReader["adNumberOfVisited"];
+                }
+
+                if (!(dataReader["emailAddress"] is DBNull))
+                {
+                    advertisementCommon.Email = (string)dataReader["emailAddress"];
+                }
+                if (!(dataReader["phoneNumber"] is DBNull))
+                {
+                    advertisementCommon.PhoneNumber = (string)dataReader["phoneNumber"];
+                }
+                advertisementCommon.CityName = (string)dataReader["cityName"];
+                advertisementCommon.AdvertisementCategory = (string)dataReader["categoryName"];
+                advertisementCommon.DistrictName = (string)dataReader["districtName"];
+                advertisementCommon.ProvinceName = (string)dataReader["provinceName"];
+                advertisementCommon.AdvertisementStatus = (string)dataReader["adStatus"];
+                if (!(dataReader["price"] is DBNull))
+                {
+                    advertisementCommon.AdvertisementPrice.price = (decimal)dataReader["price"];
+                }
+                if (!(dataReader["priceType"] is DBNull))
+                {
+                    advertisementCommon.AdvertisementPrice.SetPriceTypeFromString((string)dataReader["priceType"]);
+                } 
+
+
+
+                */
+                tempAdvertisementCommon = new AdvertisementCommon()
                 {
                     AdvertisementCategory = j.advertisement.Category.categoryName,
-                    AdvertisementTitle =j.advertisement.adTitle
+                    AdvertisementTitle =j.advertisement.adTitle,
+                    AdvertisementId = j.advertisement.adId,
+                    DistrictName = j.province.FDistrict.districtName,
+                    CityName =j.province.FCity.cityName,
+                    ProvinceName = j.advertisement.District.City.Province.provinceName
                 };
 
                 _searchResultItems.Add(tempAdvertisementCommon);
