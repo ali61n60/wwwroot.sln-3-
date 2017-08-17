@@ -1,7 +1,6 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using ModelStd.DB;
 
 namespace RepositoryStd.DB
 {
@@ -33,8 +32,6 @@ namespace RepositoryStd.DB
                 .HasKey(privilege => new {privilege.adId, privilege.privilegeId, privilege.insertionDate});
             modelBuilder.Entity<SimilarAd>()
                 .HasKey(ad => new {ad.adId,ad.similarAdId });
-            //modelBuilder.Entity<Attends>()
-            //    .HasKey(c => new { c.FarmerSS, c.HotelID });
         }
 
         public DbSet<Price> Prices { get; set; }
@@ -45,8 +42,6 @@ namespace RepositoryStd.DB
         public DbSet<District> Districts { get; set; }
         public DbSet<City> Cities { get; set; }
         public DbSet<Province> Provinces { get; set; }
-
-        
     }
 
 

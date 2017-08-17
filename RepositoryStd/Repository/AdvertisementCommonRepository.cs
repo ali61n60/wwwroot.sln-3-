@@ -137,14 +137,11 @@ namespace RepositoryStd.Repository
                     ProvinceName = advertisement.District.City.Province.provinceName,
                     AdvertisementPrice = advertisement.Price
                 };
-                
-
+                tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
                 _searchResultItems.Add(tempAdvertisementCommon);
             }
 
-
-
-
+            
             //using (SqlConnection connection = new SqlConnection(_conectionString))
             //{
             //    using (SqlCommand command = new SqlCommand(getSelectCommandText(query), connection))
@@ -258,7 +255,7 @@ namespace RepositoryStd.Repository
             command.Parameters.Add("@adComments", SqlDbType.NChar).Value = entity.AdvertisementComments;
             command.Parameters.Add("@adNumberOfVisited", SqlDbType.Int).Value = entity.NumberOfVisit;
             command.Parameters.Add("@price", SqlDbType.Money).Value = entity.AdvertisementPrice.price;
-            command.Parameters.Add("@priceType", SqlDbType.NVarChar).Value = entity.AdvertisementPrice.GetStringPriceType();
+            command.Parameters.Add("@priceType", SqlDbType.NVarChar).Value = entity.AdvertisementPrice.priceType;
             command.Parameters.Add("@privilageId", SqlDbType.Int).Value = entity.AdPrivilegeId;
 
             //Added from adTransRepo
@@ -419,7 +416,7 @@ namespace RepositoryStd.Repository
                 }
                 if (!(dataReader["priceType"] is DBNull))
                 {
-                    advertisementCommon.AdvertisementPrice.SetPriceTypeFromString((string)dataReader["priceType"]);
+                    advertisementCommon.AdvertisementPrice.priceType=(string)dataReader["priceType"];
                 }
                 responseBase.Success = true;
                 responseBase.Message = "OK";

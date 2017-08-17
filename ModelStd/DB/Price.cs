@@ -15,7 +15,7 @@ namespace ModelStd.DB
         public string priceType { get; set; }
 
         [Column("price", TypeName = "money")]
-        public decimal? price1 { get; set; }
+        public decimal? price { get; set; }
 
         public virtual Advertisement Advertisement { get; set; }
     }

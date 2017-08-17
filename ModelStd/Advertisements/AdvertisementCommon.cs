@@ -1,4 +1,5 @@
 ﻿using System;
+using ModelStd.DB;
 
 
 namespace ModelStd.Advertisements
