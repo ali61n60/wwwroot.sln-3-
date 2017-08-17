@@ -64,9 +64,13 @@ namespace RepositoryStd.Repository
             var list = adCommonDbContext.Advertisements
                 .Where(advertisement => advertisement.categoryId == 100 && advertisement.adStatusId==3)//adStatusId=3 (accepted adds only)
                 .Include(advertisement => advertisement.Category)
+                .Include(advertisement => advertisement.aspnet_Users)
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
+                .Include(advertisement => advertisement.AdPrivileges)
+                .Include(advertisement => advertisement.AdStatu)
+                .Include(advertisement => advertisement.Price)
                 .Skip(startIndex-1).Take(count);
                 
             foreach (var advertisement in list)
@@ -130,8 +134,10 @@ namespace RepositoryStd.Repository
                     DistrictId = advertisement.districtId,
                     DistrictName = advertisement.District.districtName,
                     CityName =advertisement.District.City.cityName,
-                    ProvinceName = advertisement.District.City.Province.provinceName
+                    ProvinceName = advertisement.District.City.Province.provinceName,
+                    AdvertisementPrice = advertisement.Price
                 };
+                
 
                 _searchResultItems.Add(tempAdvertisementCommon);
             }
@@ -253,7 +259,7 @@ namespace RepositoryStd.Repository
             command.Parameters.Add("@adNumberOfVisited", SqlDbType.Int).Value = entity.NumberOfVisit;
             command.Parameters.Add("@price", SqlDbType.Money).Value = entity.AdvertisementPrice.price;
             command.Parameters.Add("@priceType", SqlDbType.NVarChar).Value = entity.AdvertisementPrice.GetStringPriceType();
-            command.Parameters.Add("@privilageId", SqlDbType.Int).Value = entity.AdPrivilageId;
+            command.Parameters.Add("@privilageId", SqlDbType.Int).Value = entity.AdPrivilegeId;
 
             //Added from adTransRepo
             command.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier).Value = entity.UserId;

@@ -46,7 +46,7 @@ namespace ModelStd.Advertisements
         
         public Price AdvertisementPrice { get; set; }
         
-        public int AdPrivilageId { get; set; } 
+        public int AdPrivilegeId { get; set; } 
         
         public string[] AdvertisementImages { get; set; }
     }

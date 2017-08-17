@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 
-namespace RepositoryStd.DB
+namespace ModelStd.DB
 {
     public class DbContextFactory
     {
