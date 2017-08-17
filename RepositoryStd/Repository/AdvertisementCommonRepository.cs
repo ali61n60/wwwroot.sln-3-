@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
+using ModelStd.DB;
 using ModelStd.IRepository;
 using RepositoryStd.DB;
 using RepositoryStd.Messages;
@@ -39,7 +40,7 @@ namespace RepositoryStd.Repository
               " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
               " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
 
-        
+
         public AdvertisementCommonRepository(string connectionString)
         {
             _conectionString = connectionString;
@@ -53,16 +54,12 @@ namespace RepositoryStd.Repository
         //Called from service layer
         public IEnumerable<AdvertisementCommon> FindBy(IQuery query, int startIndex, int count)
         {
-            _searchResultItems = new List<AdvertisementCommon>();
-            DbContextFactory dbContextFactory=new DbContextFactory(_conectionString);
+            _searchResultItems = new List<AdvertisementCommon>(count);
+            DbContextFactory dbContextFactory = new DbContextFactory(_conectionString);
             AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
-            string result = "";
             
-
-
-            //var myList = adCommonDbContext.Advertisements.Skip(index).Take(count);
             var list = adCommonDbContext.Advertisements
-                .Where(advertisement => advertisement.categoryId == 100 && advertisement.adStatusId==3)//adStatusId=3 (accepted adds only)
+                .Where(advertisement => advertisement.categoryId == 100 && advertisement.adStatusId == 3)//adStatusId=3 (accepted adds only)
                 .Include(advertisement => advertisement.Category)
                 .Include(advertisement => advertisement.aspnet_Users)
                 .Include(advertisement => advertisement.District)
@@ -71,77 +68,49 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.AdPrivileges)
                 .Include(advertisement => advertisement.AdStatu)
                 .Include(advertisement => advertisement.Price)
-                .Skip(startIndex-1).Take(count);
-                
-            foreach (var advertisement in list)
+                .Skip(startIndex - 1).Take(count);
+
+            foreach (Advertisement advertisement in list)
             {
-                /*
-                 
-                 * private string getSelectCommandText(IQuery query)
-        {
-            return " WITH Results AS ( "
-                   + BaseSelectCommandText(query.GetOrderByClause())
-                   + " WHERE Advertisements.adStatusId=3 " //approved advertisements
-                   + query.GetWhereClause()
-                   + " ) SELECT * FROM Results WHERE RowNumber BETWEEN @start AND @end ";
-        }
-                 * 
-                 * 
-                  private readonly string SelectStatement = " SELECT Advertisements.adId, Advertisements.UserId, Advertisements.categoryId, " +
-                               " Advertisements.districtId, Advertisements.adInsertDateTime, Advertisements.adStatusId, " +
-                               " Advertisements.adTitle, Advertisements.adComments, Advertisements.adNumberOfVisited, " +
-                               " Price.price , Price.PriceType,  " +
-                               " AdPrivilege.privilageId , AdPrivilege.insertionDate,  " +
-                               " aspnet_Users.emailAddress, aspnet_Users.phoneNumber, " +
-                               " Cities.cityName, Categories.categoryName, Districts.districtName, Provinces.provinceName, AdStatus.adStatus, ";
-
-        public readonly string FromStatement = " FROM  Advertisements LEFT JOIN " +
-              " Price ON  Advertisements.adId=Price.adId  LEFT JOIN " +
-              " AdPrivilege ON Advertisements.adId=AdPrivilege.adId INNER JOIN " +
-              " aspnet_Users ON Advertisements.UserId = aspnet_Users.UserId INNER JOIN " +
-              " Categories ON Advertisements.categoryId = Categories.categoryId INNER JOIN " +
-              " Districts ON Advertisements.districtId = Districts.districtId INNER JOIN " +
-              " Cities ON Districts.cityId = Cities.cityId INNER JOIN " +
-              " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
-              " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
- 
-                  
-                 
-                
-                if (!(dataReader["price"] is DBNull))
-                {
-                    advertisementCommon.AdvertisementPrice.price = (decimal)dataReader["price"];
-                }
-                if (!(dataReader["priceType"] is DBNull))
-                {
-                    advertisementCommon.AdvertisementPrice.SetPriceTypeFromString((string)dataReader["priceType"]);
-                }
-                */
-                AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
-                {
-                    AdvertisementId = advertisement.adId,
-                    UserId = advertisement.UserId,
-                    AdvertisementTitle = advertisement.adTitle,//TODO test for null
-                    AdvertisementTime = advertisement.adInsertDateTime,
-                    AdvertisementStatusId = advertisement.adStatusId,
-                    AdvertisementStatus = advertisement.AdStatu.adStatus,
-                    AdvertisementCategory = advertisement.Category.categoryName,
-                    AdvertisementCategoryId = advertisement.categoryId,
-                    AdvertisementComments = advertisement.adComments,//TODO test for null
-                    NumberOfVisit = advertisement.adNumberOfVisited,//TODO test for null
-                    Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
-                    PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
-                    DistrictId = advertisement.districtId,
-                    DistrictName = advertisement.District.districtName,
-                    CityName =advertisement.District.City.cityName,
-                    ProvinceName = advertisement.District.City.Province.provinceName,
-                    AdvertisementPrice = advertisement.Price
-                };
-                tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
-                _searchResultItems.Add(tempAdvertisementCommon);
+                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
             }
+            /*
 
-            
+             * private string getSelectCommandText(IQuery query)
+    {
+        return " WITH Results AS ( "
+               + BaseSelectCommandText(query.GetOrderByClause())
+               + " WHERE Advertisements.adStatusId=3 " //approved advertisements
+               + query.GetWhereClause()
+               + " ) SELECT * FROM Results WHERE RowNumber BETWEEN @start AND @end ";
+    }
+             * 
+             * 
+              private readonly string SelectStatement = " SELECT Advertisements.adId, Advertisements.UserId, Advertisements.categoryId, " +
+                           " Advertisements.districtId, Advertisements.adInsertDateTime, Advertisements.adStatusId, " +
+                           " Advertisements.adTitle, Advertisements.adComments, Advertisements.adNumberOfVisited, " +
+                           " Price.price , Price.PriceType,  " +
+                           " AdPrivilege.privilageId , AdPrivilege.insertionDate,  " +
+                           " aspnet_Users.emailAddress, aspnet_Users.phoneNumber, " +
+                           " Cities.cityName, Categories.categoryName, Districts.districtName, Provinces.provinceName, AdStatus.adStatus, ";
+
+    public readonly string FromStatement = " FROM  Advertisements LEFT JOIN " +
+          " Price ON  Advertisements.adId=Price.adId  LEFT JOIN " +
+          " AdPrivilege ON Advertisements.adId=AdPrivilege.adId INNER JOIN " +
+          " aspnet_Users ON Advertisements.UserId = aspnet_Users.UserId INNER JOIN " +
+          " Categories ON Advertisements.categoryId = Categories.categoryId INNER JOIN " +
+          " Districts ON Advertisements.districtId = Districts.districtId INNER JOIN " +
+          " Cities ON Districts.cityId = Cities.cityId INNER JOIN " +
+          " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
+          " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
+
+
+
+
+            */
+
+
+
             //using (SqlConnection connection = new SqlConnection(_conectionString))
             //{
             //    using (SqlCommand command = new SqlCommand(getSelectCommandText(query), connection))
@@ -154,6 +123,32 @@ namespace RepositoryStd.Repository
             //    }
             //}
             return _searchResultItems;
+        }
+
+        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisement advertisement)
+        {
+            AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
+            {
+                AdvertisementId = advertisement.adId,
+                UserId = advertisement.UserId,
+                AdvertisementTitle = advertisement.adTitle,//TODO test for null
+                AdvertisementTime = advertisement.adInsertDateTime,
+                AdvertisementStatusId = advertisement.adStatusId,
+                AdvertisementStatus = advertisement.AdStatu.adStatus,
+                AdvertisementCategory = advertisement.Category.categoryName,
+                AdvertisementCategoryId = advertisement.categoryId,
+                AdvertisementComments = advertisement.adComments,//TODO test for null
+                NumberOfVisit = advertisement.adNumberOfVisited,//TODO test for null
+                Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
+                PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
+                DistrictId = advertisement.districtId,
+                DistrictName = advertisement.District.districtName,
+                CityName = advertisement.District.City.cityName,
+                ProvinceName = advertisement.District.City.Province.provinceName,
+                AdvertisementPrice = advertisement.Price
+            };
+            tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
+            return tempAdvertisementCommon;
         }
 
         private string getSelectCommandText(IQuery query)
@@ -416,7 +411,7 @@ namespace RepositoryStd.Repository
                 }
                 if (!(dataReader["priceType"] is DBNull))
                 {
-                    advertisementCommon.AdvertisementPrice.priceType=(string)dataReader["priceType"];
+                    advertisementCommon.AdvertisementPrice.priceType = (string)dataReader["priceType"];
                 }
                 responseBase.Success = true;
                 responseBase.Message = "OK";
