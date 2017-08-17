@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RepositoryStd.DB
 {
-    
+
 
     public class Advertisement
     {
-        
+
         public Advertisement()
         {
             AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
@@ -45,21 +45,20 @@ namespace RepositoryStd.DB
 
         public int adNumberOfVisited { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
 
-        //[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        //public virtual ICollection<AdPrivilege> AdPrivileges { get; set; }
+        public virtual ICollection<AdPrivilege> AdPrivileges { get; set; }
 
         public virtual AdStatu AdStatu { get; set; }
 
-        //public virtual aspnet_Users aspnet_Users { get; set; }
+        public virtual aspnet_Users aspnet_Users { get; set; }
 
         public virtual Category Category { get; set; }
 
         public virtual District District { get; set; }
 
-      //  [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-       // public virtual ICollection<SimilarAd> SimilarAds { get; set; }
+        public virtual Price Price { get; set; }
+
+        public virtual ICollection<SimilarAd> SimilarAds { get; set; }
     }
 }

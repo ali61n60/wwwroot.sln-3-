@@ -35,7 +35,7 @@ namespace RepositoryStd.Repository
 
 
         //Called from service layer
-        public IEnumerable<AdvertisementTransportation> FindBy(IQuery query, int index, int count)
+        public IEnumerable<AdvertisementTransportation> FindBy(IQuery query, int startIndex, int count)
         {
             _searchResultItems = new List<AdvertisementTransportation>();
 
@@ -47,8 +47,8 @@ namespace RepositoryStd.Repository
                 using (SqlCommand command = new SqlCommand(commandText, connection))
                 {
                     query.FillCommandParameters(command);
-                    command.Parameters.Add("@start", SqlDbType.Int).Value = index;
-                    command.Parameters.Add("@end", SqlDbType.Int).Value = (index + count - 1);
+                    command.Parameters.Add("@start", SqlDbType.Int).Value = startIndex;
+                    command.Parameters.Add("@end", SqlDbType.Int).Value = (startIndex + count - 1);
                     FillSearchResultItemsFromDatabase(connection, command);
                 }
             }

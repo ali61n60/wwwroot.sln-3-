@@ -15,7 +15,7 @@ namespace ModelStd.IRepository
     public interface IRepository<T>
     {
         IEnumerable<T> FindBy(IQuery query);//Done
-        IEnumerable<T> FindBy(IQuery query, int index, int count);//Done
+        IEnumerable<T> FindBy(IQuery query, int startIndex, int count);//Done
         void Add(T entity);//Insert Database  //Done
         void Remove(T entity);//Done
         void Save(T entity);//Update Database  //Done

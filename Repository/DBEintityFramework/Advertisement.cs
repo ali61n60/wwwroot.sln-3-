@@ -58,6 +58,8 @@ namespace Repository.DBEintityFramework
 
         public virtual District District { get; set; }
 
+        public virtual Price Price { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimilarAd> SimilarAds { get; set; }
     }

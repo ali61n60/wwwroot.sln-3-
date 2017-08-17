@@ -9,22 +9,9 @@ using ModelStd.IRepository;
 using RepositoryStd.DB;
 using RepositoryStd.Messages;
 
+
 namespace RepositoryStd.Repository
 {
-    public class FullProvince
-    {
-        public FullProvince(District district, City city, Province province)
-        {
-            FDistrict = district;
-            FCity = city;
-            FProvince = province;
-        }
-        public District FDistrict { get; set; }
-        public City FCity { get; set; }
-        public Province FProvince { get; set; }
-
-    }
-
     public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>
     {
 
@@ -64,63 +51,59 @@ namespace RepositoryStd.Repository
         }
 
         //Called from service layer
-        public IEnumerable<AdvertisementCommon> FindBy(IQuery query, int index, int count)
+        public IEnumerable<AdvertisementCommon> FindBy(IQuery query, int startIndex, int count)
         {
             _searchResultItems = new List<AdvertisementCommon>();
-            AdvertisementCommon tempAdvertisementCommon;
             DbContextFactory dbContextFactory=new DbContextFactory(_conectionString);
             AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
             string result = "";
-            var districtList = adCommonDbContext.Districts.Include(district => district.City)
-                .Join(adCommonDbContext.Provinces,
-                    district => district.City.provinceId,
-                    province => province.provinceId,
-                    (district, province) => new FullProvince(district, district.City, province));
+            
 
 
-
-            var list = adCommonDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100)
-                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District)
-                .Join(districtList,
-                    advertisement => advertisement.districtId,
-                    fullProvince => fullProvince.FDistrict.districtId,
-                    (advertisement, province) => new { advertisement, province });
-            foreach (var j in list)
+            //var myList = adCommonDbContext.Advertisements.Skip(index).Take(count);
+            var list = adCommonDbContext.Advertisements
+                .Where(advertisement => advertisement.categoryId == 100 && advertisement.adStatusId==3)//adStatusId=3 (accepted adds only)
+                .Include(advertisement => advertisement.Category)
+                .Include(advertisement => advertisement.District)
+                .Include(advertisement => advertisement.District.City)
+                .Include(advertisement => advertisement.District.City.Province)
+                .Skip(startIndex-1).Take(count);
+                
+            foreach (var advertisement in list)
             {
                 /*
                  
-                advertisementCommon.UserId = (Guid)dataReader["UserId"];
-                advertisementCommon.AdvertisementCategoryId = (int)dataReader["categoryId"];
-                advertisementCommon.DistrictId = (int)dataReader["districtId"];
-                advertisementCommon.AdvertisementTime = (DateTime)dataReader["adInsertDateTime"];
-                advertisementCommon.AdvertisementStatusId = (int)dataReader["adStatusId"];
-                if (!(dataReader["adTitle"] is DBNull))
-                {
-                    advertisementCommon.AdvertisementTitle = (string)dataReader["adTitle"];
-                }
-                if (!(dataReader["adComments"] is DBNull))
-                {
-                    advertisementCommon.AdvertisementComments = (string)dataReader["adComments"];
+                 * private string getSelectCommandText(IQuery query)
+        {
+            return " WITH Results AS ( "
+                   + BaseSelectCommandText(query.GetOrderByClause())
+                   + " WHERE Advertisements.adStatusId=3 " //approved advertisements
+                   + query.GetWhereClause()
+                   + " ) SELECT * FROM Results WHERE RowNumber BETWEEN @start AND @end ";
+        }
+                 * 
+                 * 
+                  private readonly string SelectStatement = " SELECT Advertisements.adId, Advertisements.UserId, Advertisements.categoryId, " +
+                               " Advertisements.districtId, Advertisements.adInsertDateTime, Advertisements.adStatusId, " +
+                               " Advertisements.adTitle, Advertisements.adComments, Advertisements.adNumberOfVisited, " +
+                               " Price.price , Price.PriceType,  " +
+                               " AdPrivilege.privilageId , AdPrivilege.insertionDate,  " +
+                               " aspnet_Users.emailAddress, aspnet_Users.phoneNumber, " +
+                               " Cities.cityName, Categories.categoryName, Districts.districtName, Provinces.provinceName, AdStatus.adStatus, ";
 
-                }
-                if (!(dataReader["adNumberOfVisited"] is DBNull))
-                {
-                    advertisementCommon.NumberOfVisit = (int)dataReader["adNumberOfVisited"];
-                }
-
-                if (!(dataReader["emailAddress"] is DBNull))
-                {
-                    advertisementCommon.Email = (string)dataReader["emailAddress"];
-                }
-                if (!(dataReader["phoneNumber"] is DBNull))
-                {
-                    advertisementCommon.PhoneNumber = (string)dataReader["phoneNumber"];
-                }
-                advertisementCommon.CityName = (string)dataReader["cityName"];
-                advertisementCommon.AdvertisementCategory = (string)dataReader["categoryName"];
-                advertisementCommon.DistrictName = (string)dataReader["districtName"];
-                advertisementCommon.ProvinceName = (string)dataReader["provinceName"];
-                advertisementCommon.AdvertisementStatus = (string)dataReader["adStatus"];
+        public readonly string FromStatement = " FROM  Advertisements LEFT JOIN " +
+              " Price ON  Advertisements.adId=Price.adId  LEFT JOIN " +
+              " AdPrivilege ON Advertisements.adId=AdPrivilege.adId INNER JOIN " +
+              " aspnet_Users ON Advertisements.UserId = aspnet_Users.UserId INNER JOIN " +
+              " Categories ON Advertisements.categoryId = Categories.categoryId INNER JOIN " +
+              " Districts ON Advertisements.districtId = Districts.districtId INNER JOIN " +
+              " Cities ON Districts.cityId = Cities.cityId INNER JOIN " +
+              " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
+              " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
+ 
+                  
+                 
+                
                 if (!(dataReader["price"] is DBNull))
                 {
                     advertisementCommon.AdvertisementPrice.price = (decimal)dataReader["price"];
@@ -128,19 +111,26 @@ namespace RepositoryStd.Repository
                 if (!(dataReader["priceType"] is DBNull))
                 {
                     advertisementCommon.AdvertisementPrice.SetPriceTypeFromString((string)dataReader["priceType"]);
-                } 
-
-
-
+                }
                 */
-                tempAdvertisementCommon = new AdvertisementCommon()
+                AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
                 {
-                    AdvertisementCategory = j.advertisement.Category.categoryName,
-                    AdvertisementTitle =j.advertisement.adTitle,
-                    AdvertisementId = j.advertisement.adId,
-                    DistrictName = j.province.FDistrict.districtName,
-                    CityName =j.province.FCity.cityName,
-                    ProvinceName = j.advertisement.District.City.Province.provinceName
+                    AdvertisementId = advertisement.adId,
+                    UserId = advertisement.UserId,
+                    AdvertisementTitle = advertisement.adTitle,//TODO test for null
+                    AdvertisementTime = advertisement.adInsertDateTime,
+                    AdvertisementStatusId = advertisement.adStatusId,
+                    AdvertisementStatus = advertisement.AdStatu.adStatus,
+                    AdvertisementCategory = advertisement.Category.categoryName,
+                    AdvertisementCategoryId = advertisement.categoryId,
+                    AdvertisementComments = advertisement.adComments,//TODO test for null
+                    NumberOfVisit = advertisement.adNumberOfVisited,//TODO test for null
+                    Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
+                    PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
+                    DistrictId = advertisement.districtId,
+                    DistrictName = advertisement.District.districtName,
+                    CityName =advertisement.District.City.cityName,
+                    ProvinceName = advertisement.District.City.Province.provinceName
                 };
 
                 _searchResultItems.Add(tempAdvertisementCommon);

@@ -31,6 +31,8 @@
     <AssemblyFileVersionSettings>None.None.Increment.Increment</AssemblyFileVersionSettings>
     
     <AssemblyInfoVersionSettings>None.None.Increment.Increment</AssemblyInfoVersionSettings>
+    
+    <Version>1.0.34</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
