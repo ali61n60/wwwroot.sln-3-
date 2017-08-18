@@ -21,4 +21,10 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="ModelStd">
+      <HintPath>..\packages\ModelStd.1.0.13\lib\netstandard1.4\ModelStd.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

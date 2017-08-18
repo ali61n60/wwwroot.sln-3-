@@ -22,7 +22,7 @@ namespace MvcMain.Infrastructure.IOC
             //TODO here I return a singlton for advertisementService class, Maybe I should return new object for
             //TODO each request
             _advertisementTypeDictionary.Add(0, new AdvertisementCommonService());
-            _advertisementTypeDictionary.Add(100, new AdvertisementTransportationService());//AddTransportation
+            _advertisementTypeDictionary.Add(100, new AdvertisementCommonService());//TODO change it to AddTransportationService
         }
 
         public static IAdvertisementService GetAdvertisementService(int categoryId)

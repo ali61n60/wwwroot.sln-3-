@@ -3,10 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
+using ModelStd;
 using ModelStd.Advertisements;
 using ModelStd.DB;
 using ModelStd.IRepository;
+using Remotion.Linq.Clauses;
 using RepositoryStd.DB;
 using RepositoryStd.Messages;
 
@@ -46,20 +49,20 @@ namespace RepositoryStd.Repository
             _conectionString = connectionString;
         }
 
-        public IEnumerable<AdvertisementCommon> FindBy(IQuery query)
+        public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters)
         {
-            return FindBy(query, 1, 1000000);//return first 1000000 rows of data in database
+            return FindBy(queryParameters, 1, 1000000);//return first 1000000 rows of data in database
         }
 
         //Called from service layer
-        public IEnumerable<AdvertisementCommon> FindBy(IQuery query, int startIndex, int count)
+        public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
             _searchResultItems = new List<AdvertisementCommon>(count);
             DbContextFactory dbContextFactory = new DbContextFactory(_conectionString);
+            //TODO research for singleton dbContext
             AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
-            
+
             var list = adCommonDbContext.Advertisements
-                .Where(advertisement => advertisement.categoryId == 100 && advertisement.adStatusId == 3)//adStatusId=3 (accepted adds only)
                 .Include(advertisement => advertisement.Category)
                 .Include(advertisement => advertisement.aspnet_Users)
                 .Include(advertisement => advertisement.District)
@@ -68,15 +71,20 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.AdPrivileges)
                 .Include(advertisement => advertisement.AdStatu)
                 .Include(advertisement => advertisement.Price)
-                .Skip(startIndex - 1).Take(count);
+                .Where(advertisement => advertisement.adStatusId == 3);//only accepted ads
+            wherClauseCategoryId(list, queryParameters);
+            WhereClausePrice(list, queryParameters);
+
+            list = list.Where(advertisement => advertisement.Price.priceType == "ttt");
+            list = list.Skip(startIndex - 1).Take(count);
 
             foreach (Advertisement advertisement in list)
             {
                 _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
             }
+            return _searchResultItems;
             /*
-
-             * private string getSelectCommandText(IQuery query)
+             private string getSelectCommandText(IQuery query)
     {
         return " WITH Results AS ( "
                + BaseSelectCommandText(query.GetOrderByClause())
@@ -103,26 +111,30 @@ namespace RepositoryStd.Repository
           " Cities ON Districts.cityId = Cities.cityId INNER JOIN " +
           " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
           " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
-
-
-
-
             */
-
-
-
-            //using (SqlConnection connection = new SqlConnection(_conectionString))
-            //{
-            //    using (SqlCommand command = new SqlCommand(getSelectCommandText(query), connection))
-            //    {
             //        query.FillCommandParameters(command);
-            //        command.Parameters.Add("@start", SqlDbType.Int).Value = index;
-            //        command.Parameters.Add("@end", SqlDbType.Int).Value = (index + count - 1);
 
-            //        FillSearchResultItemsFromDatabase(connection, command);
-            //    }
-            //}
-            return _searchResultItems;
+        }
+
+        private void WhereClausePrice(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        {
+            decimal minPrice = ParameterExtractor.ExtractMinPrice(queryParameters);
+            decimal maxPrice = ParameterExtractor.ExtractMaxPrice(queryParameters);
+            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters);
+            if (minPrice != ParameterExtractor.MinPriceDefault)
+                list = list.Where(advertisement => advertisement.Price.price > minPrice);
+            if (maxPrice != ParameterExtractor.MaxPriceDefault)
+                list = list.Where(advertisement => advertisement.Price.price < maxPrice);
+            if (priceType != ParameterExtractor.PriceTypeDefault)
+                list = list.Where(advertisement => advertisement.Price.priceType == 
+                                                   Price.ConverPriceTypeToString(priceType));
+
+        }
+
+        private void wherClauseCategoryId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        {
+            int categoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
+            list.Where(advertisement => advertisement.categoryId == categoryId);
         }
 
         private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisement advertisement)
