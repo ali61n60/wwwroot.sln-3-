@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using ModelStd;
 using ModelStd.Advertisements;
@@ -13,37 +12,16 @@ using Remotion.Linq.Clauses;
 using RepositoryStd.DB;
 using RepositoryStd.Messages;
 
-
 namespace RepositoryStd.Repository
 {
     public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>
     {
-
         private readonly string _conectionString;
         List<AdvertisementCommon> _searchResultItems;
         AdvertisementCommon _tempAdvertisementCommon;
         SqlDataReader _dataReader;
         RepositoryResponse _responseBase;
-
-        private readonly string SelectStatement = " SELECT Advertisements.adId, Advertisements.UserId, Advertisements.categoryId, " +
-                               " Advertisements.districtId, Advertisements.adInsertDateTime, Advertisements.adStatusId, " +
-                               " Advertisements.adTitle, Advertisements.adComments, Advertisements.adNumberOfVisited, " +
-                               " Price.price , Price.PriceType,  " +
-                               " AdPrivilege.privilageId , AdPrivilege.insertionDate,  " +
-                               " aspnet_Users.emailAddress, aspnet_Users.phoneNumber, " +
-                               " Cities.cityName, Categories.categoryName, Districts.districtName, Provinces.provinceName, AdStatus.adStatus, ";
-
-        public readonly string FromStatement = " FROM  Advertisements LEFT JOIN " +
-              " Price ON  Advertisements.adId=Price.adId  LEFT JOIN " +
-              " AdPrivilege ON Advertisements.adId=AdPrivilege.adId INNER JOIN " +
-              " aspnet_Users ON Advertisements.UserId = aspnet_Users.UserId INNER JOIN " +
-              " Categories ON Advertisements.categoryId = Categories.categoryId INNER JOIN " +
-              " Districts ON Advertisements.districtId = Districts.districtId INNER JOIN " +
-              " Cities ON Districts.cityId = Cities.cityId INNER JOIN " +
-              " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
-              " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
-
-
+        
         public AdvertisementCommonRepository(string connectionString)
         {
             _conectionString = connectionString;
@@ -71,51 +49,40 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.AdPrivileges)
                 .Include(advertisement => advertisement.AdStatu)
                 .Include(advertisement => advertisement.Price)
-                .Where(advertisement => advertisement.adStatusId == 3);//only accepted ads
+                .Where(advertisement => advertisement.adStatusId == 3) //only accepted ads
+                .OrderBy(advertisement => advertisement.Price.price);
+            //SetOrderByClause(list, queryParameters);
             wherClauseCategoryId(list, queryParameters);
             WhereClausePrice(list, queryParameters);
+            WhereClauseDistrictId(list, queryParameters);
 
-            list = list.Where(advertisement => advertisement.Price.priceType == "ttt");
-            list = list.Skip(startIndex - 1).Take(count);
+            
+
+            
+            //uegentOnly
+           
+
+            list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
 
             foreach (Advertisement advertisement in list)
             {
                 _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
             }
             return _searchResultItems;
-            /*
-             private string getSelectCommandText(IQuery query)
-    {
-        return " WITH Results AS ( "
-               + BaseSelectCommandText(query.GetOrderByClause())
-               + " WHERE Advertisements.adStatusId=3 " //approved advertisements
-               + query.GetWhereClause()
-               + " ) SELECT * FROM Results WHERE RowNumber BETWEEN @start AND @end ";
-    }
-             * 
-             * 
-              private readonly string SelectStatement = " SELECT Advertisements.adId, Advertisements.UserId, Advertisements.categoryId, " +
-                           " Advertisements.districtId, Advertisements.adInsertDateTime, Advertisements.adStatusId, " +
-                           " Advertisements.adTitle, Advertisements.adComments, Advertisements.adNumberOfVisited, " +
-                           " Price.price , Price.PriceType,  " +
-                           " AdPrivilege.privilageId , AdPrivilege.insertionDate,  " +
-                           " aspnet_Users.emailAddress, aspnet_Users.phoneNumber, " +
-                           " Cities.cityName, Categories.categoryName, Districts.districtName, Provinces.provinceName, AdStatus.adStatus, ";
-
-    public readonly string FromStatement = " FROM  Advertisements LEFT JOIN " +
-          " Price ON  Advertisements.adId=Price.adId  LEFT JOIN " +
-          " AdPrivilege ON Advertisements.adId=AdPrivilege.adId INNER JOIN " +
-          " aspnet_Users ON Advertisements.UserId = aspnet_Users.UserId INNER JOIN " +
-          " Categories ON Advertisements.categoryId = Categories.categoryId INNER JOIN " +
-          " Districts ON Advertisements.districtId = Districts.districtId INNER JOIN " +
-          " Cities ON Districts.cityId = Cities.cityId INNER JOIN " +
-          " Provinces ON Cities.provinceId = Provinces.provinceId INNER JOIN " +
-          " AdStatus ON Advertisements.adStatusId = AdStatus.adStatusId ";
-            */
-            //        query.FillCommandParameters(command);
-
         }
 
+        private void SetOrderByClause(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        {
+            list=list.OrderBy(advertisement => advertisement.Price.price);
+        }
+
+
+        //TODO change where clause to get an array of categories
+        private void wherClauseCategoryId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        {
+            int categoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
+            list=list.Where(advertisement => advertisement.categoryId == categoryId);
+        }
         private void WhereClausePrice(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
             decimal minPrice = ParameterExtractor.ExtractMinPrice(queryParameters);
@@ -126,15 +93,13 @@ namespace RepositoryStd.Repository
             if (maxPrice != ParameterExtractor.MaxPriceDefault)
                 list = list.Where(advertisement => advertisement.Price.price < maxPrice);
             if (priceType != ParameterExtractor.PriceTypeDefault)
-                list = list.Where(advertisement => advertisement.Price.priceType == 
-                                                   Price.ConverPriceTypeToString(priceType));
-
+                list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
         }
-
-        private void wherClauseCategoryId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        private void WhereClauseDistrictId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            int categoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
-            list.Where(advertisement => advertisement.categoryId == categoryId);
+            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters);
+            if (districtList.Count > 0)
+                list = list.Where(advertisement => districtList.Contains(advertisement.districtId));
         }
 
         private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisement advertisement)
@@ -163,55 +128,16 @@ namespace RepositoryStd.Repository
             return tempAdvertisementCommon;
         }
 
-        private string getSelectCommandText(IQuery query)
-        {
-            return " WITH Results AS ( "
-                   + BaseSelectCommandText(query.GetOrderByClause())
-                   + " WHERE Advertisements.adStatusId=3 " //approved advertisements
-                   + query.GetWhereClause()
-                   + " ) SELECT * FROM Results WHERE RowNumber BETWEEN @start AND @end ";
-        }
+        
 
-        private string BaseSelectCommandText(string orderByClause)
-        {
-            return SelectColumnsNameStatement(orderByClause) + FromStatement;
-        }
+      
+       
+        
+      
 
-        public string SelectColumnsNameStatement(string orderByClause)
-        {
-            return SelectStatement + RowNumberStatement(orderByClause);
-        }
-        private string RowNumberStatement(String orderByCluase)
-        {
-            return " ROW_NUMBER() OVER ( " + orderByCluase + "  ) AS RowNumber ";
-        }
-        public string SelectColumnsNameStatement()
-        {
-            string statement = SelectStatement + "ORDER BY Advertisements.adInsertDateTime DESC";
-            return statement;
-        }
+      
 
-        private string BaseSelectCommandText()
-        {
-            return SelectColumnsNameStatement() + FromStatement;
-        }
-
-        private void FillSearchResultItemsFromDatabase(SqlConnection connection, SqlCommand command)
-        {
-            connection.Open();
-            _dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (_dataReader.Read())
-            {
-                _tempAdvertisementCommon = new AdvertisementCommon();
-                _responseBase = fillAdvertisementCommonFromDataReader(_tempAdvertisementCommon, _dataReader);
-                if (!_responseBase.Success)
-                {
-                    throw new Exception(_responseBase.Message);
-                }
-                _searchResultItems.Add(_tempAdvertisementCommon);
-            }
-        }
+       
 
         public void Add(AdvertisementCommon entity)
         {
@@ -335,7 +261,7 @@ namespace RepositoryStd.Repository
 
         public AdvertisementCommon FindBy(Guid Id)
         {
-            string commandText = BaseSelectCommandText() + " WHERE adId=@adId ";
+            string commandText = "";//BaseSelectCommandText() + " WHERE adId=@adId ";
 
             using (SqlConnection connection = new SqlConnection(_conectionString))
             {
@@ -424,6 +350,7 @@ namespace RepositoryStd.Repository
                 if (!(dataReader["priceType"] is DBNull))
                 {
                     advertisementCommon.AdvertisementPrice.priceType = (string)dataReader["priceType"];
+                    
                 }
                 responseBase.Success = true;
                 responseBase.Message = "OK";

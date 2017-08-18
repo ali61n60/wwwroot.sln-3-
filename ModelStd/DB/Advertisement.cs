@@ -5,8 +5,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.DB
 {
-
-
     public class Advertisement
     {
 

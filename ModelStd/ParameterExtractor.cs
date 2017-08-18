@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using ModelStd.DB;
 
 namespace ModelStd
@@ -21,11 +19,14 @@ namespace ModelStd
         public static readonly string PriceTypeKey = "PriceType";
         public static readonly PriceType PriceTypeDefault=PriceType.All;
 
-        public static readonly string MinPriceKey = "MinPrice";
+        public static readonly string MinPriceKey = "MinimumPrice";
         public static readonly decimal MinPriceDefault = -1;
 
-        public static readonly string MaxPriceKey = "MaxPrice";
+        public static readonly string MaxPriceKey = "MaximumPrice";
         public static readonly decimal MaxPriceDefault = 1000000000000;
+
+        public static readonly string DistrictIdKey = "DistrictId";
+        public static readonly List<int> DistrctIdDefault=new List<int>();
 
         public static int ExtractCatgoryId(Dictionary<string, string> inputDictionary)
         {
@@ -104,6 +105,25 @@ namespace ModelStd
                 tempMaxPrice = MaxPriceDefault;
 
             return tempMaxPrice;
+        }
+
+        public static List<int> ExtractDistrictIds(Dictionary<string, string> inputDictionary)
+        {
+            List<int> tempList=new List<int>();
+            int tempDistrict;
+            if (inputDictionary.ContainsKey(DistrictIdKey))
+            {
+                string inputDistrictValue = inputDictionary[DistrictIdKey];
+                string[] districtArrayString = inputDistrictValue.Split(',');
+                foreach (var s in districtArrayString)
+                {
+                    if(int.TryParse(s,out tempDistrict))
+                        tempList.Add(tempDistrict);
+                }
+                return tempList;
+            }
+
+            return DistrctIdDefault;
         }
 
 

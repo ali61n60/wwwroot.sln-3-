@@ -1,7 +1,6 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using ModelStd.Advertisements;
 
 namespace ModelStd.DB
 {
@@ -22,7 +21,7 @@ namespace ModelStd.DB
         
     }
 
-    public partial class Price
+    public partial class Price:IComparable<Price>
     {
         public static PriceType ParsePriceType(string s)
         {
@@ -40,6 +39,14 @@ namespace ModelStd.DB
             if (priceType == PriceType.Request)
                 return "درخواستی";
             return "همه";
+        }
+
+
+        public int CompareTo(Price other)
+        {
+            if (ReferenceEquals(this, other)) return 0;
+            if (ReferenceEquals(null, other)) return 1;
+            return Nullable.Compare(price, other.price);
         }
     }
 

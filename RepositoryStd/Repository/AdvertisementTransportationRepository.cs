@@ -70,10 +70,10 @@ namespace RepositoryStd.Repository
                                  " INNER JOIN CarModel ON AdAttributeTransportation.modelId=CarModel.modelId " +
                                  " INNER JOIN Brands ON CarModel.brandId=Brands.brandId ";
 
-            string commandText = advertisementCommonRepository.SelectColumnsNameStatement(orderByClause) +
-                                 customColumnNames +
-                                 advertisementCommonRepository.FromStatement +
-                                 customJoins;
+            string commandText = "";// advertisementCommonRepository.SelectColumnsNameStatement(orderByClause) +
+                                 //customColumnNames +
+                                 //advertisementCommonRepository.FromStatement +
+                                 //customJoins;
             return commandText;
         }
 
