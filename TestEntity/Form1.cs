@@ -4,13 +4,17 @@ using System.Linq;
 using System.Windows.Forms;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
+using ModelStd.Advertisements;
+using ModelStd.DB;
 using RepositoryStd.DB;
+using City = ModelStd.Advertisements.Location.City;
+using District = ModelStd.Advertisements.Location.District;
+using Province = ModelStd.Advertisements.Location.Province;
 
 namespace TestEntity
 {
     public partial class Form1 : Form
     {
-        
         private AdCommonDbContext _adCommonDbContext;
         public Form1()
         {
@@ -25,18 +29,16 @@ namespace TestEntity
         {
             try
             {
-                IQueryable<Price> allPrices = _adCommonDbContext.Prices.Where(p => p.price1 > 0);
+                IQueryable<Price> allPrices = _adCommonDbContext.Prices.Where(p => p.price > 0);
                 foreach (Price currentPrice in allPrices)
                 {
-                    listBox1.Items.Add((currentPrice.price1 + " ," + currentPrice.priceType));
+                    listBox1.Items.Add((currentPrice.price + " ," + currentPrice.priceType));
                 }
             }
             catch (Exception ex)
             {
                 listBox1.Items.Add(ex.Message);
             }
-
-
         }
 
         private void buttonGetCars_Click(object sender, EventArgs e)
@@ -55,45 +57,7 @@ namespace TestEntity
         private void buttonGetAdvertisement_Click(object sender, EventArgs e)
         {
             string result = "";
-            var districtList = _adCommonDbContext.Districts.Include(district => district.City)
-                .Join(_adCommonDbContext.Provinces,
-                    district => district.City.provinceId,
-                    province => province.provinceId,
-                    (district, province) => new FullProvince(district, district.City, province));
-
-
-
-            var list = _adCommonDbContext.Advertisements.Where(advertisement => advertisement.categoryId == 100)
-                .Include(advertisement => advertisement.Category).Include(advertisement => advertisement.District)
-                .Join(districtList,
-                    advertisement => advertisement.districtId,
-                    fullProvince => fullProvince.FDistrict.districtId,
-                    (advertisement, province) => new {advertisement, province});
-            foreach (var j in list)
-            {
-                result =$"adId={j.advertisement.adId}," +
-                        $" adTitle={j.advertisement.adTitle}," +
-                        $"adCategoryName={j.advertisement.Category.categoryName},"+
-                        $" AdDistrict={j.advertisement.District.districtName}," +
-                        $" AdCity={j.advertisement.District.City.cityName}," +
-                        $"AdProvince={j.province.FProvince.provinceName}";
-
-                listBox1.Items.Add(result);
-            }
         }
     }
-
-    public class FullProvince
-    {
-        public FullProvince(District district, City city, Province province)
-        {
-            FDistrict = district;
-            FCity = city;
-            FProvince = province;
-        }
-        public District FDistrict { get; set; }
-        public City FCity { get; set; }
-        public Province FProvince { get; set; }
-
-    }
+   
 }
