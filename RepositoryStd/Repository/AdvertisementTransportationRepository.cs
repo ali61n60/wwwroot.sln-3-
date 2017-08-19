@@ -28,30 +28,30 @@ namespace RepositoryStd.Repository
             advertisementCommonRepository=new AdvertisementCommonRepository(connectionString);
         }
 
-        public IEnumerable<AdvertisementTransportation> FindBy(IQuery query)
+        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string,string> inputDictionary)
         {
-            return FindBy(query, 1, 1000000);//get first 1000000 rows from database
+            return FindBy(inputDictionary, 1, 1000000);//get first 1000000 rows from database
         }
 
 
         //Called from service layer
-        public IEnumerable<AdvertisementTransportation> FindBy(IQuery query, int index, int count)
+        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary, int startIndex, int count)
         {
             _searchResultItems = new List<AdvertisementTransportation>();
 
-            string commandText = getSelectCommandText(query);
+           // string commandText = getSelectCommandText(query);
 
 
-            using (SqlConnection connection = new SqlConnection(_conectionString))
-            {
-                using (SqlCommand command = new SqlCommand(commandText, connection))
-                {
-                    query.FillCommandParameters(command);
-                    command.Parameters.Add("@start", SqlDbType.Int).Value = index;
-                    command.Parameters.Add("@end", SqlDbType.Int).Value = (index + count - 1);
-                    FillSearchResultItemsFromDatabase(connection, command);
-                }
-            }
+            //using (SqlConnection connection = new SqlConnection(_conectionString))
+            //{
+            //    using (SqlCommand command = new SqlCommand(commandText, connection))
+            //    {
+            //       query.FillCommandParameters(command);
+            //        command.Parameters.Add("@start", SqlDbType.Int).Value = startIndex;
+            //        command.Parameters.Add("@end", SqlDbType.Int).Value = (startIndex + count - 1);
+            //        FillSearchResultItemsFromDatabase(connection, command);
+            //    }
+            //}
             return _searchResultItems;
         }
         private string getSelectCommandText(IQuery query)
@@ -70,10 +70,10 @@ namespace RepositoryStd.Repository
                                  " INNER JOIN CarModel ON AdAttributeTransportation.modelId=CarModel.modelId " +
                                  " INNER JOIN Brands ON CarModel.brandId=Brands.brandId ";
 
-            string commandText = advertisementCommonRepository.SelectColumnsNameStatement(orderByClause) +
-                                 customColumnNames +
-                                 advertisementCommonRepository.FromStatement +
-                                 customJoins;
+            string commandText = "";// advertisementCommonRepository.SelectColumnsNameStatement(orderByClause) +
+                                 //customColumnNames +
+                                 //advertisementCommonRepository.FromStatement +
+                                 //customJoins;
             return commandText;
         }
 

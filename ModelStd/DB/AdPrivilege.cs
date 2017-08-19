@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RepositoryStd.DB
+namespace ModelStd.DB
 {
     
 
     [Table("AdPrivilege")]
-    public partial class AdPrivilege
+    public class AdPrivilege
     {
         [Key]
         [Column(Order = 0)]
@@ -17,7 +17,7 @@ namespace RepositoryStd.DB
         [Key]
         [Column(Order = 1)]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int privilageId { get; set; }
+        public int privilegeId { get; set; }
 
         [Key]
         [Column(Order = 2, TypeName = "smalldatetime")]

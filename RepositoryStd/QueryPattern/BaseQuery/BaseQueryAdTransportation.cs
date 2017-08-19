@@ -9,15 +9,15 @@ namespace RepositoryStd.QueryPattern.BaseQuery
     
     public class BaseQueryAdTransportation : BaseQuery, IQuery
     {
-        private List<SearchFieldAbstract> _searchFieldList = new List<SearchFieldAbstract>();
+        private readonly List<SearchFieldAbstract> _searchFieldList = new List<SearchFieldAbstract>();
         
         public BaseQueryAdCommon baseQueryAdCommon;
 
-        public SearchFieldString BrandName { get; private set; }
-        public SearchFieldInteger BrandId { get; private set; }
+        public SearchFieldString BrandName { get; }
+        public SearchFieldInteger BrandId { get; }
 
-        public SearchFieldString ModelName { get; private set; }
-        public SearchFieldInteger ModelId{get; private set; }
+        public SearchFieldString ModelName { get; }
+        public SearchFieldInteger ModelId{get; }
 
 
         public BaseQueryAdTransportation(Dictionary<string, string> userInput)
@@ -47,7 +47,6 @@ namespace RepositoryStd.QueryPattern.BaseQuery
             {
                 whereClause += searchField.GetWhereClause();
             }
-
             return whereClause;
         }
 

@@ -17,5 +17,7 @@ namespace Repository.DBEintityFramework
 
         [Column("price", TypeName = "money")]
         public decimal? price1 { get; set; }
+
+        public virtual Advertisement Advertisement { get; set; }
     }
 }

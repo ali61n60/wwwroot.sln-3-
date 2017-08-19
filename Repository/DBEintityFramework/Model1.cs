@@ -8,7 +8,7 @@ namespace Repository.DBEintityFramework
     public partial class Model1 : DbContext
     {
         public Model1()
-            : base("name=Model1")
+            : base("name=Model11")
         {
         }
 
@@ -39,6 +39,7 @@ namespace Repository.DBEintityFramework
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<MobileBrand> MobileBrands { get; set; }
+        public virtual DbSet<Price> Prices { get; set; }
         public virtual DbSet<Privilege> Privileges { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAd> SimilarAds { get; set; }
@@ -49,7 +50,6 @@ namespace Repository.DBEintityFramework
         public virtual DbSet<Test3> Test3 { get; set; }
         public virtual DbSet<Test4> Test4 { get; set; }
         public virtual DbSet<UsersExtraInfo> UsersExtraInfoes { get; set; }
-        public virtual DbSet<Price> Prices { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -67,6 +67,10 @@ namespace Repository.DBEintityFramework
                 .HasMany(e => e.AdPrivileges)
                 .WithRequired(e => e.Advertisement)
                 .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Advertisement>()
+                .HasOptional(e => e.Price)
+                .WithRequired(e => e.Advertisement);
 
             modelBuilder.Entity<Advertisement>()
                 .HasMany(e => e.SimilarAds)
@@ -172,6 +176,10 @@ namespace Repository.DBEintityFramework
                 .WithRequired(e => e.District)
                 .WillCascadeOnDelete(false);
 
+            modelBuilder.Entity<Price>()
+                .Property(e => e.price1)
+                .HasPrecision(19, 4);
+
             modelBuilder.Entity<Privilege>()
                 .HasMany(e => e.AdPrivileges)
                 .WithRequired(e => e.Privilege)
@@ -181,10 +189,6 @@ namespace Repository.DBEintityFramework
             modelBuilder.Entity<test2>()
                 .Property(e => e.name)
                 .IsFixedLength();
-
-            modelBuilder.Entity<Price>()
-                .Property(e => e.price1)
-                .HasPrecision(19, 4);
         }
     }
 }

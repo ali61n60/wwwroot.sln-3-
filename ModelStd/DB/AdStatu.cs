@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RepositoryStd.DB
+namespace ModelStd.DB
 {
     
-
-    public partial class AdStatu
+    [Table("AdStatus")]
+    public class AdStatu
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public AdStatu()
         {
             Advertisements = new HashSet<Advertisement>();
@@ -27,7 +26,6 @@ namespace RepositoryStd.DB
         [StringLength(150)]
         public string adStatusEnglish { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Advertisement> Advertisements { get; set; }
+       public virtual ICollection<Advertisement> Advertisements { get; set; }
     }
 }

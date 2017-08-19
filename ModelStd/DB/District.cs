@@ -3,30 +3,32 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RepositoryStd.DB
+namespace ModelStd.DB
 {
     
 
-    public partial class City
+    public partial class District
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public City()
+        public District()
         {
-            Districts = new HashSet<District>();
+            Advertisements = new HashSet<Advertisement>();
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int cityId { get; set; }
+        public int districtId { get; set; }
 
         [Required]
         [StringLength(150)]
-        public string cityName { get; set; }
+        public string districtName { get; set; }
 
-        public int? provinceId { get; set; }
+        public int cityId { get; set; }
 
-        public virtual Province Province { get; set; }
+        public int? municipalId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<District> Districts { get; set; }
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
+
+        public virtual City City { get; set; }
     }
 }

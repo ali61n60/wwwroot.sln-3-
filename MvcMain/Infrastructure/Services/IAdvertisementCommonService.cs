@@ -8,12 +8,6 @@ namespace MvcMain.Infrastructure.Services
     
     public interface IAdvertisementCommonService
     {
-        //test
-        string WhatTimeIsIt(string name);
-
-        //test
-       string TestNameValue(string name, Dictionary<string,string> userDictionary);
-
         //Done
         ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(int startIndex, int count, Dictionary<string, string> userInput);
         

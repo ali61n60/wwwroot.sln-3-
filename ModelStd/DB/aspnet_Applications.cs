@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace RepositoryStd.DB
+namespace ModelStd.DB
 {
     
 
@@ -14,7 +14,6 @@ namespace RepositoryStd.DB
         {
             aspnet_Membership = new HashSet<aspnet_Membership>();
             aspnet_Paths = new HashSet<aspnet_Paths>();
-            aspnet_Roles = new HashSet<aspnet_Roles>();
             aspnet_Users = new HashSet<aspnet_Users>();
         }
 
@@ -37,9 +36,7 @@ namespace RepositoryStd.DB
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aspnet_Paths> aspnet_Paths { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<aspnet_Roles> aspnet_Roles { get; set; }
+        
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<aspnet_Users> aspnet_Users { get; set; }

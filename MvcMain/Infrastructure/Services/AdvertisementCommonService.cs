@@ -4,8 +4,6 @@ using System.Linq;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using ModelStd.Services;
-using MvcMain.Infrastructure.ServicePolicy;
-using RepositoryStd.QueryPattern.BaseQuery;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -14,12 +12,12 @@ namespace MvcMain.Infrastructure.Services
     
     public class AdvertisementCommonService : IAdvertisementService ,IAdvertisementCommonService
     {
+        //TODO make _response method field
         ResponseBase<AdvertisementCommon[]> _response;
         ResponseBase _responseBase;
         private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly IImageRepository _imageRepository;
-        private ServiceCommonPolicy _serviceCommonPolicy = new ServiceCommonPolicy();
-       // RegistrationService registrationService;//TODO put it in Bootstrapper
+        // RegistrationService registrationService;//TODO put it in Bootstrapper
 
         private readonly string NumberOfItemsKey = "numberOfItems";
         
@@ -36,21 +34,16 @@ namespace MvcMain.Infrastructure.Services
             _advertisementCommonRepository= AppServiceProvider.Instance.GetService<IRepository<AdvertisementCommon>>();
             _imageRepository = AppServiceProvider.Instance.GetService<IImageRepository>();
         }
-
-        
-
-
        
         //Main Method that get data from database
         public ResponseBase<AdvertisementCommon[]> GetAdvertisements(int startIndex, int count, Dictionary<string, string> userInput)
         {
             string errorCode = "AdvertisementCommonService.GetAdvertisements";
             _response = new ResponseBase<AdvertisementCommon[]>();
-            BaseQueryAdCommon baseQuery = new BaseQueryAdCommon(userInput);
             try
             {
                 AdvertisementCommon[] advertisementCommons =
-                    _advertisementCommonRepository.FindBy(baseQuery, startIndex, count).ToArray();//get attributes 
+                    _advertisementCommonRepository.FindBy(userInput, startIndex, count).ToArray();//get attributes 
                 FillFirstImage(advertisementCommons);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(userInput, advertisementCommons);
@@ -84,22 +77,12 @@ namespace MvcMain.Infrastructure.Services
 
         private void setResponse(AdvertisementCommon[] advertisementCommons, int numberOfItemsRetrievedFromDatabase)
         {
-            Dictionary<string, string> customDictionary = new Dictionary<string, string>();
-            customDictionary.Add(NumberOfItemsKey, numberOfItemsRetrievedFromDatabase.ToString());
+            Dictionary<string, string> customDictionary =
+                new Dictionary<string, string> {{NumberOfItemsKey, numberOfItemsRetrievedFromDatabase.ToString()}};
             _response.ResponseData = advertisementCommons;
 
             _response.SetSuccessResponse("OK");
             _response.CustomDictionary = customDictionary;
-        }
-
-        public string WhatTimeIsIt(string name)
-        {
-            throw new NotImplementedException();
-        }
-
-        public string TestNameValue(string name, Dictionary<string, string> userDictionary)
-        {
-            throw new NotImplementedException();
         }
 
         public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(int startIndex, int count, Dictionary<string, string> userInput)

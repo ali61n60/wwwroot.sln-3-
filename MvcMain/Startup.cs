@@ -22,10 +22,11 @@ using RepositoryStd.Repository.TransportationRepository;
 
 namespace MvcMain
 {
+    //Update-Package RepositoryStd -ProjectName MvcMain -reinstall
     public class Startup
     {
-        IConfigurationRoot _configuration;
-        private IHostingEnvironment _env;
+        readonly IConfigurationRoot _configuration;
+        private readonly IHostingEnvironment _env;
         private AdvertisementDataClass _advertisementDataClass;
 
         public Startup(IHostingEnvironment env)

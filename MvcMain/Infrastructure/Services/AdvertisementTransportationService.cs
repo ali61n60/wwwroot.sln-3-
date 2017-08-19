@@ -47,20 +47,20 @@ namespace MvcMain.Infrastructure.Services
             string errorCode = "AdvertisementTransportationService.GetAdvertisements";
             BaseQueryAdTransportation baseQueryAdTransportation = new BaseQueryAdTransportation(userInput);
             _response = new ResponseBase<AdvertisementCommon[]>();
-            try
-            {
-                AdvertisementTransportation[] advertisementTransportation =
-                    _advertisementTransportationRepository.FindBy(baseQueryAdTransportation, startIndex, count).ToArray();//get attributes 
-                AdvertisementCommon[] advertisementCommons = getAdvertisementCommons(advertisementTransportation);
-                _advertisementCommonService.FillFirstImage(advertisementCommons);//get Images
-                _response.ResponseData = advertisementCommons;
-                _response.SetSuccessResponse();
-            }
-            catch (Exception ex)
-            {
-                _response.ResponseData = null;
-                _response.SetFailureResponse(ex.Message, errorCode);
-            }
+            //try
+            //{
+            //    AdvertisementTransportation[] advertisementTransportation =
+            //        _advertisementTransportationRepository.FindBy(baseQueryAdTransportation, startIndex, count).ToArray();//get attributes 
+            //    AdvertisementCommon[] advertisementCommons = getAdvertisementCommons(advertisementTransportation);
+            //    _advertisementCommonService.FillFirstImage(advertisementCommons);//get Images
+            //    _response.ResponseData = advertisementCommons;
+            //    _response.SetSuccessResponse();
+            //}
+            //catch (Exception ex)
+            //{
+            //    _response.ResponseData = null;
+            //    _response.SetFailureResponse(ex.Message, errorCode);
+            //}
             return _response;
         }
 
