@@ -17,6 +17,7 @@ using ModelStd.IRepository;
 using MvcMain.Infrastructure.Services;
 using MvcMain.Models;
 using RepositoryStd;
+using RepositoryStd.DbModel;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.TransportationRepository;
 
@@ -59,6 +60,7 @@ namespace MvcMain
 
             services.AddTransient<ITransportaionRepository>(AppServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
             
+            new ayoobfar_dbContext().Database.Migrate();
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(_configuration["Data:ConnectionString"]));
 

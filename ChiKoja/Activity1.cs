@@ -24,6 +24,7 @@ namespace ChiKoja
             
 
         }
+        
 
         private void initialItems()
         {

@@ -24,11 +24,12 @@ namespace RepositoryStd.DB
         public AdCommonDbContext() { }
         public AdCommonDbContext(DbContextOptions options):base(options)
         {
+           
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            optionsBuilder.UseSqlServer("Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

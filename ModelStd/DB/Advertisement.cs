@@ -14,6 +14,7 @@ namespace ModelStd.DB
             AdPrivileges = new HashSet<AdPrivilege>();
             SimilarAds = new HashSet<SimilarAd>();
         }
+        public int WhatIsYourName { get; set; }
 
         [Key]
         public Guid adId { get; set; }

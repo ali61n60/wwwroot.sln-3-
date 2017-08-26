@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace RepositoryStd.DbModel
+{
+    public partial class CarModel
+    {
+        public CarModel()
+        {
+            AdAttributeTransportation = new HashSet<AdAttributeTransportation>();
+        }
+
+        public int ModelId { get; set; }
+        public string ModelName { get; set; }
+        public int BrandId { get; set; }
+
+        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportation { get; set; }
+        public virtual Brands Brand { get; set; }
+    }
+}
