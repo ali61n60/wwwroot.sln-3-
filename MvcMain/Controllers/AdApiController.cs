@@ -18,6 +18,10 @@ namespace MvcMain.Controllers
             return Json(String.Format("Hello {0},Number is {1} current server time is: {2}", name, numberOfCalls, DateTime.Now.ToString()));
         }
 
+        public string WhatTimeIsIt()
+        {
+            return DateTime.Now.ToString();
+        }
 
         public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(
             [FromBody] Dictionary<string, string> userInput)
