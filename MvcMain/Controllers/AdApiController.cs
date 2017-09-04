@@ -23,6 +23,12 @@ namespace MvcMain.Controllers
             return DateTime.Now.ToString();
         }
 
+        public string Ali()
+        {
+            return "REZANEJATI";
+        }
+
+
         public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(
             [FromBody] Dictionary<string, string> userInput)
         {
