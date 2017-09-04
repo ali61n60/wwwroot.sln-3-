@@ -39,7 +39,7 @@ namespace RepositoryStd.DbModel
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Server= .\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer(@"Data Source= www.whereismycar.ir\MSSQLSERVER2012;Initial Catalog=whereism_database;Persist Security Info=True;User ID=whereism_ali;Password=Lam8u38@;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
