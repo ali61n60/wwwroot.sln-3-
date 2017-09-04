@@ -30,7 +30,7 @@ namespace RepositoryStd.DB
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Data Source= www.whereismycar.ir\\MSSQLSERVER2012;Initial Catalog=whereism_database;Persist Security Info=True;User ID=whereism_ali;Password=Lam8u38@;MultipleActiveResultSets=true");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
