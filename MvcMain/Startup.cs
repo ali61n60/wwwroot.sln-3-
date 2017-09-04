@@ -96,10 +96,10 @@ namespace MvcMain
         {
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            if (env.IsDevelopment())
-            {
+            //if (env.IsDevelopment())
+            //{
                 app.UseDeveloperExceptionPage();
-            }
+            //}
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 AutomaticAuthenticate = true,
