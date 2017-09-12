@@ -26,7 +26,22 @@ footer {
     color: white;
     padding: 15px;
 }
+.myLinks {
+    background-color: #CCCCCC;
+}
 
+.myLinks:hover {
+    background-color: #999;
+}
+
+.adContainer {
+    display: table;
+    text-align: center;
+}
+
+.ajaxServerCall {
+    visibility: hidden;
+}
 
 @media screen and (max-width: 767px) {
     .sidenav {
@@ -37,22 +52,10 @@ footer {
     .row.content {
         height: auto;
     }
-}
-
-
-.myLinks {
-    background-color: #CCCCCC;
-}
-
-    .myLinks:hover {
-        background-color: #999;
+    .ads {
+        display: none;
     }
-
-.adContainer {
-    display: table;
-    text-align: center;
 }
 
-.ajaxServerCall {
-    visibility: hidden;
-}
+
+
