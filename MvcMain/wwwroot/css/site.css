@@ -1,0 +1,58 @@
+﻿.navbar {
+    margin-bottom: 0;
+    -ms-border-radius: 0;
+    border-radius: 0;
+    background-color: #9370DB;
+}
+
+.navbar-inverse .navbar-nav > li > a {
+    color: green;
+}
+
+.row.content {
+    height: 450px
+}
+
+
+.sidenav {
+    padding-top: 20px;
+    background-color: #EE82EE;
+    height: 100%;
+}
+
+
+footer {
+    background-color: #DDA0DD;
+    color: white;
+    padding: 15px;
+}
+
+
+@media screen and (max-width: 767px) {
+    .sidenav {
+        height: auto;
+        padding: 15px;
+    }
+
+    .row.content {
+        height: auto;
+    }
+}
+
+
+.myLinks {
+    background-color: #CCCCCC;
+}
+
+    .myLinks:hover {
+        background-color: #999;
+    }
+
+.adContainer {
+    display: table;
+    text-align: center;
+}
+
+.ajaxServerCall {
+    visibility: hidden;
+}

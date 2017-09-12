@@ -15,6 +15,7 @@ namespace MvcMain.Controllers
         //[Authorize]
         public async Task<IActionResult> Index()
         {
+            ViewData["Title"] = "Home";
             return View();
         }
     }
