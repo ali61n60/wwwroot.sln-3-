@@ -7,6 +7,7 @@
     <environment names="Development">
         <script src="~/lib/jQuery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/lib/mustache.js/mustache.js"></script>
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
         <link href="~/css/site.css" rel="stylesheet" />
     </environment>
@@ -20,12 +21,13 @@
                 asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
                 asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
         </script>
+        <script src="~/lib/mustache.js/mustache.min.js"></script>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link href="~/css/site.min.css" rel="stylesheet" />
     </environment>
 
     <link href="~/lib/style/css/style.css" rel="stylesheet" />
-    <script src="~/lib/mustache.js/mustache.js"></script>
+    
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     <title>xxx</title>
