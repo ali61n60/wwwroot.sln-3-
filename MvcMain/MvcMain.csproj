@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <Content Include="wwwroot\css\site.css" />
-    <Content Include="wwwroot\css\site.js" />
     <Content Include="wwwroot\css\style\css\currentProject\SingleAdItem.css" />
     <Content Include="wwwroot\css\style\css\currentProject\SingleAdItem.css.map" />
     <Content Include="wwwroot\css\style\css\lightslider.css" />
@@ -76,7 +75,6 @@
       <DependentUpon>style.css</DependentUpon>
     </Content>
     <Content Include="wwwroot\css\style\sass\style.scss" />
-    <Content Include="wwwroot\js\site.css" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\lib\jQuery\.bower.json" />
     <Content Include="wwwroot\lib\jQuery\AUTHORS.txt" />
