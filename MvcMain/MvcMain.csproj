@@ -60,6 +60,7 @@
       <DependentUpon>SingleAdItem.css</DependentUpon>
     </Content>
     <Content Include="wwwroot\css\style\sass\currentProject\SingleAdItem.scss" />
+    <Content Include="wwwroot\css\style\sass\currentProject\style.scss" />
     <Content Include="wwwroot\css\style\sass\currentProject\_oldStyle.scss" />
     <Content Include="wwwroot\css\style\sass\helpers\_mixins.scss" />
     <Content Include="wwwroot\css\style\sass\helpers\_variables.scss" />
@@ -67,14 +68,16 @@
     <Content Include="wwwroot\css\style\sass\layout\_forms.scss" />
     <Content Include="wwwroot\css\style\sass\layout\_header.scss" />
     <Content Include="wwwroot\css\style\sass\layout\_sidebar.scss" />
+    <Content Include="wwwroot\css\style\sass\site.css" />
+    <Content Include="wwwroot\css\style\sass\site.css.map" />
+    <Content Include="wwwroot\css\style\sass\site.min.css" />
     <Content Include="wwwroot\css\style\sass\style.css">
       <DependentUpon>style.scss</DependentUpon>
     </Content>
-    <Content Include="wwwroot\css\style\sass\style.css.map" />
     <Content Include="wwwroot\css\style\sass\style.min.css">
       <DependentUpon>style.css</DependentUpon>
     </Content>
-    <Content Include="wwwroot\css\style\sass\style.scss" />
+    <Content Include="wwwroot\css\style\sass\site.scss" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\AUTHORS.txt" />
