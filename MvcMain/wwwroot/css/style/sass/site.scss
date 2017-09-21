@@ -11,8 +11,6 @@
 @import 'components/buttons';
 @import 'components/dropdown';
 @import 'components/navigation';
-@import 'currentProject/SingleAdItem.scss';
-@import 'currentProject/_oldStyle.scss';
 @import 'components/_images.scss';
 @import 'base/_screenReader.scss';
 @import 'base/_headings.scss';
@@ -40,4 +38,7 @@
 @import 'components/_breadcrumb.scss';
 @import 'components/_navbar.scss';
 @import 'components/_nav.scss';
-@import 'components/_input.scss'; 
+@import 'components/_input.scss';
+@import 'currentProject/SingleAdItem.scss';
+@import 'currentProject/_oldStyle.scss';
+@import "currentProject/style.scss";
