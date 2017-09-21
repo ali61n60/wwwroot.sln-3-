@@ -1,0 +1,58 @@
+﻿
+/*Colors*/
+$defaultColor:#333;
+$defaultBackgroundColor:#fff;
+$defaultBorderColor:#ccc;
+$defaultBackgroundColorFocus:#e6e6e6;
+$defaultBorderColorFocus: #8c8c8c;
+$defaultBorderColorHover:#adadad;
+
+$primaryBackgroundColor:#337ab7;
+$primaryBorderColor: #2e6da4;
+$primaryFocusBackgroundColor:#286090;
+$primaryFocusBorderColor:#122b40;
+$primaryHoverBorderColor:#204d74;
+
+$successBackgroundColor:#5cb85c;
+$successBorderColor:#4cae4c;
+$successFocusBackgroundColor:#449d44;
+$successFocusBorderColor:#255625;
+$successHoverBorderColor: #398439;
+
+$infoBackgroundColor:#5bc0de;
+$infoBorderColor:#46b8da;
+$infoFocusBackgroundColor:#31b0d5;
+$infoFocusBorderColor:#1b6d85;
+$infoHoverBorderColor:#269abc;
+
+$warningBackgroundColor:#f0ad4e;
+$warningBorderColor:#eea236;
+$warningFocusBackgroundColor:#ec971f;
+$warningFocusBorderColor:#985f0d;
+$warningHoverBorderColor:#d58512;
+
+$dangerBackgroundColor:#d9534f;
+$dangerBorderColor:#d43f3a;
+$dangerFocusBackgroundColor:#c9302c;
+$dangerFocusBorderColor:#761c19;
+$dangerHoverBorderColor:#ac2925;
+
+
+$logo_color : #083B91;
+
+/* corporate color palette */
+$primary-dark: #06888A;
+$primary-light: #FFEED5;
+$primary-mid: #DC664A;
+$secondary-dark: #5A3928;
+$secondary-light: #FDC149;
+/* functional variables */
+$page-background: $primary-light;
+$headline-color: $primary-dark;
+$text-color: $primary-dark;
+$border-light: $secondary-light;
+$border-dark: $primary-dark;
+
+/*Fonts*/
+$headline-font: 'Varela Round', Helvetica, Arial, sans-serif;
+$body-font: 'Palatino Linotype', Baskerville, serif;
