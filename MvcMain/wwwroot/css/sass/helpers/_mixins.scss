@@ -1,1 +1,44 @@
-﻿
+﻿@mixin Roundy($radius-one,$radius-two){
+    border-radius:$radius-one;
+    border-top-right-radius:$radius-two;
+    border-bottom-left-radius:$radius-two;
+}
+
+@mixin green-links{
+    a{
+        color:green;
+        &:hover{
+            color:darkgreen;
+        }
+    }
+}
+
+.box{
+    @include Roundy(4px,8px);
+    .innerbox{
+        @include Roundy(4px,8px);
+    }
+}
+
+.button{
+    @include Roundy(4px,8px);
+    background:#345;
+}
+
+%bar-test{
+    height:14px;
+    font-size:10px;
+    > div{
+        float:left;
+        clear:none;
+    }
+}
+
+.menu-test{
+    @extend %bar-test;
+    background-color:#345;
+}
+
+.nav-test{
+    @extend %bar-test;
+}
