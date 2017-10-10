@@ -8,8 +8,8 @@ using Model.Db.Ad;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    [Migration("20171010133251_test1")]
-    partial class test1
+    [Migration("20171010135811_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -52,7 +52,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("modelId");
 
-                    b.ToTable("ad.AdAttributeTransportation");
+                    b.ToTable("AdAttributeTransportation");
                 });
 
             modelBuilder.Entity("ModelStd.Db.AdPrivilege", b =>
@@ -77,7 +77,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("privilegeId");
 
-                    b.ToTable("ad.AdPrivilege");
+                    b.ToTable("AdPrivilege");
                 });
 
             modelBuilder.Entity("ModelStd.Db.AdStatu", b =>
@@ -94,7 +94,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("adStatusId");
 
-                    b.ToTable("ad.AdStatus");
+                    b.ToTable("AdStatus");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Advertisement", b =>
@@ -137,7 +137,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("districtId");
 
-                    b.ToTable("ad.Advertisements");
+                    b.ToTable("Advertisements");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Brand", b =>
@@ -148,13 +148,9 @@ namespace RepositoryStd.Migrations
                         .IsRequired()
                         .HasMaxLength(150);
 
-                    b.Property<string>("brandName2")
-                        .IsRequired()
-                        .HasMaxLength(150);
-
                     b.HasKey("brandId");
 
-                    b.ToTable("ad.Brands");
+                    b.ToTable("Brands");
                 });
 
             modelBuilder.Entity("ModelStd.Db.CarModel", b =>
@@ -171,7 +167,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("brandId");
 
-                    b.ToTable("ad.CarModel");
+                    b.ToTable("CarModel");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Category", b =>
@@ -190,7 +186,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("categoryId");
 
-                    b.ToTable("ad.Categories");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("ModelStd.Db.City", b =>
@@ -207,7 +203,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("provinceId");
 
-                    b.ToTable("ad.Cities");
+                    b.ToTable("Cities");
                 });
 
             modelBuilder.Entity("ModelStd.Db.District", b =>
@@ -226,7 +222,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("cityId");
 
-                    b.ToTable("ad.Districts");
+                    b.ToTable("Districts");
                 });
 
             modelBuilder.Entity("ModelStd.Db.MobileBrand", b =>
@@ -241,7 +237,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("brandId");
 
-                    b.ToTable("ad.MobileBrands");
+                    b.ToTable("MobileBrands");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Price", b =>
@@ -262,7 +258,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("AdvertisementadId");
 
-                    b.ToTable("ad.Price");
+                    b.ToTable("Price");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Privilege", b =>
@@ -275,7 +271,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("privilegeId");
 
-                    b.ToTable("ad.Privilege");
+                    b.ToTable("Privilege");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Province", b =>
@@ -291,7 +287,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("provinceId");
 
-                    b.ToTable("ad.Provinces");
+                    b.ToTable("Provinces");
                 });
 
             modelBuilder.Entity("ModelStd.Db.SimilarAd", b =>
@@ -312,7 +308,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("AdvertisementadId");
 
-                    b.ToTable("ad.SimilarAds");
+                    b.ToTable("SimilarAds");
                 });
 
             modelBuilder.Entity("ModelStd.Db.SM", b =>
@@ -334,7 +330,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("messageId");
 
-                    b.ToTable("ad.SMS");
+                    b.ToTable("SMS");
                 });
 
             modelBuilder.Entity("ModelStd.Db.AdAttributeTransportation", b =>

@@ -12,7 +12,7 @@ namespace RepositoryStd.Migrations
                 name: "ad");
 
             migrationBuilder.CreateTable(
-                name: "ad.AdStatus",
+                name: "AdStatus",
                 schema: "ad",
                 columns: table => new
                 {
@@ -22,11 +22,11 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.AdStatus", x => x.adStatusId);
+                    table.PrimaryKey("PK_AdStatus", x => x.adStatusId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Brands",
+                name: "Brands",
                 schema: "ad",
                 columns: table => new
                 {
@@ -35,11 +35,11 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Brands", x => x.brandId);
+                    table.PrimaryKey("PK_Brands", x => x.brandId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Categories",
+                name: "Categories",
                 schema: "ad",
                 columns: table => new
                 {
@@ -50,11 +50,11 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Categories", x => x.categoryId);
+                    table.PrimaryKey("PK_Categories", x => x.categoryId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.MobileBrands",
+                name: "MobileBrands",
                 schema: "ad",
                 columns: table => new
                 {
@@ -64,11 +64,11 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.MobileBrands", x => x.brandId);
+                    table.PrimaryKey("PK_MobileBrands", x => x.brandId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Privilege",
+                name: "Privilege",
                 schema: "ad",
                 columns: table => new
                 {
@@ -77,11 +77,11 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Privilege", x => x.privilegeId);
+                    table.PrimaryKey("PK_Privilege", x => x.privilegeId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Provinces",
+                name: "Provinces",
                 schema: "ad",
                 columns: table => new
                 {
@@ -91,11 +91,11 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Provinces", x => x.provinceId);
+                    table.PrimaryKey("PK_Provinces", x => x.provinceId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.SMS",
+                name: "SMS",
                 schema: "ad",
                 columns: table => new
                 {
@@ -107,11 +107,11 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.SMS", x => x.messageId);
+                    table.PrimaryKey("PK_SMS", x => x.messageId);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.CarModel",
+                name: "CarModel",
                 schema: "ad",
                 columns: table => new
                 {
@@ -121,18 +121,18 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.CarModel", x => x.modelId);
+                    table.PrimaryKey("PK_CarModel", x => x.modelId);
                     table.ForeignKey(
-                        name: "FK_ad.CarModel_ad.Brands_brandId",
+                        name: "FK_CarModel_Brands_brandId",
                         column: x => x.brandId,
                         principalSchema: "ad",
-                        principalTable: "ad.Brands",
+                        principalTable: "Brands",
                         principalColumn: "brandId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Cities",
+                name: "Cities",
                 schema: "ad",
                 columns: table => new
                 {
@@ -142,18 +142,18 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Cities", x => x.cityId);
+                    table.PrimaryKey("PK_Cities", x => x.cityId);
                     table.ForeignKey(
-                        name: "FK_ad.Cities_ad.Provinces_provinceId",
+                        name: "FK_Cities_Provinces_provinceId",
                         column: x => x.provinceId,
                         principalSchema: "ad",
-                        principalTable: "ad.Provinces",
+                        principalTable: "Provinces",
                         principalColumn: "provinceId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Districts",
+                name: "Districts",
                 schema: "ad",
                 columns: table => new
                 {
@@ -164,18 +164,18 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Districts", x => x.districtId);
+                    table.PrimaryKey("PK_Districts", x => x.districtId);
                     table.ForeignKey(
-                        name: "FK_ad.Districts_ad.Cities_cityId",
+                        name: "FK_Districts_Cities_cityId",
                         column: x => x.cityId,
                         principalSchema: "ad",
-                        principalTable: "ad.Cities",
+                        principalTable: "Cities",
                         principalColumn: "cityId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Advertisements",
+                name: "Advertisements",
                 schema: "ad",
                 columns: table => new
                 {
@@ -193,32 +193,32 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Advertisements", x => x.adId);
+                    table.PrimaryKey("PK_Advertisements", x => x.adId);
                     table.ForeignKey(
-                        name: "FK_ad.Advertisements_ad.AdStatus_adStatusId",
+                        name: "FK_Advertisements_AdStatus_adStatusId",
                         column: x => x.adStatusId,
                         principalSchema: "ad",
-                        principalTable: "ad.AdStatus",
+                        principalTable: "AdStatus",
                         principalColumn: "adStatusId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ad.Advertisements_ad.Categories_categoryId",
+                        name: "FK_Advertisements_Categories_categoryId",
                         column: x => x.categoryId,
                         principalSchema: "ad",
-                        principalTable: "ad.Categories",
+                        principalTable: "Categories",
                         principalColumn: "categoryId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ad.Advertisements_ad.Districts_districtId",
+                        name: "FK_Advertisements_Districts_districtId",
                         column: x => x.districtId,
                         principalSchema: "ad",
-                        principalTable: "ad.Districts",
+                        principalTable: "Districts",
                         principalColumn: "districtId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.AdAttributeTransportation",
+                name: "AdAttributeTransportation",
                 schema: "ad",
                 columns: table => new
                 {
@@ -235,25 +235,25 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.AdAttributeTransportation", x => x.attributeId);
+                    table.PrimaryKey("PK_AdAttributeTransportation", x => x.attributeId);
                     table.ForeignKey(
-                        name: "FK_ad.AdAttributeTransportation_ad.Advertisements_adId",
+                        name: "FK_AdAttributeTransportation_Advertisements_adId",
                         column: x => x.adId,
                         principalSchema: "ad",
-                        principalTable: "ad.Advertisements",
+                        principalTable: "Advertisements",
                         principalColumn: "adId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ad.AdAttributeTransportation_ad.CarModel_modelId",
+                        name: "FK_AdAttributeTransportation_CarModel_modelId",
                         column: x => x.modelId,
                         principalSchema: "ad",
-                        principalTable: "ad.CarModel",
+                        principalTable: "CarModel",
                         principalColumn: "modelId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.AdPrivilege",
+                name: "AdPrivilege",
                 schema: "ad",
                 columns: table => new
                 {
@@ -264,27 +264,27 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.AdPrivilege", x => x.insertionDate);
-                    table.UniqueConstraint("AK_ad.AdPrivilege_adId", x => x.adId);
-                    table.UniqueConstraint("AK_ad.AdPrivilege_adId_insertionDate_privilegeId", x => new { x.adId, x.insertionDate, x.privilegeId });
+                    table.PrimaryKey("PK_AdPrivilege", x => x.insertionDate);
+                    table.UniqueConstraint("AK_AdPrivilege_adId", x => x.adId);
+                    table.UniqueConstraint("AK_AdPrivilege_adId_insertionDate_privilegeId", x => new { x.adId, x.insertionDate, x.privilegeId });
                     table.ForeignKey(
-                        name: "FK_ad.AdPrivilege_ad.Advertisements_AdvertisementadId",
+                        name: "FK_AdPrivilege_Advertisements_AdvertisementadId",
                         column: x => x.AdvertisementadId,
                         principalSchema: "ad",
-                        principalTable: "ad.Advertisements",
+                        principalTable: "Advertisements",
                         principalColumn: "adId",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_ad.AdPrivilege_ad.Privilege_privilegeId",
+                        name: "FK_AdPrivilege_Privilege_privilegeId",
                         column: x => x.privilegeId,
                         principalSchema: "ad",
-                        principalTable: "ad.Privilege",
+                        principalTable: "Privilege",
                         principalColumn: "privilegeId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.Price",
+                name: "Price",
                 schema: "ad",
                 columns: table => new
                 {
@@ -295,18 +295,18 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.Price", x => x.adId);
+                    table.PrimaryKey("PK_Price", x => x.adId);
                     table.ForeignKey(
-                        name: "FK_ad.Price_ad.Advertisements_AdvertisementadId",
+                        name: "FK_Price_Advertisements_AdvertisementadId",
                         column: x => x.AdvertisementadId,
                         principalSchema: "ad",
-                        principalTable: "ad.Advertisements",
+                        principalTable: "Advertisements",
                         principalColumn: "adId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "ad.SimilarAds",
+                name: "SimilarAds",
                 schema: "ad",
                 columns: table => new
                 {
@@ -316,151 +316,151 @@ namespace RepositoryStd.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ad.SimilarAds", x => x.similarAdId);
-                    table.UniqueConstraint("AK_ad.SimilarAds_adId", x => x.adId);
-                    table.UniqueConstraint("AK_ad.SimilarAds_adId_similarAdId", x => new { x.adId, x.similarAdId });
+                    table.PrimaryKey("PK_SimilarAds", x => x.similarAdId);
+                    table.UniqueConstraint("AK_SimilarAds_adId", x => x.adId);
+                    table.UniqueConstraint("AK_SimilarAds_adId_similarAdId", x => new { x.adId, x.similarAdId });
                     table.ForeignKey(
-                        name: "FK_ad.SimilarAds_ad.Advertisements_AdvertisementadId",
+                        name: "FK_SimilarAds_Advertisements_AdvertisementadId",
                         column: x => x.AdvertisementadId,
                         principalSchema: "ad",
-                        principalTable: "ad.Advertisements",
+                        principalTable: "Advertisements",
                         principalColumn: "adId",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.AdAttributeTransportation_adId",
+                name: "IX_AdAttributeTransportation_adId",
                 schema: "ad",
-                table: "ad.AdAttributeTransportation",
+                table: "AdAttributeTransportation",
                 column: "adId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.AdAttributeTransportation_modelId",
+                name: "IX_AdAttributeTransportation_modelId",
                 schema: "ad",
-                table: "ad.AdAttributeTransportation",
+                table: "AdAttributeTransportation",
                 column: "modelId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.AdPrivilege_AdvertisementadId",
+                name: "IX_AdPrivilege_AdvertisementadId",
                 schema: "ad",
-                table: "ad.AdPrivilege",
+                table: "AdPrivilege",
                 column: "AdvertisementadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.AdPrivilege_privilegeId",
+                name: "IX_AdPrivilege_privilegeId",
                 schema: "ad",
-                table: "ad.AdPrivilege",
+                table: "AdPrivilege",
                 column: "privilegeId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.Advertisements_adStatusId",
+                name: "IX_Advertisements_adStatusId",
                 schema: "ad",
-                table: "ad.Advertisements",
+                table: "Advertisements",
                 column: "adStatusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.Advertisements_categoryId",
+                name: "IX_Advertisements_categoryId",
                 schema: "ad",
-                table: "ad.Advertisements",
+                table: "Advertisements",
                 column: "categoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.Advertisements_districtId",
+                name: "IX_Advertisements_districtId",
                 schema: "ad",
-                table: "ad.Advertisements",
+                table: "Advertisements",
                 column: "districtId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.CarModel_brandId",
+                name: "IX_CarModel_brandId",
                 schema: "ad",
-                table: "ad.CarModel",
+                table: "CarModel",
                 column: "brandId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.Cities_provinceId",
+                name: "IX_Cities_provinceId",
                 schema: "ad",
-                table: "ad.Cities",
+                table: "Cities",
                 column: "provinceId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.Districts_cityId",
+                name: "IX_Districts_cityId",
                 schema: "ad",
-                table: "ad.Districts",
+                table: "Districts",
                 column: "cityId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.Price_AdvertisementadId",
+                name: "IX_Price_AdvertisementadId",
                 schema: "ad",
-                table: "ad.Price",
+                table: "Price",
                 column: "AdvertisementadId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ad.SimilarAds_AdvertisementadId",
+                name: "IX_SimilarAds_AdvertisementadId",
                 schema: "ad",
-                table: "ad.SimilarAds",
+                table: "SimilarAds",
                 column: "AdvertisementadId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ad.AdAttributeTransportation",
+                name: "AdAttributeTransportation",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.AdPrivilege",
+                name: "AdPrivilege",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.MobileBrands",
+                name: "MobileBrands",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Price",
+                name: "Price",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.SimilarAds",
+                name: "SimilarAds",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.SMS",
+                name: "SMS",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.CarModel",
+                name: "CarModel",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Privilege",
+                name: "Privilege",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Advertisements",
+                name: "Advertisements",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Brands",
+                name: "Brands",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.AdStatus",
+                name: "AdStatus",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Categories",
+                name: "Categories",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Districts",
+                name: "Districts",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Cities",
+                name: "Cities",
                 schema: "ad");
 
             migrationBuilder.DropTable(
-                name: "ad.Provinces",
+                name: "Provinces",
                 schema: "ad");
         }
     }

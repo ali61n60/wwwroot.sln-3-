@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace RepositoryStd.DbModel
+﻿namespace ModelStd.Db.Identity
 {
     public partial class AspNetUserRoles
     {

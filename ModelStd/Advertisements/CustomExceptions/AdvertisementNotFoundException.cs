@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ModelStd.Advertisements
+namespace ModelStd.Advertisements.CustomExceptions
 {
    public class AdvertisementNotFoundException:Exception
     {

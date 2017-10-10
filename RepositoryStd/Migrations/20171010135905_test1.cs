@@ -11,7 +11,7 @@ namespace RepositoryStd.Migrations
             migrationBuilder.AddColumn<string>(
                 name: "brandName2",
                 schema: "ad",
-                table: "ad.Brands",
+                table: "Brands",
                 maxLength: 150,
                 nullable: false,
                 defaultValue: "");
@@ -22,7 +22,7 @@ namespace RepositoryStd.Migrations
             migrationBuilder.DropColumn(
                 name: "brandName2",
                 schema: "ad",
-                table: "ad.Brands");
+                table: "Brands");
         }
     }
 }
