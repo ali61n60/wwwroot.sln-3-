@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db
 {
     
-    [Table("ad.AdAttributeTransportation")]
+    [Table("AdAttributeTransportation")]
     public partial class AdAttributeTransportation
     {
         [Key]

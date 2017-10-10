@@ -6,7 +6,7 @@ namespace ModelStd.Db
 {
     
 
-    [Table("ad.Privilege")]
+    [Table("Privilege")]
     public partial class Privilege
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

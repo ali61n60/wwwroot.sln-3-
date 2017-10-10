@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db
 {
    
-    [Table("ad.AdStatus")]
+    [Table("AdStatus")]
     public partial class AdStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]

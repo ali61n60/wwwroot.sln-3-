@@ -12,14 +12,34 @@ namespace RepositoryStd.DbModel.Identity
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
+        //private string _queryString;
+
+        //public AdDbContext(string queryString)
+        //{
+        //    _queryString = queryString;
+        //}
+
+        //public AdDbContext()
+        //{
+        //    _queryString =
+        //        "Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true";
+        //}
+
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(_queryString);
+        //}
+
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.HasDefaultSchema("identity");
         }
+     
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)
         {

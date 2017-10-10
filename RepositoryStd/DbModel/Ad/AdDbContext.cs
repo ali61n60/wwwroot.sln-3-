@@ -14,10 +14,18 @@ namespace Model.Db.Ad
             _queryString = queryString;
         }
 
+        public AdDbContext()
+        {
+            _queryString =
+                "Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true";
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_queryString);
-        }
+            optionsBuilder.UseSqlServer(_queryString,
+                x => x.MigrationsHistoryTable("__MigrationsHistory", "ad"));
+
+    }
 
         public virtual DbSet<AdAttributeTransportation> AdAttributeTransportations { get; set; }
         public virtual DbSet<AdPrivilege> AdPrivileges { get; set; }
@@ -38,6 +46,7 @@ namespace Model.Db.Ad
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("ad");
+
             modelBuilder.Entity<AdStatu>()
                 .HasMany(e => e.Advertisements)
                 //.WithRequired(e => e.AdStatu)
@@ -92,6 +101,12 @@ namespace Model.Db.Ad
                 .Property(e => e.price1)
                 // .HasPrecision(19, 4);
                 ;
+            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => privilege.adId);
+            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => privilege.insertionDate);
+            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => privilege.insertionDate);
+
+            modelBuilder.Entity<SimilarAd>().HasKey(ad => ad.adId);
+            modelBuilder.Entity<SimilarAd>().HasKey(ad => ad.similarAdId);
         }
     }
 }

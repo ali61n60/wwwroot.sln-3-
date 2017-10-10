@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db
 {
 
-    [Table("ad.SMS")]
+    [Table("SMS")]
     public partial class SM
     {
         [Key]

@@ -6,7 +6,7 @@ namespace ModelStd.Db
 {
    
 
-    [Table("ad.SimilarAds")]
+    [Table("SimilarAds")]
     public partial class SimilarAd
     {
         [Key]

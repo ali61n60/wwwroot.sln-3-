@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db
 {
-    [Table("ad.MobileBrands")]
+    [Table("MobileBrands")]
     public partial class MobileBrand
     {
         [Key]

@@ -8,7 +8,7 @@ namespace ModelStd.Db
 
 {
    
-    [Table("ad.Price")]
+    [Table("Price")]
     public partial class Price
     {
         [Key]

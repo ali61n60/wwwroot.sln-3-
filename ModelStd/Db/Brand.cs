@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db
 {
    
-    [Table("ad.Brands")]
+    [Table("Brands")]
     public partial class Brand
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,6 +20,10 @@ namespace ModelStd.Db
         [Required]
         [StringLength(150)]
         public string brandName { get; set; }
+
+        [Required]
+        [StringLength(150)]
+        public string brandName2 { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarModel> CarModels { get; set; }

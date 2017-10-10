@@ -6,7 +6,7 @@ namespace ModelStd.Db
 {
     
 
-    [Table("ad.Cities")]
+    [Table("Cities")]
     public partial class City
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
