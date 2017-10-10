@@ -7,6 +7,18 @@ namespace Model.Db.Ad
 
     public partial class AdDbContext : DbContext
     {
+        private string _queryString;
+
+        public AdDbContext(string queryString)
+        {
+            _queryString = queryString;
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(_queryString);
+        }
+
         public virtual DbSet<AdAttributeTransportation> AdAttributeTransportations { get; set; }
         public virtual DbSet<AdPrivilege> AdPrivileges { get; set; }
         public virtual DbSet<AdStatu> AdStatus { get; set; }

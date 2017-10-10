@@ -1,19 +1,19 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using ModelStd.Db;
+﻿//using Microsoft.EntityFrameworkCore;
+//using Microsoft.EntityFrameworkCore.Metadata;
+//using ModelStd.Db;
 
-namespace RepositoryStd.DbModel
-{
+//namespace RepositoryStd.DbModel
+//{
     //Scaffold-DbContext "Server= .\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true" Microsoft.EntityFrameworkCore.SqlServer -OutputDir DbModel
 
-    public partial class ayoobfar_dbContext : DbContext
-    {
-        private string _queryString;
+    //public partial class ayoobfar_dbContext : DbContext
+    //{
+    //    private string _queryString;
 
-        public ayoobfar_dbContext(string queryString)
-        {
-            _queryString = queryString;
-        }
+    //    public ayoobfar_dbContext(string queryString)
+    //    {
+    //        _queryString = queryString;
+    //    }
 
         //public virtual DbSet<AdAttributeTransportation> AdAttributeTransportation { get; set; }
         //public virtual DbSet<AdPrivilege> AdPrivilege { get; set; }
@@ -547,5 +547,5 @@ namespace RepositoryStd.DbModel
            
 
            
-        }
-    }
+    //    }
+    //}

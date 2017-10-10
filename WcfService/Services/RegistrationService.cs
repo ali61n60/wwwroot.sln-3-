@@ -142,7 +142,7 @@ namespace WcfService.Services
             }
 
 
-            string password = repositoryResponse.Customer.Password;
+            //string password = repositoryResponse.Customer.Password;
 
             StringBuilder messaBuilder=new StringBuilder();
 
@@ -150,7 +150,7 @@ namespace WcfService.Services
             messaBuilder.AppendLine("<h1><bdi>کاربر گرامی</bdi></h1>");
             messaBuilder.AppendLine("<h1>"+username+"</h1>");
             messaBuilder.AppendLine("<h1><bdi>کلمه عبور شما عبارت زیر می باشد </bdi></h1>");
-            messaBuilder.AppendFormat("<h1 dir=\"ltr\">"+password+"</h1>");
+            //messaBuilder.AppendFormat("<h1 dir=\"ltr\">"+password+"</h1>");
             messaBuilder.AppendLine();
             messaBuilder.AppendLine("<h1><bdi>با تشکر از استفاده شما از سایت</bdi></h1>");
            
@@ -191,7 +191,7 @@ namespace WcfService.Services
                 {
                     response.Success = true;
                     response.Message = "OK";
-                    response.ResponseData = repositoryResponse.Customer;
+                   // response.ResponseData = repositoryResponse.Customer;
                 }
                 else
                 {
