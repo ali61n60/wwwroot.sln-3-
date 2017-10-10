@@ -14,7 +14,11 @@ namespace RepositoryStd.DbModel.Identity
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
+        }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.HasDefaultSchema("identity");
         }
 
         public static async Task CreateAdminAccount(IServiceProvider serviceProvider, IConfiguration configuration)

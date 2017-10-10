@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using MvcMain.Models;
+using RepositoryStd.DbModel.Identity;
 
 namespace MvcMain.Migrations
 {

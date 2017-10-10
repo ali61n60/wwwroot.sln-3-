@@ -1,4 +1,4 @@
-﻿using Model;
+﻿using ModelStd;
 
 namespace Repository.Messages
 {

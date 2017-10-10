@@ -1,6 +1,10 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
-using ModelStd.DB;
+using ModelStd.Db;
+using Category = ModelStd.Advertisements.Category;
+using City = ModelStd.Advertisements.Location.City;
+using District = ModelStd.Advertisements.Location.District;
+using Province = ModelStd.Advertisements.Location.Province;
 
 
 namespace RepositoryStd.DB

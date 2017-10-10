@@ -6,7 +6,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ModelStd;
 using ModelStd.Advertisements;
-using ModelStd.DB;
+using ModelStd.Db;
 using ModelStd.IRepository;
 using RepositoryStd.DB;
 using RepositoryStd.Messages;
@@ -39,21 +39,21 @@ namespace RepositoryStd.Repository
             //TODO research for singleton dbContext
             AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
 
-            var list = adCommonDbContext.Advertisements
-                .Include(advertisement => advertisement.Category)
-                .Include(advertisement => advertisement.aspnet_Users)
-                .Include(advertisement => advertisement.District)
-                .Include(advertisement => advertisement.District.City)
-                .Include(advertisement => advertisement.District.City.Province)
-                .Include(advertisement => advertisement.AdPrivileges)
-                .Include(advertisement => advertisement.AdStatu)
-                .Include(advertisement => advertisement.Price)
-                .Where(advertisement => advertisement.adStatusId == 3) //only accepted ads
-                .OrderBy(advertisement => advertisement.Price.price);
-            //SetOrderByClause(list, queryParameters);
-            wherClauseCategoryId(list, queryParameters);
-            WhereClausePrice(list, queryParameters);
-            WhereClauseDistrictId(list, queryParameters);
+            //var list = adCommonDbContext.Advertisements
+            //    .Include(advertisement => advertisement.Category)
+            //    .Include(advertisement => advertisement.aspnet_Users)
+            //    .Include(advertisement => advertisement.District)
+            //    .Include(advertisement => advertisement.District.City)
+            //    .Include(advertisement => advertisement.District.City.Province)
+            //    .Include(advertisement => advertisement.AdPrivileges)
+            //    .Include(advertisement => advertisement.AdStatu)
+            //    .Include(advertisement => advertisement.Price)
+            //    .Where(advertisement => advertisement.adStatusId == 3) //only accepted ads
+            //    .OrderBy(advertisement => advertisement.Price.price);
+            ////SetOrderByClause(list, queryParameters);
+            //wherClauseCategoryId(list, queryParameters);
+            //WhereClausePrice(list, queryParameters);
+            //WhereClauseDistrictId(list, queryParameters);
 
             
 
@@ -61,18 +61,18 @@ namespace RepositoryStd.Repository
             //uegentOnly
            
 
-            list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
+          //  list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
 
-            foreach (Advertisement advertisement in list)
-            {
-                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
-            }
+            //foreach (Advertisement advertisement in list)
+            //{
+            //    _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
+            //}
             return _searchResultItems;
         }
 
         private void SetOrderByClause(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            list=list.OrderBy(advertisement => advertisement.Price.price);
+         //   list=list.OrderBy(advertisement => advertisement.Price.price);
         }
 
 
@@ -86,13 +86,13 @@ namespace RepositoryStd.Repository
         {
             decimal minPrice = ParameterExtractor.ExtractMinPrice(queryParameters);
             decimal maxPrice = ParameterExtractor.ExtractMaxPrice(queryParameters);
-            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters);
-            if (minPrice != ParameterExtractor.MinPriceDefault)
-                list = list.Where(advertisement => advertisement.Price.price > minPrice);
-            if (maxPrice != ParameterExtractor.MaxPriceDefault)
-                list = list.Where(advertisement => advertisement.Price.price < maxPrice);
-            if (priceType != ParameterExtractor.PriceTypeDefault)
-                list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
+           // PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters);
+           // if (minPrice != ParameterExtractor.MinPriceDefault)
+             //   list = list.Where(advertisement => advertisement.Price.price > minPrice);
+           // if (maxPrice != ParameterExtractor.MaxPriceDefault)
+             //   list = list.Where(advertisement => advertisement.Price.price < maxPrice);
+          //  if (priceType != ParameterExtractor.PriceTypeDefault)
+               // list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
         }
         private void WhereClauseDistrictId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
@@ -115,15 +115,15 @@ namespace RepositoryStd.Repository
                 AdvertisementCategoryId = advertisement.categoryId,
                 AdvertisementComments = advertisement.adComments,//TODO test for null
                 NumberOfVisit = advertisement.adNumberOfVisited,//TODO test for null
-                Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
-                PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
+                //Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
+                //PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
                 DistrictId = advertisement.districtId,
                 DistrictName = advertisement.District.districtName,
                 CityName = advertisement.District.City.cityName,
                 ProvinceName = advertisement.District.City.Province.provinceName,
-                AdvertisementPrice = advertisement.Price
+               // AdvertisementPrice = advertisement.Price
             };
-            tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
+           // tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
             return tempAdvertisementCommon;
         }
 
@@ -186,8 +186,8 @@ namespace RepositoryStd.Repository
             command.Parameters.Add("@adTitle", SqlDbType.NVarChar).Value = entity.AdvertisementTitle;
             command.Parameters.Add("@adComments", SqlDbType.NChar).Value = entity.AdvertisementComments;
             command.Parameters.Add("@adNumberOfVisited", SqlDbType.Int).Value = entity.NumberOfVisit;
-            command.Parameters.Add("@price", SqlDbType.Money).Value = entity.AdvertisementPrice.price;
-            command.Parameters.Add("@priceType", SqlDbType.NVarChar).Value = entity.AdvertisementPrice.priceType;
+            //command.Parameters.Add("@price", SqlDbType.Money).Value = entity.AdvertisementPrice.price1;
+            //command.Parameters.Add("@priceType", SqlDbType.NVarChar).Value = entity.AdvertisementPrice.priceType;
             command.Parameters.Add("@privilageId", SqlDbType.Int).Value = entity.AdPrivilegeId;
 
             //Added from adTransRepo
@@ -344,11 +344,11 @@ namespace RepositoryStd.Repository
                 advertisementCommon.AdvertisementStatus = (string)dataReader["adStatus"];
                 if (!(dataReader["price"] is DBNull))
                 {
-                    advertisementCommon.AdvertisementPrice.price = (decimal)dataReader["price"];
+                    //advertisementCommon.AdvertisementPrice.price1 = (decimal)dataReader["price"];
                 }
                 if (!(dataReader["priceType"] is DBNull))
                 {
-                    advertisementCommon.AdvertisementPrice.priceType = (string)dataReader["priceType"];
+                   // advertisementCommon.AdvertisementPrice.priceType = (string)dataReader["priceType"];
                     
                 }
                 responseBase.Success = true;

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MvcMain.Models;
+using RepositoryStd.DbModel.Identity;
 
 namespace MvcMain.Controllers
 {
