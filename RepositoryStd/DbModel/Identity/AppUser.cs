@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace MvcMain.Models
+namespace RepositoryStd.DbModel.Identity
 {
     public class AppUser : IdentityUser
     {

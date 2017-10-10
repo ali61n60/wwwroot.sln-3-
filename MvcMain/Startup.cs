@@ -15,9 +15,9 @@ using Microsoft.IdentityModel.Tokens;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using MvcMain.Infrastructure.Services;
-using MvcMain.Models;
 using RepositoryStd;
 using RepositoryStd.DbModel;
+using RepositoryStd.DbModel.Identity;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.TransportationRepository;
 

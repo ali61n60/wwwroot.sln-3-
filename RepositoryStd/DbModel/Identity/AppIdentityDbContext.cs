@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace MvcMain.Models
+namespace RepositoryStd.DbModel.Identity
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
