@@ -8,6 +8,13 @@ namespace RepositoryStd.DbModel
 
     public partial class ayoobfar_dbContext : DbContext
     {
+        private string _queryString;
+
+        public ayoobfar_dbContext(string queryString)
+        {
+            _queryString = queryString;
+        }
+
         public virtual DbSet<AdAttributeTransportation> AdAttributeTransportation { get; set; }
         public virtual DbSet<AdPrivilege> AdPrivilege { get; set; }
         public virtual DbSet<AdStatus> AdStatus { get; set; }
@@ -30,20 +37,22 @@ namespace RepositoryStd.DbModel
         public virtual DbSet<Provinces> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
         public virtual DbSet<Sms> Sms { get; set; }
-        public virtual DbSet<Test> Test { get; set; }
-        public virtual DbSet<Test2> Test2 { get; set; }
-        public virtual DbSet<Test3> Test3 { get; set; }
-        public virtual DbSet<Test4> Test4 { get; set; }
+        
         public virtual DbSet<UsersExtraInfo> UsersExtraInfo { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-            optionsBuilder.UseSqlServer(@"Data Source= www.whereismycar.ir\MSSQLSERVER2012;Initial Catalog=whereism_database;Persist Security Info=True;User ID=whereism_ali;Password=Lam8u38@;MultipleActiveResultSets=true");
+            //@"Data Source= www.whereismycar.ir\MSSQLSERVER2012;Initial Catalog=whereism_database;Persist Security Info=True;User ID=whereism_ali;Password=Lam8u38@;MultipleActiveResultSets=true"
+            optionsBuilder.UseSqlServer(_queryString);
         }
+       
+           
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("ad");
+
+            
             modelBuilder.Entity<AdAttributeTransportation>(entity =>
             {
                 entity.HasKey(e => e.AttributeId)
@@ -534,49 +543,7 @@ namespace RepositoryStd.DbModel
                 entity.Property(e => e.Sent).HasColumnName("sent");
             });
 
-            modelBuilder.Entity<Test>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(150);
-            });
-
-            modelBuilder.Entity<Test2>(entity =>
-            {
-                entity.ToTable("test2");
-
-                entity.Property(e => e.Id)
-                    .HasColumnName("id")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasColumnType("nchar(10)");
-            });
-
-            modelBuilder.Entity<Test3>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(150);
-            });
-
-            modelBuilder.Entity<Test4>(entity =>
-            {
-                entity.Property(e => e.Id).ValueGeneratedNever();
-
-                entity.Property(e => e.Name)
-                    .IsRequired()
-                    .HasColumnName("name")
-                    .HasMaxLength(150);
-            });
+           
 
             modelBuilder.Entity<UsersExtraInfo>(entity =>
             {

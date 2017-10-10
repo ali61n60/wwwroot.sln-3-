@@ -8,7 +8,6 @@ using ModelStd;
 using ModelStd.Advertisements;
 using ModelStd.DB;
 using ModelStd.IRepository;
-using Remotion.Linq.Clauses;
 using RepositoryStd.DB;
 using RepositoryStd.Messages;
 

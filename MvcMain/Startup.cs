@@ -60,7 +60,7 @@ namespace MvcMain
 
             services.AddTransient<ITransportaionRepository>(AppServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
             
-            new ayoobfar_dbContext().Database.Migrate();
+            new ayoobfar_dbContext(_configuration["Data:ConnectionString"]).Database.Migrate();
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(_configuration["Data:ConnectionString"]));
 
