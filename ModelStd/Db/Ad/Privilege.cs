@@ -1,25 +1,18 @@
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("Privilege")]
-    public  class Privilege
+    public partial class Privilege
     {
         public Privilege()
         {
-            AdPrivileges = new HashSet<AdPrivilege>();
+            AdPrivilege = new HashSet<AdPrivilege>();
         }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [Key]
-        public int privilegeId { get; set; }
+        public int PrivilegeId { get; set; }
+        public string PrivilegeName { get; set; }
 
-        [Required]
-        [StringLength(150)]
-        public string privilegeName { get; set; }
-
-        public virtual ICollection<AdPrivilege> AdPrivileges { get; set; }
+        public virtual ICollection<AdPrivilege> AdPrivilege { get; set; }
     }
 }

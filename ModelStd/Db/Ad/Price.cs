@@ -1,25 +1,16 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System.Collections.Generic;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("Price")]
     public partial class Price
     {
-        [Key]
-        public Guid adId { get; set; }
-
-        [StringLength(150)]
+        public Guid AdId { get; set; }
         public string priceType { get; set; }
-
-        [Column("price", TypeName = "money")]
         public decimal? price { get; set; }
-        public virtual Advertisement Advertisement { get; set; }
 
-       
+        public virtual Advertisements Ad { get; set; }
     }
-
     public partial class Price : IComparable<Price>
     {
         public static PriceType ParsePriceType(string s)

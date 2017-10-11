@@ -8,6 +8,7 @@ using ModelStd;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
+using ModelStd.DB;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Messages;
