@@ -122,7 +122,7 @@ namespace RepositoryStd.Repository
                 ProvinceName = advertisement.District.City.Province.ProvinceName,
                 AdvertisementPrice = advertisement.Price
             };
-           // tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
+            tempAdvertisementCommon.AdvertisementPrice.Ad= null;//prevent self referencing
             return tempAdvertisementCommon;
         }
 
