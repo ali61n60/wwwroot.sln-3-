@@ -8,22 +8,21 @@ namespace RepositoryStd.Context.AD
 
     public partial class AdDbContext : DbContext
     {
-        private string _queryString;
+        private string _connectionString;
 
-        public AdDbContext(string queryString)
+        public AdDbContext(string connectionString)
         {
-            _queryString = queryString;
+            _connectionString = connectionString;
         }
 
         public AdDbContext()
         {
-            _queryString =
-                "Data Source= .\\;Initial Catalog=ayoobfar_db;Persist Security Info=True;User ID=ayoobfar_ali;Password=119801;MultipleActiveResultSets=true";
+            _connectionString = AdvertisementDataClass.DefaultConnectionString();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(_queryString,
+            optionsBuilder.UseSqlServer(_connectionString,
                 x => x.MigrationsHistoryTable("__MigrationsHistory", "ad"));
 
     }
