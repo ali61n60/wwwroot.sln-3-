@@ -2,31 +2,27 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModelStd.Db
+namespace ModelStd.Db.Ad
 {
-   
-    [Table("AdStatus")]
-    public partial class AdStatu
+    
+
+    [Table("Privilege")]
+    public partial class Privilege
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public AdStatu()
+        public Privilege()
         {
-            Advertisements = new HashSet<Advertisement>();
+            AdPrivileges = new HashSet<AdPrivilege>();
         }
 
-        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int adStatusId { get; set; }
+        public int privilegeId { get; set; }
 
         [Required]
         [StringLength(150)]
-        public string adStatus { get; set; }
-
-        [Required]
-        [StringLength(150)]
-        public string adStatusEnglish { get; set; }
+        public string privilegeName { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Advertisement> Advertisements { get; set; }
+        public virtual ICollection<AdPrivilege> AdPrivileges { get; set; }
     }
 }

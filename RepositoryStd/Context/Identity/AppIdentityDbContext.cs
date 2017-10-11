@@ -7,8 +7,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ModelStd.Db.Identity;
 
-namespace RepositoryStd.DbModel.Identity
+namespace RepositoryStd.Context.Identity
 {
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {

@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Db;
 
-namespace Model.Db.Ad
+namespace RepositoryStd.Context.AD
 {
    
 

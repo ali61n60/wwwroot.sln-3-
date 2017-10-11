@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 
-namespace ModelStd.Db
+namespace ModelStd.Db.Ad
 
 {
    

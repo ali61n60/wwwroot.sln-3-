@@ -2,30 +2,31 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModelStd.Db
+namespace ModelStd.Db.Ad
 {
-    [Table("CarModel")]
-    public partial class CarModel
+   
+    [Table("AdStatus")]
+    public partial class AdStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CarModel()
+        public AdStatu()
         {
-            AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
+            Advertisements = new HashSet<Advertisement>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int modelId { get; set; }
+        public int adStatusId { get; set; }
 
         [Required]
         [StringLength(150)]
-        public string modelName { get; set; }
+        public string adStatus { get; set; }
 
-        public int brandId { get; set; }
+        [Required]
+        [StringLength(150)]
+        public string adStatusEnglish { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
-
-        public virtual Brand Brand { get; set; }
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
     }
 }

@@ -2,31 +2,30 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ModelStd.Db
+namespace ModelStd.Db.Ad
 {
-    
-
-    [Table("Cities")]
-    public partial class City
+    [Table("CarModel")]
+    public partial class CarModel
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public City()
+        public CarModel()
         {
-            Districts = new HashSet<District>();
+            AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
         }
 
+        [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int cityId { get; set; }
+        public int modelId { get; set; }
 
         [Required]
         [StringLength(150)]
-        public string cityName { get; set; }
+        public string modelName { get; set; }
 
-        public int? provinceId { get; set; }
-
-        public virtual Province Province { get; set; }
+        public int brandId { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<District> Districts { get; set; }
+        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
+
+        public virtual Brand Brand { get; set; }
     }
 }
