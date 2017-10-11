@@ -6,7 +6,7 @@ namespace ModelStd.Db.Ad
 {
 
     [Table("SMS")]
-    public partial class SM
+    public class SM
     {
         [Key]
         public Guid messageId { get; set; }

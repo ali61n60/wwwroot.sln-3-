@@ -5,9 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("CarModel")]
-    public partial class CarModel
+    public class CarModel
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CarModel()
         {
             AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
@@ -23,7 +22,6 @@ namespace ModelStd.Db.Ad
 
         public int brandId { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
 
         public virtual Brand Brand { get; set; }

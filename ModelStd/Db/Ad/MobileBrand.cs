@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("MobileBrands")]
-    public partial class MobileBrand
+    public class MobileBrand
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using RepositoryStd.Context.AD;
 
 namespace RepositoryStd.Migrations
@@ -143,10 +144,6 @@ namespace RepositoryStd.Migrations
                     b.Property<int>("brandId");
 
                     b.Property<string>("brandName")
-                        .IsRequired()
-                        .HasMaxLength(150);
-
-                    b.Property<string>("brandName2")
                         .IsRequired()
                         .HasMaxLength(150);
 

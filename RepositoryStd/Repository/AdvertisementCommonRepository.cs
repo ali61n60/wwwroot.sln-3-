@@ -36,11 +36,9 @@ namespace RepositoryStd.Repository
         public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
             _searchResultItems = new List<AdvertisementCommon>(count);
-            AdDbContext adDbContext=new AdDbContext();
-            //DbContextFactory dbContextFactory = new DbContextFactory(_conectionString);
             ////TODO research for singleton dbContext
-            //AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
-
+            AdDbContext adDbContext =new AdDbContext();
+           
             var list = adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
                 //.Include(advertisement => advertisement.aspnet_Users)

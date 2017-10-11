@@ -6,7 +6,7 @@ namespace ModelStd.Db.Ad
 {
    
     [Table("AdPrivilege")]
-    public partial class AdPrivilege
+    public  class AdPrivilege
     {
         [Key]
         [Column(Order = 0)]

@@ -4,12 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-    
-
     [Table("Privilege")]
-    public partial class Privilege
+    public  class Privilege
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Privilege()
         {
             AdPrivileges = new HashSet<AdPrivilege>();
@@ -22,7 +19,6 @@ namespace ModelStd.Db.Ad
         [StringLength(150)]
         public string privilegeName { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AdPrivilege> AdPrivileges { get; set; }
     }
 }

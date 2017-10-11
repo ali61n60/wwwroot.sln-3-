@@ -5,9 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace ModelStd.Db.Ad
-
 {
-   
     [Table("Price")]
     public partial class Price
     {

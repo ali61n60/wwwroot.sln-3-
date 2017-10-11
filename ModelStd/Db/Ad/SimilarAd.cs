@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-   
-
-    [Table("SimilarAds")]
-    public partial class SimilarAd
+   [Table("SimilarAds")]
+    public class SimilarAd
     {
         [Key]
         [Column(Order = 0)]

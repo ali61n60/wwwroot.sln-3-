@@ -7,12 +7,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("Advertisements")]
-    public partial class Advertisement
+    public  class Advertisement
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Advertisement()
         {
-            AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
+            //AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
             AdPrivileges = new HashSet<AdPrivilege>();
             SimilarAds = new HashSet<SimilarAd>();
         }
@@ -47,10 +46,9 @@ namespace ModelStd.Db.Ad
 
         public int WhatIsSheDoing { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
+        //public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
+        
         public virtual ICollection<AdPrivilege> AdPrivileges { get; set; }
 
         public virtual AdStatu AdStatu { get; set; }
@@ -59,7 +57,6 @@ namespace ModelStd.Db.Ad
 
         public virtual District District { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SimilarAd> SimilarAds { get; set; }
     }
 }

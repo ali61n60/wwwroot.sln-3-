@@ -4,12 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-    
-
     [Table("Provinces")]
-    public partial class Province
+    public class Province
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Province()
         {
             Cities = new HashSet<City>();
@@ -24,8 +21,7 @@ namespace ModelStd.Db.Ad
 
         [StringLength(150)]
         public string provinceCenter { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        
         public virtual ICollection<City> Cities { get; set; }
     }
 }

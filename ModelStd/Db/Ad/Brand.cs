@@ -6,9 +6,8 @@ namespace ModelStd.Db.Ad
 {
    
     [Table("Brands")]
-    public partial class Brand
+    public class Brand
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Brand()
         {
             CarModels = new HashSet<CarModel>();
@@ -21,11 +20,6 @@ namespace ModelStd.Db.Ad
         [StringLength(150)]
         public string brandName { get; set; }
 
-        [Required]
-        [StringLength(150)]
-        public string brandName2 { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CarModel> CarModels { get; set; }
     }
 }

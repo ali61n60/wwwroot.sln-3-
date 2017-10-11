@@ -53,7 +53,7 @@ namespace RepositoryStd.Context.AD
                 //.WillCascadeOnDelete(false);
                 ;
             modelBuilder.Entity<Advertisement>()
-                .HasMany(e => e.AdAttributeTransportations)
+                //.HasMany(e => e.AdAttributeTransportations)
                 //.WithRequired(e => e.Advertisement)
                 //.WillCascadeOnDelete(false);
                 ;
