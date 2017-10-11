@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using ModelStd.DB;
+using ModelStd.Db.Ad;
+
 
 namespace RepositoryStd.Context.AD
 {

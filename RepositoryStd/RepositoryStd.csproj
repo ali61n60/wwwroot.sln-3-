@@ -56,13 +56,4 @@
     <ProjectReference Include="..\ModelStd\ModelStd.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="ModelStd">
-      <HintPath>..\packages\ModelStd.1.0.18\lib\netstandard1.4\ModelStd.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.Common">
-      <HintPath>C:\Users\test\.nuget\packages\system.data.common\4.3.0\ref\netstandard1.2\System.Data.Common.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>

@@ -8,7 +8,7 @@ using ModelStd;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
-using ModelStd.DB;
+
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Messages;
@@ -46,10 +46,10 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
-                .Include(advertisement => advertisement.AdPrivileges)
+                .Include(advertisement => advertisement.AdPrivilege)
                 .Include(advertisement => advertisement.AdStatus)
                 //.Include(advertisement => advertisement.Price)
-                .Where(advertisement => advertisement.adStatusId == 3); //only accepted ads
+                .Where(advertisement => advertisement.AdStatusId == 3); //only accepted ads
                // .OrderBy(advertisement => advertisement.Price.price);
             //SetOrderByClause(list, queryParameters);
             wherClauseCategoryId(list, queryParameters);
@@ -59,28 +59,28 @@ namespace RepositoryStd.Repository
             //uegentOnly
 
 
-            list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
+            list = (IOrderedQueryable<Advertisements>) list.Skip(startIndex - 1).Take(count);
             
-            foreach (Advertisement advertisement in list)
+            foreach (Advertisements advertisement in list)
             {
                 _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
             }
             return _searchResultItems;
         }
 
-        private void SetOrderByClause(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        private void SetOrderByClause(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
          //   list=list.OrderBy(advertisement => advertisement.Price.price);
         }
 
 
         //TODO change where clause to get an array of categories
-        private void wherClauseCategoryId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        private void wherClauseCategoryId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
             int categoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
-            list=list.Where(advertisement => advertisement.categoryId == categoryId);
+            list=list.Where(advertisement => advertisement.CategoryId == categoryId);
         }
-        private void WhereClausePrice(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        private void WhereClausePrice(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
             decimal minPrice = ParameterExtractor.ExtractMinPrice(queryParameters);
             decimal maxPrice = ParameterExtractor.ExtractMaxPrice(queryParameters);
@@ -92,33 +92,34 @@ namespace RepositoryStd.Repository
           //  if (priceType != ParameterExtractor.PriceTypeDefault)
                // list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
         }
-        private void WhereClauseDistrictId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        private void WhereClauseDistrictId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
             List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters);
             if (districtList.Count > 0)
-                list = list.Where(advertisement => districtList.Contains(advertisement.districtId));
+                list = list.Where(advertisement => districtList.Contains(advertisement.DistrictId));
         }
 
-        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisement advertisement)
+        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisements advertisement)
         {
             AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
             {
-                AdvertisementId = advertisement.adId,
+                
+                AdvertisementId = advertisement.AdId,
                 UserId = advertisement.UserId,
-                AdvertisementTitle = advertisement.adTitle,//TODO test for null
-                AdvertisementTime = advertisement.adInsertDateTime,
-                AdvertisementStatusId = advertisement.adStatusId,
-                AdvertisementStatus = advertisement.AdStatus.adStatus,
-                AdvertisementCategory = advertisement.Category.categoryName,
-                AdvertisementCategoryId = advertisement.categoryId,
-                AdvertisementComments = advertisement.adComments,//TODO test for null
-                NumberOfVisit = advertisement.adNumberOfVisited,//TODO test for null
+                AdvertisementTitle = advertisement.AdTitle,//TODO test for null
+                AdvertisementTime = advertisement.AdInsertDateTime,
+                AdvertisementStatusId = advertisement.AdStatusId,
+                AdvertisementStatus = advertisement.AdStatus.AdStatus1,
+                AdvertisementCategory = advertisement.Category.CategoryName,
+                AdvertisementCategoryId = advertisement.CategoryId,
+                AdvertisementComments = advertisement.AdComments,//TODO test for null
+                NumberOfVisit = advertisement.AdNumberOfVisited,//TODO test for null
                 //Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
                 //PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
-                DistrictId = advertisement.districtId,
-                DistrictName = advertisement.District.districtName,
-                CityName = advertisement.District.City.cityName,
-                ProvinceName = advertisement.District.City.Province.provinceName,
+                DistrictId = advertisement.DistrictId,
+                DistrictName = advertisement.District.DistrictName,
+                CityName = advertisement.District.City.CityName,
+                ProvinceName = advertisement.District.City.Province.ProvinceName,
                // AdvertisementPrice = advertisement.Price
             };
            // tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
@@ -127,16 +128,7 @@ namespace RepositoryStd.Repository
 
         
 
-      
-       
-        
-      
-
-      
-
-       
-
-        public void Add(AdvertisementCommon entity)
+      public void Add(AdvertisementCommon entity)
         {
             //Cannot Insert a new ad from Common Repository
             throw new NotImplementedException();
