@@ -48,7 +48,7 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.District.City.Province)
                 .Include(advertisement => advertisement.AdPrivilege)
                 .Include(advertisement => advertisement.AdStatus)
-                //.Include(advertisement => advertisement.Price)
+                .Include(advertisement => advertisement.Price)
                 .Where(advertisement => advertisement.AdStatusId == 3); //only accepted ads
                // .OrderBy(advertisement => advertisement.Price.price);
             //SetOrderByClause(list, queryParameters);
@@ -120,7 +120,7 @@ namespace RepositoryStd.Repository
                 DistrictName = advertisement.District.DistrictName,
                 CityName = advertisement.District.City.CityName,
                 ProvinceName = advertisement.District.City.Province.ProvinceName,
-               // AdvertisementPrice = advertisement.Price
+                AdvertisementPrice = advertisement.Price
             };
            // tempAdvertisementCommon.AdvertisementPrice.Advertisement = null;//prevent self referencing
             return tempAdvertisementCommon;
