@@ -45,7 +45,7 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
-                //.Include(advertisement => advertisement.AdPrivileges)
+                .Include(advertisement => advertisement.AdPrivileges)
                 .Include(advertisement => advertisement.AdStatus)
                 //.Include(advertisement => advertisement.Price)
                 .Where(advertisement => advertisement.adStatusId == 3); //only accepted ads

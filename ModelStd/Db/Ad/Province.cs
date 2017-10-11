@@ -13,6 +13,7 @@ namespace ModelStd.Db.Ad
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int provinceId { get; set; }
 
         [Required]

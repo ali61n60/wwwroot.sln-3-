@@ -42,67 +42,10 @@ namespace RepositoryStd.Context.AD
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("ad");
-
-            modelBuilder.Entity<AdStatus>()
-                .HasMany(e => e.Advertisements)
-                //.WithRequired(e => e.AdStatu)
-                //.WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<Advertisement>()
-                //.HasMany(e => e.AdAttributeTransportations)
-                //.WithRequired(e => e.Advertisement)
-                //.WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<Advertisement>()
-                .HasMany(e => e.AdPrivileges)
-                //.WithRequired(e => e.Advertisement)
-                // .WillCascadeOnDelete(false);
-                ;
-
-            modelBuilder.Entity<Advertisement>()
-                .HasMany(e => e.SimilarAds)
-                // .WithRequired(e => e.Advertisement)
-                // .WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<Brand>()
-                .HasMany(e => e.CarModels)
-                //.WithRequired(e => e.Brand)
-                //.WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<Category>()
-                .Property(e => e.categoryParentId)
-                //.IsFixedLength();
-                ;
-            modelBuilder.Entity<Category>()
-                .HasMany(e => e.Advertisements)
-                // .WithRequired(e => e.Category)
-                // .WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<City>()
-                .HasMany(e => e.Districts)
-                // .WithRequired(e => e.City)
-                // .WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<District>()
-                .HasMany(e => e.Advertisements)
-                // .WithRequired(e => e.District)
-                // .WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<Privilege>()
-                .HasMany(e => e.AdPrivileges)
-                //.WithRequired(e => e.Privilege)
-                // .WillCascadeOnDelete(false);
-                ;
-            modelBuilder.Entity<Price>()
-                .Property(e => e.price)
-                // .HasPrecision(19, 4);
-                ;
-            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => privilege.adId);
-            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => privilege.insertionDate);
-            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => privilege.insertionDate);
-
-            modelBuilder.Entity<SimilarAd>().HasKey(ad => ad.adId);
-            modelBuilder.Entity<SimilarAd>().HasKey(ad => ad.similarAdId);
+            
+            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => new{ privilege.adId,privilege.insertionDate,privilege.privilegeId});
+           
+            modelBuilder.Entity<SimilarAd>().HasKey(ad =>new{ ad.adId,ad.similarAdId});
         }
     }
 }
