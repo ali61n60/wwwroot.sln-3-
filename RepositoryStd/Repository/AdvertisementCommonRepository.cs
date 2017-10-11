@@ -6,9 +6,10 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ModelStd;
 using ModelStd.Advertisements;
-using ModelStd.Db;
+using ModelStd.Advertisements.CustomExceptions;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
-using RepositoryStd.DB;
+using RepositoryStd.Context.AD;
 using RepositoryStd.Messages;
 
 namespace RepositoryStd.Repository
@@ -35,38 +36,34 @@ namespace RepositoryStd.Repository
         public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
             _searchResultItems = new List<AdvertisementCommon>(count);
-            DbContextFactory dbContextFactory = new DbContextFactory(_conectionString);
-            //TODO research for singleton dbContext
-            AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
-
-            //var list = adCommonDbContext.Advertisements
-            //    .Include(advertisement => advertisement.Category)
-            //    .Include(advertisement => advertisement.aspnet_Users)
-            //    .Include(advertisement => advertisement.District)
-            //    .Include(advertisement => advertisement.District.City)
-            //    .Include(advertisement => advertisement.District.City.Province)
-            //    .Include(advertisement => advertisement.AdPrivileges)
-            //    .Include(advertisement => advertisement.AdStatu)
-            //    .Include(advertisement => advertisement.Price)
-            //    .Where(advertisement => advertisement.adStatusId == 3) //only accepted ads
-            //    .OrderBy(advertisement => advertisement.Price.price);
-            ////SetOrderByClause(list, queryParameters);
-            //wherClauseCategoryId(list, queryParameters);
-            //WhereClausePrice(list, queryParameters);
-            //WhereClauseDistrictId(list, queryParameters);
-
-            
-
-            
-            //uegentOnly
+            ////TODO research for singleton dbContext
+            AdDbContext adDbContext =new AdDbContext();
            
+            var list = adDbContext.Advertisements
+                .Include(advertisement => advertisement.Category)
+                //.Include(advertisement => advertisement.aspnet_Users)
+                .Include(advertisement => advertisement.District)
+                .Include(advertisement => advertisement.District.City)
+                .Include(advertisement => advertisement.District.City.Province)
+                .Include(advertisement => advertisement.AdPrivileges)
+                .Include(advertisement => advertisement.AdStatus)
+                //.Include(advertisement => advertisement.Price)
+                .Where(advertisement => advertisement.adStatusId == 3); //only accepted ads
+               // .OrderBy(advertisement => advertisement.Price.price);
+            //SetOrderByClause(list, queryParameters);
+            wherClauseCategoryId(list, queryParameters);
+            WhereClausePrice(list, queryParameters);
+            WhereClauseDistrictId(list, queryParameters);
 
-          //  list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
+            //uegentOnly
 
-            //foreach (Advertisement advertisement in list)
-            //{
-            //    _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
-            //}
+
+            list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
+            
+            foreach (Advertisement advertisement in list)
+            {
+                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
+            }
             return _searchResultItems;
         }
 
@@ -110,7 +107,7 @@ namespace RepositoryStd.Repository
                 AdvertisementTitle = advertisement.adTitle,//TODO test for null
                 AdvertisementTime = advertisement.adInsertDateTime,
                 AdvertisementStatusId = advertisement.adStatusId,
-                AdvertisementStatus = advertisement.AdStatu.adStatus,
+                AdvertisementStatus = advertisement.AdStatus.adStatus,
                 AdvertisementCategory = advertisement.Category.categoryName,
                 AdvertisementCategoryId = advertisement.categoryId,
                 AdvertisementComments = advertisement.adComments,//TODO test for null

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using ModelStd.Advertisements;
+using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.IRepository;
 using RepositoryStd.Messages;
 

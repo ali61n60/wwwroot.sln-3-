@@ -6,16 +6,17 @@ namespace Model.Db.Ad
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ad.Price")]
-    public partial class Price
+    [Table("ad.MobileBrands")]
+    public partial class MobileBrand
     {
         [Key]
-        public Guid adId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        public int brandId { get; set; }
 
+        [Required]
         [StringLength(150)]
-        public string priceType { get; set; }
+        public string brandName { get; set; }
 
-        [Column("price", TypeName = "money")]
-        public decimal? price1 { get; set; }
+        public int brandMakerId { get; set; }
     }
 }

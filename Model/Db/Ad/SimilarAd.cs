@@ -6,16 +6,17 @@ namespace Model.Db.Ad
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ad.Price")]
-    public partial class Price
+    [Table("ad.SimilarAds")]
+    public partial class SimilarAd
     {
         [Key]
+        [Column(Order = 0)]
         public Guid adId { get; set; }
 
-        [StringLength(150)]
-        public string priceType { get; set; }
+        [Key]
+        [Column(Order = 1)]
+        public Guid similarAdId { get; set; }
 
-        [Column("price", TypeName = "money")]
-        public decimal? price1 { get; set; }
+        public virtual Advertisement Advertisement { get; set; }
     }
 }

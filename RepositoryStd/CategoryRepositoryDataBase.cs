@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
 using ModelStd.Advertisements;
+using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.IRepository;
 
 namespace RepositoryStd

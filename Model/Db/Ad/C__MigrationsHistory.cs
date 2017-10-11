@@ -6,16 +6,15 @@ namespace Model.Db.Ad
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("ad.Price")]
-    public partial class Price
+    [Table("ad.__MigrationsHistory")]
+    public partial class C__MigrationsHistory
     {
         [Key]
-        public Guid adId { get; set; }
-
         [StringLength(150)]
-        public string priceType { get; set; }
+        public string MigrationId { get; set; }
 
-        [Column("price", TypeName = "money")]
-        public decimal? price1 { get; set; }
+        [Required]
+        [StringLength(32)]
+        public string ProductVersion { get; set; }
     }
 }
