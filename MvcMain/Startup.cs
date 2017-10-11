@@ -13,10 +13,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using ModelStd.Advertisements;
+using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Infrastructure.Services;
 using RepositoryStd;
-using RepositoryStd.DbModel.Identity;
+using RepositoryStd.Context.Identity;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.TransportationRepository;
 

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
 using ModelStd;
 using ModelStd.Advertisements;
-using ModelStd.Db;
+using ModelStd.Advertisements.CustomExceptions;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
-using RepositoryStd.DB;
 using RepositoryStd.Messages;
 
 namespace RepositoryStd.Repository
@@ -35,9 +34,9 @@ namespace RepositoryStd.Repository
         public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
             _searchResultItems = new List<AdvertisementCommon>(count);
-            DbContextFactory dbContextFactory = new DbContextFactory(_conectionString);
-            //TODO research for singleton dbContext
-            AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
+            //DbContextFactory dbContextFactory = new DbContextFactory(_conectionString);
+            ////TODO research for singleton dbContext
+            //AdCommonDbContext adCommonDbContext = dbContextFactory.Create<AdCommonDbContext>();
 
             //var list = adCommonDbContext.Advertisements
             //    .Include(advertisement => advertisement.Category)

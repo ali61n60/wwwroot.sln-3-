@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ModelStd.Db;
+using ModelStd.Db.Ad;
 
 namespace ModelStd
 {
