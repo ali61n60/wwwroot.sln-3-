@@ -14,6 +14,7 @@ namespace ModelStd.Db.Ad
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int brandId { get; set; }
 
         [Required]

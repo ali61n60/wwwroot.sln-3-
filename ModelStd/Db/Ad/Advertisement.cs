@@ -19,19 +19,23 @@ namespace ModelStd.Db.Ad
         [Key]
         public Guid adId { get; set; }
 
+        [Required]
         public Guid UserId { get; set; }
 
+        [Required]
         public int categoryId { get; set; }
-
+        [Required]
         public int districtId { get; set; }
 
         [Column(TypeName = "smalldatetime")]
+        [Required]
         public DateTime adInsertDateTime { get; set; }
 
         [Required]
         [StringLength(500)]
         public string adLink { get; set; }
 
+        [Required]
         public int adStatusId { get; set; }
 
         [Required]
@@ -51,7 +55,7 @@ namespace ModelStd.Db.Ad
         
         public virtual ICollection<AdPrivilege> AdPrivileges { get; set; }
 
-        public virtual AdStatu AdStatu { get; set; }
+        public virtual AdStatus AdStatus { get; set; }
 
         public virtual Category Category { get; set; }
 

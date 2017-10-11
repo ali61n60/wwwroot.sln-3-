@@ -1,7 +1,5 @@
 ﻿using System;
-using ModelStd.Db;
 using ModelStd.Db.Ad;
-
 
 namespace ModelStd.Advertisements
 {

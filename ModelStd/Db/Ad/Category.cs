@@ -6,7 +6,7 @@ namespace ModelStd.Db.Ad
 {
    
     [Table("Categories")]
-    public partial class Category
+    public class Category
     {
         public Category()
         {
@@ -14,6 +14,7 @@ namespace ModelStd.Db.Ad
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int categoryId { get; set; }
 
         [Required]

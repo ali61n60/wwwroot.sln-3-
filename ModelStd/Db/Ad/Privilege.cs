@@ -13,6 +13,7 @@ namespace ModelStd.Db.Ad
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int privilegeId { get; set; }
 
         [Required]

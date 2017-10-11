@@ -1,14 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using ModelStd.Db;
 using ModelStd.Db.Ad;
 
 namespace RepositoryStd.Context.AD
 {
-   
-
-    public partial class AdDbContext : DbContext
+   public partial class AdDbContext : DbContext
     {
-        private string _connectionString;
+        private readonly string _connectionString;
 
         public AdDbContext(string connectionString)
         {
@@ -24,12 +21,11 @@ namespace RepositoryStd.Context.AD
         {
             optionsBuilder.UseSqlServer(_connectionString,
                 x => x.MigrationsHistoryTable("__MigrationsHistory", "ad"));
-
-    }
+        }
 
         public virtual DbSet<AdAttributeTransportation> AdAttributeTransportations { get; set; }
         public virtual DbSet<AdPrivilege> AdPrivileges { get; set; }
-        public virtual DbSet<AdStatu> AdStatus { get; set; }
+        public virtual DbSet<AdStatus> AdStatus { get; set; }
         public virtual DbSet<Advertisement> Advertisements { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<CarModel> CarModels { get; set; }
@@ -47,7 +43,7 @@ namespace RepositoryStd.Context.AD
         {
             modelBuilder.HasDefaultSchema("ad");
 
-            modelBuilder.Entity<AdStatu>()
+            modelBuilder.Entity<AdStatus>()
                 .HasMany(e => e.Advertisements)
                 //.WithRequired(e => e.AdStatu)
                 //.WillCascadeOnDelete(false);
@@ -98,7 +94,7 @@ namespace RepositoryStd.Context.AD
                 // .WillCascadeOnDelete(false);
                 ;
             modelBuilder.Entity<Price>()
-                .Property(e => e.price1)
+                .Property(e => e.price)
                 // .HasPrecision(19, 4);
                 ;
             modelBuilder.Entity<AdPrivilege>().HasKey(privilege => privilege.adId);

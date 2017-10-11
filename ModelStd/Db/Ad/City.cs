@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("Cities")]
-    public partial class City
+    public class City
     {
         public City()
         {
@@ -13,6 +13,7 @@ namespace ModelStd.Db.Ad
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int cityId { get; set; }
 
         [Required]

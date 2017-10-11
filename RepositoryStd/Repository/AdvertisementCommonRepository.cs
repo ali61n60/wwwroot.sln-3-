@@ -45,8 +45,8 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
-                .Include(advertisement => advertisement.AdPrivileges)
-                .Include(advertisement => advertisement.AdStatu)
+                //.Include(advertisement => advertisement.AdPrivileges)
+                .Include(advertisement => advertisement.AdStatus)
                 //.Include(advertisement => advertisement.Price)
                 .Where(advertisement => advertisement.adStatusId == 3); //only accepted ads
                // .OrderBy(advertisement => advertisement.Price.price);
@@ -58,8 +58,8 @@ namespace RepositoryStd.Repository
             //uegentOnly
 
 
-             list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
-
+            list = (IOrderedQueryable<Advertisement>) list.Skip(startIndex - 1).Take(count);
+            
             foreach (Advertisement advertisement in list)
             {
                 _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
@@ -107,7 +107,7 @@ namespace RepositoryStd.Repository
                 AdvertisementTitle = advertisement.adTitle,//TODO test for null
                 AdvertisementTime = advertisement.adInsertDateTime,
                 AdvertisementStatusId = advertisement.adStatusId,
-                AdvertisementStatus = advertisement.AdStatu.adStatus,
+                AdvertisementStatus = advertisement.AdStatus.adStatus,
                 AdvertisementCategory = advertisement.Category.categoryName,
                 AdvertisementCategoryId = advertisement.categoryId,
                 AdvertisementComments = advertisement.adComments,//TODO test for null

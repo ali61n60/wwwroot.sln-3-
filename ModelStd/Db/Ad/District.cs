@@ -14,6 +14,7 @@ namespace ModelStd.Db.Ad
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int districtId { get; set; }
 
         [Required]

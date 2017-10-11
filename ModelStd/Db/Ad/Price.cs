@@ -2,8 +2,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-
-
 namespace ModelStd.Db.Ad
 {
     [Table("Price")]
@@ -16,7 +14,7 @@ namespace ModelStd.Db.Ad
         public string priceType { get; set; }
 
         [Column("price", TypeName = "money")]
-        public decimal? price1 { get; set; }
+        public decimal? price { get; set; }
         public virtual Advertisement Advertisement { get; set; }
 
        
@@ -47,7 +45,7 @@ namespace ModelStd.Db.Ad
         {
             if (ReferenceEquals(this, other)) return 0;
             if (ReferenceEquals(null, other)) return 1;
-            return Nullable.Compare(price1, other.price1);
+            return Nullable.Compare(price, other.price);
         }
     }
 

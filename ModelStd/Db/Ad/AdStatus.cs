@@ -6,11 +6,11 @@ namespace ModelStd.Db.Ad
 {
    
     [Table("AdStatus")]
-    public  class AdStatu
+    public  class AdStatus
     {
-        public AdStatu()
+        public AdStatus()
         {
-            Advertisements = new HashSet<Advertisement>();
+            //Advertisements = new HashSet<Advertisement>();
         }
 
         [Key]
@@ -25,6 +25,6 @@ namespace ModelStd.Db.Ad
         [StringLength(150)]
         public string adStatusEnglish { get; set; }
 
-        public virtual ICollection<Advertisement> Advertisements { get; set; }
+        //public virtual ICollection<Advertisement> Advertisements { get; set; }
     }
 }
