@@ -27,9 +27,11 @@
 }
 @section Body
 {
-    <div class="row">
+    <div class="row well">
         <div class="col-sm-6">
-            <input />
+            <input id="minPrice" class="form-control" placeholder="MinPrice"/>
+            <br/>
+            <input id="maxPrice" class="form-control" placeholder="MaxPrice" />
         </div>
         <div class="col-sm-6">
             <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
@@ -77,6 +79,8 @@
             $userInput.StartIndex = $start;
             $userInput.Count = $count;
             $userInput.CategoryId = 100;//cars
+            $userInput.MinimumPrice = $("#minPrice").val();
+            $userInput.MaximumPrice = $("#maxPrice").val();
 
             //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
             $userInput.RequestIndex = $requestIndex;

@@ -22,4 +22,10 @@
     <PackageReference Include="System.Data.SqlClient" Version="4.4.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="RepositoryStd">
+      <HintPath>..\packages\RepositoryStd.1.0.49\lib\netstandard1.4\RepositoryStd.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

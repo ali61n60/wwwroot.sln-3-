@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using ModelStd.Db.Ad;
+using RepositoryStd.QueryPattern;
 
 namespace ModelStd
 {
@@ -27,6 +28,9 @@ namespace ModelStd
 
         public static readonly string DistrictIdKey = "DistrictId";
         public static readonly List<int> DistrctIdDefault=new List<int>();
+
+        public static readonly string OrderByKey = "OrderBy";
+        public static readonly OrderBy OrderByDefault=OrderBy.DateAsc;
 
         public static int ExtractCatgoryId(Dictionary<string, string> inputDictionary)
         {
@@ -98,7 +102,7 @@ namespace ModelStd
             decimal tempMaxPrice = MaxPriceDefault;
             if (inputDictionary.ContainsKey(MaxPriceKey))
             {
-                if (!decimal.TryParse(inputDictionary[MinPriceKey], out tempMaxPrice))
+                if (!decimal.TryParse(inputDictionary[MaxPriceKey], out tempMaxPrice))
                     tempMaxPrice = MaxPriceDefault;
             }
             if (tempMaxPrice > MaxPriceDefault)
@@ -126,7 +130,16 @@ namespace ModelStd
             return DistrctIdDefault;
         }
 
-
+        public static OrderBy ExtractOrderBy(Dictionary<string, string> inputDictionary)
+        {
+            OrderBy tempOrderBy = OrderByDefault;
+            if (inputDictionary.ContainsKey(OrderByKey))
+            {
+                string userInputOrderByValue = inputDictionary[OrderByKey];
+              
+            }
+            return tempOrderBy;
+        }
 
     }
 }
