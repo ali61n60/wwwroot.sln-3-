@@ -2,7 +2,8 @@
 using ModelStd.Db.Ad;
 using RepositoryStd.QueryPattern;
 
-namespace ModelStd
+
+namespace RepositoryStd.Context.Helper
 {
     public class ParameterExtractor
     {
@@ -136,7 +137,7 @@ namespace ModelStd
             if (inputDictionary.ContainsKey(OrderByKey))
             {
                 string userInputOrderByValue = inputDictionary[OrderByKey];
-              
+                tempOrderBy= OrderByHelper.SetOrderByFromString(userInputOrderByValue, OrderByDefault);
             }
             return tempOrderBy;
         }
