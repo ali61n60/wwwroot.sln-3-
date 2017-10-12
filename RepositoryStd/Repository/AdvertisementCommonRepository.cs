@@ -13,6 +13,7 @@ using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Messages;
+using RepositoryStd.QueryPattern;
 
 namespace RepositoryStd.Repository
 {
@@ -71,7 +72,20 @@ namespace RepositoryStd.Repository
         private IQueryable<Advertisements> orderByClause(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
             //TODO act based on user input
-            return list.OrderBy(advertisement => advertisement.Price.price);
+            OrderBy orderByUserInput = ParameterExtractor.ExtractOrderBy(queryParameters);
+            switch (orderByUserInput)
+            {
+                    case OrderBy.PriceAsc:
+                        return list.OrderBy(advertisement => advertisement.Price.price);
+                    case OrderBy.PriceDesc:
+                        return list.OrderByDescending(advertisements => advertisements.Price.price);
+                    case OrderBy.DateAsc:
+                        return list.OrderBy(advertisements => advertisements.AdInsertDateTime);
+                    case OrderBy.DateDesc:
+                        return list.OrderByDescending(advertisements => advertisements.AdInsertDateTime);
+                default:
+                    return list;
+            }
         }
 
 
