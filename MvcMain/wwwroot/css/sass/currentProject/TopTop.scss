@@ -1,5 +1,6 @@
-﻿.top-top {
-    background-color: $color-purple-darken-4;
+﻿@import '../helpers/_variables.scss';
+.top-top {
+    background-color: $color-teal-darken-4;
     color: $text-color-white;
     padding: 7px 0 7px 0;
     font-size: 12px;

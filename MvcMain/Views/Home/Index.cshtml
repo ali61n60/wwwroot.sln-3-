@@ -16,7 +16,6 @@
 }
 @section PageTitle
 {
-    @Html.Partial("PageTitle")
 }
 @section TopHeader
 {
@@ -28,19 +27,18 @@
 }
 @section Body
 {
-    <p>This is Default page</p>
-    <div class="row well">
-        <div class="col-sm-12">
+    <div class="row">
+        <div class="col-sm-6">
+            <input />
+        </div>
+        <div class="col-sm-6">
             <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
-            <label id="serverTime"></label>
+
         </div>
     </div>
     <div id="adPlaceHolder" class="row">
     
     </div>
-
-
-   
 }
 
 @section Footer

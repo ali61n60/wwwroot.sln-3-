@@ -27,8 +27,7 @@
     </environment>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <link href="~/css/style/css/style.css" rel="stylesheet" />
-
+    
     <title>@ViewData["Title"]</title>
    
 </head>
@@ -44,10 +43,10 @@
     @RenderSection("TopHeader", required: false)
 
     <div class="middle">
-        <div class="col-lg-3 col-md-3 col-sm-4 hidden-xs">
+        <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
             @RenderSection("SideNav", required: false)
         </div>
-        <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12 logo-image">
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
             <div class="main">
                 @RenderSection("Body", required: true)
             </div>
