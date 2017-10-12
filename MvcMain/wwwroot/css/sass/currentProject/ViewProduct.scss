@@ -1,0 +1,17 @@
+﻿.productComponent {
+    margin: 5px;
+    padding: 5px;
+    border: solid 1px $color-purple-accent-4;
+    height: 150px;
+    text-align: center;
+
+    img {
+        width: 90px;
+        height: 90px;
+
+        @media screen and (min-width: $size-sm) and (max-width:$size-md - 1) {
+            width: 70px;
+            height: 70px;
+        }
+    }
+}

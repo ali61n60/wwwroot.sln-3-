@@ -1,0 +1,15 @@
+﻿.sidenav {
+    padding: 5px;
+    font-size: 20px;
+    color: $color-purple-darken-4;
+
+    ul li {
+        list-style-type: none;
+        text-align: right;
+        margin:5px 0 5px 0;
+
+        a {
+            color: $text-color-white;
+        }
+    }
+}

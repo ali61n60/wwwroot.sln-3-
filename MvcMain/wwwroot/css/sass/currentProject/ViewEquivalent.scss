@@ -1,0 +1,18 @@
+﻿.equivalent {
+    .panel {
+        border-color: $color-deep-purple-darken-3;
+
+        .panel-heading {
+            background-color: $color-deep-purple-darken-2;
+            color: $text-color-white;
+        }
+
+        .panel-body {
+            background-color: $color-deep-purple-lighten-4;
+
+            a {
+                font-size: 20px;
+            }
+        }
+    }
+}

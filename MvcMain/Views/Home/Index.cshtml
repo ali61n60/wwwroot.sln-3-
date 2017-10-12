@@ -28,7 +28,19 @@
 }
 @section Body
 {
+    <p>This is Default page</p>
+    <div class="row well">
+        <div class="col-sm-12">
+            <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
+            <label id="serverTime"></label>
+        </div>
+    </div>
+    <div id="adPlaceHolder" class="row">
+    
+    </div>
 
+
+   
 }
 
 @section Footer
@@ -37,126 +49,106 @@
 }
 
 @section scripts{
-
-}
-
-
-
-
-<p>This is Default page</p>
-
-
-<div class="row well">
-    <div class="col-sm-12">
-        <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
-        <label id="serverTime"></label>
-    </div>
-</div>
-<div id="adPlaceHolder" class="row">
-    
-</div>
+    <script type="text/javascript">
+        var $initialStart = 1;
+        var $start = 1;
+        var $count = 5;
+        var $requestIndex = 0;
+        var $previousRequestIndex = -1;
+        var $isServerCalled = false;
+        var $numberOfStartServerCallNotification = 0;
 
 
-<script type="text/javascript">
-    var $initialStart = 1;
-    var $start = 1;
-    var $count = 5;
-    var $requestIndex = 0;
-    var $previousRequestIndex = -1;
-    var $isServerCalled = false;
-    var $numberOfStartServerCallNotification = 0;
+        $(document).ready(function () {
+            $("#getAdFromServer").on("click",
+                function (event) {
+                    event.preventDefault();
+                    getAdItemsFromServer();
+                }); //end click
+        });//end ready
 
+        //CORE
+        function getAdItemsFromServer() {
+            if ($isServerCalled && ($previousRequestIndex === $requestIndex)) {//a call is sent but no answer yet
+                return;
+            } else {
+                $previousRequestIndex = $requestIndex;
+                $isServerCalled = true;
+            }//else
+            var $userInput = {};
+            $userInput.StartIndex = $start;
+            $userInput.Count = $count;
+            $userInput.CategoryId = 100;//cars
 
-    $(document).ready(function () {
-        $("#getAdFromServer").on("click",
-            function (event) {
-                event.preventDefault();
-                getAdItemsFromServer();
-            }); //end click
-    });//end ready
+            //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
+            $userInput.RequestIndex = $requestIndex;
+            //notifyUserAjaxCallStarted();
 
-    //CORE
-    function getAdItemsFromServer() {
-        if ($isServerCalled && ($previousRequestIndex === $requestIndex)) {//a call is sent but no answer yet
-            return;
-        } else {
-            $previousRequestIndex = $requestIndex;
-            $isServerCalled = true;
-        }//else
-        var $userInput = {};
-        $userInput.StartIndex = $start;
-        $userInput.Count = $count;
-        $userInput.CategoryId = 100;//cars
-
-        //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
-        $userInput.RequestIndex = $requestIndex;
-        //notifyUserAjaxCallStarted();
-
-        $.ajax({
-            type: "POST", //GET or POST or PUT or DELETE verb
-            url: "api/AdApi/GetAdvertisementCommon",
-            data: JSON.stringify($userInput), //Data sent to server
-            contentType: 'application/json', // content type sent to server
-            success: OnSuccessGetItemsFromServer,//On Successfull service call
-            error: OnErrorGetItemsFromServer// When Service call fails
-        });//end .ajax
-    }
-
-    function OnSuccessGetItemsFromServer(msg) {
-        //notifyUserAjaxCallFinished();
-        if (msg.success == true) {
-            if (msg.customDictionary["RequestIndex"] == $requestIndex) {
-                $start += parseInt(msg.customDictionary["numberOfItems"]);
-                var template = $('#singleAdItem').html();
-                var data;
-                for (var i = 0; i < msg.responseData.length; i++) {
-                    var adImage = null;
-                    if (msg.responseData[i].advertisementImages[0] != null) {
-                        adImage = "data:image/jpg;base64," + msg.responseData[i].advertisementImages[0];
-                    } //end if
-                    data = {
-                        AdvertisementId: msg.responseData[i].advertisementId,
-                        AdvertisementCategoryId: msg.responseData[i].advertisementCategoryId,
-                        AdvertisementCategory: msg.responseData[i].advertisementCategory,
-                        adImage: adImage,
-                        adPrice: msg.responseData[i].advertisementPrice.price, //todo check the price type
-                        AdvertisementTitle: msg.responseData[i].advertisementTitle,
-                        AdvertisementStatus: msg.responseData[i].advertisementStatus
-                        //adDate: msg.ResponseData[i].AdTime
-                    } //end data
-
-                    var html = Mustache.to_html(template, data);
-                    $("#adPlaceHolder").append(html);
-                } //end for
-            }//end if
-        }//end if
-        else {
-            //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+            $.ajax({
+                type: "POST", //GET or POST or PUT or DELETE verb
+                url: "api/AdApi/GetAdvertisementCommon",
+                data: JSON.stringify($userInput), //Data sent to server
+                contentType: 'application/json', // content type sent to server
+                success: OnSuccessGetItemsFromServer,//On Successfull service call
+                error: OnErrorGetItemsFromServer// When Service call fails
+            });//end .ajax
         }
-        $isServerCalled = false;
-        $requestIndex++;
-    }//end OnSuccessGetTimeFromServer
 
-    function OnErrorGetItemsFromServer(XMLHttpRequest, textStatus, errorThrown) {
-        $isServerCalled = false;
-        $requestIndex++;
-        //notifyUserAjaxCallFinished();
-        //showErrorMessage(textStatus + " , " + errorThrown);
-    }//end OnErrorGetTimeFromServer
-</script>
+        function OnSuccessGetItemsFromServer(msg) {
+            //notifyUserAjaxCallFinished();
+            if (msg.success == true) {
+                if (msg.customDictionary["RequestIndex"] == $requestIndex) {
+                    $start += parseInt(msg.customDictionary["numberOfItems"]);
+                    var template = $('#singleAdItem').html();
+                    var data;
+                    for (var i = 0; i < msg.responseData.length; i++) {
+                        var adImage = null;
+                        if (msg.responseData[i].advertisementImages[0] != null) {
+                            adImage = "data:image/jpg;base64," + msg.responseData[i].advertisementImages[0];
+                        } //end if
+                        data = {
+                            AdvertisementId: msg.responseData[i].advertisementId,
+                            AdvertisementCategoryId: msg.responseData[i].advertisementCategoryId,
+                            AdvertisementCategory: msg.responseData[i].advertisementCategory,
+                            adImage: adImage,
+                            adPrice: msg.responseData[i].advertisementPrice.price, //todo check the price type
+                            AdvertisementTitle: msg.responseData[i].advertisementTitle,
+                            AdvertisementStatus: msg.responseData[i].advertisementStatus
+                            //adDate: msg.ResponseData[i].AdTime
+                        } //end data
 
-<script>
-    $(document).ready(function () {
+                        var html = Mustache.to_html(template, data);
+                        $("#adPlaceHolder").append(html);
+                    } //end for
+                }//end if
+            }//end if
+            else {
+                //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+            }
+            $isServerCalled = false;
+            $requestIndex++;
+        }//end OnSuccessGetTimeFromServer
 
-        //show detail of singleAdItem when mouse over
-        $(document).on('mouseenter mouseleave', '.blockDisplay', function () {
-            $(this).find('.moreInfo').fadeToggle(250);
-        });//end on
+        function OnErrorGetItemsFromServer(XMLHttpRequest, textStatus, errorThrown) {
+            $isServerCalled = false;
+            $requestIndex++;
+            //notifyUserAjaxCallFinished();
+            //showErrorMessage(textStatus + " , " + errorThrown);
+        }//end OnErrorGetTimeFromServer
+    </script>
 
-    });//end ready
-</script>
+    <script>
+        $(document).ready(function () {
 
-<script id="singleAdItem" type="text/template">
+            //show detail of singleAdItem when mouse over
+            $(document).on('mouseenter mouseleave', '.blockDisplay', function () {
+                $(this).find('.moreInfo').fadeToggle(250);
+            });//end on
+
+        });//end ready
+    </script>
+
+    <script id="singleAdItem" type="text/template">
     <div class="blockDisplay adDetail">
         <a href="./AdDetail/AdDetail.aspx?adId={{AdvertisementId}}&categoryId={{AdvertisementCategoryId}}">
             <div>
@@ -190,3 +182,11 @@
         </a>
     </div>
 </script>
+}
+
+
+
+
+
+
+

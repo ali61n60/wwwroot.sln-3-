@@ -1,0 +1,10 @@
+﻿.top-top {
+    background-color: $color-purple-darken-4;
+    color: $text-color-white;
+    padding: 7px 0 7px 0;
+    font-size: 12px;
+
+    @media screen and (min-width: $size-sm) {
+        font-size: 20px;
+    }
+}
