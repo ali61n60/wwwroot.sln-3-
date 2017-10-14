@@ -1,44 +1,113 @@
-﻿
+﻿/*_variables.scss*/
+/*Sizes*/
+$size-xs: 576px;
+$size-sm: 768px;
+$size-md: 992px;
+$size-lg: 1200px;
+
 /*Colors*/
-$defaultColor:#333;
-$defaultBackgroundColor:#fff;
-$defaultBorderColor:#ccc;
-$defaultBackgroundColorFocus:#e6e6e6;
+$defaultColor: #333;
+$defaultBackgroundColor: #fff;
+$defaultBorderColor: #ccc;
+$defaultBackgroundColorFocus: #e6e6e6;
 $defaultBorderColorFocus: #8c8c8c;
-$defaultBorderColorHover:#adadad;
+$defaultBorderColorHover: #adadad;
 
-$primaryBackgroundColor:#337ab7;
+$primaryBackgroundColor: #337ab7;
 $primaryBorderColor: #2e6da4;
-$primaryFocusBackgroundColor:#286090;
-$primaryFocusBorderColor:#122b40;
-$primaryHoverBorderColor:#204d74;
+$primaryFocusBackgroundColor: #286090;
+$primaryFocusBorderColor: #122b40;
+$primaryHoverBorderColor: #204d74;
 
-$successBackgroundColor:#5cb85c;
-$successBorderColor:#4cae4c;
-$successFocusBackgroundColor:#449d44;
-$successFocusBorderColor:#255625;
+$successBackgroundColor: #5cb85c;
+$successBorderColor: #4cae4c;
+$successFocusBackgroundColor: #449d44;
+$successFocusBorderColor: #255625;
 $successHoverBorderColor: #398439;
 
-$infoBackgroundColor:#5bc0de;
-$infoBorderColor:#46b8da;
-$infoFocusBackgroundColor:#31b0d5;
-$infoFocusBorderColor:#1b6d85;
-$infoHoverBorderColor:#269abc;
+$infoBackgroundColor: #5bc0de;
+$infoBorderColor: #46b8da;
+$infoFocusBackgroundColor: #31b0d5;
+$infoFocusBorderColor: #1b6d85;
+$infoHoverBorderColor: #269abc;
 
-$warningBackgroundColor:#f0ad4e;
-$warningBorderColor:#eea236;
-$warningFocusBackgroundColor:#ec971f;
-$warningFocusBorderColor:#985f0d;
-$warningHoverBorderColor:#d58512;
+$warningBackgroundColor: #f0ad4e;
+$warningBorderColor: #eea236;
+$warningFocusBackgroundColor: #ec971f;
+$warningFocusBorderColor: #985f0d;
+$warningHoverBorderColor: #d58512;
 
-$dangerBackgroundColor:#d9534f;
-$dangerBorderColor:#d43f3a;
-$dangerFocusBackgroundColor:#c9302c;
-$dangerFocusBorderColor:#761c19;
-$dangerHoverBorderColor:#ac2925;
+$dangerBackgroundColor: #d9534f;
+$dangerBorderColor: #d43f3a;
+$dangerFocusBackgroundColor: #c9302c;
+$dangerFocusBorderColor: #761c19;
+$dangerHoverBorderColor: #ac2925;
 
 
-$logo_color : #083B91;
+$color-purple-lighten-5: #f3e5f5;
+$color-purple-lighten-4: #e1bee7;
+$color-purple-lighten-3: #ce93d8;
+$color-purple-lighten-2: #ba68c8;
+$color-purple-lighten-1: #ab47bc;
+$color-purple: #9c27b0;
+$color-purple-darken-1: #8e24aa;
+$color-purple-darken-2: #7b1fa2;
+$color-purple-darken-3: #6a1b9a;
+$color-purple-darken-4: #4a148c;
+$color-purple-accent-1: #ea80fc;
+$color-purple-accent-2: #e040fb;
+$color-purple-accent-3: #d500f9;
+$color-purple-accent-4: #aa00ff;
+
+
+$color-deep-purple-lighten-5: #ede7f6;
+$color-deep-purple-lighten-4: #d1c4e9;
+$color-deep-purple-lighten-3: #b39ddb;
+$color-deep-purple-lighten-2: #9575cd;
+$color-deep-purple-lighten-1: #7e57c2;
+$color-deep-purple: #673ab7;
+$color-deep-purple-darken-1: #5e35b1;
+$color-deep-purple-darken-2: #512da8;
+$color-deep-purple-darken-3: #4527a0;
+$color-deep-purple-darken-4: #311b92;
+$color-deep-purple-accent-1: #b388ff;
+$color-deep-purple-accent-2: #7c4dff;
+$color-deep-purple-accent-3: #651fff;
+$color-deep-purple-accent-4: #6200ea;
+
+$color-green-lighten-5: #e8f5e9;
+$color-green-lighten-4: #c8e6c9;
+$color-green-lighten-3: #a5d6a7;
+$color-green-lighten-2: #81c784;
+$color-green-lighten-1: #66bb6a;
+$color-green: #4caf50;
+$color-green-darken-1: #43a047;
+$color-green-darken-2: #388e3c;
+$color-green-darken-3: #2e7d32;
+$color-green-darken-4: #1b5e20;
+$color-green-accent-1: #b9f6ca;
+$color-green-accent-2: #69f0ae;
+$color-green-accent-3: #00e676;
+$color-green-accent-4: #00c853;
+
+
+
+$color-teal-lighten-5: #e0f2f1;
+$color-teal-lighten-4: #b2dfdb;
+$color-teal-lighten-3: #80cbc4;
+$color-teal-lighten-2: #4db6ac;
+$color-teal-lighten-1: #26a69a;
+$color-teal: #009688;
+$color-teal-darken-1: #00897b;
+$color-teal-darken-2: #00796b;
+$color-teal-darken-3: #00695c;
+$color-teal-darken-4: #004d40;
+$color-teal-accent-1: #a7ffeb;
+$color-teal-accent-2: #64ffda;
+$color-teal-accent-3: #1de9b6;
+$color-teal-accent-4: #00bfa5;
+
+$logo_color: #083B91;
 
 /* corporate color palette */
 $primary-dark: #06888A;
@@ -47,8 +116,10 @@ $primary-mid: #DC664A;
 $secondary-dark: #5A3928;
 $secondary-light: #FDC149;
 /* functional variables */
-$page-background: $primary-light;
-$headline-color: $primary-dark;
+$text-color-white: #fff;
+$text-color-light: #333;
+$text-color-dark: #aaa;
+$text-color-black: #000;
 $text-color: $primary-dark;
 $border-light: $secondary-light;
 $border-dark: $primary-dark;

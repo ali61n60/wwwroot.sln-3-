@@ -1,0 +1,9 @@
+﻿@import '../helpers/_variables.scss';
+.new-message{
+    border:solid 4px $color-deep-purple-darken-4;
+    border-left:solid 10px #f00;
+}
+
+.seen-message {
+    border: solid 4px $color-deep-purple-lighten-5;
+}

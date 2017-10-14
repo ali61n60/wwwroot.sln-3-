@@ -3,9 +3,9 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
     <environment names="Development">
-        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jQuery/dist/jquery.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
         <script src="~/lib/mustache.js/mustache.js"></script>
         <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
@@ -27,58 +27,35 @@
     </environment>
 
     <script src="~/js/site.js" asp-append-version="true"></script>
-    <link href="~/css/style/css/style.css" rel="stylesheet" />
-
+    
     <title>@ViewData["Title"]</title>
+   
 </head>
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">Where Is My Car</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">خانه</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">درباره ما</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">تماس با ما</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Index">محصولات</a></li>
-                </ul>
+@RenderSection("TopTop", required: false)
+@RenderSection("NavBar", required: false)
 
-            </div>
+
+
+<div class="container mainContainer">
+
+    @RenderSection("PageTitle", required: false)
+    @RenderSection("TopHeader", required: false)
+
+    <div class="middle">
+        <div class="col-lg-2 col-md-2 col-sm-2 hidden-xs">
+            @RenderSection("SideNav", required: false)
         </div>
-    </nav>
-    <div class="container-fluid text-center">
-        <div class="row content">
-            <div class="col-sm-2 sidenav">
-                <p><a asp-area="" asp-controller="Home" asp-action="Index">خانه</a></p>
-                <p><a asp-area="" asp-controller="Home" asp-action="Index">درباره ما</a></p>
-                <p><a asp-area="" asp-controller="Home" asp-action="Index">تماس با ما</a></p>
-                <p><a asp-area="" asp-controller="Home" asp-action="Index">محصولات</a></p>
+        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+            <div class="main">
+                @RenderSection("Body", required: true)
             </div>
-            <div class="col-sm-8 text-left">
-                @RenderBody()
-            </div>
-            <div class="col-sm-2 sidenav ads">
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-                <div class="well">
-                    <p>ADS</p>
-                </div>
-            </div>
+
         </div>
     </div>
-    <footer class="container-fluid text-center">
-        <p>&copy; 2017 - whereismycar</p>
-    </footer>
-    @RenderSection("scripts", required: false)
+</div>
+    
+@RenderSection("Footer", required: false)
+@RenderSection("scripts", required: false)
 </body>
 </html>

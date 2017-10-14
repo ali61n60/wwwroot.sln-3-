@@ -19,12 +19,7 @@ namespace RepositoryStd.QueryPattern.BaseQuery
 
         public BaseQueryAdCommon(Dictionary<string, string> userInput)
         {
-            
-           
-
-          
-
-            DistrictId = new SearchFieldIntegerArray("DistrictId", "Advertisements.districtId",CriteriaOperator.In, 0,1000,0, userInput);
+           DistrictId = new SearchFieldIntegerArray("DistrictId", "Advertisements.districtId",CriteriaOperator.In, 0,1000,0, userInput);
             _searchFieldList.Add(DistrictId);
 
             
@@ -37,9 +32,9 @@ namespace RepositoryStd.QueryPattern.BaseQuery
         }
         private void setOrderBy(Dictionary<string, string> userInputDictionary)
         {
-            SetOrderByFromString(userInputDictionary.ContainsKey("OrderBy")
-                ? userInputDictionary["OrderBy"]
-                : "giveMeDefaultOrderBy");
+            //SetOrderByFromString(userInputDictionary.ContainsKey("OrderBy")
+             //   ? userInputDictionary["OrderBy"]
+             //   : "giveMeDefaultOrderBy");
         }
         
         public string GetWhereClause()

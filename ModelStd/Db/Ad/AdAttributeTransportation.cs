@@ -1,41 +1,22 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ModelStd.Db.Ad
 {
-    
-    [Table("AdAttributeTransportation")]
     public partial class AdAttributeTransportation
     {
-        [Key]
-        public Guid attributeId { get; set; }
+        public Guid AttributeId { get; set; }
+        public Guid AdId { get; set; }
+        public int? ModelId { get; set; }
+        public int? MakeYear { get; set; }
+        public string Fuel { get; set; }
+        public int? Mileage { get; set; }
+        public string Gearbox { get; set; }
+        public string BodyColor { get; set; }
+        public string InternalColor { get; set; }
+        public string BodyStatus { get; set; }
 
-        public Guid adId { get; set; }
-
-        public int? modelId { get; set; }
-
-        public int? makeYear { get; set; }
-
-        [StringLength(50)]
-        public string fuel { get; set; }
-
-        public int? mileage { get; set; }
-
-        [StringLength(50)]
-        public string gearbox { get; set; }
-
-        [StringLength(50)]
-        public string bodyColor { get; set; }
-
-        [StringLength(50)]
-        public string internalColor { get; set; }
-
-        [StringLength(50)]
-        public string bodyStatus { get; set; }
-
-        public virtual Advertisement Advertisement { get; set; }
-
-        public virtual CarModel CarModel { get; set; }
+        public virtual Advertisements Ad { get; set; }
+        public virtual CarModel Model { get; set; }
     }
 }

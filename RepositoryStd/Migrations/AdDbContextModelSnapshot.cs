@@ -13,402 +13,447 @@ namespace RepositoryStd.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasDefaultSchema("ad")
-                .HasAnnotation("ProductVersion", "1.1.2")
+                .HasAnnotation("ProductVersion", "1.1.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ModelStd.Db.Ad.AdAttributeTransportation", b =>
                 {
-                    b.Property<Guid>("attributeId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("AttributeId")
+                        .HasColumnName("attributeId");
 
-                    b.Property<Guid>("adId");
+                    b.Property<Guid>("AdId")
+                        .HasColumnName("adId");
 
-                    b.Property<string>("bodyColor")
+                    b.Property<string>("BodyColor")
+                        .HasColumnName("bodyColor")
                         .HasMaxLength(50);
 
-                    b.Property<string>("bodyStatus")
+                    b.Property<string>("BodyStatus")
+                        .HasColumnName("bodyStatus")
                         .HasMaxLength(50);
 
-                    b.Property<string>("fuel")
+                    b.Property<string>("Fuel")
+                        .HasColumnName("fuel")
                         .HasMaxLength(50);
 
-                    b.Property<string>("gearbox")
+                    b.Property<string>("Gearbox")
+                        .HasColumnName("gearbox")
                         .HasMaxLength(50);
 
-                    b.Property<string>("internalColor")
+                    b.Property<string>("InternalColor")
+                        .HasColumnName("internalColor")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("makeYear");
+                    b.Property<int?>("MakeYear")
+                        .HasColumnName("makeYear");
 
-                    b.Property<int?>("mileage");
+                    b.Property<int?>("Mileage")
+                        .HasColumnName("mileage");
 
-                    b.Property<int?>("modelId");
+                    b.Property<int?>("ModelId")
+                        .HasColumnName("modelId");
 
-                    b.HasKey("attributeId");
+                    b.HasKey("AttributeId")
+                        .HasName("PK_AdAttributeCar");
 
-                    b.HasIndex("adId");
+                    b.HasIndex("AdId");
 
-                    b.HasIndex("modelId");
+                    b.HasIndex("ModelId");
 
-                    b.ToTable("AdAttributeTransportation");
+                    b.ToTable("AdAttributeTransportation","ad");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.AdPrivilege", b =>
                 {
-                    b.Property<DateTime>("insertionDate")
+                    b.Property<Guid>("AdId")
+                        .HasColumnName("adId");
+
+                    b.Property<int>("PrivilegeId")
+                        .HasColumnName("privilegeId");
+
+                    b.Property<DateTime>("InsertionDate")
+                        .HasColumnName("insertionDate")
                         .HasColumnType("smalldatetime");
 
-                    b.Property<Guid?>("AdvertisementadId");
+                    b.HasKey("AdId", "PrivilegeId", "InsertionDate")
+                        .HasName("PK_AdPrivilage");
 
-                    b.Property<Guid>("adId");
+                    b.HasIndex("PrivilegeId");
 
-                    b.Property<int>("privilegeId");
-
-                    b.HasKey("insertionDate");
-
-                    b.HasAlternateKey("adId");
-
-
-                    b.HasAlternateKey("adId", "insertionDate", "privilegeId");
-
-                    b.HasIndex("AdvertisementadId");
-
-                    b.HasIndex("privilegeId");
-
-                    b.ToTable("AdPrivilege");
+                    b.ToTable("AdPrivilege","ad");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.AdStatus", b =>
                 {
-                    b.Property<int>("adStatusId");
+                    b.Property<int>("AdStatusId")
+                        .HasColumnName("adStatusId");
 
-                    b.Property<string>("adStatus")
+                    b.Property<string>("AdStatus1")
                         .IsRequired()
+                        .HasColumnName("adStatus")
                         .HasMaxLength(150);
 
-                    b.Property<string>("adStatusEnglish")
+                    b.Property<string>("AdStatusEnglish")
                         .IsRequired()
+                        .HasColumnName("adStatusEnglish")
                         .HasMaxLength(150);
 
-                    b.HasKey("adStatusId");
+                    b.HasKey("AdStatusId");
 
-                    b.ToTable("AdStatus");
+                    b.ToTable("AdStatus","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.Advertisement", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Advertisements", b =>
                 {
-                    b.Property<Guid>("adId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("AdId")
+                        .HasColumnName("adId");
+
+                    b.Property<string>("AdComments")
+                        .IsRequired()
+                        .HasColumnName("adComments")
+                        .HasMaxLength(1000);
+
+                    b.Property<DateTime>("AdInsertDateTime")
+                        .HasColumnName("adInsertDateTime")
+                        .HasColumnType("smalldatetime");
+
+                    b.Property<string>("AdLink")
+                        .IsRequired()
+                        .HasColumnName("adLink")
+                        .HasMaxLength(500);
+
+                    b.Property<int>("AdNumberOfVisited")
+                        .HasColumnName("adNumberOfVisited");
+
+                    b.Property<int>("AdStatusId")
+                        .HasColumnName("adStatusId");
+
+                    b.Property<string>("AdTitle")
+                        .IsRequired()
+                        .HasColumnName("adTitle")
+                        .HasMaxLength(250);
+
+                    b.Property<int>("CategoryId")
+                        .HasColumnName("categoryId");
+
+                    b.Property<int>("DistrictId")
+                        .HasColumnName("districtId");
 
                     b.Property<Guid>("UserId");
 
-                    b.Property<int>("WhatIsSheDoing");
+                    b.Property<int>("WhatIsSheDoing")
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("0");
 
-                    b.Property<string>("adComments")
-                        .IsRequired()
-                        .HasMaxLength(1000);
+                    b.HasKey("AdId")
+                        .HasName("PK_Advertisements_1");
 
-                    b.Property<DateTime>("adInsertDateTime")
-                        .HasColumnType("smalldatetime");
+                    b.HasIndex("AdStatusId");
 
-                    b.Property<string>("adLink")
-                        .IsRequired()
-                        .HasMaxLength(500);
+                    b.HasIndex("CategoryId");
 
-                    b.Property<int>("adNumberOfVisited");
+                    b.HasIndex("DistrictId");
 
-                    b.Property<int>("adStatusId");
-
-                    b.Property<string>("adTitle")
-                        .IsRequired()
-                        .HasMaxLength(250);
-
-                    b.Property<int>("categoryId");
-
-                    b.Property<int>("districtId");
-
-                    b.HasKey("adId");
-
-                    b.HasIndex("adStatusId");
-
-                    b.HasIndex("categoryId");
-
-                    b.HasIndex("districtId");
-
-                    b.ToTable("Advertisements");
+                    b.ToTable("Advertisements","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.Brand", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Brands", b =>
                 {
-                    b.Property<int>("brandId");
+                    b.Property<int>("BrandId")
+                        .HasColumnName("brandId");
 
-                    b.Property<string>("brandName")
+                    b.Property<string>("BrandName")
                         .IsRequired()
+                        .HasColumnName("brandName")
                         .HasMaxLength(150);
 
-                    b.HasKey("brandId");
+                    b.HasKey("BrandId")
+                        .HasName("PK_CarMakers");
 
-                    b.ToTable("Brands");
+                    b.ToTable("Brands","ad");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.CarModel", b =>
                 {
-                    b.Property<int>("modelId");
+                    b.Property<int>("ModelId")
+                        .HasColumnName("modelId");
 
-                    b.Property<int>("brandId");
+                    b.Property<int>("BrandId")
+                        .HasColumnName("brandId");
 
-                    b.Property<string>("modelName")
+                    b.Property<string>("ModelName")
                         .IsRequired()
+                        .HasColumnName("modelName")
                         .HasMaxLength(150);
 
-                    b.HasKey("modelId");
+                    b.HasKey("ModelId")
+                        .HasName("PK_CarBrand");
 
-                    b.HasIndex("brandId");
+                    b.HasIndex("BrandId");
 
-                    b.ToTable("CarModel");
+                    b.ToTable("CarModel","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.Category", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Categories", b =>
                 {
-                    b.Property<int>("categoryId");
+                    b.Property<int>("CategoryId")
+                        .HasColumnName("categoryId");
 
-                    b.Property<string>("categoryName")
+                    b.Property<string>("CategoryName")
                         .IsRequired()
+                        .HasColumnName("categoryName")
                         .HasMaxLength(150);
 
-                    b.Property<string>("categoryNameEnglish")
+                    b.Property<string>("CategoryNameEnglish")
+                        .HasColumnName("categoryNameEnglish")
                         .HasMaxLength(150);
 
-                    b.Property<string>("categoryParentId")
-                        .HasMaxLength(10);
+                    b.Property<string>("CategoryParentId")
+                        .HasColumnName("categoryParentId")
+                        .HasColumnType("nchar(10)");
 
-                    b.HasKey("categoryId");
+                    b.HasKey("CategoryId")
+                        .HasName("PK_Categories");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.City", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Cities", b =>
                 {
-                    b.Property<int>("cityId");
+                    b.Property<int>("CityId")
+                        .HasColumnName("cityId");
 
-                    b.Property<string>("cityName")
+                    b.Property<string>("CityName")
                         .IsRequired()
+                        .HasColumnName("cityName")
                         .HasMaxLength(150);
 
-                    b.Property<int?>("provinceId");
+                    b.Property<int?>("ProvinceId")
+                        .HasColumnName("provinceId");
 
-                    b.HasKey("cityId");
+                    b.HasKey("CityId")
+                        .HasName("PK_Cities");
 
-                    b.HasIndex("provinceId");
+                    b.HasIndex("ProvinceId");
 
-                    b.ToTable("Cities");
+                    b.ToTable("Cities","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.District", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Districts", b =>
                 {
-                    b.Property<int>("districtId");
+                    b.Property<int>("DistrictId")
+                        .HasColumnName("districtId");
 
-                    b.Property<int>("cityId");
+                    b.Property<int>("CityId")
+                        .HasColumnName("cityId");
 
-                    b.Property<string>("districtName")
+                    b.Property<string>("DistrictName")
                         .IsRequired()
+                        .HasColumnName("districtName")
                         .HasMaxLength(150);
 
-                    b.Property<int?>("municipalId");
+                    b.Property<int?>("MunicipalId")
+                        .HasColumnName("municipalId");
 
-                    b.HasKey("districtId");
+                    b.HasKey("DistrictId")
+                        .HasName("PK_Districts");
 
-                    b.HasIndex("cityId");
+                    b.HasIndex("CityId");
 
-                    b.ToTable("Districts");
+                    b.ToTable("Districts","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.MobileBrand", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.MobileBrands", b =>
                 {
-                    b.Property<int>("brandId");
+                    b.Property<int>("BrandId")
+                        .HasColumnName("brandId");
 
-                    b.Property<int>("brandMakerId");
+                    b.Property<int>("BrandMakerId")
+                        .HasColumnName("brandMakerId");
 
-                    b.Property<string>("brandName")
+                    b.Property<string>("BrandName")
                         .IsRequired()
+                        .HasColumnName("brandName")
                         .HasMaxLength(150);
 
-                    b.HasKey("brandId");
+                    b.HasKey("BrandId")
+                        .HasName("PK_MobileBrands");
 
-                    b.ToTable("MobileBrands");
+                    b.ToTable("MobileBrands","ad");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.Price", b =>
                 {
-                    b.Property<Guid>("adId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("AdvertisementadId");
+                    b.Property<Guid>("AdId")
+                        .HasColumnName("adId");
 
                     b.Property<decimal?>("price")
                         .HasColumnName("price")
                         .HasColumnType("money");
 
                     b.Property<string>("priceType")
+                        .HasColumnName("priceType")
                         .HasMaxLength(150);
 
-                    b.HasKey("adId");
+                    b.HasKey("AdId")
+                        .HasName("PK_Price");
 
-                    b.HasIndex("AdvertisementadId");
-
-                    b.ToTable("Price");
+                    b.ToTable("Price","ad");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.Privilege", b =>
                 {
-                    b.Property<int>("privilegeId");
+                    b.Property<int>("PrivilegeId")
+                        .HasColumnName("privilegeId");
 
-                    b.Property<string>("privilegeName")
+                    b.Property<string>("PrivilegeName")
                         .IsRequired()
+                        .HasColumnName("privilegeName")
                         .HasMaxLength(150);
 
-                    b.HasKey("privilegeId");
+                    b.HasKey("PrivilegeId");
 
-                    b.ToTable("Privilege");
+                    b.ToTable("Privilege","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.Province", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Provinces", b =>
                 {
-                    b.Property<int>("provinceId");
+                    b.Property<int>("ProvinceId")
+                        .HasColumnName("provinceId");
 
-                    b.Property<string>("provinceCenter")
+                    b.Property<string>("ProvinceCenter")
+                        .HasColumnName("provinceCenter")
                         .HasMaxLength(150);
 
-                    b.Property<string>("provinceName")
+                    b.Property<string>("ProvinceName")
                         .IsRequired()
+                        .HasColumnName("provinceName")
                         .HasMaxLength(150);
 
-                    b.HasKey("provinceId");
+                    b.HasKey("ProvinceId")
+                        .HasName("PK_Provinces");
 
-                    b.ToTable("Provinces");
+                    b.ToTable("Provinces","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.SimilarAd", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.SimilarAds", b =>
                 {
-                    b.Property<Guid>("similarAdId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("AdId")
+                        .HasColumnName("adId");
 
-                    b.Property<Guid?>("AdvertisementadId");
+                    b.Property<Guid>("SimilarAdId")
+                        .HasColumnName("similarAdId");
 
-                    b.Property<Guid>("adId");
+                    b.HasKey("AdId", "SimilarAdId")
+                        .HasName("PK_SimilarAds");
 
-                    b.HasKey("similarAdId");
-
-                    b.HasAlternateKey("adId");
-
-
-                    b.HasAlternateKey("adId", "similarAdId");
-
-                    b.HasIndex("AdvertisementadId");
-
-                    b.ToTable("SimilarAds");
+                    b.ToTable("SimilarAds","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.SM", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Sms", b =>
                 {
-                    b.Property<Guid>("messageId")
-                        .ValueGeneratedOnAdd();
+                    b.Property<Guid>("MessageId")
+                        .HasColumnName("messageId");
 
-                    b.Property<string>("message")
+                    b.Property<string>("Message")
                         .IsRequired()
+                        .HasColumnName("message")
                         .HasMaxLength(256);
 
-                    b.Property<DateTime>("messageDate");
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnName("messageDate")
+                        .HasColumnType("datetime");
 
-                    b.Property<string>("phoneNumber")
+                    b.Property<string>("PhoneNumber")
                         .IsRequired()
+                        .HasColumnName("phoneNumber")
                         .HasMaxLength(256);
 
-                    b.Property<bool>("sent");
+                    b.Property<bool>("Sent")
+                        .HasColumnName("sent");
 
-                    b.HasKey("messageId");
+                    b.HasKey("MessageId")
+                        .HasName("PK_SMS");
 
-                    b.ToTable("SMS");
+                    b.ToTable("SMS","ad");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.AdAttributeTransportation", b =>
                 {
-                    b.HasOne("ModelStd.Db.Ad.Advertisement", "Advertisement")
-                        .WithMany()
-                        .HasForeignKey("adId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ModelStd.Db.Ad.Advertisements", "Ad")
+                        .WithMany("AdAttributeTransportation")
+                        .HasForeignKey("AdId");
 
-                    b.HasOne("ModelStd.Db.Ad.CarModel", "CarModel")
-                        .WithMany("AdAttributeTransportations")
-                        .HasForeignKey("modelId");
+                    b.HasOne("ModelStd.Db.Ad.CarModel", "Model")
+                        .WithMany("AdAttributeTransportation")
+                        .HasForeignKey("ModelId");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.AdPrivilege", b =>
                 {
-                    b.HasOne("ModelStd.Db.Ad.Advertisement", "Advertisement")
-                        .WithMany("AdPrivileges")
-                        .HasForeignKey("AdvertisementadId");
+                    b.HasOne("ModelStd.Db.Ad.Advertisements", "Ad")
+                        .WithMany("AdPrivilege")
+                        .HasForeignKey("AdId");
 
                     b.HasOne("ModelStd.Db.Ad.Privilege", "Privilege")
-                        .WithMany("AdPrivileges")
-                        .HasForeignKey("privilegeId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .WithMany("AdPrivilege")
+                        .HasForeignKey("PrivilegeId")
+                        .HasConstraintName("FK_AdPrivilege_Privilege");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.Advertisement", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Advertisements", b =>
                 {
                     b.HasOne("ModelStd.Db.Ad.AdStatus", "AdStatus")
-                        .WithMany()
-                        .HasForeignKey("adStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("ModelStd.Db.Ad.Category", "Category")
                         .WithMany("Advertisements")
-                        .HasForeignKey("categoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AdStatusId")
+                        .HasConstraintName("FK_Advertisements_AdTypes");
 
-                    b.HasOne("ModelStd.Db.Ad.District", "District")
+                    b.HasOne("ModelStd.Db.Ad.Categories", "Category")
                         .WithMany("Advertisements")
-                        .HasForeignKey("districtId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CategoryId");
+
+                    b.HasOne("ModelStd.Db.Ad.Districts", "District")
+                        .WithMany("Advertisements")
+                        .HasForeignKey("DistrictId");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.CarModel", b =>
                 {
-                    b.HasOne("ModelStd.Db.Ad.Brand", "Brand")
-                        .WithMany("CarModels")
-                        .HasForeignKey("brandId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("ModelStd.Db.Ad.Brands", "Brand")
+                        .WithMany("CarModel")
+                        .HasForeignKey("BrandId")
+                        .HasConstraintName("FK_CarBrands_Makers");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.City", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Cities", b =>
                 {
-                    b.HasOne("ModelStd.Db.Ad.Province", "Province")
+                    b.HasOne("ModelStd.Db.Ad.Provinces", "Province")
                         .WithMany("Cities")
-                        .HasForeignKey("provinceId");
+                        .HasForeignKey("ProvinceId");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.District", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.Districts", b =>
                 {
-                    b.HasOne("ModelStd.Db.Ad.City", "City")
+                    b.HasOne("ModelStd.Db.Ad.Cities", "City")
                         .WithMany("Districts")
-                        .HasForeignKey("cityId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("CityId")
+                        .HasConstraintName("FK_Districts_Cities");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.Price", b =>
                 {
-                    b.HasOne("ModelStd.Db.Ad.Advertisement", "Advertisement")
-                        .WithMany()
-                        .HasForeignKey("AdvertisementadId");
+                    b.HasOne("ModelStd.Db.Ad.Advertisements", "Ad")
+                        .WithOne("Price")
+                        .HasForeignKey("ModelStd.Db.Ad.Price", "AdId")
+                        .HasConstraintName("FK_Price_Advertisements");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.SimilarAd", b =>
+            modelBuilder.Entity("ModelStd.Db.Ad.SimilarAds", b =>
                 {
-                    b.HasOne("ModelStd.Db.Ad.Advertisement", "Advertisement")
+                    b.HasOne("ModelStd.Db.Ad.Advertisements", "Ad")
                         .WithMany("SimilarAds")
-                        .HasForeignKey("AdvertisementadId");
+                        .HasForeignKey("AdId")
+                        .HasConstraintName("FK_SimilarAds_Advertisements");
                 });
         }
     }

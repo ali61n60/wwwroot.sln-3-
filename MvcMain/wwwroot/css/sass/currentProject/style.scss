@@ -1,13 +1,7 @@
-﻿.navbar {
-    margin-bottom: 0;
-    -ms-border-radius: 0;
-    border-radius: 0;
-    background-color: #9370DB;
-}
+﻿@import 'TopTop.scss';
+@import 'Navbar.scss';
 
-.navbar-inverse .navbar-nav > li > a {
-    color: green;
-}
+
 
 .row.content {
     height: 450px

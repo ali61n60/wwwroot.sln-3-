@@ -15,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
+using MvcMain.Controllers;
 using MvcMain.Infrastructure.Services;
 using RepositoryStd;
 using RepositoryStd.Context.AD;
@@ -58,8 +59,9 @@ namespace MvcMain
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 
             services.AddTransient<ICategoryRepository,CategoryRepositoryInCode>();
+            services.AddTransient<CategoryApiController>();
 
-            services.AddTransient<ITransportaionRepository>(AppServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
+            services.AddTransient<ITransportaionRepository>(appServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
             
             new AdDbContext(_configuration["Data:ConnectionString"]).Database.Migrate();
             services.AddDbContext<AppIdentityDbContext>(options =>

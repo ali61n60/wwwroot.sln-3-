@@ -1,29 +1,20 @@
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("CarModel")]
-    public class CarModel
+    public partial class CarModel
     {
         public CarModel()
         {
-            AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
+            AdAttributeTransportation = new HashSet<AdAttributeTransportation>();
         }
 
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int modelId { get; set; }
+        public int ModelId { get; set; }
+        public string ModelName { get; set; }
+        public int BrandId { get; set; }
 
-        [Required]
-        [StringLength(150)]
-        public string modelName { get; set; }
-
-        public int brandId { get; set; }
-
-        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
-
-        public virtual Brand Brand { get; set; }
+        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportation { get; set; }
+        public virtual Brands Brand { get; set; }
     }
 }

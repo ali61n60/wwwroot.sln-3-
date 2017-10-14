@@ -12,60 +12,22 @@
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="wwwroot\css\img\controls.png" />
-    <Content Include="wwwroot\css\sass\base\_fonts.scss" />
-    <Content Include="wwwroot\css\sass\base\_grid.scss" />
-    <Content Include="wwwroot\css\sass\base\_headings.scss" />
     <Content Include="wwwroot\css\sass\base\_normalize.scss" />
-    <Content Include="wwwroot\css\sass\base\_print.scss" />
     <Content Include="wwwroot\css\sass\base\_reset.scss" />
-    <Content Include="wwwroot\css\sass\base\_screenReader.scss" />
-    <Content Include="wwwroot\css\sass\base\_typography.scss" />
     <Content Include="wwwroot\css\sass\cmd.exe" />
-    <Content Include="wwwroot\css\sass\components\_alert.scss" />
-    <Content Include="wwwroot\css\sass\components\_badge.scss" />
-    <Content Include="wwwroot\css\sass\components\_breadcrumb.scss" />
-    <Content Include="wwwroot\css\sass\components\_buttons.scss" />
-    <Content Include="wwwroot\css\sass\components\_carousel.scss" />
-    <Content Include="wwwroot\css\sass\components\_close.scss" />
-    <Content Include="wwwroot\css\sass\components\_dropdown.scss" />
-    <Content Include="wwwroot\css\sass\components\_embed.scss" />
-    <Content Include="wwwroot\css\sass\components\_images.scss" />
-    <Content Include="wwwroot\css\sass\components\_input.scss" />
-    <Content Include="wwwroot\css\sass\components\_jumbotron.scss" />
-    <Content Include="wwwroot\css\sass\components\_label.scss" />
-    <Content Include="wwwroot\css\sass\components\_lists.scss" />
-    <Content Include="wwwroot\css\sass\components\_media.scss" />
-    <Content Include="wwwroot\css\sass\components\_modal.scss" />
-    <Content Include="wwwroot\css\sass\components\_nav.scss" />
-    <Content Include="wwwroot\css\sass\components\_navbar.scss" />
-    <Content Include="wwwroot\css\sass\components\_navigation.scss" />
-    <Content Include="wwwroot\css\sass\components\_pager.scss" />
-    <Content Include="wwwroot\css\sass\components\_pagination.scss" />
-    <Content Include="wwwroot\css\sass\components\_panel.scss" />
-    <Content Include="wwwroot\css\sass\components\_popover.scss" />
-    <Content Include="wwwroot\css\sass\components\_progressbar.scss" />
-    <Content Include="wwwroot\css\sass\components\_tables.scss" />
-    <Content Include="wwwroot\css\sass\components\_thumbnail.scss" />
-    <Content Include="wwwroot\css\sass\components\_tooltip.scss" />
-    <Content Include="wwwroot\css\sass\components\_well.scss" />
     <Content Include="wwwroot\css\sass\currentProject\lightSlider.scss" />
-    <Content Include="wwwroot\css\sass\currentProject\SingleAdItem.css" />
-    <Content Include="wwwroot\css\sass\currentProject\SingleAdItem.min.css" />
     <Content Include="wwwroot\css\sass\currentProject\SingleAdItem.scss" />
     <Content Include="wwwroot\css\sass\currentProject\style.scss" />
     <Content Include="wwwroot\css\sass\currentProject\_oldStyle.scss" />
     <Content Include="wwwroot\css\sass\helpers\_mixins.scss" />
     <Content Include="wwwroot\css\sass\helpers\_variables.scss" />
-    <Content Include="wwwroot\css\sass\layout\_footer.scss" />
-    <Content Include="wwwroot\css\sass\layout\_forms.scss" />
-    <Content Include="wwwroot\css\sass\layout\_header.scss" />
-    <Content Include="wwwroot\css\sass\layout\_sidebar.scss" />
     <Content Include="wwwroot\css\sass\sassLearning\StyleSheet.scss" />
     <Content Include="wwwroot\css\sass\site.css" />
     <Content Include="wwwroot\css\sass\site.css.map" />
     <Content Include="wwwroot\css\sass\site.min.css" />
     <Content Include="wwwroot\css\sass\site.scss" />
     <Content Include="wwwroot\css\site.css" />
+    <Content Include="wwwroot\js\Home\index.js" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\AUTHORS.txt" />
@@ -190,7 +152,10 @@
 
   <ItemGroup>
     <Folder Include="Connected Services\" />
+    <Folder Include="Documents\" />
     <Folder Include="Views\Home\" />
+    <Folder Include="Views\Shared\Components\CategorySelection\" />
+    <Folder Include="wwwroot\Resources\Images\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
@@ -201,7 +166,7 @@
     <PackageReference Include="Microsoft.AspNetCore.Razor.Tools" Version="1.1.0-preview4-final" />
     <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
     <PackageReference Include="StructureMap.AspNetCore" Version="1.3.1" />

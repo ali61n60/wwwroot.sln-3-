@@ -1,0 +1,11 @@
+﻿.top-header {
+    img {
+        width: 100%;
+        margin: 0 auto;
+        height: 150px;
+
+        @media screen and (min-width: $size-sm) {
+            height: 300px;
+        }
+    }
+}

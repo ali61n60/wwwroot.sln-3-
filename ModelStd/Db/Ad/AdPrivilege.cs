@@ -1,28 +1,15 @@
-using System;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System;
+using System.Collections.Generic;
 
 namespace ModelStd.Db.Ad
 {
-   
-    [Table("AdPrivilege")]
-    public  class AdPrivilege
+    public partial class AdPrivilege
     {
-        [Key]
-        [Column(Order = 0)]
-        public Guid adId { get; set; }
+        public Guid AdId { get; set; }
+        public int PrivilegeId { get; set; }
+        public DateTime InsertionDate { get; set; }
 
-        [Key]
-        [Column(Order = 1)]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int privilegeId { get; set; }
-
-        [Key]
-        [Column(Order = 2, TypeName = "smalldatetime")]
-        public DateTime insertionDate { get; set; }
-
-        public virtual Advertisement Advertisement { get; set; }
-
+        public virtual Advertisements Ad { get; set; }
         public virtual Privilege Privilege { get; set; }
     }
 }
