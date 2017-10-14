@@ -56,7 +56,7 @@ namespace RepositoryStd.Repository
             list=orderByClause(list, queryParameters);//OrderBy
             list= wherClauseCategoryId(list, queryParameters);//Category
             list= WhereClausePrice(list, queryParameters);//MinPrice and MAxPrice
-            list=whereClauseDistrictId(list, queryParameters);//DistrictId
+            list= whereClauseDistrictId(list, queryParameters);//DistrictId
 
             //uegentOnly
 

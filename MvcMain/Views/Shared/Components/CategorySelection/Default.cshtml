@@ -1,3 +1,13 @@
-﻿@model object
+﻿@using ModelStd.Advertisements
+@model IEnumerable<Category>
 
-<p>Category Selection Test</p>
+<select id="category" class="form-control">
+    <option value="" selected="selected">تمام آگهی ها</option>
+    @foreach (Category category in Model)
+    {
+        if (category.ParentCategoryId == 0)
+        {
+            @:<option value="@category.CategoryId">@category.CategoryName</option>
+        }
+    }
+</select>

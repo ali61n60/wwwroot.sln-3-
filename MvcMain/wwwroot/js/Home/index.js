@@ -26,7 +26,7 @@ function getAdItemsFromServer() {
     var $userInput = {};
     $userInput.StartIndex = $start;
     $userInput.Count = $count;
-    $userInput.CategoryId = 100;//cars
+    $userInput.CategoryId = $("#category").val();//100 for cars
     $userInput.MinimumPrice = $("#minPrice").val();
     $userInput.MaximumPrice = $("#maxPrice").val();
     $userInput.OrderBy = $("#orderBy").val();

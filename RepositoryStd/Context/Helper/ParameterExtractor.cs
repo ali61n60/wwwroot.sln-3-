@@ -41,7 +41,6 @@ namespace RepositoryStd.Context.Helper
                 if (!int.TryParse(inputDictionary[CategoryIdKey], out tempCategoryId))
                     tempCategoryId = CategoryIdDefault;
             }
-
             return tempCategoryId;
         }
 
