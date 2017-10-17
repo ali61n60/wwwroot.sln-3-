@@ -21,13 +21,15 @@ namespace RepositoryStd.Repository
     {
         private readonly string _conectionString;
         List<AdvertisementCommon> _searchResultItems;
+        private ICategoryRepository _categoryRepository;
         AdvertisementCommon _tempAdvertisementCommon;
         SqlDataReader _dataReader;
         RepositoryResponse _responseBase;
 
-        public AdvertisementCommonRepository(string connectionString)
+        public AdvertisementCommonRepository(string connectionString, ICategoryRepository categoryRepository)
         {
             _conectionString = connectionString;
+            _categoryRepository = categoryRepository;
         }
 
         public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters)
@@ -59,6 +61,7 @@ namespace RepositoryStd.Repository
             list= whereClauseDistrictId(list, queryParameters);//DistrictId
 
             //uegentOnly
+            string generatedSql= list.ToSql();
 
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
 
@@ -89,11 +92,30 @@ namespace RepositoryStd.Repository
         }
 
 
-        //TODO change where clause to get an array of categories
+        
         private IQueryable<Advertisements> wherClauseCategoryId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            int categoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
-            list = list.Where(advertisement => advertisement.CategoryId == categoryId);
+            int firstLevelCategoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
+            if (firstLevelCategoryId == 0)//root is selected so do not include anything in where clause
+            {
+                return list;
+            }
+            List<int> fullCategoryIdList = new List<int> { firstLevelCategoryId };
+            IList<Category> secondLevelCategories= _categoryRepository.GetAllChildernCategories(firstLevelCategoryId);
+            List<Category> thirdLevelCategories=new List<Category>();
+            foreach (Category secondLevelCategory in secondLevelCategories)
+            {
+                fullCategoryIdList.Add(secondLevelCategory.CategoryId);
+                thirdLevelCategories.AddRange(_categoryRepository.GetAllChildernCategories(secondLevelCategory.CategoryId));
+            }
+            
+            foreach (Category thirdLevelCategory in thirdLevelCategories)
+            {
+                fullCategoryIdList.Add(thirdLevelCategory.CategoryId);
+            }
+                //TODO include user input categoryId and all its children
+            //list = list.Where(advertisement => advertisement.CategoryId == categoryId);
+            list = list.Where(advertisement => fullCategoryIdList.Contains(advertisement.CategoryId) );
             return list;
         }
         private IQueryable<Advertisements> WhereClausePrice(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)

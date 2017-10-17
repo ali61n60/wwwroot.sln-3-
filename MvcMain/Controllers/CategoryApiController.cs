@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
@@ -27,10 +28,10 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public ResponseBase<Category[]> GetAllCategories()
+        public ResponseBase<IEnumerable<Category>> GetAllCategories()
         {
             string errorCode = "CategoryApiController.GetAllCategories";
-            ResponseBase<Category[]> response = new ResponseBase<Category[]>();
+            ResponseBase<IEnumerable<Category>> response = new ResponseBase<IEnumerable<Category>>();
             try
             {
                 response.ResponseData = _categoryRepository.GetAllCategories();

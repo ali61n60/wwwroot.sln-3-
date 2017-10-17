@@ -8,7 +8,7 @@ namespace RepositoryStd.Context.Helper
     public class ParameterExtractor
     {
         public static readonly string CategoryIdKey = "CategoryId";
-        public static readonly int CategoryIdDefault = 100;
+        public static readonly int CategoryIdDefault = 0;
 
         public static readonly string StartIndexKey = "StartIndex";
         public static readonly int StartIndexDefault = 1;

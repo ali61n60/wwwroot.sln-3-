@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
@@ -59,12 +60,12 @@ namespace RepositoryStd
             return tempCategory;
         }
 
-        public Category[] GetAllCategories()
+        public IList<Category> GetAllCategories()
         {
             throw new Exception();
         }
 
-        public Category[] GetAllChildernCategories(int ParentCategoryId)
+        public IList<Category> GetAllChildernCategories(int ParentCategoryId)
         {
             throw new Exception();
         }

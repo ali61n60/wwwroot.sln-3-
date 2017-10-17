@@ -2,7 +2,7 @@
 @model IEnumerable<Category>
 
 <select id="category" class="form-control">
-    <option value="" selected="selected">تمام آگهی ها</option>
+    <option value="0" selected="selected">تمام آگهی ها</option>
     @foreach (Category category in Model)
     {
         if (category.ParentCategoryId == 0)
