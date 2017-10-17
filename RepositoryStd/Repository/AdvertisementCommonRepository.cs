@@ -61,8 +61,7 @@ namespace RepositoryStd.Repository
             list= whereClauseDistrictId(list, queryParameters);//DistrictId
 
             //uegentOnly
-            string generatedSql= list.ToSql();
-
+            
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
 
             foreach (Advertisements advertisement in list)
@@ -90,9 +89,6 @@ namespace RepositoryStd.Repository
                     return list;
             }
         }
-
-
-        
         private IQueryable<Advertisements> wherClauseCategoryId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
             int firstLevelCategoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
@@ -113,8 +109,7 @@ namespace RepositoryStd.Repository
             {
                 fullCategoryIdList.Add(thirdLevelCategory.CategoryId);
             }
-                //TODO include user input categoryId and all its children
-            //list = list.Where(advertisement => advertisement.CategoryId == categoryId);
+            
             list = list.Where(advertisement => fullCategoryIdList.Contains(advertisement.CategoryId) );
             return list;
         }
@@ -165,8 +160,6 @@ namespace RepositoryStd.Repository
             tempAdvertisementCommon.AdvertisementPrice.Ad = null;//prevent self referencing
             return tempAdvertisementCommon;
         }
-
-
 
         public void Add(AdvertisementCommon entity)
         {

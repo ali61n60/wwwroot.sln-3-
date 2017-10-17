@@ -1,13 +1,10 @@
 ﻿@using ModelStd.Advertisements
 @model IEnumerable<Category>
 
-<select id="category" class="form-control">
-    <option value="0" selected="selected">تمام آگهی ها</option>
-    @foreach (Category category in Model)
-    {
-        if (category.ParentCategoryId == 0)
-        {
-            @:<option value="@category.CategoryId">@category.CategoryName</option>
-        }
-    }
-</select>
+<div id="categorySelector">
+    <input id="allCategories" type="hidden" value='@Json.Serialize(Model)' />
+
+    <select id="category0" class="form-control">
+        <option value="0" selected="selected">تمام آگهی ها</option>
+    </select>
+</div>
