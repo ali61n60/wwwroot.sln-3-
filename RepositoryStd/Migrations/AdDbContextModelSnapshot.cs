@@ -139,7 +139,7 @@ namespace RepositoryStd.Migrations
                     b.Property<int>("DistrictId")
                         .HasColumnName("districtId");
 
-                    b.Property<Guid>("UserId");
+                    b.Property<string>("UserId");
 
                     b.Property<int>("WhatIsSheDoing")
                         .ValueGeneratedOnAdd()

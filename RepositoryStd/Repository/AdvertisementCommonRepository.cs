@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ModelStd;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
@@ -12,6 +11,7 @@ using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
+using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
 using RepositoryStd.QueryPattern;
 
@@ -60,13 +60,20 @@ namespace RepositoryStd.Repository
             list= WhereClausePrice(list, queryParameters);//MinPrice and MAxPrice
             list= whereClauseDistrictId(list, queryParameters);//DistrictId
 
+
+            //TODO include ad owner information into each ad (UserId,Email And PhoneNumber)
+            AppIdentityDbContext appIdentityDbContext=new AppIdentityDbContext();
+            
+
+
+
             //uegentOnly
             
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
 
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
+                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement,appIdentityDbContext));
             }
             return _searchResultItems;
         }
@@ -134,7 +141,7 @@ namespace RepositoryStd.Repository
             return list;
         }
 
-        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisements advertisement)
+        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisements advertisement, AppIdentityDbContext identityDbContext)
         {
             AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
             {
@@ -149,8 +156,8 @@ namespace RepositoryStd.Repository
                 AdvertisementCategoryId = advertisement.CategoryId,
                 AdvertisementComments = advertisement.AdComments,//TODO test for null
                 NumberOfVisit = advertisement.AdNumberOfVisited,//TODO test for null
-                //Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
-                //PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
+                Email =identityDbContext.Users.First(user => user.Id== advertisement.UserId).Email,//TODO test for null
+                PhoneNumber = identityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber,//TODO test for null
                 DistrictId = advertisement.DistrictId,
                 DistrictName = advertisement.District.DistrictName,
                 CityName = advertisement.District.City.CityName,
@@ -333,7 +340,7 @@ namespace RepositoryStd.Repository
             try
             {
                 advertisementCommon.AdvertisementId = (Guid)dataReader["adId"];
-                advertisementCommon.UserId = (Guid)dataReader["UserId"];
+                advertisementCommon.UserId = (string)dataReader["UserId"];
                 advertisementCommon.AdvertisementCategoryId = (int)dataReader["categoryId"];
                 advertisementCommon.DistrictId = (int)dataReader["districtId"];
                 advertisementCommon.AdvertisementTime = (DateTime)dataReader["adInsertDateTime"];

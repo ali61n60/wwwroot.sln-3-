@@ -14,12 +14,7 @@ namespace RepositoryStd.Context.Identity
     public class AppIdentityDbContext : IdentityDbContext<AppUser>
     {
         private readonly string _connectionString;
-
-       
-        //public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
-        //{
-            
-        //}
+        
         public AppIdentityDbContext(string connectionString)
         {
             _connectionString = connectionString;
