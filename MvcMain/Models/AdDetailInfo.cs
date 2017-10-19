@@ -7,7 +7,7 @@ namespace MvcMain.Models
 {
     public class AdDetailInfo
     {
-        public string AdId { get;  set; }
+        public Guid AdId { get;  set; }
         public int CategoryId { get;  set; }
 
     }

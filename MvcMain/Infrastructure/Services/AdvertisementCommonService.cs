@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace MvcMain.Infrastructure.Services
 {
     
-    public class AdvertisementCommonService : IAdvertisementService ,IAdvertisementCommonService
+    public class AdvertisementCommonService : IAdvertisementService<AdvertisementCommon> ,IAdvertisementCommonService
     {
         //TODO make _response method field
         ResponseBase<AdvertisementCommon[]> _response;

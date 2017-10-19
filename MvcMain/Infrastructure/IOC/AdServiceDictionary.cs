@@ -8,8 +8,8 @@ namespace MvcMain.Infrastructure.IOC
     {
         private static int _defaultCategoryId = 0;
 
-        private static readonly Dictionary<int, IAdvertisementService> _advertisementTypeDictionary
-            =new Dictionary<int, IAdvertisementService>();
+        private static readonly Dictionary<int, IAdvertisementService<object>> _advertisementTypeDictionary
+            =new Dictionary<int, IAdvertisementService<object>>();
 
          static AdServiceDictionary()
         {

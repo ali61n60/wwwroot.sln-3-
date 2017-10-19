@@ -1,8 +1,8 @@
-﻿<script src="../../StyleScript/lightslider.js"></script>
+﻿@model ModelStd.Advertisements.AdvertisementCommon
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $('#<%=imageGallery.ClientID%>').lightSlider({
+        $('#imageGallery').lightSlider({
             auto: true,
             pause: 5000,
             pager: true,
@@ -17,7 +17,7 @@
             currentPagerPosition: 'left',
             onSliderLoad: function (el) {
                 el.lightGallery({
-                    selector: '#<%=imageGallery.ClientID%> .lslide'
+                    selector: '#imageGallery .lslide'
                 });
             }
         });
@@ -46,63 +46,45 @@
     <div class="col-sm-6 dataSection">
         <div class="row">
             <div class="col-xs-12 text-center">
-                <Label ID="LabelAdTitle" runat="server" Text="" Font-Size="XX-Large" ForeColor="#660033"></Label>
+                @Model.AdvertisementTitle
             </div>
         </div>
         <div class="row">
             <div class="col-xs-8 text-right">
-                <Label ID="LabelPhoneNumber" runat="server" Text=""></Label>
+                <span>@Model.PhoneNumber</span>
             </div>
             <div class="col-xs-4">
-                <Label ID="Label11" runat="server" Text="شماره تماس"></Label>
+                <span>تلفن</span>
             </div>
             <div class="col-xs-8 text-right">
-                <Label ID="LabelEmail" runat="server" Text=""></Label>
+                <span>@Model.Email</span>
             </div>
             <div class="col-xs-4">
-                <Label ID="Label13" runat="server" Text="ایمیل"></Label>
+                <span>ایمیل</span>
             </div>
             <div class="col-xs-8 text-right">
-                <Label ID="LabelPrice" runat="server" Text=""></Label>
+                <span>@Model.AdvertisementPrice.price</span>
             </div>
             <div class="col-xs-4">
-                <Label ID="Label1" runat="server" Text="قیمت"></Label>
+                <span>قیمت</span>
             </div>
 
             <div class="col-xs-8 text-right">
-                <Label ID="LabelPriceType" runat="server" Text=""></Label>
+                <span>@Model.AdvertisementPrice.priceType</span>
             </div>
             <div class="col-xs-4">
-                <Label ID="Label4" runat="server" Text="نوع قیمت"></Label>
+                <span>نوع قیمت</span>
             </div>
-
-
         </div>
         <div class="row">
             <div class="col-xs-8 text-right">
-                <Label ID="LabelTime" runat="server" Text=""></Label>
+                <span>@Model.AdvertisementTime</span>
             </div>
             <div class="col-xs-4">
-                <Label ID="Label2" runat="server" Text="زمان"></Label>
+                <span>زمان</span>
             </div>
-        </div>
-        <div class="row">
-            <p ID="PlaceHolderAdCustomControl" runat="server"></p>
         </div>
     </div>
 </div>
 <br />
 <br />
-<div class="row">
-    <div class="well">
-        <div class="row text-right">
-            <Label ID="Label9" runat="server" Text="توضیحات"></Label>
-        </div>
-        <div class="well">
-            <div class="row text-right">
-                <Label ID="LabelComments" runat="server" Text=""></Label>
-            </div>
-        </div>
-
-    </div>
-</div>

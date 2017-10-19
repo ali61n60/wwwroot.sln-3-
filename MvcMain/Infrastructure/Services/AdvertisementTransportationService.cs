@@ -11,7 +11,7 @@ using RepositoryStd.QueryPattern.BaseQuery;
 
 namespace MvcMain.Infrastructure.Services
 {
-     public class AdvertisementTransportationService :IAdvertisementService// IAdvertisementTransportationService, IAdvertisementService, IServiceCommon
+     public class AdvertisementTransportationService :IAdvertisementService<AdvertisementTransportation>// IAdvertisementTransportationService, IAdvertisementService, IServiceCommon
     {
         ResponseBase<AdvertisementCommon[]> _response;
         private readonly IRepository<AdvertisementTransportation> _advertisementTransportationRepository;
@@ -64,10 +64,14 @@ namespace MvcMain.Infrastructure.Services
             return _response;
         }
 
-        public ResponseBase<AdvertisementCommon> GetAdDetail(Guid adId)
+        public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
         {
+            ResponseBase<AdvertisementTransportation> responseBase=new ResponseBase<AdvertisementTransportation>();
+            responseBase.ResponseData.AdvertisementCommon.AdvertisementCategoryId = 100;
+            responseBase.ResponseData.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
+            responseBase.ResponseData.AdvertisementCommon.AdvertisementTitle = "Test to be done";
 
-            return null;
+            return responseBase;
         }
 
         private AdvertisementCommon[] getAdvertisementCommons(AdvertisementTransportation[] advertisementTransportations)
