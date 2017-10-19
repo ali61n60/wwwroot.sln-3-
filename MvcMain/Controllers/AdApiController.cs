@@ -53,6 +53,12 @@ namespace MvcMain.Controllers
                     response.CustomDictionary = new Dictionary<string, string>{{"RequestIndex", userInput["RequestIndex"]}};
             }
         }
+
+        public void GetAdDetail(string adId,int categoryId)
+        {
+            //Polymorphic dispatch of service call
+            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(categoryId);
+        }
     }
 
 

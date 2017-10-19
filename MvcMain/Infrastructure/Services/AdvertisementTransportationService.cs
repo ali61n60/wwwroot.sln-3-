@@ -64,6 +64,12 @@ namespace MvcMain.Infrastructure.Services
             return _response;
         }
 
+        public ResponseBase<AdvertisementCommon> GetAdDetail(Guid adId)
+        {
+
+            return null;
+        }
+
         private AdvertisementCommon[] getAdvertisementCommons(AdvertisementTransportation[] advertisementTransportations)
         {
             AdvertisementCommon[] advertisementCommons = new AdvertisementCommon[advertisementTransportations.Length];

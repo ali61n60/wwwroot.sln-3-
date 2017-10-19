@@ -56,6 +56,11 @@ namespace MvcMain.Infrastructure.Services
             return _response;
         }
 
+        public ResponseBase<AdvertisementCommon> GetAdDetail(Guid adId)
+        {
+            throw new NotImplementedException("No Detail From AdvertisemntCommonService");
+        }
+
         private void checkAndCorrectOnlyWithPicturesFilter(Dictionary<string, string> userInput, AdvertisementCommon[] advertisementCommons)
         {
             List<AdvertisementCommon> adCommonList = new List<AdvertisementCommon>();

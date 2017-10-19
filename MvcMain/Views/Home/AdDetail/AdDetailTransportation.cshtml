@@ -1,0 +1,46 @@
+﻿@model AdDetailInfo
+
+@{
+    ViewData["Title"] = "جزئیات آگهی";
+    ViewData["PageTitle"] = "جزئیات آگهی";
+    Layout = "_Layout";
+}
+
+@section TopTop
+{
+    @Html.Partial("TopTop")
+}
+@section NavBar
+{
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+{
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+{
+
+}
+@section SideNav
+{
+    @Html.Partial("SideNav")
+}
+@section Body
+{
+    @Html.Partial("AdDetail/AdDetailCommon")
+    <p>Ad Detail just started</p>
+    <p>model detail is===> adId:  @Model.AdId and categoryId:@Model.CategoryId
+    </p> 
+
+
+}
+
+@section Footer
+{
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+<script src="~/lib/lightslider/src/js/lightslider.js"></script>
+}
