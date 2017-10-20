@@ -139,7 +139,7 @@ namespace RepositoryStd.Repository
             command.Parameters.Add("@gearbox", SqlDbType.NVarChar).Value = entity.Gearbox;
             command.Parameters.Add("@bodyColor", SqlDbType.NVarChar).Value = entity.BodyColor;
             command.Parameters.Add("@internalColor", SqlDbType.NVarChar).Value = entity.InternalColor;
-            command.Parameters.Add("@bodyStatus", SqlDbType.NVarChar).Value = entity.BodyStatusName;
+           // command.Parameters.Add("@bodyStatus", SqlDbType.NVarChar).Value = entity.BodyStatusName;
         }
 
         public void Remove(AdvertisementTransportation entity)// entity only has advertisementCommon attributes
@@ -231,8 +231,6 @@ namespace RepositoryStd.Repository
             return _searchResultItems;
         }
 
-
-        //TODO use EF
         public AdvertisementTransportation FindBy(Guid adId)
         {
             AdvertisementTransportation advertisementTransportation=new AdvertisementTransportation();
@@ -247,16 +245,40 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.AdStatus)
                 .Include(advertisement => advertisement.Price)
                 .Include(advertisements => advertisements.AdAttributeTransportation)
+                .Include(advertisements => advertisements.AdAttributeTransportation.Model)
+                .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
                 .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId==adId);//only accepted ads
 
             string query = list.ToSql();
             Advertisements item= list.Single();
-            advertisementTransportation.AdvertisementCommon =
-                advertisementCommonRepository.GetAdvertisementCommonFromDatabaseResult(item, appIdentityDbContext);
-            advertisementTransportation.BodyColor = item.AdAttributeTransportation.BodyColor;
-            
+            fillAdTransportation(advertisementTransportation, item, appIdentityDbContext);
             
             return advertisementTransportation;
+        }
+
+        private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisements advertisements, AppIdentityDbContext appIdentityDbContext)
+        {
+            adTrans.AdvertisementCommon =
+                advertisementCommonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements, appIdentityDbContext);
+            adTrans.BodyColor = advertisements.AdAttributeTransportation.BodyColor;
+            adTrans.InternalColor = advertisements.AdAttributeTransportation.InternalColor;
+            adTrans.SetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus);
+            adTrans.BrandId = advertisements.AdAttributeTransportation.Model.BrandId;
+            adTrans.BrandName = advertisements.AdAttributeTransportation.Model.Brand.BrandName;
+            adTrans.ModelName = advertisements.AdAttributeTransportation.Model.ModelName;
+            adTrans.Gearbox = advertisements.AdAttributeTransportation.Gearbox;
+
+            if (advertisements.AdAttributeTransportation.Mileage != null)
+                adTrans.Mileage = advertisements.AdAttributeTransportation.Mileage.Value;
+            else
+                adTrans.Mileage = -1;
+
+            if (advertisements.AdAttributeTransportation.MakeYear != null)
+                adTrans.MakeYear = advertisements.AdAttributeTransportation.MakeYear.Value;
+            else
+                adTrans.MakeYear = -1;
+
+
         }
 
         public void IncrementNumberOfVisit(Guid adGuid)
@@ -283,7 +305,7 @@ namespace RepositoryStd.Repository
                 advertisementTransportation.Gearbox = (string)dataReader["gearbox"];
                 advertisementTransportation.BodyColor = (string)dataReader["bodyColor"];
                 advertisementTransportation.InternalColor = (string)dataReader["internalColor"];
-                advertisementTransportation.BodyStatusName = (string)dataReader["bodyStatus"];
+                //advertisementTransportation.BodyStatusName = (string)dataReader["bodyStatus"];
                 advertisementTransportation.ModelName = (string)dataReader["modelName"];
                 advertisementTransportation.BrandName = (string)dataReader["brandName"];
 

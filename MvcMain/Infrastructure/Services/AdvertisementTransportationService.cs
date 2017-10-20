@@ -64,7 +64,7 @@ namespace MvcMain.Infrastructure.Services
 
         public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
         {
-            //TODO get ad detail from repository layer
+            
             ResponseBase<AdvertisementTransportation> responseBase=new ResponseBase<AdvertisementTransportation>();
             //TODO check for error
             responseBase.ResponseData = _advertisementTransportationRepository.FindBy(adId);

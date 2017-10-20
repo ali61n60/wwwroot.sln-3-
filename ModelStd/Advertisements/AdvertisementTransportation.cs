@@ -3,7 +3,6 @@
     
     public class AdvertisementTransportation:AdvertisementBase
     {
-        
         public int ModelId;
         
         public string ModelName;
@@ -26,8 +25,6 @@
         
         public BodyStatus BodyStatus;
 
-        
-        
         public CarStatus CarStatus;
         
         public PlateType PlateType;
@@ -93,48 +90,27 @@
             }
             return fuelTypeName;
         }
-        
-        public string BodyStatusName
+
+        public void SetBodyStatus(string bodyStatus)
         {
-            get { return _BodyStatusName(); }
-            set
+            switch (bodyStatus)
             {
-                string temp = value;
-                switch (temp)
-                {
-                    case "بدون تصادف":
-                        BodyStatus=BodyStatus.NoAccident;
-                        break;
-                    case "یک تصادف":
-                        BodyStatus=BodyStatus.OneAccident;
-                        break;
-                    case "دو تصادف":
-                        BodyStatus=BodyStatus.TwoAccident;
-                        break;
-                    default:
-                        BodyStatus=BodyStatus.NoAccident;
-                        break;
-                }
+                case "NoAccident":
+                    this.BodyStatus=BodyStatus.NoAccident;
+                    break;
+                case "OneAccident":
+                    this.BodyStatus = BodyStatus.OneAccident;
+                    break;
+                case "TwoAccident":
+                    this.BodyStatus = BodyStatus.TwoAccident;
+                    break;
+                default:
+                    this.BodyStatus=BodyStatus.NoAccident;
+                    break;
             }
         }
 
-        private string _BodyStatusName()
-        {
-            string bodyStatusName = "";
-            switch (BodyStatus)
-            {
-                    case BodyStatus.NoAccident:
-                    bodyStatusName = "بدون تصادف";
-                    break;
-                    case BodyStatus.OneAccident:
-                    bodyStatusName = "یک تصادف";
-                    break;
-                    case BodyStatus.TwoAccident:
-                    bodyStatusName = "دو تصادف";
-                    break;
-            }
-            return bodyStatusName;
-        }
+       
 
        
 

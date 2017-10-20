@@ -24,15 +24,10 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> AdDetail(AdDetailInfo adDetailInfo)
         {
             AdApiController adApiController=new AdApiController();
-            //TODO based on adCategory  get ad detail from database and show specific view
-            //1- get a view based on categoryId
             switch (adDetailInfo.CategoryId)
             {
                 case 100:
-                    //TODOD get model data from repository and send it to view
-
                     AdvertisementTransportation advertisementTransportation = adApiController.GetTransportationAdDetail(adDetailInfo.AdId);
-
                     return View("AdDetail/AdDetailTransportation", advertisementTransportation);
                 default:
                     return View("AdDetail/AdDetailDefault", adDetailInfo);
