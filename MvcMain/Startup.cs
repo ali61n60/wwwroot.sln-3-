@@ -58,7 +58,7 @@ namespace MvcMain
             services.AddTransient<IRepository<AdvertisementCommon>>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
             
             services.AddTransient<IRepository<AdvertisementTransportation>>(provider => new AdvertisementTransportationRepository(
-                new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository),_advertisementDataClass.ConnectionString ));
+                _advertisementDataClass.ConnectionString ));
 
             services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
 
@@ -69,7 +69,7 @@ namespace MvcMain
 
             services.AddTransient<ITransportaionRepository>(appServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
             
-            new AdDbContext(_configuration["Data:ConnectionString"]).Database.Migrate();
+            
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(_configuration["Data:ConnectionString"]));
 

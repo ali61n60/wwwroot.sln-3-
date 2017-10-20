@@ -8,9 +8,10 @@ using RepositoryStd.Context.AD;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171020120150_adTransport")]
+    partial class adTransport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.3")

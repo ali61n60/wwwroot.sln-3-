@@ -66,11 +66,9 @@ namespace MvcMain.Infrastructure.Services
         {
             //TODO get ad detail from repository layer
             ResponseBase<AdvertisementTransportation> responseBase=new ResponseBase<AdvertisementTransportation>();
-            responseBase.ResponseData=new AdvertisementTransportation();
-            responseBase.ResponseData.AdvertisementCommon.AdvertisementCategoryId = 100;
-            responseBase.ResponseData.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
-            responseBase.ResponseData.AdvertisementCommon.AdvertisementTitle = "Test to be done";
-
+            //TODO check for error
+            responseBase.ResponseData = _advertisementTransportationRepository.FindBy(adId);
+            responseBase.SetSuccessResponse();
             return responseBase;
         }
 

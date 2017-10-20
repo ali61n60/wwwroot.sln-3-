@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using ModelStd.Db.Ad;
+using SQLitePCL;
 
 
 namespace RepositoryStd.Context.AD
@@ -47,46 +48,15 @@ namespace RepositoryStd.Context.AD
         {
             modelBuilder.Entity<AdAttributeTransportation>(entity =>
             {
-                entity.HasKey(e => e.AttributeId)
-                    .HasName("PK_AdAttributeCar");
-
-                entity.ToTable("AdAttributeTransportation", "ad");
-
-                entity.Property(e => e.AttributeId)
-                    .HasColumnName("attributeId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.AdId).HasColumnName("adId");
-
-                entity.Property(e => e.BodyColor)
-                    .HasColumnName("bodyColor")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.BodyStatus)
-                    .HasColumnName("bodyStatus")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Fuel)
-                    .HasColumnName("fuel")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.Gearbox)
-                    .HasColumnName("gearbox")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.InternalColor)
-                    .HasColumnName("internalColor")
-                    .HasMaxLength(50);
-
-                entity.Property(e => e.MakeYear).HasColumnName("makeYear");
-
-                entity.Property(e => e.Mileage).HasColumnName("mileage");
-
-                entity.Property(e => e.ModelId).HasColumnName("modelId");
-
+               
+                //modelBuilder.Entity<Blog>()
+                //    .HasOne(p => p.BlogImage)
+                //    .WithOne(i => i.Blog)
+                //    .HasForeignKey<BlogImage>(b => b.BlogForeignKey);
+                             
+                
                 entity.HasOne(d => d.Ad)
-                    .WithMany(p => p.AdAttributeTransportation)
-                    .HasForeignKey(d => d.AdId)
+                    .WithOne(advertisements => advertisements.AdAttributeTransportation)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_AdAttributeTransportation_Advertisements");
 
@@ -94,6 +64,30 @@ namespace RepositoryStd.Context.AD
                     .WithMany(p => p.AdAttributeTransportation)
                     .HasForeignKey(d => d.ModelId)
                     .HasConstraintName("FK_AdAttributeTransportation_CarBrands");
+            });
+
+            modelBuilder.Entity<Advertisements>(entity =>
+            {
+                entity.HasKey(e => e.AdId)
+                    .HasName("PK_Advertisements_1");
+                
+                entity.HasOne(d => d.AdStatus)
+                    .WithMany(p => p.Advertisements)
+                    .HasForeignKey(d => d.AdStatusId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Advertisements_AdTypes");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Advertisements)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Advertisements_Categories");
+
+                entity.HasOne(d => d.District)
+                    .WithMany(p => p.Advertisements)
+                    .HasForeignKey(d => d.DistrictId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Advertisements_Districts");
             });
 
             modelBuilder.Entity<AdPrivilege>(entity =>
@@ -143,64 +137,7 @@ namespace RepositoryStd.Context.AD
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<Advertisements>(entity =>
-            {
-                entity.HasKey(e => e.AdId)
-                    .HasName("PK_Advertisements_1");
-
-                entity.ToTable("Advertisements", "ad");
-
-                entity.Property(e => e.AdId)
-                    .HasColumnName("adId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.AdComments)
-                    .IsRequired()
-                    .HasColumnName("adComments")
-                    .HasMaxLength(1000);
-
-                entity.Property(e => e.AdInsertDateTime)
-                    .HasColumnName("adInsertDateTime")
-                    .HasColumnType("smalldatetime");
-
-                entity.Property(e => e.AdLink)
-                    .IsRequired()
-                    .HasColumnName("adLink")
-                    .HasMaxLength(500);
-
-                entity.Property(e => e.AdNumberOfVisited).HasColumnName("adNumberOfVisited");
-
-                entity.Property(e => e.AdStatusId).HasColumnName("adStatusId");
-
-                entity.Property(e => e.AdTitle)
-                    .IsRequired()
-                    .HasColumnName("adTitle")
-                    .HasMaxLength(250);
-
-                entity.Property(e => e.CategoryId).HasColumnName("categoryId");
-
-                entity.Property(e => e.DistrictId).HasColumnName("districtId");
-
-                entity.Property(e => e.WhatIsSheDoing).HasDefaultValueSql("0");
-
-                entity.HasOne(d => d.AdStatus)
-                    .WithMany(p => p.Advertisements)
-                    .HasForeignKey(d => d.AdStatusId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Advertisements_AdTypes");
-
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Advertisements)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Advertisements_Categories");
-
-                entity.HasOne(d => d.District)
-                    .WithMany(p => p.Advertisements)
-                    .HasForeignKey(d => d.DistrictId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Advertisements_Districts");
-            });
+           
 
             modelBuilder.Entity<Brands>(entity =>
             {

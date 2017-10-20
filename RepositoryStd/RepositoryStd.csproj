@@ -53,10 +53,17 @@
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="1.1.2" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="1.1.2" />
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="SQLitePCLRaw.core" Version="1.1.8" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ModelStd\ModelStd.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SQLitePCLRaw.core">
+      <HintPath>..\packages\SQLitePCLRaw.core.1.1.8\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

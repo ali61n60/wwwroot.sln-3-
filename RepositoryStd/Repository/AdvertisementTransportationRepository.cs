@@ -9,6 +9,7 @@ using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
+using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
 
@@ -232,7 +233,7 @@ namespace RepositoryStd.Repository
 
 
         //TODO use EF
-        public AdvertisementTransportation FindBy(Guid Id)
+        public AdvertisementTransportation FindBy(Guid adId)
         {
             AdvertisementTransportation advertisementTransportation=new AdvertisementTransportation();
             AdDbContext adDbContext = new AdDbContext();
@@ -246,12 +247,13 @@ namespace RepositoryStd.Repository
                 .Include(advertisement => advertisement.AdStatus)
                 .Include(advertisement => advertisement.Price)
                 .Include(advertisements => advertisements.AdAttributeTransportation)
-                .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId==Id);//only accepted ads
+                .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId==adId);//only accepted ads
 
+            string query = list.ToSql();
             Advertisements item= list.Single();
             advertisementTransportation.AdvertisementCommon =
                 advertisementCommonRepository.GetAdvertisementCommonFromDatabaseResult(item, appIdentityDbContext);
-            advertisementTransportation.BodyColor=item.AdAttributeTransportation.GetEnumerator().Current.BodyColor
+            advertisementTransportation.BodyColor = item.AdAttributeTransportation.BodyColor;
             
             
             return advertisementTransportation;
