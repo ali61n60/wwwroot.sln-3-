@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace MvcMain.Infrastructure.Services
 {
     
-    public class AdvertisementCommonService : IAdvertisementService ,IAdvertisementCommonService
+    public class AdvertisementCommonService : IAdvertisementService<AdvertisementCommon> ,IAdvertisementCommonService
     {
         //TODO make _response method field
         ResponseBase<AdvertisementCommon[]> _response;
@@ -54,6 +54,11 @@ namespace MvcMain.Infrastructure.Services
                 _response.SetFailureResponse(ex.Message, errorCode);
             }
             return _response;
+        }
+
+        public ResponseBase<AdvertisementCommon> GetAdDetail(Guid adId)
+        {
+            throw new NotImplementedException("No Detail From AdvertisemntCommonService");
         }
 
         private void checkAndCorrectOnlyWithPicturesFilter(Dictionary<string, string> userInput, AdvertisementCommon[] advertisementCommons)

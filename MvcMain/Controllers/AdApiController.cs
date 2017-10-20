@@ -6,6 +6,7 @@ using ModelStd.Services;
 using MvcMain.Infrastructure.IOC;
 using MvcMain.Infrastructure.Services;
 using RepositoryStd.Context.Helper;
+using StructureMap.TypeRules;
 
 
 namespace MvcMain.Controllers
@@ -29,14 +30,15 @@ namespace MvcMain.Controllers
         }
 
 
-        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(
-            [FromBody] Dictionary<string, string> userInput)
+        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
             int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
             int count = ParameterExtractor.ExtractCount(userInput);
             int selectedCategoryId = ParameterExtractor.ExtractCatgoryId(userInput);
             //Polymorphic dispatch of service call
-            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(selectedCategoryId);
+            Type type = TypeFactory.GeType(selectedCategoryId);
+            Activator.CreateInstance<typeof(type)>()
+            IAdvertisementService<type.GetName()> advertisementService = AdServiceDictionary.GetAdvertisementService<T>();
             ResponseBase<AdvertisementCommon[]> response = advertisementService.GetAdvertisements(startIndex, count, userInput);
             setRequestIndex(userInput, response);
             return response;
@@ -52,6 +54,12 @@ namespace MvcMain.Controllers
                 else
                     response.CustomDictionary = new Dictionary<string, string>{{"RequestIndex", userInput["RequestIndex"]}};
             }
+        }
+
+        public void GetAdDetail(string adId,int categoryId)
+        {
+            //Polymorphic dispatch of service call
+            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(categoryId);
         }
     }
 

@@ -27,28 +27,35 @@
 }
 @section Body
 {
-    <div class="row well">
-        <div class="col-sm-6">
-            <input id="minPrice" class="form-control" placeholder="از قیمت" />
-            <br />
-            <input id="maxPrice" class="form-control" placeholder="تا قیمت" />
-            <br />
-            <select id="orderBy" class="form-control">
-                <option value="" selected="selected">به ترتیب</option>
-                <option value="DateAsc">به روزترین آگهی</option>
-                <option value="DateDesc">قدیمی ترین آگهی</option>
-                <option value="PriceAsc">ارزانترین</option>
-                <option value="PriceDesc">گرانترین</option>
-            </select>
-            <br/>
+    <div class="well">
+        <div class="row">
             @await Component.InvokeAsync("CategorySelection")
-
         </div>
-        <div class="col-sm-6">
-            <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
+        <br/>
+        <div class="row">
 
+            <div class="col-sm-6">
+                <input id="minPrice" class="form-control" placeholder="از قیمت"/>
+                <br/>
+                <input id="maxPrice" class="form-control" placeholder="تا قیمت"/>
+                <br/>
+                <select id="orderBy" class="form-control">
+                    <option value="" selected="selected">به ترتیب</option>
+                    <option value="DateAsc">به روزترین آگهی</option>
+                    <option value="DateDesc">قدیمی ترین آگهی</option>
+                    <option value="PriceAsc">ارزانترین</option>
+                    <option value="PriceDesc">گرانترین</option>
+                </select>
+                
+
+            </div>
+            <div class="col-sm-6">
+                <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
+
+            </div>
         </div>
     </div>
+   
     <div id="adPlaceHolder" class="row">
 
     </div>
@@ -64,7 +71,7 @@
     
     <script id="singleAdItem" type="text/template">
         <div class="blockDisplay adDetail">
-            <a href="./AdDetail/AdDetail.aspx?adId={{AdvertisementId}}&categoryId={{AdvertisementCategoryId}}">
+            <a href="./Home/AdDetail?adId={{AdvertisementId}}&categoryId={{AdvertisementCategoryId}}">   
                 <div>
                     @*image section*@
                     <div class="imageSection">

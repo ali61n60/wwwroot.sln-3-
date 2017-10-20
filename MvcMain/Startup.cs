@@ -31,6 +31,7 @@ namespace MvcMain
         readonly IConfigurationRoot _configuration;
         private readonly IHostingEnvironment _env;
         private AdvertisementDataClass _advertisementDataClass;
+        private ICategoryRepository _categoryRepository;
 
         public Startup(IHostingEnvironment env)
         {
@@ -46,19 +47,24 @@ namespace MvcMain
             _advertisementDataClass=new AdvertisementDataClass(_configuration["Data:ConnectionString"]);
             services.AddSingleton(provider => _advertisementDataClass);
 
+            _categoryRepository=new CategoryRepositoryInCode();
+            services.AddTransient<ICategoryRepository>(provider => _categoryRepository);
+
             string directoryPath = _env.ContentRootPath + "/AdvertisementImages/";
             services.AddTransient<IImageRepository>(provider => new ImageRepositoryFileSystem(directoryPath));
 
-            services.AddTransient<IRepository<AdvertisementCommon>>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString));
+            
+
+            services.AddTransient<IRepository<AdvertisementCommon>>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
             
             services.AddTransient<IRepository<AdvertisementTransportation>>(provider => new AdvertisementTransportationRepository(
-                new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString),_advertisementDataClass.ConnectionString ));
+                new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository),_advertisementDataClass.ConnectionString ));
 
             services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
 
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 
-            services.AddTransient<ICategoryRepository,CategoryRepositoryInCode>();
+            
             services.AddTransient<CategoryApiController>();
 
             services.AddTransient<ITransportaionRepository>(appServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));

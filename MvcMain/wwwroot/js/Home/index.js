@@ -26,7 +26,7 @@ function getAdItemsFromServer() {
     var $userInput = {};
     $userInput.StartIndex = $start;
     $userInput.Count = $count;
-    $userInput.CategoryId = $("#category").val();//100 for cars
+    $userInput.CategoryId = $("#category0").val();//100 for cars
     $userInput.MinimumPrice = $("#minPrice").val();
     $userInput.MaximumPrice = $("#maxPrice").val();
     $userInput.OrderBy = $("#orderBy").val();
@@ -87,11 +87,46 @@ function OnErrorGetItemsFromServer(XMLHttpRequest, textStatus, errorThrown) {
     //showErrorMessage(textStatus + " , " + errorThrown);
 }//end OnErrorGetTimeFromServer
 
-    $(document).ready(function () {
+$(document).ready(function () {
 
-        //show detail of singleAdItem when mouse over
-        $(document).on('mouseenter mouseleave', '.blockDisplay', function () {
-            $(this).find('.moreInfo').fadeToggle(250);
-        });//end on
+    //show detail of singleAdItem when mouse over
+    $(document).on("mouseenter mouseleave", ".blockDisplay", function () {
+        $(this).find(".moreInfo").fadeToggle(250);
+    });//end on
 
-    });//end ready
+});//end ready
+
+//Category Selection
+$(document).ready(function () {
+    //Add first level categories
+    var $allCategoriesString = $("#allCategories").val();
+    var $allCategories = $.parseJSON($allCategoriesString);
+    $allCategories.forEach(function(category) {
+        if (category.parentCategoryId === 0) {
+            $("#category0").append($("<option>", {
+                value: category.categoryId,
+                text: category.categoryName
+            }));   
+        }//end if
+    });//end forEach
+       
+
+    $("#category0").change(function () {
+        $("#category1").remove();
+        $selectedId = $(this).val();
+        var $select = $("<br/> <select id='category1' class='form-control'></select>")
+            .append("<option value='0'>تمام آگهی ها</option>");
+        $allCategories.forEach(function(category) {
+            if (category.parentCategoryId == $selectedId) {
+                $select.append($("<option>", {
+                    value: category.categoryId,
+                    text: category.categoryName
+                }));   
+            }
+        });//end forEach
+        $("#categorySelector").append($select);
+        //TODO show second select  and populate it with data from server
+    });//end change
+
+
+});//end ready

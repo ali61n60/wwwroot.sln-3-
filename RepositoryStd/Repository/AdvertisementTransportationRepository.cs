@@ -26,7 +26,7 @@ namespace RepositoryStd.Repository
         {
             _conectionString = connectionString;
             _repositoryAdvertisementCommon = repositoryAdvertisementCommon;
-            advertisementCommonRepository=new AdvertisementCommonRepository(connectionString);
+            advertisementCommonRepository=new AdvertisementCommonRepository(connectionString,null);
         }
 
         public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string,string> inputDictionary)

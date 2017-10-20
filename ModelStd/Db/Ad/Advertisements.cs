@@ -13,7 +13,7 @@ namespace ModelStd.Db.Ad
         }
 
         public Guid AdId { get; set; }
-        public Guid UserId { get; set; }
+        public string UserId { get; set; }
         public int CategoryId { get; set; }
         public int DistrictId { get; set; }
         public DateTime AdInsertDateTime { get; set; }

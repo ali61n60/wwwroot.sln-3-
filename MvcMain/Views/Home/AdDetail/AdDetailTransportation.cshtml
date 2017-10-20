@@ -1,0 +1,112 @@
+﻿@model ModelStd.Advertisements.AdvertisementTransportation
+
+@{
+    ViewData["Title"] = "جزئیات آگهی";
+    ViewData["PageTitle"] = "جزئیات آگهی";
+    Layout = "_Layout";
+}
+
+@section TopTop
+{
+    @Html.Partial("TopTop")
+}
+@section NavBar
+{
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+{
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+{
+
+}
+@section SideNav
+{
+    @Html.Partial("SideNav")
+}
+@section Body
+{
+    @Html.Partial("AdDetail/AdDetailCommon",Model.AdvertisementCommon)
+
+    <div class="row">
+        <div class="col-xs-8 text-right">
+            <span>@Model.ModelName</span>
+            <span>/</span>
+            <span>@Model.BrandName</span>
+        </div>
+        <div class="col-xs-4">
+            <span>برند</span>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-8 text-right">
+            <span>@Model.Gearbox</span>
+        </div>
+        <div class="col-xs-4">
+            <span>گیربکس</span>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-8 text-right">
+            <span>@Model.BodyColor</span>
+            <span>@Model.InternalColor</span>
+        </div>
+        <div class="col-xs-4">
+            <span>رنگ</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8 text-right">
+            <span>@Model.Mileage</span>
+        </div>
+        <div class="col-xs-4">
+            <span>کیلومتر</span>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-8 text-right">
+            <span>@Model.MakeYear</span>
+        </div>
+        <div class="col-xs-4">
+            <span>سال تولید</span>
+            <asp:Label ID="Label7" runat="server" Text="سال تولید"></asp:Label>
+        </div>
+    </div>
+    <div class="row">
+
+        <div class="col-xs-8 text-right">
+            <span>@Model.Fuel</span>
+        </div>
+        <div class="col-xs-4">
+            <span>سوخت</span>
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="well">
+            <div class="row text-right">
+                <span>توضیحات</span>
+            </div>
+            <div class="well">
+                <div class="row text-right">
+                    <span>@Model.AdvertisementCommon.AdvertisementComments</span>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@section Footer
+{
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+<script src="/lib/lightslider/src/js/lightslider.js"></script>
+}

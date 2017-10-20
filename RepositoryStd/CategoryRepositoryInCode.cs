@@ -7,9 +7,9 @@ namespace RepositoryStd
     public class CategoryRepositoryInCode : ICategoryRepository
     {
         private List<Category> allCategories;
-        public int CategoryVersion { get { return 1; } }
+        public int CategoryVersion => 1;
 
-        
+
         public CategoryRepositoryInCode()
         {
            fillAllCategories();
@@ -29,12 +29,12 @@ namespace RepositoryStd
             return tempCategory;
         }
 
-        public Category[] GetAllCategories()
+        public IList<Category> GetAllCategories()
         {
-            return allCategories.ToArray();
+            return allCategories;
         }
 
-        public Category[] GetAllChildernCategories(int ParentCategoryId)
+        public IList<Category> GetAllChildernCategories(int ParentCategoryId)
         {
             List<Category> tempList=new List<Category>();
             foreach (Category category in allCategories)
@@ -44,7 +44,7 @@ namespace RepositoryStd
                     tempList.Add(category);
                 }
             }
-            return tempList.ToArray();
+            return tempList;
         }
 
         public Category FindCategoryByEnglishName(string EnglishCategoryName)
@@ -109,12 +109,6 @@ namespace RepositoryStd
             return tempCategory;
         }
 
-
-        
-
-        /// <summary>
-        /// 
-        /// </summary>
         private void fillAllCategories()
         {
             allCategories = new List<Category>();

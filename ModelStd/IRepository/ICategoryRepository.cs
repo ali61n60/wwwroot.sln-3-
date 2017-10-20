@@ -12,9 +12,9 @@ namespace ModelStd.IRepository
 
         Category FindCategoryById(int CategoryId);
 
-        Category[] GetAllCategories();
+        IList<Category> GetAllCategories();
 
-        Category[] GetAllChildernCategories(int ParentCategoryId);
+        IList<Category> GetAllChildernCategories(int ParentCategoryId);
 
         Category FindCategoryByEnglishName(string EnglishCategoryName);
 

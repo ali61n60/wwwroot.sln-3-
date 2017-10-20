@@ -1,0 +1,90 @@
+﻿@model ModelStd.Advertisements.AdvertisementCommon
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#imageGallery').lightSlider({
+            auto: true,
+            pause: 5000,
+            pager: true,
+
+            gallery: true,
+            item: 1,
+            loop: true,
+            thumbItem: 6,
+           
+            slideMargin: 0,
+            enableDrag: true,
+            currentPagerPosition: 'left',
+            onSliderLoad: function (el) {
+                el.lightGallery({
+                    selector: '#imageGallery .lslide'
+                });
+            }
+        });
+    });
+</script>
+<style>
+   
+    .lSPager li.active{
+        border: 5px blue double;
+    }
+</style>
+<div class="row">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-5 imageSection">
+        <ul id="imageGallery" runat="server">
+           @*<li class=".lslide" data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/0.jpeg">
+                <img src="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/1.jpeg" />
+            </li>
+            <li data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/2.jpeg">
+                <img src="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/3.jpeg" />
+            </li>*@
+        </ul>
+    </div>
+
+    <div class="col-sm-6 dataSection">
+        <div class="row">
+            <div class="col-xs-12 text-center">
+                @Model.AdvertisementTitle
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 text-right">
+                <span>@Model.PhoneNumber</span>
+            </div>
+            <div class="col-xs-4">
+                <span>تلفن</span>
+            </div>
+            <div class="col-xs-8 text-right">
+                <span>@Model.Email</span>
+            </div>
+            <div class="col-xs-4">
+                <span>ایمیل</span>
+            </div>
+            <div class="col-xs-8 text-right">
+                <span>@Model.AdvertisementPrice.price</span>
+            </div>
+            <div class="col-xs-4">
+                <span>قیمت</span>
+            </div>
+
+            <div class="col-xs-8 text-right">
+                <span>@Model.AdvertisementPrice.priceType</span>
+            </div>
+            <div class="col-xs-4">
+                <span>نوع قیمت</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-8 text-right">
+                <span>@Model.AdvertisementTime</span>
+            </div>
+            <div class="col-xs-4">
+                <span>زمان</span>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<br />

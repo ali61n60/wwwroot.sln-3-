@@ -4,7 +4,6 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
-using ModelStd;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
@@ -12,6 +11,7 @@ using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
+using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
 using RepositoryStd.QueryPattern;
 
@@ -21,13 +21,15 @@ namespace RepositoryStd.Repository
     {
         private readonly string _conectionString;
         List<AdvertisementCommon> _searchResultItems;
+        private ICategoryRepository _categoryRepository;
         AdvertisementCommon _tempAdvertisementCommon;
         SqlDataReader _dataReader;
         RepositoryResponse _responseBase;
 
-        public AdvertisementCommonRepository(string connectionString)
+        public AdvertisementCommonRepository(string connectionString, ICategoryRepository categoryRepository)
         {
             _conectionString = connectionString;
+            _categoryRepository = categoryRepository;
         }
 
         public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters)
@@ -58,13 +60,20 @@ namespace RepositoryStd.Repository
             list= WhereClausePrice(list, queryParameters);//MinPrice and MAxPrice
             list= whereClauseDistrictId(list, queryParameters);//DistrictId
 
-            //uegentOnly
 
+            //TODO include ad owner information into each ad (UserId,Email And PhoneNumber)
+            AppIdentityDbContext appIdentityDbContext=new AppIdentityDbContext();
+            
+
+
+
+            //uegentOnly
+            
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
 
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement));
+                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement,appIdentityDbContext));
             }
             return _searchResultItems;
         }
@@ -87,13 +96,28 @@ namespace RepositoryStd.Repository
                     return list;
             }
         }
-
-
-        //TODO change where clause to get an array of categories
         private IQueryable<Advertisements> wherClauseCategoryId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            int categoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
-            list = list.Where(advertisement => advertisement.CategoryId == categoryId);
+            int firstLevelCategoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
+            if (firstLevelCategoryId == 0)//root is selected so do not include anything in where clause
+            {
+                return list;
+            }
+            List<int> fullCategoryIdList = new List<int> { firstLevelCategoryId };
+            IList<Category> secondLevelCategories= _categoryRepository.GetAllChildernCategories(firstLevelCategoryId);
+            List<Category> thirdLevelCategories=new List<Category>();
+            foreach (Category secondLevelCategory in secondLevelCategories)
+            {
+                fullCategoryIdList.Add(secondLevelCategory.CategoryId);
+                thirdLevelCategories.AddRange(_categoryRepository.GetAllChildernCategories(secondLevelCategory.CategoryId));
+            }
+            
+            foreach (Category thirdLevelCategory in thirdLevelCategories)
+            {
+                fullCategoryIdList.Add(thirdLevelCategory.CategoryId);
+            }
+            
+            list = list.Where(advertisement => fullCategoryIdList.Contains(advertisement.CategoryId) );
             return list;
         }
         private IQueryable<Advertisements> WhereClausePrice(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
@@ -117,7 +141,7 @@ namespace RepositoryStd.Repository
             return list;
         }
 
-        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisements advertisement)
+        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisements advertisement, AppIdentityDbContext identityDbContext)
         {
             AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
             {
@@ -132,8 +156,8 @@ namespace RepositoryStd.Repository
                 AdvertisementCategoryId = advertisement.CategoryId,
                 AdvertisementComments = advertisement.AdComments,//TODO test for null
                 NumberOfVisit = advertisement.AdNumberOfVisited,//TODO test for null
-                //Email = advertisement.aspnet_Users.emailAddress,//TODO test for null
-                //PhoneNumber = advertisement.aspnet_Users.phoneNumber,//TODO test for null
+                Email =identityDbContext.Users.First(user => user.Id== advertisement.UserId).Email,//TODO test for null
+                PhoneNumber = identityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber,//TODO test for null
                 DistrictId = advertisement.DistrictId,
                 DistrictName = advertisement.District.DistrictName,
                 CityName = advertisement.District.City.CityName,
@@ -143,8 +167,6 @@ namespace RepositoryStd.Repository
             tempAdvertisementCommon.AdvertisementPrice.Ad = null;//prevent self referencing
             return tempAdvertisementCommon;
         }
-
-
 
         public void Add(AdvertisementCommon entity)
         {
@@ -318,7 +340,7 @@ namespace RepositoryStd.Repository
             try
             {
                 advertisementCommon.AdvertisementId = (Guid)dataReader["adId"];
-                advertisementCommon.UserId = (Guid)dataReader["UserId"];
+                advertisementCommon.UserId = (string)dataReader["UserId"];
                 advertisementCommon.AdvertisementCategoryId = (int)dataReader["categoryId"];
                 advertisementCommon.DistrictId = (int)dataReader["districtId"];
                 advertisementCommon.AdvertisementTime = (DateTime)dataReader["adInsertDateTime"];

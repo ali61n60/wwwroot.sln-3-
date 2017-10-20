@@ -19,7 +19,7 @@ namespace MvcMain.Components
         public IViewComponentResult Invoke()
         {
             //TODO Get All categories and pass it to the view to show to user
-            ResponseBase<Category[]> response= _categoryApi.GetAllCategories();
+            ResponseBase<IEnumerable<Category>> response= _categoryApi.GetAllCategories();
             if (!response.Success)
             {
                 //TODD Search what to do in case of error in View Component
