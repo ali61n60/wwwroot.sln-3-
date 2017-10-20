@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
+using RepositoryStd.Context.AD;
+using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
 
 namespace RepositoryStd.Repository
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>
     {
-        private readonly IRepository<AdvertisementCommon> _repositoryAdvertisementCommon;
         private readonly AdvertisementCommonRepository advertisementCommonRepository;
         private readonly string _conectionString;
 
@@ -21,11 +25,9 @@ namespace RepositoryStd.Repository
         RepositoryResponse _responseBase;
 
         
-        public AdvertisementTransportationRepository(IRepository<AdvertisementCommon> repositoryAdvertisementCommon
-                                                     , string connectionString)
+        public AdvertisementTransportationRepository(string connectionString)
         {
             _conectionString = connectionString;
-            _repositoryAdvertisementCommon = repositoryAdvertisementCommon;
             advertisementCommonRepository=new AdvertisementCommonRepository(connectionString,null);
         }
 
@@ -229,52 +231,35 @@ namespace RepositoryStd.Repository
         }
 
 
-        //sp
+        //TODO use EF
         public AdvertisementTransportation FindBy(Guid Id)
         {
-            AdvertisementTransportation tempAdvertisementTransportation;
-            SqlDataReader dataReader = null;
-            RepositoryResponse responseBase;
+            AdvertisementTransportation advertisementTransportation=new AdvertisementTransportation();
+            AdDbContext adDbContext = new AdDbContext();
+            AppIdentityDbContext appIdentityDbContext = new AppIdentityDbContext();
+            IQueryable<Advertisements> list = adDbContext.Advertisements
+                .Include(advertisement => advertisement.Category)
+                .Include(advertisement => advertisement.District)
+                .Include(advertisement => advertisement.District.City)
+                .Include(advertisement => advertisement.District.City.Province)
+                .Include(advertisement => advertisement.AdPrivilege)
+                .Include(advertisement => advertisement.AdStatus)
+                .Include(advertisement => advertisement.Price)
+                .Include(advertisements => advertisements.AdAttributeTransportation)
+                .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId==Id);//only accepted ads
 
-            using (SqlConnection connection = new SqlConnection(_conectionString))
-            {
-                using (SqlCommand command = new SqlCommand("sp_findAdTransport", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@adId", System.Data.SqlDbType.UniqueIdentifier).Value = Id;
-                    try
-                    {
-                        connection.Open();
-                        dataReader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                        if (dataReader.Read())
-                        {
-                            tempAdvertisementTransportation = new AdvertisementTransportation();
-                            responseBase = fillAdvertisementTransportationFromDataReader(
-                                tempAdvertisementTransportation, dataReader);
-                            if (!responseBase.Success)
-                            {
-                                throw new Exception(responseBase.Message);
-                            }
-                        }
-                        else
-                        {
-                            throw new AdvertisementNotFoundException();
-                        }
-
-                    }
-                    catch (Exception)
-                    {
-                        throw;
-                    }
-                    
-                }
-            }
-            return tempAdvertisementTransportation;
+            Advertisements item= list.Single();
+            advertisementTransportation.AdvertisementCommon =
+                advertisementCommonRepository.GetAdvertisementCommonFromDatabaseResult(item, appIdentityDbContext);
+            advertisementTransportation.BodyColor=item.AdAttributeTransportation.GetEnumerator().Current.BodyColor
+            
+            
+            return advertisementTransportation;
         }
 
         public void IncrementNumberOfVisit(Guid adGuid)
         {
-            _repositoryAdvertisementCommon.IncrementNumberOfVisit(adGuid);
+            advertisementCommonRepository.IncrementNumberOfVisit(adGuid);
         }
 
         private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,

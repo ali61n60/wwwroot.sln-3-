@@ -46,7 +46,6 @@ namespace RepositoryStd.Repository
 
             IQueryable<Advertisements> list = adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
-                //.Include(advertisement => advertisement.aspnet_Users)
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
@@ -64,16 +63,13 @@ namespace RepositoryStd.Repository
             //TODO include ad owner information into each ad (UserId,Email And PhoneNumber)
             AppIdentityDbContext appIdentityDbContext=new AppIdentityDbContext();
             
-
-
-
             //uegentOnly
             
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
 
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(getAdvertisementCommonFromDatabaseResult(advertisement,appIdentityDbContext));
+                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement,appIdentityDbContext));
             }
             return _searchResultItems;
         }
@@ -141,7 +137,7 @@ namespace RepositoryStd.Repository
             return list;
         }
 
-        private AdvertisementCommon getAdvertisementCommonFromDatabaseResult(Advertisements advertisement, AppIdentityDbContext identityDbContext)
+        public AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Advertisements advertisement, AppIdentityDbContext identityDbContext)
         {
             AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
             {
@@ -288,6 +284,7 @@ namespace RepositoryStd.Repository
             return _searchResultItems;
         }
 
+        //TODO use EF
         public AdvertisementCommon FindBy(Guid Id)
         {
             string commandText = "";//BaseSelectCommandText() + " WHERE adId=@adId ";

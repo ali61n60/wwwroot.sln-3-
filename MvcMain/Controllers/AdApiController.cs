@@ -29,7 +29,7 @@ namespace MvcMain.Controllers
             return "REZANEJATI";
         }
 
-
+        //Called from android and home controller
         public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
             int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
@@ -42,10 +42,12 @@ namespace MvcMain.Controllers
             return response;
         }
         
-        public void GetAdDetail(string adId,int categoryId)
+        public AdvertisementTransportation GetTransportationAdDetail(Guid adId)
         {
-            //Polymorphic dispatch of service call
-            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(categoryId);
+            AdvertisementTransportationService advertisementTransportationService = new AdvertisementTransportationService();
+            AdvertisementTransportation advertisementTransportation = advertisementTransportationService.GetAdDetail(adId)
+                .ResponseData;//TODO check for success parameter and if it is false show error to user
+            return advertisementTransportation;
         }
 
         private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<AdvertisementCommon[]> response)

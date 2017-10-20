@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using ModelStd.Advertisements;
 using MvcMain.Infrastructure.Services;
 
-
 namespace MvcMain.Infrastructure.IOC
 {
     public static class AdServiceDictionary
@@ -23,14 +22,8 @@ namespace MvcMain.Infrastructure.IOC
         {
             if (_serviceDictionary.ContainsKey(categoryId))
                 return _serviceDictionary[categoryId];
-            else
-                return _serviceDictionary[_defaultCategoryId];//default
+
+            return _serviceDictionary[_defaultCategoryId];//default
         }
     }
-
-   
-
-       
-
-     
 }

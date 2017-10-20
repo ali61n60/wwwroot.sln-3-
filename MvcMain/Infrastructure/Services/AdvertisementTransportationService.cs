@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using ModelStd.Services;
-using MvcMain.Infrastructure.IOC;
 using RepositoryStd.QueryPattern.BaseQuery;
 
 
@@ -66,7 +64,9 @@ namespace MvcMain.Infrastructure.Services
 
         public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
         {
+            //TODO get ad detail from repository layer
             ResponseBase<AdvertisementTransportation> responseBase=new ResponseBase<AdvertisementTransportation>();
+            responseBase.ResponseData=new AdvertisementTransportation();
             responseBase.ResponseData.AdvertisementCommon.AdvertisementCategoryId = 100;
             responseBase.ResponseData.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
             responseBase.ResponseData.AdvertisementCommon.AdvertisementTitle = "Test to be done";
