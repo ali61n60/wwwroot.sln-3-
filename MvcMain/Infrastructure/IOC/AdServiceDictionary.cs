@@ -8,43 +8,29 @@ namespace MvcMain.Infrastructure.IOC
 {
     public static class AdServiceDictionary
     {
-        public static IAdvertisementService<T> GetAdvertisementService(Type T)
-        {
-            Type type = typeof(T);
-            if (type == typeof(AdvertisementCommon))
-                return (IAdvertisementService<T>) new AdvertisementCommonService();
-            else if(type== typeof(AdvertisementTransportation))
-            {
-                return (IAdvertisementService<T>) new AdvertisementTransportationService();
-            }
-
-            //default
-            return null;
-        }
-    }
-
-    public static class TypeFactory
-    {
-        private static readonly Dictionary<int ,Type> _typeDictionary=new Dictionary<int, Type>();
+        private static readonly Dictionary<int, IAdvertisementService> _serviceDictionary = new Dictionary<int, IAdvertisementService>();
         private static int _defaultCategoryId = 0;
-
-        static TypeFactory()
+        static AdServiceDictionary()
         {
             InitializeDictionary();
         }
-
         private static void InitializeDictionary()
         {
-            _typeDictionary.Add(0,typeof(AdvertisementCommon));
-            _typeDictionary.Add(100, typeof(AdvertisementTransportation));
+            _serviceDictionary.Add(0, new AdvertisementCommonService());
+            _serviceDictionary.Add(100, new AdvertisementTransportationService());
         }
-
-        public static Type GeType(int categoryId)
+        public static IAdvertisementService GetAdvertisementService(int categoryId)
         {
-            if (_typeDictionary.ContainsKey(categoryId))
-                return _typeDictionary[categoryId];
+            if (_serviceDictionary.ContainsKey(categoryId))
+                return _serviceDictionary[categoryId];
             else
-                return _typeDictionary[_defaultCategoryId];
+                return _serviceDictionary[_defaultCategoryId];//default
         }
     }
+
+   
+
+       
+
+     
 }

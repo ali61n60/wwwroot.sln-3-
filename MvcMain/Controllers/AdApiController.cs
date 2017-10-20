@@ -36,14 +36,17 @@ namespace MvcMain.Controllers
             int count = ParameterExtractor.ExtractCount(userInput);
             int selectedCategoryId = ParameterExtractor.ExtractCatgoryId(userInput);
             //Polymorphic dispatch of service call
-            Type type = TypeFactory.GeType(selectedCategoryId);
-            Activator.CreateInstance<typeof(type)>()
-            IAdvertisementService<type.GetName()> advertisementService = AdServiceDictionary.GetAdvertisementService<T>();
+            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(selectedCategoryId);
             ResponseBase<AdvertisementCommon[]> response = advertisementService.GetAdvertisements(startIndex, count, userInput);
             setRequestIndex(userInput, response);
             return response;
         }
-
+        
+        public void GetAdDetail(string adId,int categoryId)
+        {
+            //Polymorphic dispatch of service call
+            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(categoryId);
+        }
 
         private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<AdvertisementCommon[]> response)
         {
@@ -52,14 +55,8 @@ namespace MvcMain.Controllers
                 if (response.CustomDictionary != null)
                     response.CustomDictionary["RequestIndex"] = userInput["RequestIndex"];
                 else
-                    response.CustomDictionary = new Dictionary<string, string>{{"RequestIndex", userInput["RequestIndex"]}};
+                    response.CustomDictionary = new Dictionary<string, string> { { "RequestIndex", userInput["RequestIndex"] } };
             }
-        }
-
-        public void GetAdDetail(string adId,int categoryId)
-        {
-            //Polymorphic dispatch of service call
-            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(categoryId);
         }
     }
 

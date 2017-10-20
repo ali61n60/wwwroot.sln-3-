@@ -11,7 +11,7 @@ using RepositoryStd.QueryPattern.BaseQuery;
 
 namespace MvcMain.Infrastructure.Services
 {
-     public class AdvertisementTransportationService :IAdvertisementService<AdvertisementTransportation>// IAdvertisementTransportationService, IAdvertisementService, IServiceCommon
+     public class AdvertisementTransportationService :IAdvertisementService// IAdvertisementTransportationService, IAdvertisementService, IServiceCommon
     {
         ResponseBase<AdvertisementCommon[]> _response;
         private readonly IRepository<AdvertisementTransportation> _advertisementTransportationRepository;
