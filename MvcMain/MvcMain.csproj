@@ -28,7 +28,6 @@
     <Content Include="wwwroot\css\sass\site.scss" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\js\Home\index.js" />
-    <Content Include="wwwroot\js\Home\lightslider.js" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\AUTHORS.txt" />

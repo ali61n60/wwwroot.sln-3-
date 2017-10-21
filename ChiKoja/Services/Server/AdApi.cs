@@ -4,6 +4,8 @@ using System.IO;
 using System.Json;
 using System.Net;
 using System.Threading.Tasks;
+using Android.Util;
+using ChiKoja.AdDetail;
 using ChiKoja.Repository;
 using ChiKoja.Repository.Filter;
 using ChiKoja.Repository.Location;
@@ -29,6 +31,11 @@ namespace ChiKoja.Services.Server
         string RequestIndexKey = "RequestIndex";
         private string StartIndexKey = "StartIndex";
         private string CountKey = "Count";
+        private string CategoryIdKey = "CategoryId";
+        private string MinimumPriceKey = "MinimumPrice";
+        private string MaximumPriceKey = "MaximumPrice";
+        private string OrderByKey = "OrderBy";
+
 
         public AdApi()
         {
@@ -168,23 +175,17 @@ namespace ChiKoja.Services.Server
             //}).Start();
         }
 
-        public void GetAdTransportationDetailFromServer(Guid adGuid)
+        public async Task GetAdTransportationDetailFromServer(Guid adGuid,IAdDetailCallBack<ResponseBase<AdvertisementTransportation>> adDetailCallBack)
         {
-            //Handler mainHandler = new Handler(Application.Context.MainLooper);
-            //AdvertisementTransportationService adTransportationService = new AdvertisementTransportationService();
-            //new Thread(() =>
-            //{
-            //    try
-            //    {
-            //        ResponseBaseOfAdvertisementTransportationgJiz6K1p response =
-            //            adTransportationService.GetAdvertisementTransportation(adGuid.ToString());
-            //        mainHandler.Post(() => { searchAdResult.OnSerachAdCompleted(response); });
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        mainHandler.Post(() => { searchAdResult.OnSearchAdError(ex); });
-            //    }
-            //}).Start();
+            //TODO research what heppen if adDetailCallBack is destroyed or stopped when calling it
+            //TODO get ad detail from server and show data to user
+            //TODO use a call back method when completed
+            //TODO do not block the calling thread
+            Log.Debug("async", "************* Before async method call");
+            ResponseBase<AdvertisementTransportation> response=await ServicesCommon.CallService<AdvertisementTransportation>("api/AdApi/GetAdvertisementCommon");
+            Log.Debug("async", "************* After async method call");
+            adDetailCallBack.DataFromServer(response);
+            
         }
 
         public void ResetSearchCondition()

@@ -57,7 +57,7 @@ namespace ChiKoja.Services.Server
             try
             {
                 string url = ServerUrl + "/" + controllerActionUrlPart;
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(url));
                 request.ContentType = "application/json";
                 request.Method = "POST";
                 using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
@@ -72,7 +72,7 @@ namespace ChiKoja.Services.Server
                 {
                     using (Stream stream = webResponse.GetResponseStream())
                     {
-                        JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
+                        JsonValue jsonDoc = await Task.Run(() => JsonValue.Load(stream));
                         response = JsonConvert.DeserializeObject<ResponseBase<T>>(jsonDoc.ToString());
 
                         if (response.Success)

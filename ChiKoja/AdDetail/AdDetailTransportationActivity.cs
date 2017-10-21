@@ -20,7 +20,7 @@ namespace ChiKoja.AdDetail
 
     //TODO show similar ads
     [Activity(Label = "AdTransportationActivity", Theme = "@style/Theme.Main")]
-    public class AdDetailTransportationActivity : NavActivity
+    public class AdDetailTransportationActivity : NavActivity,IAdDetailCallBack<ResponseBase<AdvertisementTransportation>>
     {
         //TODO Design UI for this activity
 
@@ -46,7 +46,9 @@ namespace ChiKoja.AdDetail
             }
             adGuid = Guid.Parse(Intent.GetStringExtra(AdDetail.AdGuidKey));
             AdApi adApi = new AdApi();
-            adApi.GetAdTransportationDetailFromServer(adGuid);
+            Log.Debug("async", "************* Before Activity method call");
+            adApi.GetAdTransportationDetailFromServer(adGuid,this);
+            Log.Debug("async", "************* Before Activity method call");
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall),ShowMessageType.Permanent);
             userMarkedAds=new UserMarkedAds(Repository.Repository.DataBasePath);
 
@@ -68,10 +70,10 @@ namespace ChiKoja.AdDetail
         {
             buttonMarkAd = rootView.FindViewById<Button>(Resource.Id.buttonMarkAd);
             buttonMarkAd.Click += buttonMarkAd_Click;
-            manageButoonMarkAdText();
+            manageButtonMarkAdText();
         }
 
-        private void manageButoonMarkAdText()
+        private void manageButtonMarkAdText()
         {
             if (userMarkedAds.IsAdMarked(Repository.Repository.Locker, adGuid))
                 buttonMarkAd.Text = Resources.GetString(Resource.String.UnMarkAd);
@@ -85,7 +87,7 @@ namespace ChiKoja.AdDetail
                 userMarkedAds.UnmarAd(Repository.Repository.Locker,adGuid);
             else
                 userMarkedAds.MarkAd(Repository.Repository.Locker, adGuid);
-            manageButoonMarkAdText();
+            manageButtonMarkAdText();
         }
 
         void buttonContactInfo_Click(object sender, EventArgs e)
@@ -176,6 +178,11 @@ namespace ChiKoja.AdDetail
         public void OnSearchAdError(Exception ex)
         {
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(ex.Message, ShowMessageType.Long);
+        }
+
+        public void DataFromServer(ResponseBase<AdvertisementTransportation> response)
+        {
+            //TODO populate view from response, show error if response contains error
         }
     }
 }

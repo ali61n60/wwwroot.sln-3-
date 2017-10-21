@@ -218,6 +218,7 @@
     <Compile Include="Activity1.cs" />
     <Compile Include="AdDetail\AdDetail.cs" />
     <Compile Include="AdDetail\AdDetailTransportationActivity.cs" />
+    <Compile Include="AdDetail\IAdDetailCallBack.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
     <Compile Include="BroadcastReceiver\ActivityBroadcastReceiverSms.cs" />
