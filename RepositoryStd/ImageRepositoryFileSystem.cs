@@ -17,7 +17,7 @@ namespace RepositoryStd
         {
             string directoryPathString = _directoryPath + advertisementGuid;
             Directory.CreateDirectory(directoryPathString);
-            
+
             for (int i = 0, fileName = 0; i < Images.Length; i++)
                 if (Images[i] != null)
                 {
@@ -38,13 +38,11 @@ namespace RepositoryStd
             try
             {
                 string directoryPathString = _directoryPath + advertisementGuid;
-                //  DirectoryInfo dir = Directory.CreateDirectory(directoryPathString);
                 string[] fileImages = Directory.GetFiles(directoryPathString, "*.jpeg", SearchOption.TopDirectoryOnly);
                 advertisementImages = new string[fileImages.Length];
 
                 for (int i = 0, j = 0; i < fileImages.Length; i++)
                 {
-
                     using (fileStream = new FileStream(fileImages[i], FileMode.Open, FileAccess.Read))
                     {
                         if (fileStream.CanRead)

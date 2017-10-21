@@ -132,7 +132,7 @@ namespace MvcMain.Infrastructure.Services
 
         public void FillAllImages(AdvertisementCommon advertisementCommon)
         {
-            throw new NotImplementedException();
+            advertisementCommon.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdvertisementId);
         }
 
         public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)

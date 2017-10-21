@@ -250,7 +250,7 @@ namespace RepositoryStd.Repository
                 .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId==adId);//only accepted ads
 
             string query = list.ToSql();
-            Advertisements item= list.Single();
+            Advertisements item = list.FirstOrDefault();
             fillAdTransportation(advertisementTransportation, item, appIdentityDbContext);
             
             return advertisementTransportation;

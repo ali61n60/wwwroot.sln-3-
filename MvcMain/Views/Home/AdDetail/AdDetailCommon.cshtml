@@ -33,8 +33,12 @@
     <div class="col-sm-1">
     </div>
     <div class="col-sm-5 imageSection">
+        @if (Model.AdvertisementImages != null)
+        {
+            @:<img width="100px" height="100px" src="data:image/jpg;base64,@Model.AdvertisementImages[0]"/>
+        }
         <ul id="imageGallery" runat="server">
-           @*<li class=".lslide" data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/0.jpeg">
+            @*<li class=".lslide" data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/0.jpeg">
                 <img src="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/1.jpeg" />
             </li>
             <li data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/2.jpeg">
