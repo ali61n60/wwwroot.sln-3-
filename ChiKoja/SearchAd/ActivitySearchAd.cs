@@ -164,7 +164,7 @@ namespace ChiKoja.SearchAd
                 AdPrice = advertisementCommon.AdvertisementPrice.price.ToString(),
                 AdImage = advertisementCommon.AdvertisementImages[0],
                 AdCategoryId = advertisementCommon.AdvertisementCategoryId,
-              //  AdGuid = Guid.Parse(advertisementCommon.AdvertisementId),
+                AdGuid = advertisementCommon.AdvertisementId,
                 AdNumberOfVisit = advertisementCommon.NumberOfVisit
             };
         }

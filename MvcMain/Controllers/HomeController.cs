@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
+using ModelStd.Services;
 using MvcMain.Infrastructure.Services;
 using MvcMain.Models;
 
@@ -27,8 +28,12 @@ namespace MvcMain.Controllers
             switch (adDetailInfo.CategoryId)
             {
                 case 100:
-                    AdvertisementTransportation advertisementTransportation = adApiController.GetTransportationAdDetail(adDetailInfo.AdId);
-                    return View("AdDetail/AdDetailTransportation", advertisementTransportation);
+                    ResponseBase<AdvertisementTransportation> response = adApiController.GetTransportationAdDetail(adDetailInfo.AdId);
+                    if (response.Success)
+                        return View("AdDetail/AdDetailTransportation", response.ResponseData);
+                    else
+                        //TODO show error
+                        return null;
                 default:
                     return View("AdDetail/AdDetailDefault", adDetailInfo);
             }

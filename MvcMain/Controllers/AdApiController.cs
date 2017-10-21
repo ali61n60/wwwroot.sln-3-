@@ -42,12 +42,10 @@ namespace MvcMain.Controllers
             return response;
         }
         
-        public AdvertisementTransportation GetTransportationAdDetail(Guid adId)
+        public ResponseBase<AdvertisementTransportation> GetTransportationAdDetail([FromBody] Guid adId)
         {
             AdvertisementTransportationService advertisementTransportationService = new AdvertisementTransportationService();
-            AdvertisementTransportation advertisementTransportation = advertisementTransportationService.GetAdDetail(adId)
-                .ResponseData;//TODO check for success parameter and if it is false show error to user
-            return advertisementTransportation;
+            return advertisementTransportationService.GetAdDetail(adId);//TODO check for success parameter and if it is false show error to user
         }
 
         private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<AdvertisementCommon[]> response)

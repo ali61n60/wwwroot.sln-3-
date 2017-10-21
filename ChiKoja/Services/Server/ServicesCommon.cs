@@ -50,7 +50,7 @@ namespace ChiKoja.Services.Server
                 return response;
             }
         }
-        public static async Task<ResponseBase<T>> CallService<T>(string controllerActionUrlPart,Dictionary<string,string> userInput)
+        public static async Task<ResponseBase<T>> CallService<T>(string controllerActionUrlPart,object userInput)
         {
             ResponseBase<T> response;
 

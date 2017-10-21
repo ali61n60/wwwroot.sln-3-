@@ -175,15 +175,16 @@ namespace ChiKoja.Services.Server
             //}).Start();
         }
 
-        public async Task GetAdTransportationDetailFromServer(Guid adGuid,IAdDetailCallBack<ResponseBase<AdvertisementTransportation>> adDetailCallBack)
+        public async Task GetAdTransportationDetailFromServer(Guid adId,IAdDetailCallBack<ResponseBase<AdvertisementTransportation>> adDetailCallBack)
         {
             //TODO research what heppen if adDetailCallBack is destroyed or stopped when calling it
             //TODO get ad detail from server and show data to user
             //TODO use a call back method when completed
             //TODO do not block the calling thread
-            Log.Debug("async", "************* Before async method call");
-            ResponseBase<AdvertisementTransportation> response=await ServicesCommon.CallService<AdvertisementTransportation>("api/AdApi/GetAdvertisementCommon");
-            Log.Debug("async", "************* After async method call");
+            
+            ResponseBase<AdvertisementTransportation> response =
+                await ServicesCommon.CallService<AdvertisementTransportation>("api/AdApi/GetTransportationAdDetail",adId);
+            
             adDetailCallBack.DataFromServer(response);
             
         }

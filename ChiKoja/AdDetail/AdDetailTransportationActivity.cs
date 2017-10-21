@@ -46,9 +46,8 @@ namespace ChiKoja.AdDetail
             }
             adGuid = Guid.Parse(Intent.GetStringExtra(AdDetail.AdGuidKey));
             AdApi adApi = new AdApi();
-            Log.Debug("async", "************* Before Activity method call");
             adApi.GetAdTransportationDetailFromServer(adGuid,this);
-            Log.Debug("async", "************* Before Activity method call");
+
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall),ShowMessageType.Permanent);
             userMarkedAds=new UserMarkedAds(Repository.Repository.DataBasePath);
 
@@ -112,8 +111,13 @@ namespace ChiKoja.AdDetail
             contactInfoDialog.Show();
         }
 
-        public void OnSerachAdCompleted(ResponseBase<AdvertisementTransportation> response)
+        /// <summary>
+        /// this method is called back from AdApi class when adDetail is ready from servre
+        /// </summary>
+        /// <param name="response"></param>
+        public void DataFromServer(ResponseBase<AdvertisementTransportation> response)
         {
+            //TODO populate view from response, show error if response contains error
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
 
             if (response == null)
@@ -123,7 +127,7 @@ namespace ChiKoja.AdDetail
             }
             if (!response.Success)
             {
-                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(response.Message, ShowMessageType.Long);
+                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(response.Message, ShowMessageType.Permanent);
                 return;
             }
             advertisementTransportation = response.ResponseData;
@@ -140,8 +144,8 @@ namespace ChiKoja.AdDetail
                 setBitmapImage(imageView, advertisementTransportation.AdvertisementCommon.AdvertisementImages[i]);
                 LinearLayout.LayoutParams layoutParams =
                     new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-                
-                
+
+
                 layoutParams.SetMargins(10, 10, 10, 10);
                 linearLayoutImageContainer.AddView(imageView, layoutParams);
             }
@@ -173,16 +177,6 @@ namespace ChiKoja.AdDetail
                 Bitmap decodedByte = BitmapFactory.DecodeByteArray(decodedString, 0, decodedString.Length);
                 imageView.SetImageBitmap(decodedByte);
             }
-        }
-
-        public void OnSearchAdError(Exception ex)
-        {
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(ex.Message, ShowMessageType.Long);
-        }
-
-        public void DataFromServer(ResponseBase<AdvertisementTransportation> response)
-        {
-            //TODO populate view from response, show error if response contains error
         }
     }
 }
