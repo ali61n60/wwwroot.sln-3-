@@ -50,6 +50,7 @@ namespace ChiKoja.Services.Server
                 return response;
             }
         }
+        //TODO test for calling a method with two or more parameters
         public static async Task<ResponseBase<T>> CallService<T>(string controllerActionUrlPart,object userInput)
         {
             ResponseBase<T> response;
