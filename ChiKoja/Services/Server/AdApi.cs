@@ -37,8 +37,7 @@ namespace ChiKoja.Services.Server
            // searchFilterRepository = new SearchFilterRepository();
             
         }
-        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon(
-            Dictionary<string, string> userInput)
+        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon(Dictionary<string, string> userInput)
         {
             return  await ServicesCommon.CallService<AdvertisementCommon[]>("api/AdApi/GetAdvertisementCommon", userInput);
             

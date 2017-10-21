@@ -68,6 +68,7 @@ namespace MvcMain.Infrastructure.Services
             ResponseBase<AdvertisementTransportation> responseBase=new ResponseBase<AdvertisementTransportation>();
             //TODO check for error
             responseBase.ResponseData = _advertisementTransportationRepository.FindBy(adId);
+            //TODO fill Ad Images
             responseBase.SetSuccessResponse();
             return responseBase;
         }
