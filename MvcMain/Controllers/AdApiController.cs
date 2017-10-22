@@ -5,6 +5,7 @@ using ModelStd.Advertisements;
 using ModelStd.Services;
 using MvcMain.Infrastructure.IOC;
 using MvcMain.Infrastructure.Services;
+using Newtonsoft.Json.Linq;
 using RepositoryStd.Context.Helper;
 using StructureMap.TypeRules;
 
@@ -48,6 +49,7 @@ namespace MvcMain.Controllers
             return advertisementTransportationService.GetAdDetail(adId);//TODO check for success parameter and if it is false show error to user
         }
 
+       
         private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<AdvertisementCommon[]> response)
         {
             if (userInput.ContainsKey("RequestIndex"))

@@ -13,7 +13,11 @@ $(document).ready(function () {
             event.preventDefault();
             getAdItemsFromServer();
         }); //end click
+
+    
 });//end ready
+
+
 
 //CORE
 function getAdItemsFromServer() {
@@ -101,27 +105,27 @@ $(document).ready(function () {
     //Add first level categories
     var $allCategoriesString = $("#allCategories").val();
     var $allCategories = $.parseJSON($allCategoriesString);
-    $allCategories.forEach(function(category) {
+    $allCategories.forEach(function (category) {
         if (category.parentCategoryId === 0) {
             $("#category0").append($("<option>", {
                 value: category.categoryId,
                 text: category.categoryName
-            }));   
+            }));
         }//end if
     });//end forEach
-       
+
 
     $("#category0").change(function () {
         $("#category1").remove();
         $selectedId = $(this).val();
         var $select = $("<br/> <select id='category1' class='form-control'></select>")
             .append("<option value='0'>تمام آگهی ها</option>");
-        $allCategories.forEach(function(category) {
+        $allCategories.forEach(function (category) {
             if (category.parentCategoryId == $selectedId) {
                 $select.append($("<option>", {
                     value: category.categoryId,
                     text: category.categoryName
-                }));   
+                }));
             }
         });//end forEach
         $("#categorySelector").append($select);
