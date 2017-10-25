@@ -58,47 +58,10 @@ namespace RepositoryStd.Repository
             //}
             return _searchResultItems;
         }
-        private string getSelectCommandText(IQuery query)
-        {
-            return " WITH Results AS ( "
-                   + BaseSelectCommandText(query.GetOrderByClause())
-                   + " WHERE Advertisements.adStatusId=3 " //approved advertisements
-                   + query.GetWhereClause()
-                   + " ) SELECT * FROM Results WHERE RowNumber BETWEEN @start AND @end ";
-        }
-        private string BaseSelectCommandText(string orderByClause)
-        {
-            string customColumnNames = " , AdAttributeTransportation.modelId,Brands.brandName ";
+       
+       
 
-            string customJoins = " INNER JOIN AdAttributeTransportation ON Advertisements.adId=AdAttributeTransportation.adId " +
-                                 " INNER JOIN CarModel ON AdAttributeTransportation.modelId=CarModel.modelId " +
-                                 " INNER JOIN Brands ON CarModel.brandId=Brands.brandId ";
-
-            string commandText = "";// advertisementCommonRepository.SelectColumnsNameStatement(orderByClause) +
-                                 //customColumnNames +
-                                 //advertisementCommonRepository.FromStatement +
-                                 //customJoins;
-            return commandText;
-        }
-
-        private void FillSearchResultItemsFromDatabase(SqlConnection connection, SqlCommand command)
-        {
-            connection.Open();
-            _dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
-
-            while (_dataReader.Read())
-            {
-                _tempAdvertisementTransportation = new AdvertisementTransportation();
-                _responseBase =
-                    AdvertisementCommonRepository.fillAdvertisementCommonFromDataReader(
-                        _tempAdvertisementTransportation.AdvertisementCommon, _dataReader);
-                if (!_responseBase.Success)
-                {
-                    throw new Exception(_responseBase.Message);
-                }
-                _searchResultItems.Add(_tempAdvertisementTransportation);
-            }
-        }
+       
 
         public void Add(AdvertisementTransportation entity)
         {
@@ -231,6 +194,11 @@ namespace RepositoryStd.Repository
             return _searchResultItems;
         }
 
+        /// <summary>
+        /// Find AdvertisementTransportation from database 
+        /// </summary>
+        /// <param name="adId">Advertisement key</param>
+        /// <returns>if ad is not found returns NULL </returns>
         public AdvertisementTransportation FindBy(Guid adId)
         {
             AdvertisementTransportation advertisementTransportation=new AdvertisementTransportation();
@@ -249,6 +217,7 @@ namespace RepositoryStd.Repository
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
                 .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId==adId);//only accepted ads
 
+            //TODO verify that good query is generated
             string query = list.ToSql();
             Advertisements item = list.FirstOrDefault();
             fillAdTransportation(advertisementTransportation, item, appIdentityDbContext);

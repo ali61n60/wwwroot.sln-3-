@@ -20,12 +20,8 @@ namespace RepositoryStd.Repository
     public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>
     {
         private readonly string _conectionString;
-        List<AdvertisementCommon> _searchResultItems;
-        private ICategoryRepository _categoryRepository;
-        AdvertisementCommon _tempAdvertisementCommon;
-        SqlDataReader _dataReader;
-        RepositoryResponse _responseBase;
-
+        private readonly ICategoryRepository _categoryRepository;
+      
         public AdvertisementCommonRepository(string connectionString, ICategoryRepository categoryRepository)
         {
             _conectionString = connectionString;
@@ -40,24 +36,11 @@ namespace RepositoryStd.Repository
         //Called from service layer
         public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
-            _searchResultItems = new List<AdvertisementCommon>(count);
+            List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
             ////TODO research for singleton dbContext
             AdDbContext adDbContext = new AdDbContext();
 
-            IQueryable<Advertisements> list = adDbContext.Advertisements
-                .Include(advertisement => advertisement.Category)
-                .Include(advertisement => advertisement.District)
-                .Include(advertisement => advertisement.District.City)
-                .Include(advertisement => advertisement.District.City.Province)
-                .Include(advertisement => advertisement.AdPrivilege)
-                .Include(advertisement => advertisement.AdStatus)
-                .Include(advertisement => advertisement.Price)
-                .Where(advertisement => advertisement.AdStatusId == 3);//only accepted ads
-            
-            list=orderByClause(list, queryParameters);//OrderBy
-            list= wherClauseCategoryId(list, queryParameters);//Category
-            list= WhereClausePrice(list, queryParameters);//MinPrice and MAxPrice
-            list= whereClauseDistrictId(list, queryParameters);//DistrictId
+            IQueryable<Advertisements> list = GetQueryableList(queryParameters, adDbContext);
 
 
             //TODO include ad owner information into each ad (UserId,Email And PhoneNumber)
@@ -73,6 +56,26 @@ namespace RepositoryStd.Repository
             }
             return _searchResultItems;
         }
+
+        public IQueryable<Advertisements> GetQueryableList(Dictionary<string, string> queryParameters, AdDbContext adDbContext)
+        {
+            IQueryable<Advertisements> list = adDbContext.Advertisements
+                .Include(advertisement => advertisement.Category)
+                .Include(advertisement => advertisement.District)
+                .Include(advertisement => advertisement.District.City)
+                .Include(advertisement => advertisement.District.City.Province)
+                .Include(advertisement => advertisement.AdPrivilege)
+                .Include(advertisement => advertisement.AdStatus)
+                .Include(advertisement => advertisement.Price)
+                .Where(advertisement => advertisement.AdStatusId == 3); //only accepted ads
+
+            list = orderByClause(list, queryParameters); //OrderBy
+            list = wherClauseCategoryId(list, queryParameters); //Category
+            list = WhereClausePrice(list, queryParameters); //MinPrice and MAxPrice
+            list = whereClauseDistrictId(list, queryParameters); //DistrictId
+            return list;
+        }
+
 
         private IQueryable<Advertisements> orderByClause(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
@@ -235,8 +238,7 @@ namespace RepositoryStd.Repository
 
         public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string username)
         {
-            _searchResultItems = new List<AdvertisementCommon>();
-
+            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             using (SqlConnection connection = new SqlConnection(_conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_getUserAdvertisements", connection))
@@ -244,65 +246,64 @@ namespace RepositoryStd.Repository
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;//insert input parameters
                     connection.Open();
-                    _dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                    while (_dataReader.Read())
+                    SqlDataReader sqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                    while (sqlDataReader.Read())
                     {
-                        _tempAdvertisementCommon = new AdvertisementCommon();
-                        fillAdvertisementCommonFromDataReader(_tempAdvertisementCommon, _dataReader);
-                        _searchResultItems.Add(_tempAdvertisementCommon);
+                        var tempAdvertisementCommon = new AdvertisementCommon();
+                        fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
+                        searchResultItems.Add(tempAdvertisementCommon);
                     }
                 }
             }
-            return _searchResultItems;
+            return searchResultItems;
         }
 
 
         //sp To be removed
         public IEnumerable<AdvertisementCommon> FindAll()
         {
-            _searchResultItems = new List<AdvertisementCommon>();
-
+            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             using (SqlConnection connection = new SqlConnection(_conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_findAllAdCommon", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     connection.Open();
-                    _dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                    while (_dataReader.Read())
+                    SqlDataReader sqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                    while (sqlDataReader.Read())
                     {
-                        _tempAdvertisementCommon = new AdvertisementCommon();
-                        _responseBase = fillAdvertisementCommonFromDataReader(_tempAdvertisementCommon, _dataReader);
-                        if (!_responseBase.Success)
+                        AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon();
+                        RepositoryResponse repositoryResponse = fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
+                        if (!repositoryResponse.Success)
                         {
-                            throw new Exception(_responseBase.Message);
+                            throw new Exception(repositoryResponse.Message);
                         }
-                        _searchResultItems.Add(_tempAdvertisementCommon);
+                        searchResultItems.Add(tempAdvertisementCommon);
                     }
                 }
             }
-            return _searchResultItems;
+            return searchResultItems;
         }
 
         //TODO use EF
         public AdvertisementCommon FindBy(Guid Id)
         {
             string commandText = "";//BaseSelectCommandText() + " WHERE adId=@adId ";
-
+            AdvertisementCommon tempAdvertisementCommon;
             using (SqlConnection connection = new SqlConnection(_conectionString))
             {
                 using (SqlCommand command = new SqlCommand(commandText, connection))
                 {
                     command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = Id;
                     connection.Open();
-                    _dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                    if (_dataReader.Read())
+                    SqlDataReader sqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
+                    if (sqlDataReader.Read())
                     {
-                        _tempAdvertisementCommon = new AdvertisementCommon();
-                        _responseBase = fillAdvertisementCommonFromDataReader(_tempAdvertisementCommon, _dataReader);
-                        if (!_responseBase.Success)
+                        tempAdvertisementCommon = new AdvertisementCommon();
+                        RepositoryResponse responseBase = fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
+                        if (!responseBase.Success)
                         {
-                            throw new Exception(_responseBase.Message);
+                            throw new Exception(responseBase.Message);
                         }
                     }
                     else
@@ -311,7 +312,7 @@ namespace RepositoryStd.Repository
                     }
                 }
             }
-            return _tempAdvertisementCommon;
+            return tempAdvertisementCommon;
         }
 
         public void IncrementNumberOfVisit(Guid adGuid)

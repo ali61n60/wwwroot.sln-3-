@@ -8,10 +8,7 @@ namespace MvcMain.Infrastructure.Services
     
     public interface IAdvertisementCommonService
     {
-        //Done
-        ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(int startIndex, int count, Dictionary<string, string> userInput);
-        
-        //Done
+       //Done
        ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string userName,string password,bool userPassIsEncrypted);
         
         //Done

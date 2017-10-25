@@ -9,9 +9,8 @@ using RepositoryStd.QueryPattern.BaseQuery;
 
 namespace MvcMain.Infrastructure.Services
 {
-     public class AdvertisementTransportationService :IAdvertisementService// IAdvertisementTransportationService, IAdvertisementService, IServiceCommon
+     public class AdvertisementTransportationService // IAdvertisementTransportationService, IAdvertisementService, IServiceCommon
     {
-        ResponseBase<AdvertisementCommon[]> _response;
         private readonly IRepository<AdvertisementTransportation> _advertisementTransportationRepository;
         private readonly ITransportaionRepository _transportaionRepository;
         private readonly IAdvertisementCommonService _advertisementCommonService;
@@ -39,35 +38,15 @@ namespace MvcMain.Infrastructure.Services
            // registrationService = new RegistrationService();
         }
 
-        //Called for getting search result
-        public ResponseBase<AdvertisementCommon[]> GetAdvertisements(int startIndex, int count, Dictionary<string, string> userInput)
-        {
-            string errorCode = "AdvertisementTransportationService.GetAdvertisements";
-            BaseQueryAdTransportation baseQueryAdTransportation = new BaseQueryAdTransportation(userInput);
-            _response = new ResponseBase<AdvertisementCommon[]>();
-            //try
-            //{
-            //    AdvertisementTransportation[] advertisementTransportation =
-            //        _advertisementTransportationRepository.FindBy(baseQueryAdTransportation, startIndex, count).ToArray();//get attributes 
-            //    AdvertisementCommon[] advertisementCommons = getAdvertisementCommons(advertisementTransportation);
-            //    _advertisementCommonService.FillFirstImage(advertisementCommons);//get Images
-            //    _response.ResponseData = advertisementCommons;
-            //    _response.SetSuccessResponse();
-            //}
-            //catch (Exception ex)
-            //{
-            //    _response.ResponseData = null;
-            //    _response.SetFailureResponse(ex.Message, errorCode);
-            //}
-            return _response;
-        }
-
         public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
         {
-            
-            ResponseBase<AdvertisementTransportation> responseBase=new ResponseBase<AdvertisementTransportation>();
+
+            ResponseBase<AdvertisementTransportation> responseBase =
+                new ResponseBase<AdvertisementTransportation>
+                {
+                    ResponseData = _advertisementTransportationRepository.FindBy(adId)
+                };
             //TODO check for error
-            responseBase.ResponseData = _advertisementTransportationRepository.FindBy(adId);
             if (responseBase.ResponseData != null)
             {
                 _advertisementCommonService.FillAllImages(responseBase.ResponseData.AdvertisementCommon);

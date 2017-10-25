@@ -12,9 +12,6 @@ namespace MvcMain.Infrastructure.Services
     
     public class AdvertisementCommonService : IAdvertisementService ,IAdvertisementCommonService
     {
-        //TODO make _response method field
-        ResponseBase<AdvertisementCommon[]> _response;
-        ResponseBase _responseBase;
         private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly IImageRepository _imageRepository;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
@@ -39,26 +36,26 @@ namespace MvcMain.Infrastructure.Services
         public ResponseBase<AdvertisementCommon[]> GetAdvertisements(int startIndex, int count, Dictionary<string, string> userInput)
         {
             string errorCode = "AdvertisementCommonService.GetAdvertisements";
-            _response = new ResponseBase<AdvertisementCommon[]>();
+            ResponseBase<AdvertisementCommon[]> response = new ResponseBase<AdvertisementCommon[]>();
             try
             {
                 AdvertisementCommon[] advertisementCommons =
                     _advertisementCommonRepository.FindBy(userInput, startIndex, count).ToArray();//get attributes 
                 FillFirstImage(advertisementCommons);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
-                checkAndCorrectOnlyWithPicturesFilter(userInput, advertisementCommons);
+                checkAndCorrectOnlyWithPicturesFilter(response,userInput, advertisementCommons);
             }
             catch (Exception ex)
             {
-                _response.ResponseData = null;
-                _response.SetFailureResponse(ex.Message, errorCode);
+                response.ResponseData = null;
+                response.SetFailureResponse(ex.Message, errorCode);
             }
-            return _response;
+            return response;
         }
 
        
 
-        private void checkAndCorrectOnlyWithPicturesFilter(Dictionary<string, string> userInput, AdvertisementCommon[] advertisementCommons)
+        private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<AdvertisementCommon[]> response, Dictionary<string, string> userInput, AdvertisementCommon[] advertisementCommons)
         {
             List<AdvertisementCommon> adCommonList = new List<AdvertisementCommon>();
             if (userInput.ContainsKey("OnlyWithPictures") && userInput["OnlyWithPictures"] == "True") // OnlyWithPictures filter set
@@ -68,29 +65,26 @@ namespace MvcMain.Infrastructure.Services
                     if (advertisementCommon.AdvertisementImages[0] != null)
                         adCommonList.Add(advertisementCommon);
                 }
-                setResponse(adCommonList.ToArray(),advertisementCommons.Length);//set only with pictures ads
+                setResponse(response, adCommonList.ToArray(),advertisementCommons.Length);//set only with pictures ads
             }
             else // OnlyWithPictures filter NOT set
             {
-                setResponse(advertisementCommons, advertisementCommons.Length);//set all ads
+                setResponse(response, advertisementCommons, advertisementCommons.Length);//set all ads
             }
         }
 
 
-        private void setResponse(AdvertisementCommon[] advertisementCommons, int numberOfItemsRetrievedFromDatabase)
+        private void setResponse(ResponseBase<AdvertisementCommon[]> response, AdvertisementCommon[] advertisementCommons, int numberOfItemsRetrievedFromDatabase)
         {
             Dictionary<string, string> customDictionary =
                 new Dictionary<string, string> {{NumberOfItemsKey, numberOfItemsRetrievedFromDatabase.ToString()}};
-            _response.ResponseData = advertisementCommons;
+            response.ResponseData = advertisementCommons;
 
-            _response.SetSuccessResponse("OK");
-            _response.CustomDictionary = customDictionary;
+            response.SetSuccessResponse("OK");
+            response.CustomDictionary = customDictionary;
         }
 
-        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon(int startIndex, int count, Dictionary<string, string> userInput)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string userName, string password, bool userPassIsEncrypted)
         {
