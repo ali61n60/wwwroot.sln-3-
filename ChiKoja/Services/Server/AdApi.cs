@@ -1,10 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Json;
-using System.Net;
 using System.Threading.Tasks;
-using Android.Util;
 using ChiKoja.AdDetail;
 using ChiKoja.Repository;
 using ChiKoja.Repository.Filter;
@@ -12,7 +8,6 @@ using ChiKoja.Repository.Location;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Services;
-using Newtonsoft.Json;
 using ServiceLayer;
 using AdvertisementCommon = ModelStd.Advertisements.AdvertisementCommon;
 

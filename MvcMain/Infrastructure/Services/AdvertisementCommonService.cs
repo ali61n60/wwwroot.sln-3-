@@ -32,13 +32,13 @@ namespace MvcMain.Infrastructure.Services
         }
        
         //Main Method that get data from database
-        public ResponseBase<AdvertisementCommon[]> GetAdvertisements(int startIndex, int count, Dictionary<string, string> userInput)
+        public ResponseBase<IList<AdvertisementCommon>> GetAdvertisements(int startIndex, int count, Dictionary<string, string> userInput)
         {
             string errorCode = "AdvertisementCommonService.GetAdvertisements";
-            ResponseBase<AdvertisementCommon[]> response = new ResponseBase<AdvertisementCommon[]>();
+            ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
             try
             {
-                AdvertisementCommon[] advertisementCommons =
+                IList<AdvertisementCommon> advertisementCommons =
                     _advertisementCommonRepository.FindBy(userInput, startIndex, count).ToArray();//get attributes 
                 FillFirstImage(advertisementCommons);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
@@ -52,29 +52,28 @@ namespace MvcMain.Infrastructure.Services
             return response;
         }
 
-       private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<AdvertisementCommon[]> response, Dictionary<string, string> userInput, AdvertisementCommon[] advertisementCommons)
+       private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<IList<AdvertisementCommon>> response, Dictionary<string, string> userInput, IList<AdvertisementCommon> advertisementCommons)
         {
-            List<AdvertisementCommon> adCommonList = new List<AdvertisementCommon>();
             if (userInput.ContainsKey("OnlyWithPictures") && userInput["OnlyWithPictures"] == "True") // OnlyWithPictures filter set
             {
+                List<AdvertisementCommon> adCommonList = new List<AdvertisementCommon>();
                 foreach (AdvertisementCommon advertisementCommon in advertisementCommons)
                 {
                     if (advertisementCommon.AdvertisementImages[0] != null)
                         adCommonList.Add(advertisementCommon);
                 }
-                setResponse(response, adCommonList.ToArray(),advertisementCommons.Length);//set only with pictures ads
+                setResponse(response, adCommonList);//set only with pictures ads
             }
             else // OnlyWithPictures filter NOT set
             {
-                setResponse(response, advertisementCommons, advertisementCommons.Length);//set all ads
+                setResponse(response, advertisementCommons);//set all ads
             }
         }
-
-
-        private void setResponse(ResponseBase<AdvertisementCommon[]> response, AdvertisementCommon[] advertisementCommons, int numberOfItemsRetrievedFromDatabase)
+        
+        private void setResponse(ResponseBase<IList<AdvertisementCommon>> response, IList<AdvertisementCommon> advertisementCommons)
         {
             Dictionary<string, string> customDictionary =
-                new Dictionary<string, string> {{NumberOfItemsKey, numberOfItemsRetrievedFromDatabase.ToString()}};
+                new Dictionary<string, string> {{NumberOfItemsKey, advertisementCommons.Count.ToString()}};
             response.ResponseData = advertisementCommons;
 
             response.SetSuccessResponse("OK");
@@ -103,7 +102,7 @@ namespace MvcMain.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public void FillFirstImage(AdvertisementCommon[] advertisementCommons)
+        public void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons)
         {
             foreach (AdvertisementCommon advertisement in advertisementCommons)
             {

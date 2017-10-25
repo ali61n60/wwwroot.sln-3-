@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Services;
-using MvcMain.Infrastructure.IOC;
 using MvcMain.Infrastructure.Services;
-using Newtonsoft.Json.Linq;
 using RepositoryStd.Context.Helper;
-using StructureMap.TypeRules;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -32,12 +29,12 @@ namespace MvcMain.Controllers
         }
 
         //Called from android and home controller
-        public ResponseBase<AdvertisementCommon[]> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
+        public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
             int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
             int count = ParameterExtractor.ExtractCount(userInput);
             IAdvertisementService advertisementService =MyService.Inst.GetService<IAdvertisementService>();
-            ResponseBase<AdvertisementCommon[]> response = advertisementService.GetAdvertisements(startIndex, count, userInput);
+            ResponseBase<IList<AdvertisementCommon>> response = advertisementService.GetAdvertisements(startIndex, count, userInput);
             setRequestIndex(userInput, response);
             return response;
         }
@@ -49,7 +46,7 @@ namespace MvcMain.Controllers
         }
 
        
-        private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<AdvertisementCommon[]> response)
+        private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<IList<AdvertisementCommon>> response)
         {
             if (userInput.ContainsKey("RequestIndex"))
             {

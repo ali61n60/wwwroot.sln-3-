@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using ModelStd.Services;
-using RepositoryStd.QueryPattern.BaseQuery;
 
 
 namespace MvcMain.Infrastructure.Services
