@@ -64,6 +64,7 @@ namespace MvcMain
                     MyService.Inst.GetService<ICommonRepository>()));
 
             services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
+            services.AddTransient<IAdvertisementService, AdvertisementCommonService>();
 
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 

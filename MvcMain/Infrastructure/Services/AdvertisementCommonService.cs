@@ -18,8 +18,7 @@ namespace MvcMain.Infrastructure.Services
 
         private readonly string NumberOfItemsKey = "numberOfItems";
         
-        public AdvertisementCommonService
-            (IRepository<AdvertisementCommon> advertisementCommonRepository, IImageRepository imageRepository)
+        public AdvertisementCommonService(IRepository<AdvertisementCommon> advertisementCommonRepository, IImageRepository imageRepository)
         {
             _advertisementCommonRepository = advertisementCommonRepository;
             _imageRepository = imageRepository;
@@ -53,9 +52,7 @@ namespace MvcMain.Infrastructure.Services
             return response;
         }
 
-       
-
-        private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<AdvertisementCommon[]> response, Dictionary<string, string> userInput, AdvertisementCommon[] advertisementCommons)
+       private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<AdvertisementCommon[]> response, Dictionary<string, string> userInput, AdvertisementCommon[] advertisementCommons)
         {
             List<AdvertisementCommon> adCommonList = new List<AdvertisementCommon>();
             if (userInput.ContainsKey("OnlyWithPictures") && userInput["OnlyWithPictures"] == "True") // OnlyWithPictures filter set

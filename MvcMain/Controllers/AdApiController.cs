@@ -36,9 +36,8 @@ namespace MvcMain.Controllers
         {
             int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
             int count = ParameterExtractor.ExtractCount(userInput);
-            AdvertisementCommonService adCommonService =MyService.Inst.GetService<AdvertisementCommonService>();
-            
-            ResponseBase<AdvertisementCommon[]> response = adCommonService.GetAdvertisements(startIndex, count, userInput);
+            IAdvertisementService advertisementService =MyService.Inst.GetService<IAdvertisementService>();
+            ResponseBase<AdvertisementCommon[]> response = advertisementService.GetAdvertisements(startIndex, count, userInput);
             setRequestIndex(userInput, response);
             return response;
         }
