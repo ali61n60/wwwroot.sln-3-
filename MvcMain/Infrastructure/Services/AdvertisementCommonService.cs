@@ -28,8 +28,8 @@ namespace MvcMain.Infrastructure.Services
 
         public AdvertisementCommonService()
         {
-            _advertisementCommonRepository= AppServiceProvider.Instance.GetService<IRepository<AdvertisementCommon>>();
-            _imageRepository = AppServiceProvider.Instance.GetService<IImageRepository>();
+            _advertisementCommonRepository= MyService.Inst.GetService<IRepository<AdvertisementCommon>>();
+            _imageRepository = MyService.Inst.GetService<IImageRepository>();
         }
        
         //Main Method that get data from database

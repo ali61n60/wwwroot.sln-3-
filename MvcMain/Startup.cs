@@ -61,7 +61,7 @@ namespace MvcMain
             services.AddTransient<IRepository<AdvertisementTransportation>>(
                 provider => new AdvertisementTransportationRepository(
                     _advertisementDataClass.ConnectionString,
-                    AppServiceProvider.Instance.GetService<ICommonRepository>()));
+                    MyService.Inst.GetService<ICommonRepository>()));
 
             services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
 
@@ -128,13 +128,13 @@ namespace MvcMain
             });
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
-            AppServiceProvider.Instance = app.ApplicationServices;
+            MyService.Inst = app.ApplicationServices;
             
         }
     }
 
-    public static class AppServiceProvider
+    public static class MyService
     {
-        public static IServiceProvider Instance { get; set; }
+        public static IServiceProvider Inst { get; set; }
     }
 }

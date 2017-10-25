@@ -16,7 +16,7 @@ namespace MvcMain.Infrastructure.IOC
         private static void InitializeDictionary()
         {
             _serviceDictionary.Add(0, new AdvertisementCommonService());
-            //_serviceDictionary.Add(100, new AdvertisementTransportationService());
+           
         }
         public static IAdvertisementService GetAdvertisementService(int categoryId)
         {

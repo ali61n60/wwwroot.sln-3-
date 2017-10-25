@@ -17,7 +17,7 @@ namespace MvcMain.Controllers
 
         public AdTransportationApiController()
         {
-            _transportaionRepository =AppServiceProvider.Instance.GetService<ITransportaionRepository>();
+            _transportaionRepository =MyService.Inst.GetService<ITransportaionRepository>();
            
         }
 

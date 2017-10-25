@@ -8,6 +8,7 @@ using MvcMain.Infrastructure.Services;
 using Newtonsoft.Json.Linq;
 using RepositoryStd.Context.Helper;
 using StructureMap.TypeRules;
+using Microsoft.Extensions.DependencyInjection;
 
 
 namespace MvcMain.Controllers
@@ -35,10 +36,9 @@ namespace MvcMain.Controllers
         {
             int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
             int count = ParameterExtractor.ExtractCount(userInput);
-            int selectedCategoryId = ParameterExtractor.ExtractCatgoryId(userInput);
-            //Polymorphic dispatch of service call
-            IAdvertisementService advertisementService = AdServiceDictionary.GetAdvertisementService(selectedCategoryId);
-            ResponseBase<AdvertisementCommon[]> response = advertisementService.GetAdvertisements(startIndex, count, userInput);
+            AdvertisementCommonService adCommonService =MyService.Inst.GetService<AdvertisementCommonService>();
+            
+            ResponseBase<AdvertisementCommon[]> response = adCommonService.GetAdvertisements(startIndex, count, userInput);
             setRequestIndex(userInput, response);
             return response;
         }

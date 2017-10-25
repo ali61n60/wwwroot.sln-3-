@@ -29,11 +29,9 @@ namespace MvcMain.Infrastructure.Services
         private IImageRepository im;
         public AdvertisementTransportationService()
         {
-            _advertisementTransportationRepository =
-                AppServiceProvider.Instance.GetService<IRepository<AdvertisementTransportation>>();
-
-            _advertisementCommonService = AppServiceProvider.Instance.GetService<IAdvertisementCommonService>();
-            _transportaionRepository = AppServiceProvider.Instance.GetService<ITransportaionRepository>();
+            _advertisementTransportationRepository =MyService.Inst.GetService<IRepository<AdvertisementTransportation>>();
+            _advertisementCommonService = MyService.Inst.GetService<IAdvertisementCommonService>();
+            _transportaionRepository = MyService.Inst.GetService<ITransportaionRepository>();
            
            // registrationService = new RegistrationService();
         }
