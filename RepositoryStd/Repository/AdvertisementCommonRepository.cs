@@ -17,7 +17,7 @@ using RepositoryStd.QueryPattern;
 
 namespace RepositoryStd.Repository
 {
-    public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>
+    public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>,ICommonRepository
     {
         private readonly string _conectionString;
         private readonly ICategoryRepository _categoryRepository;

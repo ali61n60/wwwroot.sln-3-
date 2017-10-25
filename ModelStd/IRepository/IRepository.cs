@@ -25,6 +25,6 @@ namespace ModelStd.IRepository
 
         IEnumerable<T> FindAll();//to Be Studied
         
-        void IncrementNumberOfVisit(Guid adGuid);
+        
     }
 }

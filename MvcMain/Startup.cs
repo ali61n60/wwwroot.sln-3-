@@ -56,9 +56,12 @@ namespace MvcMain
             
 
             services.AddTransient<IRepository<AdvertisementCommon>>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
-            
-            services.AddTransient<IRepository<AdvertisementTransportation>>(provider => new AdvertisementTransportationRepository(
-                _advertisementDataClass.ConnectionString ));
+            services.AddTransient<ICommonRepository>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
+
+            services.AddTransient<IRepository<AdvertisementTransportation>>(
+                provider => new AdvertisementTransportationRepository(
+                    _advertisementDataClass.ConnectionString,
+                    (services as IServiceProvider).GetService<ICommonRepository>()));
 
             services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
 

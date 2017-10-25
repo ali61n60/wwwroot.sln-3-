@@ -17,19 +17,16 @@ namespace RepositoryStd.Repository
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>
     {
-        private readonly AdvertisementCommonRepository advertisementCommonRepository;
+       // private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
+        private readonly ICommonRepository _commonRepository;
+
         private readonly string _conectionString;
 
-        List<AdvertisementTransportation> _searchResultItems;
-        SqlDataReader _dataReader;
-        AdvertisementTransportation _tempAdvertisementTransportation;
-        RepositoryResponse _responseBase;
-
         
-        public AdvertisementTransportationRepository(string connectionString)
+        public AdvertisementTransportationRepository(string connectionString, ICommonRepository commonRepository)
         {
             _conectionString = connectionString;
-            advertisementCommonRepository=new AdvertisementCommonRepository(connectionString,null);
+           _commonRepository=commonRepository;
         }
 
         public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string,string> inputDictionary)
@@ -41,7 +38,7 @@ namespace RepositoryStd.Repository
         //Called from service layer
         public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary, int startIndex, int count)
         {
-            _searchResultItems = new List<AdvertisementTransportation>();
+            List<AdvertisementTransportation> searchResultItems = new List<AdvertisementTransportation>();
 
            // string commandText = getSelectCommandText(query);
 
@@ -56,7 +53,7 @@ namespace RepositoryStd.Repository
             //        FillSearchResultItemsFromDatabase(connection, command);
             //    }
             //}
-            return _searchResultItems;
+            return searchResultItems;
         }
        
        
@@ -71,7 +68,7 @@ namespace RepositoryStd.Repository
             Guid attributeId = Guid.NewGuid();//create a new attributeId to be used in AdAttributeTransportation
             command.Parameters.Add("@attributeId", SqlDbType.UniqueIdentifier).Value = attributeId;
             fillAddCommandParameters(command, entity);
-            advertisementCommonRepository.AddReturnParameterToCommand(command);
+          //  _advertisementCommonRepository.AddReturnParameterToCommand(command);
             try
             {
                 connection.Open();
@@ -89,7 +86,7 @@ namespace RepositoryStd.Repository
 
         private void fillAddCommandParameters(SqlCommand command, AdvertisementTransportation entity)
         {
-            advertisementCommonRepository.FillSaveCommandParameters(command, entity.AdvertisementCommon);
+           // _advertisementCommonRepository.FillSaveCommandParameters(command, entity.AdvertisementCommon);
             fillCommandByCustomAttribute(command, entity);
         }
 
@@ -113,7 +110,7 @@ namespace RepositoryStd.Repository
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = entity.AdvertisementCommon.AdvertisementId;
-                    advertisementCommonRepository.AddReturnParameterToCommand(command);
+                  //  _advertisementCommonRepository.AddReturnParameterToCommand(command);
                     try
                     {
                         connection.Open();
@@ -139,7 +136,7 @@ namespace RepositoryStd.Repository
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     fillAddCommandParameters(command, entity);
-                    advertisementCommonRepository.AddReturnParameterToCommand(command);
+                    //_advertisementCommonRepository.AddReturnParameterToCommand(command);
                     try
                     {
                         connection.Open();
@@ -159,9 +156,9 @@ namespace RepositoryStd.Repository
 
         public IEnumerable<AdvertisementTransportation> FindAll()
         {
-            _searchResultItems = new List<AdvertisementTransportation>();
+            List<AdvertisementTransportation>  searchResultItems = new List<AdvertisementTransportation>();
 
-
+            
             RepositoryResponse responseBase;
 
             using (SqlConnection connection = new SqlConnection(_conectionString))
@@ -172,16 +169,16 @@ namespace RepositoryStd.Repository
                     try
                     {
                         connection.Open();
-                        _dataReader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                        while (_dataReader.Read())
+                        SqlDataReader dataReader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                        while (dataReader.Read())
                         {
-                            _tempAdvertisementTransportation = new AdvertisementTransportation();
-                            responseBase = fillAdvertisementTransportationFromDataReader(_tempAdvertisementTransportation, _dataReader);
+                            AdvertisementTransportation tempAdvertisementTransportation = new AdvertisementTransportation();
+                            responseBase = fillAdvertisementTransportationFromDataReader(tempAdvertisementTransportation, dataReader);
                             if (!responseBase.Success)
                             {
                                 throw new Exception(responseBase.Message);
                             }
-                            _searchResultItems.Add(_tempAdvertisementTransportation);
+                            searchResultItems.Add(tempAdvertisementTransportation);
                         }
                     }
                     catch (Exception)
@@ -191,7 +188,7 @@ namespace RepositoryStd.Repository
                     
                 }
             }
-            return _searchResultItems;
+            return searchResultItems;
         }
 
         /// <summary>
@@ -228,7 +225,7 @@ namespace RepositoryStd.Repository
         private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisements advertisements, AppIdentityDbContext appIdentityDbContext)
         {
             adTrans.AdvertisementCommon =
-                advertisementCommonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements, appIdentityDbContext);
+                _commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements, appIdentityDbContext);
             adTrans.BodyColor = advertisements.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisements.AdAttributeTransportation.InternalColor;
             adTrans.SetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus);
@@ -252,7 +249,7 @@ namespace RepositoryStd.Repository
 
         public void IncrementNumberOfVisit(Guid adGuid)
         {
-            advertisementCommonRepository.IncrementNumberOfVisit(adGuid);
+            _commonRepository.IncrementNumberOfVisit(adGuid);
         }
 
         private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,
