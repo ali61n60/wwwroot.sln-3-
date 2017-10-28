@@ -319,16 +319,20 @@ namespace RepositoryStd.Repository
         public async Task IncrementNumberOfVisit(Guid adGuid)
         {
             //TODO use EF instead of ADO.Net
-            using (SqlConnection connection = new SqlConnection(_conectionString))
-            {
-                using (SqlCommand command = new SqlCommand("sp_increment_number_of_visit", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@adGuid", SqlDbType.UniqueIdentifier).Value = adGuid;
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-            }
+            AdDbContext adDbContext=new AdDbContext();
+            adDbContext.Advertisements.FirstOrDefault(advertisements => advertisements.AdId == adGuid)
+                .AdNumberOfVisited++;
+            adDbContext.SaveChanges();
+            //using (SqlConnection connection = new SqlConnection(_conectionString))
+            //{
+            //    using (SqlCommand command = new SqlCommand("sp_increment_number_of_visit", connection))
+            //    {
+            //        command.CommandType = CommandType.StoredProcedure;
+            //        command.Parameters.Add("@adGuid", SqlDbType.UniqueIdentifier).Value = adGuid;
+            //        connection.Open();
+            //        command.ExecuteNonQuery();
+            //    }
+            //}
         }
 
 
