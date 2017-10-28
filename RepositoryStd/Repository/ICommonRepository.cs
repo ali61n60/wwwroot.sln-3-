@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 using RepositoryStd.Context.AD;
@@ -16,6 +17,6 @@ namespace RepositoryStd.Repository
         AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Advertisements advertisement,
             AppIdentityDbContext identityDbContext);
 
-        void IncrementNumberOfVisit(Guid adGuid);
+        Task IncrementNumberOfVisit(Guid adGuid);
     }
 }

@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using Microsoft.Extensions.DependencyInjection;
+using RepositoryStd.Repository;
 
 
 namespace MvcMain.Infrastructure.Services
@@ -12,15 +14,17 @@ namespace MvcMain.Infrastructure.Services
     
     public class AdvertisementCommonService : IAdvertisementService ,IAdvertisementCommonService
     {
+        private readonly ICommonRepository _commonRepository;
         private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly IImageRepository _imageRepository;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
 
         private readonly string NumberOfItemsKey = "numberOfItems";
         
-        public AdvertisementCommonService(IRepository<AdvertisementCommon> advertisementCommonRepository, IImageRepository imageRepository)
+        public AdvertisementCommonService(IRepository<AdvertisementCommon> advertisementCommonRepository,ICommonRepository commonRepository, IImageRepository imageRepository)
         {
             _advertisementCommonRepository = advertisementCommonRepository;
+            _commonRepository = commonRepository;
             _imageRepository = imageRepository;
           //  registrationService = new RegistrationService();
         }
@@ -28,6 +32,7 @@ namespace MvcMain.Infrastructure.Services
         public AdvertisementCommonService()
         {
             _advertisementCommonRepository= MyService.Inst.GetService<IRepository<AdvertisementCommon>>();
+            _commonRepository = MyService.Inst.GetService<ICommonRepository>();
             _imageRepository = MyService.Inst.GetService<IImageRepository>();
         }
        
@@ -97,9 +102,20 @@ namespace MvcMain.Infrastructure.Services
             throw new NotImplementedException();
         }
 
-        public ResponseBase IncrementNumberOfVisit(Guid adGuid)
+        public async Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid)
         {
-            throw new NotImplementedException();
+            string errorCode = "AdvertisementCommonService.IncrementNumberOfVisit";
+            ResponseBase response=new ResponseBase();
+            try
+            {
+                await _commonRepository.IncrementNumberOfVisit(adGuid);
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message,errorCode);
+            }
+            return response;
         }
 
         public void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons)

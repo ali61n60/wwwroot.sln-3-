@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
@@ -315,8 +316,9 @@ namespace RepositoryStd.Repository
             return tempAdvertisementCommon;
         }
 
-        public void IncrementNumberOfVisit(Guid adGuid)
+        public async Task IncrementNumberOfVisit(Guid adGuid)
         {
+            //TODO use EF instead of ADO.Net
             using (SqlConnection connection = new SqlConnection(_conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_increment_number_of_visit", connection))

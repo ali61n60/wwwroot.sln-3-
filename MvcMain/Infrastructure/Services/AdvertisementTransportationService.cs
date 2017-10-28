@@ -45,6 +45,7 @@ namespace MvcMain.Infrastructure.Services
             //TODO check for error
             if (responseBase.ResponseData != null)
             {
+                _advertisementCommonService.IncrementNumberOfVisit(adId);
                 _advertisementCommonService.FillAllImages(responseBase.ResponseData.AdvertisementCommon);
             }
             responseBase.SetSuccessResponse();

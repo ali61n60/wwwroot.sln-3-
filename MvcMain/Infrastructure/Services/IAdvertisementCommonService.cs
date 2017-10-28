@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
@@ -17,7 +18,7 @@ namespace MvcMain.Infrastructure.Services
         //Done
         ResponseBase ExtendAdvertisement(AdvertisementCommon advertisement);
 
-        ResponseBase IncrementNumberOfVisit(Guid adGuid);
+        Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid);
         
         
         void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons);//Done

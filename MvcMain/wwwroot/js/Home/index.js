@@ -6,24 +6,20 @@ var $previousRequestIndex = -1;
 var $isServerCalled = false;
 var $numberOfStartServerCallNotification = 0;
 
-
 $(document).ready(function () {
     $("#getAdFromServer").on("click",
         function (event) {
             event.preventDefault();
             getAdItemsFromServer();
-        }); //end click
-
-    
-});//end ready
-
-
+        }); //click
+});//ready
 
 //CORE
 function getAdItemsFromServer() {
     if ($isServerCalled && ($previousRequestIndex === $requestIndex)) {//a call is sent but no answer yet
         return;
-    } else {
+    }//if
+    else {
         $previousRequestIndex = $requestIndex;
         $isServerCalled = true;
     }//else
@@ -46,7 +42,7 @@ function getAdItemsFromServer() {
         contentType: 'application/json', // content type sent to server
         success: OnSuccessGetItemsFromServer,//On Successfull service call
         error: OnErrorGetItemsFromServer// When Service call fails
-    });//end .ajax
+    });//.ajax
 }
 
 function OnSuccessGetItemsFromServer(msg) {
@@ -111,8 +107,8 @@ $(document).ready(function () {
                 value: category.categoryId,
                 text: category.categoryName
             }));
-        }//end if
-    });//end forEach
+        }//if
+    });//forEach
 
 
     $("#category0").change(function () {
@@ -127,10 +123,10 @@ $(document).ready(function () {
                     text: category.categoryName
                 }));
             }
-        });//end forEach
+        });//forEach
         $("#categorySelector").append($select);
         //TODO show second select  and populate it with data from server
-    });//end change
+    });//change
 
 
-});//end ready
+});//ready
