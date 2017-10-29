@@ -1,4 +1,4 @@
-﻿namespace RepositoryStd
+﻿ namespace RepositoryStd
 {
     public class AdvertisementDataClass
     {
