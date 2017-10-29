@@ -40,17 +40,13 @@ namespace RepositoryStd.Repository
             List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
             ////TODO research for singleton dbContext
             AdDbContext adDbContext = new AdDbContext();
+            AppIdentityDbContext appIdentityDbContext = new AppIdentityDbContext();
 
             IQueryable<Advertisements> list = GetQueryableList(queryParameters, adDbContext);
-
-
-            //TODO include ad owner information into each ad (UserId,Email And PhoneNumber)
-            AppIdentityDbContext appIdentityDbContext=new AppIdentityDbContext();
             
             //uegentOnly
             
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
-
             foreach (Advertisements advertisement in list)
             {
                 _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement,appIdentityDbContext));
@@ -77,10 +73,8 @@ namespace RepositoryStd.Repository
             return list;
         }
 
-
         private IQueryable<Advertisements> orderByClause(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            //TODO act based on user input
             OrderBy orderByUserInput = ParameterExtractor.ExtractOrderBy(queryParameters);
             switch (orderByUserInput)
             {
@@ -180,6 +174,7 @@ namespace RepositoryStd.Repository
             throw new NotImplementedException();
         }
 
+        //TODO use EF
         public void Save(AdvertisementCommon entity)
         {
             using (SqlConnection connection = new SqlConnection(_conectionString))
@@ -320,19 +315,8 @@ namespace RepositoryStd.Repository
         {
             //TODO use EF instead of ADO.Net
             AdDbContext adDbContext=new AdDbContext();
-            adDbContext.Advertisements.FirstOrDefault(advertisements => advertisements.AdId == adGuid)
-                .AdNumberOfVisited++;
+            adDbContext.Advertisements.FirstOrDefault(advertisements => advertisements.AdId == adGuid).AdNumberOfVisited++;
             adDbContext.SaveChanges();
-            //using (SqlConnection connection = new SqlConnection(_conectionString))
-            //{
-            //    using (SqlCommand command = new SqlCommand("sp_increment_number_of_visit", connection))
-            //    {
-            //        command.CommandType = CommandType.StoredProcedure;
-            //        command.Parameters.Add("@adGuid", SqlDbType.UniqueIdentifier).Value = adGuid;
-            //        connection.Open();
-            //        command.ExecuteNonQuery();
-            //    }
-            //}
         }
 
 

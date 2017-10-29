@@ -11,11 +11,9 @@ namespace RepositoryStd.Repository
 {
     public interface ICommonRepository
     {
-        IQueryable<Advertisements> GetQueryableList(Dictionary<string, string> queryParameters,
-            AdDbContext adDbContext);
+        IQueryable<Advertisements> GetQueryableList(Dictionary<string, string> queryParameters,AdDbContext adDbContext);
 
-        AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Advertisements advertisement,
-            AppIdentityDbContext identityDbContext);
+        AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Advertisements advertisement,AppIdentityDbContext identityDbContext);
 
         Task IncrementNumberOfVisit(Guid adGuid);
     }

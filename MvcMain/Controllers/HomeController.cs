@@ -38,5 +38,10 @@ namespace MvcMain.Controllers
                     return View("AdDetail/AdDetailDefault", adDetailInfo);
             }
         }
+
+        public async Task<IActionResult> NewAd(AdDetailInfo adDetailInfo)
+        {
+            return View();
+        }
     }
 }

@@ -33,23 +33,58 @@ namespace MvcMain.Infrastructure.Services
            
            // registrationService = new RegistrationService();
         }
-
+       
         public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
         {
+            string errorCode = "AdvertisementTransportationService.GetAdDetail";
 
-            ResponseBase<AdvertisementTransportation> responseBase =
-                new ResponseBase<AdvertisementTransportation>
-                {
-                    ResponseData = _advertisementTransportationRepository.FindBy(adId)
-                };
-            //TODO check for error
-            if (responseBase.ResponseData != null)
+            ResponseBase<AdvertisementTransportation> responseBase = new ResponseBase<AdvertisementTransportation>();
+            try
             {
-                _advertisementCommonService.IncrementNumberOfVisit(adId);
-                _advertisementCommonService.FillAllImages(responseBase.ResponseData.AdvertisementCommon);
+                responseBase.ResponseData = _advertisementTransportationRepository.FindBy(adId);
+                if (responseBase.ResponseData != null)
+                {
+                    _advertisementCommonService.IncrementNumberOfVisit(adId);
+                    _advertisementCommonService.FillAllImages(responseBase.ResponseData.AdvertisementCommon);
+                    responseBase.SetSuccessResponse();
+                }
+                else
+                {
+                    responseBase.SetFailureResponse("repository returned NULL",errorCode);
+                }
             }
-            responseBase.SetSuccessResponse();
+            catch (Exception ex)
+            {
+                responseBase.SetFailureResponse(ex.Message,errorCode);
+            }
+            
             return responseBase;
+        }
+
+        public ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation)
+        {
+            //string errorCode = "AdvertisementTransportationService.AddNewAdvertisementTransportation";
+            //ResponseBase response = new ResponseBase();
+
+            //if (userPassIsEncrypted)
+            //{
+            //    userName = CryptoService.Decrypt(userName);
+            //    password = CryptoService.Decrypt(password);
+            //}
+            //ResponseBase userPassResponseBase = registrationService.ValidateUser(userName, password);
+            //if (!userPassResponseBase.Success)//error in username/password
+            //{
+            //    response.SetFailureResponse(userPassResponseBase.Message, errorCode + ", " + userPassResponseBase.ErrorCode);
+            //    return response;
+            //}
+            //if (!InputParametersOk(advertisementTransportation))
+            //{
+            //    response.SetFailureResponse("Input Parameters Error", errorCode);
+            //}
+            //Guid userGuid = registrationService.GetUserId(userName);
+            //return AddNewAdvertisementTransportation(advertisementTransportation, userGuid);
+            return null;
+
         }
 
         private AdvertisementCommon[] getAdvertisementCommons(AdvertisementTransportation[] advertisementTransportations)
@@ -87,56 +122,10 @@ namespace MvcMain.Infrastructure.Services
         ////get custom and common attributes
         ////Refactor this method
 
-        //public ResponseBase<AdvertisementTransportation> GetAdvertisementTransportation(Guid AdvertisementGuid)
-        //{
-        //    string errorCode = "AdvertisementTransportationService.GetAdvertisementsTransportation";
-        //    ResponseBase<AdvertisementTransportation> response = new ResponseBase<AdvertisementTransportation>();
-
-        //    try
-        //    {
-        //        response.ResponseData =
-        //            _advertisementTransportationRepository.FindBy(AdvertisementGuid);//get Ad attributes
-        //        _advertisementCommonService.FillAllImages(response.ResponseData.AdvertisementCommon);
-        //        _advertisementTransportationRepository.IncrementNumberOfVisit(AdvertisementGuid);
-        //        response.Success = true;
-        //        response.Message = "OK";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.SetFailureResponse(ex.Message, errorCode);
-        //        response.Success = false;
-        //        response.Message = ex.Message;
-        //    }
-        //    return response;
-        //}
+       
 
 
-        //public ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation,
-        //                                                         string userName, string password, bool userPassIsEncrypted)
-        //{
-        //    string errorCode = "AdvertisementTransportationService.AddNewAdvertisementTransportation";
-        //    ResponseBase response = new ResponseBase();
-
-        //    if (userPassIsEncrypted)
-        //    {
-        //        userName = CryptoService.Decrypt(userName);
-        //        password = CryptoService.Decrypt(password);
-        //    }
-        //    ResponseBase userPassResponseBase = registrationService.ValidateUser(userName, password);
-        //    if (!userPassResponseBase.Success)//error in username/password
-        //    {
-        //        response.SetFailureResponse(userPassResponseBase.Message, errorCode + ", " + userPassResponseBase.ErrorCode);
-        //        return response;
-        //    }
-        //    if (!InputParametersOk(advertisementTransportation))
-        //    {
-        //        response.SetFailureResponse("Input Parameters Error", errorCode);
-        //    }
-        //    Guid userGuid = registrationService.GetUserId(userName);
-        //    return AddNewAdvertisementTransportation(advertisementTransportation, userGuid);
-
-
-        //}
+       
 
         //private bool InputParametersOk(AdvertisementTransportation advertisementTransportation)
         //{

@@ -14,7 +14,7 @@
     <script>
         $(document).ready(function () {
             //focus on upload Image item
-            $("#<%=AdCommonControl.currentImageWebUserControl.Controls[1].ClientID%>").focus(); 
+            <%--$("#<%=AdCommonControl.currentImageWebUserControl.Controls[1].ClientID%>").focus(); --%>
         });//end ready
     </script>
 
