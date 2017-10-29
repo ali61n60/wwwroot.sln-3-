@@ -127,6 +127,4 @@ $(document).ready(function () {
         $("#categorySelector").append($select);
         //TODO show second select  and populate it with data from server
     });//change
-
-
 });//ready

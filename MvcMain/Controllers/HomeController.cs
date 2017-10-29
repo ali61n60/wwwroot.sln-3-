@@ -16,7 +16,7 @@ namespace MvcMain.Controllers
 {
     public class HomeController : Controller
     {
-        //[Authorize]
+        
         public async Task<IActionResult> Index()
         {
             return View();
@@ -39,6 +39,7 @@ namespace MvcMain.Controllers
             }
         }
 
+        [Authorize]
         public async Task<IActionResult> NewAd(AdDetailInfo adDetailInfo)
         {
             return View();
