@@ -44,5 +44,11 @@ namespace MvcMain.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public IActionResult GetNewAdPartialView()
+        {
+            return PartialView("Components/NewAdTransformation/Default");
+        }
     }
 }

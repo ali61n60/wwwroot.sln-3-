@@ -33,20 +33,50 @@
         <div class="row">
             @await Component.InvokeAsync("CategorySelectionNewAd")
         </div>
-        <br/>
-        <div class="row">
-
-            
-
-            </div>
-            
-        </div>
-   
-   
-    <div id="adPlaceHolder" class="row">
-
     </div>
-    
+    <br />
+
+    <div class="row form-group">
+        <div class="col-sm-2 text-right"><label>عنوان</label></div>
+        <div class="col-sm-10"><input class="form-control" placeholder="عنوان آگهی را وارد کنید" /></div>
+    </div>
+
+    <div id="NewAdPlaceHolder" class="row"></div>
+    <br />
+
+    <div class="row form-group">
+        <div class="col-sm-2 text-right"><label>توضیحات</label></div>
+        <div class="col-sm-10"><input class="form-control" placeholder="توضیحات" /></div>
+    </div>
+
+
+
+
+    @*<uc1:ImageWebUserControl runat="server" ID="ImageWebUserControl1" />
+        <br />
+
+        <div class="row">
+            <div class="col-sm-12">
+                <asp:Label ID="Label7" runat="server" Text="AdPrivilageId" Font-Size="Large"></asp:Label>
+                <asp:TextBox ID="TextBoxAdPrivilageId" CssClass="text-right" runat="server" placeholder="1" Font-Size="X-Large"></asp:TextBox>
+            </div>
+            <div class="col-sm-12">
+                <asp:Button ID="ButtonSubmitAd" CssClass="btn btn-success btn-lg btn-block" runat="server" Text="ارسال آگهی" OnClick="ButtonSubmitAd_Click" />
+            </div>
+            <div class="col-sm-12">
+                <br />
+                <br />
+                <asp:Label ID="LabelSendResult" runat="server" Text=""></asp:Label>
+            </div>
+        </div>*@
+
+
+
+
+
+
+
+
 
 }
 
@@ -56,5 +86,5 @@
 }
 
 @section scripts{
-
+    <script src="~/js/Home/newAd.js"></script>
 }
