@@ -2,7 +2,6 @@
 
 
 <div class="well">
-
     <div class="row">
         <div class="col-sm-2 col-sm-push-10">
             <label>برند</label>
@@ -91,12 +90,12 @@
             </select>
         </div>
     </div>
-    <br />
+    <br/>
     <div class="row">
         <div class="col-sm-2 col-sm-push-10">
-            <input type="radio" name="newUsed" value="used" checked="checked">کارکرده<br>
-            <input type="radio" name="newUsed" value="draft">حواله<br>
-            <input type="radio" name="newUsed" value="new">صفر <br/>
+            <input type="radio" name="newUsed" value="used" checked="checked"/>کارکرده<br/>
+            <input type="radio" name="newUsed" value="draft"/>حواله<br/>
+            <input type="radio" name="newUsed" value="new"/>صفر <br/>
         </div>
         <div class="col-sm-4 col-sm-push-4">
             <input class="form-control" placeholder="کارکرد بر حسب کیلومتر" />
@@ -105,47 +104,41 @@
             <label>گیربکس</label>
         </div>
         <div class="col-sm-4 col-sm-pull-8 col-sm-push-0 text-right">
-            <input type="radio" name="gearbox" value="manual" checked="checked">دنده ای<br>
-            <input type="radio" name="gearbox" value="automatic">اتوماتیک<br>
+            <input type="radio" name="gearbox" value="manual" checked="checked" />دنده ای<br/>
+            <input type="radio" name="gearbox" value="automatic"/>اتوماتیک
         </div>
     </div>
-    <br />
+    <br/>
     <div class="well">
         <div class="row">
 
             <div class="col-sm-2 col-sm-push-10">
-                <asp:RadioButton ID="RadioButtonCash" runat="server" Text="نقد" GroupName="Payment"
-                                 OnCheckedChanged="RadioButtonInsatllment_CheckedChanged" Checked="True" AutoPostBack="True" />
-                <br />
-                <br />
-                <asp:RadioButton ID="RadioButtonInsatllment" runat="server" Text="قسطی" GroupName="Payment"
-                                 OnCheckedChanged="RadioButtonInsatllment_CheckedChanged" AutoPostBack="True" />
+                <input type="radio" name="payment" value="cash" checked="checked">نقد<br/><br/>
+                <input type="radio" name="payment" value="insatllment">قسطی<br/>
             </div>
             <div class="col-sm-4 col-sm-push-4">
-                <asp:TextBox ID="TextBoxPriceCash" runat="server" placeholder="قیمت نقدی" Width="100%"></asp:TextBox>
-                <br />
-                <br />
-                <asp:TextBox ID="TextBoxTotalInstallments" runat="server" placeholder="تعداد اقساط" Enabled="False" Width="100%"></asp:TextBox>
-                <br />
-                <br />
-                <asp:TextBox ID="TextBoxDistanceBetweenPerPayment" runat="server" placeholder="فاصله بین اقساط بر حسب ماه" Enabled="False" Width="100%"></asp:TextBox>
-                <br />
-                <br />
-                <asp:TextBox ID="TextBoxPayPerInstallment" runat="server" placeholder="مبلغ هر قسط" Enabled="False" Width="100%"></asp:TextBox>
+                <input id="priceCash" class="form-control" placeholder="قیمت نقدی" />
+                
+                <br/>
+                <br/>
+                <input id="numberOfInstallments" class="form-control" placeholder="تعداد اقساط" disabled="disabled" />
+                <br/>
+                <br/>
+                <input id="distanceBetweenPerPayment" class="form-control" placeholder="فاصله بین اقساط بر حسب ماه" disabled="disabled" />
+                <br/>
+                <br/>
+                <input id="payPerInstallment" class="form-control" placeholder="مبلغ هر قسط" disabled="disabled" />
             </div>
             <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-                <asp:Label ID="Label6" runat="server" Text="نوع پلاک"></asp:Label>
+                <label>نوع پلاک</label>
             </div>
             <div class="col-sm-4 col-sm-pull-8 col-sm-push-0 text-right">
-                <asp:RadioButton ID="RadioButtonNationalPlate" runat="server" Text="پلاک ملی" Checked="True" GroupName="Plate" />
-                <br />
-                <asp:RadioButton ID="RadioButtonFreeRegionPlate" runat="server" Text="منطقه آزاد" GroupName="Plate" />
-                <br />
-                <asp:RadioButton ID="RadioButtonTemporaryPlate" runat="server" Text="گذر موقت" GroupName="Plate" />
+                <input type="radio" name="plate" value="nationalPlate" checked="checked" />پلاک ملی<br/>
+                <input type="radio" name="plate" value="freeRegionPlate" />منطقه آزاد<br />
+                <input type="radio" name="plate" value="temporaryPlate"/>گذر موقت
             </div>
         </div>
         <br />
-
     </div>
     <br />
 
