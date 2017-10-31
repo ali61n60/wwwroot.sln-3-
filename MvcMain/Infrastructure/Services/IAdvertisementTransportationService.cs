@@ -1,4 +1,6 @@
-﻿using ModelStd.Services;
+﻿using System;
+using ModelStd.Advertisements;
+using ModelStd.Services;
 
 
 namespace MvcMain.Infrastructure.Services
@@ -7,11 +9,7 @@ namespace MvcMain.Infrastructure.Services
     public interface IAdvertisementTransportationService
     {
       //  ResponseBase<Vehicle[]> GetAllVehicles();
-
-       
-       // ResponseBase<AdvertisementTransportation> GetAdvertisementTransportation(Guid AdvertisementGuid); 
-
-       
+      
       //  ResponseBase AddNewAdvertisementTransportation(
        //     AdvertisementTransportation advertisementTransportation,string userName,string password,bool userPassIsEncrypted);
 
@@ -26,5 +24,6 @@ namespace MvcMain.Infrastructure.Services
 
         
         ResponseBase<int> GetServerDataVersion();
+        ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId);
     }
 }

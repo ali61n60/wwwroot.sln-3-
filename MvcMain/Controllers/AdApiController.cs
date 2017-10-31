@@ -21,14 +21,9 @@ namespace MvcMain.Controllers
         private readonly ICommonRepository _commonRepository;
         private readonly IImageRepository _imageRepository;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
-        private readonly string NumberOfItemsKey = "numberOfItems";
-
-        //public AdApiController(IRepository<AdvertisementCommon> advertisementCommonRepository, ICommonRepository commonRepository, IImageRepository imageRepository)
-        //{
-        //    _advertisementCommonRepository = advertisementCommonRepository;
-        //    _commonRepository = commonRepository;
-        //    _imageRepository = imageRepository;
-        //}
+        private readonly string numberOfItemsKey = "numberOfItems";
+        private readonly string onlyWithPicturesKey= "OnlyWithPictures";
+        private readonly string requestIndexKey = "RequestIndex";
 
         public AdApiController()
         {
@@ -64,13 +59,14 @@ namespace MvcMain.Controllers
 
             try
             {
-                response.ResponseData =_advertisementCommonRepository.FindBy(userInput, startIndex, count).ToArray();//get attributes 
-                
+                response.ResponseData =_advertisementCommonRepository.FindBy(userInput, startIndex, count).ToList();//get attributes 
                 FillFirstImage(response.ResponseData);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(response, userInput);
-                Dictionary<string, string> customDictionary =
-                    new Dictionary<string, string> { { NumberOfItemsKey, response.ResponseData.Count.ToString() } };
+                Dictionary<string, string> customDictionary =new Dictionary<string, string>
+                {
+                    { numberOfItemsKey, response.ResponseData.Count.ToString() }
+                };
                 
                 response.SetSuccessResponse("OK");
                 response.CustomDictionary = customDictionary;
@@ -106,10 +102,9 @@ namespace MvcMain.Controllers
             advertisementCommon.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdvertisementId);
         }
         
-       
         private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<IList<AdvertisementCommon>> response, Dictionary<string, string> userInput)
         {
-            if (userInput.ContainsKey("OnlyWithPictures") && userInput["OnlyWithPictures"] == "True") // OnlyWithPictures filter set
+            if (userInput.ContainsKey(onlyWithPicturesKey) && userInput[onlyWithPicturesKey] == "True") // OnlyWithPictures filter set
             {
                 foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
                 {
@@ -119,8 +114,6 @@ namespace MvcMain.Controllers
             }
         }
         
-
-
         public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string userName, string password, bool userPassIsEncrypted)
         {
             throw new NotImplementedException();
@@ -138,7 +131,7 @@ namespace MvcMain.Controllers
 
         public async Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid)
         {
-            string errorCode = "AdvertisementCommonService.IncrementNumberOfVisit";
+            string errorCode = "AdApiController.IncrementNumberOfVisit";
             ResponseBase response = new ResponseBase();
             try
             {
@@ -151,8 +144,6 @@ namespace MvcMain.Controllers
             }
             return response;
         }
-
-
 
         public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
         {
@@ -232,22 +223,7 @@ namespace MvcMain.Controllers
         //    return responseBase;
         //}
 
-        //public ResponseBase IncrementNumberOfVisit(Guid adGuid)
-        //{
-        //    string errorCode = "AdvertisementCommonService.IncrementNumberOfVisit";
-        //    ResponseBase responseBase=new ResponseBase();
-        //    try
-        //    {
-        //        _advertisementCommonRepository.IncrementNumberOfVisit(adGuid);
-        //        responseBase.SetSuccessResponse("OK");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        responseBase.SetFailureResponse(ex.Message,errorCode);
-        //    }
-        //    return responseBase;
-
-        //}
+        
 
         //public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
         //{
@@ -319,39 +295,22 @@ namespace MvcMain.Controllers
         //}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            
         public ResponseBase<AdvertisementTransportation> GetTransportationAdDetail([FromBody] Guid adId)
         {
-            AdvertisementTransportationService advertisementTransportationService = new AdvertisementTransportationService();
-            return advertisementTransportationService.GetAdDetail(adId);//TODO check for success parameter and if it is false show error to user
+            IAdvertisementTransportationService transportationService =MyService.Inst.GetService<IAdvertisementTransportationService>();
+            return transportationService.GetAdDetail(adId);
         }
 
        
         private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<IList<AdvertisementCommon>> response)
         {
-            if (userInput.ContainsKey("RequestIndex"))
+            if (userInput.ContainsKey(requestIndexKey))
             {
                 if (response.CustomDictionary != null)
-                    response.CustomDictionary["RequestIndex"] = userInput["RequestIndex"];
+                    response.CustomDictionary[requestIndexKey] = userInput[requestIndexKey];
                 else
-                    response.CustomDictionary = new Dictionary<string, string> { { "RequestIndex", userInput["RequestIndex"] } };
+                    response.CustomDictionary = new Dictionary<string, string> { { requestIndexKey, userInput[requestIndexKey] } };
             }
         }
     }

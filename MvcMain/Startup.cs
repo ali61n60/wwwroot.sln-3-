@@ -16,6 +16,7 @@ using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Controllers;
+using MvcMain.Infrastructure.Services;
 using RepositoryStd;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Repository;
@@ -56,13 +57,14 @@ namespace MvcMain
             services.AddTransient<IRepository<AdvertisementCommon>>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
             services.AddTransient<ICommonRepository>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
 
-            services.AddTransient<IRepository<AdvertisementTransportation>>(
-                provider => new AdvertisementTransportationRepository(
+            services.AddTransient<IRepository<AdvertisementTransportation>>(provider => new AdvertisementTransportationRepository(
                     _advertisementDataClass.ConnectionString,
                     MyService.Inst.GetService<ICommonRepository>()));
 
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 
+            services.AddTransient<IAdvertisementCommonService>(provider => new AdApiController());
+            services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController());
             
             services.AddTransient<CategoryApiController>();
 
