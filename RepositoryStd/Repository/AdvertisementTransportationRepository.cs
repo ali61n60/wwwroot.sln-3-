@@ -52,7 +52,7 @@ namespace RepositoryStd.Repository
             adDbContext.Advertisements.Add(ad);
             adDbContext.AdAttributeTransportation.Add(adAttribute);
 
-           
+            adDbContext.SaveChanges();
         }
 
         //TODO the method implementation is not complete
@@ -60,30 +60,18 @@ namespace RepositoryStd.Repository
         {
             AdAttributeTransportation adAttribute =  new AdAttributeTransportation();
             adAttribute.AdId = entity.AdvertisementCommon.AdvertisementId;
+            adAttribute.ModelId = entity.ModelId;
+            adAttribute.MakeYear = entity.MakeYear;
+            adAttribute.Fuel = entity.FuelName;
+            adAttribute.Mileage = entity.Mileage;
+            adAttribute.Gearbox = entity.Gearbox;
             adAttribute.BodyColor = entity.BodyColor;
+            adAttribute.InternalColor = entity.InternalColor;
             adAttribute.BodyStatus = entity.BodyStatus.ToString();
-
+            
             return adAttribute;
         }
-
-        private void fillAddCommandParameters(SqlCommand command, AdvertisementTransportation entity)
-        {
-            // _advertisementCommonRepository.FillSaveCommandParameters(command, entity.AdvertisementCommon);
-            fillCommandByCustomAttribute(command, entity);
-        }
-
-        private void fillCommandByCustomAttribute(SqlCommand command, AdvertisementTransportation entity)
-        {
-            command.Parameters.Add("@modelId", SqlDbType.Int).Value = entity.ModelId;
-            command.Parameters.Add("@makeYear", SqlDbType.Int).Value = entity.MakeYear;
-            command.Parameters.Add("@fuel", SqlDbType.NVarChar).Value = entity.FuelName;
-            command.Parameters.Add("@mileage", SqlDbType.Int).Value = entity.Mileage;
-            command.Parameters.Add("@gearbox", SqlDbType.NVarChar).Value = entity.Gearbox;
-            command.Parameters.Add("@bodyColor", SqlDbType.NVarChar).Value = entity.BodyColor;
-            command.Parameters.Add("@internalColor", SqlDbType.NVarChar).Value = entity.InternalColor;
-           // command.Parameters.Add("@bodyStatus", SqlDbType.NVarChar).Value = entity.BodyStatusName;
-        }
-
+        
         public void Remove(AdvertisementTransportation entity)// entity only has advertisementCommon attributes
         {
             using (SqlConnection connection = new SqlConnection(_conectionString))
@@ -117,7 +105,7 @@ namespace RepositoryStd.Repository
                 using (SqlCommand command = new SqlCommand("sp_saveAdTransportation", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    fillAddCommandParameters(command, entity);
+                    //fillAddCommandParameters(command, entity);
                     //_advertisementCommonRepository.AddReturnParameterToCommand(command);
                     try
                     {
@@ -225,8 +213,6 @@ namespace RepositoryStd.Repository
                 adTrans.MakeYear = advertisements.AdAttributeTransportation.MakeYear.Value;
             else
                 adTrans.MakeYear = -1;
-
-
         }
 
        
@@ -266,7 +252,7 @@ namespace RepositoryStd.Repository
         }
 
         //ni
-        public IEnumerable<AdvertisementTransportation> GetUserAdvertisements(string username)
+        public IEnumerable<AdvertisementTransportation> GetUserAdvertisements(string userEmail)
         {
             throw new NotImplementedException();
         }

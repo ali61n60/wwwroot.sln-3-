@@ -232,7 +232,7 @@ namespace RepositoryStd.Repository
         }
 
 
-        public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string username)
+        public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string userEmail)
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             using (SqlConnection connection = new SqlConnection(_conectionString))
@@ -240,7 +240,7 @@ namespace RepositoryStd.Repository
                 using (SqlCommand command = new SqlCommand("sp_getUserAdvertisements", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@username", SqlDbType.NVarChar).Value = username;//insert input parameters
+                    command.Parameters.Add("@username", SqlDbType.NVarChar).Value = userEmail;//insert input parameters
                     connection.Open();
                     SqlDataReader sqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
                     while (sqlDataReader.Read())
