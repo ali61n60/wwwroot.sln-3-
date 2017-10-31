@@ -23,7 +23,7 @@ namespace MvcMain.Controllers
         private readonly IAdvertisementCommonService _advertisementCommonService;
         //RegistrationService registrationService;//TODO put it in Bootstrapper
         private IImageRepository im;
-        private UserManager<AppUser> _userManager;
+        private readonly UserManager<AppUser> _userManager;
 
         public AdTransportationApiController(UserManager<AppUser> userManager)
         {
@@ -33,15 +33,11 @@ namespace MvcMain.Controllers
             // registrationService = new RegistrationService();
             _userManager = userManager;
         }
-
-
         
-
        
         public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
         {
-            string errorCode = "AdvertisementTransportationService.GetAdDetail";
-
+            string errorCode = "AdTransportationApiController.GetAdDetail";
             ResponseBase<AdvertisementTransportation> responseBase = new ResponseBase<AdvertisementTransportation>();
             try
             {
@@ -53,15 +49,12 @@ namespace MvcMain.Controllers
                     responseBase.SetSuccessResponse();
                 }
                 else
-                {
                     responseBase.SetFailureResponse("repository returned NULL", errorCode);
-                }
             }
             catch (Exception ex)
             {
                 responseBase.SetFailureResponse(ex.Message, errorCode);
             }
-
             return responseBase;
         }
 
@@ -75,53 +68,37 @@ namespace MvcMain.Controllers
                 response.SetFailureResponse("Input Parameters Error", errorCode);
             
             AppUser user =await _userManager.GetUserAsync(HttpContext.User);
-            //Guid userGuid = registrationService.GetUserId(userName);
-            //return AddNewAdvertisementTransportation(advertisementTransportation, userGuid);
+            if (user == null)
+            {
+                response.SetFailureResponse("user is null", errorCode);
+                return response;
+            }
+            advertisementTransportation.AdvertisementCommon.AdvertisementStatusId = 1;//submitted
+            advertisementTransportation.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
+            advertisementTransportation.AdvertisementCommon.AdvertisementTime = DateTime.Now;
+            advertisementTransportation.AdvertisementCommon.UserId =user.Id;
+            try
+            {
+                //TODO why first insert Ad images and then attributes are saved in database????
+                response = _advertisementCommonService.SaveAdImages(advertisementTransportation.AdvertisementCommon);//save images
+                if (!response.Success)
+                {
+                    return response;
+                }
+                _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                //TODO images saved and error in database==> delete images 
+                response.SetFailureResponse(ex.Message, errorCode);
+            }
             return response;
         }
         private bool inputParametersOk(AdvertisementTransportation advertisementTransportation)
         {
             //TODO check input data in AdTransportation and return false if error
             return true;
-        }
-
-        //private ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation, Guid userGuid)
-        //{
-        //    string errorCode = "AdvertisementTransportationService.AddNewAdvertisementTransportation";
-        //    advertisementTransportation.AdvertisementCommon.AdvertisementStatusId = 1;//submitted
-        //    advertisementTransportation.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
-        //    advertisementTransportation.AdvertisementCommon.AdvertisementTime = DateTime.Now;
-        //    advertisementTransportation.AdvertisementCommon.UserId = userGuid;
-        //    ResponseBase response = new ResponseBase();
-        //    try
-        //    {
-        //        //TODO why first insert Ad images and then attributes are saved in database????
-        //        response = _advertisementCommonService.SaveAdImages(advertisementTransportation.AdvertisementCommon);//save images
-        //        if (!response.Success)
-        //        {
-        //            return response;
-        //        }
-        //        _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
-        //        response.SetSuccessResponse();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        //TODO images saved and error in database==> delete images 
-        //        response.SetFailureResponse("Could not add advertisementTransportation in repository", errorCode);
-        //    }
-        //    return response;
-        //}
-
-
-
-        private AdvertisementCommon[] getAdvertisementCommons(AdvertisementTransportation[] advertisementTransportations)
-        {
-            AdvertisementCommon[] advertisementCommons = new AdvertisementCommon[advertisementTransportations.Length];
-            for (int i = 0; i < advertisementTransportations.Length; i++)
-            {
-                advertisementCommons[i] = advertisementTransportations[i].AdvertisementCommon;
-            }
-            return advertisementCommons;
         }
 
         //public ResponseBase RemoveAd(AdvertisementCommon advertisementCommon)
@@ -150,9 +127,9 @@ namespace MvcMain.Controllers
         ////Refactor this method
 
 
-       
 
-       
+
+
 
         //public ResponseBase EditAdvertisementTransportation(AdvertisementTransportation advertisementTransportation)
         //{
@@ -169,88 +146,9 @@ namespace MvcMain.Controllers
         //    }
         //    return response;
         //}
+        
 
-        //public ResponseBase<TransportationBrand[]> GetAllTransportationBrands()
-        //{
-        //    string errorCode = "AdvertisementTransportationService.GetAllTransportationBrands";
-        //    ResponseBase<TransportationBrand[]> response = new ResponseBase<TransportationBrand[]>();
-        //    try
-        //    {
-        //        response.ResponseData = _transportaionRepository.GetAllBrands();
-        //        response.SetSuccessResponse();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.ResponseData = null;
-        //        response.SetFailureResponse(ex.Message, errorCode);
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseBase<TransportationModel[]> GetAllTransportationModels()
-        //{
-        //    string errorCode = "AdvertisementTransportationService.GetAllTransportationModels";
-        //    ResponseBase<TransportationModel[]> response = new ResponseBase<TransportationModel[]>();
-        //    try
-        //    {
-        //        response.ResponseData = _transportaionRepository.GetAllModels();
-        //        response.SetSuccessResponse();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.ResponseData = null;
-        //        response.SetFailureResponse(ex.Message, errorCode);
-        //    }
-        //    return response;
-        //}
-
-
-        //public ResponseBase<Vehicle[]> GetAllVehicles()
-        //{
-        //    string errorCode = "AdvertisementTransportationServic.GetAllVehicles";
-        //    ITransportaionRepository iTransportaionRepository = Bootstrapper.container.GetInstance<ITransportaionRepository>();
-        //    ResponseBase<Vehicle[]> response = new ResponseBase<Vehicle[]>();
-        //    try
-        //    {
-        //        response.ResponseData = iTransportaionRepository.GetAllVehicles();
-        //        response.SetSuccessResponse("OK");
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.ResponseData = null;
-        //        response.SetFailureResponse(ex.Message, errorCode);
-        //    }
-        //    return response;
-        //}
-
-        //public ResponseBase<int> GetServerDataVersion()
-        //{
-        //    ResponseBase<int> response = new ResponseBase<int>
-        //    {
-        //        ResponseData = 2 //TODO create an xml-base file and read this value from xml file
-        //    };
-        //    response.SetSuccessResponse();
-        //    return response;
-        //}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        public ResponseBase<int> GetServerDataVersion()
+       public ResponseBase<int> GetServerDataVersion()
         {
             ResponseBase<int> response = new ResponseBase<int>
             {

@@ -59,7 +59,7 @@ namespace RepositoryStd.Repository
        
 
        
-
+        //TODO use EF
         public void Add(AdvertisementTransportation entity)
         {
             SqlConnection connection = new SqlConnection(_conectionString);
