@@ -23,12 +23,12 @@ namespace MvcMain.Controllers
         // RegistrationService registrationService;//TODO put it in Bootstrapper
         private readonly string NumberOfItemsKey = "numberOfItems";
 
-        public AdApiController(IRepository<AdvertisementCommon> advertisementCommonRepository, ICommonRepository commonRepository, IImageRepository imageRepository)
-        {
-            _advertisementCommonRepository = advertisementCommonRepository;
-            _commonRepository = commonRepository;
-            _imageRepository = imageRepository;
-        }
+        //public AdApiController(IRepository<AdvertisementCommon> advertisementCommonRepository, ICommonRepository commonRepository, IImageRepository imageRepository)
+        //{
+        //    _advertisementCommonRepository = advertisementCommonRepository;
+        //    _commonRepository = commonRepository;
+        //    _imageRepository = imageRepository;
+        //}
 
         public AdApiController()
         {
