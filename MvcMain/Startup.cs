@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -64,7 +65,7 @@ namespace MvcMain
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 
             services.AddTransient<IAdvertisementCommonService>(provider => new AdApiController());
-            services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController());
+            services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController(MyService.Inst.GetService<UserManager<AppUser>>()));
             
             services.AddTransient<CategoryApiController>();
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
@@ -10,8 +11,7 @@ namespace MvcMain.Infrastructure.Services
     {
       //  ResponseBase<Vehicle[]> GetAllVehicles();
       
-      //  ResponseBase AddNewAdvertisementTransportation(
-       //     AdvertisementTransportation advertisementTransportation,string userName,string password,bool userPassIsEncrypted);
+     
 
         
        // ResponseBase EditAdvertisementTransportation(AdvertisementTransportation advertisementTransportation);
@@ -25,5 +25,6 @@ namespace MvcMain.Infrastructure.Services
         
         ResponseBase<int> GetServerDataVersion();
         ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId);
+        Task<ResponseBase> AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation);
     }
 }

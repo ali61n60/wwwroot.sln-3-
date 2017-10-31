@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using MvcMain.Infrastructure.Services;
@@ -17,17 +20,18 @@ namespace MvcMain.Controllers
     {
         private readonly ITransportaionRepository _transportaionRepository;
         private readonly IRepository<AdvertisementTransportation> _advertisementTransportationRepository;
-
         private readonly IAdvertisementCommonService _advertisementCommonService;
         //RegistrationService registrationService;//TODO put it in Bootstrapper
         private IImageRepository im;
+        private UserManager<AppUser> _userManager;
 
-        public AdTransportationApiController()
+        public AdTransportationApiController(UserManager<AppUser> userManager)
         {
             _transportaionRepository =MyService.Inst.GetService<ITransportaionRepository>();
             _advertisementTransportationRepository = MyService.Inst.GetService<IRepository<AdvertisementTransportation>>();
             _advertisementCommonService = MyService.Inst.GetService<IAdvertisementCommonService>();
             // registrationService = new RegistrationService();
+            _userManager = userManager;
         }
 
 
@@ -61,31 +65,54 @@ namespace MvcMain.Controllers
             return responseBase;
         }
 
-        public ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation)
+        [Authorize]
+        public async Task<ResponseBase> AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation)
         {
-            //string errorCode = "AdvertisementTransportationService.AddNewAdvertisementTransportation";
-            //ResponseBase response = new ResponseBase();
+            string errorCode = "AdTransportationApiController.AddNewAdvertisementTransportation";
+            ResponseBase response = new ResponseBase();
 
-            //if (userPassIsEncrypted)
-            //{
-            //    userName = CryptoService.Decrypt(userName);
-            //    password = CryptoService.Decrypt(password);
-            //}
-            //ResponseBase userPassResponseBase = registrationService.ValidateUser(userName, password);
-            //if (!userPassResponseBase.Success)//error in username/password
-            //{
-            //    response.SetFailureResponse(userPassResponseBase.Message, errorCode + ", " + userPassResponseBase.ErrorCode);
-            //    return response;
-            //}
-            //if (!InputParametersOk(advertisementTransportation))
-            //{
-            //    response.SetFailureResponse("Input Parameters Error", errorCode);
-            //}
+            if (!inputParametersOk(advertisementTransportation))
+                response.SetFailureResponse("Input Parameters Error", errorCode);
+            
+            AppUser user =await _userManager.GetUserAsync(HttpContext.User);
             //Guid userGuid = registrationService.GetUserId(userName);
             //return AddNewAdvertisementTransportation(advertisementTransportation, userGuid);
-            return null;
-
+            return response;
         }
+        private bool inputParametersOk(AdvertisementTransportation advertisementTransportation)
+        {
+            //TODO check input data in AdTransportation and return false if error
+            return true;
+        }
+
+        //private ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation, Guid userGuid)
+        //{
+        //    string errorCode = "AdvertisementTransportationService.AddNewAdvertisementTransportation";
+        //    advertisementTransportation.AdvertisementCommon.AdvertisementStatusId = 1;//submitted
+        //    advertisementTransportation.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
+        //    advertisementTransportation.AdvertisementCommon.AdvertisementTime = DateTime.Now;
+        //    advertisementTransportation.AdvertisementCommon.UserId = userGuid;
+        //    ResponseBase response = new ResponseBase();
+        //    try
+        //    {
+        //        //TODO why first insert Ad images and then attributes are saved in database????
+        //        response = _advertisementCommonService.SaveAdImages(advertisementTransportation.AdvertisementCommon);//save images
+        //        if (!response.Success)
+        //        {
+        //            return response;
+        //        }
+        //        _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
+        //        response.SetSuccessResponse();
+        //    }
+        //    catch (Exception)
+        //    {
+        //        //TODO images saved and error in database==> delete images 
+        //        response.SetFailureResponse("Could not add advertisementTransportation in repository", errorCode);
+        //    }
+        //    return response;
+        //}
+
+
 
         private AdvertisementCommon[] getAdvertisementCommons(AdvertisementTransportation[] advertisementTransportations)
         {
@@ -123,42 +150,9 @@ namespace MvcMain.Controllers
         ////Refactor this method
 
 
+       
 
-
-
-
-        //private bool InputParametersOk(AdvertisementTransportation advertisementTransportation)
-        //{
-        //    //TODO check input data in AdTransportation and return false if error
-        //    return true;
-        //}
-
-        //private ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation, Guid userGuid)
-        //{
-        //    string errorCode = "AdvertisementTransportationService.AddNewAdvertisementTransportation";
-        //    advertisementTransportation.AdvertisementCommon.AdvertisementStatusId = 1;//submitted
-        //    advertisementTransportation.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
-        //    advertisementTransportation.AdvertisementCommon.AdvertisementTime = DateTime.Now;
-        //    advertisementTransportation.AdvertisementCommon.UserId = userGuid;
-        //    ResponseBase response = new ResponseBase();
-        //    try
-        //    {
-        //        //TODO why first insert Ad images and then attributes are saved in database????
-        //        response = _advertisementCommonService.SaveAdImages(advertisementTransportation.AdvertisementCommon);//save images
-        //        if (!response.Success)
-        //        {
-        //            return response;
-        //        }
-        //        _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
-        //        response.SetSuccessResponse();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        //TODO images saved and error in database==> delete images 
-        //        response.SetFailureResponse("Could not add advertisementTransportation in repository", errorCode);
-        //    }
-        //    return response;
-        //}
+       
 
         //public ResponseBase EditAdvertisementTransportation(AdvertisementTransportation advertisementTransportation)
         //{
