@@ -16,5 +16,6 @@ namespace RepositoryStd.Repository
         AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Advertisements advertisement,AppIdentityDbContext identityDbContext);
 
         Task IncrementNumberOfVisit(Guid adGuid);
+        Advertisements GetAdvertisement(AdvertisementCommon advertisementCommon);
     }
 }

@@ -31,29 +31,12 @@ namespace RepositoryStd.Repository
 
         public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string,string> inputDictionary)
         {
-            return FindBy(inputDictionary, 1, 1000000);//get first 1000000 rows from database
+            throw new NotImplementedException();
         }
 
-
-        //Called from service layer
-        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary, int startIndex, int count)
+        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary,int startIndex, int count)
         {
-            List<AdvertisementTransportation> searchResultItems = new List<AdvertisementTransportation>();
-
-           // string commandText = getSelectCommandText(query);
-
-
-            //using (SqlConnection connection = new SqlConnection(_conectionString))
-            //{
-            //    using (SqlCommand command = new SqlCommand(commandText, connection))
-            //    {
-            //       query.FillCommandParameters(command);
-            //        command.Parameters.Add("@start", SqlDbType.Int).Value = startIndex;
-            //        command.Parameters.Add("@end", SqlDbType.Int).Value = (startIndex + count - 1);
-            //        FillSearchResultItemsFromDatabase(connection, command);
-            //    }
-            //}
-            return searchResultItems;
+            throw new NotImplementedException();
         }
        
        
@@ -62,31 +45,30 @@ namespace RepositoryStd.Repository
         //TODO use EF
         public void Add(AdvertisementTransportation entity)
         {
-            SqlConnection connection = new SqlConnection(_conectionString);
-            SqlCommand command = new SqlCommand("sp_insertNewAdTransportation", connection);
-            command.CommandType = CommandType.StoredProcedure;
-            Guid attributeId = Guid.NewGuid();//create a new attributeId to be used in AdAttributeTransportation
-            command.Parameters.Add("@attributeId", SqlDbType.UniqueIdentifier).Value = attributeId;
-            fillAddCommandParameters(command, entity);
-          //  _advertisementCommonRepository.AddReturnParameterToCommand(command);
-            try
-            {
-                connection.Open();
-                command.ExecuteNonQuery();
-                if (command.Parameters["returnValue"].Value.ToString() == "0")
-                {
-                    throw new Exception(" خطا در دیتا بیس");
-                }
-            }
-            finally
-            {
-                connection.Close();
-            }
+            AdDbContext adDbContext = new AdDbContext();
+            Advertisements ad = _commonRepository.GetAdvertisement(entity.AdvertisementCommon);
+            AdAttributeTransportation adAttribute = getAdAtribute(entity); 
+            
+            adDbContext.Advertisements.Add(ad);
+            adDbContext.AdAttributeTransportation.Add(adAttribute);
+
+           
+        }
+
+        //TODO the method implementation is not complete
+        private AdAttributeTransportation getAdAtribute(AdvertisementTransportation entity)
+        {
+            AdAttributeTransportation adAttribute =  new AdAttributeTransportation();
+            adAttribute.AdId = entity.AdvertisementCommon.AdvertisementId;
+            adAttribute.BodyColor = entity.BodyColor;
+            adAttribute.BodyStatus = entity.BodyStatus.ToString();
+
+            return adAttribute;
         }
 
         private void fillAddCommandParameters(SqlCommand command, AdvertisementTransportation entity)
         {
-           // _advertisementCommonRepository.FillSaveCommandParameters(command, entity.AdvertisementCommon);
+            // _advertisementCommonRepository.FillSaveCommandParameters(command, entity.AdvertisementCommon);
             fillCommandByCustomAttribute(command, entity);
         }
 
@@ -247,10 +229,7 @@ namespace RepositoryStd.Repository
 
         }
 
-        public void IncrementNumberOfVisit(Guid adGuid)
-        {
-            _commonRepository.IncrementNumberOfVisit(adGuid);
-        }
+       
 
         private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,
                                                                       SqlDataReader dataReader)

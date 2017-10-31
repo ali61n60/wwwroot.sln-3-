@@ -319,6 +319,19 @@ namespace RepositoryStd.Repository
             adDbContext.SaveChanges();
         }
 
+        //TODO the method implementation is not complete
+        public Advertisements GetAdvertisement(AdvertisementCommon advertisementCommon)
+        {
+            Advertisements ad=new Advertisements();
+            ad.AdComments = advertisementCommon.AdvertisementComments;
+            ad.AdId = advertisementCommon.AdvertisementId;
+            ad.AdInsertDateTime = advertisementCommon.AdvertisementTime;
+            ad.AdNumberOfVisited = advertisementCommon.NumberOfVisit;
+
+
+            return ad;
+        }
+
 
         //helper method
         public static RepositoryResponse fillAdvertisementCommonFromDataReader

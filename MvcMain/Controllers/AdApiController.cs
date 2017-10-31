@@ -147,8 +147,30 @@ namespace MvcMain.Controllers
 
         public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
         {
-            throw new NotImplementedException();
+            string errorCode = "AdApiController.SaveAdImages";
+            ResponseBase responseBase = new ResponseBase();
+            try
+            {
+                if (advertisementCommon.AdvertisementImages != null)
+                {
+                    _imageRepository.SaveImages(advertisementCommon.AdvertisementId, advertisementCommon.AdvertisementImages);
+                    responseBase.SetSuccessResponse("Advertisement images saved in repository");
+                }
+                else
+                {
+                    responseBase.SetSuccessResponse("advertisementCommon.AdvertisementImages is Null");
+                }
+            }
+            catch (Exception ex)
+            {
+                responseBase.SetFailureResponse(ex.Message, errorCode);
+            }
+            return responseBase;
+
         }
+
+
+
 
 
         //public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string username, string password, bool userPassIsEncrypted)
@@ -223,30 +245,9 @@ namespace MvcMain.Controllers
         //    return responseBase;
         //}
 
-        
 
-        //public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
-        //{
-        //    string errorCode = "AdvertisementCommonService.SaveAdImages";
-        //    ResponseBase responseBase = new ResponseBase();
-        //    try
-        //    {
-        //        if (advertisementCommon.AdvertisementImages != null)
-        //        {
-        //            _imageRepository.SaveImages(advertisementCommon.AdvertisementId, advertisementCommon.AdvertisementImages);
-        //            responseBase.SetSuccessResponse("Advertisement images saved in repository");
-        //        }
-        //        else
-        //        {
-        //            responseBase.SetSuccessResponse("advertisementCommon.AdvertisementImages is Null");
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        responseBase.SetFailureResponse("Error in Saving Advertisement images in repository", errorCode);
-        //    }
-        //    return responseBase;
-        //}
+
+
 
         //private int getSelectedCategoryId(Dictionary<string, string> userInput)
         //{
@@ -295,7 +296,7 @@ namespace MvcMain.Controllers
         //}
 
 
-            
+
         public ResponseBase<AdvertisementTransportation> GetTransportationAdDetail([FromBody] Guid adId)
         {
             IAdvertisementTransportationService transportationService =MyService.Inst.GetService<IAdvertisementTransportationService>();
