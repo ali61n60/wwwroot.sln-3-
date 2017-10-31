@@ -155,6 +155,7 @@
     <Folder Include="Connected Services\" />
     <Folder Include="Documents\" />
     <Folder Include="Infrastructure\IOC\" />
+    <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="wwwroot\Resources\Images\" />
   </ItemGroup>

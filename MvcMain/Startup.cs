@@ -16,9 +16,7 @@ using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Controllers;
-using MvcMain.Infrastructure.Services;
 using RepositoryStd;
-using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.TransportationRepository;
@@ -62,9 +60,6 @@ namespace MvcMain
                 provider => new AdvertisementTransportationRepository(
                     _advertisementDataClass.ConnectionString,
                     MyService.Inst.GetService<ICommonRepository>()));
-
-            services.AddTransient<IAdvertisementCommonService,AdvertisementCommonService>();
-            services.AddTransient<IAdvertisementService, AdvertisementCommonService>();
 
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 
