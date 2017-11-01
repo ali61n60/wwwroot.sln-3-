@@ -149,6 +149,7 @@
     <Content Include="wwwroot\lib\jquery\src\var\support.js" />
     <Content Include="wwwroot\lib\jquery\src\var\toString.js" />
     <Content Include="wwwroot\lib\jquery\src\wrap.js" />
+    <Content Include="wwwroot\Resources\Images\loader.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -157,7 +158,7 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
-    <Folder Include="wwwroot\Resources\Images\" />
+    <Folder Include="Views\Shared\Components\FileUpload\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Services;
@@ -39,6 +40,7 @@ namespace MvcMain.Controllers
             return Json(String.Format("Hello {0},Number is {1} current server time is: {2}", name, numberOfCalls, DateTime.Now.ToString()));
         }
 
+        [Authorize]
         public string WhatTimeIsIt()
         {
             return DateTime.Now.ToString();
@@ -166,7 +168,11 @@ namespace MvcMain.Controllers
                 responseBase.SetFailureResponse(ex.Message, errorCode);
             }
             return responseBase;
+        }
 
+        public void UploadFile()
+        {
+            
         }
 
 
