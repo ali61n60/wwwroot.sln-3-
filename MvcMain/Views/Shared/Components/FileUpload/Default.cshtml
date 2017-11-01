@@ -5,7 +5,11 @@
         <label>ارسال عکس</label>
         <button id="callServer" type="button">Call Server</button>
         <br />
-        <input type="file" id="FileUpload1" class="btn btn-info btn-block" />
+        <input id="FileUpload1" type="file"  class="btn btn-info btn-block" />
+        <br/>
+        <input id="files" type="file" name="files" multiple />
+        <button id="upload" type="button"  >Upload Selected Files</button>
+
         <br />
         <div id="labelUploadResult"></div>
         <br />
@@ -24,13 +28,37 @@
                 var $userInput = {};
                 $.ajax({
                     type: "GET", //GET or POST or PUT or DELETE verb
-                    url: "/api/AdApi/WhatTimeIsIt",
+                    url: "/api/AdApi/UploadFile",
                     data: JSON.stringify($userInput), //Data sent to server
                     //contentType: 'application/json', // content type sent to server
                     success: serverResult,//On Successfull service call
                     error: serverResult// When Service call fails
                 });//.ajax
             }); //on click
+
+        $("#upload").click(function (evt) {
+            var fileUpload = $("#files").get(0);
+            var files = fileUpload.files;
+            var data = new FormData();
+            for (var i = 0; i < files.length ; i++) {
+                data.append(files[i].name, files[i]);
+            }
+            $.ajax({
+                type: "POST",
+                url: "/api/AdApi/UploadFile",
+                contentType: false,
+                processData: false,
+                data: data,
+                success: function (response) {
+                    alert(response.message);
+                },
+                error: function () {
+                    alert("There was error uploading files!");
+                }
+            });
+        });
+
+
     });//ready
 
     function serverResult(msg) {

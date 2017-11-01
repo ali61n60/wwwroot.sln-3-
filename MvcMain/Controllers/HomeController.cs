@@ -40,7 +40,7 @@ namespace MvcMain.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> NewAd(AdDetailInfo adDetailInfo)
+        public async Task<IActionResult> NewAd()
         {
             return View();
         }

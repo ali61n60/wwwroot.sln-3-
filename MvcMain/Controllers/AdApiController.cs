@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 using MvcMain.Infrastructure.Services;
 using RepositoryStd.Context.Helper;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
+using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using RepositoryStd.Repository;
 
@@ -21,6 +26,7 @@ namespace MvcMain.Controllers
         private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly ICommonRepository _commonRepository;
         private readonly IImageRepository _imageRepository;
+        private readonly UserManager<AppUser> _userManager;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
         private readonly string numberOfItemsKey = "numberOfItems";
         private readonly string onlyWithPicturesKey= "OnlyWithPictures";
@@ -31,6 +37,7 @@ namespace MvcMain.Controllers
             _advertisementCommonRepository = MyService.Inst.GetService<IRepository<AdvertisementCommon>>();
             _commonRepository = MyService.Inst.GetService<ICommonRepository>();
             _imageRepository = MyService.Inst.GetService<IImageRepository>();
+            _userManager = MyService.Inst.GetService<UserManager<AppUser>>();
         }
 
 
@@ -40,7 +47,6 @@ namespace MvcMain.Controllers
             return Json(String.Format("Hello {0},Number is {1} current server time is: {2}", name, numberOfCalls, DateTime.Now.ToString()));
         }
 
-        [Authorize]
         public string WhatTimeIsIt()
         {
             return DateTime.Now.ToString();
@@ -170,9 +176,23 @@ namespace MvcMain.Controllers
             return responseBase;
         }
 
-        public void UploadFile()
+        [Authorize]
+        public async Task<ResponseBase> UploadFile()
         {
-            
+            string errorCode = "AdApiController.UploadFile";
+            ResponseBase response=new ResponseBase();
+            try
+            {
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                IFormFileCollection files = Request.Form.Files;
+                await _imageRepository.SaveTempFile(files, user.Email);
+                response.SetSuccessResponse("files saved in temp folder");
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message,errorCode);
+            }
+            return response;
         }
 
 

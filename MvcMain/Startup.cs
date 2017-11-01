@@ -65,7 +65,7 @@ namespace MvcMain
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 
             services.AddTransient<IAdvertisementCommonService>(provider => new AdApiController());
-            services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController(MyService.Inst.GetService<UserManager<AppUser>>()));
+            services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController());
             
             services.AddTransient<CategoryApiController>();
 

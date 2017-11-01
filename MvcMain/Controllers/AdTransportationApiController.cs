@@ -25,13 +25,13 @@ namespace MvcMain.Controllers
         private IImageRepository im;
         private readonly UserManager<AppUser> _userManager;
 
-        public AdTransportationApiController(UserManager<AppUser> userManager)
+        public AdTransportationApiController()
         {
             _transportaionRepository =MyService.Inst.GetService<ITransportaionRepository>();
             _advertisementTransportationRepository = MyService.Inst.GetService<IRepository<AdvertisementTransportation>>();
             _advertisementCommonService = MyService.Inst.GetService<IAdvertisementCommonService>();
             // registrationService = new RegistrationService();
-            _userManager = userManager;
+            _userManager = MyService.Inst.GetService<UserManager<AppUser>>();
         }
         
        
