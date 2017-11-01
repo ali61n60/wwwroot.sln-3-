@@ -5,7 +5,6 @@
     "bootstrap": "v3.3.7",
     "jQuery": "3.2.1",
     "mustache.js": "mustache#v2.3.0",
-    "lightslider": "1.1.6",
-    "blueimp-file-upload": "v9.19.1"
+    "lightslider": "1.1.6"
   }
 }
