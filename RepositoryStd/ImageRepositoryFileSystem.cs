@@ -2,6 +2,7 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Net.Http.Headers;
 using ModelStd.IRepository;
 
 namespace RepositoryStd
@@ -135,30 +136,24 @@ namespace RepositoryStd
 
         public async Task SaveTempFile(IFormFileCollection files, string userEmail)
         {
-            //TODO save files by user email
-            string tempFilesDirectoryPath = _directoryPath +"TempFiles/"+ userEmail;
-            if(!Directory.Exists(tempFilesDirectoryPath))
+            long size = 0;
+            string tempFilesDirectoryPath = _directoryPath + "TempFiles/" + userEmail;
+            if (!Directory.Exists(tempFilesDirectoryPath))
                 Directory.CreateDirectory(tempFilesDirectoryPath);
 
-            string filenames = "";
+
             foreach (IFormFile file in files)
             {
-                filenames += " " + file.FileName;
-                //    var filename = ContentDispositionHeaderValue
-                //        .Parse(file.ContentDisposition)
-                //        .FileName
-                //        .Trim('"');
-                //    filename = hostingEnv.WebRootPath + $@"\{filename}";
-                //    size += file.Length;
-                //    using (FileStream fs = System.IO.File.Create(filename))
-                //    {
-                //        file.CopyTo(fs);
-                //        fs.Flush();
-                //    }
-                //}
-                //string message = $"{files.Count} file(s) / { size}bytes uploaded successfully!";
+                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+                filename = tempFilesDirectoryPath + $@"\{filename}";
+                size += file.Length;
+                using (FileStream fs = File.Create(filename))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
             }
-
         }
     }
 }
+
