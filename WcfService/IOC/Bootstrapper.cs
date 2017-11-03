@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Model.IRepository;
+﻿using Model.IRepository;
 using Repository;
 using StructureMap;
 using System.Web;
-using CommonServices;
 using WcfService.Services;
 using Model.Advertisements;
 using Repository.Repository;
@@ -34,7 +28,7 @@ namespace WcfService.IOC
                 x.For<IAdvertisementTransportationService>().Use<AdvertisementTransportationService>();
                 x.For<ICategoryRepository>().Use<CategoryRepositoryInCode>();
                 x.For<RegistrationRepository>().Use<RegistrationRepository>();
-                x.For<IEmail>().Use<Email>();
+                
             });
         }
     }

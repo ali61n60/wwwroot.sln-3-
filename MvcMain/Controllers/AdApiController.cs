@@ -177,10 +177,10 @@ namespace MvcMain.Controllers
         }
 
         [Authorize]
-        public async Task<ResponseBase> UploadFile()
+        public async Task<ResponseBase<UploadedImage>> UploadFile()
         {
             string errorCode = "AdApiController.UploadFile";
-            ResponseBase response=new ResponseBase();
+            ResponseBase<UploadedImage> response =new ResponseBase<UploadedImage>();
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
@@ -342,5 +342,9 @@ namespace MvcMain.Controllers
         }
     }
 
-
+    public class UploadedImage
+    {
+        public string Image { get; set; }
+        public string ImageFileName { get; set; }
+    }
 }

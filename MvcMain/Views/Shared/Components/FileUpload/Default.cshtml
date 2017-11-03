@@ -3,12 +3,10 @@
 <div class="row well">
     <div class="col-sm-4 col-sm-push-8 text-right">
         <label>ارسال عکس</label>
-        <br />
-        <input id="FileUpload1" type="file"  class="btn btn-info btn-block" />
-        <br/>
-        <input id="files" type="file" name="files" />
-        <button id="upload" type="button"  >ارسال عکس</button>
 
+        <br />
+        <input id="imageUpload" type="file" name="imageUpload" class="btn btn-info btn-block" />
+        <button id="imageUploadButton" type="button">ارسال عکس</button>
         <br />
         <div id="labelUploadResult"></div>
         <br />
@@ -18,105 +16,108 @@
     </div>
 </div>
 
+<script id="sendingImageTemplate" type="text/template">
+    <div class='col-sm-6' style='border: 2px solid blue; margin:5px'>
+        <p dir='rtl'>در حال ارسال فایل</p>
+        <img src="/Resources/Images/loader.gif" width="50px" height="50px" />
+    </div>
+</script>
+
+<script id="addedImage" type="text/template">
+    <div id="{{imageId}}" class='col-sm-2'>
+        <img class='img-rounded img-responsive' src="{{imageSrc}}" />
+        <input type='button' class='btn btn-primary btn-block' value='حذف' />
+        @*$button.on("click", { imageId: divId }, removeImageFromSession);*@
+    </div>
+
+</script>
+
+
 <script>
     $(document).ready(function () {
         //$("#FileUpload1").change(uploadImage); //set event handler for change event on file upload element
         // recreateLoadedImages(); // if page reloads, show added images
-       
-        $("#upload").click(function (evt) {
-            var fileUpload = $("#files").get(0);
+
+        $("#imageUploadButton").click(function (evt) {
+            var fileUpload = $("#imageUpload").get(0);
             var files = fileUpload.files;
             var data = new FormData();
-            for (var i = 0; i < files.length ; i++) {
+            for (var i = 0; i < files.length; i++) {
                 data.append(files[i].name, files[i]);
-            }
+            }//for
             $.ajax({
                 type: "POST",
                 url: "/api/AdApi/UploadFile",
                 contentType: false,
                 processData: false,
                 data: data,
-                success: function (response) {
-                    alert(response.message);
-                },
-                error: function () {
-                    alert("There was error uploading files!");
-                }
-            });
-        });
-
-
+                success: uploadImageSuccess,
+                error: uploadImageError
+            });//ajax
+            showSendingImage();
+        });//click
     });//ready
+
+    function uploadImageSuccess(data) {
+        hideSendingImage();
+        $("#imageUpload").val("");
+        //TODO check for data.success parameter
+        addNewImageToPage(data);
+
+    }//uploadImageSuccess
+
+    function uploadImageError() {
+        hideSendingImage();
+    }
+
+    function showSendingImage() {
+        var $sendingImageTemplate = $("#sendingImageTemplate").clone();
+        $("#labelUploadResult").html($sendingImageTemplate.html());
+    }//showSendingImage
+
+    function hideSendingImage() {
+        $("#labelUploadResult").html("");
+
+    }//hideSendingImage
+
+    function addNewImageToPage(data) {
+        //TODO create a copy of newImage template and add it to page
+        var newImage;
+
+        data = {
+            imageId: data.imageId,
+            imageSrc: data.imageSrc
+        } //data
+
+        var html = Mustache.to_html(template, data);
+        $("#adPlaceHolder").append(html);
+
+
+
+        $("#loadedImageView").append(newImage);
+    }//addNewImageToPage
 
     function serverResult(msg) {
         $("#labelUploadResult").html(msg);
+    }//serverResult
 
-    }//OnSuccessGetTimeFromServer
+    function addNewImageDivToPage(divId, imageSrc) {
+        var $newdiv1 = $("<div id= '" + divId + "' class='col-sm-2'></div>");
+        var $image = $("<img class='img-rounded img-responsive'  src=\"" + imageSrc + "\"/>");
+        var $button = $("<input type='button' class='btn btn-primary btn-block' value='حذف' />");
+        $button.on("click", { imageId: divId }, removeImageFromSession);
+        $newdiv1.append($image);
+        $newdiv1.append($button);
+        var ImagePlaceHolder = $("#<%=loadedImageView.ClientID%>");
+        ImagePlaceHolder.append($newdiv1);
+    }//end addNewImageDivToPage
 
-    
 
-    function uploadImage(elem) {
-        var file_data = $("#FileUpload1").prop("files")[0];   // Getting the properties of file from file field
-        addDivImageHolder(file_data);
-        $("#FileUpload1").val('');
-    }//end uploadImage
 
-    function addDivImageHolder(file_data) {
-        var $newdiv1 = addTempraryDiv();
-        var form_data = new FormData();                 // Creating object of FormData class
-        form_data.append("file", file_data);            // Appending parameter named file with properties of file_field to form_data
-        form_data.append("method", "addImage");         // Adding extra parameters to form_data
-        $.ajax({//C# Method call
-            type: 'POST',
-            processData: false, // important
-            contentType: false, // important
-            data: form_data,
-            async: true,
-            url: "/AdApi/",
-            success: function (msg) {
-                var jsonMessage = JSON.parse(msg);
-                if (jsonMessage.status === "true") {
-                    addNewImageDivToPage(jsonMessage.imageId, jsonMessage.imageUrl);
-                }//end if
-                else {
-                    reportMessageToUser(jsonMessage.message);
-                }//end else
-                $newdiv1.remove();
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                $newdiv1.remove();
-                reportMessageToUser(textStatus + "  ," + errorThrown);
-            }
-        });//end $.ajax C# call
-    }
 
-    function recreateLoadedImages() {
-        var form_data = new FormData();                 // Creating object of FormData class
-        form_data.append("method", "recreateLoadedImages");         // Adding extra parameters to form_data
-        $.ajax({//C# Method call
-            type: 'POST',
-            processData: false, // important
-            contentType: false, // important
-            data: form_data,
-            async: true,
-            url: "<%= Page.ResolveClientUrl(imageWebUserControlHandlerAddress) %>",
-            success: function (msg) {
-                var jsonMessage = JSON.parse(msg);
-                if (jsonMessage.status === "true") {
-                    var numberOfImages = jsonMessage.numberOfImages;
-                    for (var i = 0; i < numberOfImages; i++) {
-                        addNewImageDivToPage(jsonMessage.imagesUrl[i].imageId, jsonMessage.imagesUrl[i].imageUrl);
-                    }//end for
-                }//end if
-                else {
-                    reportMessageToUser(jsonMessage.message);
-                }//end else
-            }, //end success
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                reportMessageToUser(textStatus + "  ," + errorThrown);
-            }//end error
-        });//end $.ajax C# call
-    }//end  recreateLoadedImages
+
+
+
 
     function removeImageFromSession(event) {
         var form_data = new FormData();                  // Creating object of FormData class
@@ -141,27 +142,9 @@
         });//end $.ajax C# call
     }//end removeImageFromSession
 
-    function addNewImageDivToPage(divId, imageSrc) {
-        var $newdiv1 = $("<div id= '" + divId + "' class='col-sm-2'></div>");
-        var $image = $("<img class='img-rounded img-responsive'  src=\"" + imageSrc + "\"/>");
-        var $button = $("<input type='button' class='btn btn-primary btn-block' value='حذف' />");
-        $button.on("click", { imageId: divId }, removeImageFromSession);
-        $newdiv1.append($image);
-        $newdiv1.append($button);
-        var ImagePlaceHolder = $("#<%=loadedImageView.ClientID%>");
-        ImagePlaceHolder.append($newdiv1);
-    }//end addNewImageDivToPage
 
-    function addTempraryDiv() {
-        var ImagePlaceHolder = $("#loadedImageView");
-        var $newdiv1 = $("<div class='col-sm-2' style='border: 2px solid blue; margin:5px'></div>");
-        var $newSpan = $("<p  dir='rtl' >" + "در حال ارسال فایل" + "</p>");
-        var $image = $("<img src=\"/Images/loader.gif\" width=\"50px\" height=\"50px\"   />");
-        $newdiv1.append($newSpan);
-        $newdiv1.append($image);
-        ImagePlaceHolder.append($newdiv1);
-        return $newdiv1;
-    }//end addTempraryDiv
+
+
 
     function reportMessageToUser(message) {
         $newMessage = $("<span style=\"color:red\">" + message + "</span><br />");
