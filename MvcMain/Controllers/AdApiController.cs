@@ -178,9 +178,9 @@ namespace MvcMain.Controllers
         }
 
         [Authorize]
-        public async Task<ResponseBase<UploadedImage>> UploadFile()
+        public async Task<ResponseBase<UploadedImage>> AddTempImage()
         {
-            string errorCode = "AdApiController.UploadFile";
+            string errorCode = "AdApiController.AddTempImage";
             ResponseBase<UploadedImage> response =new ResponseBase<UploadedImage>()
             {
                 ResponseData = new UploadedImage()
@@ -197,7 +197,7 @@ namespace MvcMain.Controllers
                     return response;
                 }
                 response.ResponseData.Image = Convert.ToBase64String(thumbnailResponse.ResponseData);
-                response.ResponseData.ImageFileName = "ToBeSet";
+                response.ResponseData.ImageFileName = "ToBeSet"+DateTime.Now.ToLocalTime();
 
                 await _imageRepository.SaveTempFile(uploadedFile,thumbnailResponse.ResponseData, user.Email);
                 response.SetSuccessResponse("files saved in temp folder");

@@ -3,12 +3,10 @@
 <div class="row well">
     <div class="col-sm-4 col-sm-push-8 text-right">
         <label>ارسال عکس</label>
-
         <br />
         <input id="imageUpload" type="file" name="imageUpload" class="btn btn-info btn-block" />
-        <button id="imageUploadButton" type="button">ارسال عکس</button>
         <br />
-        <div id="labelUploadResult"></div>
+        <div id="labelMessageToUser"></div>
         <br />
     </div>
     <div class="col-sm-8 col-sm-pull-4 col-sm-push-0">
@@ -35,8 +33,7 @@
 
 <script>
     $(document).ready(function () {
-        //$("#FileUpload1").change(uploadImage); //set event handler for change event on file upload element
-        $("#imageUploadButton").click(function (evt) {
+        $("#imageUpload").change(function (evt) {
             var fileUpload = $("#imageUpload").get(0);
             var files = fileUpload.files;
             var data = new FormData();
@@ -45,7 +42,7 @@
             }//for
             $.ajax({
                 type: "POST",
-                url: "/api/AdApi/UploadFile",
+                url: "/api/AdApi/AddTempImage",
                 contentType: false,
                 processData: false,
                 data: data,
@@ -55,59 +52,52 @@
             showSendingImage();
         });//click
 
-        $(".addedImage > input").on("click",function (event) {
-               // var message = $('this').parent().attr("id");
-                alert("click");
-            });//on
+        $(document).on('click', '.addedImage > input', function (event) {
+            //todo call server to remove temp file and also remove it from page
+            alert($(this).parent().attr("id"));
+        });//click
+
     });//ready
 
     function uploadImageSuccess(msg) {
-        hideSendingImage();
+        showMessageToUser("");
         $("#imageUpload").val("");
         //TODO check for data.success parameter
-        if (msg.success==true) {
+        if (msg.success == true) {
             addNewImageToPage(msg.responseData);
         }//if
         else {
-            //todo show error message
+            showMessageToUser(msg.messag+" ," + msg.errorCode);
         }//else
-
     }//uploadImageSuccess
 
     function uploadImageError() {
-        hideSendingImage();
+        showMessageToUser("خطا در ارسال");
     }
 
     function showSendingImage() {
         var $sendingImageTemplate = $("#sendingImageTemplate").clone();
-        $("#labelUploadResult").html($sendingImageTemplate.html());
+        showMessageToUser($sendingImageTemplate.html());
     }//showSendingImage
 
-    function hideSendingImage() {
-        $("#labelUploadResult").html("");
-
-    }//hideSendingImage
-
+    
     function addNewImageToPage(data) {
         //TODO create a copy of newImage template and add it to page
         var responseImage = "data:image/jpg;base64," + data.image;
         var template = $('#addedImage').html();
-
-        templateData = {
+        var templateData = {
             imageId: data.imageFileName,
             imageSrc: responseImage
         } //data
-
         var html = Mustache.to_html(template, templateData);
-
         $("#loadedImageView").append(html);
     }//addNewImageToPage
 
-    function serverResult(msg) {
-        $("#labelUploadResult").html(msg);
+    function showMessageToUser(msg) {
+        $("#labelMessageToUser").html(msg);
     }//serverResult
 
-    
+
 
     function removeImageFromSession(event) {
         var form_data = new FormData();                  // Creating object of FormData class
