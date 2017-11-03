@@ -24,7 +24,7 @@
 </script>
 
 <script id="addedImage" type="text/template">
-    <div id="{{imageId}}" class='col-sm-2'>
+    <div id="{{imageId}}" class='col-sm-2 addedImage'>
         <img class='img-rounded img-responsive' src="{{imageSrc}}" />
         <input type='button' class='btn btn-primary btn-block' value='حذف' />
         @*$button.on("click", { imageId: divId }, removeImageFromSession);*@
@@ -36,8 +36,6 @@
 <script>
     $(document).ready(function () {
         //$("#FileUpload1").change(uploadImage); //set event handler for change event on file upload element
-        // recreateLoadedImages(); // if page reloads, show added images
-
         $("#imageUploadButton").click(function (evt) {
             var fileUpload = $("#imageUpload").get(0);
             var files = fileUpload.files;
@@ -56,13 +54,23 @@
             });//ajax
             showSendingImage();
         });//click
+
+        $(".addedImage > input").on("click",function (event) {
+               // var message = $('this').parent().attr("id");
+                alert("click");
+            });//on
     });//ready
 
-    function uploadImageSuccess(data) {
+    function uploadImageSuccess(msg) {
         hideSendingImage();
         $("#imageUpload").val("");
         //TODO check for data.success parameter
-        addNewImageToPage(data);
+        if (msg.success==true) {
+            addNewImageToPage(msg.responseData);
+        }//if
+        else {
+            //todo show error message
+        }//else
 
     }//uploadImageSuccess
 
@@ -82,42 +90,24 @@
 
     function addNewImageToPage(data) {
         //TODO create a copy of newImage template and add it to page
-        var newImage;
+        var responseImage = "data:image/jpg;base64," + data.image;
+        var template = $('#addedImage').html();
 
-        data = {
-            imageId: data.imageId,
-            imageSrc: data.imageSrc
+        templateData = {
+            imageId: data.imageFileName,
+            imageSrc: responseImage
         } //data
 
-        var html = Mustache.to_html(template, data);
-        $("#adPlaceHolder").append(html);
+        var html = Mustache.to_html(template, templateData);
 
-
-
-        $("#loadedImageView").append(newImage);
+        $("#loadedImageView").append(html);
     }//addNewImageToPage
 
     function serverResult(msg) {
         $("#labelUploadResult").html(msg);
     }//serverResult
 
-    function addNewImageDivToPage(divId, imageSrc) {
-        var $newdiv1 = $("<div id= '" + divId + "' class='col-sm-2'></div>");
-        var $image = $("<img class='img-rounded img-responsive'  src=\"" + imageSrc + "\"/>");
-        var $button = $("<input type='button' class='btn btn-primary btn-block' value='حذف' />");
-        $button.on("click", { imageId: divId }, removeImageFromSession);
-        $newdiv1.append($image);
-        $newdiv1.append($button);
-        var ImagePlaceHolder = $("#<%=loadedImageView.ClientID%>");
-        ImagePlaceHolder.append($newdiv1);
-    }//end addNewImageDivToPage
-
-
-
-
-
-
-
+    
 
     function removeImageFromSession(event) {
         var form_data = new FormData();                  // Creating object of FormData class

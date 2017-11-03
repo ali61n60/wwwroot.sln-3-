@@ -86,7 +86,7 @@ namespace RepositoryStd
                             {
                                 if (fileStream.CanRead)
                                 {
-                                    var bytesToRead = new byte[fileStream.Length];
+                                    byte[] bytesToRead = new byte[fileStream.Length];
                                     fileStream.Read(bytesToRead, 0, (int)fileStream.Length);
                                     firstAdvertisementImage = Convert.ToBase64String(bytesToRead);
                                 }

@@ -181,7 +181,10 @@ namespace MvcMain.Controllers
         public async Task<ResponseBase<UploadedImage>> UploadFile()
         {
             string errorCode = "AdApiController.UploadFile";
-            ResponseBase<UploadedImage> response =new ResponseBase<UploadedImage>();
+            ResponseBase<UploadedImage> response =new ResponseBase<UploadedImage>()
+            {
+                ResponseData = new UploadedImage()
+            };
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
@@ -193,6 +196,8 @@ namespace MvcMain.Controllers
                     response.SetFailureResponse(thumbnailResponse.Message,errorCode+" ,"+thumbnailResponse.ErrorCode);
                     return response;
                 }
+                response.ResponseData.Image = Convert.ToBase64String(thumbnailResponse.ResponseData);
+                response.ResponseData.ImageFileName = "ToBeSet";
 
                 await _imageRepository.SaveTempFile(uploadedFile,thumbnailResponse.ResponseData, user.Email);
                 response.SetSuccessResponse("files saved in temp folder");
