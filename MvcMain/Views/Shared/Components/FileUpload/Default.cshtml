@@ -3,12 +3,11 @@
 <div class="row well">
     <div class="col-sm-4 col-sm-push-8 text-right">
         <label>ارسال عکس</label>
-        <button id="callServer" type="button">Call Server</button>
         <br />
         <input id="FileUpload1" type="file"  class="btn btn-info btn-block" />
         <br/>
-        <input id="files" type="file" name="files" multiple />
-        <button id="upload" type="button"  >Upload Selected Files</button>
+        <input id="files" type="file" name="files" />
+        <button id="upload" type="button"  >ارسال عکس</button>
 
         <br />
         <div id="labelUploadResult"></div>
@@ -23,19 +22,7 @@
     $(document).ready(function () {
         //$("#FileUpload1").change(uploadImage); //set event handler for change event on file upload element
         // recreateLoadedImages(); // if page reloads, show added images
-        $("#callServer").on("click",
-            function () {
-                var $userInput = {};
-                $.ajax({
-                    type: "GET", //GET or POST or PUT or DELETE verb
-                    url: "/api/AdApi/UploadFile",
-                    data: JSON.stringify($userInput), //Data sent to server
-                    //contentType: 'application/json', // content type sent to server
-                    success: serverResult,//On Successfull service call
-                    error: serverResult// When Service call fails
-                });//.ajax
-            }); //on click
-
+       
         $("#upload").click(function (evt) {
             var fileUpload = $("#files").get(0);
             var files = fileUpload.files;
