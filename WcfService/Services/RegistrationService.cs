@@ -10,7 +10,7 @@ using Repository;
 using Repository.Messages;
 using WcfService.IOC;
 using WcfService.Messages;
-using CommonServices;
+
 
 
 namespace WcfService.Services
@@ -121,7 +121,7 @@ namespace WcfService.Services
         public ResponseBase ForgotPassword(string username)
         {
             
-            IEmail email = Bootstrapper.container.GetInstance<IEmail>();
+           // IEmail email = Bootstrapper.container.GetInstance<IEmail>();
             string errorCode = "RegistrationService.ForgotPassword";
             ResponseBase response = new ResponseBase();
             RepositoryResponse repositoryResponse;
@@ -157,7 +157,7 @@ namespace WcfService.Services
             string message = messaBuilder.ToString();
             try
             {
-                email.SendEmail(username, message, "پاسخ به درخواست کلمه عبور");
+               // email.SendEmail(username, message, "پاسخ به درخواست کلمه عبور");
                 response.SetSuccessResponse("کلمه عبور به ایمیل شما ارسال شد");
             }
             catch (Exception ex)
