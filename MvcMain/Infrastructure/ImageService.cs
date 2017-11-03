@@ -5,8 +5,10 @@ using System.IO;
 //using System.Drawing.Drawing2D;
 //using System.Drawing.Imaging;
 using ModelStd.Services;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Formats.Jpeg;
 
-namespace WcfService.Services
+namespace Infrastructure
 {
     public static class ImageService
     {
@@ -16,8 +18,7 @@ namespace WcfService.Services
             string errorCode = "ImageService.ConvertImage";
             try
             {                
-                convertResponse.ResponseData = GetThumbnailsFromStream
-                    (newWidth, newHeight, sourcePath);
+                convertResponse.ResponseData = GetThumbnailsFromStream(newWidth, newHeight, sourcePath);
                 convertResponse.Success = true;
                 convertResponse.Message = "Successfully converted";
             }
@@ -31,18 +32,14 @@ namespace WcfService.Services
 
         private static byte[] GetThumbnailsFromStream(int newWidth, int newHeight, Stream sourcePath)
         {
-            //Image image = Image.FromStream(sourcePath);
-            //Bitmap thumbnailImg = new Bitmap(newWidth, newHeight);
-            //Graphics thumbGraph = Graphics.FromImage(thumbnailImg);
-            //Rectangle imageRectangle = new Rectangle(0, 0, newWidth, newHeight);
-            MemoryStream ms = new MemoryStream();
-
-            //thumbGraph.CompositingQuality = CompositingQuality.HighSpeed;
-            //thumbGraph.SmoothingMode = SmoothingMode.HighSpeed;
-            //thumbGraph.InterpolationMode = InterpolationMode.Low;
-            //thumbGraph.DrawImage(image, imageRectangle);
-            //thumbnailImg.Save(ms, ImageFormat.Jpeg);
-            return ms.ToArray();
+            MemoryStream memoryStream = new MemoryStream();
+            using (Image<Rgba32> image = Image.Load(sourcePath))
+            {
+                image.Mutate(x => x.Resize(newWidth, newHeight));
+                image.Save(memoryStream,new JpegEncoder());
+                
+            }
+            return memoryStream.ToArray();
         }
     }
 }

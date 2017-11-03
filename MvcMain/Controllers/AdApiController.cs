@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Infrastructure;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -184,8 +185,16 @@ namespace MvcMain.Controllers
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                IFormFileCollection files = Request.Form.Files;
-                await _imageRepository.SaveTempFile(files, user.Email);
+                IFormFile uploadedFile = Request.Form.Files[0];
+                //TODO create a thumbnail file from uploadedFile
+                ResponseBase<byte[]> thumbnailResponse= ImageService.ConvertImage(100, 100, uploadedFile.OpenReadStream());
+                if (!thumbnailResponse.Success)
+                {
+                    response.SetFailureResponse(thumbnailResponse.Message,errorCode+" ,"+thumbnailResponse.ErrorCode);
+                    return response;
+                }
+
+                await _imageRepository.SaveTempFile(uploadedFile,thumbnailResponse.ResponseData, user.Email);
                 response.SetSuccessResponse("files saved in temp folder");
             }
             catch (Exception ex)

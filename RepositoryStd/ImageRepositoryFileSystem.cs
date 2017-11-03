@@ -27,7 +27,7 @@ namespace RepositoryStd
                     string fullFileName = directoryPathString + "/" + fileName++ + ".jpeg";
                     using (FileStream imageFileStream = File.Create(fullFileName))
                     {
-                        var byteImage = Convert.FromBase64String(Images[i]);
+                        byte[] byteImage = Convert.FromBase64String(Images[i]);
                         imageFileStream.Write(byteImage, 0, byteImage.Length);
                     }
                 }
@@ -134,24 +134,24 @@ namespace RepositoryStd
             return maxImageSizeInByte;
         }
 
-        public async Task SaveTempFile(IFormFileCollection files, string userEmail)
+        public async Task SaveTempFile(IFormFile file, byte[] thumbnailFile, string userEmail)
         {
-            long size = 0;
             string tempFilesDirectoryPath = _directoryPath + "TempFiles/" + userEmail;
             if (!Directory.Exists(tempFilesDirectoryPath))
                 Directory.CreateDirectory(tempFilesDirectoryPath);
-
-
-            foreach (IFormFile file in files)
+            string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            string thumbnailFileName = "thumbnail-" + filename;
+            filename = tempFilesDirectoryPath + $@"\{filename}";
+            thumbnailFileName = tempFilesDirectoryPath + $@"\{thumbnailFileName}";
+            using (FileStream fs = File.Create(filename))
             {
-                string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-                filename = tempFilesDirectoryPath + $@"\{filename}";
-                size += file.Length;
-                using (FileStream fs = File.Create(filename))
-                {
-                    file.CopyTo(fs);
-                    fs.Flush();
-                }
+                file.CopyTo(fs);
+                fs.Flush();
+            }
+            using (FileStream fs=File.Create(thumbnailFileName))
+            {
+                fs.Write(thumbnailFile,0,thumbnailFile.Length);
+                fs.Flush();
             }
         }
     }

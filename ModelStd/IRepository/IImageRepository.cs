@@ -12,6 +12,6 @@ namespace ModelStd.IRepository
        void RemoveAdvertisementImages(Guid advertisementGuid);
        int MaximumNumberOfImagesPerAdvertisement();
        int MaximumImageSizeInByte();
-       Task SaveTempFile(IFormFileCollection files, string userEmail);
+       Task SaveTempFile(IFormFile file, byte[] thumbnailFile, string userEmail);
    }
 }
