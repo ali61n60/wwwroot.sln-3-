@@ -11,7 +11,7 @@
         this.age = age;
     }
 
-    greetMe() {
+    greetMe():void {
         console.log(`Hello ${this.firstName} ${this.lastName}`);
     }
 }

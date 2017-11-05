@@ -37,6 +37,8 @@
     <Content Include="wwwroot\js\Home\index.js" />
     <Content Include="wwwroot\js\Home\newAd.js" />
     <Content Include="wwwroot\js\site.js" />
+    <Content Include="wwwroot\js\TypeScript\inheritance.ts" />
+    <Content Include="wwwroot\js\TypeScript\interfaces.ts" />
     <Content Include="wwwroot\js\TypeScript\lambda.ts" />
     <Content Include="wwwroot\js\TypeScript\numberDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\numDemo.ts" />
