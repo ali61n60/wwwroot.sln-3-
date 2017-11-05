@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\js\TypeScript\anyDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\booleanDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\enumDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\HelloWorld.ts" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
@@ -33,7 +35,23 @@
     <Content Include="wwwroot\js\Home\newAd.js" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\js\TypeScript\numberDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\numDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\stringDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js.map" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\booleanDemo.js" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\booleanDemo.js.map" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\booleanDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\enumDemo.js" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\enumDemo.js.map" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\enumDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\numberDemo.js" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\numberDemo.js.map" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\numberDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\stringDemo.js" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\stringDemo.js.map" />
+    <Content Include="wwwroot\js\TypeScript\TypesDemo\stringDemo.ts" />
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\AUTHORS.txt" />
     <Content Include="wwwroot\lib\jquery\bower.json" />
