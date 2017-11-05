@@ -150,6 +150,7 @@
     <Content Include="wwwroot\lib\jquery\src\var\toString.js" />
     <Content Include="wwwroot\lib\jquery\src\wrap.js" />
     <Content Include="wwwroot\Resources\Images\loader.gif" />
+    <Content Include="wwwroot\TypeScript\HelloWorld.ts" />
   </ItemGroup>
 
   <ItemGroup>
