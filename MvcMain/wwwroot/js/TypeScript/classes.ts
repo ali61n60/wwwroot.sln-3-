@@ -10,4 +10,11 @@
         this.email = email;
         this.age = age;
     }
+
+    greetMe() {
+        console.log(`Hello ${this.firstName} ${this.lastName}`);
+    }
 }
+
+let p = new Person("Ali", "Nejati", "ali62n62@yahoo.com", 35);
+p.greetMe();

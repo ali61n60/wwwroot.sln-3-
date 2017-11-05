@@ -9,6 +9,7 @@
     <Content Include="wwwroot\js\TypeScript\anyDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\booleanDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\classes.ts" />
+    <Content Include="wwwroot\js\TypeScript\classes2.ts" />
     <Content Include="wwwroot\js\TypeScript\defaultParams.ts" />
     <Content Include="wwwroot\js\TypeScript\enumDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\HelloWorld.ts" />
