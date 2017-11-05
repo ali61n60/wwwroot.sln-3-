@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\js\TypeScript\booleanDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\HelloWorld.ts" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.ttf" />
@@ -30,6 +32,8 @@
     <Content Include="wwwroot\js\Home\index.js" />
     <Content Include="wwwroot\js\Home\newAd.js" />
     <Content Include="wwwroot\js\site.js" />
+    <Content Include="wwwroot\js\TypeScript\numberDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\stringDemo.ts" />
     <Content Include="wwwroot\lib\jquery\.bower.json" />
     <Content Include="wwwroot\lib\jquery\AUTHORS.txt" />
     <Content Include="wwwroot\lib\jquery\bower.json" />
@@ -160,6 +164,10 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\TypeScript\HelloWorld.ts" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
