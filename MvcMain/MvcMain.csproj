@@ -8,6 +8,8 @@
   <ItemGroup>
     <Content Include="wwwroot\js\TypeScript\anyDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\booleanDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\classes.ts" />
+    <Content Include="wwwroot\js\TypeScript\defaultParams.ts" />
     <Content Include="wwwroot\js\TypeScript\enumDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\HelloWorld.ts" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.eot" />
@@ -34,8 +36,12 @@
     <Content Include="wwwroot\js\Home\index.js" />
     <Content Include="wwwroot\js\Home\newAd.js" />
     <Content Include="wwwroot\js\site.js" />
+    <Content Include="wwwroot\js\TypeScript\lambda.ts" />
     <Content Include="wwwroot\js\TypeScript\numberDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\numDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\optionalParams.ts" />
+    <Content Include="wwwroot\js\TypeScript\overloading.ts" />
+    <Content Include="wwwroot\js\TypeScript\restParams.ts" />
     <Content Include="wwwroot\js\TypeScript\stringDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js" />
     <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js.map" />
