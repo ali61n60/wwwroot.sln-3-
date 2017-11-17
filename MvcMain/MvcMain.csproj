@@ -7,12 +7,16 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="wwwroot\js\TypeScript\anyDemo.ts" />
-    <Content Include="wwwroot\js\TypeScript\booleanDemo.ts" />
+    <Compile Remove="wwwroot\TypeScript\**" />
+    <Content Remove="wwwroot\TypeScript\**" />
+    <EmbeddedResource Remove="wwwroot\TypeScript\**" />
+    <None Remove="wwwroot\TypeScript\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Include="wwwroot\js\TypeScript\classes.ts" />
     <Content Include="wwwroot\js\TypeScript\classes2.ts" />
     <Content Include="wwwroot\js\TypeScript\defaultParams.ts" />
-    <Content Include="wwwroot\js\TypeScript\enumDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\HelloWorld.ts" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
@@ -37,16 +41,14 @@
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\js\Home\index.js" />
     <Content Include="wwwroot\js\Home\newAd.js" />
-    <Content Include="wwwroot\js\site.js" />
+    <Compile Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\js\TypeScript\inheritance.ts" />
     <Content Include="wwwroot\js\TypeScript\interfaces.ts" />
     <Content Include="wwwroot\js\TypeScript\lambda.ts" />
-    <Content Include="wwwroot\js\TypeScript\numberDemo.ts" />
-    <Content Include="wwwroot\js\TypeScript\numDemo.ts" />
     <Content Include="wwwroot\js\TypeScript\optionalParams.ts" />
     <Content Include="wwwroot\js\TypeScript\overloading.ts" />
     <Content Include="wwwroot\js\TypeScript\restParams.ts" />
-    <Content Include="wwwroot\js\TypeScript\stringDemo.ts" />
+    <Content Include="wwwroot\js\TypeScript\testJquery.ts" />
     <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js" />
     <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js.map" />
     <Content Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.ts" />
@@ -182,7 +184,6 @@
     <Content Include="wwwroot\lib\jquery\src\var\toString.js" />
     <Content Include="wwwroot\lib\jquery\src\wrap.js" />
     <Content Include="wwwroot\Resources\Images\loader.gif" />
-    <Content Include="wwwroot\TypeScript\HelloWorld.ts" />
   </ItemGroup>
 
   <ItemGroup>
