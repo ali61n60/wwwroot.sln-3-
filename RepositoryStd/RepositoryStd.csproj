@@ -60,10 +60,4 @@
     <ProjectReference Include="..\ModelStd\ModelStd.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Reference Include="SQLitePCLRaw.core">
-      <HintPath>..\packages\SQLitePCLRaw.core.1.1.8\lib\MonoAndroid\SQLitePCLRaw.core.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-
 </Project>
