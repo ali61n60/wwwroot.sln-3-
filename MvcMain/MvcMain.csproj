@@ -8,9 +8,17 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\TypeScript\**" />
+    <Compile Remove="wwwroot\typings\**" />
     <Content Remove="wwwroot\TypeScript\**" />
+    <Content Remove="wwwroot\typings\**" />
     <EmbeddedResource Remove="wwwroot\TypeScript\**" />
+    <EmbeddedResource Remove="wwwroot\typings\**" />
     <None Remove="wwwroot\TypeScript\**" />
+    <None Remove="wwwroot\typings\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot/typings\globals\jquery\index.d.ts" />
   </ItemGroup>
 
   <ItemGroup>
@@ -199,6 +207,7 @@
     <None Include="wwwroot\js\TypeScript\HelloWorld.ts" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="jquery.TypeScript.DefinitelyTyped" Version="3.1.2" />
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="1.1.2" />
