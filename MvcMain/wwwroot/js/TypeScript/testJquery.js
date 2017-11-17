@@ -1,5 +1,5 @@
-// <reference path ="../../typings/globals/jquery/index.d.ts"/>
-var MyTestClss = (function () {
+/// <reference path ="../../typings/globals/jquery/index.d.ts"/>
+var MyTestClss = /** @class */ (function () {
     function MyTestClss() {
     }
     MyTestClss.prototype.test = function () {

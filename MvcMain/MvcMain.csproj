@@ -8,17 +8,9 @@
 
   <ItemGroup>
     <Compile Remove="wwwroot\TypeScript\**" />
-    <Compile Remove="wwwroot\typings\**" />
     <Content Remove="wwwroot\TypeScript\**" />
-    <Content Remove="wwwroot\typings\**" />
     <EmbeddedResource Remove="wwwroot\TypeScript\**" />
-    <EmbeddedResource Remove="wwwroot\typings\**" />
     <None Remove="wwwroot\TypeScript\**" />
-    <None Remove="wwwroot\typings\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot/typings\globals\jquery\index.d.ts" />
   </ItemGroup>
 
   <ItemGroup>
