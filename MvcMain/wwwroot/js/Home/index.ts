@@ -45,14 +45,16 @@ class ServerCaller {
         //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
         userInput.RequestIndex = this._requestIndex;
         //notifyUserAjaxCallStarted();
-
+        let self = this;
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
             url: "api/AdApi/GetAdvertisementCommon",
             data: JSON.stringify(userInput), //Data sent to server
             contentType: 'application/json', // content type sent to server
-            success: this.onSuccessGetItemsFromServer,//On Successfull service call
-            error: this.onErrorGetItemsFromServer // When Service call fails
+            success: function(arg) {
+                 self.onSuccessGetItemsFromServer(arg)
+            },//On Successfull service call
+            error: self.onErrorGetItemsFromServer // When Service call fails
 // When Service call fails
         });//.ajax
     }//GetAdItemsFromServer
@@ -103,17 +105,17 @@ class ServerCaller {
 
 
 
-$(document).ready(function () {
+$(document).ready(function ()  {
     let serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click",
         function (event) {
             event.preventDefault();
             var categoryId = parseInt($("#category0").val().toString());
-            $("#minPrice").val();
-            $("#maxPrice").val();
-            $("#orderBy").val();
+            var minPrice=parseInt($("#minPrice").val().toString());
+            var maxPrice=parseInt($("#maxPrice").val().toString());
+            var orderBy= $("#orderBy").val().toString();
 
-            serverCaller.GetAdItemsFromServer(categoryId);
+            serverCaller.GetAdItemsFromServer(categoryId,minPrice,maxPrice,orderBy);
         }); //click
 });//ready
 
@@ -131,7 +133,7 @@ $(document).ready(function () {
 //Category Selection
 $(document).ready(function () {
     //Add first level categories
-    var $allCategoriesString = $("#allCategories").val();
+    var $allCategoriesString = $("#allCategories").val().toString();
     var $allCategories = $.parseJSON($allCategoriesString);
     $allCategories.forEach(function (category) {
         if (category.parentCategoryId === 0) {

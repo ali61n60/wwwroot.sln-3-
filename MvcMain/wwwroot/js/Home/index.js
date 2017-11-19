@@ -1,9 +1,11 @@
-var UserInput = (function () {
+/// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
+/// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
+var UserInput = /** @class */ (function () {
     function UserInput() {
     }
     return UserInput;
 }());
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;
@@ -13,7 +15,7 @@ var ServerCaller = (function () {
         this._isServerCalled = false;
         this._numberOfStartServerCallNotification = 0;
     }
-    ServerCaller.prototype.GetAdItemsFromServer = function () {
+    ServerCaller.prototype.GetAdItemsFromServer = function (categoryId, minPrice, maxPrice, orderBy) {
         var userInput = new UserInput();
         if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)) {
             return;
@@ -26,20 +28,21 @@ var ServerCaller = (function () {
         userInput.Count = this._count;
         //TODO pass the object to the category selector element and let it fill the categoryId
         //OR call a method on category selector element to get categoryId
-        userInput.CategoryId = $("#category0").val(); //100 for cars
-        userInput.MinimumPrice = $("#minPrice").val();
-        userInput.MaximumPrice = $("#maxPrice").val();
-        userInput.OrderBy = $("#orderBy").val();
+        userInput.CategoryId = categoryId; //100 for cars
+        userInput.MinimumPrice = minPrice;
+        userInput.MaximumPrice = maxPrice;
+        userInput.OrderBy = orderBy;
         //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
         userInput.RequestIndex = this._requestIndex;
         //notifyUserAjaxCallStarted();
+        var self = this;
         $.ajax({
             type: "POST",
             url: "api/AdApi/GetAdvertisementCommon",
             data: JSON.stringify(userInput),
             contentType: 'application/json',
-            success: this.onSuccessGetItemsFromServer,
-            error: this.onErrorGetItemsFromServer // When Service call fails
+            success: function (arg) { self.onSuccessGetItemsFromServer(arg); },
+            error: self.onErrorGetItemsFromServer // When Service call fails
             // When Service call fails
         }); //.ajax
     }; //GetAdItemsFromServer
@@ -88,7 +91,11 @@ $(document).ready(function () {
     var serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click", function (event) {
         event.preventDefault();
-        serverCaller.GetAdItemsFromServer();
+        var categoryId = parseInt($("#category0").val().toString());
+        var minPrice = parseInt($("#minPrice").val().toString());
+        var maxPrice = parseInt($("#maxPrice").val().toString());
+        var orderBy = $("#orderBy").val().toString();
+        serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
     }); //click
 }); //ready
 $(document).ready(function () {
@@ -100,7 +107,7 @@ $(document).ready(function () {
 //Category Selection
 $(document).ready(function () {
     //Add first level categories
-    var $allCategoriesString = $("#allCategories").val();
+    var $allCategoriesString = $("#allCategories").val().toString();
     var $allCategories = $.parseJSON($allCategoriesString);
     $allCategories.forEach(function (category) {
         if (category.parentCategoryId === 0) {

@@ -1,4 +1,4 @@
-﻿//npm install--save @types/mustache
+﻿//npm install--save @types/mustache hello
 class Person {
     public firstName: string;
     public lastName: string;
