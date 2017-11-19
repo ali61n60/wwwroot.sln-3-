@@ -1,4 +1,5 @@
-var Person = (function () {
+//npm install--save @types/mustache
+var Person = /** @class */ (function () {
     function Person(fn, ln, email, age) {
         this.firstName = fn;
         this.lastName = ln;
