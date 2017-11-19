@@ -1,5 +1,5 @@
 // <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
-var MyTestClss = (function () {
+var MyTestClss = /** @class */ (function () {
     function MyTestClss() {
     }
     MyTestClss.prototype.test = function () {

@@ -32,7 +32,6 @@ var ServerCaller = /** @class */ (function () {
         userInput.MinimumPrice = minPrice;
         userInput.MaximumPrice = maxPrice;
         userInput.OrderBy = orderBy;
-        //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
         userInput.RequestIndex = this._requestIndex;
         //notifyUserAjaxCallStarted();
         var self = this;
@@ -41,7 +40,9 @@ var ServerCaller = /** @class */ (function () {
             url: "api/AdApi/GetAdvertisementCommon",
             data: JSON.stringify(userInput),
             contentType: 'application/json',
-            success: function (arg) { self.onSuccessGetItemsFromServer(arg); },
+            success: function (arg) {
+                self.onSuccessGetItemsFromServer(arg);
+            },
             error: self.onErrorGetItemsFromServer // When Service call fails
             // When Service call fails
         }); //.ajax
@@ -91,7 +92,7 @@ $(document).ready(function () {
     var serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click", function (event) {
         event.preventDefault();
-        var categoryId = parseInt($("#category0").val().toString());
+        var categoryId = new CategorySelection("categorySelector").GetSelectedCategoryId();
         var minPrice = parseInt($("#minPrice").val().toString());
         var maxPrice = parseInt($("#maxPrice").val().toString());
         var orderBy = $("#orderBy").val().toString();
@@ -104,6 +105,18 @@ $(document).ready(function () {
         $(this).find(".moreInfo").fadeToggle(250);
     }); //end on
 }); //end ready
+var CategorySelection = /** @class */ (function () {
+    function CategorySelection(parentDivId) {
+        this._parentDivId = parentDivId;
+    }
+    CategorySelection.prototype.GetSelectedCategoryId = function () {
+        var categoryId = parseInt($("#category0").val().toString());
+        if (categoryId === NaN)
+            categoryId = 0;
+        return categoryId;
+    };
+    return CategorySelection;
+}());
 //Category Selection
 $(document).ready(function () {
     //Add first level categories

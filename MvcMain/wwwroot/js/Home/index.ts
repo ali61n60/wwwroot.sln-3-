@@ -41,9 +41,8 @@ class ServerCaller {
         userInput.MinimumPrice =minPrice ;
         userInput.MaximumPrice = maxPrice;
         userInput.OrderBy = orderBy;
-
-        //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
         userInput.RequestIndex = this._requestIndex;
+
         //notifyUserAjaxCallStarted();
         let self = this;
         $.ajax({
@@ -110,7 +109,8 @@ $(document).ready(function ()  {
     $("#getAdFromServer").on("click",
         function (event) {
             event.preventDefault();
-            var categoryId = parseInt($("#category0").val().toString());
+            let categoryId = new CategorySelection("#categorySelector").GetSelectedCategoryId();
+            
             var minPrice=parseInt($("#minPrice").val().toString());
             var maxPrice=parseInt($("#maxPrice").val().toString());
             var orderBy= $("#orderBy").val().toString();
@@ -129,6 +129,23 @@ $(document).ready(function () {
     });//end on
 
 });//end ready
+
+
+class CategorySelection {
+    private _parentDivId: string;
+
+    constructor(parentDivId: string) {
+        this._parentDivId = parentDivId;
+    }
+
+    public GetSelectedCategoryId(): number {
+        var $category0 = $(this._parentDivId + " #category0");
+        let categoryId = parseInt($category0.val().toString());
+        if (categoryId === NaN)
+            categoryId = 0;
+        return categoryId;
+    }
+}
 
 //Category Selection
 $(document).ready(function () {
