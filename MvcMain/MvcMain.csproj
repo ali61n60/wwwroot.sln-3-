@@ -153,6 +153,10 @@
     <None Include="wwwroot\js\Home\index.js" />
     <None Include="wwwroot\js\Home\index.js.map" />
     <None Include="wwwroot\js\Home\newAd.js" />
+    <None Include="wwwroot\js\Home\SearchAdUserInput.js" />
+    <None Include="wwwroot\js\Home\SearchAdUserInput.js.map" />
+    <None Include="wwwroot\js\Home\ServerCaller.js" />
+    <None Include="wwwroot\js\Home\ServerCaller.js.map" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\js\TypeScript\classes.js" />
     <None Include="wwwroot\js\TypeScript\classes.js.map" />
@@ -468,6 +472,8 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\js\Home\index.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Home\SearchAdUserInput.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Home\ServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes2.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\defaultParams.ts" />
