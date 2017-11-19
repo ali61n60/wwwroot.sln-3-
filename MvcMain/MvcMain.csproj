@@ -113,7 +113,6 @@
     <None Include="wwwroot\css\sass\sassLearning\StyleSheet.scss" />
     <None Include="wwwroot\css\sass\site.scss" />
     <None Include="wwwroot\css\site.css.map" />
-    <None Include="wwwroot\js\Home\index.js" />
     <None Include="wwwroot\js\Home\newAd.js" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\js\TypeScript\classes.js" />
@@ -171,6 +170,7 @@
     <ProjectReference Include="..\RepositoryStd\RepositoryStd.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\js\Home\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes2.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\defaultParams.ts" />
