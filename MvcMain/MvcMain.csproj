@@ -20,6 +20,8 @@
     <Content Include="wwwroot\css\img\controls.png" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\css\site.min.css" />
+    <Content Include="wwwroot\package-lock.json" />
+    <Content Include="wwwroot\package.json" />
     <Content Include="wwwroot\Resources\Images\loader.gif" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast128.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast16.png" />
@@ -28,7 +30,6 @@
     <Content Include="wwwroot\Resources\Images\Logo\howcast32.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast512.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast64.png" />
-    <Content Include="wwwroot\typings\globals\jquery\typings.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -187,8 +188,6 @@
     <TypeScriptCompile Include="wwwroot\js\TypeScript\TypesDemo\enumDemo.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\TypesDemo\numberDemo.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\TypesDemo\stringDemo.ts" />
-    <TypeScriptCompile Include="wwwroot\typings\globals\jquery\index.d.ts" />
-    <TypeScriptCompile Include="wwwroot\typings\index.d.ts" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services" />

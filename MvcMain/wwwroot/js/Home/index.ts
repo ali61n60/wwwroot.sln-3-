@@ -46,10 +46,53 @@ class ServerCaller {
             url: "api/AdApi/GetAdvertisementCommon",
             data: JSON.stringify(userInput), //Data sent to server
             contentType: 'application/json', // content type sent to server
-            success: OnSuccessGetItemsFromServer,//On Successfull service call
-            error: OnErrorGetItemsFromServer// When Service call fails
+            success: this.onSuccessGetItemsFromServer,//On Successfull service call
+            error: this.onErrorGetItemsFromServer // When Service call fails
+// When Service call fails
         });//.ajax
-    }
+    }//GetAdItemsFromServer
+
+    private  onSuccessGetItemsFromServer(msg) {
+        //notifyUserAjaxCallFinished();
+        if (msg.success == true) {
+            if (msg.customDictionary["RequestIndex"] == this._requestIndex) {
+                this._start += parseInt(msg.customDictionary["numberOfItems"]);
+                var template = $('#singleAdItem').html();
+                var data;
+                for (var i = 0; i < msg.responseData.length; i++) {
+                    var adImage = null;
+                    if (msg.responseData[i].advertisementImages[0] != null) {
+                        adImage = "data:image/jpg;base64," + msg.responseData[i].advertisementImages[0];
+                    } //end if
+                    data = {
+                        AdvertisementId: msg.responseData[i].advertisementId,
+                        AdvertisementCategoryId: msg.responseData[i].advertisementCategoryId,
+                        AdvertisementCategory: msg.responseData[i].advertisementCategory,
+                        adImage: adImage,
+                        adPrice: msg.responseData[i].advertisementPrice.price, //todo check the price type
+                        AdvertisementTitle: msg.responseData[i].advertisementTitle,
+                        AdvertisementStatus: msg.responseData[i].advertisementStatus
+                        //adDate: msg.ResponseData[i].AdTime
+                    } //end data
+
+                    var html = Mustache.to_html(template, data);
+                    $("#adPlaceHolder").append(html);
+                } //end for
+            }//end if
+        }//end if
+        else {
+            //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+        }
+        this._isServerCalled = false;
+        this._requestIndex++;
+    }//end OnSuccessGetTimeFromServer
+
+    private onErrorGetItemsFromServer(XMLHttpRequest, textStatus, errorThrown) {
+        this._isServerCalled = false;
+        this._requestIndex++;
+        //notifyUserAjaxCallFinished();
+        //showErrorMessage(textStatus + " , " + errorThrown);
+    }//end OnErrorGetTimeFromServer
 }
 
 
@@ -65,50 +108,6 @@ $(document).ready(function () {
 });//ready
 
 
-    
-
-
-function OnSuccessGetItemsFromServer(msg) {
-    //notifyUserAjaxCallFinished();
-    if (msg.success == true) {
-        if (msg.customDictionary["RequestIndex"] == $requestIndex) {
-            $start += parseInt(msg.customDictionary["numberOfItems"]);
-            var template = $('#singleAdItem').html();
-            var data;
-            for (var i = 0; i < msg.responseData.length; i++) {
-                var adImage = null;
-                if (msg.responseData[i].advertisementImages[0] != null) {
-                    adImage = "data:image/jpg;base64," + msg.responseData[i].advertisementImages[0];
-                } //end if
-                data = {
-                    AdvertisementId: msg.responseData[i].advertisementId,
-                    AdvertisementCategoryId: msg.responseData[i].advertisementCategoryId,
-                    AdvertisementCategory: msg.responseData[i].advertisementCategory,
-                    adImage: adImage,
-                    adPrice: msg.responseData[i].advertisementPrice.price, //todo check the price type
-                    AdvertisementTitle: msg.responseData[i].advertisementTitle,
-                    AdvertisementStatus: msg.responseData[i].advertisementStatus
-                    //adDate: msg.ResponseData[i].AdTime
-                } //end data
-
-                var html = Mustache.to_html(template, data);
-                $("#adPlaceHolder").append(html);
-            } //end for
-        }//end if
-    }//end if
-    else {
-        //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
-    }
-    $isServerCalled = false;
-    $requestIndex++;
-}//end OnSuccessGetTimeFromServer
-
-function OnErrorGetItemsFromServer(XMLHttpRequest, textStatus, errorThrown) {
-    $isServerCalled = false;
-    $requestIndex++;
-    //notifyUserAjaxCallFinished();
-    //showErrorMessage(textStatus + " , " + errorThrown);
-}//end OnErrorGetTimeFromServer
 
 $(document).ready(function () {
 
@@ -136,7 +135,7 @@ $(document).ready(function () {
 
     $("#category0").change(function () {
         $("#category1").remove();
-        $selectedId = $(this).val();
+        let $selectedId = $(this).val();
         var $select = $("<br/> <select id='category1' class='form-control'></select>")
             .append("<option value='0'>تمام آگهی ها</option>");
         $allCategories.forEach(function (category) {
