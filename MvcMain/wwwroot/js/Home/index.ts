@@ -1,4 +1,6 @@
-﻿class UserInput {
+﻿/// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
+/// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
+class UserInput {
     public StartIndex: number;
     public Count: number;
     public CategoryId: number;
@@ -18,7 +20,10 @@ class ServerCaller {
     private _isServerCalled:boolean = false;
     private _numberOfStartServerCallNotification: number = 0;
 
-    public GetAdItemsFromServer(): void {
+    public GetAdItemsFromServer(categoryId: number,
+        minPrice: number,
+        maxPrice: number,
+        orderBy:string): void {
         let userInput = new UserInput();
         if (this._isServerCalled && (this._previousRequestIndex ===this._requestIndex)) {//a call is sent but no answer yet
             return;
@@ -32,10 +37,10 @@ class ServerCaller {
         userInput.Count = this._count;
         //TODO pass the object to the category selector element and let it fill the categoryId
         //OR call a method on category selector element to get categoryId
-        userInput.CategoryId = $("#category0").val();//100 for cars
-        userInput.MinimumPrice = $("#minPrice").val();
-        userInput.MaximumPrice = $("#maxPrice").val();
-        userInput.OrderBy = $("#orderBy").val();
+        userInput.CategoryId =categoryId ;//100 for cars
+        userInput.MinimumPrice =minPrice ;
+        userInput.MaximumPrice = maxPrice;
+        userInput.OrderBy = orderBy;
 
         //var $myDictionary={};// = searchCriteriaObject.getSearchOptionDictionary();
         userInput.RequestIndex = this._requestIndex;
@@ -103,7 +108,12 @@ $(document).ready(function () {
     $("#getAdFromServer").on("click",
         function (event) {
             event.preventDefault();
-            serverCaller.GetAdItemsFromServer();
+            var categoryId = parseInt($("#category0").val().toString());
+            $("#minPrice").val();
+            $("#maxPrice").val();
+            $("#orderBy").val();
+
+            serverCaller.GetAdItemsFromServer(categoryId);
         }); //click
 });//ready
 
