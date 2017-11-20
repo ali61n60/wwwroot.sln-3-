@@ -1,8 +1,5 @@
-"use strict";
 /// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
-Object.defineProperty(exports, "__esModule", { value: true });
-var SearchAdUserInputFile = require("./SearchAdUserInput");
-var SearchAdUserInput = SearchAdUserInputFile.SearchAdUserInput;
+/// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
 var ServerCaller = (function () {
     function ServerCaller() {
         this._initialStart = 1;
@@ -86,5 +83,4 @@ var ServerCaller = (function () {
     }; //end OnErrorGetTimeFromServer
     return ServerCaller;
 }());
-exports.ServerCaller = ServerCaller;
 //# sourceMappingURL=ServerCaller.js.map

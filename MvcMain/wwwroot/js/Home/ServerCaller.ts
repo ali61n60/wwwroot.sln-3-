@@ -1,10 +1,8 @@
 ﻿/// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
-
-import SearchAdUserInputFile = require("./SearchAdUserInput");
-import SearchAdUserInput = SearchAdUserInputFile.SearchAdUserInput;
+/// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
 
 
-export class ServerCaller {
+ class ServerCaller {
         private _initialStart: number = 1;
         private _start: number = 1;
         private _count: number = 5;

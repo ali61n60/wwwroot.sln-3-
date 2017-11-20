@@ -1,9 +1,5 @@
-"use strict";
 /// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
 /// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
-Object.defineProperty(exports, "__esModule", { value: true });
-var ServerCallerFile = require("./ServerCaller");
-var ServerCaller = ServerCallerFile.ServerCaller;
 $(document).ready(function () {
     var serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click", function (event) {

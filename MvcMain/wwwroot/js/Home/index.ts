@@ -1,10 +1,10 @@
 ﻿/// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
 /// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
 
-import ServerCallerFile = require("./ServerCaller");
-import ServerCaller = ServerCallerFile.ServerCaller;
 
-$(document).ready(function ()  {
+
+
+$(document).ready(function () {
     let serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click",
         function (event) {

@@ -1,4 +1,4 @@
-﻿export class SearchAdUserInput {
+﻿class SearchAdUserInput {
     public StartIndex: number;
     public Count: number;
     public CategoryId: number;
@@ -7,3 +7,4 @@
     public OrderBy: string;
     public RequestIndex: number;
 }
+
