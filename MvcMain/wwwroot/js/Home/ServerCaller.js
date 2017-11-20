@@ -1,6 +1,6 @@
 /// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
 /// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;

@@ -1,4 +1,4 @@
-var SearchAdUserInput = (function () {
+var SearchAdUserInput = /** @class */ (function () {
     function SearchAdUserInput() {
     }
     return SearchAdUserInput;

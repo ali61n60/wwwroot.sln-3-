@@ -1,5 +1,4 @@
 /// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
-/// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
 $(document).ready(function () {
     var serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click", function (event) {
@@ -17,7 +16,7 @@ $(document).ready(function () {
         $(this).find(".moreInfo").fadeToggle(250);
     }); //end on
 }); //end ready
-var CategorySelection = (function () {
+var CategorySelection = /** @class */ (function () {
     function CategorySelection(parentDivId) {
         this._parentDivId = parentDivId;
     }
@@ -61,7 +60,7 @@ $(document).ready(function () {
     }); //change
 }); //ready
 //# sourceMappingURL=index.js.map
-var SearchAdUserInput = (function () {
+var SearchAdUserInput = /** @class */ (function () {
     function SearchAdUserInput() {
     }
     return SearchAdUserInput;
@@ -69,7 +68,7 @@ var SearchAdUserInput = (function () {
 //# sourceMappingURL=SearchAdUserInput.js.map
 /// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
 /// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;

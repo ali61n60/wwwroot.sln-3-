@@ -1,5 +1,4 @@
 /// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
-/// <reference path ="../../node_modules/@types/mustache/index.d.ts"/>
 $(document).ready(function () {
     var serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click", function (event) {
@@ -17,7 +16,7 @@ $(document).ready(function () {
         $(this).find(".moreInfo").fadeToggle(250);
     }); //end on
 }); //end ready
-var CategorySelection = (function () {
+var CategorySelection = /** @class */ (function () {
     function CategorySelection(parentDivId) {
         this._parentDivId = parentDivId;
     }
