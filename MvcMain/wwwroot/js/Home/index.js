@@ -3,7 +3,7 @@ $(document).ready(function () {
     var serverCaller = new ServerCaller();
     $("#getAdFromServer").on("click", function (event) {
         event.preventDefault();
-        var categoryId = new CategorySelection("#categorySelector").GetSelectedCategoryId();
+        var categoryId = new CategorySelection("#categorySelector", null).GetSelectedCategoryId();
         var minPrice = parseInt($("#minPrice").val().toString());
         var maxPrice = parseInt($("#maxPrice").val().toString());
         var orderBy = $("#orderBy").val().toString();
@@ -16,47 +16,4 @@ $(document).ready(function () {
         $(this).find(".moreInfo").fadeToggle(250);
     }); //end on
 }); //end ready
-var CategorySelection = /** @class */ (function () {
-    function CategorySelection(parentDivId) {
-        this._parentDivId = parentDivId;
-    }
-    CategorySelection.prototype.GetSelectedCategoryId = function () {
-        var $category0 = $(this._parentDivId + " #category0");
-        var categoryId = parseInt($category0.val().toString());
-        if (categoryId === NaN)
-            categoryId = 0;
-        return categoryId;
-    };
-    return CategorySelection;
-}());
-//Category Selection
-$(document).ready(function () {
-    //Add first level categories
-    var $allCategoriesString = $("#allCategories").val().toString();
-    var $allCategories = $.parseJSON($allCategoriesString);
-    $allCategories.forEach(function (category) {
-        if (category.parentCategoryId === 0) {
-            $("#category0").append($("<option>", {
-                value: category.categoryId,
-                text: category.categoryName
-            }));
-        } //if
-    }); //forEach
-    $("#category0").change(function () {
-        $("#category1").remove();
-        var $selectedId = $(this).val();
-        var $select = $("<br/> <select id='category1' class='form-control'></select>")
-            .append("<option value='0'>تمام آگهی ها</option>");
-        $allCategories.forEach(function (category) {
-            if (category.parentCategoryId == $selectedId) {
-                $select.append($("<option>", {
-                    value: category.categoryId,
-                    text: category.categoryName
-                }));
-            }
-        }); //forEach
-        $("#categorySelector").append($select);
-        //TODO show second select  and populate it with data from server
-    }); //change
-}); //ready
 //# sourceMappingURL=index.js.map

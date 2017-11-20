@@ -150,6 +150,8 @@
     <None Include="wwwroot\css\sass\sassLearning\StyleSheet.scss" />
     <None Include="wwwroot\css\sass\site.scss" />
     <None Include="wwwroot\css\site.css.map" />
+    <None Include="wwwroot\js\Components\CategorySelection.js" />
+    <None Include="wwwroot\js\Components\CategorySelection.js.map" />
     <None Include="wwwroot\js\Home\bundleSearchAd.js" />
     <None Include="wwwroot\js\Home\bundleSearchAd.min.js" />
     <None Include="wwwroot\js\Home\index.js" />
@@ -473,6 +475,7 @@
     <ProjectReference Include="..\RepositoryStd\RepositoryStd.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\js\Components\CategorySelection.ts" />
     <TypeScriptCompile Include="wwwroot\js\Home\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\Home\SearchAdUserInput.ts" />
     <TypeScriptCompile Include="wwwroot\js\Home\ServerCaller.ts" />
