@@ -1,9 +1,9 @@
-var Category = /** @class */ (function () {
+var Category = (function () {
     function Category() {
     }
     return Category;
 }());
-var CategorySelection = /** @class */ (function () {
+var CategorySelection = (function () {
     function CategorySelection(parentDivId, allCategories) {
         this._firstLevelSelectId = "category1";
         this._secondLevelSelectId = "category2";
