@@ -66,6 +66,7 @@
     <Content Include="wwwroot\Resources\Images\Logo\howcast32.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast512.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast64.png" />
+    <Content Include="wwwroot\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>

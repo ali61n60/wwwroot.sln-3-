@@ -108,7 +108,7 @@ class CategorySelection {
 }
 
 //Category Selection
-$(document).ready(function () {
+$(document).ready(function () {   
     //Add first level categories
     var allCategoriesString = $("#allCategories").val().toString();
     var allCategories = $.parseJSON(allCategoriesString) as Category[];
