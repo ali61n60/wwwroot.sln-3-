@@ -10,6 +10,7 @@ function person(value: (string | number | boolean)): string {
         case "boolean":
             return value ? "I am married" : "I am not married";
     }
+    return "";
 }
 
 let personAnswer = person("Ali Nejati");

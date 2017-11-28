@@ -4,7 +4,7 @@
 }
 
 let myAnswer = addit(10, 20, 30);
-console.log("adding three numbers: " + answer);
+console.log("adding three numbers: " + myAnswer);
 
 myAnswer = addit(10, 20);
-console.log("adding two numbers: " + answer);
+console.log("adding two numbers: " + myAnswer);
