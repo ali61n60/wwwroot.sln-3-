@@ -16,6 +16,12 @@ var Person = (function () {
         this.email = email;
         this.age = age;
     }
+    Object.defineProperty(Person.prototype, "Age", {
+        get: function () { return this.age; },
+        set: function (value) { this.age = value; },
+        enumerable: true,
+        configurable: true
+    });
     Person.prototype.greetMe = function () {
         console.log("Hello " + this.firstName + " " + this.lastName);
     };

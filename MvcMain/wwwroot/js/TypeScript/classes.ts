@@ -12,6 +12,9 @@ class Person {
         this.age = age;
     }
 
+    get Age() { return this.age; }
+    set Age(value:number) { this.age = value; }
+
     greetMe():void {
         console.log(`Hello ${this.firstName} ${this.lastName}`);
     }
