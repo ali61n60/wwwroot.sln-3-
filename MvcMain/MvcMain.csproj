@@ -373,7 +373,6 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
-    <Folder Include="wwwroot\js\LearnGulp\dist\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -465,6 +464,8 @@
     <None Include="wwwroot\js\LearnGulp\Base2.js" />
     <None Include="wwwroot\js\LearnGulp\Base2.js.map" />
     <None Include="wwwroot\js\LearnGulp\bundle.js" />
+    <None Include="wwwroot\js\LearnGulp\dist\greet.js" />
+    <None Include="wwwroot\js\LearnGulp\dist\main.js" />
     <None Include="wwwroot\js\LearnGulp\gulpfile.js" />
     <None Include="wwwroot\js\LearnGulp\node_modules\.bin\gulp" />
     <None Include="wwwroot\js\LearnGulp\node_modules\.bin\gulp.cmd" />
@@ -2196,6 +2197,7 @@
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\node_modules\typescript\lib\tsserverlibrary.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\node_modules\typescript\lib\typescript.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\node_modules\typescript\lib\typescriptServices.d.ts" />
+    <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\greet.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\main.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\TestApp.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\TestApp2.ts" />
