@@ -1,4 +1,4 @@
-﻿class Base {
+﻿export  class Base {
 
     constructor() {
     }
@@ -8,4 +8,4 @@
     }
 }
 
-export = Base;
+//http://www.myeyeson.net/gulp-js-and-browserify-with-asp-net/

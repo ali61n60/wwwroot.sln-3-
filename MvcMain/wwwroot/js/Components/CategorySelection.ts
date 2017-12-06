@@ -4,7 +4,7 @@
     public categoryName: string;
     public englishCategoryName: string;
 }
-class CategorySelection {
+export class CategorySelection {
     //TODO what if a level has no item at all
     //TODO what if on level selected id is 0
     private _parentDivId: string;

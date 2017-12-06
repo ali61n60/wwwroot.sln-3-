@@ -1,5 +1,6 @@
 ﻿/// <reference path ="../../node_modules/@types/jquery/index.d.ts"/>
-
+import CategorySelectionModule = require("../Components/CategorySelection");
+import CategorySelection = CategorySelectionModule.CategorySelection;
 
 $(document).ready(function () {
     let serverCaller = new ServerCaller();
