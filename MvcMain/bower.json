@@ -5,6 +5,7 @@
     "jQuery": "3.2.1",
     "mustache.js": "mustache#v2.3.0",
     "lightslider": "1.1.6",
-    "bootstrap": "v3.3.7"
+    "bootstrap": "v3.3.7",
+    "requirejs": "2.3.5"
   }
 }

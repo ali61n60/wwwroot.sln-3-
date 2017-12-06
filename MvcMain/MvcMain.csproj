@@ -55,6 +55,8 @@
     <Content Include="wwwroot\lib\mustache.js\bower.json" />
     <Content Include="wwwroot\lib\mustache.js\package.json" />
     <Content Include="wwwroot\lib\mustache.js\spec\_files\bom_as_whitespace.txt" />
+    <Content Include="wwwroot\lib\requirejs\.bower.json" />
+    <Content Include="wwwroot\lib\requirejs\bower.json" />
     <Content Include="wwwroot\node_modules\%40types\jquery\package.json" />
     <Content Include="wwwroot\node_modules\%40types\mustache\package.json" />
     <Content Include="wwwroot\package.json" />
@@ -449,6 +451,9 @@
     <None Include="wwwroot\lib\mustache.js\wrappers\qooxdoo\mustache.js.pre" />
     <None Include="wwwroot\lib\mustache.js\wrappers\yui3\mustache.js.post" />
     <None Include="wwwroot\lib\mustache.js\wrappers\yui3\mustache.js.pre" />
+    <None Include="wwwroot\lib\requirejs\LICENSE" />
+    <None Include="wwwroot\lib\requirejs\README.md" />
+    <None Include="wwwroot\lib\requirejs\require.js" />
     <None Include="wwwroot\node_modules\%40types\jquery\LICENSE" />
     <None Include="wwwroot\node_modules\%40types\jquery\README.md" />
     <None Include="wwwroot\node_modules\%40types\mustache\LICENSE" />
