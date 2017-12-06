@@ -3,8 +3,13 @@
     "src/main.ts",
     "src/greet.ts"
   ],
+  
   "compilerOptions": {
     "noImplicitAny": true,
     "target": "es5"
-  }
+  },
+  
+  "exclude": [
+    "node_modules"
+  ]
 }
