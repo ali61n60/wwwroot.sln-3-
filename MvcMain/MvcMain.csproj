@@ -485,6 +485,8 @@
     <TypeScriptCompile Include="wwwroot\js\Home\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\Home\SearchAdUserInput.ts" />
     <TypeScriptCompile Include="wwwroot\js\Home\ServerCaller.ts" />
+    <TypeScriptCompile Include="wwwroot\js\LearningRequireJs\Base.ts" />
+    <TypeScriptCompile Include="wwwroot\js\LearningRequireJs\TestApp.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes2.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\defaultParams.ts" />
