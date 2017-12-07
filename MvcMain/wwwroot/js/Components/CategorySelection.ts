@@ -1,6 +1,4 @@
-﻿/// <reference path="../../node_modules/@types/jquery/index.d.ts" />
-
-class Category {
+﻿class Category {
     public categoryId: number;
     public parentCategoryId: number;
     public categoryName: string;
