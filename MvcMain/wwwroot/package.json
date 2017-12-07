@@ -4,8 +4,6 @@
   "private": true,
   "devDependencies": {
     "@types/jquery": "^3.2.1",
-    "@types/mustache": "^0.8.30",
-    "gulp": "^3.9.1",
-    "gulp-browserify": "^0.5.1"
+    "@types/mustache": "^0.8.30"
   }
 }

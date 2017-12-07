@@ -5,4 +5,4 @@ function showHello(divName: string, name: string) {
     elt.innerText = sayHello(name);
 }
 
-showHello("greeting", Date.now().toString());
+showHello("greeting", Date.now().toString()+" is working from my bundle");

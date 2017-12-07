@@ -5,4 +5,4 @@ function showHello(divName, name) {
     var elt = document.getElementById(divName);
     elt.innerText = greet_1.sayHello(name);
 }
-showHello("greeting", Date.now().toString());
+showHello("greeting", Date.now().toString() + " is working from my bundle");
