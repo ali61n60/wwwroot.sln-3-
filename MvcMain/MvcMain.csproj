@@ -14,6 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="node_modules\%40types\jquery\package.json" />
+    <Content Include="node_modules\%40types\mustache\package.json" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff" />
@@ -77,6 +79,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="node_modules\%40types\jquery\LICENSE" />
+    <None Include="node_modules\%40types\jquery\README.md" />
+    <None Include="node_modules\%40types\mustache\LICENSE" />
+    <None Include="node_modules\%40types\mustache\README.md" />
     <None Include="wwwroot\cmd.exe" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff2" />
@@ -437,6 +443,8 @@
     <ProjectReference Include="..\RepositoryStd\RepositoryStd.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\mustache\index.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\CategorySelection.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchAdUserInput.ts" />
