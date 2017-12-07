@@ -19,7 +19,7 @@ namespace MvcMain.Controllers
         
         public async Task<IActionResult> Index()
         {
-            return View("index1");
+            return View();
         }
 
         public async Task<IActionResult> AdDetail(AdDetailInfo adDetailInfo)

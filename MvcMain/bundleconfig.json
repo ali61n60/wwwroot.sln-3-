@@ -4,14 +4,5 @@
     "inputFiles": [
       "wwwroot/css/site.css"
     ]
-  },
-  {
-    "outputFileName": "wwwroot/js/Home/bundleSearchAd.js",
-    "inputFiles": [
-      "wwwroot/js/Home/index.js",
-      "wwwroot/js/Home/SearchAdUserInput.js",
-      "wwwroot/js/Home/ServerCaller.js",
-      "wwwroot/js/Components/CategorySelection.js"
-    ]
   }
 ]

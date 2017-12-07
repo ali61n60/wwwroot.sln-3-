@@ -20,7 +20,6 @@
     <Content Include="wwwroot\css\img\controls.png" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\css\site.min.css" />
-    <Content Include="wwwroot\js\LearnGulp\tsconfig.json" />
     <Content Include="wwwroot\lib\bootstrap\.bower.json" />
     <Content Include="wwwroot\lib\bootstrap\bower.json" />
     <Content Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
@@ -58,7 +57,6 @@
     <Content Include="wwwroot\lib\mustache.js\spec\_files\bom_as_whitespace.txt" />
     <Content Include="wwwroot\lib\requirejs\.bower.json" />
     <Content Include="wwwroot\lib\requirejs\bower.json" />
-    <Content Include="wwwroot\package.json" />
     <Content Include="wwwroot\Resources\Images\loader.gif" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast128.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast16.png" />
@@ -67,7 +65,6 @@
     <Content Include="wwwroot\Resources\Images\Logo\howcast32.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast512.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast64.png" />
-    <Content Include="wwwroot\tsconfig.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -154,8 +151,6 @@
     <None Include="wwwroot\css\site.css.map" />
     <None Include="wwwroot\js\Components\CategorySelection.js" />
     <None Include="wwwroot\js\Components\CategorySelection.js.map" />
-    <None Include="wwwroot\js\Home\bundleSearchAd.js" />
-    <None Include="wwwroot\js\Home\bundleSearchAd.min.js" />
     <None Include="wwwroot\js\Home\index.js" />
     <None Include="wwwroot\js\Home\index.js.map" />
     <None Include="wwwroot\js\Home\newAd.js" />

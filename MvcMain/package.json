@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@types/jquery": "^3.2.1",
+    "@types/mustache": "^0.8.30",
     "browserify": "^14.5.0",
     "gulp": "^3.9.1",
     "gulp-typescript": "^3.2.3",
