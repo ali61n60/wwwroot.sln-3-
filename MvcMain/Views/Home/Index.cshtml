@@ -7,38 +7,38 @@
 }
 
 @section TopTop
-{
+    {
     @Html.Partial("TopTop")
 }
 @section NavBar
-{
+    {
     @Html.Partial("NavBar")
 }
 @section PageTitle
-{
+    {
 }
 @section TopHeader
-{
+    {
 
 }
 @section SideNav
-{
+    {
     @Html.Partial("SideNav")
 }
 @section Body
-{
+    {
     <div class="well">
         <div class="row">
             @await Component.InvokeAsync("CategorySelection")
         </div>
-        <br/>
+        <br />
         <div class="row">
 
             <div class="col-sm-6">
-                <input id="minPrice" class="form-control" placeholder="از قیمت"/>
-                <br/>
-                <input id="maxPrice" class="form-control" placeholder="تا قیمت"/>
-                <br/>
+                <input id="minPrice" class="form-control" placeholder="از قیمت" />
+                <br />
+                <input id="maxPrice" class="form-control" placeholder="تا قیمت" />
+                <br />
                 <select id="orderBy" class="form-control">
                     <option value="" selected="selected">به ترتیب</option>
                     <option value="DateAsc">به روزترین آگهی</option>
@@ -46,7 +46,7 @@
                     <option value="PriceAsc">ارزانترین</option>
                     <option value="PriceDesc">گرانترین</option>
                 </select>
-                
+
 
             </div>
             <div class="col-sm-6">
@@ -54,31 +54,23 @@
             </div>
         </div>
     </div>
-   
+
     <div id="adPlaceHolder" class="row">
 
     </div>
 }
 
 @section Footer
-{
+    {
     @Html.Partial("Footer")
 }
 
 @section scripts{
-    @*<script src="~/js/Home/SearchAdUserInput.js"></script>
-    <script src="~/js/Home/ServerCaller.js"></script>
-    <script src="~/js/Home/index.js"></script>
-    <script src="~/js/Components/CategorySelection.js"></script>*@
-    
+    <script src="~/js/home/index/dist/bundle.js"></script>
 
-    
-    @*<script src="~/js/Home/bundleSearchAd.js"></script>*@
-    
-    
-    <script id="singleAdItem" type="text/template">        
+    <script id="singleAdItem" type="text/template">
         <div class="blockDisplay adDetail">
-            <a href="./Home/AdDetail?adId={{AdvertisementId}}&categoryId={{AdvertisementCategoryId}}">   
+            <a href="./Home/AdDetail?adId={{AdvertisementId}}&categoryId={{AdvertisementCategoryId}}">
                 <div>
                     @*image section*@
                     <div class="imageSection">
@@ -109,7 +101,7 @@
                 <br />
             </a>
         </div>
-    
+
     </script>
 }
 

@@ -108,6 +108,7 @@ export class CategorySelection {
 }
 
 //Category Selection
+//TODO move it to app.js file
 $(document).ready(function () {   
     //Add first level categories
     var allCategoriesString = $("#allCategories").val().toString();

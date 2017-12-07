@@ -19,7 +19,7 @@ gulp.task('default', function () {
     // place code for your default task here
 });
 
-gulp.task("default2", function () {
+gulp.task("LearnGulp", function () {
     return browserify({
         debug: true,
         entries: ["./wwwroot/js/LearnGulp/src/main.ts"],
@@ -31,3 +31,17 @@ gulp.task("default2", function () {
         .pipe(source("bundle.js"))
         .pipe(gulp.dest("./wwwroot/js/LearnGulp/dist"));
 });
+
+gulp.task("HomeIndex",
+    function() {
+        return browserify({
+                debug: true,
+                entries: ["./wwwroot/js/home/index/src/index.ts"],
+                cache: {},
+                packageCache: {}
+            })
+            .plugin(tsify)
+            .bundle()
+            .pipe(source("bundle.js"))
+            .pipe(gulp.dest("./wwwroot/js/home/index/dist"));
+    });
