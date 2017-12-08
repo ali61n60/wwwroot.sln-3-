@@ -14,9 +14,11 @@ using MvcMain.Infrastructure.Services;
 using RepositoryStd.Context.Helper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
+using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using RepositoryStd.Repository;
+using RepositoryStd.TepmeratureRepository;
 
 
 namespace MvcMain.Controllers
@@ -56,6 +58,25 @@ namespace MvcMain.Controllers
         public string Ali()
         {
             return "REZANEJATI";
+        }
+
+        public JsonResult InsertTemperature([FromQuery] int temperature)
+        {
+            TemperatureModel temperatureModel=new TemperatureModel()
+            {
+                InsertDateTime = DateTime.Now,
+                Temp = temperature
+            };
+            TemperatureRepository temperatureRepository=new TemperatureRepository();
+            try
+            {
+                temperatureRepository.Insert(temperatureModel);
+            }
+            catch (Exception ex)
+            {
+                return Json("Error " + ex.Message);
+            }
+            return Json("OK");
         }
 
         //Called from android and home controller

@@ -1,4 +1,5 @@
-﻿@model object
+﻿@using ModelStd.Db.Ad
+@model List<ModelStd.Db.Ad.TemperatureModel>
 
 @{
     ViewData["Title"] = "دماسنج";
@@ -28,7 +29,23 @@
 }
 @section Body
     {
-
+    <table class="table table-bordered table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Date</th>
+            <th>Temperature</th>
+        </tr>
+        </thead>
+        @foreach (TemperatureModel temperature in Model)
+        {
+            <tr>
+                <td>@temperature.TemperatureId</td>
+                <td>@temperature.InsertDateTime</td>
+                <td>@temperature.Temp</td>
+            </tr>
+        }
+    </table>
 
 }
 
