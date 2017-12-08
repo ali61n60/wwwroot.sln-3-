@@ -41,6 +41,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<Provinces> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
         public virtual DbSet<Sms> Sms { get; set; }
+        public virtual DbSet<TemperatueModel> TemperatueModels { get; set; }
 
        
 
