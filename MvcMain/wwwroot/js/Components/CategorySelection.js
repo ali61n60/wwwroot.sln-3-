@@ -5,6 +5,7 @@ var Category = (function () {
     }
     return Category;
 }());
+exports.Category = Category;
 var CategorySelection = (function () {
     function CategorySelection(parentDivId, allCategories) {
         this._firstLevelSelectId = "category1";
@@ -90,13 +91,4 @@ var CategorySelection = (function () {
     return CategorySelection;
 }());
 exports.CategorySelection = CategorySelection;
-//Category Selection
-//TODO move it to app.js file
-$(document).ready(function () {
-    //Add first level categories
-    var allCategoriesString = $("#allCategories").val().toString();
-    var allCategories = $.parseJSON(allCategoriesString);
-    var categorySelection = new CategorySelection("categorySelector", allCategories);
-    categorySelection.CreateFirstLevel();
-}); //ready
 //# sourceMappingURL=CategorySelection.js.map

@@ -19,4 +19,13 @@ $(document).ready(function () {
         $(this).find(".moreInfo").fadeToggle(250);
     }); //end on
 }); //end ready
+//Category Selection
+//TODO move it to app.js file
+$(document).ready(function () {
+    //Add first level categories
+    var allCategoriesString = $("#allCategories").val().toString();
+    var allCategories = $.parseJSON(allCategoriesString);
+    var categorySelection = new CategorySelection_1.CategorySelection("categorySelector", allCategories);
+    categorySelection.CreateFirstLevel();
+}); //ready
 //# sourceMappingURL=index.js.map

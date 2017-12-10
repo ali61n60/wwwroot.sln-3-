@@ -1,4 +1,4 @@
-﻿import { SearchAdUserInput} from "./SearchAdUserInput";
+﻿import {SearchAdUserInput} from "./SearchAdUserInput";
 export class ServerCaller {
         private _initialStart: number = 1;
         private _start: number = 1;

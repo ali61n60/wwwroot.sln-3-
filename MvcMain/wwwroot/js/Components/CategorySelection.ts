@@ -1,4 +1,4 @@
-﻿class Category {
+﻿export class Category {
     public categoryId: number;
     public parentCategoryId: number;
     public categoryName: string;
@@ -107,12 +107,3 @@ export class CategorySelection {
     }
 }
 
-//Category Selection
-//TODO move it to app.js file
-$(document).ready(function () {   
-    //Add first level categories
-    var allCategoriesString = $("#allCategories").val().toString();
-    var allCategories = $.parseJSON(allCategoriesString) as Category[];
-    let categorySelection = new CategorySelection("categorySelector", allCategories);
-    categorySelection.CreateFirstLevel();
-});//ready

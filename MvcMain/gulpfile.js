@@ -35,7 +35,6 @@ gulp.task("LearnGulp", function () {
 gulp.task("HomeIndex",
     function() {
         return browserify({
-           
                 debug: true,
                 entries: ["./wwwroot/js/home/index/src/index.ts"],
                 cache: {},
