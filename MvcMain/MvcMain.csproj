@@ -76,6 +76,7 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
+    <Folder Include="wwwroot\js\Models\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -158,12 +159,12 @@
     <None Include="wwwroot\js\Components\CategorySelection.js" />
     <None Include="wwwroot\js\Components\CategorySelection.js.map" />
     <None Include="wwwroot\js\home\index\dist\bundle.js" />
-    <None Include="wwwroot\js\Home\index\src\index.js" />
-    <None Include="wwwroot\js\Home\index\src\index.js.map" />
-    <None Include="wwwroot\js\Home\index\src\SearchAdUserInput.js" />
-    <None Include="wwwroot\js\Home\index\src\SearchAdUserInput.js.map" />
-    <None Include="wwwroot\js\Home\index\src\ServerCaller.js" />
-    <None Include="wwwroot\js\Home\index\src\ServerCaller.js.map" />
+    <None Include="wwwroot\js\home\index\src\index.js" />
+    <None Include="wwwroot\js\home\index\src\index.js.map" />
+    <None Include="wwwroot\js\home\index\src\SearchAdUserInput.js" />
+    <None Include="wwwroot\js\home\index\src\SearchAdUserInput.js.map" />
+    <None Include="wwwroot\js\home\index\src\ServerCaller.js" />
+    <None Include="wwwroot\js\home\index\src\ServerCaller.js.map" />
     <None Include="wwwroot\js\home\newAd.js" />
     <None Include="wwwroot\js\LearnGulp\dist\bundle.js" />
     <None Include="wwwroot\js\LearnGulp\src\greet.js" />
