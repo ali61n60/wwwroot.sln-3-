@@ -1,4 +1,4 @@
-var HelloWorld = /** @class */ (function () {
+var HelloWorld = (function () {
     function HelloWorld() {
     }
     HelloWorld.prototype.sayHi = function () {

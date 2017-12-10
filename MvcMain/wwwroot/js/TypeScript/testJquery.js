@@ -1,4 +1,4 @@
-var MyTestClss = /** @class */ (function () {
+var MyTestClss = (function () {
     function MyTestClss() {
     }
     MyTestClss.prototype.test = function () {
