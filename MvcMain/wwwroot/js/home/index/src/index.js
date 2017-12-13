@@ -26,6 +26,9 @@ $(document).ready(function () {
     var allCategoriesString = $("#allCategories").val().toString();
     var allCategories = $.parseJSON(allCategoriesString);
     var categorySelection = new CategorySelection_1.CategorySelection("categorySelector", allCategories);
+    categorySelection.SelectedCategoryChanged.Subscribe(function (sender, args) {
+        alert("selected category changed " + args);
+    });
     categorySelection.CreateFirstLevel();
 }); //ready
 //# sourceMappingURL=index.js.map

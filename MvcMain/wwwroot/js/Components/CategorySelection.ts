@@ -1,4 +1,6 @@
-﻿export class Category {
+﻿import {EventDispatcher} from "../Events/EventDispatcher";
+
+export class Category {
     public categoryId: number;
     public parentCategoryId: number;
     public categoryName: string;
@@ -7,7 +9,7 @@
 export class CategorySelection {
     //TODO what if a level has no item at all
     //TODO what if on level selected id is 0
-    private _parentDivId: string;
+    private _parentDivId: string;//div element that holds all CategorySelection elements
     private _allCategories: Category[];
     private readonly _firstLevelSelectId: string = "category1";
     private readonly _secondLevelSelectId: string = "category2";
@@ -17,6 +19,8 @@ export class CategorySelection {
     private static _selectedCategoryIdLevelOne: number;
     private static _selectedCategoryIdLevelTwo: number;
     private static  _selectedCategoryIdLevelThree:number;
+
+    public SelectedCategoryChanged: EventDispatcher<CategorySelection, number> = new EventDispatcher<CategorySelection, number>();;
 
     constructor(parentDivId: string, allCategories: Category[]) {
         this._parentDivId = parentDivId;
@@ -50,6 +54,7 @@ export class CategorySelection {
             let selectedId = parseInt($(this).val().toString());
             CategorySelection._selectedCategoryIdLevelOne = selectedId;
             self.CreateSecondLevel(selectedId);
+            self.SelectedCategoryChanged.dispatch(self, self.GetSelectedCategoryId());
         });//change
 
     }//CreateFirstLevel

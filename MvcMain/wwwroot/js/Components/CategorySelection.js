@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var EventDispatcher_1 = require("../Events/EventDispatcher");
 var Category = (function () {
     function Category() {
     }
@@ -12,9 +13,11 @@ var CategorySelection = (function () {
         this._secondLevelSelectId = "category2";
         this._thirdLevelSelectId = "category3";
         this._rootCategoryId = 0;
+        this.SelectedCategoryChanged = new EventDispatcher_1.EventDispatcher();
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
+    ;
     CategorySelection.prototype.GetSelectedCategoryId = function () {
         if (CategorySelection._selectedCategoryIdLevelThree !== this._rootCategoryId)
             return CategorySelection._selectedCategoryIdLevelThree;
@@ -38,6 +41,7 @@ var CategorySelection = (function () {
             var selectedId = parseInt($(this).val().toString());
             CategorySelection._selectedCategoryIdLevelOne = selectedId;
             self.CreateSecondLevel(selectedId);
+            self.SelectedCategoryChanged.dispatch(self, self.GetSelectedCategoryId());
         }); //change
     }; //CreateFirstLevel
     CategorySelection.prototype.CreateSecondLevel = function (firstLevelCategoryId) {
