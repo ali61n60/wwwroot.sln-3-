@@ -45,3 +45,17 @@ gulp.task("HomeIndex",
             .pipe(source("bundle.js"))
             .pipe(gulp.dest("./wwwroot/js/home/index/dist"));
     });
+
+gulp.task("EventExample",
+    function() {
+        return browserify({
+                debug: true,
+                entries: ["./wwwroot/js/Events/Examples/PulseGenerator.ts"],
+                cache: {},
+                packageCache: {}
+            })
+            .plugin(tsify)
+            .bundle()
+            .pipe(source("bundle.js"))
+            .pipe(gulp.dest("./wwwroot/js/Events/Examples/dist"));
+    });

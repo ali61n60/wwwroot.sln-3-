@@ -158,6 +158,7 @@
     <None Include="wwwroot\css\site.css.map" />
     <None Include="wwwroot\js\Components\CategorySelection.js" />
     <None Include="wwwroot\js\Components\CategorySelection.js.map" />
+    <None Include="wwwroot\js\Events\Examples\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\src\index.js" />
     <None Include="wwwroot\js\home\index\src\index.js.map" />
@@ -453,6 +454,9 @@
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\mustache\index.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\CategorySelection.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Events\EventDispatcher.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchAdUserInput.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\ServerCaller.ts" />
