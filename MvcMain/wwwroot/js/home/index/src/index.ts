@@ -2,54 +2,69 @@
 import { ServerCaller } from "./ServerCaller";
 
 class Index {
-    public  serverCaller = new ServerCaller();
-    public  categorySelection: CategorySelection;
+    private  _serverCaller = new ServerCaller();
+    private  _categorySelection: CategorySelection;
 
-    constructor() {
-        $(document).ready( ()=> {
-            this.initCategorySelectionControl(this.categorySelection);
-            this.initGetAdFromServer();
-        });//ready
+    private _categorySelectorParentDivId: string;
+    private _getAdFromServerId: string;
+    private _allCategoriesId: string;
 
-       
-
-        $(document).ready(function () {
-
-            //show detail of singleAdItem when mouse over
-            $(document).on("mouseenter mouseleave", ".blockDisplay", function () {
-                $(this).find(".moreInfo").fadeToggle(250);
-            });//end on
-
-        });//end ready
-
+    constructor(categorySelectorParentDivId: string,
+                allCategoriesId:string,
+                getAdFromServerId: string) {
+        this._categorySelectorParentDivId = categorySelectorParentDivId;
+        this._allCategoriesId = allCategoriesId;
+        this._getAdFromServerId = getAdFromServerId;
+        
+        this.initPage();
     }
 
-    private  initCategorySelectionControl(categorySelection: CategorySelection): void {
+    private initPage(): void {
+        $(document).ready(() => {
+            this.initCategorySelectionControl();
+            this.initGetAdFromServer();
+            this.initSingleAdItemStyle();
+        });//ready
+    }//initPage
+
+    private  initCategorySelectionControl(): void {
         //Add first level categories
-        var allCategoriesString = $("#allCategories").val().toString();
-        var allCategories = $.parseJSON(allCategoriesString) as Category[];
-        categorySelection = new CategorySelection("categorySelector", allCategories);
-        categorySelection.SelectedCategoryChanged.Subscribe((sender, args) => {
+        let allCategoriesString = $("#"+this._allCategoriesId).val().toString();
+        let allCategories = $.parseJSON(allCategoriesString) as Category[];
+        this._categorySelection = new CategorySelection(this._categorySelectorParentDivId, allCategories);
+        this._categorySelection.SelectedCategoryChanged.Subscribe((sender, args) => {
             alert("selected category changed " + args);
         });
-        categorySelection.CreateFirstLevel();
-    }
+        this._categorySelection.CreateFirstLevel();
+    }//initCategorySelectionControl
 
-    private initGetAdFromServer() {
-        $("#getAdFromServer").on("click", (event) => {
+    private initGetAdFromServer():void {
+        $("#"+this._getAdFromServerId).on("click", (event) => {
             event.preventDefault();
 
-            let categoryId = this.categorySelection.GetSelectedCategoryId();
+            let categoryId = this._categorySelection.GetSelectedCategoryId();
             let minPrice = parseInt($("#minPrice").val().toString());
             let maxPrice = parseInt($("#maxPrice").val().toString());
             let orderBy = $("#orderBy").val().toString();
 
-            this.serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
+            this._serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
         }); //click
-    }
+    }//initGetAdFromServer
+
+    private initSingleAdItemStyle(): void {
+        //show detail of singleAdItem when mouse over
+        $(document).on("mouseenter mouseleave", ".blockDisplay", (event: JQuery.Event<HTMLElement, null>) => {
+            $(event.currentTarget).find(".moreInfo").fadeToggle(250);
+            //$(this).find(".moreInfo").fadeToggle(250);
+        });//end on
+    }//initSingleAdItemStyle
 }
 
-let index = new Index();
+let categorySelectorParentDivId: string = "categorySelector";
+let getAdFromServerId = "getAdFromServer";
+let allCategoriesId = "allCategories";
+
+let index = new Index(categorySelectorParentDivId,allCategoriesId, getAdFromServerId);
 
 
 
