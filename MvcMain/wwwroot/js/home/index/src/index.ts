@@ -17,14 +17,15 @@ class Index {
         this._getAdFromServerId = getAdFromServerId;
         
         this.initPage();
+        this.initEventHandlers();
     }
 
     private initPage(): void {
-        $(document).ready(() => {
+        
             this.initCategorySelectionControl();
             this.initGetAdFromServer();
             this.initSingleAdItemStyle();
-        });//ready
+        
     }//initPage
 
     private  initCategorySelectionControl(): void {
@@ -32,11 +33,16 @@ class Index {
         let allCategoriesString = $("#"+this._allCategoriesId).val().toString();
         let allCategories = $.parseJSON(allCategoriesString) as Category[];
         this._categorySelection = new CategorySelection(this._categorySelectorParentDivId, allCategories);
-        this._categorySelection.SelectedCategoryChanged.Subscribe((sender, args) => {
-            alert("selected category changed " + args);
-        });
         this._categorySelection.CreateFirstLevel();
+        
     }//initCategorySelectionControl
+
+    private initEventHandlers(): void {
+        this._categorySelection.SelectedCategoryChanged.Subscribe((sender, args) => {
+            $("#adPlaceHolder").children().remove();
+            this._serverCaller.ResetSearchParameters();
+        });
+    }
 
     private initGetAdFromServer():void {
         $("#"+this._getAdFromServerId).on("click", (event) => {
@@ -64,9 +70,9 @@ let categorySelectorParentDivId: string = "categorySelector";
 let getAdFromServerId = "getAdFromServer";
 let allCategoriesId = "allCategories";
 
-let index = new Index(categorySelectorParentDivId,allCategoriesId, getAdFromServerId);
-
-
+$(document).ready(() => {
+    let index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
+});//ready
 
 
 
