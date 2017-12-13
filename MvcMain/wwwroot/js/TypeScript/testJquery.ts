@@ -1,5 +1,5 @@
 ﻿
-class MyTestClss {
+export class MyTestClss {
     test(): void {
         alert("$ in jquery.d.ts is working");
     }
