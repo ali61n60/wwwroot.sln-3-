@@ -76,7 +76,6 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
-    <Folder Include="wwwroot\js\Models\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -171,6 +170,38 @@
     <None Include="wwwroot\js\LearnGulp\src\greet.js" />
     <None Include="wwwroot\js\LearnGulp\src\main.js" />
     <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\TypeScript\classes.js" />
+    <None Include="wwwroot\js\TypeScript\classes.js.map" />
+    <None Include="wwwroot\js\TypeScript\classes2.js" />
+    <None Include="wwwroot\js\TypeScript\classes2.js.map" />
+    <None Include="wwwroot\js\TypeScript\defaultParams.js" />
+    <None Include="wwwroot\js\TypeScript\defaultParams.js.map" />
+    <None Include="wwwroot\js\TypeScript\HelloWorld.js" />
+    <None Include="wwwroot\js\TypeScript\HelloWorld.js.map" />
+    <None Include="wwwroot\js\TypeScript\inheritance.js" />
+    <None Include="wwwroot\js\TypeScript\inheritance.js.map" />
+    <None Include="wwwroot\js\TypeScript\interfaces.js" />
+    <None Include="wwwroot\js\TypeScript\interfaces.js.map" />
+    <None Include="wwwroot\js\TypeScript\lambda.js" />
+    <None Include="wwwroot\js\TypeScript\lambda.js.map" />
+    <None Include="wwwroot\js\TypeScript\optionalParams.js" />
+    <None Include="wwwroot\js\TypeScript\optionalParams.js.map" />
+    <None Include="wwwroot\js\TypeScript\overloading.js" />
+    <None Include="wwwroot\js\TypeScript\overloading.js.map" />
+    <None Include="wwwroot\js\TypeScript\restParams.js" />
+    <None Include="wwwroot\js\TypeScript\restParams.js.map" />
+    <None Include="wwwroot\js\TypeScript\testJquery.js" />
+    <None Include="wwwroot\js\TypeScript\testJquery.js.map" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\anyDemo.js.map" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\booleanDemo.js" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\booleanDemo.js.map" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\enumDemo.js" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\enumDemo.js.map" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\numberDemo.js" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\numberDemo.js.map" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\stringDemo.js" />
+    <None Include="wwwroot\js\TypeScript\TypesDemo\stringDemo.js.map" />
     <None Include="wwwroot\lib\bootstrap\CHANGELOG.md" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
     <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
