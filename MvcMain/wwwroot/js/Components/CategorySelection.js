@@ -11,6 +11,7 @@ var CategorySelection = /** @class */ (function () {
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
+    //TODO chech for undefined
     CategorySelection.prototype.GetSelectedCategoryId = function () {
         if (this._selectedCategoryIdLevelThree !== this._rootCategoryId)
             return this._selectedCategoryIdLevelThree;
