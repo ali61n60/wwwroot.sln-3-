@@ -40,7 +40,7 @@ export class ServerCaller {
             data: JSON.stringify(userInput), //Data sent to server
             contentType: 'application/json', // content type sent to server
             success: function (arg) {
-                self.onSuccessGetItemsFromServer(arg)
+                self.onSuccessGetItemsFromServer(arg);
             }, //On Successfull service call
             error: self.onErrorGetItemsFromServer // When Service call fails
             // When Service call fails
