@@ -3,46 +3,57 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
 var Index = (function () {
-    function Index() {
-        this.serverCaller = new ServerCaller_1.ServerCaller();
+    function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
+        this._serverCaller = new ServerCaller_1.ServerCaller();
+        this._categorySelectorParentDivId = categorySelectorParentDivId;
+        this._allCategoriesId = allCategoriesId;
+        this._getAdFromServerId = getAdFromServerId;
         this.initPage();
+        this.initEventHandlers();
     }
     Index.prototype.initPage = function () {
-        var _this = this;
-        $(document).ready(function () {
-            _this.initCategorySelectionControl(_this.categorySelection);
-            _this.initGetAdFromServer();
-        }); //ready
-        $(document).ready(function () {
-            //show detail of singleAdItem when mouse over
-            $(document).on("mouseenter mouseleave", ".blockDisplay", function (event) {
-                $(event.currentTarget).find(".moreInfo").fadeToggle(250);
-                //$(this).find(".moreInfo").fadeToggle(250);
-            }); //end on
-        }); //end ready
-    };
-    Index.prototype.initCategorySelectionControl = function (categorySelection) {
+        this.initCategorySelectionControl();
+        this.initGetAdFromServer();
+        this.initSingleAdItemStyle();
+    }; //initPage
+    Index.prototype.initCategorySelectionControl = function () {
         //Add first level categories
-        var allCategoriesString = $("#allCategories").val().toString();
+        var allCategoriesString = $("#" + this._allCategoriesId).val().toString();
         var allCategories = $.parseJSON(allCategoriesString);
-        categorySelection = new CategorySelection_1.CategorySelection("categorySelector", allCategories);
-        categorySelection.SelectedCategoryChanged.Subscribe(function (sender, args) {
-            alert("selected category changed " + args);
+        this._categorySelection = new CategorySelection_1.CategorySelection(this._categorySelectorParentDivId, allCategories);
+        this._categorySelection.CreateFirstLevel();
+    }; //initCategorySelectionControl
+    Index.prototype.initEventHandlers = function () {
+        var _this = this;
+        this._categorySelection.SelectedCategoryChanged.Subscribe(function (sender, args) {
+            $("#adPlaceHolder").children().remove();
+            _this._serverCaller.ResetSearchParameters();
         });
-        categorySelection.CreateFirstLevel();
     };
     Index.prototype.initGetAdFromServer = function () {
         var _this = this;
-        $("#getAdFromServer").on("click", function (event) {
+        $("#" + this._getAdFromServerId).on("click", function (event) {
             event.preventDefault();
-            var categoryId = _this.categorySelection.GetSelectedCategoryId();
+            var categoryId = _this._categorySelection.GetSelectedCategoryId();
             var minPrice = parseInt($("#minPrice").val().toString());
             var maxPrice = parseInt($("#maxPrice").val().toString());
             var orderBy = $("#orderBy").val().toString();
-            _this.serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
+            _this._serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
         }); //click
-    };
+    }; //initGetAdFromServer
+    Index.prototype.initSingleAdItemStyle = function () {
+        //show detail of singleAdItem when mouse over
+        $(document).on("mouseenter mouseleave", ".blockDisplay", function (event) {
+            $(event.currentTarget).find(".moreInfo").fadeToggle(250);
+            //$(this).find(".moreInfo").fadeToggle(250);
+        }); //end on
+    }; //initSingleAdItemStyle
     return Index;
 }());
-var index = new Index();
+var categorySelectorParentDivId = "categorySelector";
+var getAdFromServerId = "getAdFromServer";
+var allCategoriesId = "allCategories";
+$(document).ready(function () {
+    var index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
+}); //ready
 //# sourceMappingURL=index.js.map

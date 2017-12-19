@@ -82,6 +82,9 @@ var ServerCaller = (function () {
         //notifyUserAjaxCallFinished();
         //showErrorMessage(textStatus + " , " + errorThrown);
     }; //end OnErrorGetTimeFromServer
+    ServerCaller.prototype.ResetSearchParameters = function () {
+        this._start = this._initialStart;
+    };
     return ServerCaller;
 }());
 exports.ServerCaller = ServerCaller;
