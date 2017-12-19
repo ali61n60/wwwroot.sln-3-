@@ -7,11 +7,9 @@ export class ServerCaller {
     private _previousRequestIndex: number = -1;
     private _isServerCalled: boolean = false;
     private _numberOfStartServerCallNotification: number = 0;
+    private _url: string = "api/AdApi/GetAdvertisementCommon";
 
-    public GetAdItemsFromServer(categoryId: number,
-        minPrice: number,
-        maxPrice: number,
-        orderBy: string): void {
+    public GetAdItemsFromServer(categoryId: number,minPrice: number,maxPrice: number,orderBy: string): void {
         let userInput = new SearchAdUserInput();
         if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)
         ) { //a call is sent but no answer yet
@@ -33,21 +31,21 @@ export class ServerCaller {
         userInput.RequestIndex = this._requestIndex;
 
         //notifyUserAjaxCallStarted();
-        let self = this;
+     
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
-            url: "api/AdApi/GetAdvertisementCommon",
+            url: this._url,
             data: JSON.stringify(userInput), //Data sent to server
             contentType: 'application/json', // content type sent to server
-            success: function (arg) {
-                self.onSuccessGetItemsFromServer(arg)
-            }, //On Successfull service call
-            error: self.onErrorGetItemsFromServer // When Service call fails
-            // When Service call fails
+            success: (msg,textStatus,jqXHR)=> {this.onSuccessGetItemsFromServer(msg,textStatus,jqXHR);}, //On Successfull service call
+            error: (jqXHR, textStatus, errorThrown) => {
+                this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown);
+            } // When Service call fails
         }); //.ajax
     } //GetAdItemsFromServer
 
-    private onSuccessGetItemsFromServer(msg) {
+     
+    private onSuccessGetItemsFromServer(msg:any,textStatus:string, jqXHR:JQueryXHR) {
         //notifyUserAjaxCallFinished();
         if (msg.success == true) {
             if (msg.customDictionary["RequestIndex"] == this._requestIndex) {
@@ -82,7 +80,8 @@ export class ServerCaller {
         this._requestIndex++;
     } //end OnSuccessGetTimeFromServer
 
-    private onErrorGetItemsFromServer(XMLHttpRequest, textStatus, errorThrown) {
+    
+    private onErrorGetItemsFromServer(jqXHR:JQueryXHR, textStatus:string, errorThrown:string) {
         this._isServerCalled = false;
         this._requestIndex++;
         //notifyUserAjaxCallFinished();

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SearchAdUserInput_1 = require("./SearchAdUserInput");
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;
@@ -10,8 +10,10 @@ var ServerCaller = (function () {
         this._previousRequestIndex = -1;
         this._isServerCalled = false;
         this._numberOfStartServerCallNotification = 0;
+        this._url = "api/AdApi/GetAdvertisementCommon";
     }
     ServerCaller.prototype.GetAdItemsFromServer = function (categoryId, minPrice, maxPrice, orderBy) {
+        var _this = this;
         var userInput = new SearchAdUserInput_1.SearchAdUserInput();
         if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)) {
             return;
@@ -30,20 +32,18 @@ var ServerCaller = (function () {
         userInput.OrderBy = orderBy;
         userInput.RequestIndex = this._requestIndex;
         //notifyUserAjaxCallStarted();
-        var self = this;
         $.ajax({
             type: "POST",
-            url: "api/AdApi/GetAdvertisementCommon",
+            url: this._url,
             data: JSON.stringify(userInput),
             contentType: 'application/json',
-            success: function (arg) {
-                self.onSuccessGetItemsFromServer(arg);
-            },
-            error: self.onErrorGetItemsFromServer // When Service call fails
-            // When Service call fails
+            success: function (msg, textStatus, jqXHR) { _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
+            error: function (jqXHR, textStatus, errorThrown) {
+                _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown);
+            } // When Service call fails
         }); //.ajax
     }; //GetAdItemsFromServer
-    ServerCaller.prototype.onSuccessGetItemsFromServer = function (msg) {
+    ServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
         //notifyUserAjaxCallFinished();
         if (msg.success == true) {
             if (msg.customDictionary["RequestIndex"] == this._requestIndex) {
@@ -76,7 +76,7 @@ var ServerCaller = (function () {
         this._isServerCalled = false;
         this._requestIndex++;
     }; //end OnSuccessGetTimeFromServer
-    ServerCaller.prototype.onErrorGetItemsFromServer = function (XMLHttpRequest, textStatus, errorThrown) {
+    ServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         this._isServerCalled = false;
         this._requestIndex++;
         //notifyUserAjaxCallFinished();

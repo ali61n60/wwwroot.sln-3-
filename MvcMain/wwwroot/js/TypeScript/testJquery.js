@@ -1,4 +1,6 @@
-var MyTestClss = (function () {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var MyTestClss = /** @class */ (function () {
     function MyTestClss() {
     }
     MyTestClss.prototype.test = function () {
@@ -6,6 +8,7 @@ var MyTestClss = (function () {
     };
     return MyTestClss;
 }());
+exports.MyTestClss = MyTestClss;
 var myObject = new MyTestClss();
 $(document).ready(function () {
     myObject.test();

@@ -3,8 +3,38 @@
 
 <div id="categorySelector">
     <input id="allCategories" type="hidden" value='@Json.Serialize(Model)' />
-
-    <select id="category1" class="form-control">
-        <option value="0" selected="selected">تمام آگهی ها</option>
-    </select>
 </div>
+
+
+<script id="category1Template" type="text/template">
+    <div id="category1">
+        <select id="select1" class="form-control">
+            <option value="0" selected="selected">تمام آگهی ها</option>
+            {{#categories}}
+            <option value="{{categoryId}}">{{categoryName}}</option>
+            {{/categories}}
+        </select>
+    </div>   
+</script>
+
+<script id="category2Template" type="text/template">
+    <div id="category2">
+        <select id="select2" class="form-control">
+            <option value="0" selected="selected">تمام آگهی ها</option>
+            {{#categories}}
+            <option value="{{categoryId}}">{{categoryName}}</option>
+            {{/categories}}
+        </select>
+    </div>
+</script>
+
+<script id="category3Template" type="text/template">
+    <div id="category3">
+        <select id="select3" class="form-control">
+            <option value="0" selected="selected">تمام آگهی ها</option>
+            {{#categories}}
+            <option value="{{categoryId}}">{{categoryName}}</option>
+            {{/categories}}
+        </select>
+    </div>
+</script>

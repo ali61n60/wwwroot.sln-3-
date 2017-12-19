@@ -1,26 +1,30 @@
-﻿import {EventDispatcher} from "../Events/EventDispatcher";
+﻿import { EventDispatcher } from "../Events/EventDispatcher";
+import { Category } from "../Models/Category";
 
-export class Category {
-    public categoryId: number;
-    public parentCategoryId: number;
-    public categoryName: string;
-    public englishCategoryName: string;
-}
+
+
 export class CategorySelection {
-    //TODO what if a level has no item at all
-    //TODO what if on level selected id is 0
     private _parentDivId: string;//div element that holds all CategorySelection elements
     private _allCategories: Category[];
-    private readonly _firstLevelSelectId: string = "category1";
-    private readonly _secondLevelSelectId: string = "category2";
-    private readonly _thirdLevelSelectId: string = "category3";
-    private readonly _rootCategoryId: number = 0;
-    
-    private static _selectedCategoryIdLevelOne: number;
-    private static _selectedCategoryIdLevelTwo: number;
-    private static  _selectedCategoryIdLevelThree:number;
 
-    public SelectedCategoryChanged: EventDispatcher<CategorySelection, number> = new EventDispatcher<CategorySelection, number>();;
+    private readonly _firstLevelTemplate ="category1Template";
+    private readonly _firstLevelDiv="category1";
+    private readonly _firstLevelSelect: string = "select1";
+
+    private readonly _secondLevelTemplate = "category2Template";
+    private readonly _secondLevelDiv = "category2";
+    private readonly _secondLevelSelect: string = "select2";
+
+    private readonly _thirdLevelTemplate = "category3Template";
+    private readonly _thirdLevelDiv = "category3";
+    private readonly _thirdLevelSelect: string = "select3";
+    private readonly _rootCategoryId: number = 0;
+
+    private _selectedCategoryIdLevelOne: number;
+    private _selectedCategoryIdLevelTwo: number;
+    private _selectedCategoryIdLevelThree: number;
+
+    public SelectedCategoryChanged: EventDispatcher<CategorySelection, number> = new EventDispatcher<CategorySelection, number>();
 
     constructor(parentDivId: string, allCategories: Category[]) {
         this._parentDivId = parentDivId;
@@ -28,86 +32,106 @@ export class CategorySelection {
     }
 
     public GetSelectedCategoryId(): number {
-        if (CategorySelection._selectedCategoryIdLevelThree !== this._rootCategoryId)
-            return CategorySelection._selectedCategoryIdLevelThree;
-        else if (CategorySelection._selectedCategoryIdLevelTwo !== this._rootCategoryId)
-            return CategorySelection._selectedCategoryIdLevelTwo;
+        if (this._selectedCategoryIdLevelThree !== undefined &&
+            this._selectedCategoryIdLevelThree !== this._rootCategoryId)
+            return this._selectedCategoryIdLevelThree;
+        else if (this._selectedCategoryIdLevelTwo !== undefined &&
+                 this._selectedCategoryIdLevelTwo !== this._rootCategoryId)
+            return this._selectedCategoryIdLevelTwo;
         else
-            return CategorySelection._selectedCategoryIdLevelOne; 
-        
-        
+            return this._selectedCategoryIdLevelOne;
     }//GetSelectedCategoryId
-
+    private removeElement(id: string):void {
+        $("#" + id).remove();
+    }
+    private addOptionElementToSelectElement(selectElementId:string,category: Category):void {
+        $("#" + selectElementId).append($("<option>", {
+            value: category.categoryId,
+            text: category.categoryName
+        }));
+    }
     public CreateFirstLevel(): void {
-        var self = this;
-        CategorySelection._selectedCategoryIdLevelOne = this._rootCategoryId;
+        this.removeElement(this._firstLevelDiv);
+        this.removeElement(this._secondLevelDiv);
+        this.removeElement(this._thirdLevelDiv);
+
+        let template = $("#"+this._firstLevelTemplate).html();
+        let categories: Category[] = new Array<Category>();
+        let data = {categories:categories}
+        this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this._allCategories.forEach(category => {
-            if (category.parentCategoryId === self._rootCategoryId) {
-                $("#" + self._firstLevelSelectId).append($("<option>", {
-                    value: category.categoryId,
-                    text: category.categoryName
-                }));
+            if (category.parentCategoryId === this._rootCategoryId) {
+                categories.push(category);
             }//if
         });//forEach
 
-        $("#" + this._firstLevelSelectId).change(function () {
-            let selectedId = parseInt($(this).val().toString());
-            CategorySelection._selectedCategoryIdLevelOne = selectedId;
-            self.CreateSecondLevel(selectedId);
-            self.SelectedCategoryChanged.dispatch(self, self.GetSelectedCategoryId());
+        let html = Mustache.to_html(template, data);
+        $("#" + this._parentDivId).append(html);
+
+        $("#" + this._firstLevelSelect).change((event) => {
+            let selectedId = parseInt($(event.currentTarget).val().toString());
+            this._selectedCategoryIdLevelOne = selectedId;
+            this.createSecondLevel(selectedId);
+            this.SelectedCategoryChanged.dispatch(this, this.GetSelectedCategoryId());
         });//change
 
     }//CreateFirstLevel
 
-    private CreateSecondLevel(firstLevelCategoryId: number): void {
-        var self = this;
-        CategorySelection._selectedCategoryIdLevelTwo = this._rootCategoryId;
-        $("#" + this._secondLevelSelectId).remove();
-        $("#" + this._thirdLevelSelectId).remove();
+    private createSecondLevel(firstLevelCategoryId: number): void {
+        this.removeElement(this._secondLevelDiv);
+        this.removeElement(this._thirdLevelDiv);
+        this._selectedCategoryIdLevelTwo = this._rootCategoryId;
         if (firstLevelCategoryId === this._rootCategoryId) {
             return;
         }
-        var $select = $(`<select id="${this._secondLevelSelectId}" class="form-control"></select>`)
-            .append(`<option value="${this._rootCategoryId}">تمام آگهی ها</option>`);
+
+        let template = $("#" + this._secondLevelTemplate).html();
+        let categories: Category[] = new Array<Category>();
+        let data = { categories: categories }
+        
         this._allCategories.forEach(category => {
             if (category.parentCategoryId === firstLevelCategoryId) {
-                $select.append($("<option>", {
-                    value: category.categoryId,
-                    text: category.categoryName
-                }));
-            }
+                categories.push(category);
+            }//if
         });//forEach
-        $("#" + this._parentDivId).append($select);
 
-        $("#" + this._secondLevelSelectId).change(function () {
-            let selectedId = parseInt($(this).val().toString());
-            CategorySelection._selectedCategoryIdLevelTwo = selectedId;
-            self.CreateThirdLevel(selectedId);
+        let html = Mustache.to_html(template, data);
+        $("#" + this._parentDivId).append(html);
+
+        $("#" + this._secondLevelSelect).change((event) => {
+            let selectedId = parseInt($(event.currentTarget).val().toString());
+            this._selectedCategoryIdLevelTwo = selectedId;
+            this.CreateThirdLevel(selectedId);
+            this.SelectedCategoryChanged.dispatch(this, this.GetSelectedCategoryId());
         });//change
     }
 
-    CreateThirdLevel(secondLevelCategoryId: number):void {
-        var self = this;
-        CategorySelection._selectedCategoryIdLevelThree = this._rootCategoryId;
-        $("#" + this._thirdLevelSelectId).remove();
+    CreateThirdLevel(secondLevelCategoryId: number): void {
+        this.removeElement(this._thirdLevelDiv);
+        this._selectedCategoryIdLevelThree = this._rootCategoryId;
+        
         if (secondLevelCategoryId === this._rootCategoryId) {
             return;
         }
-        var $select = $(`<select id="${this._thirdLevelSelectId}" class="form-control"></select>`)
-            .append(`<option value="${this._rootCategoryId}">تمام آگهی ها</option>`);
+
+        let template = $("#" + this._thirdLevelTemplate).html();
+        let categories: Category[] = new Array<Category>();
+        let data = { categories: categories }
+
         this._allCategories.forEach(category => {
             if (category.parentCategoryId === secondLevelCategoryId) {
-                $select.append($("<option>", {
-                    value: category.categoryId,
-                    text: category.categoryName
-                }));
-            }
+                categories.push(category);
+            }//if
         });//forEach
-        $("#" + this._parentDivId).append($select);
+        if (categories.length === 0) {//No Itme in third level category
+            return;
+        }
+        let html = Mustache.to_html(template, data);
+        $("#" + this._parentDivId).append(html);
 
-        $("#" + this._thirdLevelSelectId).change(function () {
-            let selectedId = parseInt($(this).val().toString());
-            CategorySelection._selectedCategoryIdLevelThree = selectedId;
+       $("#" + this._thirdLevelSelect).change((event) => {
+            this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
+            this.SelectedCategoryChanged.dispatch(this, this.GetSelectedCategoryId());
         });//change
     }
 }

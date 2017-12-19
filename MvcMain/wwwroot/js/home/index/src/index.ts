@@ -1,4 +1,5 @@
-﻿import {Category,CategorySelection} from "../../../Components/CategorySelection";
+﻿import {Category} from "../../../Models/Category";
+import { CategorySelection } from "../../../Components/CategorySelection";
 import { ServerCaller } from "./ServerCaller";
 
 class Index {
