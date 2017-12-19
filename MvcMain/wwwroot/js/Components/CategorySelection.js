@@ -1,12 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../Events/EventDispatcher");
-var CategorySelection = /** @class */ (function () {
+var CategorySelection = (function () {
     function CategorySelection(parentDivId, allCategories) {
+        this._firstLevelTemplate = "category1Template";
         this._firstLevelDiv = "category1";
         this._firstLevelSelect = "select1";
+        this._secondLevelTemplate = "category2Template";
         this._secondLevelDiv = "category2";
         this._secondLevelSelect = "select2";
+        this._thirdLevelTemplate = "category3Template";
         this._thirdLevelDiv = "category3";
         this._thirdLevelSelect = "select3";
         this._rootCategoryId = 0;
@@ -38,14 +41,17 @@ var CategorySelection = /** @class */ (function () {
         this.removeElement(this._firstLevelDiv);
         this.removeElement(this._secondLevelDiv);
         this.removeElement(this._thirdLevelDiv);
-        var firstLevelCategory = $("#category1Template").html();
-        $("#" + this._parentDivId).append(firstLevelCategory);
+        var template = $("#" + this._firstLevelTemplate).html();
+        var categories = new Array();
+        var data = { categories: categories };
         this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this._allCategories.forEach(function (category) {
             if (category.parentCategoryId === _this._rootCategoryId) {
-                _this.addOptionElementToSelectElement(_this._firstLevelSelect, category);
+                categories.push(category);
             } //if
         }); //forEach
+        var html = Mustache.to_html(template, data);
+        $("#" + this._parentDivId).append(html);
         $("#" + this._firstLevelSelect).change(function (event) {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelOne = selectedId;
@@ -55,23 +61,22 @@ var CategorySelection = /** @class */ (function () {
     }; //CreateFirstLevel
     CategorySelection.prototype.createSecondLevel = function (firstLevelCategoryId) {
         var _this = this;
+        this.removeElement(this._secondLevelDiv);
+        this.removeElement(this._thirdLevelDiv);
         this._selectedCategoryIdLevelTwo = this._rootCategoryId;
-        $("#" + this._secondLevelSelect).remove();
-        $("#" + this._thirdLevelSelect).remove();
         if (firstLevelCategoryId === this._rootCategoryId) {
             return;
         }
-        var $select = $("<select id=\"" + this._secondLevelSelect + "\" class=\"form-control\"></select>")
-            .append("<option value=\"" + this._rootCategoryId + "\">\u062A\u0645\u0627\u0645 \u0622\u06AF\u0647\u06CC \u0647\u0627</option>");
+        var template = $("#" + this._secondLevelTemplate).html();
+        var categories = new Array();
+        var data = { categories: categories };
         this._allCategories.forEach(function (category) {
             if (category.parentCategoryId === firstLevelCategoryId) {
-                $select.append($("<option>", {
-                    value: category.categoryId,
-                    text: category.categoryName
-                }));
-            }
+                categories.push(category);
+            } //if
         }); //forEach
-        $("#" + this._parentDivId).append($select);
+        var html = Mustache.to_html(template, data);
+        $("#" + this._parentDivId).append(html);
         $("#" + this._secondLevelSelect).change(function (event) {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelTwo = selectedId;
@@ -81,24 +86,24 @@ var CategorySelection = /** @class */ (function () {
     };
     CategorySelection.prototype.CreateThirdLevel = function (secondLevelCategoryId) {
         var _this = this;
+        this.removeElement(this._thirdLevelDiv);
         this._selectedCategoryIdLevelThree = this._rootCategoryId;
-        $("#" + this._thirdLevelSelect).remove();
         if (secondLevelCategoryId === this._rootCategoryId) {
             return;
         }
-        var $thirdLevelElement = $("<div><p>testDiv</p></div>");
-        var $select = $("<select id=\"" + this._thirdLevelSelect + "\" class=\"form-control\"></select>")
-            .append("<option value=\"" + this._rootCategoryId + "\">\u062A\u0645\u0627\u0645 \u0622\u06AF\u0647\u06CC \u0647\u0627</option>");
+        var template = $("#" + this._thirdLevelTemplate).html();
+        var categories = new Array();
+        var data = { categories: categories };
         this._allCategories.forEach(function (category) {
             if (category.parentCategoryId === secondLevelCategoryId) {
-                $select.append($("<option>", {
-                    value: category.categoryId,
-                    text: category.categoryName
-                }));
-            }
+                categories.push(category);
+            } //if
         }); //forEach
-        $thirdLevelElement.append($select);
-        $("#" + this._parentDivId).append($thirdLevelElement);
+        if (categories.length === 0) {
+            return;
+        }
+        var html = Mustache.to_html(template, data);
+        $("#" + this._parentDivId).append(html);
         $("#" + this._thirdLevelSelect).change(function (event) {
             _this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
             _this.SelectedCategoryChanged.dispatch(_this, _this.GetSelectedCategoryId());
