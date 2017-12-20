@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
-var Index = /** @class */ (function () {
+var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._serverCaller = new ServerCaller_1.ServerCaller();
         this._categorySelectorParentDivId = categorySelectorParentDivId;

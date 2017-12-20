@@ -1,10 +1,12 @@
 ﻿using System.Threading.Tasks;
+using CommonServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ModelStd.Db.Identity;
 using MvcMain.Models;
+using MvcMain.Models.Email;
 
 namespace MvcMain.Controllers
 {
@@ -72,6 +74,15 @@ namespace MvcMain.Controllers
         {
             //TODO Email user password or do appropriate action
             //TODO Make your action as an API to be able to use that from android app
+            Email email=new Email();
+            EmailMessage emailMessage=new EmailMessage()
+            {
+                Title = "فراموشی رمز عبور",
+                MessageDetail = "رمز عبور شما عبارت زیر میباشد: "
+            };
+            emailMessage.MessageDetail += "\n\n\n\n";
+            emailMessage.MessageDetail += "hello";
+            email.SendEmail(detail.Email,emailMessage);
             return RedirectToAction("Login",new { returnUrl =returnUrl?? "/" });
         }
 
