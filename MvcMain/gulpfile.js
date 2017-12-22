@@ -1,4 +1,4 @@
-﻿/// <binding BeforeBuild='HomeIndex' />
+﻿/// <binding BeforeBuild='HomeIndex, HomeNewAd' />
 /*
 This file is the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. https://go.microsoft.com/fwlink/?LinkId=518007
@@ -44,6 +44,20 @@ gulp.task("HomeIndex",
             .bundle()
             .pipe(source("bundle.js"))
             .pipe(gulp.dest("./wwwroot/js/home/index/dist"));
+    });
+
+gulp.task("HomeNewAd",
+    function () {
+        return browserify({
+                debug: true,
+                entries: ["./wwwroot/js/home/newAd/src/newAd.ts"],
+                cache: {},
+                packageCache: {}
+            })
+            .plugin(tsify)
+            .bundle()
+            .pipe(source("bundle.js"))
+            .pipe(gulp.dest("./wwwroot/js/home/newAd/dist"));
     });
 
 gulp.task("EventExample",

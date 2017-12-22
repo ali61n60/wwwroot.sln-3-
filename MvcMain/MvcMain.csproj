@@ -76,8 +76,6 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
-    <Folder Include="wwwroot\js\home\newAd\dist\" />
-    <Folder Include="wwwroot\js\home\newAd\src\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -168,6 +166,7 @@
     <None Include="wwwroot\js\home\index\src\ServerCaller.js" />
     <None Include="wwwroot\js\home\index\src\ServerCaller.js.map" />
     <None Include="wwwroot\js\home\newAd.js" />
+    <None Include="wwwroot\js\home\newAd\dist\bundle.js" />
     <None Include="wwwroot\js\LearnGulp\dist\bundle.js" />
     <None Include="wwwroot\js\LearnGulp\src\greet.js" />
     <None Include="wwwroot\js\LearnGulp\src\main.js" />
@@ -495,6 +494,7 @@
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchAdUserInput.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\ServerCaller.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\newAd\src\newAd.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\greet.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\main.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\Category.ts" />

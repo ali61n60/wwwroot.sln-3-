@@ -1,5 +1,5 @@
 ﻿import {Category} from "../../../Models/Category";
-import { CategorySelection } from "../../../Components/CategorySelection";
+import { CategorySelection } from "../../../Components/Category/SearchAd/CategorySelection";
 import { ServerCaller } from "./ServerCaller";
 
 class Index {

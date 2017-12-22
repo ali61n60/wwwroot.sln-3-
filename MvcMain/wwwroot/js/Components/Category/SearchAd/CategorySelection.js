@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var EventDispatcher_1 = require("../Events/EventDispatcher");
+var EventDispatcher_1 = require("../../../Events/EventDispatcher");
 var CategorySelection = /** @class */ (function () {
     function CategorySelection(parentDivId, allCategories) {
         this._firstLevelTemplate = "category1Template";

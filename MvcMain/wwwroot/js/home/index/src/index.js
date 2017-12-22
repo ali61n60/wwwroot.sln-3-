@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CategorySelection_1 = require("../../../Components/CategorySelection");
+var CategorySelection_1 = require("../../../Components/Category/SearchAd/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
 var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
