@@ -76,6 +76,8 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
+    <Folder Include="wwwroot\js\home\newAd\dist\" />
+    <Folder Include="wwwroot\js\home\newAd\src\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -155,8 +157,8 @@
     <None Include="wwwroot\css\sass\sassLearning\StyleSheet.scss" />
     <None Include="wwwroot\css\sass\site.scss" />
     <None Include="wwwroot\css\site.css.map" />
-    <None Include="wwwroot\js\Components\CategorySelection.js" />
-    <None Include="wwwroot\js\Components\CategorySelection.js.map" />
+    <None Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.js" />
+    <None Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.js.map" />
     <None Include="wwwroot\js\Events\Examples\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\src\index.js" />
@@ -485,7 +487,8 @@
   <ItemGroup>
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\mustache\index.d.ts" />
-    <TypeScriptCompile Include="wwwroot\js\Components\CategorySelection.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Components\Category\NewAd\CategorySelectionNewAd.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\EventDispatcher.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />

@@ -78,9 +78,9 @@ namespace MvcMain
 
             services.AddTransient<AdDbContext>(provider =>new AdDbContext(_configuration["Data:ConnectionString"]));
 
-            services.AddDbContext<AppIdentityDbContext>(options =>
-                options.UseSqlServer(_configuration["Data:ConnectionString"]));
-
+            services.AddTransient<AppIdentityDbContext>(provider =>
+                new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
+           
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
                     options.Password.RequireUppercase = false;

@@ -1,4 +1,9 @@
-﻿@model System.Collections.Generic.IEnumerable<ModelStd.Advertisements.Category>
+﻿@using ModelStd.Advertisements
+@model IEnumerable<Category>
+
+<div id="categorySelector">
+    <input id="allCategories" type="hidden" value='@Json.Serialize(Model)' />
+</div>
 
 <p>new Ad category selection</p>
 <button type="button" id="getPartialViewFromServer" class="btn btn-primary btn-block">Get Partial View </button>

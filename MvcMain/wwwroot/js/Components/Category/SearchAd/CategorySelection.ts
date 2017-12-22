@@ -1,7 +1,5 @@
-﻿import { EventDispatcher } from "../Events/EventDispatcher";
-import { Category } from "../Models/Category";
-
-
+﻿import { EventDispatcher } from "../../../Events/EventDispatcher";
+import { Category } from "../../../Models/Category";
 
 export class CategorySelection {
     private _parentDivId: string;//div element that holds all CategorySelection elements
