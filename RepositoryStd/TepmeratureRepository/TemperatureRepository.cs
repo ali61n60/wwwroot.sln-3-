@@ -9,17 +9,26 @@ namespace RepositoryStd.TepmeratureRepository
 {
     public class TemperatureRepository
     {
+        private readonly AdDbContext _adDbContext;
+        public TemperatureRepository(AdDbContext adDbContext)
+        {
+            _adDbContext = adDbContext;
+        }
         public void Insert(TemperatureModel temperature)
         {
-            AdDbContext adDbContext = new AdDbContext();
-            adDbContext.TemperatueModels.Add(temperature);
-            adDbContext.SaveChanges();
+            _adDbContext.TemperatueModels.Add(temperature);
+            _adDbContext.SaveChanges();
         }
 
         public List<TemperatureModel> GetAllTemperatures()
         {
-            AdDbContext adDbContext = new AdDbContext();
-            return adDbContext.TemperatueModels.ToList();
+            return _adDbContext.TemperatueModels.ToList();
+        }
+
+        public List<TemperatureModel> GetNLastTemperatures(int n)
+        {
+            int numberOfItems= _adDbContext.TemperatueModels.Count(model => true);
+            return _adDbContext.TemperatueModels.Skip(Math.Max(0, numberOfItems - n)).ToList();
         }
     }
 }

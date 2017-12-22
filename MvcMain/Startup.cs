@@ -19,6 +19,7 @@ using ModelStd.IRepository;
 using MvcMain.Controllers;
 using MvcMain.Infrastructure.Services;
 using RepositoryStd;
+using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.TransportationRepository;
@@ -32,6 +33,8 @@ namespace MvcMain
         private readonly IHostingEnvironment _env;
         private AdvertisementDataClass _advertisementDataClass;
         private ICategoryRepository _categoryRepository;
+        private AdDbContext _adDbContext;
+        private AppIdentityDbContext _appIdentityDbContext;
 
         public Startup(IHostingEnvironment env)
         {
@@ -53,14 +56,16 @@ namespace MvcMain
             string directoryPath = _env.ContentRootPath + "/AdvertisementImages/";
             services.AddTransient<IImageRepository>(provider => new ImageRepositoryFileSystem(directoryPath));
 
-            
+            _adDbContext=new AdDbContext(_configuration["Data:ConnectionString"]);
+            _appIdentityDbContext=new AppIdentityDbContext(_configuration["Data:ConnectionString"]);
+            services.AddTransient<IRepository<AdvertisementCommon>>(provider =>
+            new AdvertisementCommonRepository(_adDbContext,_appIdentityDbContext,_categoryRepository));
 
-            services.AddTransient<IRepository<AdvertisementCommon>>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
-            services.AddTransient<ICommonRepository>(provider => new AdvertisementCommonRepository(_advertisementDataClass.ConnectionString,_categoryRepository));
+            services.AddTransient<ICommonRepository>(provider =>
+            new AdvertisementCommonRepository(_adDbContext,_appIdentityDbContext,_categoryRepository));
 
-            services.AddTransient<IRepository<AdvertisementTransportation>>(provider => new AdvertisementTransportationRepository(
-                    _advertisementDataClass.ConnectionString,
-                    MyService.Inst.GetService<ICommonRepository>()));
+            services.AddTransient<IRepository<AdvertisementTransportation>>(provider => 
+            new AdvertisementTransportationRepository(_adDbContext,_appIdentityDbContext,MyService.Inst.GetService<ICommonRepository>()));
 
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
 
@@ -70,8 +75,9 @@ namespace MvcMain
             services.AddTransient<CategoryApiController>();
 
             services.AddTransient<ITransportaionRepository>(appServiceProvider=>new TransportationRepository(_advertisementDataClass.ConnectionString));
-            
-            
+
+            services.AddTransient<AdDbContext>(provider =>new AdDbContext(_configuration["Data:ConnectionString"]));
+
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(_configuration["Data:ConnectionString"]));
 

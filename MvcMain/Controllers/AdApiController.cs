@@ -17,6 +17,7 @@ using Microsoft.Net.Http.Headers;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
+using RepositoryStd.Context.AD;
 using RepositoryStd.Repository;
 using RepositoryStd.TepmeratureRepository;
 
@@ -30,6 +31,7 @@ namespace MvcMain.Controllers
         private readonly ICommonRepository _commonRepository;
         private readonly IImageRepository _imageRepository;
         private readonly UserManager<AppUser> _userManager;
+        private readonly AdDbContext _adDbContext;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
         private readonly string numberOfItemsKey = "numberOfItems";
         private readonly string onlyWithPicturesKey= "OnlyWithPictures";
@@ -41,6 +43,7 @@ namespace MvcMain.Controllers
             _commonRepository = MyService.Inst.GetService<ICommonRepository>();
             _imageRepository = MyService.Inst.GetService<IImageRepository>();
             _userManager = MyService.Inst.GetService<UserManager<AppUser>>();
+            _adDbContext = MyService.Inst.GetService<AdDbContext>();
         }
 
 
@@ -67,7 +70,7 @@ namespace MvcMain.Controllers
                 InsertDateTime = DateTime.Now,
                 Temp = temperature
             };
-            TemperatureRepository temperatureRepository=new TemperatureRepository();
+            TemperatureRepository temperatureRepository=new TemperatureRepository(_adDbContext);
             try
             {
                 temperatureRepository.Insert(temperatureModel);

@@ -28,7 +28,25 @@
     @Html.Partial("SideNav")
 }
 @section Body
-    {
+{
+    <form asp-controller="Temperature" asp-action="CustomResult" method="post">
+        <div>
+            <span>انتخاب تعداد رکورد</span>
+            <select id="numberOfItems" name="numberOfItems">
+                <option value="50">50</option>
+                <option value="100">100</option>
+                <option value="100">150</option>
+                <option value="100">200</option>
+                <option value="100">250</option>
+                <option value="100">300</option>
+                <option value="1000000">all</option>
+            </select>
+            <button id="newNumberOfItems" class="btn btn-lg btn-primary">ارسال</button>
+        </div>
+        
+    </form>
+    <br/><br/> 
+    
     <table class="table table-bordered table-striped">
         <thead>
         <tr>

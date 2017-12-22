@@ -19,13 +19,13 @@ namespace RepositoryStd.Repository
     {
        // private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly ICommonRepository _commonRepository;
+        private readonly AdDbContext _adDbContext;
+        private readonly AppIdentityDbContext _appIdentityDbContext;
 
-        private readonly string _conectionString;
-
-        
-        public AdvertisementTransportationRepository(string connectionString, ICommonRepository commonRepository)
+        public AdvertisementTransportationRepository(AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICommonRepository commonRepository)
         {
-            _conectionString = connectionString;
+            _adDbContext=adDbContext;
+            _appIdentityDbContext = appIdentityDbContext;
            _commonRepository=commonRepository;
         }
 
@@ -45,14 +45,13 @@ namespace RepositoryStd.Repository
         //TODO use EF
         public void Add(AdvertisementTransportation entity)
         {
-            AdDbContext adDbContext = new AdDbContext();
+            
             Advertisements ad = _commonRepository.GetAdvertisement(entity.AdvertisementCommon);
             AdAttributeTransportation adAttribute = getAdAtribute(entity); 
             
-            adDbContext.Advertisements.Add(ad);
-            adDbContext.AdAttributeTransportation.Add(adAttribute);
-
-            adDbContext.SaveChanges();
+            _adDbContext.Advertisements.Add(ad);
+            _adDbContext.AdAttributeTransportation.Add(adAttribute);
+            _adDbContext.SaveChanges();
         }
 
         //TODO the method implementation is not complete
@@ -74,7 +73,7 @@ namespace RepositoryStd.Repository
         
         public void Remove(AdvertisementTransportation entity)// entity only has advertisementCommon attributes
         {
-            using (SqlConnection connection = new SqlConnection(_conectionString))
+            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_removeAdTransportation", connection))
                 {
@@ -100,7 +99,7 @@ namespace RepositoryStd.Repository
 
         public void Save(AdvertisementTransportation entity)
         {
-            using (SqlConnection connection = new SqlConnection(_conectionString))
+            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_saveAdTransportation", connection))
                 {
@@ -131,7 +130,7 @@ namespace RepositoryStd.Repository
             
             RepositoryResponse responseBase;
 
-            using (SqlConnection connection = new SqlConnection(_conectionString))
+            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_findAllAdTransport", connection))
                 {
@@ -169,9 +168,8 @@ namespace RepositoryStd.Repository
         public AdvertisementTransportation FindBy(Guid adId)
         {
             AdvertisementTransportation advertisementTransportation=new AdvertisementTransportation();
-            AdDbContext adDbContext = new AdDbContext();
-            AppIdentityDbContext appIdentityDbContext = new AppIdentityDbContext();
-            IQueryable<Advertisements> list = adDbContext.Advertisements
+           
+            IQueryable<Advertisements> list = _adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
@@ -187,7 +185,7 @@ namespace RepositoryStd.Repository
             //TODO verify that good query is generated
             string query = list.ToSql();
             Advertisements item = list.FirstOrDefault();
-            fillAdTransportation(advertisementTransportation, item, appIdentityDbContext);
+            fillAdTransportation(advertisementTransportation, item, _appIdentityDbContext);
             
             return advertisementTransportation;
         }

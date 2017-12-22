@@ -20,12 +20,15 @@ namespace RepositoryStd.Repository
 {
     public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>,ICommonRepository
     {
-        private readonly string _conectionString;
         private readonly ICategoryRepository _categoryRepository;
-      
-        public AdvertisementCommonRepository(string connectionString, ICategoryRepository categoryRepository)
+        private readonly AdDbContext _adDbContext;
+        private readonly AppIdentityDbContext _appIdentityDbContext;
+
+        public AdvertisementCommonRepository(AdDbContext adDbContext,
+            AppIdentityDbContext appIdentityDbContext, ICategoryRepository categoryRepository)
         {
-            _conectionString = connectionString;
+            _adDbContext = adDbContext;
+            _appIdentityDbContext = appIdentityDbContext;
             _categoryRepository = categoryRepository;
         }
 
@@ -39,17 +42,15 @@ namespace RepositoryStd.Repository
         {
             List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
             ////TODO research for singleton dbContext
-            AdDbContext adDbContext = new AdDbContext();
-            AppIdentityDbContext appIdentityDbContext = new AppIdentityDbContext();
-
-            IQueryable<Advertisements> list = GetQueryableList(queryParameters, adDbContext);
+           
+            IQueryable<Advertisements> list = GetQueryableList(queryParameters, _adDbContext);
             
             //uegentOnly
             
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement,appIdentityDbContext));
+                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement,_appIdentityDbContext));
             }
             return _searchResultItems;
         }
@@ -177,7 +178,7 @@ namespace RepositoryStd.Repository
         //TODO use EF
         public void Save(AdvertisementCommon entity)
         {
-            using (SqlConnection connection = new SqlConnection(_conectionString))
+            using (SqlConnection connection = new SqlConnection(""))//_conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_saveAdCommon", connection))
                 {
@@ -235,7 +236,7 @@ namespace RepositoryStd.Repository
         public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string userEmail)
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
-            using (SqlConnection connection = new SqlConnection(_conectionString))
+            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_getUserAdvertisements", connection))
                 {
@@ -259,7 +260,7 @@ namespace RepositoryStd.Repository
         public IEnumerable<AdvertisementCommon> FindAll()
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
-            using (SqlConnection connection = new SqlConnection(_conectionString))
+            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
             {
                 using (SqlCommand command = new SqlCommand("sp_findAllAdCommon", connection))
                 {
@@ -286,7 +287,7 @@ namespace RepositoryStd.Repository
         {
             string commandText = "";//BaseSelectCommandText() + " WHERE adId=@adId ";
             AdvertisementCommon tempAdvertisementCommon;
-            using (SqlConnection connection = new SqlConnection(_conectionString))
+            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
             {
                 using (SqlCommand command = new SqlCommand(commandText, connection))
                 {
@@ -314,9 +315,9 @@ namespace RepositoryStd.Repository
         public async Task IncrementNumberOfVisit(Guid adGuid)
         {
             //TODO use EF instead of ADO.Net
-            AdDbContext adDbContext=new AdDbContext();
-            adDbContext.Advertisements.FirstOrDefault(advertisements => advertisements.AdId == adGuid).AdNumberOfVisited++;
-            adDbContext.SaveChanges();
+           
+            _adDbContext.Advertisements.FirstOrDefault(advertisements => advertisements.AdId == adGuid).AdNumberOfVisited++;
+            _adDbContext.SaveChanges();
         }
 
         //TODO the method implementation is not complete

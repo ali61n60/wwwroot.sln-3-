@@ -19,11 +19,7 @@ namespace RepositoryStd.Context.Identity
         {
             _connectionString = connectionString;
         }
-
-        public AppIdentityDbContext()
-        {
-            _connectionString = AdvertisementDataClass.DefaultConnectionString();
-        }
+        
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString,
