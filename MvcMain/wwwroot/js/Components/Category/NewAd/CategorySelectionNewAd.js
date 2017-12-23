@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CategorySelectionNewAd = /** @class */ (function () {
+var CategorySelectionNewAd = (function () {
     function CategorySelectionNewAd(parentDivId, allCategories) {
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
