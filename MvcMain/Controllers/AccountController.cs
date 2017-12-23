@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
-using CommonServices;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using ModelStd.Db.Identity;
+using MvcMain.Infrastructure;
 using MvcMain.Models;
 using MvcMain.Models.Email;
 

@@ -1,6 +1,6 @@
 ﻿using MvcMain.Models.Email;
 
-namespace CommonServices  
+namespace MvcMain.Infrastructure  
 {
    public interface IEmail
     {

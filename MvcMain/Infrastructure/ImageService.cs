@@ -8,7 +8,7 @@ using ModelStd.Services;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;
 
-namespace Infrastructure
+namespace MvcMain.Infrastructure
 {
     public static class ImageService
     {

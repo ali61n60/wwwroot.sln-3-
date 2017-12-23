@@ -2,7 +2,7 @@
 using MailKit.Net.Smtp;
 using MvcMain.Models.Email;
 
-namespace CommonServices
+namespace MvcMain.Infrastructure
 {
     public class Email : IEmail
     {
