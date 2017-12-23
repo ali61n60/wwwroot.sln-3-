@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/Category/SearchAd/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
-var Index = (function () {
+var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._serverCaller = new ServerCaller_1.ServerCaller();
         this._categorySelectorParentDivId = categorySelectorParentDivId;
@@ -25,7 +25,7 @@ var Index = (function () {
     }; //initCategorySelectionControl
     Index.prototype.initEventHandlers = function () {
         var _this = this;
-        this._categorySelection.SelectedCategoryChanged.Subscribe(function (sender, args) {
+        this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
             $("#adPlaceHolder").children().remove();
             _this._serverCaller.ResetSearchParameters();
         });

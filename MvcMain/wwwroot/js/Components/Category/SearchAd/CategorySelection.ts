@@ -22,7 +22,7 @@ export class CategorySelection {
     private _selectedCategoryIdLevelTwo: number;
     private _selectedCategoryIdLevelThree: number;
 
-    public SelectedCategoryChanged: EventDispatcher<CategorySelection, number> = new EventDispatcher<CategorySelection, number>();
+    public SelectedCategoryChangedEvent: EventDispatcher<CategorySelection, number> = new EventDispatcher<CategorySelection, number>();
 
     constructor(parentDivId: string, allCategories: Category[]) {
         this._parentDivId = parentDivId;
@@ -39,15 +39,18 @@ export class CategorySelection {
         else
             return this._selectedCategoryIdLevelOne;
     }//GetSelectedCategoryId
+
     private removeElement(id: string):void {
         $("#" + id).remove();
     }
+
     private addOptionElementToSelectElement(selectElementId:string,category: Category):void {
         $("#" + selectElementId).append($("<option>", {
             value: category.categoryId,
             text: category.categoryName
         }));
     }
+
     public CreateFirstLevel(): void {
         this.removeElement(this._firstLevelDiv);
         this.removeElement(this._secondLevelDiv);
@@ -70,7 +73,7 @@ export class CategorySelection {
             let selectedId = parseInt($(event.currentTarget).val().toString());
             this._selectedCategoryIdLevelOne = selectedId;
             this.createSecondLevel(selectedId);
-            this.SelectedCategoryChanged.dispatch(this, this.GetSelectedCategoryId());
+            this.SelectedCategoryChangedEvent.dispatch(this, this.GetSelectedCategoryId());
         });//change
 
     }//CreateFirstLevel
@@ -99,12 +102,12 @@ export class CategorySelection {
         $("#" + this._secondLevelSelect).change((event) => {
             let selectedId = parseInt($(event.currentTarget).val().toString());
             this._selectedCategoryIdLevelTwo = selectedId;
-            this.CreateThirdLevel(selectedId);
-            this.SelectedCategoryChanged.dispatch(this, this.GetSelectedCategoryId());
+            this.createThirdLevel(selectedId);
+            this.SelectedCategoryChangedEvent.dispatch(this, this.GetSelectedCategoryId());
         });//change
     }
 
-    CreateThirdLevel(secondLevelCategoryId: number): void {
+    private createThirdLevel(secondLevelCategoryId: number): void {
         this.removeElement(this._thirdLevelDiv);
         this._selectedCategoryIdLevelThree = this._rootCategoryId;
         
@@ -129,7 +132,7 @@ export class CategorySelection {
 
        $("#" + this._thirdLevelSelect).change((event) => {
             this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
-            this.SelectedCategoryChanged.dispatch(this, this.GetSelectedCategoryId());
+            this.SelectedCategoryChangedEvent.dispatch(this, this.GetSelectedCategoryId());
         });//change
     }
 }

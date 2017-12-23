@@ -39,7 +39,7 @@ class Index {
     }//initCategorySelectionControl
 
     private initEventHandlers(): void {
-        this._categorySelection.SelectedCategoryChanged.Subscribe((sender, args) => {
+        this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             $("#adPlaceHolder").children().remove();
             this._serverCaller.ResetSearchParameters();
         });

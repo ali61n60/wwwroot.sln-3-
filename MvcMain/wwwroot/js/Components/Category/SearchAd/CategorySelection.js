@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../../Events/EventDispatcher");
-var CategorySelection = (function () {
+var CategorySelection = /** @class */ (function () {
     function CategorySelection(parentDivId, allCategories) {
         this._firstLevelTemplate = "category1Template";
         this._firstLevelDiv = "category1";
@@ -13,7 +13,7 @@ var CategorySelection = (function () {
         this._thirdLevelDiv = "category3";
         this._thirdLevelSelect = "select3";
         this._rootCategoryId = 0;
-        this.SelectedCategoryChanged = new EventDispatcher_1.EventDispatcher();
+        this.SelectedCategoryChangedEvent = new EventDispatcher_1.EventDispatcher();
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
@@ -56,7 +56,7 @@ var CategorySelection = (function () {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelOne = selectedId;
             _this.createSecondLevel(selectedId);
-            _this.SelectedCategoryChanged.dispatch(_this, _this.GetSelectedCategoryId());
+            _this.SelectedCategoryChangedEvent.dispatch(_this, _this.GetSelectedCategoryId());
         }); //change
     }; //CreateFirstLevel
     CategorySelection.prototype.createSecondLevel = function (firstLevelCategoryId) {
@@ -80,11 +80,11 @@ var CategorySelection = (function () {
         $("#" + this._secondLevelSelect).change(function (event) {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelTwo = selectedId;
-            _this.CreateThirdLevel(selectedId);
-            _this.SelectedCategoryChanged.dispatch(_this, _this.GetSelectedCategoryId());
+            _this.createThirdLevel(selectedId);
+            _this.SelectedCategoryChangedEvent.dispatch(_this, _this.GetSelectedCategoryId());
         }); //change
     };
-    CategorySelection.prototype.CreateThirdLevel = function (secondLevelCategoryId) {
+    CategorySelection.prototype.createThirdLevel = function (secondLevelCategoryId) {
         var _this = this;
         this.removeElement(this._thirdLevelDiv);
         this._selectedCategoryIdLevelThree = this._rootCategoryId;
@@ -106,7 +106,7 @@ var CategorySelection = (function () {
         $("#" + this._parentDivId).append(html);
         $("#" + this._thirdLevelSelect).change(function (event) {
             _this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
-            _this.SelectedCategoryChanged.dispatch(_this, _this.GetSelectedCategoryId());
+            _this.SelectedCategoryChangedEvent.dispatch(_this, _this.GetSelectedCategoryId());
         }); //change
     };
     return CategorySelection;
