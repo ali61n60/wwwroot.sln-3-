@@ -54,9 +54,7 @@ namespace MvcMain.Controllers
             switch (categoryId)
             {
                 case 100:
-                    Dictionary<string,object> parameters=new Dictionary<string, object>();
-                    parameters.Add("number",11980);
-                    return ViewComponent("NewAdTransformation",parameters);
+                    return ViewComponent("NewAdTransformation");
                     //return PartialView("Components/NewAdTransformation/Default");
                     default:
                         return null;
