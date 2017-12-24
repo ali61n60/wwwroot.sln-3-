@@ -46,9 +46,16 @@ namespace MvcMain.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetNewAdPartialView()
+        public IActionResult GetNewAdPartialView(int categoryId)
         {
-            return PartialView("Components/NewAdTransformation/Default");
+            switch (categoryId)
+            {
+                case 100:
+                    return PartialView("Components/NewAdTransformation/Default");
+                    default:
+                        return null;
+            }
+            
         }
     }
 }
