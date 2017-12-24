@@ -80,6 +80,12 @@ namespace MvcMain.Controllers
             return Json("OK");
         }
 
+        public string WhatIsMyIpAddress()
+        {
+            string ip = Request.Host.ToString();
+            return ip;
+        }
+
         //Called from android and home controller
         public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {

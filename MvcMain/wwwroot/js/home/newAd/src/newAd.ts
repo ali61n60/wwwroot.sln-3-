@@ -34,7 +34,7 @@ class NewAd {
     }
 
     private initEventHandlers(): void {
-        this._categorySelectionNewAd. SelectedCategoryChangedEvent.Subscribe((sender, args) => {
+        this._categorySelectionNewAd.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             if (!this._categorySelectionNewAd.SelectedCategoryHasChildren()) {
                 //TODO load partial view for that category id from server and notify user 
                 this._partialView.GetPartialViewFromServer(args);

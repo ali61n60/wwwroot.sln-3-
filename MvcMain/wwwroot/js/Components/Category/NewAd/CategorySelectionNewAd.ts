@@ -1,7 +1,7 @@
 ﻿import { EventDispatcher } from "../../../Events/EventDispatcher";
 import { Category } from "../../../Models/Category";
 
-
+//TODO when first level is changed but we have previous 3th-level selectedCategoryId is not correct 
 export class CategorySelectionNewAd {
     
 
@@ -59,8 +59,11 @@ export class CategorySelectionNewAd {
 
     public CreateFirstLevel(): void {
         this.removeElement(this._firstLevelDiv);
+        this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this.removeElement(this._secondLevelDiv);
+        this._selectedCategoryIdLevelTwo = this._rootCategoryId;
         this.removeElement(this._thirdLevelDiv);
+        this._selectedCategoryIdLevelThree = this._rootCategoryId;
 
         let template = $("#" + this._firstLevelTemplate).html();
         let categories: Category[] = new Array<Category>();
@@ -86,8 +89,10 @@ export class CategorySelectionNewAd {
 
     private createSecondLevel(firstLevelCategoryId: number): void {
         this.removeElement(this._secondLevelDiv);
-        this.removeElement(this._thirdLevelDiv);
         this._selectedCategoryIdLevelTwo = this._rootCategoryId;
+        this.removeElement(this._thirdLevelDiv);
+        this._selectedCategoryIdLevelThree = this._rootCategoryId;
+        
         if (firstLevelCategoryId === this._rootCategoryId) {
             return;
         }

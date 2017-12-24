@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/CategorySelectionNewAd");
 var PartialViewCategorySpecific_1 = require("./PartialViewCategorySpecific");
-var NewAd = (function () {
+var NewAd = /** @class */ (function () {
     function NewAd(categorySelectorParentDivId, allCategoriesId, categorySpecificPartialViewId) {
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
@@ -23,6 +23,8 @@ var NewAd = (function () {
     NewAd.prototype.initEventHandlers = function () {
         var _this = this;
         this._categorySelectionNewAd.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
+            console.log("args=" + args);
+            console.log("categoryId=" + _this._categorySelectionNewAd.GetSelectedCategoryId());
             if (!_this._categorySelectionNewAd.SelectedCategoryHasChildren()) {
                 //TODO load partial view for that category id from server and notify user 
                 _this._partialView.GetPartialViewFromServer(args);

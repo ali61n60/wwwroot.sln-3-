@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PartialViewCategorySpecific = (function () {
+var PartialViewCategorySpecific = /** @class */ (function () {
     function PartialViewCategorySpecific(partialViewDivId) {
         this._url = "/Home/GetNewAdPartialView";
         this._partialViewDivId = partialViewDivId;
@@ -28,7 +28,7 @@ var PartialViewCategorySpecific = (function () {
     return PartialViewCategorySpecific;
 }());
 exports.PartialViewCategorySpecific = PartialViewCategorySpecific;
-var PartialViewServerCallParameters = (function () {
+var PartialViewServerCallParameters = /** @class */ (function () {
     function PartialViewServerCallParameters() {
     }
     return PartialViewServerCallParameters;

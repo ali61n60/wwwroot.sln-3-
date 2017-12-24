@@ -1,7 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../../Events/EventDispatcher");
-var CategorySelectionNewAd = (function () {
+//TODO when first level is changed but we have previous 3th-level selectedCategoryId is not correct 
+var CategorySelectionNewAd = /** @class */ (function () {
     function CategorySelectionNewAd(parentDivId, allCategories) {
         this._firstLevelTemplate = "category1Template";
         this._firstLevelDiv = "category1";
@@ -40,8 +41,11 @@ var CategorySelectionNewAd = (function () {
     CategorySelectionNewAd.prototype.CreateFirstLevel = function () {
         var _this = this;
         this.removeElement(this._firstLevelDiv);
+        this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this.removeElement(this._secondLevelDiv);
+        this._selectedCategoryIdLevelTwo = this._rootCategoryId;
         this.removeElement(this._thirdLevelDiv);
+        this._selectedCategoryIdLevelThree = this._rootCategoryId;
         var template = $("#" + this._firstLevelTemplate).html();
         var categories = new Array();
         var data = { categories: categories };
@@ -63,8 +67,9 @@ var CategorySelectionNewAd = (function () {
     CategorySelectionNewAd.prototype.createSecondLevel = function (firstLevelCategoryId) {
         var _this = this;
         this.removeElement(this._secondLevelDiv);
-        this.removeElement(this._thirdLevelDiv);
         this._selectedCategoryIdLevelTwo = this._rootCategoryId;
+        this.removeElement(this._thirdLevelDiv);
+        this._selectedCategoryIdLevelThree = this._rootCategoryId;
         if (firstLevelCategoryId === this._rootCategoryId) {
             return;
         }
