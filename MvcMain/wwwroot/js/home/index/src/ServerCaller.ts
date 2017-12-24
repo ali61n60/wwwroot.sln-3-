@@ -37,10 +37,8 @@ export class ServerCaller {
             url: this._url,
             data: JSON.stringify(userInput), //Data sent to server
             contentType: 'application/json', // content type sent to server
-            success: (msg,textStatus,jqXHR)=> {this.onSuccessGetItemsFromServer(msg,textStatus,jqXHR);}, //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => {
-                this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown);
-            } // When Service call fails
+            success: (msg,textStatus,jqXHR)=> this.onSuccessGetItemsFromServer(msg,textStatus,jqXHR), //On Successfull service call
+            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
         }); //.ajax
     } //GetAdItemsFromServer
 

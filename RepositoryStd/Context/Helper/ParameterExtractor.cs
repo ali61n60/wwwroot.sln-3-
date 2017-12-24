@@ -7,6 +7,7 @@ namespace RepositoryStd.Context.Helper
 {
     public class ParameterExtractor
     {
+        
         public static readonly string CategoryIdKey = "CategoryId";
         public static readonly int CategoryIdDefault = 0;
 
@@ -33,6 +34,7 @@ namespace RepositoryStd.Context.Helper
         public static readonly string OrderByKey = "OrderBy";
         public static readonly OrderBy OrderByDefault=OrderBy.DateAsc;
 
+        
         public static int ExtractCatgoryId(Dictionary<string, string> inputDictionary)
         {
             int tempCategoryId = CategoryIdDefault;

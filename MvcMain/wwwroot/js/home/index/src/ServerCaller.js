@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SearchAdUserInput_1 = require("./SearchAdUserInput");
-var ServerCaller = /** @class */ (function () {
+var ServerCaller = (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;
@@ -37,10 +37,8 @@ var ServerCaller = /** @class */ (function () {
             url: this._url,
             data: JSON.stringify(userInput),
             contentType: 'application/json',
-            success: function (msg, textStatus, jqXHR) { _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
-            error: function (jqXHR, textStatus, errorThrown) {
-                _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown);
-            } // When Service call fails
+            success: function (msg, textStatus, jqXHR) { return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
+            error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails
         }); //.ajax
     }; //GetAdItemsFromServer
     ServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {

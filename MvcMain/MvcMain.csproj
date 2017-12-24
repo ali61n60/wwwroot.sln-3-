@@ -83,7 +83,6 @@
     <None Include="node_modules\%40types\jquery\README.md" />
     <None Include="node_modules\%40types\mustache\LICENSE" />
     <None Include="node_modules\%40types\mustache\README.md" />
-    <None Include="Views\Shared\Components\NewAdTransformation\Default.cshtml" />
     <None Include="wwwroot\cmd.exe" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff2" />

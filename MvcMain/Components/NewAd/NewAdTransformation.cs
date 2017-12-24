@@ -8,9 +8,9 @@ namespace MvcMain.Components.NewAd
 {
     public class NewAdTransformation : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(int number)
         {
-            return View();
+            return View(number);
         }
     }
 }
