@@ -151,19 +151,6 @@ namespace RepositoryStd.Context.AD
                 entity.HasKey(e => e.ModelId)
                     .HasName("PK_CarBrand");
 
-                entity.ToTable("CarModel", "ad");
-
-                entity.Property(e => e.ModelId)
-                    .HasColumnName("modelId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.BrandId).HasColumnName("brandId");
-
-                entity.Property(e => e.ModelName)
-                    .IsRequired()
-                    .HasColumnName("modelName")
-                    .HasMaxLength(150);
-
                 entity.HasOne(d => d.Brand)
                     .WithMany(p => p.CarModel)
                     .HasForeignKey(d => d.BrandId)

@@ -495,6 +495,7 @@
     <TypeScriptCompile Include="wwwroot\js\home\index\src\ServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\newAd.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\PartialViewCategorySpecific.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\newAd\src\PartialViews\AdTransformation\Brands.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\greet.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\main.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\Category.ts" />

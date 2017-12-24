@@ -19,4 +19,10 @@ namespace MvcMain.Components
             return View(allBrands);
         }
     }
+
+    public class AllVihecles
+    {
+        public IEnumerable<Brand> AllBrands;
+        public IEnumerable<CarModel> AllCarModels;
+    }
 }

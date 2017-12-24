@@ -2,20 +2,7 @@
 
 <div class="well">
 <div class="row">
-    <div class="col-sm-2 col-sm-push-10">
-        <label>برند</label>
-    </div>
-    <div class="col-sm-4 col-sm-push-4">
-        @await Component.InvokeAsync("BrandsTransformation")
-    </div>
-    <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-        <label>مدل</label>
-    </div>
-    <div class="col-sm-4 col-sm-pull-8 col-sm-push-0">
-        <select id='model' class='form-control'>
-            <option value='0'>تمام مدل ها</option>
-        </select>
-    </div>
+    @await Component.InvokeAsync("BrandsTransformation")
 </div>
 <br />
 <div class="row">
@@ -291,3 +278,4 @@
             }); //click
     });//ready
 </script>
+<script src="~/js/home/newAd/src/PartialViews/AdTransformation/Brands.js"></script>
