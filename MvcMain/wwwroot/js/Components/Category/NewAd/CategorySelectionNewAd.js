@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../../Events/EventDispatcher");
-//TODO when first level is changed but we have previous 3th-level selectedCategoryId is not correct 
 var CategorySelectionNewAd = /** @class */ (function () {
     function CategorySelectionNewAd(parentDivId, allCategories) {
         this._firstLevelTemplate = "category1Template";

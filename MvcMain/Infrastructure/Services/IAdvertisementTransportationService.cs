@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 
 
@@ -18,7 +20,7 @@ namespace MvcMain.Infrastructure.Services
        // ResponseBase EditAdvertisementTransportation(AdvertisementTransportation advertisementTransportation);
         
         ResponseBase<int> GetServerDataVersion();
-        ResponseBase<TransportationBrand[]> GetAllTransportationBrands();
+        ResponseBase<IEnumerable<Brand>> GetAllTransportationBrands();
         ResponseBase<TransportationModel[]> GetAllTransportationModels();
         ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId);
         Task<ResponseBase> AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation);

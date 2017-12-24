@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
@@ -158,10 +159,10 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public ResponseBase<TransportationBrand[]> GetAllTransportationBrands()
+        public ResponseBase<IEnumerable<Brand>> GetAllTransportationBrands()
         {
             string errorCode = "AdTransportationApiController.GetAllTransportationBrands";
-            ResponseBase<TransportationBrand[]> response = new ResponseBase<TransportationBrand[]>();
+            ResponseBase<IEnumerable<Brand>> response = new ResponseBase<IEnumerable<Brand>>();
             try
             {
                 response.ResponseData = _transportaionRepository.GetAllBrands();

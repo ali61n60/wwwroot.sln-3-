@@ -1,11 +1,13 @@
-﻿using ModelStd.Advertisements.Transportation;
+﻿using System.Collections.Generic;
+using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Ad;
 
 namespace ModelStd.IRepository
 {
     public interface ITransportaionRepository
     {
         Vehicle[] GetAllVehicles();
-        TransportationBrand[] GetAllBrands();
+        IEnumerable<Brand> GetAllBrands();
         TransportationModel[] GetAllModels();
     }
 }

@@ -23,8 +23,6 @@ var NewAd = /** @class */ (function () {
     NewAd.prototype.initEventHandlers = function () {
         var _this = this;
         this._categorySelectionNewAd.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
-            console.log("args=" + args);
-            console.log("categoryId=" + _this._categorySelectionNewAd.GetSelectedCategoryId());
             if (!_this._categorySelectionNewAd.SelectedCategoryHasChildren()) {
                 //TODO load partial view for that category id from server and notify user 
                 _this._partialView.GetPartialViewFromServer(args);

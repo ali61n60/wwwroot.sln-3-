@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 
 namespace RepositoryStd.Repository.TransportationRepository
@@ -43,12 +44,12 @@ namespace RepositoryStd.Repository.TransportationRepository
             return searchResultItems.ToArray();
         }
 
-        public TransportationBrand[] GetAllBrands()
+        public IEnumerable<Brand> GetAllBrands()
         {
-            string query = " SELECT Brands.brandId,Brands.brandName " +
-                            " FROM Brands " +
+            string query = " SELECT ad.Brands.brandId,ad.Brands.brandName " +
+                            " FROM ad.Brands " +
                             " ORDER BY brandId ";
-            List<TransportationBrand> listOfTransportationBrands = new List<TransportationBrand>();
+            List<Brand> listOfTransportationBrands = new List<Brand>();
 
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -58,15 +59,19 @@ namespace RepositoryStd.Repository.TransportationRepository
                     command.Connection = connection;
                     connection.Open();
                     var dataReader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                    TransportationBrand tempBrand;
+                    Brand tempBrand;
                     while (dataReader.Read())
                     {
-                        tempBrand = new TransportationBrand((int)dataReader["brandId"], (string)dataReader["brandName"]);
+                        tempBrand = new Brand
+                        {
+                            BrandId = (int) dataReader["brandId"],
+                            BrandName = (string) dataReader["brandName"]
+                        };
                         listOfTransportationBrands.Add(tempBrand);
                     }
                 }
             }
-            return listOfTransportationBrands.ToArray();
+            return listOfTransportationBrands;
         }
 
         public TransportationModel[] GetAllModels()
@@ -86,7 +91,7 @@ namespace RepositoryStd.Repository.TransportationRepository
                     TransportationModel tempModel;
                     while (dataReader.Read())
                     {
-                        tempModel = new TransportationModel((int)dataReader["modelId"],(string)dataReader["modelName"],(int)dataReader["brandId"]);
+                        tempModel = new TransportationModel((int)dataReader["modelId"], (string)dataReader["modelName"], (int)dataReader["brandId"]);
                         listOfTransportationModels.Add(tempModel);
                     }
                 }

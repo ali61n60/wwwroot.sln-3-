@@ -1,7 +1,6 @@
 ﻿import { EventDispatcher } from "../../../Events/EventDispatcher";
 import { Category } from "../../../Models/Category";
 
-//TODO when first level is changed but we have previous 3th-level selectedCategoryId is not correct 
 export class CategorySelection {
     private _parentDivId: string;//div element that holds all CategorySelection elements
     private _allCategories: Category[];

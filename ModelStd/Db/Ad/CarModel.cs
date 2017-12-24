@@ -15,6 +15,6 @@ namespace ModelStd.Db.Ad
         public int BrandId { get; set; }
 
         public virtual ICollection<AdAttributeTransportation> AdAttributeTransportation { get; set; }
-        public virtual Brands Brand { get; set; }
+        public virtual Brand Brand { get; set; }
     }
 }

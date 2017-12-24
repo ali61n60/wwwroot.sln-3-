@@ -30,7 +30,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<AdPrivilege> AdPrivilege { get; set; }
         public virtual DbSet<AdStatus> AdStatus { get; set; }
         public virtual DbSet<Advertisements> Advertisements { get; set; }
-        public virtual DbSet<Brands> Brands { get; set; }
+        public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<CarModel> CarModel { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<Cities> Cities { get; set; }
@@ -140,21 +140,10 @@ namespace RepositoryStd.Context.AD
 
            
 
-            modelBuilder.Entity<Brands>(entity =>
+            modelBuilder.Entity<Brand>(entity =>
             {
                 entity.HasKey(e => e.BrandId)
                     .HasName("PK_CarMakers");
-
-                entity.ToTable("Brands", "ad");
-
-                entity.Property(e => e.BrandId)
-                    .HasColumnName("brandId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.BrandName)
-                    .IsRequired()
-                    .HasColumnName("brandName")
-                    .HasMaxLength(150);
             });
 
             modelBuilder.Entity<CarModel>(entity =>

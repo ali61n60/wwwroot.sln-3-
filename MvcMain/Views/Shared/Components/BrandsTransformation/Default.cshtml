@@ -1,5 +1,10 @@
-﻿@model object
-<p>all brands</p>
+﻿@using ModelStd.Db.Ad
+@model IEnumerable<Brand>
+<p>all brands are here</p>
 <select id='brand' class='form-control'>
     <option value='0'>تمام برندها</option>
+    @foreach (Brand brand in Model)
+    {
+        @:<option value="@brand.BrandId">@brand.BrandName</option>
+    }
 </select>
