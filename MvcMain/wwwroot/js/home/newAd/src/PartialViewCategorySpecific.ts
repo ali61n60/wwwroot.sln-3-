@@ -21,7 +21,8 @@ export class PartialViewCategorySpecific {
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-
+        $("#" + this._partialViewDivId).children().remove();
+        $("#jsfile").remove();
         $("#"+this._partialViewDivId).html(msg);
         //  $("#adPlaceHolder").append(html);
     }//onSuccessGetTimeFromServer

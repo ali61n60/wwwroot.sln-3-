@@ -8,5 +8,10 @@ $(document).ready(()=> {
                 $(event.currentTarget).val() +
                 ", text=" +
                 $(event.currentTarget).find("option:selected").text());
-        });
+    });//change
+
+    var timer = setInterval(() => {
+        var date = new Date();
+        console.log(date.getHours()+":"+date.getMinutes()+":"+date.getSeconds());
+    },1000);
 });

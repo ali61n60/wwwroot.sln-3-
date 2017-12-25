@@ -28,7 +28,6 @@
 }
 @section Body
     {
-    @* TODO add category select view and based on user selection load specific partial view *@
     <div class="well">
         <div class="row">
             @await Component.InvokeAsync("CategorySelectionNewAd")
@@ -42,9 +41,7 @@
     </div>
 
     <div id="NewAdPlaceHolder" class="row"></div>
-    <br />
-
-    <br />
+    <br /><br />
 
     <div class="row">
         @await Component.InvokeAsync("FileUpload")

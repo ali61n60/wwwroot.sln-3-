@@ -55,9 +55,8 @@ namespace MvcMain.Controllers
             {
                 case 100:
                     return ViewComponent("NewAdTransformation");
-                    //return PartialView("Components/NewAdTransformation/Default");
                     default:
-                        return null;
+                        return ViewComponent("NewAdDefault");
             }
             
         }

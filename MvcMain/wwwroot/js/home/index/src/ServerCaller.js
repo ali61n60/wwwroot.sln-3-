@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var SearchAdUserInput_1 = require("./SearchAdUserInput");
-var ServerCaller = /** @class */ (function () {
+var ServerCaller = (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;
