@@ -3,10 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/Category/SearchAd/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
 var SearchCriteriaLoader_1 = require("./SearchCriteriaLoader");
+var SearchAdUserInput_1 = require("./SearchAdUserInput");
 var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._serverCaller = new ServerCaller_1.ServerCaller();
-        this._searchCriteriaLoader = new SearchCriteriaLoader_1.SearchCriteriaLoader("categorySpecificSearchCriteria");
+        this._searchCriteriaLoader = new SearchCriteriaLoader_1.SearchCriteriaLoader("categorySpecificSearchCriteria", this);
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
         this._getAdFromServerId = getAdFromServerId;
@@ -32,6 +33,9 @@ var Index = /** @class */ (function () {
             _this._searchCriteriaLoader.GetSearchCriteriaViewFromServer(args);
         });
     };
+    Index.prototype.CustomSearchCriteriChanged = function () {
+        this.searchCriteriaChanged();
+    };
     Index.prototype.searchCriteriaChanged = function () {
         $("#adPlaceHolder").children().remove();
         this._serverCaller.ResetSearchParameters();
@@ -44,18 +48,26 @@ var Index = /** @class */ (function () {
             var minPrice = parseInt($("#minPrice").val().toString());
             var maxPrice = parseInt($("#maxPrice").val().toString());
             var orderBy = $("#orderBy").val().toString();
+            var userInput = new SearchAdUserInput_1.SearchAdUserInput();
+            userInput.SearchParameters.CategoryId = categoryId; //100 for cars
+            userInput.SearchParameters.MinimumPrice = minPrice;
+            userInput.SearchParameters.MaximumPrice = maxPrice;
+            userInput.SearchParameters.OrderBy = orderBy;
             //TODO What about category specific search parameters
-            _this.fillCategorySpecificSearchCriteria();
-            _this._serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
+            _this.fillCategorySpecificSearchCriteria(userInput);
+            _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }; //initGetAdFromServer
-    Index.prototype.fillCategorySpecificSearchCriteria = function () {
+    Index.prototype.fillCategorySpecificSearchCriteria = function (userInput) {
         var categoryId = this._categorySelection.GetSelectedCategoryId();
         switch (categoryId) {
             case 100:
-                var brandName = $("#brand").find("option:selected").text();
-                alert(brandName);
+                userInput.SearchParameters.BrandId = 100;
+                userInput.SearchParameters.ModelId = 21;
+                break;
             default:
+                userInput.SearchParameters.defaultParameter = 1234;
+                break;
         }
     };
     Index.prototype.initSingleAdItemStyle = function () {
@@ -67,6 +79,7 @@ var Index = /** @class */ (function () {
     }; //initSingleAdItemStyle
     return Index;
 }());
+exports.Index = Index;
 var categorySelectorParentDivId = "categorySelector";
 var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";

@@ -2,11 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var PartialViewCategorySpecific_1 = require("../../newAd/src/PartialViewCategorySpecific");
 var SearchCriteriaLoader = /** @class */ (function () {
-    function SearchCriteriaLoader(parentDivId) {
+    function SearchCriteriaLoader(parentDivId, indexObject) {
         this._url = "Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
         this._parentDivId = parentDivId;
+        this._indexObject = indexObject;
     }
     SearchCriteriaLoader.prototype.GetSearchCriteriaViewFromServer = function (categoryId) {
         var _this = this;
@@ -33,21 +34,27 @@ var SearchCriteriaLoader = /** @class */ (function () {
         alert(errorThrown);
     }; //onErrorGetTimeFromServer
     SearchCriteriaLoader.prototype.bindEvents = function () {
+        var _this = this;
         //use currentCategoryId
         switch (this._currentCategoryId) {
             case 100:
+                $("#brand").on("change", function (event) {
+                    console.log($(event.currentTarget).find("option:selected").text());
+                    _this._indexObject.CustomSearchCriteriChanged();
+                });
             default:
         }
-        alert("binding " + this._currentCategoryId);
+        console.log("binding " + this._currentCategoryId);
         this._previousCategoryId = this._currentCategoryId;
     };
     SearchCriteriaLoader.prototype.unBindEvents = function () {
         //use previouscategoryId
         switch (this._previousCategoryId) {
             case 100:
+                $("#brand").off("change");
             default:
         }
-        alert("UnBinding " + this._previousCategoryId);
+        console.log("UnBinding " + this._previousCategoryId);
     };
     return SearchCriteriaLoader;
 }());

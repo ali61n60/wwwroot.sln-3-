@@ -1,14 +1,18 @@
 ﻿import { PartialViewServerCallParameters} from "../../newAd/src/PartialViewCategorySpecific";
+import {Index} from "./index";
+
 
 
 export class SearchCriteriaLoader {
     private _parentDivId: string;
+    private _indexObject:Index;
     private _url: string = "Home/GetSearchCriteriaView";
     private _previousCategoryId:number = 0;
     private _currentCategoryId: number = 0;
 
-    constructor(parentDivId: string) {
+    constructor(parentDivId: string, indexObject: Index) {
         this._parentDivId = parentDivId;
+        this._indexObject = indexObject;
     }
 
     public GetSearchCriteriaViewFromServer(categoryId: number) {
@@ -42,7 +46,10 @@ export class SearchCriteriaLoader {
         //use currentCategoryId
         switch (this._currentCategoryId) {
         case 100:
-            
+            $("#brand").on("change",(event) => {
+                console.log($(event.currentTarget).find("option:selected").text());
+                this._indexObject.CustomSearchCriteriChanged();
+            });
         default:
         }
         console.log("binding " + this._currentCategoryId);
@@ -53,7 +60,7 @@ export class SearchCriteriaLoader {
         //use previouscategoryId
         switch (this._previousCategoryId) {
         case 100:
-            
+            $("#brand").off("change");
         default:
         }
         console.log("UnBinding " + this._previousCategoryId);
