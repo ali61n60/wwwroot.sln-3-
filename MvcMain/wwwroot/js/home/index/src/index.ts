@@ -43,10 +43,15 @@ class Index {
 
     private initEventHandlers(): void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
-            $("#adPlaceHolder").children().remove();
-            this._serverCaller.ResetSearchParameters();
+            this.searchCriteriaChanged();
             this._searchCriteriaLoader.GetSearchCriteriaViewFromServer(args);
         });
+    }
+
+    private searchCriteriaChanged():void {
+        $("#adPlaceHolder").children().remove();
+        this._serverCaller.ResetSearchParameters();
+
     }
 
     private initGetAdFromServer():void {
@@ -58,9 +63,20 @@ class Index {
             let maxPrice = parseInt($("#maxPrice").val().toString());
             let orderBy = $("#orderBy").val().toString();
             //TODO What about category specific search parameters
+            this.fillCategorySpecificSearchCriteria();
             this._serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
         }); //click
     }//initGetAdFromServer
+
+    private fillCategorySpecificSearchCriteria() {
+        let categoryId = this._categorySelection.GetSelectedCategoryId();
+        switch (categoryId) {
+        case 100:
+                let brandName = $("#brand").find("option:selected").text();
+            alert(brandName);
+        default:
+        }
+    }
 
     private initSingleAdItemStyle(): void {
         //show detail of singleAdItem when mouse over

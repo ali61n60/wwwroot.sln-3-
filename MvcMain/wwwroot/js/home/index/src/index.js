@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/Category/SearchAd/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
-var Index = (function () {
+var SearchCriteriaLoader_1 = require("./SearchCriteriaLoader");
+var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._serverCaller = new ServerCaller_1.ServerCaller();
+        this._searchCriteriaLoader = new SearchCriteriaLoader_1.SearchCriteriaLoader("categorySpecificSearchCriteria");
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
         this._getAdFromServerId = getAdFromServerId;
@@ -26,9 +28,13 @@ var Index = (function () {
     Index.prototype.initEventHandlers = function () {
         var _this = this;
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
-            $("#adPlaceHolder").children().remove();
-            _this._serverCaller.ResetSearchParameters();
+            _this.searchCriteriaChanged();
+            _this._searchCriteriaLoader.GetSearchCriteriaViewFromServer(args);
         });
+    };
+    Index.prototype.searchCriteriaChanged = function () {
+        $("#adPlaceHolder").children().remove();
+        this._serverCaller.ResetSearchParameters();
     };
     Index.prototype.initGetAdFromServer = function () {
         var _this = this;
@@ -38,9 +44,20 @@ var Index = (function () {
             var minPrice = parseInt($("#minPrice").val().toString());
             var maxPrice = parseInt($("#maxPrice").val().toString());
             var orderBy = $("#orderBy").val().toString();
+            //TODO What about category specific search parameters
+            _this.fillCategorySpecificSearchCriteria();
             _this._serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
         }); //click
     }; //initGetAdFromServer
+    Index.prototype.fillCategorySpecificSearchCriteria = function () {
+        var categoryId = this._categorySelection.GetSelectedCategoryId();
+        switch (categoryId) {
+            case 100:
+                var brandName = $("#brand").find("option:selected").text();
+                alert(brandName);
+            default:
+        }
+    };
     Index.prototype.initSingleAdItemStyle = function () {
         //show detail of singleAdItem when mouse over
         $(document).on("mouseenter mouseleave", ".blockDisplay", function (event) {
