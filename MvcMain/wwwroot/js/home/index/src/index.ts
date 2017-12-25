@@ -53,7 +53,7 @@ class Index {
             let minPrice = parseInt($("#minPrice").val().toString());
             let maxPrice = parseInt($("#maxPrice").val().toString());
             let orderBy = $("#orderBy").val().toString();
-
+            //TODO What about category specific search parameters
             this._serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
         }); //click
     }//initGetAdFromServer
