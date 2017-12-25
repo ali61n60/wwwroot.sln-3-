@@ -69,6 +69,9 @@ var Index = /** @class */ (function () {
                 userInput.SearchParameters.defaultParameter = 1234;
                 break;
         }
+        greet();
+        var myObj = new MyClass();
+        myObj.MyMethod();
     };
     Index.prototype.initSingleAdItemStyle = function () {
         //show detail of singleAdItem when mouse over

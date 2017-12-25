@@ -4,7 +4,10 @@ import { ServerCaller } from "./ServerCaller";
 import { SearchCriteriaLoader } from "./SearchCriteriaLoader";
 import { SearchAdUserInput } from "./SearchAdUserInput";
 
-
+declare function greet(): string;
+declare class MyClass {
+    public MyMethod():void;
+}
 
 export class Index {
     private _serverCaller = new ServerCaller();
@@ -90,6 +93,9 @@ export class Index {
                 userInput.SearchParameters.defaultParameter = 1234;
                 break;
         }
+        greet();
+        let myObj = new MyClass();
+        myObj.MyMethod();
     }
 
     private initSingleAdItemStyle(): void {
