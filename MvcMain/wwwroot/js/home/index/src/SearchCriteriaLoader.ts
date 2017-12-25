@@ -1,13 +1,15 @@
-﻿
-export class PartialViewCategorySpecific {
-    private _partialViewDivId: string;
-    private _url: string = "/Home/GetNewAdPartialView";
+﻿import { PartialViewServerCallParameters} from "../../newAd/src/PartialViewCategorySpecific";
 
-    constructor(partialViewDivId: string) {
-        this._partialViewDivId = partialViewDivId;
+
+export class SearchCriteriaLoader {
+    private _parentDivId: string;
+    private _url: string = "Home/GetSearchCriteriaView";
+    constructor(parentDivId: string) {
+        this._parentDivId = parentDivId;
     }
 
-    public GetPartialViewFromServer(categoryId: number) {
+    public GetSearchCriteriaViewFromServer(categoryId: number) {
+        //TODO get view from server and add it to page
         let callParams = new PartialViewServerCallParameters();
         callParams.CategoryId = categoryId;
         $.ajax({
@@ -21,16 +23,13 @@ export class PartialViewCategorySpecific {
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        $("#" + this._partialViewDivId).children().remove();
-        $("#jsfile").remove();
-        $("#"+this._partialViewDivId).html(msg);
+        $("#" + this._parentDivId).children().remove();
+        
+        $("#" + this._parentDivId).html(msg);
     }//onSuccessGetTimeFromServer
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
         alert(errorThrown);
     }//onErrorGetTimeFromServer
-}
-
-export class PartialViewServerCallParameters {
-    public CategoryId:number;
+    
 }

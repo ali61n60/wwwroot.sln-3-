@@ -1,10 +1,13 @@
 ﻿import {Category} from "../../../Models/Category";
 import { CategorySelection } from "../../../Components/Category/SearchAd/CategorySelection";
 import { ServerCaller } from "./ServerCaller";
+import {SearchCriteriaLoader} from "./SearchCriteriaLoader";
+
 
 class Index {
     private  _serverCaller = new ServerCaller();
-    private  _categorySelection: CategorySelection;
+    private _categorySelection: CategorySelection;
+    private _searchCriteriaLoader = new SearchCriteriaLoader("categorySpecificSearchCriteria");
 
     private _categorySelectorParentDivId: string;
     private _getAdFromServerId: string;
@@ -42,6 +45,7 @@ class Index {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             $("#adPlaceHolder").children().remove();
             this._serverCaller.ResetSearchParameters();
+            this._searchCriteriaLoader.GetSearchCriteriaViewFromServer(args);
         });
     }
 
