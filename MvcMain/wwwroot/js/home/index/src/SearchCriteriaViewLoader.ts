@@ -3,7 +3,7 @@ import {Index} from "./index";
 
 
 
-export class SearchCriteriaLoader {
+export class SearchCriteriaViewLoader {
     private _parentDivId: string;
     private _indexObject:Index;
     private _url: string = "Home/GetSearchCriteriaView";

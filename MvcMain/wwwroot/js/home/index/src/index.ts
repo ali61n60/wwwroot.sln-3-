@@ -1,18 +1,17 @@
 ﻿import { Category } from "../../../Models/Category";
 import { CategorySelection } from "../../../Components/Category/SearchAd/CategorySelection";
 import { ServerCaller } from "./ServerCaller";
-import { SearchCriteriaLoader } from "./SearchCriteriaLoader";
+import { SearchCriteriaViewLoader} from "./SearchCriteriaViewLoader";
 import { SearchAdUserInput } from "./SearchAdUserInput";
+import {SearchCriteria} from "./SearchCriteria";
 
-declare function greet(): string;
-declare class MyClass {
-    public MyMethod():void;
-}
+
 
 export class Index {
     private _serverCaller = new ServerCaller();
     private _categorySelection: CategorySelection;
-    private _searchCriteriaLoader = new SearchCriteriaLoader("categorySpecificSearchCriteria", this);
+    private _searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this);
+    private _searchCriteria=new SearchCriteria();
 
     private _categorySelectorParentDivId: string;
     private _getAdFromServerId: string;
@@ -49,7 +48,7 @@ export class Index {
     private initEventHandlers(): void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             this.searchCriteriaChanged();
-            this._searchCriteriaLoader.GetSearchCriteriaViewFromServer(args);
+            this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args);
         });
     }
 
@@ -66,37 +65,27 @@ export class Index {
     private initGetAdFromServer(): void {
         $("#" + this._getAdFromServerId).on("click", (event) => {
             event.preventDefault();
+            let userInput = new SearchAdUserInput();
 
             let categoryId = this._categorySelection.GetSelectedCategoryId();
-            let minPrice = parseInt($("#minPrice").val().toString());
-            let maxPrice = parseInt($("#maxPrice").val().toString());
-            let orderBy = $("#orderBy").val().toString();
-            let userInput = new SearchAdUserInput();
             userInput.SearchParameters.CategoryId = categoryId;//100 for cars
+
+            let minPrice = parseInt($("#minPrice").val().toString());
             userInput.SearchParameters.MinimumPrice = minPrice;
+
+            let maxPrice = parseInt($("#maxPrice").val().toString());
             userInput.SearchParameters.MaximumPrice = maxPrice;
+
+            let orderBy = $("#orderBy").val().toString();
             userInput.SearchParameters.OrderBy = orderBy;
-            //TODO What about category specific search parameters
-            this.fillCategorySpecificSearchCriteria(userInput);
+            
+            this._searchCriteria.FillCategorySpecificSearchCriteria(categoryId, userInput);//fill category specific search parameters
+            
             this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }//initGetAdFromServer
 
-    private fillCategorySpecificSearchCriteria(userInput: SearchAdUserInput) {
-        let categoryId = this._categorySelection.GetSelectedCategoryId();
-        switch (categoryId) {
-            case 100:
-                userInput.SearchParameters.BrandId = 100;
-                userInput.SearchParameters.ModelId = 21;
-                break;
-            default:
-                userInput.SearchParameters.defaultParameter = 1234;
-                break;
-        }
-        greet();
-        let myObj = new MyClass();
-        myObj.MyMethod();
-    }
+   
 
     private initSingleAdItemStyle(): void {
         //show detail of singleAdItem when mouse over

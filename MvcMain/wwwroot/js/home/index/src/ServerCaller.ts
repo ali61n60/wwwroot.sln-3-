@@ -22,12 +22,7 @@ export class ServerCaller {
             this._previousRequestIndex = this._requestIndex;
             this._isServerCalled = true;
         } //else
-
-        //TODO pass the object to the category selector element and let it fill the categoryId
-        //OR call a method on category selector element to get categoryId
         
-        
-
         //notifyUserAjaxCallStarted();
      
         $.ajax({

@@ -160,6 +160,7 @@
     <None Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.js.map" />
     <None Include="wwwroot\js\Events\Examples\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\dist\bundle.js" />
+    <None Include="wwwroot\js\home\index\dist\bundle.min.js" />
     <None Include="wwwroot\js\home\index\src\index.js" />
     <None Include="wwwroot\js\home\index\src\index.js.map" />
     <None Include="wwwroot\js\home\index\src\SearchAdUserInput.js" />
@@ -497,9 +498,11 @@
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchAdUserInput.ts" />
-    <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteriaLoader.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteriaViewLoader.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria\AdTransformationSearchCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria\DefaultSearchCriteria.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria\ISearchCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\ServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\newAd.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\PartialViewCategorySpecific.ts" />
