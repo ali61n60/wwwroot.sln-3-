@@ -1,6 +1,6 @@
 var tran;
 (function (tran) {
-    var MyClass = /** @class */ (function () {
+    var MyClass = (function () {
         function MyClass() {
         }
         MyClass.prototype.MyMethod = function () {

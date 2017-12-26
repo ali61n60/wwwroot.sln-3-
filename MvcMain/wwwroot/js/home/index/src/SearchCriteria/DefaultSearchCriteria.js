@@ -1,6 +1,6 @@
 var def;
 (function (def) {
-    var MyClass = /** @class */ (function () {
+    var MyClass = (function () {
         function MyClass() {
         }
         MyClass.prototype.MyMethod = function () {
