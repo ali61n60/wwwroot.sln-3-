@@ -2,6 +2,7 @@
 import {AdTransformationSearchCriteria} from "./SearchCriteria/AdTransformationSearchCriteria";
 import {ISearchCriteria} from "./SearchCriteria/ISearchCriteria";
 import {DefaultSearchCriteria} from "./SearchCriteria/DefaultSearchCriteria";
+import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
 
 
 
@@ -11,12 +12,14 @@ export class SearchCriteria {
         searchCriteria.FillSearchCriteria(userInput);
     }
 
-    public Bind(categoryId:number) {
-        
+    public Bind(categoryId: number, searchCriteriaChange: ISearchCriteriaChange) {
+        let searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
+        searchCriteria.BindEvents(searchCriteriaChange);
     }
 
     public UnBind(categoryId:number) {
-        
+        let searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
+        searchCriteria.UnBindEvents();
     }
 
     private polymorphicDispatchSearchCriteria(categoryId:number): ISearchCriteria {
@@ -27,5 +30,4 @@ export class SearchCriteria {
             return new DefaultSearchCriteria();
         }
     }
-
 }

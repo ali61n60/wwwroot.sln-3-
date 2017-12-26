@@ -497,6 +497,7 @@
     <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\index\src\ISearchCriteriaChange.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchAdUserInput.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteriaViewLoader.ts" />

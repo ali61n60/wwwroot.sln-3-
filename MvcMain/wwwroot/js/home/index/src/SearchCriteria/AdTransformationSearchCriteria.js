@@ -9,9 +9,14 @@ var AdTransformationSearchCriteria = (function () {
         searchAdUserInput.SearchParameters[this.BrandParameter] =
             $("#" + this.BrandSelectId).find("option:selected").val();
     };
-    AdTransformationSearchCriteria.prototype.BindEvents = function () {
+    AdTransformationSearchCriteria.prototype.BindEvents = function (searchCriteriaChange) {
+        $("#brand").on("change", function (event) {
+            console.log($(event.currentTarget).find("option:selected").text());
+            searchCriteriaChange.CustomSearchCriteriChanged();
+        });
     };
     AdTransformationSearchCriteria.prototype.UnBindEvents = function () {
+        $("#brand").off("change");
     };
     return AdTransformationSearchCriteria;
 }());

@@ -1,23 +1,29 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AdTransformationSearchCriteria_1 = require("./SearchCriteria/AdTransformationSearchCriteria");
+var DefaultSearchCriteria_1 = require("./SearchCriteria/DefaultSearchCriteria");
 var SearchCriteria = (function () {
     function SearchCriteria() {
     }
     SearchCriteria.prototype.FillCategorySpecificSearchCriteria = function (categoryId, userInput) {
+        var searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
+        searchCriteria.FillSearchCriteria(userInput);
+    };
+    SearchCriteria.prototype.Bind = function (categoryId, searchCriteriaChange) {
+        var searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
+        searchCriteria.BindEvents(searchCriteriaChange);
+    };
+    SearchCriteria.prototype.UnBind = function (categoryId) {
+        var searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
+        searchCriteria.UnBindEvents();
+    };
+    SearchCriteria.prototype.polymorphicDispatchSearchCriteria = function (categoryId) {
         switch (categoryId) {
             case 100:
-                var adTransSerachCriteris = new AdTransformationSearchCriteria_1.AdTransformationSearchCriteria();
-                adTransSerachCriteris.FillSearchCriteria(userInput);
-                break;
+                return new AdTransformationSearchCriteria_1.AdTransformationSearchCriteria();
             default:
-                userInput.SearchParameters.defaultParameter = 1234;
-                break;
+                return new DefaultSearchCriteria_1.DefaultSearchCriteria();
         }
-    };
-    SearchCriteria.prototype.Bind = function () {
-    };
-    SearchCriteria.prototype.UnBind = function () {
     };
     return SearchCriteria;
 }());

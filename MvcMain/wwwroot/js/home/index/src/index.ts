@@ -4,10 +4,11 @@ import { ServerCaller } from "./ServerCaller";
 import { SearchCriteriaViewLoader} from "./SearchCriteriaViewLoader";
 import { SearchAdUserInput } from "./SearchAdUserInput";
 import {SearchCriteria} from "./SearchCriteria";
+import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
 
 
 
-export class Index {
+export class Index implements ISearchCriteriaChange {
     private _serverCaller = new ServerCaller();
     private _categorySelection: CategorySelection;
     private _searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this);
@@ -52,7 +53,7 @@ export class Index {
         });
     }
 
-    public CustomSearchCriteriChanged() {
+    public CustomSearchCriteriChanged():void {
         this.searchCriteriaChanged();
     }
 

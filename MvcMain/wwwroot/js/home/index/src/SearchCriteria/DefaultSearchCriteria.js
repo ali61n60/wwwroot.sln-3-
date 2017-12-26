@@ -1,13 +1,16 @@
-var def;
-(function (def) {
-    var MyClass = (function () {
-        function MyClass() {
-        }
-        MyClass.prototype.MyMethod = function () {
-            console.log("my method of default");
-        };
-        return MyClass;
-    }());
-    def.MyClass = MyClass;
-})(def || (def = {}));
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var DefaultSearchCriteria = (function () {
+    function DefaultSearchCriteria() {
+    }
+    DefaultSearchCriteria.prototype.FillSearchCriteria = function (userInput) {
+        userInput.SearchParameters.defaultParameter = 1234;
+    };
+    DefaultSearchCriteria.prototype.BindEvents = function (searchCriteriaChange) {
+    };
+    DefaultSearchCriteria.prototype.UnBindEvents = function () {
+    };
+    return DefaultSearchCriteria;
+}());
+exports.DefaultSearchCriteria = DefaultSearchCriteria;
 //# sourceMappingURL=DefaultSearchCriteria.js.map

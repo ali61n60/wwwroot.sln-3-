@@ -1,13 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var PartialViewCategorySpecific_1 = require("../../newAd/src/PartialViewCategorySpecific");
+var SearchCriteria_1 = require("./SearchCriteria");
 var SearchCriteriaViewLoader = (function () {
-    function SearchCriteriaViewLoader(parentDivId, indexObject) {
+    function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange) {
         this._url = "Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
+        this._searchCriteria = new SearchCriteria_1.SearchCriteria();
         this._parentDivId = parentDivId;
-        this._indexObject = indexObject;
+        this._searchCriteriaChange = searchCriteriaChange;
     }
     SearchCriteriaViewLoader.prototype.GetSearchCriteriaViewFromServer = function (categoryId) {
         var _this = this;
@@ -25,37 +27,15 @@ var SearchCriteriaViewLoader = (function () {
         }); //.ajax
     };
     SearchCriteriaViewLoader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
-        this.unBindEvents();
+        this._searchCriteria.UnBind(this._previousCategoryId);
         $("#" + this._parentDivId).children().remove();
         $("#" + this._parentDivId).html(msg);
-        this.bindEvents();
+        this._searchCriteria.Bind(this._currentCategoryId, this._searchCriteriaChange);
+        this._previousCategoryId = this._currentCategoryId;
     }; //onSuccessGetTimeFromServer
     SearchCriteriaViewLoader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         alert(errorThrown);
     }; //onErrorGetTimeFromServer
-    SearchCriteriaViewLoader.prototype.bindEvents = function () {
-        var _this = this;
-        //use currentCategoryId
-        switch (this._currentCategoryId) {
-            case 100:
-                $("#brand").on("change", function (event) {
-                    console.log($(event.currentTarget).find("option:selected").text());
-                    _this._indexObject.CustomSearchCriteriChanged();
-                });
-            default:
-        }
-        console.log("binding " + this._currentCategoryId);
-        this._previousCategoryId = this._currentCategoryId;
-    };
-    SearchCriteriaViewLoader.prototype.unBindEvents = function () {
-        //use previouscategoryId
-        switch (this._previousCategoryId) {
-            case 100:
-                $("#brand").off("change");
-            default:
-        }
-        console.log("UnBinding " + this._previousCategoryId);
-    };
     return SearchCriteriaViewLoader;
 }());
 exports.SearchCriteriaViewLoader = SearchCriteriaViewLoader;

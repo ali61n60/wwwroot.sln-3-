@@ -1,5 +1,6 @@
 ﻿import {SearchAdUserInput} from "../SearchAdUserInput";
 import {ISearchCriteria} from"./ISearchCriteria";
+import {ISearchCriteriaChange} from "../ISearchCriteriaChange";
 
 
 
@@ -12,11 +13,14 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
             $("#" + this.BrandSelectId).find("option:selected").val();
     }
 
-    public BindEvents():void {
-        
+    public BindEvents(searchCriteriaChange: ISearchCriteriaChange):void {
+        $("#brand").on("change", (event) => {
+            console.log($(event.currentTarget).find("option:selected").text());
+            searchCriteriaChange.CustomSearchCriteriChanged();
+        });
     }
 
     public UnBindEvents(): void {
-        
+        $("#brand").off("change");
     }
 }
