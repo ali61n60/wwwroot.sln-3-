@@ -5,7 +5,7 @@ var ServerCaller_1 = require("./ServerCaller");
 var SearchCriteriaViewLoader_1 = require("./SearchCriteriaViewLoader");
 var SearchAdUserInput_1 = require("./SearchAdUserInput");
 var SearchCriteria_1 = require("./SearchCriteria");
-var Index = (function () {
+var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._serverCaller = new ServerCaller_1.ServerCaller();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this);
