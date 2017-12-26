@@ -83,6 +83,7 @@
     <None Include="node_modules\%40types\jquery\README.md" />
     <None Include="node_modules\%40types\mustache\LICENSE" />
     <None Include="node_modules\%40types\mustache\README.md" />
+    <None Include="Views\Shared\Components\SearchCriteriaTransformation\Default.cshtml" />
     <None Include="wwwroot\cmd.exe" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff2" />
@@ -163,6 +164,10 @@
     <None Include="wwwroot\js\home\index\src\index.js.map" />
     <None Include="wwwroot\js\home\index\src\SearchAdUserInput.js" />
     <None Include="wwwroot\js\home\index\src\SearchAdUserInput.js.map" />
+    <None Include="wwwroot\js\home\index\src\SearchCriteria\AdTransformationSearchCriteria.js" />
+    <None Include="wwwroot\js\home\index\src\SearchCriteria\AdTransformationSearchCriteria.js.map" />
+    <None Include="wwwroot\js\home\index\src\SearchCriteria\DefaultSearchCriteria.js" />
+    <None Include="wwwroot\js\home\index\src\SearchCriteria\DefaultSearchCriteria.js.map" />
     <None Include="wwwroot\js\home\index\src\ServerCaller.js" />
     <None Include="wwwroot\js\home\index\src\ServerCaller.js.map" />
     <None Include="wwwroot\js\home\newAd\dist\bundle.js" />
@@ -492,6 +497,9 @@
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchAdUserInput.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteriaLoader.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria\AdTransformationSearchCriteria.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria\DefaultSearchCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\ServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\newAd.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\PartialViewCategorySpecific.ts" />

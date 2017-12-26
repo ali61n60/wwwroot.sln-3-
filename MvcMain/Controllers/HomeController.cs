@@ -60,5 +60,18 @@ namespace MvcMain.Controllers
             }
             
         }
+
+        [HttpGet]
+        public IActionResult GetSearchCriteriaView([FromQuery] Dictionary<string, string> userInput)
+        {
+            int categoryId = ParameterExtractor.ExtractCatgoryId(userInput);
+            switch (categoryId)
+            {
+                case 100:
+                    return ViewComponent("SearchCriteriaTransformation");
+                default:
+                    return ViewComponent("SearchCriteriaDefault");
+            }
+        }
     }
 }

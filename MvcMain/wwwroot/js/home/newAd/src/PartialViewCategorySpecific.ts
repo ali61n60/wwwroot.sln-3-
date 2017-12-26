@@ -24,7 +24,6 @@ export class PartialViewCategorySpecific {
         $("#" + this._partialViewDivId).children().remove();
         $("#jsfile").remove();
         $("#"+this._partialViewDivId).html(msg);
-        //  $("#adPlaceHolder").append(html);
     }//onSuccessGetTimeFromServer
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
@@ -32,6 +31,6 @@ export class PartialViewCategorySpecific {
     }//onErrorGetTimeFromServer
 }
 
-class PartialViewServerCallParameters {
+export class PartialViewServerCallParameters {
     public CategoryId:number;
 }

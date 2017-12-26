@@ -87,6 +87,7 @@ namespace MvcMain.Controllers
         }
 
         //Called from android and home controller
+        //TODO based on categoryId call specific repository 
         public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
             string errorCode = "AdApiController.GetAdvertisementCommon";

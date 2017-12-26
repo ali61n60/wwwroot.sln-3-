@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PartialViewCategorySpecific = (function () {
+var PartialViewCategorySpecific = /** @class */ (function () {
     function PartialViewCategorySpecific(partialViewDivId) {
         this._url = "/Home/GetNewAdPartialView";
         this._partialViewDivId = partialViewDivId;
@@ -22,7 +22,6 @@ var PartialViewCategorySpecific = (function () {
         $("#" + this._partialViewDivId).children().remove();
         $("#jsfile").remove();
         $("#" + this._partialViewDivId).html(msg);
-        //  $("#adPlaceHolder").append(html);
     }; //onSuccessGetTimeFromServer
     PartialViewCategorySpecific.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         alert(errorThrown);
@@ -30,9 +29,10 @@ var PartialViewCategorySpecific = (function () {
     return PartialViewCategorySpecific;
 }());
 exports.PartialViewCategorySpecific = PartialViewCategorySpecific;
-var PartialViewServerCallParameters = (function () {
+var PartialViewServerCallParameters = /** @class */ (function () {
     function PartialViewServerCallParameters() {
     }
     return PartialViewServerCallParameters;
 }());
+exports.PartialViewServerCallParameters = PartialViewServerCallParameters;
 //# sourceMappingURL=PartialViewCategorySpecific.js.map

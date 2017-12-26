@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var SearchAdUserInput_1 = require("./SearchAdUserInput");
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;
@@ -12,9 +11,11 @@ var ServerCaller = (function () {
         this._numberOfStartServerCallNotification = 0;
         this._url = "api/AdApi/GetAdvertisementCommon";
     }
-    ServerCaller.prototype.GetAdItemsFromServer = function (categoryId, minPrice, maxPrice, orderBy) {
+    ServerCaller.prototype.GetAdItemsFromServer = function (userInput) {
         var _this = this;
-        var userInput = new SearchAdUserInput_1.SearchAdUserInput();
+        userInput.SearchParameters.StartIndex = this._start;
+        userInput.SearchParameters.Count = this._count;
+        userInput.SearchParameters.RequestIndex = this._requestIndex;
         if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)) {
             return;
         } //if
@@ -22,20 +23,13 @@ var ServerCaller = (function () {
             this._previousRequestIndex = this._requestIndex;
             this._isServerCalled = true;
         } //else
-        userInput.StartIndex = this._start;
-        userInput.Count = this._count;
         //TODO pass the object to the category selector element and let it fill the categoryId
         //OR call a method on category selector element to get categoryId
-        userInput.CategoryId = categoryId; //100 for cars
-        userInput.MinimumPrice = minPrice;
-        userInput.MaximumPrice = maxPrice;
-        userInput.OrderBy = orderBy;
-        userInput.RequestIndex = this._requestIndex;
         //notifyUserAjaxCallStarted();
         $.ajax({
             type: "POST",
             url: this._url,
-            data: JSON.stringify(userInput),
+            data: JSON.stringify(userInput.SearchParameters),
             contentType: 'application/json',
             success: function (msg, textStatus, jqXHR) { return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
             error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails

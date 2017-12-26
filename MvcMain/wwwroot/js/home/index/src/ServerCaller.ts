@@ -9,8 +9,11 @@ export class ServerCaller {
     private _numberOfStartServerCallNotification: number = 0;
     private _url: string = "api/AdApi/GetAdvertisementCommon";
 
-    public GetAdItemsFromServer(categoryId: number,minPrice: number,maxPrice: number,orderBy: string): void {
-        let userInput = new SearchAdUserInput();
+    public GetAdItemsFromServer(userInput: SearchAdUserInput): void {
+        userInput.SearchParameters.StartIndex = this._start;
+        userInput.SearchParameters.Count = this._count;
+        userInput.SearchParameters.RequestIndex = this._requestIndex;
+        
         if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)
         ) { //a call is sent but no answer yet
             return;
@@ -20,22 +23,17 @@ export class ServerCaller {
             this._isServerCalled = true;
         } //else
 
-        userInput.StartIndex = this._start;
-        userInput.Count = this._count;
         //TODO pass the object to the category selector element and let it fill the categoryId
         //OR call a method on category selector element to get categoryId
-        userInput.CategoryId = categoryId; //100 for cars
-        userInput.MinimumPrice = minPrice;
-        userInput.MaximumPrice = maxPrice;
-        userInput.OrderBy = orderBy;
-        userInput.RequestIndex = this._requestIndex;
+        
+        
 
         //notifyUserAjaxCallStarted();
      
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
             url: this._url,
-            data: JSON.stringify(userInput), //Data sent to server
+            data:JSON.stringify(userInput.SearchParameters), //Data sent to server
             contentType: 'application/json', // content type sent to server
             success: (msg,textStatus,jqXHR)=> this.onSuccessGetItemsFromServer(msg,textStatus,jqXHR), //On Successfull service call
             error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
