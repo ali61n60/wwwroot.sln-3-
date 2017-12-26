@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 
-namespace MvcMain.Components
+namespace MvcMain.Components.SearchAd.AdTransformation
 {
     public class BrandsTransformationViewComponent : ViewComponent
     {

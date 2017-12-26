@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-namespace MvcMain.Components.SearchAd
+namespace MvcMain.Components.SearchAd.AdTransformation
 {
     public class SearchCriteriaTransformation : ViewComponent
     {
