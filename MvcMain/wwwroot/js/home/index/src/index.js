@@ -38,6 +38,7 @@ var Index = (function () {
             var minPrice = parseInt($("#minPrice").val().toString());
             var maxPrice = parseInt($("#maxPrice").val().toString());
             var orderBy = $("#orderBy").val().toString();
+            //TODO What about category specific search parameters
             _this._serverCaller.GetAdItemsFromServer(categoryId, minPrice, maxPrice, orderBy);
         }); //click
     }; //initGetAdFromServer
