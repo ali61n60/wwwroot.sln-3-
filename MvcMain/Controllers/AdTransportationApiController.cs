@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
-using ModelStd.Advertisements.Transportation;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
@@ -176,10 +174,10 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public ResponseBase<TransportationModel[]> GetAllTransportationModels()
+        public ResponseBase<IEnumerable<CarModel>> GetAllTransportationModels()
         {
             string errorCode = "AdTransportationApiController.GetAllTransportationModels";
-            ResponseBase<TransportationModel[]> response = new ResponseBase<TransportationModel[]>();
+            ResponseBase<IEnumerable<CarModel>> response = new ResponseBase<IEnumerable<CarModel>>();
             try
             {
                 response.ResponseData = _transportaionRepository.GetAllModels();

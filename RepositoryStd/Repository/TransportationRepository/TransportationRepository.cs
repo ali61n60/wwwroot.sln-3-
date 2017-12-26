@@ -74,12 +74,12 @@ namespace RepositoryStd.Repository.TransportationRepository
             return listOfTransportationBrands;
         }
 
-        public TransportationModel[] GetAllModels()
+        public IEnumerable<CarModel> GetAllModels()
         {
-            string query = " SELECT CarModel.modelId, CarModel.modelName, CarModel.brandId " +
-                            " FROM CarModel " +
+            string query = " SELECT ad.CarModel.modelId, ad.CarModel.modelName, ad.CarModel.brandId " +
+                            " FROM ad.CarModel " +
                             " ORDER BY modelId ";
-            List<TransportationModel> listOfTransportationModels = new List<TransportationModel>();
+            List<CarModel> listOfTransportationModels = new List<CarModel>();
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 using (SqlCommand command = new SqlCommand())
@@ -88,15 +88,20 @@ namespace RepositoryStd.Repository.TransportationRepository
                     command.Connection = connection;
                     connection.Open();
                     var dataReader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                    TransportationModel tempModel;
+                    CarModel tempModel;
                     while (dataReader.Read())
                     {
-                        tempModel = new TransportationModel((int)dataReader["modelId"], (string)dataReader["modelName"], (int)dataReader["brandId"]);
+                        tempModel = new CarModel{
+                            ModelId = (int) dataReader["modelId"],
+                            ModelName = (string) dataReader["modelName"],
+                            BrandId = (int) dataReader["brandId"]
+                        };
+                        
                         listOfTransportationModels.Add(tempModel);
                     }
                 }
             }
-            return listOfTransportationModels.ToArray();
+            return listOfTransportationModels;
         }
     }
 }

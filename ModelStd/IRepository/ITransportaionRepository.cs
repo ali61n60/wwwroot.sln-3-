@@ -8,6 +8,6 @@ namespace ModelStd.IRepository
     {
         Vehicle[] GetAllVehicles();
         IEnumerable<Brand> GetAllBrands();
-        TransportationModel[] GetAllModels();
+        IEnumerable<CarModel> GetAllModels();
     }
 }

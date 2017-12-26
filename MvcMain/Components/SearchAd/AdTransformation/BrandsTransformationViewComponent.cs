@@ -16,7 +16,13 @@ namespace MvcMain.Components.SearchAd.AdTransformation
         {
             //TODO get all brands from database and pass it to view to render
             IEnumerable<Brand> allBrands = _transportationRepository.GetAllBrands();
-            return View(allBrands);
+            IEnumerable<CarModel> allCarModels = _transportationRepository.GetAllModels();
+            AllVihecles allVihecles=new AllVihecles
+            {
+                AllBrands = allBrands,
+                AllCarModels = allCarModels
+            };
+            return View(allVihecles);
         }
     }
 
