@@ -94,7 +94,7 @@ namespace MvcMain.Controllers
             int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
             int count = ParameterExtractor.ExtractCount(userInput);
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
-
+            //TODO get repository based on categoryId
             try
             {
                 response.ResponseData =_advertisementCommonRepository.FindBy(userInput, startIndex, count).ToList();//get attributes 
