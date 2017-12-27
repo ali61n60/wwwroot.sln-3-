@@ -38,10 +38,13 @@ namespace RepositoryStd.Repository
         {
             throw new NotImplementedException();
         }
-       
-       
 
-       
+        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(IQuery query, int index, int count)
+        {
+            throw new NotImplementedException();
+        }
+
+
         //TODO use EF
         public void Add(AdvertisementTransportation entity)
         {

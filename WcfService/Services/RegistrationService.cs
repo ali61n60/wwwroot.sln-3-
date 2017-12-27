@@ -6,9 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Security;
 using Model;
-using Repository;
-using Repository.Messages;
-using WcfService.IOC;
 using WcfService.Messages;
 
 

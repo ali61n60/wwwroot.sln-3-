@@ -3,7 +3,6 @@ using System.ServiceModel;
 using System.ServiceModel.Activation;
 using Model.Advertisements;
 using Model.IRepository;
-using WcfService.IOC;
 using WcfService.Messages;
 
 namespace WcfService.Services
@@ -19,8 +18,8 @@ namespace WcfService.Services
             _categoryRepository = categoryRepository;
         }
 
-        public CategoryService():
-            this(Bootstrapper.container.GetInstance<ICategoryRepository>())
+        public CategoryService()
+            
         {
             
         }

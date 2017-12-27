@@ -55,6 +55,11 @@ namespace RepositoryStd.Repository
             return _searchResultItems;
         }
 
+        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(IQuery query, int index, int count)
+        {
+            throw new NotImplementedException();
+        }
+
         public IQueryable<Advertisements> GetQueryableList(Dictionary<string, string> queryParameters, AdDbContext adDbContext)
         {
             IQueryable<Advertisements> list = adDbContext.Advertisements
