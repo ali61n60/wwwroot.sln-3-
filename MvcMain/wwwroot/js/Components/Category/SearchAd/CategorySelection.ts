@@ -44,14 +44,7 @@ export class CategorySelection {
         $("#" + id).remove();
     }
 
-    private addOptionElementToSelectElement(selectElementId:string,category: Category):void {
-        $("#" + selectElementId).append($("<option>", {
-            value: category.categoryId,
-            text: category.categoryName
-        }));
-    }
-
-    public CreateFirstLevel(): void {
+   public CreateFirstLevel(): void {
         this.removeElement(this._firstLevelDiv);
         this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this.removeElement(this._secondLevelDiv);

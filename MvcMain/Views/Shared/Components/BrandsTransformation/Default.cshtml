@@ -1,10 +1,10 @@
 ﻿@using ModelStd.Db.Ad
 @using MvcMain.Components.SearchAd.AdTransformation
 @model AllVihecles
-    
-    
+
+
 <div id="carModel">
-<input id="allCarModels" type="hidden" value='@Json.Serialize(Model.AllCarModels)' />
+    <input id="allCarModels" type="hidden" value='@Json.Serialize(Model.AllCarModels)' />
 </div>
 <div class="col-sm-2 col-sm-push-10">
     <label>برند</label>
@@ -23,8 +23,17 @@
 <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
     <label>مدل</label>
 </div>
-<div class="col-sm-4 col-sm-pull-8 col-sm-push-0">
+<div id="modelPlaceHolder" class="col-sm-4 col-sm-pull-8 col-sm-push-0">
     <select id="model" class="form-control">
         <option value='0'>تمام مدل ها</option>
     </select>
 </div>
+
+<script id="modelTemplate" type="text/template">
+    <select id="model" class="form-control">
+        <option value="0" selected="selected">تمام مدل ها</option>
+        {{#carModels}}
+        <option value="{{modelId}}">{{modelName}}</option>
+        {{/carModels}}
+    </select>
+</script>

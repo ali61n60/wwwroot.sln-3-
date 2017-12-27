@@ -2,9 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AdTransformationSearchCriteria_1 = require("./SearchCriteria/AdTransformationSearchCriteria");
 var DefaultSearchCriteria_1 = require("./SearchCriteria/DefaultSearchCriteria");
+var MyNumericDictionary = (function () {
+    function MyNumericDictionary() {
+    }
+    return MyNumericDictionary;
+}());
 var SearchCriteria = (function () {
     function SearchCriteria() {
+        this._searchCriteriaIocContainer = new MyNumericDictionary();
+        this.initSearchCriteriaIocContainer();
     }
+    SearchCriteria.prototype.initSearchCriteriaIocContainer = function () {
+        this._searchCriteriaIocContainer[0] = new DefaultSearchCriteria_1.DefaultSearchCriteria();
+        this._searchCriteriaIocContainer[100] = new AdTransformationSearchCriteria_1.AdTransformationSearchCriteria();
+    };
     SearchCriteria.prototype.FillCategorySpecificSearchCriteria = function (categoryId, userInput) {
         var searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
         searchCriteria.FillSearchCriteria(userInput);
@@ -18,12 +29,11 @@ var SearchCriteria = (function () {
         searchCriteria.UnBindEvents();
     };
     SearchCriteria.prototype.polymorphicDispatchSearchCriteria = function (categoryId) {
-        switch (categoryId) {
-            case 100:
-                return new AdTransformationSearchCriteria_1.AdTransformationSearchCriteria();
-            default:
-                return new DefaultSearchCriteria_1.DefaultSearchCriteria();
+        var returnValue = this._searchCriteriaIocContainer[categoryId];
+        if (returnValue === undefined || returnValue === null) {
+            returnValue = this._searchCriteriaIocContainer[0];
         }
+        return returnValue;
     };
     return SearchCriteria;
 }());

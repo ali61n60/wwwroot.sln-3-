@@ -1,12 +1,25 @@
 ﻿import {SearchAdUserInput} from "./SearchAdUserInput";
 import {AdTransformationSearchCriteria} from "./SearchCriteria/AdTransformationSearchCriteria";
-import {ISearchCriteria} from "./SearchCriteria/ISearchCriteria";
+import {ISearchCriteria } from "./SearchCriteria/ISearchCriteria";
 import {DefaultSearchCriteria} from "./SearchCriteria/DefaultSearchCriteria";
 import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
+import { NumericDictionary } from "lodash";
 
-
-
+class MyNumericDictionary implements NumericDictionary<ISearchCriteria> {
+    [index: number]: ISearchCriteria;
+}
 export class SearchCriteria {
+    private _searchCriteriaIocContainer: MyNumericDictionary=new MyNumericDictionary();
+    constructor() {
+        this.initSearchCriteriaIocContainer();
+        
+    }
+
+    private initSearchCriteriaIocContainer() {
+        this._searchCriteriaIocContainer[0] = new DefaultSearchCriteria();
+        this._searchCriteriaIocContainer[100] = new AdTransformationSearchCriteria();
+    }
+
     public FillCategorySpecificSearchCriteria(categoryId: number, userInput: SearchAdUserInput): void {
         let searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
         searchCriteria.FillSearchCriteria(userInput);
@@ -23,11 +36,10 @@ export class SearchCriteria {
     }
 
     private polymorphicDispatchSearchCriteria(categoryId:number): ISearchCriteria {
-        switch (categoryId) {
-        case 100:
-            return  new AdTransformationSearchCriteria();
-        default:
-            return new DefaultSearchCriteria();
+        let returnValue: ISearchCriteria = this._searchCriteriaIocContainer[categoryId];
+        if (returnValue===undefined || returnValue===null) {
+            returnValue = this._searchCriteriaIocContainer[0];
         }
+        return returnValue;
     }
 }

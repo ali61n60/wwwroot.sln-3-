@@ -30,12 +30,6 @@ var CategorySelection = (function () {
     CategorySelection.prototype.removeElement = function (id) {
         $("#" + id).remove();
     };
-    CategorySelection.prototype.addOptionElementToSelectElement = function (selectElementId, category) {
-        $("#" + selectElementId).append($("<option>", {
-            value: category.categoryId,
-            text: category.categoryName
-        }));
-    };
     CategorySelection.prototype.CreateFirstLevel = function () {
         var _this = this;
         this.removeElement(this._firstLevelDiv);
