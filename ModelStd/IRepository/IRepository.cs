@@ -17,9 +17,7 @@ namespace ModelStd.IRepository
     {
         IEnumerable<T> FindBy(Dictionary<string, string> queryParameters);//Done
         IEnumerable<T> FindBy(Dictionary<string,string> queryParameters, int startIndex, int count);//Done
-        IEnumerable<AdvertisementCommon> FindAdvertisementCommons(IQuery query, int index, int count);
         T FindBy(Guid Id);//in progress
-
         void Add(T entity);//Insert Database  //Done
         void Remove(T entity);//Done
         void Save(T entity);//Update Database  //Done

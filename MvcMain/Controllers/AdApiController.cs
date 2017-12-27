@@ -26,6 +26,7 @@ namespace MvcMain.Controllers
     public class AdApiController : Controller, IAdvertisementCommonService
     {
         private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
+        
         private readonly ICommonRepository _commonRepository;
         private readonly IImageRepository _imageRepository;
         private readonly UserManager<AppUser> _userManager;
@@ -85,6 +86,13 @@ namespace MvcMain.Controllers
             string ip = Request.Host.ToString();
             return ip;
         }
+
+        //TODO move this method to an IOC container
+        //private IFindRepository getFindRepository(int categoryId)
+        //{
+        //    if(categoryId==100)
+        //        return new AdvertisementTransportationRepository();
+        //}
 
         //Called from android and home controller
         //TODO based on categoryId call specific repository 

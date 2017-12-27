@@ -4,7 +4,8 @@ using System.Text;
 
 namespace RepositoryStd.Repository
 {
-    class RepositoryContainer
+    public class RepositoryContainer
     {
+
     }
 }

@@ -15,7 +15,7 @@ using RepositoryStd.Messages;
 
 namespace RepositoryStd.Repository
 {
-    public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>
+    public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
     {
        // private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly ICommonRepository _commonRepository;
