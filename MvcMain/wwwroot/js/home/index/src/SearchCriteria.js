@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AdTransformationSearchCriteria_1 = require("./SearchCriteria/AdTransformationSearchCriteria");
 var DefaultSearchCriteria_1 = require("./SearchCriteria/DefaultSearchCriteria");
-var SearchCriteria = /** @class */ (function () {
+var SearchCriteria = (function () {
     function SearchCriteria() {
     }
     SearchCriteria.prototype.FillCategorySpecificSearchCriteria = function (categoryId, userInput) {

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/CategorySelectionNewAd");
 var PartialViewCategorySpecific_1 = require("./PartialViewCategorySpecific");
-var NewAd = /** @class */ (function () {
+var NewAd = (function () {
     function NewAd(categorySelectorParentDivId, allCategoriesId, categorySpecificPartialViewId) {
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
