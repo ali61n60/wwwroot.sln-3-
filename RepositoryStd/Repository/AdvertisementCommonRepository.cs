@@ -32,32 +32,23 @@ namespace RepositoryStd.Repository
             _categoryRepository = categoryRepository;
         }
 
-        public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters)
-        {
-            return FindBy(queryParameters, 1, 1000000);//return first 1000000 rows of data in database
-        }
-
+        
         //Called from service layer
-        public IEnumerable<AdvertisementCommon> FindBy(Dictionary<string, string> queryParameters, int startIndex, int count)
+       public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
             List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
             ////TODO research for singleton dbContext
-           
+
             IQueryable<Advertisements> list = GetQueryableList(queryParameters, _adDbContext);
-            
+
             //uegentOnly
-            
+
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement,_appIdentityDbContext));
+                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement, _appIdentityDbContext));
             }
             return _searchResultItems;
-        }
-
-        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(IQuery query, int index, int count)
-        {
-            throw new NotImplementedException();
         }
 
         public IQueryable<Advertisements> GetQueryableList(Dictionary<string, string> queryParameters, AdDbContext adDbContext)

@@ -66,6 +66,7 @@ namespace MvcMain
 
             services.AddTransient<IRepository<AdvertisementTransportation>>(provider => 
             new AdvertisementTransportationRepository(_adDbContext,_appIdentityDbContext,MyService.Inst.GetService<ICommonRepository>()));
+            addRepositoryContainer(services,_adDbContext,_appIdentityDbContext,_categoryRepository);
 
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_configuration["Data:ConnectionString"]));
 
@@ -104,6 +105,19 @@ namespace MvcMain
                 ).AddEntityFrameworkStores<AppIdentityDbContext>();
             
             services.AddMvc();
+        }
+
+        private void addRepositoryContainer(IServiceCollection services,
+            AdDbContext adDbContext,AppIdentityDbContext appIdentityDbContext,ICategoryRepository categoryRepository)
+        {
+            RepositoryContainer repositoryContainer=new RepositoryContainer(int.Parse(_configuration["Data:DefaultCategoryId"]));
+            IFindRepository defaulyFindRepository=new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository);
+            repositoryContainer.RegisterRepository(0,defaulyFindRepository);
+            IFindRepository adTaransportationFindRepository=
+                new AdvertisementTransportationRepository(adDbContext,appIdentityDbContext,
+                new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository));
+            repositoryContainer.RegisterRepository(100,adTaransportationFindRepository);
+            services.AddTransient<RepositoryContainer>(provider => repositoryContainer);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

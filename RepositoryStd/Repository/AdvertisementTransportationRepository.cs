@@ -39,9 +39,15 @@ namespace RepositoryStd.Repository
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(IQuery query, int index, int count)
+        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
-            throw new NotImplementedException();
+            return new List<AdvertisementCommon>()
+            {
+                new AdvertisementCommon()
+                {
+                    AdvertisementTitle = "test"
+                }
+            };
         }
 
 

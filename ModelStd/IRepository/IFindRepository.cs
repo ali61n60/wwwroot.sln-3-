@@ -5,6 +5,6 @@ namespace ModelStd.IRepository
 {
     public interface IFindRepository
     {
-        IEnumerable<AdvertisementCommon> FindAdvertisementCommons(IQuery query, int index, int count);
+        IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count);
     }
 }

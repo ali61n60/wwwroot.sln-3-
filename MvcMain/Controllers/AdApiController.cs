@@ -26,7 +26,7 @@ namespace MvcMain.Controllers
     public class AdApiController : Controller, IAdvertisementCommonService
     {
         private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
-        
+        private readonly RepositoryContainer _repositoryContainer;
         private readonly ICommonRepository _commonRepository;
         private readonly IImageRepository _imageRepository;
         private readonly UserManager<AppUser> _userManager;
@@ -39,6 +39,7 @@ namespace MvcMain.Controllers
         public AdApiController()
         {
             _advertisementCommonRepository = MyService.Inst.GetService<IRepository<AdvertisementCommon>>();
+            _repositoryContainer = MyService.Inst.GetService<RepositoryContainer>();
             _commonRepository = MyService.Inst.GetService<ICommonRepository>();
             _imageRepository = MyService.Inst.GetService<IImageRepository>();
             _userManager = MyService.Inst.GetService<UserManager<AppUser>>();
@@ -87,13 +88,7 @@ namespace MvcMain.Controllers
             return ip;
         }
 
-        //TODO move this method to an IOC container
-        //private IFindRepository getFindRepository(int categoryId)
-        //{
-        //    if(categoryId==100)
-        //        return new AdvertisementTransportationRepository();
-        //}
-
+        
         //Called from android and home controller
         //TODO based on categoryId call specific repository 
         public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
@@ -101,11 +96,13 @@ namespace MvcMain.Controllers
             string errorCode = "AdApiController.GetAdvertisementCommon";
             int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
             int count = ParameterExtractor.ExtractCount(userInput);
+            int categoryId = ParameterExtractor.ExtractCatgoryId(userInput);
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
             //TODO get repository based on categoryId
+            IFindRepository findRepository = _repositoryContainer.GetFindRepository(categoryId);//polymorphyic dispatch
             try
             {
-                response.ResponseData =_advertisementCommonRepository.FindBy(userInput, startIndex, count).ToList();//get attributes 
+                response.ResponseData =findRepository.FindAdvertisementCommons(userInput, startIndex, count).ToList();//get attributes 
                 FillFirstImage(response.ResponseData);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(response, userInput);
