@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Web.UI;
 using Model.Advertisements;
-using WcfService.Messages;
-using WcfService.Services;
 
 namespace WebUIMain.UserControls.AdDetail
 {

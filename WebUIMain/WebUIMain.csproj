@@ -237,12 +237,6 @@
     <Content Include="General\loader.gif" />
     <Content Include="Search\AjaxTest2.aspx" />
     <Content Include="Search\WebService1.asmx" />
-    <Content Include="Services\RegistrationService.svc" />
-    <Content Include="Services\LocationService.svc" />
-    <Content Include="Services\RepositoryService.svc" />
-    <Content Include="Services\SmsService.svc" />
-    <Content Include="Services\CryptoService.svc" />
-    <Content Include="Services\AdvertisementCommonService.svc" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Registration\CreateNewUser.aspx" />
@@ -250,9 +244,6 @@
     <Content Include="Search\AdDetail\AdDetail.aspx" />
     <Content Include="Search\Search.aspx" />
     <Content Include="Search\urlError.aspx" />
-    <Content Include="Services\CategoryService.svc" />
-    <Content Include="Services\AdvertisementTransportationService.svc" />
-    <Content Include="Services\Service1.svc" />
     <Content Include="StyleScript\jquery-1.11.3.js" />
     <Content Include="StyleScript\lightslider.js" />
     <Content Include="StyleScript\mustache.js" />
@@ -620,9 +611,6 @@
     <Content Include="Web.sitemap">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Web.config">
-      <SubType>Designer</SubType>
-    </Content>
     <None Include="Properties\PublishProfiles\testnew.pubxml" />
     <Content Include="style\sass\base\_grid.scss" />
     <Content Include="style\sass\base\_reset.scss" />
@@ -698,10 +686,6 @@
       <Project>{70577d6f-da8d-425d-a9b8-4c6a108a46b8}</Project>
       <Name>Presentation</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WcfService\WcfService.csproj">
-      <Project>{15B3E0D2-6217-493A-A690-158C497F5318}</Project>
-      <Name>WcfService</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="AdvertisementImages\f5dfc294-416b-456f-89bb-7c1689766aa9\" />
@@ -709,6 +693,7 @@
     <Folder Include="App_WebReferences\" />
     <Folder Include="bin\" />
     <Folder Include="Images\" />
+    <Folder Include="Services\" />
     <Folder Include="style\img\" />
     <Folder Include="WebConfigServer\" />
   </ItemGroup>
