@@ -22,6 +22,7 @@
     <WcfConfigValidationEnabled>True</WcfConfigValidationEnabled>
     <TargetFrameworkProfile />
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -696,10 +697,6 @@
     <ProjectReference Include="..\Presentation\Presentation.csproj">
       <Project>{70577d6f-da8d-425d-a9b8-4c6a108a46b8}</Project>
       <Name>Presentation</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{67d19860-9041-4509-94f7-e93915da5278}</Project>
-      <Name>Repository</Name>
     </ProjectReference>
     <ProjectReference Include="..\WcfService\WcfService.csproj">
       <Project>{15B3E0D2-6217-493A-A690-158C497F5318}</Project>

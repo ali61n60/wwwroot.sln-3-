@@ -133,10 +133,6 @@
       <Project>{942e6802-f2e4-42ab-84e4-3f6d8e2bccf3}</Project>
       <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{67d19860-9041-4509-94f7-e93915da5278}</Project>
-      <Name>Repository</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="IOCTest\" />

@@ -1,10 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.4
+VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{67D19860-9041-4509-94F7-E93915DA5278}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{942E6802-F2E4-42AB-84E4-3F6D8E2BCCF3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{70577D6F-DA8D-425D-A9B8-4C6A108A46B8}"
@@ -29,7 +27,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService", "WcfService\Wc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestService", "TestService\TestService.csproj", "{9961CE80-F0D2-4B83-B892-C8424A097010}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcMain", "MvcMain\MvcMain.csproj", "{041340D8-7A1A-4E3D-8304-95ABE317255A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvcMain", "MvcMain\MvcMain.csproj", "{041340D8-7A1A-4E3D-8304-95ABE317255A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiKoja", "ChiKoja\ChiKoja.csproj", "{37E92A03-D6D5-40AB-B627-B98898A88AF7}"
 EndProject
@@ -37,9 +35,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7-Android", "7-Android", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceLayer", "ServiceLayer\ServiceLayer.csproj", "{A7FE567B-D17E-4B5E-86C5-7224C753C1DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelStd", "ModelStd\ModelStd.csproj", "{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelStd", "ModelStd\ModelStd.csproj", "{A6B55618-2C5C-4B70-AE9E-1C5247EA11DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryStd", "RepositoryStd\RepositoryStd.csproj", "{F2DA4EAA-6D1F-4819-87C3-C30DF1532CD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryStd", "RepositoryStd\RepositoryStd.csproj", "{F2DA4EAA-6D1F-4819-87C3-C30DF1532CD1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEntity", "TestEntity\TestEntity.csproj", "{073D0EB3-B253-467E-AE26-FF73CD7CF50E}"
 EndProject
@@ -49,10 +47,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{67D19860-9041-4509-94F7-E93915DA5278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{67D19860-9041-4509-94F7-E93915DA5278}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{67D19860-9041-4509-94F7-E93915DA5278}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{67D19860-9041-4509-94F7-E93915DA5278}.Release|Any CPU.Build.0 = Release|Any CPU
 		{942E6802-F2E4-42AB-84E4-3F6D8E2BCCF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{942E6802-F2E4-42AB-84E4-3F6D8E2BCCF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{942E6802-F2E4-42AB-84E4-3F6D8E2BCCF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -108,7 +102,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{67D19860-9041-4509-94F7-E93915DA5278} = {B86A1EFE-CFDF-43BF-9AA8-74169FFC90A0}
 		{942E6802-F2E4-42AB-84E4-3F6D8E2BCCF3} = {3FC1937E-C1E2-47F1-B2AA-E3D34EB3307C}
 		{70577D6F-DA8D-425D-A9B8-4C6A108A46B8} = {9DEEB267-3847-4966-BAA9-022FAA3EBC36}
 		{43F5599E-C0D2-42E1-AC07-41CF565A3067} = {8320FF7E-C833-473B-A534-D403364CCE32}
@@ -124,5 +117,6 @@ Global
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {6866D85D-0351-402A-9737-2B5016D41ED4}
 	EndGlobalSection
 EndGlobal
