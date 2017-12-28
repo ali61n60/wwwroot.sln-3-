@@ -4,7 +4,7 @@ using ModelStd.Advertisements.Transportation;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 
-namespace RepositoryStd.Repository.TransportationRepository
+namespace RepositoryStd.Repository.Transportation
 {
     public class TransportationRepository : ITransportaionRepository
     {

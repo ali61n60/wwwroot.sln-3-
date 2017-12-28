@@ -16,7 +16,7 @@ using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
 using RepositoryStd.QueryPattern;
 
-namespace RepositoryStd.Repository
+namespace RepositoryStd.Repository.Common
 {
     public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>,IFindRepository,ICommonRepository
     {

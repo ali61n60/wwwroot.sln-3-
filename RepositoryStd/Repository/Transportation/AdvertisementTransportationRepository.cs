@@ -11,8 +11,9 @@ using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
+using RepositoryStd.Repository.Common;
 
-namespace RepositoryStd.Repository
+namespace RepositoryStd.Repository.Transportation
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
     {

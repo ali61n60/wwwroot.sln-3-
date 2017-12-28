@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -22,7 +20,9 @@ using RepositoryStd;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Repository;
-using RepositoryStd.Repository.TransportationRepository;
+using RepositoryStd.Repository.Common;
+using RepositoryStd.Repository.Transportation;
+
 
 namespace MvcMain
 {
