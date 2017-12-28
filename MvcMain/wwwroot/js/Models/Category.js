@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var Category = (function () {
+var Category = /** @class */ (function () {
     function Category() {
     }
     return Category;

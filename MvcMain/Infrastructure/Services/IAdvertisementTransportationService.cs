@@ -12,13 +12,6 @@ namespace MvcMain.Infrastructure.Services
     
     public interface IAdvertisementTransportationService
     {
-      //  ResponseBase<Vehicle[]> GetAllVehicles();
-      
-     
-
-        
-       // ResponseBase EditAdvertisementTransportation(AdvertisementTransportation advertisementTransportation);
-        
         ResponseBase<int> GetServerDataVersion();
         ResponseBase<IEnumerable<Brand>> GetAllTransportationBrands();
         ResponseBase<IEnumerable<CarModel>> GetAllTransportationModels();

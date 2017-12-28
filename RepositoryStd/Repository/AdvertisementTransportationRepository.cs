@@ -5,7 +5,6 @@ using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
-using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
@@ -194,15 +193,15 @@ namespace RepositoryStd.Repository
             //TODO verify that good query is generated
             string query = list.ToSql();
             Advertisements item = list.FirstOrDefault();
-            fillAdTransportation(advertisementTransportation, item, _appIdentityDbContext);
+            fillAdTransportation(advertisementTransportation, item);
             
             return advertisementTransportation;
         }
 
-        private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisements advertisements, AppIdentityDbContext appIdentityDbContext)
+        private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisements advertisements)
         {
             adTrans.AdvertisementCommon =
-                _commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements, appIdentityDbContext);
+                _commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements);
             adTrans.BodyColor = advertisements.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisements.AdAttributeTransportation.InternalColor;
             adTrans.SetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus);

@@ -39,21 +39,21 @@ namespace RepositoryStd.Repository
             List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
             ////TODO research for singleton dbContext
 
-            IQueryable<Advertisements> list = GetQueryableList(queryParameters, _adDbContext);
+            IQueryable<Advertisements> list = GetQueryableList(queryParameters);
 
             //uegentOnly
 
             list = (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement, _appIdentityDbContext));
+                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement));
             }
             return _searchResultItems;
         }
 
-        public IQueryable<Advertisements> GetQueryableList(Dictionary<string, string> queryParameters, AdDbContext adDbContext)
+        public IQueryable<Advertisements> GetQueryableList(Dictionary<string, string> queryParameters)
         {
-            IQueryable<Advertisements> list = adDbContext.Advertisements
+            IQueryable<Advertisements> list = _adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
@@ -132,7 +132,7 @@ namespace RepositoryStd.Repository
             return list;
         }
 
-        public AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Advertisements advertisement, AppIdentityDbContext identityDbContext)
+        public AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Advertisements advertisement)
         {
             AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
             {
@@ -147,8 +147,8 @@ namespace RepositoryStd.Repository
                 AdvertisementCategoryId = advertisement.CategoryId,
                 AdvertisementComments = advertisement.AdComments,//TODO test for null
                 NumberOfVisit = advertisement.AdNumberOfVisited,//TODO test for null
-                Email =identityDbContext.Users.First(user => user.Id== advertisement.UserId).Email,//TODO test for null
-                PhoneNumber = identityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber,//TODO test for null
+                Email =_appIdentityDbContext.Users.First(user => user.Id== advertisement.UserId).Email,//TODO test for null
+                PhoneNumber = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber,//TODO test for null
                 DistrictId = advertisement.DistrictId,
                 DistrictName = advertisement.District.DistrictName,
                 CityName = advertisement.District.City.CityName,

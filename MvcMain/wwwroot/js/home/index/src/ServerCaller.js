@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this._initialStart = 1;
         this._start = 1;

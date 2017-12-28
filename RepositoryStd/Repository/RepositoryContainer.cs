@@ -6,7 +6,7 @@ namespace RepositoryStd.Repository
     public class RepositoryContainer
     {
         private readonly Dictionary<int,IFindRepository> _container=new Dictionary<int, IFindRepository>();
-        private int _defaultCategoryId;
+        private readonly int _defaultCategoryId;
 
         public RepositoryContainer(int defaultCategoryId)
         {
