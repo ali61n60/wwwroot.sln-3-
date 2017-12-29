@@ -37,8 +37,6 @@ namespace RepositoryStd.Repository.Common
        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
             List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
-            ////TODO research for singleton dbContext
-
             IQueryable<Advertisements> list = GetQueryableList(queryParameters);
 
             //uegentOnly

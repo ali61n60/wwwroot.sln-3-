@@ -17,24 +17,24 @@ namespace RepositoryStd.Repository.Transportation
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
     {
-       // private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
+        // private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
 
         public AdvertisementTransportationRepository(AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICommonRepository commonRepository)
         {
-            _adDbContext=adDbContext;
+            _adDbContext = adDbContext;
             _appIdentityDbContext = appIdentityDbContext;
-           _commonRepository=commonRepository;
+            _commonRepository = commonRepository;
         }
 
-        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string,string> inputDictionary)
+        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary,int startIndex, int count)
+        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary, int startIndex, int count)
         {
             throw new NotImplementedException();
         }
@@ -54,10 +54,10 @@ namespace RepositoryStd.Repository.Transportation
         //TODO use EF
         public void Add(AdvertisementTransportation entity)
         {
-            
+
             Advertisements ad = _commonRepository.GetAdvertisement(entity.AdvertisementCommon);
-            AdAttributeTransportation adAttribute = getAdAtribute(entity); 
-            
+            AdAttributeTransportation adAttribute = getAdAtribute(entity);
+
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             _adDbContext.SaveChanges();
@@ -66,7 +66,7 @@ namespace RepositoryStd.Repository.Transportation
         //TODO the method implementation is not complete
         private AdAttributeTransportation getAdAtribute(AdvertisementTransportation entity)
         {
-            AdAttributeTransportation adAttribute =  new AdAttributeTransportation();
+            AdAttributeTransportation adAttribute = new AdAttributeTransportation();
             adAttribute.AdId = entity.AdvertisementCommon.AdvertisementId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
@@ -76,10 +76,10 @@ namespace RepositoryStd.Repository.Transportation
             adAttribute.BodyColor = entity.BodyColor;
             adAttribute.InternalColor = entity.InternalColor;
             adAttribute.BodyStatus = entity.BodyStatus.ToString();
-            
+
             return adAttribute;
         }
-        
+
         public void Remove(AdvertisementTransportation entity)// entity only has advertisementCommon attributes
         {
             using (SqlConnection connection = new SqlConnection(""))// _conectionString))
@@ -88,7 +88,7 @@ namespace RepositoryStd.Repository.Transportation
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = entity.AdvertisementCommon.AdvertisementId;
-                  //  _advertisementCommonRepository.AddReturnParameterToCommand(command);
+                    //  _advertisementCommonRepository.AddReturnParameterToCommand(command);
                     try
                     {
                         connection.Open();
@@ -134,9 +134,9 @@ namespace RepositoryStd.Repository.Transportation
 
         public IEnumerable<AdvertisementTransportation> FindAll()
         {
-            List<AdvertisementTransportation>  searchResultItems = new List<AdvertisementTransportation>();
+            List<AdvertisementTransportation> searchResultItems = new List<AdvertisementTransportation>();
 
-            
+
             RepositoryResponse responseBase;
 
             using (SqlConnection connection = new SqlConnection(""))// _conectionString))
@@ -163,7 +163,7 @@ namespace RepositoryStd.Repository.Transportation
                     {
                         throw;
                     }
-                    
+
                 }
             }
             return searchResultItems;
@@ -176,8 +176,8 @@ namespace RepositoryStd.Repository.Transportation
         /// <returns>if ad is not found returns NULL </returns>
         public AdvertisementTransportation FindBy(Guid adId)
         {
-            AdvertisementTransportation advertisementTransportation=new AdvertisementTransportation();
-           
+            AdvertisementTransportation advertisementTransportation = new AdvertisementTransportation();
+
             IQueryable<Advertisements> list = _adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
                 .Include(advertisement => advertisement.District)
@@ -189,13 +189,13 @@ namespace RepositoryStd.Repository.Transportation
                 .Include(advertisements => advertisements.AdAttributeTransportation)
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model)
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
-                .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId==adId);//only accepted ads
+                .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId == adId);//only accepted ads
 
             //TODO verify that good query is generated
             string query = list.ToSql();
             Advertisements item = list.FirstOrDefault();
             fillAdTransportation(advertisementTransportation, item);
-            
+
             return advertisementTransportation;
         }
 
@@ -222,7 +222,7 @@ namespace RepositoryStd.Repository.Transportation
                 adTrans.MakeYear = -1;
         }
 
-       
+
 
         private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,
                                                                       SqlDataReader dataReader)

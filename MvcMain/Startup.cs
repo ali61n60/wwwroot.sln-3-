@@ -22,11 +22,13 @@ using RepositoryStd.Context.Identity;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 using RepositoryStd.Repository.Transportation;
+using RepositoryStd.TepmeratureRepository;
 
 
 namespace MvcMain
 {
     //Update-Package RepositoryStd -ProjectName MvcMain -reinstall
+    //TODO research for singleton dbContext
     public class Startup
     {
         readonly IConfigurationRoot _configuration;
@@ -67,6 +69,8 @@ namespace MvcMain
             services.AddTransient<IRepository<AdvertisementTransportation>>(provider => 
             new AdvertisementTransportationRepository(_adDbContext,_appIdentityDbContext,MyService.Inst.GetService<ICommonRepository>()));
             addRepositoryContainer(services,_adDbContext,_appIdentityDbContext,_categoryRepository);
+
+            services.AddTransient<TemperatureRepository>(provider => new TemperatureRepository(_adDbContext));
 
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_configuration["Data:ConnectionString"]));
 

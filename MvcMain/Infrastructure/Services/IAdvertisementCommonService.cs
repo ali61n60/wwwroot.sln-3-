@@ -20,9 +20,7 @@ namespace MvcMain.Infrastructure.Services
 
         Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid);
         
-        
         void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons);//Done
-        void FillFirstImage(AdvertisementCommon advertisementCommon);//Done
         void FillAllImages(AdvertisementCommon[] advertisementCommons);//Done
         void FillAllImages(AdvertisementCommon advertisementCommon);//Done
         ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon); //Done

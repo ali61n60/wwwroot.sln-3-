@@ -15,7 +15,6 @@ using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Infrastructure;
-using RepositoryStd.Context.AD;
 using RepositoryStd.Repository;
 using RepositoryStd.TepmeratureRepository;
 
@@ -25,12 +24,11 @@ namespace MvcMain.Controllers
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {
-        private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
         private readonly RepositoryContainer _repositoryContainer;
         private readonly ICommonRepository _commonRepository;
         private readonly IImageRepository _imageRepository;
         private readonly UserManager<AppUser> _userManager;
-        private readonly AdDbContext _adDbContext;
+        private readonly TemperatureRepository _temperatureRepository;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
         private readonly string numberOfItemsKey = "numberOfItems";
         private readonly string onlyWithPicturesKey= "OnlyWithPictures";
@@ -38,12 +36,11 @@ namespace MvcMain.Controllers
 
         public AdApiController()
         {
-            _advertisementCommonRepository = MyService.Inst.GetService<IRepository<AdvertisementCommon>>();
             _repositoryContainer = MyService.Inst.GetService<RepositoryContainer>();
             _commonRepository = MyService.Inst.GetService<ICommonRepository>();
             _imageRepository = MyService.Inst.GetService<IImageRepository>();
             _userManager = MyService.Inst.GetService<UserManager<AppUser>>();
-            _adDbContext = MyService.Inst.GetService<AdDbContext>();
+            _temperatureRepository = MyService.Inst.GetService<TemperatureRepository>();
         }
 
 
@@ -70,10 +67,10 @@ namespace MvcMain.Controllers
                 InsertDateTime = DateTime.Now,
                 Temp = temperature
             };
-            TemperatureRepository temperatureRepository=new TemperatureRepository(_adDbContext);
+            
             try
             {
-                temperatureRepository.Insert(temperatureModel);
+                _temperatureRepository.Insert(temperatureModel);
             }
             catch (Exception ex)
             {
@@ -124,16 +121,14 @@ namespace MvcMain.Controllers
         }
         public void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons)
         {
-            foreach (AdvertisementCommon advertisement in advertisementCommons)
+            foreach (AdvertisementCommon advertisementCommon in advertisementCommons)
             {
-                FillFirstImage(advertisement);
+                advertisementCommon.AdvertisementImages[0] =
+                    _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
+                
             }
         }
-        public void FillFirstImage(AdvertisementCommon advertisementCommon)
-        {
-            advertisementCommon.AdvertisementImages[0] =
-                _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
-        }
+        
 
         public void FillAllImages(AdvertisementCommon[] advertisementCommons)
         {
