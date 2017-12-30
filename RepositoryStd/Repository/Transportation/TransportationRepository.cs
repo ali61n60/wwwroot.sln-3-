@@ -6,6 +6,7 @@ using ModelStd.IRepository;
 
 namespace RepositoryStd.Repository.Transportation
 {
+    //TODO merge this class into AdvertisementTransportationRepository
     public class TransportationRepository : ITransportaionRepository
     {
         private string _connectionString;

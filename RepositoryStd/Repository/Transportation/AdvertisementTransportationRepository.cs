@@ -17,37 +17,43 @@ namespace RepositoryStd.Repository.Transportation
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
     {
-        // private readonly IRepository<AdvertisementCommon> _advertisementCommonRepository;
+         private readonly AdvertisementCommonRepository _advertisementCommonRepository;//TODO extract an interface of used method onad reference that interface
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
 
-        public AdvertisementTransportationRepository(AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICommonRepository commonRepository)
+        public AdvertisementTransportationRepository(AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICommonRepository commonRepository, AdvertisementCommonRepository advertisementCommonRepository)
         {
             _adDbContext = adDbContext;
             _appIdentityDbContext = appIdentityDbContext;
             _commonRepository = commonRepository;
+            _advertisementCommonRepository = advertisementCommonRepository;
         }
 
-        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary)
-        {
-            throw new NotImplementedException();
-        }
-
-        public IEnumerable<AdvertisementTransportation> FindBy(Dictionary<string, string> inputDictionary, int startIndex, int count)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
-            return new List<AdvertisementCommon>()
+            List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
+            IQueryable<Advertisements>  list=_advertisementCommonRepository.FindAdCommonQueryableList(queryParameters);
+            //TODO add category specific query to the list
+            list = WhereCluaseCarModel(queryParameters, list);
+            
+
+            list = _advertisementCommonRepository.EnforceStartIndexAndCount(startIndex, count, list);
+            foreach (Advertisements advertisement in list)
             {
-                new AdvertisementCommon()
-                {
-                    AdvertisementTitle = "test"
-                }
-            };
+                _searchResultItems.Add(_advertisementCommonRepository.GetAdvertisementCommonFromDatabaseResult(advertisement));
+            }
+
+            return _searchResultItems;
+        }
+
+        private IQueryable<Advertisements> WhereCluaseCarModel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            int carModelId = ParameterExtractor.ExtractCarModelId(queryParameters);
+            list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.ModelId == carModelId);
+            return list;
         }
 
 
@@ -222,8 +228,6 @@ namespace RepositoryStd.Repository.Transportation
                 adTrans.MakeYear = -1;
         }
 
-
-
         private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,
                                                                       SqlDataReader dataReader)
         {
@@ -263,7 +267,5 @@ namespace RepositoryStd.Repository.Transportation
         {
             throw new NotImplementedException();
         }
-
-
     }
 }

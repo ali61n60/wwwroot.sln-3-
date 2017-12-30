@@ -7,7 +7,7 @@ namespace RepositoryStd.Context.Helper
 {
     public class ParameterExtractor
     {
-        
+        //Common Properties
         public static readonly string CategoryIdKey = "CategoryId";
         public static readonly int CategoryIdDefault = 0;
 
@@ -34,6 +34,10 @@ namespace RepositoryStd.Context.Helper
         public static readonly string OrderByKey = "OrderBy";
         public static readonly OrderBy OrderByDefault=OrderBy.DateAsc;
 
+        //AdTransportation Properties
+        public static readonly string CarModelIdKey = "CarModelId";
+
+        public static readonly int CarModelIdDefault = 0;
         
         public static int ExtractCatgoryId(Dictionary<string, string> inputDictionary)
         {
@@ -141,6 +145,17 @@ namespace RepositoryStd.Context.Helper
                 tempOrderBy= OrderByHelper.SetOrderByFromString(userInputOrderByValue, OrderByDefault);
             }
             return tempOrderBy;
+        }
+
+        public static int ExtractCarModelId(Dictionary<string, string> queryParameters)
+        {
+            int currentCarModelId= CarModelIdDefault;
+            if (queryParameters.ContainsKey(CarModelIdKey))
+            {
+                if (!int.TryParse(queryParameters[CarModelIdKey], out currentCarModelId))
+                    currentCarModelId = CarModelIdDefault;
+            }
+            return currentCarModelId;
         }
     }
 }

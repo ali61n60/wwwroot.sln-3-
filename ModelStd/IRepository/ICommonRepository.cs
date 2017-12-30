@@ -9,7 +9,7 @@ namespace ModelStd.IRepository
 {
     public interface ICommonRepository
     {
-        IQueryable<Db.Ad.Advertisements> GetQueryableList(Dictionary<string, string> queryParameters);
+        IQueryable<Db.Ad.Advertisements> FindAdCommonQueryableList(Dictionary<string, string> queryParameters);
 
         AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Db.Ad.Advertisements advertisement);
 
