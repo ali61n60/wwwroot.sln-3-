@@ -36,17 +36,17 @@ namespace RepositoryStd.Repository.Common
         //Called from service layer
        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
-            List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
-            IQueryable<Advertisements> list = FindAdCommonQueryableList(queryParameters);
-
+            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>(count);
+            IQueryable<Advertisements> list = GetCommonQueryableList(queryParameters);
+            
             //uegentOnly
 
             list = EnforceStartIndexAndCount(startIndex, count, list);
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement));
+                searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement));
             }
-            return _searchResultItems;
+            return searchResultItems;
         }
 
         public IQueryable<Advertisements> EnforceStartIndexAndCount(int startIndex, int count, IQueryable<Advertisements> list)
@@ -55,7 +55,7 @@ namespace RepositoryStd.Repository.Common
         }
 
         
-        public IQueryable<Advertisements> FindAdCommonQueryableList(Dictionary<string, string> queryParameters)
+        public IQueryable<Advertisements> GetCommonQueryableList(Dictionary<string, string> queryParameters)
         {
             IQueryable<Advertisements> list = _adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
