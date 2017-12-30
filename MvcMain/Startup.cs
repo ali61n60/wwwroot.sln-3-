@@ -67,8 +67,7 @@ namespace MvcMain
             new AdvertisementCommonRepository(_adDbContext,_appIdentityDbContext,_categoryRepository));
 
             services.AddTransient<IRepository<AdvertisementTransportation>>(provider => 
-            new AdvertisementTransportationRepository(_adDbContext,_appIdentityDbContext,MyService.Inst.GetService<ICommonRepository>(), 
-            new AdvertisementCommonRepository(_adDbContext, _appIdentityDbContext, _categoryRepository)));
+            new AdvertisementTransportationRepository(_adDbContext,_appIdentityDbContext,MyService.Inst.GetService<ICommonRepository>()));
             addRepositoryContainer(services,_adDbContext,_appIdentityDbContext,_categoryRepository);
 
             services.AddTransient<TemperatureRepository>(provider => new TemperatureRepository(_adDbContext));
@@ -120,8 +119,7 @@ namespace MvcMain
             repositoryContainer.RegisterRepository(0,defaulyFindRepository);
             IFindRepository adTaransportationFindRepository=
                 new AdvertisementTransportationRepository(adDbContext,appIdentityDbContext,
-                new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository),
-                new AdvertisementCommonRepository(_adDbContext, _appIdentityDbContext, _categoryRepository));
+                new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository));
             repositoryContainer.RegisterRepository(100,adTaransportationFindRepository);
             services.AddTransient<RepositoryContainer>(provider => repositoryContainer);
         }
