@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AdTransformationSearchCriteria = /** @class */ (function () {
+var AdTransformationSearchCriteria = (function () {
     function AdTransformationSearchCriteria() {
         this.BrandParameter = "BrandId";
         this.BrandSelectId = "brand";
@@ -67,12 +67,12 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
     return AdTransformationSearchCriteria;
 }());
 exports.AdTransformationSearchCriteria = AdTransformationSearchCriteria;
-var Brand = /** @class */ (function () {
+var Brand = (function () {
     function Brand() {
     }
     return Brand;
 }());
-var CarModel = /** @class */ (function () {
+var CarModel = (function () {
     function CarModel() {
     }
     return CarModel;
