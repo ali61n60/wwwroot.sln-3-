@@ -17,36 +17,33 @@ namespace RepositoryStd.Repository.Transportation
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
     {
-         private readonly AdvertisementCommonRepository _advertisementCommonRepository;//TODO extract an interface of used method onad reference that interface
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
 
-        public AdvertisementTransportationRepository(AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICommonRepository commonRepository, AdvertisementCommonRepository advertisementCommonRepository)
+        public AdvertisementTransportationRepository(AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICommonRepository commonRepository)
         {
             _adDbContext = adDbContext;
             _appIdentityDbContext = appIdentityDbContext;
             _commonRepository = commonRepository;
-            _advertisementCommonRepository = advertisementCommonRepository;
         }
 
        
 
         public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
         {
-            List<AdvertisementCommon> _searchResultItems = new List<AdvertisementCommon>(count);
-            IQueryable<Advertisements>  list=_advertisementCommonRepository.FindAdCommonQueryableList(queryParameters);
+            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>(count);
+            IQueryable<Advertisements>  list=_commonRepository.GetCommonQueryableList(queryParameters);
             //TODO add category specific query to the list
             list = WhereCluaseCarModel(queryParameters, list);
             
-
-            list = _advertisementCommonRepository.EnforceStartIndexAndCount(startIndex, count, list);
+            list = _commonRepository.EnforceStartIndexAndCount(startIndex, count, list);
             foreach (Advertisements advertisement in list)
             {
-                _searchResultItems.Add(_advertisementCommonRepository.GetAdvertisementCommonFromDatabaseResult(advertisement));
+                searchResultItems.Add(_commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisement));
             }
 
-            return _searchResultItems;
+            return searchResultItems;
         }
 
         private IQueryable<Advertisements> WhereCluaseCarModel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
