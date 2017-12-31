@@ -15,8 +15,6 @@ export class ServerCaller {
         this._currentRequestIndex++;
         userInput.SearchParameters.RequestIndex = this._currentRequestIndex;
         
-        //notifyUserAjaxCallStarted();
-       
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
             url: this._url,
@@ -26,6 +24,7 @@ export class ServerCaller {
             error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
         }); //.ajax
         this._isServerCalled = true;
+        this.notifyUserAjaxCallStarted();
     } //GetAdItemsFromServer
 
      
@@ -38,7 +37,7 @@ export class ServerCaller {
         if (this._isServerCalled) {
             if (msg.customDictionary["RequestIndex"] == this._currentRequestIndex) { //last call response
                 this._isServerCalled = false;
-
+                this.notifyUserAjaxCallFinished();
                 if (msg.success == true) {
                     console.log("processing request index:" + this._currentRequestIndex);
                     this._start += parseInt(msg.customDictionary["numberOfItems"]);
@@ -74,13 +73,22 @@ export class ServerCaller {
     
     private onErrorGetItemsFromServer(jqXHR:JQueryXHR, textStatus:string, errorThrown:string) {
         this._isServerCalled = false;
-        this._currentRequestIndex++;
-        //notifyUserAjaxCallFinished();
+        this.notifyUserAjaxCallFinished();
         //showErrorMessage(textStatus + " , " + errorThrown);
     } //end OnErrorGetTimeFromServer
 
     public ResetSearchParameters(): void {
         this._start = this._initialStart;
+    }
+
+    private notifyUserAjaxCallStarted() {
+        console.log("Started Ajax Call");
+        $("#serverCalledImage").show();
+    }
+
+    notifyUserAjaxCallFinished() {
+        console.log("Finished Ajax Call");
+        $("#serverCalledImage").hide();
     }
 }
 
