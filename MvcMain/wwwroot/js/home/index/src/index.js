@@ -7,6 +7,7 @@ var SearchAdUserInput_1 = require("./SearchAdUserInput");
 var SearchCriteria_1 = require("./SearchCriteria");
 var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
+        this._orderBySelectIdDiv = "orderBy";
         this._serverCaller = new ServerCaller_1.ServerCaller();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this);
         this._searchCriteria = new SearchCriteria_1.SearchCriteria();
@@ -33,6 +34,9 @@ var Index = (function () {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
             _this.searchCriteriaChanged();
             _this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args);
+        });
+        $("#" + this._orderBySelectIdDiv).on("change", function (event) {
+            _this.searchCriteriaChanged();
         });
     };
     Index.prototype.CustomSearchCriteriChanged = function () {

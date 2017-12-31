@@ -1,10 +1,10 @@
 ﻿import { SearchAdUserInput } from "./SearchAdUserInput";
 export class ServerCaller {
-    private _initialStart: number = 1;
+    private readonly  _initialStart: number = 1;
     private _start: number = 1;
     private _count: number = 5;
-    private _requestIndex: number = 0;
-    private _previousRequestIndex: number = -1;
+    private _currentRequestIndex: number = 0;
+    private readonly  _initialRequestIndex: number = 0;
     private _isServerCalled: boolean = false;
     private _numberOfStartServerCallNotification: number = 0;
     private _url: string = "api/AdApi/GetAdvertisementCommon";
@@ -12,19 +12,22 @@ export class ServerCaller {
     public GetAdItemsFromServer(userInput: SearchAdUserInput): void {
         userInput.SearchParameters.StartIndex = this._start;
         userInput.SearchParameters.Count = this._count;
-        userInput.SearchParameters.RequestIndex = this._requestIndex;
+        this._currentRequestIndex++;
+        userInput.SearchParameters.RequestIndex = this._currentRequestIndex;
+
         
-        if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)
-        ) { //a call is sent but no answer yet
-            return;
-        } //if
-        else {
-            this._previousRequestIndex = this._requestIndex;
-            this._isServerCalled = true;
-        } //else
+        
+        //if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)
+        //) { //a call is sent but no answer yet
+          //  return;
+        //} //if
+        //else {
+          //  this._previousRequestIndex = this._requestIndex;
+           // this._isServerCalled = true;
+        //} //else
         
         //notifyUserAjaxCallStarted();
-     
+       
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
             url: this._url,
@@ -33,13 +36,20 @@ export class ServerCaller {
             success: (msg,textStatus,jqXHR)=> this.onSuccessGetItemsFromServer(msg,textStatus,jqXHR), //On Successfull service call
             error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
         }); //.ajax
+        this._isServerCalled = true;
     } //GetAdItemsFromServer
 
      
     private onSuccessGetItemsFromServer(msg:any,textStatus:string, jqXHR:JQueryXHR) {
         //notifyUserAjaxCallFinished();
-        if (msg.success == true) {
-            if (msg.customDictionary["RequestIndex"] == this._requestIndex) {
+        //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
+        if (msg.customDictionary["RequestIndex"] == this._currentRequestIndex) { //last call response
+            this._isServerCalled = false;
+            console.log("server response request index:" +
+                msg.customDictionary["RequestIndex"] +
+                ", client current request index:" + this._currentRequestIndex);
+            if (msg.success == true) {
+                console.log("processing request index:" + this._currentRequestIndex);
                 this._start += parseInt(msg.customDictionary["numberOfItems"]);
                 var template = $('#singleAdItem').html();
                 var data;
@@ -62,19 +72,17 @@ export class ServerCaller {
                     var html = Mustache.to_html(template, data);
                     $("#adPlaceHolder").append(html);
                 } //end for
-            } //end if
-        } //end if
-        else {
-            //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
-        }
-        this._isServerCalled = false;
-        this._requestIndex++;
+            } //if (msg.success == true)
+            else {
+                //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+            }
+        }//if (msg.customDictionary["RequestIndex"]
     } //end OnSuccessGetTimeFromServer
 
     
     private onErrorGetItemsFromServer(jqXHR:JQueryXHR, textStatus:string, errorThrown:string) {
         this._isServerCalled = false;
-        this._requestIndex++;
+        this._currentRequestIndex++;
         //notifyUserAjaxCallFinished();
         //showErrorMessage(textStatus + " , " + errorThrown);
     } //end OnErrorGetTimeFromServer

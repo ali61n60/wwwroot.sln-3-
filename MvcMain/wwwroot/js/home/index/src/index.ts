@@ -9,6 +9,11 @@ import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
 
 
 export class Index implements ISearchCriteriaChange {
+
+    private readonly _orderBySelectIdDiv = "orderBy";
+    private readonly _minPriceInputId= "minPrice";
+    private readonly _maxPriceInputId ="maxPrice";
+
     private _serverCaller = new ServerCaller();
     private _categorySelection: CategorySelection;
     private _searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this);
@@ -51,6 +56,20 @@ export class Index implements ISearchCriteriaChange {
             this.searchCriteriaChanged();
             this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args);
         });
+
+        $("#" + this._orderBySelectIdDiv).on("change",
+            (event) => {
+                this.searchCriteriaChanged();
+            });
+        //you can also user "input" instead of "change"
+        $("#" + this._minPriceInputId).on("change",
+            (event) => {
+                this.searchCriteriaChanged();
+            });
+        $("#" + this._maxPriceInputId).on("change",
+            (event) => {
+                this.searchCriteriaChanged();
+            });
     }
 
     public CustomSearchCriteriChanged():void {
@@ -60,6 +79,7 @@ export class Index implements ISearchCriteriaChange {
     private searchCriteriaChanged(): void {
         $("#adPlaceHolder").children().remove();
         this._serverCaller.ResetSearchParameters();
+        $("#" + this._getAdFromServerId).trigger("click");
 
     }
 
