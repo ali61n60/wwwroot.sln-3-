@@ -5,15 +5,23 @@ import { ISearchCriteriaChange } from "../ISearchCriteriaChange";
 export class AdTransformationSearchCriteria implements ISearchCriteria {
     private _searchCriteriaChange: ISearchCriteriaChange;
 
-    private BrandParameter: string = "BrandId";
-    private BrandSelectId: string = "brand";
+    private readonly CarBrandIdKey: string = "BrandId";
+    private readonly BrandSelectId: string = "brand";
 
-    private CarModelTemplateId: string = "modelTemplate";
-    private CarModelDivPlaceHolderId: string = "modelPlaceHolder";
-    private CarModelParameter: string = "CarModelId";
-    private AllCarModelsInputId: string = "allCarModels";
-    private ModelSelectId: string = "model";
+    private readonly CarModelTemplateId: string = "modelTemplate";
+    private readonly CarModelDivPlaceHolderId: string = "modelPlaceHolder";
+    private readonly CarModelIdKey:string = "CarModelId";
+    private readonly AllCarModelsInputId: string = "allCarModels";
+    private readonly ModelSelectId: string = "model";
     private _allCarModels: CarModel[];
+
+    private readonly MakeYearFromKey: string = "MakeYearFrom";
+    private readonly MakeYearFromInputId: string = "fromYear";
+
+    private readonly MakeYearToKey: string = "MakeYearTo";
+    private readonly MakeYearToInputId: string = "toYear";
+    
+
 
     private initView(): void {
         let allCarModelssString = $("#" + this.AllCarModelsInputId).val().toString();
@@ -44,10 +52,14 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
     }
 
     public FillSearchCriteria(searchAdUserInput: SearchAdUserInput): void {
-        searchAdUserInput.SearchParameters[this.BrandParameter] =
+        searchAdUserInput.SearchParameters[this.CarBrandIdKey] =
             $("#" + this.BrandSelectId).find("option:selected").val();
-        searchAdUserInput.SearchParameters[this.CarModelParameter] =
+        searchAdUserInput.SearchParameters[this.CarModelIdKey] =
             $("#" + this.ModelSelectId).find("option:selected").val();
+        searchAdUserInput.SearchParameters[this.MakeYearFromKey] =
+            $("#" + this.MakeYearFromInputId).val();
+        searchAdUserInput.SearchParameters[this.MakeYearToKey] =
+            $("#" + this.MakeYearToInputId).val();
     }
 
     public BindEvents(searchCriteriaChange: ISearchCriteriaChange): void {

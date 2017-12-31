@@ -6,12 +6,10 @@
 <div id="carModel">
     <input id="allCarModels" type="hidden" value='@Json.Serialize(Model.AllCarModels)' />
 </div>
-<div class="col-sm-2 col-sm-push-10">
-    <label>برند</label>
-</div>
-<div class="col-sm-4 col-sm-push-4">
+
+<div class="col-sm-6">
     <select id="brand" class="form-control">
-        <option value='0'>تمام برندها</option>
+        <option value='0'>برند</option>
         @foreach (Brand brand in Model.AllBrands)
         {
             @:
@@ -19,19 +17,15 @@
         }
     </select>
 </div>
-
-<div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-    <label>مدل</label>
-</div>
-<div id="modelPlaceHolder" class="col-sm-4 col-sm-pull-8 col-sm-push-0">
+<div id="modelPlaceHolder" class="col-sm-6">
     <select id="model" class="form-control">
-        <option value='0'>تمام مدل ها</option>
+        <option value='0'>مدل</option>
     </select>
 </div>
 
 <script id="modelTemplate" type="text/template">
     <select id="model" class="form-control">
-        <option value="0" selected="selected">تمام مدل ها</option>
+        <option value="0" selected="selected">مدل</option>
         {{#carModels}}
         <option value="{{modelId}}">{{modelName}}</option>
         {{/carModels}}

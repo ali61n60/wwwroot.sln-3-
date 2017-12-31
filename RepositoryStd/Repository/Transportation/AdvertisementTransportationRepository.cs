@@ -24,6 +24,13 @@ namespace RepositoryStd.Repository.Transportation
 
         public static readonly string CarBrandIdKey = "BrandId";
         public static readonly int CarBrandIdDefault = 0;
+
+        public static readonly string MakeYearFromKey = "MakeYearFrom";
+        public static readonly int MakeYearFromDefault = 0;
+
+        public static readonly string MakeYearToKey = "MakeYearTo";
+        public static readonly int MakeYearToDefault = 1400;
+
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
@@ -42,7 +49,8 @@ namespace RepositoryStd.Repository.Transportation
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             IQueryable<Advertisements> list=_commonRepository.GetCommonQueryableList(queryParameters);
             //TODO add category specific query to the list
-            list = WhereCluaseCarModelAndBrand(queryParameters, list);
+            list = WhereClauseCarModelAndBrand(queryParameters, list);
+            list = WhereClauseMakeYear(queryParameters, list);
             
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
@@ -53,8 +61,20 @@ namespace RepositoryStd.Repository.Transportation
             return searchResultItems;
         }
 
-        
-        private IQueryable<Advertisements> WhereCluaseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisements> WhereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters,MakeYearFromKey,MakeYearFromDefault);
+            int makeYearTo = ParameterExtractor.ExtractInt(queryParameters, MakeYearToKey, MakeYearToDefault);
+
+            list = list.Where(advertisement =>
+                advertisement.AdAttributeTransportation.MakeYear >= makeYearFrom &&
+                advertisement.AdAttributeTransportation.MakeYear <= makeYearTo);
+
+            return list;
+        }
+
+
+        private IQueryable<Advertisements> WhereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int carModelId = ParameterExtractor.ExtractInt(queryParameters,CarModelIdKey,CarModelIdDefault);
             int brandId = ParameterExtractor.ExtractInt(queryParameters,CarBrandIdKey,CarBrandIdDefault);
