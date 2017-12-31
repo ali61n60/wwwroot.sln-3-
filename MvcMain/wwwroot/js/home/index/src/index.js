@@ -8,6 +8,8 @@ var SearchCriteria_1 = require("./SearchCriteria");
 var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._orderBySelectIdDiv = "orderBy";
+        this._minPriceInputId = "minPrice";
+        this._maxPriceInputId = "maxPrice";
         this._serverCaller = new ServerCaller_1.ServerCaller();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this);
         this._searchCriteria = new SearchCriteria_1.SearchCriteria();
@@ -38,6 +40,13 @@ var Index = (function () {
         $("#" + this._orderBySelectIdDiv).on("change", function (event) {
             _this.searchCriteriaChanged();
         });
+        //you can also user "input" instead of "change"
+        $("#" + this._minPriceInputId).on("input", function (event) {
+            _this.searchCriteriaChanged();
+        });
+        $("#" + this._maxPriceInputId).on("change", function (event) {
+            _this.searchCriteriaChanged();
+        });
     };
     Index.prototype.CustomSearchCriteriChanged = function () {
         this.searchCriteriaChanged();
@@ -45,6 +54,7 @@ var Index = (function () {
     Index.prototype.searchCriteriaChanged = function () {
         $("#adPlaceHolder").children().remove();
         this._serverCaller.ResetSearchParameters();
+        $("#" + this._getAdFromServerId).trigger("click");
     };
     Index.prototype.initGetAdFromServer = function () {
         var _this = this;

@@ -14,17 +14,6 @@ export class ServerCaller {
         userInput.SearchParameters.Count = this._count;
         this._currentRequestIndex++;
         userInput.SearchParameters.RequestIndex = this._currentRequestIndex;
-
-        
-        
-        //if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)
-        //) { //a call is sent but no answer yet
-          //  return;
-        //} //if
-        //else {
-          //  this._previousRequestIndex = this._requestIndex;
-           // this._isServerCalled = true;
-        //} //else
         
         //notifyUserAjaxCallStarted();
        
@@ -43,40 +32,43 @@ export class ServerCaller {
     private onSuccessGetItemsFromServer(msg:any,textStatus:string, jqXHR:JQueryXHR) {
         //notifyUserAjaxCallFinished();
         //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
-        if (msg.customDictionary["RequestIndex"] == this._currentRequestIndex) { //last call response
-            this._isServerCalled = false;
-            console.log("server response request index:" +
-                msg.customDictionary["RequestIndex"] +
-                ", client current request index:" + this._currentRequestIndex);
-            if (msg.success == true) {
-                console.log("processing request index:" + this._currentRequestIndex);
-                this._start += parseInt(msg.customDictionary["numberOfItems"]);
-                var template = $('#singleAdItem').html();
-                var data;
-                for (var i = 0; i < msg.responseData.length; i++) {
-                    var adImage = null;
-                    if (msg.responseData[i].advertisementImages[0] != null) {
-                        adImage = "data:image/jpg;base64," + msg.responseData[i].advertisementImages[0];
-                    } //end if
-                    data = {
-                        AdvertisementId: msg.responseData[i].advertisementId,
-                        AdvertisementCategoryId: msg.responseData[i].advertisementCategoryId,
-                        AdvertisementCategory: msg.responseData[i].advertisementCategory,
-                        adImage: adImage,
-                        adPrice: msg.responseData[i].advertisementPrice.price, //todo check the price type
-                        AdvertisementTitle: msg.responseData[i].advertisementTitle,
-                        AdvertisementStatus: msg.responseData[i].advertisementStatus
-                        //adDate: msg.ResponseData[i].AdTime
-                    } //end data
+        console.log("server response request index:" +
+            msg.customDictionary["RequestIndex"] +
+            ", client current request index:" + this._currentRequestIndex);
+        if (this._isServerCalled) {
+            if (msg.customDictionary["RequestIndex"] == this._currentRequestIndex) { //last call response
+                this._isServerCalled = false;
 
-                    var html = Mustache.to_html(template, data);
-                    $("#adPlaceHolder").append(html);
-                } //end for
-            } //if (msg.success == true)
-            else {
-                //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
-            }
-        }//if (msg.customDictionary["RequestIndex"]
+                if (msg.success == true) {
+                    console.log("processing request index:" + this._currentRequestIndex);
+                    this._start += parseInt(msg.customDictionary["numberOfItems"]);
+                    var template = $('#singleAdItem').html();
+                    var data;
+                    for (var i = 0; i < msg.responseData.length; i++) {
+                        var adImage = null;
+                        if (msg.responseData[i].advertisementImages[0] != null) {
+                            adImage = "data:image/jpg;base64," + msg.responseData[i].advertisementImages[0];
+                        } //end if
+                        data = {
+                            AdvertisementId: msg.responseData[i].advertisementId,
+                            AdvertisementCategoryId: msg.responseData[i].advertisementCategoryId,
+                            AdvertisementCategory: msg.responseData[i].advertisementCategory,
+                            adImage: adImage,
+                            adPrice: msg.responseData[i].advertisementPrice.price, //todo check the price type
+                            AdvertisementTitle: msg.responseData[i].advertisementTitle,
+                            AdvertisementStatus: msg.responseData[i].advertisementStatus
+                            //adDate: msg.ResponseData[i].AdTime
+                        } //end data
+
+                        var html = Mustache.to_html(template, data);
+                        $("#adPlaceHolder").append(html);
+                    } //end for
+                } //if (msg.success == true)
+                else {
+                    //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+                }
+            } //if (msg.customDictionary["RequestIndex"]
+        } //if (this._isServerCalled)
     } //end OnSuccessGetTimeFromServer
 
     

@@ -62,7 +62,7 @@ export class Index implements ISearchCriteriaChange {
                 this.searchCriteriaChanged();
             });
         //you can also user "input" instead of "change"
-        $("#" + this._minPriceInputId).on("change",
+        $("#" + this._minPriceInputId).on("input",
             (event) => {
                 this.searchCriteriaChanged();
             });

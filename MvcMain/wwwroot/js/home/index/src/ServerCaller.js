@@ -5,8 +5,8 @@ var ServerCaller = (function () {
         this._initialStart = 1;
         this._start = 1;
         this._count = 5;
-        this._requestIndex = 0;
-        this._previousRequestIndex = -1;
+        this._currentRequestIndex = 0;
+        this._initialRequestIndex = 0;
         this._isServerCalled = false;
         this._numberOfStartServerCallNotification = 0;
         this._url = "api/AdApi/GetAdvertisementCommon";
@@ -15,14 +15,16 @@ var ServerCaller = (function () {
         var _this = this;
         userInput.SearchParameters.StartIndex = this._start;
         userInput.SearchParameters.Count = this._count;
-        userInput.SearchParameters.RequestIndex = this._requestIndex;
-        if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)) {
-            return;
-        } //if
-        else {
-            this._previousRequestIndex = this._requestIndex;
-            this._isServerCalled = true;
-        } //else
+        this._currentRequestIndex++;
+        userInput.SearchParameters.RequestIndex = this._currentRequestIndex;
+        //if (this._isServerCalled && (this._previousRequestIndex === this._requestIndex)
+        //) { //a call is sent but no answer yet
+        //  return;
+        //} //if
+        //else {
+        //  this._previousRequestIndex = this._requestIndex;
+        // this._isServerCalled = true;
+        //} //else
         //notifyUserAjaxCallStarted();
         $.ajax({
             type: "POST",
@@ -32,11 +34,18 @@ var ServerCaller = (function () {
             success: function (msg, textStatus, jqXHR) { return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
             error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails
         }); //.ajax
+        this._isServerCalled = true;
     }; //GetAdItemsFromServer
     ServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
         //notifyUserAjaxCallFinished();
-        if (msg.success == true) {
-            if (msg.customDictionary["RequestIndex"] == this._requestIndex) {
+        //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
+        if (msg.customDictionary["RequestIndex"] == this._currentRequestIndex) {
+            this._isServerCalled = false;
+            console.log("server response request index:" +
+                msg.customDictionary["RequestIndex"] +
+                ", client current request index:" + this._currentRequestIndex);
+            if (msg.success == true) {
+                console.log("processing request index:" + this._currentRequestIndex);
                 this._start += parseInt(msg.customDictionary["numberOfItems"]);
                 var template = $('#singleAdItem').html();
                 var data;
@@ -58,17 +67,15 @@ var ServerCaller = (function () {
                     var html = Mustache.to_html(template, data);
                     $("#adPlaceHolder").append(html);
                 } //end for
-            } //end if
-        } //end if
-        else {
-            //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
-        }
-        this._isServerCalled = false;
-        this._requestIndex++;
+            } //if (msg.success == true)
+            else {
+                //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+            }
+        } //if (msg.customDictionary["RequestIndex"]
     }; //end OnSuccessGetTimeFromServer
     ServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         this._isServerCalled = false;
-        this._requestIndex++;
+        this._currentRequestIndex++;
         //notifyUserAjaxCallFinished();
         //showErrorMessage(textStatus + " , " + errorThrown);
     }; //end OnErrorGetTimeFromServer
