@@ -36,9 +36,11 @@ namespace RepositoryStd.Context.Helper
 
         //AdTransportation Properties
         public static readonly string CarModelIdKey = "CarModelId";
-
         public static readonly int CarModelIdDefault = 0;
-        
+
+        public static readonly string CarBrandIdKey="BrandId";
+        public static readonly int CarBrandIdDefault = 0;
+
         public static int ExtractCatgoryId(Dictionary<string, string> inputDictionary)
         {
             int tempCategoryId = CategoryIdDefault;
@@ -156,6 +158,17 @@ namespace RepositoryStd.Context.Helper
                     currentCarModelId = CarModelIdDefault;
             }
             return currentCarModelId;
+        }
+
+        public static int ExtractBrandId(Dictionary<string, string> queryParameters)
+        {
+            int currentCarBrandId = CarBrandIdDefault;
+            if (queryParameters.ContainsKey(CarBrandIdKey))
+            {
+                if (!int.TryParse(queryParameters[CarBrandIdKey], out currentCarBrandId))
+                    currentCarBrandId = CarBrandIdDefault;
+            }
+            return currentCarBrandId;
         }
     }
 }

@@ -35,7 +35,7 @@ namespace RepositoryStd.Repository.Transportation
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>(count);
             IQueryable<Advertisements>  list=_commonRepository.GetCommonQueryableList(queryParameters);
             //TODO add category specific query to the list
-            list = WhereCluaseCarModel(queryParameters, list);
+            list = WhereCluaseCarModelAndBrand(queryParameters, list);
             
             list = _commonRepository.EnforceStartIndexAndCount(startIndex, count, list);
             foreach (Advertisements advertisement in list)
@@ -46,11 +46,22 @@ namespace RepositoryStd.Repository.Transportation
             return searchResultItems;
         }
 
-        private IQueryable<Advertisements> WhereCluaseCarModel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisements> WhereCluaseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int carModelId = ParameterExtractor.ExtractCarModelId(queryParameters);
-            list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.ModelId == carModelId);
+            int brandId = ParameterExtractor.ExtractBrandId(queryParameters);
+            
+            if (carModelId != ParameterExtractor.CarModelIdDefault)//when carModel is selected certainly brand is selected
+            {
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.ModelId == carModelId);
+            }
+            else if (brandId != ParameterExtractor.CarBrandIdDefault && carModelId == ParameterExtractor.CarModelIdDefault)//just brand is selected
+            {
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.BrandId == brandId);//apply brandId filter
+            }
+            //not brand nor model selected do nothing on the list
             return list;
+
         }
 
 
