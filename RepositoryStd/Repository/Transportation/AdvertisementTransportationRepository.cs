@@ -17,6 +17,13 @@ namespace RepositoryStd.Repository.Transportation
 {
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
     {
+        //AdTransportation Properties
+
+        public static readonly string CarModelIdKey = "CarModelId";
+        public static readonly int CarModelIdDefault = 0;
+
+        public static readonly string CarBrandIdKey = "BrandId";
+        public static readonly int CarBrandIdDefault = 0;
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
@@ -30,14 +37,14 @@ namespace RepositoryStd.Repository.Transportation
 
        
 
-        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
+        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
         {
-            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>(count);
-            IQueryable<Advertisements>  list=_commonRepository.GetCommonQueryableList(queryParameters);
+            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
+            IQueryable<Advertisements> list=_commonRepository.GetCommonQueryableList(queryParameters);
             //TODO add category specific query to the list
             list = WhereCluaseCarModelAndBrand(queryParameters, list);
             
-            list = _commonRepository.EnforceStartIndexAndCount(startIndex, count, list);
+            list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
             {
                 searchResultItems.Add(_commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisement));
@@ -46,16 +53,17 @@ namespace RepositoryStd.Repository.Transportation
             return searchResultItems;
         }
 
+        
         private IQueryable<Advertisements> WhereCluaseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
-            int carModelId = ParameterExtractor.ExtractCarModelId(queryParameters);
-            int brandId = ParameterExtractor.ExtractBrandId(queryParameters);
+            int carModelId = ParameterExtractor.ExtractInt(queryParameters,CarModelIdKey,CarModelIdDefault);
+            int brandId = ParameterExtractor.ExtractInt(queryParameters,CarBrandIdKey,CarBrandIdDefault);
             
-            if (carModelId != ParameterExtractor.CarModelIdDefault)//when carModel is selected certainly brand is selected
+            if (carModelId != CarModelIdDefault)//when carModel is selected certainly brand is selected
             {
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.ModelId == carModelId);
             }
-            else if (brandId != ParameterExtractor.CarBrandIdDefault && carModelId == ParameterExtractor.CarModelIdDefault)//just brand is selected
+            else if (brandId != CarBrandIdDefault && carModelId == CarModelIdDefault)//just brand is selected
             {
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.BrandId == brandId);//apply brandId filter
             }
@@ -161,7 +169,7 @@ namespace RepositoryStd.Repository.Transportation
                     try
                     {
                         connection.Open();
-                        SqlDataReader dataReader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
+                        SqlDataReader dataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
                         while (dataReader.Read())
                         {
                             AdvertisementTransportation tempAdvertisementTransportation = new AdvertisementTransportation();

@@ -10,12 +10,8 @@ namespace ModelStd.IRepository
     public interface ICommonRepository
     {
         IQueryable<Db.Ad.Advertisements> GetCommonQueryableList(Dictionary<string, string> queryParameters);
-
-        IQueryable<Db.Ad.Advertisements> EnforceStartIndexAndCount(int startIndex, int count,
-            IQueryable<Db.Ad.Advertisements> list);
-
+        IQueryable<Db.Ad.Advertisements> EnforceStartIndexAndCount(Dictionary<string, string> queryParameters,IQueryable<Db.Ad.Advertisements> list);
         AdvertisementCommon GetAdvertisementCommonFromDatabaseResult(Db.Ad.Advertisements advertisement);
-
         Task IncrementNumberOfVisit(Guid adGuid);
         Db.Ad.Advertisements GetAdvertisement(AdvertisementCommon advertisementCommon);
     }

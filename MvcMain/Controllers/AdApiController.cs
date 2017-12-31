@@ -16,6 +16,7 @@ using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Infrastructure;
 using RepositoryStd.Repository;
+using RepositoryStd.Repository.Common;
 using RepositoryStd.TepmeratureRepository;
 
 
@@ -91,15 +92,12 @@ namespace MvcMain.Controllers
         public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
             string errorCode = "AdApiController.GetAdvertisementCommon";
-            int startIndex = ParameterExtractor.ExtractStartIndex(userInput);
-            int count = ParameterExtractor.ExtractCount(userInput);
-            int categoryId = ParameterExtractor.ExtractCatgoryId(userInput);
+            int categoryId = ParameterExtractor.ExtractInt(userInput,AdvertisementCommonRepository.CategoryIdKey,AdvertisementCommonRepository.CategoryIdDefault);
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
-            //TODO get repository based on categoryId
             IFindRepository findRepository = _repositoryContainer.GetFindRepository(categoryId);//polymorphyic dispatch
             try
             {
-                response.ResponseData =findRepository.FindAdvertisementCommons(userInput, startIndex, count).ToList();//get attributes 
+                response.ResponseData =findRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
                 FillFirstImage(response.ResponseData);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(response, userInput);

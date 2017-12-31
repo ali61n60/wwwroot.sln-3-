@@ -18,8 +18,37 @@ using RepositoryStd.QueryPattern;
 
 namespace RepositoryStd.Repository.Common
 {
-    public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>,IFindRepository,ICommonRepository
+    public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>, IFindRepository, ICommonRepository
     {
+        //Common Properties
+
+        public static readonly string CategoryIdKey = "CategoryId";
+        public static readonly int CategoryIdDefault = 0;
+
+        public static readonly string StartIndexKey = "StartIndex";
+        public static readonly int StartIndexDefault = 1;
+
+        public static readonly string CountKey = "Count";
+        public static readonly int CountDefault = 5;
+        public static readonly int MinCount = 1;
+        public static readonly int MaxCount = 20;
+
+        public static readonly string PriceTypeKey = "PriceType";
+        public static readonly PriceType PriceTypeDefault = PriceType.All;
+
+        public static readonly string MinPriceKey = "MinimumPrice";
+        public static readonly decimal MinPriceDefault = -1;
+
+        public static readonly string MaxPriceKey = "MaximumPrice";
+        public static readonly decimal MaxPriceDefault = 1000000000000;
+
+        public static readonly string DistrictIdKey = "DistrictId";
+        public static readonly List<int> DistrctIdDefault = new List<int>();
+
+        public static readonly string OrderByKey = "OrderBy";
+        public static readonly OrderBy OrderByDefault = OrderBy.DateAsc;
+
+
         private readonly ICategoryRepository _categoryRepository;
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
@@ -32,16 +61,16 @@ namespace RepositoryStd.Repository.Common
             _categoryRepository = categoryRepository;
         }
 
-        
+
         //Called from service layer
-       public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, int startIndex, int count)
+        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
         {
-            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>(count);
+            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             IQueryable<Advertisements> list = GetCommonQueryableList(queryParameters);
-            
+
             //uegentOnly
 
-            list = EnforceStartIndexAndCount(startIndex, count, list);
+            list = EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
             {
                 searchResultItems.Add(GetAdvertisementCommonFromDatabaseResult(advertisement));
@@ -49,12 +78,22 @@ namespace RepositoryStd.Repository.Common
             return searchResultItems;
         }
 
-        public IQueryable<Advertisements> EnforceStartIndexAndCount(int startIndex, int count, IQueryable<Advertisements> list)
+        public IQueryable<Advertisements> EnforceStartIndexAndCount(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
-            return (IOrderedQueryable<Advertisements>) list.Skip(startIndex - 1).Take(count);
+            int startIndex = ParameterExtractor.ExtractInt(queryParameters, StartIndexKey, StartIndexDefault);
+            if (startIndex < 0)
+                startIndex = StartIndexDefault;
+
+            int count = ParameterExtractor.ExtractInt(queryParameters, CountKey, CountDefault);
+            if (count > MaxCount)
+                count = MaxCount;
+            else if (count < MinCount)
+                count = MinCount;
+
+            return (IOrderedQueryable<Advertisements>)list.Skip(startIndex - 1).Take(count);
         }
 
-        
+
         public IQueryable<Advertisements> GetCommonQueryableList(Dictionary<string, string> queryParameters)
         {
             IQueryable<Advertisements> list = _adDbContext.Advertisements
@@ -76,61 +115,68 @@ namespace RepositoryStd.Repository.Common
 
         private IQueryable<Advertisements> orderByClause(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            OrderBy orderByUserInput = ParameterExtractor.ExtractOrderBy(queryParameters);
+            OrderBy orderByUserInput = ParameterExtractor.ExtractOrderBy(queryParameters, OrderByKey, OrderByDefault);
             switch (orderByUserInput)
             {
-                    case OrderBy.PriceAsc:
-                        return list.OrderBy(advertisement => advertisement.Price.price);
-                    case OrderBy.PriceDesc:
-                        return list.OrderByDescending(advertisements => advertisements.Price.price);
-                    case OrderBy.DateAsc:
-                        return list.OrderBy(advertisements => advertisements.AdInsertDateTime);
-                    case OrderBy.DateDesc:
-                        return list.OrderByDescending(advertisements => advertisements.AdInsertDateTime);
+                case OrderBy.PriceAsc:
+                    return list.OrderBy(advertisement => advertisement.Price.price);
+                case OrderBy.PriceDesc:
+                    return list.OrderByDescending(advertisements => advertisements.Price.price);
+                case OrderBy.DateAsc:
+                    return list.OrderBy(advertisements => advertisements.AdInsertDateTime);
+                case OrderBy.DateDesc:
+                    return list.OrderByDescending(advertisements => advertisements.AdInsertDateTime);
                 default:
                     return list;
             }
         }
         private IQueryable<Advertisements> wherClauseCategoryId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            int firstLevelCategoryId = ParameterExtractor.ExtractCatgoryId(queryParameters);
+            int firstLevelCategoryId = ParameterExtractor.ExtractInt(queryParameters, CategoryIdKey, CategoryIdDefault);
             if (firstLevelCategoryId == 0)//root is selected so do not include anything in where clause
             {
                 return list;
             }
             List<int> fullCategoryIdList = new List<int> { firstLevelCategoryId };
-            IList<Category> secondLevelCategories= _categoryRepository.GetAllChildernCategories(firstLevelCategoryId);
-            List<Category> thirdLevelCategories=new List<Category>();
+            IList<Category> secondLevelCategories = _categoryRepository.GetAllChildernCategories(firstLevelCategoryId);
+            List<Category> thirdLevelCategories = new List<Category>();
             foreach (Category secondLevelCategory in secondLevelCategories)
             {
                 fullCategoryIdList.Add(secondLevelCategory.CategoryId);
                 thirdLevelCategories.AddRange(_categoryRepository.GetAllChildernCategories(secondLevelCategory.CategoryId));
             }
-            
+
             foreach (Category thirdLevelCategory in thirdLevelCategories)
             {
                 fullCategoryIdList.Add(thirdLevelCategory.CategoryId);
             }
-            
-            list = list.Where(advertisement => fullCategoryIdList.Contains(advertisement.CategoryId) );
+
+            list = list.Where(advertisement => fullCategoryIdList.Contains(advertisement.CategoryId));
             return list;
         }
         private IQueryable<Advertisements> WhereClausePrice(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            decimal minPrice = ParameterExtractor.ExtractMinPrice(queryParameters);
-            decimal maxPrice = ParameterExtractor.ExtractMaxPrice(queryParameters);
-            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters);
-            if (minPrice != ParameterExtractor.MinPriceDefault)
+            decimal minPrice = ParameterExtractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
+            if (minPrice < MinPriceDefault)
+                minPrice = MinPriceDefault;
+            if (minPrice != MinPriceDefault)
                 list = list.Where(advertisement => advertisement.Price.price > minPrice);
-            if (maxPrice != ParameterExtractor.MaxPriceDefault)
+
+            decimal maxPrice = ParameterExtractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
+            if (maxPrice > MaxPriceDefault)
+                maxPrice = MaxPriceDefault;
+            if (maxPrice != MaxPriceDefault)
                 list = list.Where(advertisement => advertisement.Price.price < maxPrice);
-            if (priceType != ParameterExtractor.PriceTypeDefault)
+
+
+            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
+            if (priceType != PriceTypeDefault)
                 list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
             return list;
         }
         private IQueryable<Advertisements> whereClauseDistrictId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters);
+            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters,DistrictIdKey,DistrctIdDefault);
             if (districtList.Count > 0)
                 list = list.Where(advertisement => districtList.Contains(advertisement.DistrictId));
             return list;
@@ -151,7 +197,7 @@ namespace RepositoryStd.Repository.Common
                 AdvertisementCategoryId = advertisement.CategoryId,
                 AdvertisementComments = advertisement.AdComments,//TODO test for null
                 NumberOfVisit = advertisement.AdNumberOfVisited,//TODO test for null
-                Email =_appIdentityDbContext.Users.First(user => user.Id== advertisement.UserId).Email,//TODO test for null
+                Email = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).Email,//TODO test for null
                 PhoneNumber = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber,//TODO test for null
                 DistrictId = advertisement.DistrictId,
                 DistrictName = advertisement.District.DistrictName,
@@ -315,7 +361,7 @@ namespace RepositoryStd.Repository.Common
         public async Task IncrementNumberOfVisit(Guid adGuid)
         {
             //TODO use EF instead of ADO.Net
-           
+
             _adDbContext.Advertisements.FirstOrDefault(advertisements => advertisements.AdId == adGuid).AdNumberOfVisited++;
             _adDbContext.SaveChanges();
         }
@@ -323,7 +369,7 @@ namespace RepositoryStd.Repository.Common
         //TODO the method implementation is not complete
         public Advertisements GetAdvertisement(AdvertisementCommon advertisementCommon)
         {
-            Advertisements ad=new Advertisements();
+            Advertisements ad = new Advertisements();
             ad.AdComments = advertisementCommon.AdvertisementComments;
             ad.AdId = advertisementCommon.AdvertisementId;
             ad.AdInsertDateTime = advertisementCommon.AdvertisementTime;

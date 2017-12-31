@@ -10,6 +10,7 @@ using MvcMain.Components.NewAd;
 using MvcMain.Infrastructure.Services;
 using MvcMain.Models;
 using RepositoryStd.Context.Helper;
+using RepositoryStd.Repository.Common;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 //http://bitoftech.net/2014/06/01/token-based-authentication-asp-net-web-api-2-owin-asp-net-identity/
@@ -50,7 +51,7 @@ namespace MvcMain.Controllers
         [HttpGet]
         public IActionResult GetNewAdPartialView([FromQuery] Dictionary<string, string> userInput)
         {
-            int categoryId = ParameterExtractor.ExtractCatgoryId(userInput);
+            int categoryId = ParameterExtractor.ExtractInt(userInput,AdvertisementCommonRepository.CategoryIdKey,AdvertisementCommonRepository.CategoryIdDefault);
             switch (categoryId)
             {
                 case 100:
@@ -64,7 +65,7 @@ namespace MvcMain.Controllers
         [HttpGet]
         public IActionResult GetSearchCriteriaView([FromQuery] Dictionary<string, string> userInput)
         {
-            int categoryId = ParameterExtractor.ExtractCatgoryId(userInput);
+            int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
             switch (categoryId)
             {
                 case 100:
