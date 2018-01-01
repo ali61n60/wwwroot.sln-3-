@@ -7,7 +7,7 @@
     <input id="allCarModels" type="hidden" value='@Json.Serialize(Model.AllCarModels)' />
 </div>
 
-<div class="col-sm-6">
+<div>
     <select id="brand" class="form-control">
         <option value='0'>برند</option>
         @foreach (Brand brand in Model.AllBrands)
@@ -16,12 +16,14 @@
             <option value="@brand.BrandId">@brand.BrandName</option>
         }
     </select>
+    <br/>
+    <div id="modelPlaceHolder">
+        <select id="model" class="form-control">
+            <option value='0'>مدل</option>
+        </select>
+    </div>
 </div>
-<div id="modelPlaceHolder" class="col-sm-6">
-    <select id="model" class="form-control">
-        <option value='0'>مدل</option>
-    </select>
-</div>
+
 
 <script id="modelTemplate" type="text/template">
     <select id="model" class="form-control">

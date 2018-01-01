@@ -1,0 +1,42 @@
+﻿@model object
+
+@{
+    ViewData["Title"] = "به من اطلاع بده";
+    ViewData["PageTitle"] = "به من اطلاع بده";
+    Layout = "_Layout";
+}
+
+@section TopTop
+    {
+    @Html.Partial("TopTop")
+}
+@section NavBar
+    {
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+    {
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+    {
+
+}
+@section SideNav
+    {
+    @Html.Partial("SideNav")
+}
+@section Body
+{
+    <h1 class="text-right">در این صفحه کالایی که به دنبال آن می گردید را انتخاب کنید. در آینده هنگام دریافت آگهی جدید در صورتی که با مشخصات شما هماهنگ باشد، به شما اطلاع میدهیم </h1>
+
+}
+
+@section Footer
+    {
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}

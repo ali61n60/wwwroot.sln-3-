@@ -123,6 +123,7 @@ let allCategoriesId = "allCategories";
 
 $(document).ready(() => {
     let index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
+    index.CustomSearchCriteriChanged();//to initiate a server call on page load for first time
 });//ready
 
 

@@ -48,6 +48,12 @@ namespace MvcMain.Controllers
             return View();
         }
 
+        [Authorize]
+        public async Task<IActionResult> LetMeKnow()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult GetNewAdPartialView([FromQuery] Dictionary<string, string> userInput)
         {

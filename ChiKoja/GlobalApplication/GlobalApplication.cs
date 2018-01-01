@@ -13,8 +13,6 @@ namespace ChiKoja.GlobalApplication
     [Application(Icon = "@drawable/icon", Label = "@string/ApplicationName")]
     public class GlobalApplication : Application, ICallBack
     {
-        //Learn LINQ
-        //Learn Lambda
         //Learn Action<T>
         //Learn more StructureMap IOC and manage localTables
         //Learn and use UNIT TEST, Integration test, Interaction test, UI test, Acceptance test, Approval test, Telerik test studio

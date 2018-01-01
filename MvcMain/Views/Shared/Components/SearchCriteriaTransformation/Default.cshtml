@@ -1,12 +1,17 @@
 ﻿@model object
-@await Component.InvokeAsync("BrandsTransformation")
+<div class="col-sm-6">
+    @await Component.InvokeAsync("BrandsTransformation")    
+</div>
+
 @*TODO add other category specific criterias
     FromYear ToYear*@
-<br/><br/>
-<div class="col-sm-6"><input id="fromYear" class="form-control" placeholder="از سال" /></div>
-<div class="col-sm-6"><input id="toYear" class="form-control" placeholder="تا سال" /></div>
 
-<br />
+<div class="col-sm-6">
+    <input id="fromYear" class="form-control" placeholder="از سال"/>
+    <br/>
+    <input id="toYear" class="form-control" placeholder="تا سال" />
+</div>
+
 
 
 
