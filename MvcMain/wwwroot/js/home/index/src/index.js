@@ -5,7 +5,7 @@ var ServerCaller_1 = require("./ServerCaller");
 var SearchCriteriaViewLoader_1 = require("./SearchCriteriaViewLoader");
 var SearchAdUserInput_1 = require("./SearchAdUserInput");
 var SearchCriteria_1 = require("./SearchCriteria");
-var Index = (function () {
+var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._orderBySelectIdDiv = "orderBy";
         this._minPriceInputId = "minPrice";
@@ -88,5 +88,6 @@ var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";
 $(document).ready(function () {
     var index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
+    index.CustomSearchCriteriChanged(); //to initiate a server call on page load for first time
 }); //ready
 //# sourceMappingURL=index.js.map

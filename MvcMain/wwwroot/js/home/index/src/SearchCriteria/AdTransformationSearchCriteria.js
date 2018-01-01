@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AdTransformationSearchCriteria = (function () {
+var AdTransformationSearchCriteria = /** @class */ (function () {
     function AdTransformationSearchCriteria() {
         this.CarBrandIdKey = "BrandId";
         this.BrandSelectId = "brand";
@@ -13,6 +13,8 @@ var AdTransformationSearchCriteria = (function () {
         this.MakeYearFromInputId = "fromYear";
         this.MakeYearToKey = "MakeYearTo";
         this.MakeYearToInputId = "toYear";
+        this.FuelKey = "Fuel";
+        this.FuelSelectId = "fuel";
     }
     AdTransformationSearchCriteria.prototype.initView = function () {
         var allCarModelssString = $("#" + this.AllCarModelsInputId).val().toString();
@@ -75,12 +77,12 @@ var AdTransformationSearchCriteria = (function () {
     return AdTransformationSearchCriteria;
 }());
 exports.AdTransformationSearchCriteria = AdTransformationSearchCriteria;
-var Brand = (function () {
+var Brand = /** @class */ (function () {
     function Brand() {
     }
     return Brand;
 }());
-var CarModel = (function () {
+var CarModel = /** @class */ (function () {
     function CarModel() {
     }
     return CarModel;

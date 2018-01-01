@@ -1,102 +1,69 @@
 ﻿namespace ModelStd.Advertisements
 {
-    
-    public class AdvertisementTransportation:AdvertisementBase
+
+    public class AdvertisementTransportation : AdvertisementBase
     {
         public int ModelId;
-        
+
         public string ModelName;
-        
+
         public string BrandName;
-        
+
         public int BrandId;
-        
+
         public int MakeYear;
-        
+
         public FuelType Fuel;
-        
+
         public int Mileage;
-        
+
         public string Gearbox;
-        
+
         public string BodyColor;
-        
+
         public string InternalColor;
-        
+
         public BodyStatus BodyStatus;
 
         public CarStatus CarStatus;
-        
+
         public PlateType PlateType;
-        
-        public string FuelName { 
-            get { return FuelTypeName(); }
-            set
-            {
-                string temp = value;
-                switch (temp)
-                {
-                    case "گاز":
-                        Fuel = FuelType.Gas;
-                        break;
-                    case "دیزل":
-                        Fuel=FuelType.Disel;
-                        break;
-                    case "الکتریکی":
-                        Fuel = FuelType.Electric;
-                        break;
-                    case "دوگانه سوز":
-                        Fuel=FuelType.GasPetrol;
-                        break;
-                    case "بنزین":
-                        Fuel=FuelType.Petrol;
-                        break;
-                    case "هیبرید":
-                        Fuel=FuelType.Hybrid;
-                        break;
-                    default:
-                    Fuel=FuelType.Petrol;
-                        break;
-                }
-            }
-        }
-        
-        private string FuelTypeName()
+
+        public static string GetFuelName(FuelType fuelType)
         {
-            string fuelTypeName;
-            switch (Fuel)
+            switch (fuelType)
             {
-                case FuelType.Gas:
-                    fuelTypeName = "گاز";
-                    break;
-                case FuelType.Disel:
-                    fuelTypeName = "دیزل";
-                    break;
-                case FuelType.Electric:
-                    fuelTypeName = "الکتریکی";
-                    break;
-                case FuelType.GasPetrol:
-                    fuelTypeName = "دوگانه سوز";
-                    break;
-                case FuelType.Petrol:
-                    fuelTypeName = "بنزین";
-                    break;
-                case FuelType.Hybrid:
-                    fuelTypeName = "هیبرید";
-                    break;
-                default:
-                    fuelTypeName = "بنزین";
-                    break;
+                case FuelType.Petrol: return "Pertrol";
+                case FuelType.Disel: return "Disel";
+                case FuelType.Gas: return "Gas";
+                case FuelType.GasPetrol: return "GasPetrol";
+                case FuelType.Electric: return "Electric";
+                case FuelType.Hybrid: return "Hybrid";
+                case FuelType.UnSpecified: return "UnSpecified";
             }
-            return fuelTypeName;
+            return "UnSpecified";
         }
 
+        public static FuelType GetFuelType(string fuelTypeString)
+        {
+            switch (fuelTypeString)
+            {
+                case "Petrol": return FuelType.Petrol;
+                case "Disel": return FuelType.Disel;
+                case "Gas": return FuelType.Gas;
+                case "GasPetrol": return FuelType.GasPetrol;
+                case "Electric": return FuelType.Electric;
+                case "Hybrid": return FuelType.Hybrid;
+            }
+            return FuelType.UnSpecified;
+        }
+        
         public void SetBodyStatus(string bodyStatus)
         {
             switch (bodyStatus)
             {
                 case "NoAccident":
-                    this.BodyStatus=BodyStatus.NoAccident;
+                    this.BodyStatus = BodyStatus.NoAccident;
                     break;
                 case "OneAccident":
                     this.BodyStatus = BodyStatus.OneAccident;
@@ -105,26 +72,27 @@
                     this.BodyStatus = BodyStatus.TwoAccident;
                     break;
                 default:
-                    this.BodyStatus=BodyStatus.NoAccident;
+                    this.BodyStatus = BodyStatus.NoAccident;
                     break;
             }
         }
 
-       
 
-       
+
+
 
     }
-    
-    
+
+
     public enum FuelType
     {
-        Gas,
         Petrol,
         Disel,
+        Gas,
         Electric,
         GasPetrol,
-        Hybrid
+        Hybrid,
+        UnSpecified
     }
 
     public enum GearboxType
