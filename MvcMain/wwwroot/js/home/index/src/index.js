@@ -88,5 +88,6 @@ var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";
 $(document).ready(function () {
     var index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
+    index.CustomSearchCriteriChanged(); //to initiate a server call on page load for first time
 }); //ready
 //# sourceMappingURL=index.js.map
