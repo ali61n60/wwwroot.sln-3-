@@ -15,6 +15,22 @@ var AdTransformationSearchCriteria = (function () {
         this.MakeYearToInputId = "toYear";
         this.FuelKey = "Fuel";
         this.FuelSelectId = "fuel";
+        this.MileageFromKey = "MileageFrom";
+        this.MileageFromInputId = "mileageFrom";
+        this.MileageToKey = "MileageTo";
+        this.MileageToInputId = "mileageTo";
+        this.GearboxKey = "Gearbox";
+        this.GearboxTypeSelectId = "gearboxType";
+        this.BodyColorKey = "BodyColor";
+        this.BodyColorSelectId = "bodyColor";
+        this.InternalColorKey = "InternalColor";
+        this.InternalColorSelectId = "internalColor";
+        this.BodyStatusKey = "BodyStatus";
+        this.BodyStatusSelectId = "bodyStatus";
+        this.CarStatusKey = "CarStatus";
+        this.CarStatusSelectId = "carStatus";
+        this.PlateTypeKey = "PlateType";
+        this.PlateTypeSelectId = "plateType";
     }
     AdTransformationSearchCriteria.prototype.initView = function () {
         var allCarModelssString = $("#" + this.AllCarModelsInputId).val().toString();
@@ -52,6 +68,22 @@ var AdTransformationSearchCriteria = (function () {
             $("#" + this.MakeYearToInputId).val(); //makeYearTo
         searchAdUserInput.SearchParameters[this.FuelKey] =
             $("#" + this.FuelSelectId).find("option:selected").val(); //fuel
+        searchAdUserInput.SearchParameters[this.MileageFromKey] =
+            $("#" + this.MileageFromInputId).val(); //mileageFrom
+        searchAdUserInput.SearchParameters[this.MileageToKey] =
+            $("#" + this.MileageToInputId).val(); //mileageTo
+        searchAdUserInput.SearchParameters[this.GearboxKey] =
+            $("#" + this.GearboxTypeSelectId).find("option:selected").val(); //gearboxType
+        searchAdUserInput.SearchParameters[this.BodyColorKey] =
+            $("#" + this.BodyColorSelectId).find("option:selected").val(); //bodyColor
+        searchAdUserInput.SearchParameters[this.InternalColorKey] =
+            $("#" + this.InternalColorSelectId).find("option:selected").val(); //internalColor
+        searchAdUserInput.SearchParameters[this.BodyStatusKey] =
+            $("#" + this.BodyStatusSelectId).find("option:selected").val(); //bodyStatus
+        searchAdUserInput.SearchParameters[this.CarStatusKey] =
+            $("#" + this.CarStatusSelectId).find("option:selected").val(); //carStatus
+        searchAdUserInput.SearchParameters[this.PlateTypeKey] =
+            $("#" + this.PlateTypeSelectId).find("option:selected").val(); //plateType
     };
     AdTransformationSearchCriteria.prototype.BindEvents = function (searchCriteriaChange) {
         var _this = this;

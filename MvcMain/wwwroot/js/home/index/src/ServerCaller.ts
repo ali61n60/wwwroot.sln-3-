@@ -64,6 +64,7 @@ export class ServerCaller {
                     } //end for
                 } //if (msg.success == true)
                 else {
+                    //TODO show error message to user
                     //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
                 }
             } //if (msg.customDictionary["RequestIndex"]

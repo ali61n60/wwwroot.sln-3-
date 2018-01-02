@@ -398,7 +398,7 @@ namespace RepositoryStd.Repository.Transportation
                 _commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements);
             adTrans.BodyColor = advertisements.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisements.AdAttributeTransportation.InternalColor;
-            adTrans.SetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus);
+            adTrans.BodyStatus=AdvertisementTransportation.GetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus,BodyStatusDefault);
             adTrans.BrandId = advertisements.AdAttributeTransportation.Model.BrandId;
             adTrans.BrandName = advertisements.AdAttributeTransportation.Model.Brand.BrandName;
             adTrans.ModelName = advertisements.AdAttributeTransportation.Model.ModelName;

@@ -111,9 +111,7 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
         $("#" + this.CarStatusSelectId).find("option:selected").val();//carStatus
         
         searchAdUserInput.SearchParameters[this.PlateTypeKey] =
-            $("#" + this.PlateTypeSelectId).find("option:selected").val();//internalColor
-
-
+            $("#" + this.PlateTypeSelectId).find("option:selected").val();//plateType
     }
 
     public BindEvents(searchCriteriaChange: ISearchCriteriaChange): void {

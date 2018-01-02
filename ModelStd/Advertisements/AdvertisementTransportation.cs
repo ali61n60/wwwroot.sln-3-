@@ -79,24 +79,7 @@
             }
             return dedaultValue;
         }
-        public void SetBodyStatus(string bodyStatus)
-        {
-            switch (bodyStatus)
-            {
-                case "NoAccident":
-                    this.BodyStatus = BodyStatus.NoAccident;
-                    break;
-                case "OneAccident":
-                    this.BodyStatus = BodyStatus.OneAccident;
-                    break;
-                case "TwoAccident":
-                    this.BodyStatus = BodyStatus.TwoAccident;
-                    break;
-                default:
-                    this.BodyStatus = BodyStatus.NoAccident;
-                    break;
-            }
-        }
+       
 
 
         public static BodyStatus GetBodyStatus(string bodyStatusString, BodyStatus defaultValue)
