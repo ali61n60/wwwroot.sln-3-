@@ -40,24 +40,24 @@ namespace RepositoryStd.Repository.Transportation
 
         public static readonly string MileageToKey = "MileageTo";
         public static readonly int MileageToDefault = 100000000;
-        //
+        
         public static readonly string GearboxKey = "Gearbox";
         public static readonly GearboxType GearboxDefault = GearboxType.UnSpecified;
 
         public static readonly string BodyColorKey = "BodyColor";
-        public static readonly string BodyColorDefault = "Black";
+        public static readonly string BodyColorDefault = "UnSpecified";
 
         public static readonly string InternalColorKey = "InternalColor";
-        public static readonly string InternalColorDefault = "Black";
+        public static readonly string InternalColorDefault = "UnSpecified";
 
         public static readonly string BodyStatusKey = "BodyStatus";
-        public static readonly BodyStatus BodyStatusDefault = BodyStatus.NoAccident;
+        public static readonly BodyStatus BodyStatusDefault = BodyStatus.UnSpecified;
 
         public static readonly string CarStatusKey = "CarStatus";
-        public static readonly CarStatus CarStatusDefault = CarStatus.New;
+        public static readonly CarStatus CarStatusDefault = CarStatus.UnSpecified;
 
         public static readonly string PlateTypeKey = "PlateType";
-        public static readonly PlateType PlateTypeDefault = PlateType.National;
+        public static readonly PlateType PlateTypeDefault = PlateType.UnSpecified;
 
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
@@ -80,9 +80,9 @@ namespace RepositoryStd.Repository.Transportation
             list = whereClauseFuel(queryParameters, list);
             list = whereMileage(queryParameters, list);
             list = whereGearbox(queryParameters, list);
-            //list = whereBodyColor(queryParameters, list);
-            //list = whereInternalColor(queryParameters, list);
-            //list = whereBodyStatus(queryParameters, list);
+            list = whereBodyColor(queryParameters, list);
+            list = whereInternalColor(queryParameters, list);
+            list = whereBodyStatus(queryParameters, list);
             //list = whereCarStatus(queryParameters, list);
             //list = wherePlateType(queryParameters, list);
 
@@ -94,6 +94,43 @@ namespace RepositoryStd.Repository.Transportation
             }
 
             return searchResultItems;
+        }
+
+        private IQueryable<Advertisements> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            BodyStatus bodyStatus = AdvertisementTransportation.GetBodyStatus(
+                ParameterExtractor.ExtractString(queryParameters, BodyStatusKey,
+                    AdvertisementTransportation.GetBodyStatusString(BodyStatusDefault)),
+                BodyStatusDefault);
+            if (bodyStatus != BodyStatusDefault)
+            {
+                list = list.Where(advertisement =>
+                    advertisement.AdAttributeTransportation.BodyStatus ==
+                    AdvertisementTransportation.GetBodyStatusString(bodyStatus));
+            }
+            return list;
+        }
+
+        private IQueryable<Advertisements> whereInternalColor(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            string internalColor = ParameterExtractor.ExtractString(queryParameters, InternalColorKey, InternalColorDefault);
+            if (internalColor != BodyColorDefault)
+            {
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.BodyColor == internalColor);
+            }
+
+            return list;
+        }
+
+        private IQueryable<Advertisements> whereBodyColor(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            string bodyColor = ParameterExtractor.ExtractString(queryParameters, BodyColorKey, BodyColorDefault);
+            if (bodyColor != BodyColorDefault)
+            {
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.BodyColor == bodyColor);
+            }
+
+            return list;
         }
 
         private IQueryable<Advertisements> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)

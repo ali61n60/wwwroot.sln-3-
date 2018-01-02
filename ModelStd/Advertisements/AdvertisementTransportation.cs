@@ -99,9 +99,29 @@
         }
 
 
+        public static BodyStatus GetBodyStatus(string bodyStatusString, BodyStatus defaultValue)
+        {
+            switch (bodyStatusString)
+            {
+                case "NoAccident": return BodyStatus.NoAccident;
+                case "OneAccident": return BodyStatus.OneAccident;
+                case "TwoAccidents": return BodyStatus.TwoAccidents;
+                case "UnSpecified": return BodyStatus.UnSpecified;
+            }
+            return defaultValue;
+        }
 
-
-
+        public static string GetBodyStatusString(BodyStatus bodyStatus)
+        {
+            switch (bodyStatus)
+            {
+                case BodyStatus.NoAccident: return "NoAccident";
+                case BodyStatus.OneAccident: return "OneAccident";
+                case BodyStatus.TwoAccidents: return "TwoAccidents";
+                case BodyStatus.UnSpecified: return "UnSpecified";
+            }
+            return "UnSpecified";
+        }
     }
 
 
@@ -127,7 +147,7 @@
     {
         NoAccident,
         OneAccident,
-        TwoAccident,
+        TwoAccidents,
         UnSpecified
     }
 
