@@ -3,14 +3,27 @@
     @await Component.InvokeAsync("BrandsTransformation")    
 </div>
 
-@*TODO add other category specific criterias
-    FromYear ToYear*@
+@*TODO add other category specific criterias*@
 
 <div class="col-sm-6">
     <input id="fromYear" class="form-control" placeholder="از سال"/>
     <br/>
     <input id="toYear" class="form-control" placeholder="تا سال" />
 </div>
+
+<div class="col-sm-6">
+    <select id="fuel" class="form-control">
+        <option value="UnSpecified" selected="selected">سوخت</option>
+        <option value="Pertrol">بنزین</option>
+        <option value="GasPetrol">دوگانه سوز</option>
+        <option value="Disel">دیزل</option>
+        <option value="Gas">گاز</option>
+        <option value="Electric">الکتریکی</option>
+        <option value="Hybrid">هیبرید</option>
+    </select>
+</div>
+
+
 
 
 

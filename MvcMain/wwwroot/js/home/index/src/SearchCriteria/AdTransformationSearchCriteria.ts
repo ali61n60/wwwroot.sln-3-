@@ -20,6 +20,9 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
 
     private readonly MakeYearToKey: string = "MakeYearTo";
     private readonly MakeYearToInputId: string = "toYear";
+
+    private readonly FuelKey="Fuel";
+    private readonly FuelSelectId: string ="fuel";
     
 
 

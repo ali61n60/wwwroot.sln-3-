@@ -31,6 +31,9 @@ namespace RepositoryStd.Repository.Transportation
         public static readonly string MakeYearToKey = "MakeYearTo";
         public static readonly int MakeYearToDefault = 1400;
 
+        public static readonly string FuelTypeKey = "Fuel";
+        public static readonly FuelType FuelTypeDefault = FuelType.UnSpecified;
+
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
@@ -66,9 +69,14 @@ namespace RepositoryStd.Repository.Transportation
             int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters,MakeYearFromKey,MakeYearFromDefault);
             int makeYearTo = ParameterExtractor.ExtractInt(queryParameters, MakeYearToKey, MakeYearToDefault);
 
-            list = list.Where(advertisement =>
-                advertisement.AdAttributeTransportation.MakeYear >= makeYearFrom &&
-                advertisement.AdAttributeTransportation.MakeYear <= makeYearTo);
+            if (makeYearFrom != MakeYearFromDefault)
+            {
+                list = list.Where(advertisement =>advertisement.AdAttributeTransportation.MakeYear >= makeYearFrom);
+            }
+            if (makeYearTo != MakeYearToDefault)
+            {
+                list = list.Where(advertisement =>advertisement.AdAttributeTransportation.MakeYear <= makeYearTo);
+            }
 
             return list;
         }
@@ -112,7 +120,7 @@ namespace RepositoryStd.Repository.Transportation
             adAttribute.AdId = entity.AdvertisementCommon.AdvertisementId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
-            adAttribute.Fuel = entity.FuelName;
+            adAttribute.Fuel =AdvertisementTransportation.GetFuelName(entity.Fuel);
             adAttribute.Mileage = entity.Mileage;
             adAttribute.Gearbox = entity.Gearbox;
             adAttribute.BodyColor = entity.BodyColor;
@@ -278,7 +286,7 @@ namespace RepositoryStd.Repository.Transportation
                 }
                 advertisementTransportation.ModelId = (int)dataReader["modelId"];
                 advertisementTransportation.MakeYear = (int)dataReader["makeYear"];
-                advertisementTransportation.FuelName = (string)dataReader["fuel"];
+                advertisementTransportation.Fuel = AdvertisementTransportation.GetFuelType((string)dataReader["fuel"]);
                 advertisementTransportation.Mileage = (int)dataReader["mileage"];
                 advertisementTransportation.Gearbox = (string)dataReader["gearbox"];
                 advertisementTransportation.BodyColor = (string)dataReader["bodyColor"];
