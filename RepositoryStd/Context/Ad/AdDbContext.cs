@@ -15,10 +15,10 @@ namespace RepositoryStd.Context.AD
             _connectionString = connectionString;
         }
 
-        //public AdDbContext()
-        //{
-        //    _connectionString = AdvertisementDataClass.DefaultConnectionString();
-        //}
+        public AdDbContext()
+        {
+            _connectionString = AdvertisementDataClass.DefaultConnectionString();
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
