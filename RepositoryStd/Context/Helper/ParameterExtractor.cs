@@ -71,20 +71,10 @@ namespace RepositoryStd.Context.Helper
             }
             return currentValue;
         }
-
-
-        public static FuelType ExtractFuelType(Dictionary<string, string> queryParameters, string fuelTypeKey, FuelType fuelTypeDefault)
+        
+        public static string ExtractString(Dictionary<string, string> queryParameters, string key, string defaultVlaue)
         {
-            FuelType currentValue = fuelTypeDefault;
-            if (queryParameters.ContainsKey(fuelTypeKey))
-            {
-                string fuelTypeString = queryParameters[fuelTypeKey];
-                currentValue = AdvertisementTransportation.GetFuelType(fuelTypeString);
-                if (currentValue == FuelType.UnSpecified)//GetFuelType method returns FuelType.UnSpecified in case of no matching string input 
-                    currentValue = fuelTypeDefault;
-            }
-
-            return currentValue;
+            return queryParameters.ContainsKey(key) ? queryParameters[key] : defaultVlaue;
         }
     }
 }

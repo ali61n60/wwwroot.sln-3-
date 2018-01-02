@@ -99,7 +99,7 @@ namespace MvcMain.Controllers
             IFindRepository findRepository = _repositoryContainer.GetFindRepository(categoryId);//polymorphyic dispatch
             try
             {
-                response.ResponseData =findRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
+                response.ResponseData =findRepository.FindAdvertisementCommons(userInput, TODO).ToList();//get attributes 
                 FillFirstImage(response.ResponseData);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(response, userInput);

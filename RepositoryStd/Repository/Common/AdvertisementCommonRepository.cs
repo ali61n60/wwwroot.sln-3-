@@ -63,7 +63,7 @@ namespace RepositoryStd.Repository.Common
 
 
         //Called from service layer
-        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
+        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters, object whereGearbox)
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             IQueryable<Advertisements> list = GetCommonQueryableList(queryParameters);

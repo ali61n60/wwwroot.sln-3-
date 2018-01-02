@@ -29,7 +29,7 @@
 
         public PlateType PlateType;
 
-        public static string GetFuelName(FuelType fuelType)
+        public static string GetFuelTypeString(FuelType fuelType)
         {
             switch (fuelType)
             {
@@ -44,7 +44,7 @@
             return "UnSpecified";
         }
 
-        public static FuelType GetFuelType(string fuelTypeString)
+        public static FuelType GetFuelType(string fuelTypeString,FuelType defaultValue)
         {
             switch (fuelTypeString)
             {
@@ -55,9 +55,30 @@
                 case "Electric": return FuelType.Electric;
                 case "Hybrid": return FuelType.Hybrid;
             }
-            return FuelType.UnSpecified;
+            return defaultValue;
         }
-        
+
+        public static string GetGearboxTypeString(GearboxType gearboxType)
+        {
+            switch (gearboxType)
+            {
+                case GearboxType.Manual: return "Manual";
+                case GearboxType.Automatic: return "Automatic";
+                case GearboxType.UnSpecified: return "UnSpecified";
+            }
+            return "UnSpecified";
+        }
+
+        public static GearboxType GetGearboxType(string gearboxTypeString, GearboxType dedaultValue)
+        {
+            switch (gearboxTypeString)
+            {
+                case "Manual": return GearboxType.Manual;
+                case "Automatic": return GearboxType.Automatic;
+                case "UnSpecified": return GearboxType.UnSpecified;
+            }
+            return dedaultValue;
+        }
         public void SetBodyStatus(string bodyStatus)
         {
             switch (bodyStatus)
@@ -98,27 +119,31 @@
     public enum GearboxType
     {
         Manual,
-        Automatic
+        Automatic,
+        UnSpecified
     }
 
     public enum BodyStatus
     {
         NoAccident,
         OneAccident,
-        TwoAccident
+        TwoAccident,
+        UnSpecified
     }
 
     public enum CarStatus
     {
         New,
         Used,
-        Draft
+        Draft,
+        UnSpecified
     }
 
     public enum PlateType
     {
         National,
         FreeRegion,
-        Temporary
+        Temporary,
+        UnSpecified
     }
 }

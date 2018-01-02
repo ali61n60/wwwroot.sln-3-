@@ -34,18 +34,15 @@ namespace RepositoryStd.Repository.Transportation
 
         public static readonly string FuelTypeKey = "Fuel";
         public static readonly FuelType FuelTypeDefault = FuelType.UnSpecified;
-
-        //
-        
         
         public static readonly string MileageFromKey = "MileageFrom";
         public static readonly int MileageFromDefault = 0;
 
         public static readonly string MileageToKey = "MileageTo";
-        public static readonly int MileageToDefault = 0;
-
+        public static readonly int MileageToDefault = 100000000;
+        //
         public static readonly string GearboxKey = "Gearbox";
-        public static readonly GearboxType GearboxDefault = GearboxType.Manual;
+        public static readonly GearboxType GearboxDefault = GearboxType.UnSpecified;
 
         public static readonly string BodyColorKey = "BodyColor";
         public static readonly string BodyColorDefault = "Black";
@@ -73,9 +70,7 @@ namespace RepositoryStd.Repository.Transportation
             _commonRepository = commonRepository;
         }
 
-       
-
-        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
+       public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             IQueryable<Advertisements> list=_commonRepository.GetCommonQueryableList(queryParameters);
@@ -83,8 +78,15 @@ namespace RepositoryStd.Repository.Transportation
             list = whereClauseCarModelAndBrand(queryParameters, list);
             list = whereClauseMakeYear(queryParameters, list);
             list = whereClauseFuel(queryParameters, list);
+            list = whereMileage(queryParameters, list);
+            list = whereGearbox(queryParameters, list);
+            //list = whereBodyColor(queryParameters, list);
+            //list = whereInternalColor(queryParameters, list);
+            //list = whereBodyStatus(queryParameters, list);
+            //list = whereCarStatus(queryParameters, list);
+            //list = wherePlateType(queryParameters, list);
 
-            
+
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
             {
@@ -94,13 +96,44 @@ namespace RepositoryStd.Repository.Transportation
             return searchResultItems;
         }
 
+        private IQueryable<Advertisements> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            GearboxType gearboxType = AdvertisementTransportation.GetGearboxType(
+                ParameterExtractor.ExtractString(queryParameters, GearboxKey,
+                    AdvertisementTransportation.GetGearboxTypeString(GearboxDefault)),
+                GearboxDefault);
+            if (gearboxType != GearboxDefault)
+            {
+                list = list.Where(advertisement =>
+                    advertisement.AdAttributeTransportation.Gearbox ==
+                    AdvertisementTransportation.GetGearboxTypeString(gearboxType));
+            }
+            return list;
+        }
+
+        private IQueryable<Advertisements> whereMileage(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            int mileageFrom = ParameterExtractor.ExtractInt(queryParameters, MileageFromKey, MileageFromDefault);
+            int mileageTo = ParameterExtractor.ExtractInt(queryParameters, MileageToKey, MileageToDefault);
+
+            if (mileageFrom != MileageFromDefault)
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.Mileage >= mileageFrom);
+            
+            if (mileageTo != MileageToDefault)
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.Mileage <= mileageTo);
+
+            return list;
+        }
+
         private IQueryable<Advertisements> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
-            FuelType fuelType = ParameterExtractor.ExtractFuelType(queryParameters, FuelTypeKey,FuelTypeDefault);
+            FuelType fuelType =AdvertisementTransportation.GetFuelType(
+                ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault)),
+                FuelTypeDefault);
             if (fuelType != FuelTypeDefault)
             {
                 list = list.Where(advertisement =>
-                    advertisement.AdAttributeTransportation.Fuel == AdvertisementTransportation.GetFuelName(fuelType));
+                    advertisement.AdAttributeTransportation.Fuel == AdvertisementTransportation.GetFuelTypeString(fuelType));
             }
 
             return list;
@@ -162,7 +195,7 @@ namespace RepositoryStd.Repository.Transportation
             adAttribute.AdId = entity.AdvertisementCommon.AdvertisementId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
-            adAttribute.Fuel =AdvertisementTransportation.GetFuelName(entity.Fuel);
+            adAttribute.Fuel =AdvertisementTransportation.GetFuelTypeString(entity.Fuel);
             adAttribute.Mileage = entity.Mileage;
             adAttribute.Gearbox = entity.Gearbox;
             adAttribute.BodyColor = entity.BodyColor;
@@ -328,7 +361,7 @@ namespace RepositoryStd.Repository.Transportation
                 }
                 advertisementTransportation.ModelId = (int)dataReader["modelId"];
                 advertisementTransportation.MakeYear = (int)dataReader["makeYear"];
-                advertisementTransportation.Fuel = AdvertisementTransportation.GetFuelType((string)dataReader["fuel"]);
+                advertisementTransportation.Fuel = AdvertisementTransportation.GetFuelType((string)dataReader["fuel"],FuelTypeDefault);
                 advertisementTransportation.Mileage = (int)dataReader["mileage"];
                 advertisementTransportation.Gearbox = (string)dataReader["gearbox"];
                 advertisementTransportation.BodyColor = (string)dataReader["bodyColor"];
