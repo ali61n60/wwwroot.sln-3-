@@ -15,6 +15,7 @@ using RepositoryStd.Repository.Common;
 
 namespace RepositoryStd.Repository.Transportation
 {
+    //TODO add CarStatus and PlateType to database table
     public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
     {
         //AdTransportation Properties
@@ -33,6 +34,33 @@ namespace RepositoryStd.Repository.Transportation
 
         public static readonly string FuelTypeKey = "Fuel";
         public static readonly FuelType FuelTypeDefault = FuelType.UnSpecified;
+
+        //
+        
+        
+        public static readonly string MileageFromKey = "MileageFrom";
+        public static readonly int MileageFromDefault = 0;
+
+        public static readonly string MileageToKey = "MileageTo";
+        public static readonly int MileageToDefault = 0;
+
+        public static readonly string GearboxKey = "Gearbox";
+        public static readonly GearboxType GearboxDefault = GearboxType.Manual;
+
+        public static readonly string BodyColorKey = "BodyColor";
+        public static readonly string BodyColorDefault = "Black";
+
+        public static readonly string InternalColorKey = "InternalColor";
+        public static readonly string InternalColorDefault = "Black";
+
+        public static readonly string BodyStatusKey = "BodyStatus";
+        public static readonly BodyStatus BodyStatusDefault = BodyStatus.NoAccident;
+
+        public static readonly string CarStatusKey = "CarStatus";
+        public static readonly CarStatus CarStatusDefault = CarStatus.New;
+
+        public static readonly string PlateTypeKey = "PlateType";
+        public static readonly PlateType PlateTypeDefault = PlateType.National;
 
         private readonly ICommonRepository _commonRepository;
         private readonly AdDbContext _adDbContext;
