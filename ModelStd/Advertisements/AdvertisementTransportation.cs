@@ -122,6 +122,55 @@
             }
             return "UnSpecified";
         }
+
+        public static CarStatus GetCarStatus(string carStatusString, CarStatus defaultValue)
+        {
+            switch (carStatusString)
+            {
+                case "New ": return CarStatus.New;
+                case "Used": return CarStatus.Used;
+                case "Draft": return CarStatus.Draft;
+                case "UnSpecified": return CarStatus.UnSpecified;
+            }
+
+            return defaultValue;
+        }
+
+        public static string GetCarStatusString(CarStatus carStatus)
+        {
+            switch (carStatus)
+            {
+                case CarStatus.New: return "New";
+                case CarStatus.Used: return "Used";
+                case CarStatus.Draft: return "Draft";
+                case CarStatus.UnSpecified: return "UnSpecified";
+            }
+            return "UnSpecified";
+        }
+
+        public static PlateType GetPlateType(string plateTypeString, PlateType defaultValue)
+        {
+            switch (plateTypeString)
+            {
+                case "National": return PlateType.National;
+                case "FreeRegion": return PlateType.FreeRegion;
+                case "Temporary": return PlateType.Temporary;
+                case "UnSpecified": return PlateType.UnSpecified;
+            }
+            return defaultValue;
+        }
+
+        public static string GetPlateTypeString(PlateType plateType)
+        {
+            switch (plateType)
+            {
+                case PlateType.National: return "National";
+                case PlateType.FreeRegion: return "FreeRegion";
+                case PlateType.Temporary: return "Temporary";
+                case PlateType.UnSpecified: return "UnSpecified";
+            }
+            return "UnSpecified";
+        }
     }
 
 

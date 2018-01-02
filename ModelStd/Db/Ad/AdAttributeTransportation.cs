@@ -44,7 +44,16 @@ namespace ModelStd.Db.Ad
         [MaxLength(50)]
         public string BodyStatus { get; set; }
 
+        [Column("carStatus")]
+        [MaxLength(50)]
+        public string CarStatus { get; set; }
+
+        [Column("plateType")]
+        [MaxLength(50)]
+        public string PlateType { get; set; }
+
         public virtual Advertisements Ad { get; set; }
         public virtual CarModel Model { get; set; }
+        
     }
 }

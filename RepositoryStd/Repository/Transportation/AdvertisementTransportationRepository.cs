@@ -83,8 +83,8 @@ namespace RepositoryStd.Repository.Transportation
             list = whereBodyColor(queryParameters, list);
             list = whereInternalColor(queryParameters, list);
             list = whereBodyStatus(queryParameters, list);
-            //list = whereCarStatus(queryParameters, list);
-            //list = wherePlateType(queryParameters, list);
+            list = whereCarStatus(queryParameters, list);
+            list = wherePlateType(queryParameters, list);
 
 
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
@@ -94,6 +94,37 @@ namespace RepositoryStd.Repository.Transportation
             }
 
             return searchResultItems;
+        }
+
+        private IQueryable<Advertisements> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            PlateType plateType = AdvertisementTransportation.GetPlateType(
+                ParameterExtractor.ExtractString(queryParameters, PlateTypeKey,
+                    AdvertisementTransportation.GetPlateTypeString(PlateTypeDefault)),
+                PlateTypeDefault);
+            if (plateType != PlateTypeDefault)
+            {
+                list = list.Where(advertisement =>
+                    advertisement.AdAttributeTransportation.PlateType ==
+                    AdvertisementTransportation.GetPlateTypeString(plateType));
+            }
+            return list;
+        }
+
+        private IQueryable<Advertisements> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            CarStatus carStatus= AdvertisementTransportation.GetCarStatus(
+                ParameterExtractor.ExtractString(queryParameters, CarStatusKey,
+                    AdvertisementTransportation.GetCarStatusString(CarStatusDefault)),
+                CarStatusDefault);
+            if (carStatus != CarStatusDefault)
+            {
+                list = list.Where(advertisement =>
+                    advertisement.AdAttributeTransportation.CarStatus ==
+                    AdvertisementTransportation.GetCarStatusString(carStatus));
+            }
+
+            return list;
         }
 
         private IQueryable<Advertisements> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
