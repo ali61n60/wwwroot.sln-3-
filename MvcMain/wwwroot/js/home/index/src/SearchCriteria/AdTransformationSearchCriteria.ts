@@ -22,7 +22,31 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
     private readonly MakeYearToInputId: string = "toYear";
 
     private readonly FuelKey="Fuel";
-    private readonly FuelSelectId: string ="fuel";
+    private readonly FuelSelectId: string = "fuel";
+
+    public readonly MileageFromKey: string = "MileageFrom";
+    public readonly MileageFromInputId:string ="mileageFrom";
+
+    public readonly MileageToKey: string = "MileageTo";
+    public readonly MileageToInputId:string = "mileageTo";
+
+    public readonly GearboxKey: string = "Gearbox";
+    public  readonly GearboxTypeSelectId:string="gearboxType";
+
+    public readonly BodyColorKey: string = "BodyColor";
+    public  readonly BodyColorSelectId:string = "bodyColor";
+
+    public readonly InternalColorKey: string = "InternalColor";
+    public  readonly InternalColorSelectId = "internalColor";
+
+    public readonly BodyStatusKey: string = "BodyStatus";
+    public  readonly BodyStatusSelectId:string = "bodyStatus";
+
+    public readonly CarStatusKey: string = "CarStatus";
+    public  readonly CarStatusSelectId:string = "carStatus";
+
+    public readonly PlateTypeKey: string = "PlateType";
+    public  readonly PlateTypeSelectId:string= "plateType";
     
 
 
@@ -66,6 +90,30 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
             $("#" + this.MakeYearToInputId).val();//makeYearTo
         searchAdUserInput.SearchParameters[this.FuelKey] =
             $("#" + this.FuelSelectId).find("option:selected").val();//fuel
+        searchAdUserInput.SearchParameters[this.MileageFromKey] =
+            $("#" + this.MileageFromInputId).val();//mileageFrom
+        searchAdUserInput.SearchParameters[this.MileageToKey] =
+        $("#" + this.MileageToInputId).val();//mileageTo
+        searchAdUserInput.SearchParameters[this.GearboxKey] =
+            $("#" + this.GearboxTypeSelectId).find("option:selected").val();//gearboxType
+        
+        searchAdUserInput.SearchParameters[this.BodyColorKey] =
+        $("#" + this.BodyColorSelectId).find("option:selected").val();//bodyColor
+        
+
+        searchAdUserInput.SearchParameters[this.InternalColorKey] =
+        $("#" + this.InternalColorSelectId).find("option:selected").val();//internalColor
+        
+        searchAdUserInput.SearchParameters[this.BodyStatusKey] =
+        $("#" + this.BodyStatusSelectId).find("option:selected").val();//bodyStatus
+
+        searchAdUserInput.SearchParameters[this.CarStatusKey] =
+        $("#" + this.CarStatusSelectId).find("option:selected").val();//carStatus
+        
+        searchAdUserInput.SearchParameters[this.PlateTypeKey] =
+            $("#" + this.PlateTypeSelectId).find("option:selected").val();//internalColor
+
+
     }
 
     public BindEvents(searchCriteriaChange: ISearchCriteriaChange): void {
