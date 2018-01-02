@@ -54,15 +54,18 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
         this.bindCarModel();
     }
 
+    //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
     public FillSearchCriteria(searchAdUserInput: SearchAdUserInput): void {
         searchAdUserInput.SearchParameters[this.CarBrandIdKey] =
-            $("#" + this.BrandSelectId).find("option:selected").val();
+            $("#" + this.BrandSelectId).find("option:selected").val();//brandId
         searchAdUserInput.SearchParameters[this.CarModelIdKey] =
-            $("#" + this.ModelSelectId).find("option:selected").val();
+            $("#" + this.ModelSelectId).find("option:selected").val();//carModelId
         searchAdUserInput.SearchParameters[this.MakeYearFromKey] =
-            $("#" + this.MakeYearFromInputId).val();
+            $("#" + this.MakeYearFromInputId).val();//makeYearFrom
         searchAdUserInput.SearchParameters[this.MakeYearToKey] =
-            $("#" + this.MakeYearToInputId).val();
+            $("#" + this.MakeYearToInputId).val();//makeYearTo
+        searchAdUserInput.SearchParameters[this.FuelKey] =
+            $("#" + this.FuelSelectId).find("option:selected").val();//fuel
     }
 
     public BindEvents(searchCriteriaChange: ISearchCriteriaChange): void {

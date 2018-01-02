@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AdTransformationSearchCriteria = /** @class */ (function () {
+var AdTransformationSearchCriteria = (function () {
     function AdTransformationSearchCriteria() {
         this.CarBrandIdKey = "BrandId";
         this.BrandSelectId = "brand";
@@ -40,15 +40,18 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
         $("#" + this.CarModelDivPlaceHolderId).append(html);
         this.bindCarModel();
     };
+    //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
     AdTransformationSearchCriteria.prototype.FillSearchCriteria = function (searchAdUserInput) {
         searchAdUserInput.SearchParameters[this.CarBrandIdKey] =
-            $("#" + this.BrandSelectId).find("option:selected").val();
+            $("#" + this.BrandSelectId).find("option:selected").val(); //brandId
         searchAdUserInput.SearchParameters[this.CarModelIdKey] =
-            $("#" + this.ModelSelectId).find("option:selected").val();
+            $("#" + this.ModelSelectId).find("option:selected").val(); //carModelId
         searchAdUserInput.SearchParameters[this.MakeYearFromKey] =
-            $("#" + this.MakeYearFromInputId).val();
+            $("#" + this.MakeYearFromInputId).val(); //makeYearFrom
         searchAdUserInput.SearchParameters[this.MakeYearToKey] =
-            $("#" + this.MakeYearToInputId).val();
+            $("#" + this.MakeYearToInputId).val(); //makeYearTo
+        searchAdUserInput.SearchParameters[this.FuelKey] =
+            $("#" + this.FuelSelectId).find("option:selected").val(); //fuel
     };
     AdTransformationSearchCriteria.prototype.BindEvents = function (searchCriteriaChange) {
         var _this = this;
@@ -77,12 +80,12 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
     return AdTransformationSearchCriteria;
 }());
 exports.AdTransformationSearchCriteria = AdTransformationSearchCriteria;
-var Brand = /** @class */ (function () {
+var Brand = (function () {
     function Brand() {
     }
     return Brand;
 }());
-var CarModel = /** @class */ (function () {
+var CarModel = (function () {
     function CarModel() {
     }
     return CarModel;

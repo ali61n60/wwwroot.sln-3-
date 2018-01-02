@@ -52,8 +52,10 @@ namespace RepositoryStd.Repository.Transportation
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             IQueryable<Advertisements> list=_commonRepository.GetCommonQueryableList(queryParameters);
             //TODO add category specific query to the list
-            list = WhereClauseCarModelAndBrand(queryParameters, list);
-            list = WhereClauseMakeYear(queryParameters, list);
+            list = whereClauseCarModelAndBrand(queryParameters, list);
+            list = whereClauseMakeYear(queryParameters, list);
+            list = whereClauseFuel(queryParameters, list);
+
             
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
@@ -64,7 +66,19 @@ namespace RepositoryStd.Repository.Transportation
             return searchResultItems;
         }
 
-        private IQueryable<Advertisements> WhereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisements> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        {
+            FuelType fuelType = ParameterExtractor.ExtractFuelType(queryParameters, FuelTypeKey,FuelTypeDefault);
+            if (fuelType != FuelTypeDefault)
+            {
+                list = list.Where(advertisement =>
+                    advertisement.AdAttributeTransportation.Fuel == AdvertisementTransportation.GetFuelName(fuelType));
+            }
+
+            return list;
+        }
+
+        private IQueryable<Advertisements> whereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters,MakeYearFromKey,MakeYearFromDefault);
             int makeYearTo = ParameterExtractor.ExtractInt(queryParameters, MakeYearToKey, MakeYearToDefault);
@@ -82,7 +96,7 @@ namespace RepositoryStd.Repository.Transportation
         }
 
 
-        private IQueryable<Advertisements> WhereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisements> whereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int carModelId = ParameterExtractor.ExtractInt(queryParameters,CarModelIdKey,CarModelIdDefault);
             int brandId = ParameterExtractor.ExtractInt(queryParameters,CarBrandIdKey,CarBrandIdDefault);

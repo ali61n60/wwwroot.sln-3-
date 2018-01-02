@@ -33,7 +33,7 @@
         {
             switch (fuelType)
             {
-                case FuelType.Petrol: return "Pertrol";
+                case FuelType.Petrol: return "Petrol";
                 case FuelType.Disel: return "Disel";
                 case FuelType.Gas: return "Gas";
                 case FuelType.GasPetrol: return "GasPetrol";

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 using RepositoryStd.QueryPattern;
 using RepositoryStd.Repository.Common;
@@ -72,5 +73,18 @@ namespace RepositoryStd.Context.Helper
         }
 
 
+        public static FuelType ExtractFuelType(Dictionary<string, string> queryParameters, string fuelTypeKey, FuelType fuelTypeDefault)
+        {
+            FuelType currentValue = fuelTypeDefault;
+            if (queryParameters.ContainsKey(fuelTypeKey))
+            {
+                string fuelTypeString = queryParameters[fuelTypeKey];
+                currentValue = AdvertisementTransportation.GetFuelType(fuelTypeString);
+                if (currentValue == FuelType.UnSpecified)//GetFuelType method returns FuelType.UnSpecified in case of no matching string input 
+                    currentValue = fuelTypeDefault;
+            }
+
+            return currentValue;
+        }
     }
 }
