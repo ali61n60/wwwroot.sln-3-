@@ -4,7 +4,7 @@ import { ISearchCriteriaChange } from "../ISearchCriteriaChange";
 
 export class AdTransformationSearchCriteria implements ISearchCriteria {
     private _searchCriteriaChange: ISearchCriteriaChange;
-
+    //TODO this code for brand is also used on new add extract a common method
     private readonly CarBrandIdKey: string = "BrandId";
     private readonly BrandSelectId: string = "brand";
 
@@ -143,7 +143,7 @@ class Brand {
     public brandId: number;
     public brandName: string;
 }
-class CarModel {
+export class CarModel {
     public modelId: number;
     public modelName: string;
     public brandId: number;
