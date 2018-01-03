@@ -79,16 +79,23 @@
             }
             return dedaultValue;
         }
-       
-
-
+        
         public static BodyStatus GetBodyStatus(string bodyStatusString, BodyStatus defaultValue)
         {
             switch (bodyStatusString)
             {
-                case "NoAccident": return BodyStatus.NoAccident;
-                case "OneAccident": return BodyStatus.OneAccident;
-                case "TwoAccidents": return BodyStatus.TwoAccidents;
+                case "NoColor": return BodyStatus.NoColor;
+                case "OnePieceColored": return BodyStatus.OnePieceColored;
+                case "TwoPiecesColored": return BodyStatus.TwoPiecesColored;
+                case "MultiPieceColored": return BodyStatus.MultiPieceColored;
+                case "BumperColored": return BodyStatus.BumperColored;
+                case "BumperChanged": return BodyStatus.BumperChanged;
+                case "HoodColored": return BodyStatus.HoodColored;
+                case "RoundColored": return BodyStatus.RoundColored;
+                case "FullyColored": return BodyStatus.FullyColored;
+                case "Accident": return BodyStatus.Accident;
+                case "Scrap": return BodyStatus.Scrap;
+                case "BodyChanged": return BodyStatus.BodyChanged;
                 case "UnSpecified": return BodyStatus.UnSpecified;
             }
             return defaultValue;
@@ -98,9 +105,18 @@
         {
             switch (bodyStatus)
             {
-                case BodyStatus.NoAccident: return "NoAccident";
-                case BodyStatus.OneAccident: return "OneAccident";
-                case BodyStatus.TwoAccidents: return "TwoAccidents";
+                case BodyStatus.NoColor: return "NoColor";
+                case BodyStatus.OnePieceColored: return "OnePieceColored";
+                case BodyStatus.TwoPiecesColored: return "TwoPiecesColored";
+                case BodyStatus.MultiPieceColored: return "MultiPieceColored";
+                case BodyStatus.BumperColored: return "BumperColored";
+                case BodyStatus.BumperChanged: return "BumperChanged";
+                case BodyStatus.HoodColored: return "HoodColored";
+                case BodyStatus.RoundColored: return "RoundColored";
+                case BodyStatus.FullyColored: return "FullyColored";
+                case BodyStatus.Accident: return "Accident";
+                case BodyStatus.Scrap: return "Scrap";
+                case BodyStatus.BodyChanged: return "BodyChanged";
                 case BodyStatus.UnSpecified: return "UnSpecified";
             }
             return "UnSpecified";
@@ -175,11 +191,22 @@
         UnSpecified
     }
 
+  
+
     public enum BodyStatus
     {
-        NoAccident,
-        OneAccident,
-        TwoAccidents,
+        NoColor,
+        OnePieceColored,
+        TwoPiecesColored,
+        MultiPieceColored,
+        BumperColored,
+        BumperChanged,
+        HoodColored,
+        RoundColored,
+        FullyColored,
+        Accident,
+        Scrap,
+        BodyChanged,
         UnSpecified
     }
 

@@ -95,115 +95,6 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AdvertisementImages\0a559a29-f176-4f1d-b9e6-032d919f3955\test.txt" />
-    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\0.jpeg" />
-    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\1.jpeg" />
-    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\2.jpeg" />
-    <Content Include="AdvertisementImages\18f8c69c-53e0-4434-a6c3-5f38ee9a7a96\3.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\0.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\1.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\2.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\3.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\4.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\5.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\6.jpeg" />
-    <Content Include="AdvertisementImages\1e0bd8ee-f961-4376-a409-8c477fbc6bfe\7.jpeg" />
-    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\0.jpeg" />
-    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\1.jpeg" />
-    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\2.jpeg" />
-    <Content Include="AdvertisementImages\2ea6d8e4-f459-4dad-89e5-0a660f19b825\3.jpeg" />
-    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\0.jpeg" />
-    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\1.jpeg" />
-    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\2.jpeg" />
-    <Content Include="AdvertisementImages\3caa1ac0-d9a2-4281-a820-ca490a14950e\3.jpeg" />
-    <Content Include="AdvertisementImages\3fdd9167-40ed-4f59-a306-d47cce5b406d\0.jpeg" />
-    <Content Include="AdvertisementImages\3fdd9167-40ed-4f59-a306-d47cce5b406d\1.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\0.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\1.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\2.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\3.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\4.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\5.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\6.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\7.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\8.jpeg" />
-    <Content Include="AdvertisementImages\64cb7494-16fe-46ef-86dc-cd89ab1026df\9.jpeg" />
-    <Content Include="AdvertisementImages\7528e8d6-35c3-411b-bdc1-d7df991ac973\0.jpeg" />
-    <Content Include="AdvertisementImages\7528e8d6-35c3-411b-bdc1-d7df991ac973\1.jpeg" />
-    <Content Include="AdvertisementImages\780a8014-f027-4a73-aa36-7662575dac5d\0.jpeg" />
-    <Content Include="AdvertisementImages\780a8014-f027-4a73-aa36-7662575dac5d\1.jpeg" />
-    <Content Include="AdvertisementImages\8c13a62b-8dc3-405c-86fa-96334bf31271\0.jpeg" />
-    <Content Include="AdvertisementImages\8c13a62b-8dc3-405c-86fa-96334bf31271\1.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\0.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\1.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\2.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\3.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\4.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\5.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\6.jpeg" />
-    <Content Include="AdvertisementImages\8d26076a-4704-4c5c-9ee2-1f7781606569\7.jpeg" />
-    <Content Include="AdvertisementImages\a29d2202-366e-433c-9a3a-91fa6f83bb03\0.jpeg" />
-    <Content Include="AdvertisementImages\a29d2202-366e-433c-9a3a-91fa6f83bb03\1.jpeg" />
-    <Content Include="AdvertisementImages\b1c8e9e6-ee11-4c25-9a3c-edc317029b4d\0.jpeg" />
-    <Content Include="AdvertisementImages\b1c8e9e6-ee11-4c25-9a3c-edc317029b4d\1.jpeg" />
-    <Content Include="AdvertisementImages\b462026b-aaff-4301-a09c-7d7e52e98d30\0.jpeg" />
-    <Content Include="AdvertisementImages\b462026b-aaff-4301-a09c-7d7e52e98d30\1.jpeg" />
-    <Content Include="AdvertisementImages\b6ce4c2c-15d6-44b6-b301-2ca7897ec277\0.jpeg" />
-    <Content Include="AdvertisementImages\b6ce4c2c-15d6-44b6-b301-2ca7897ec277\1.jpeg" />
-    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\0.jpeg" />
-    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\1.jpeg" />
-    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\2.jpeg" />
-    <Content Include="AdvertisementImages\bd5c7f8c-79e9-4ea0-8a53-ce9946d3a47c\3.jpeg" />
-    <Content Include="AdvertisementImages\c11172b2-6cdb-48b1-a8f5-1f30aaa0bae1\0.jpeg" />
-    <Content Include="AdvertisementImages\c11172b2-6cdb-48b1-a8f5-1f30aaa0bae1\1.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\0.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\1.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\2.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\3.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\4.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\5.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\6.jpeg" />
-    <Content Include="AdvertisementImages\c30941ad-6fca-44e4-90a4-f7164425a16d\7.jpeg" />
-    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\0.jpeg" />
-    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\1.jpeg" />
-    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\2.jpeg" />
-    <Content Include="AdvertisementImages\ce4b3090-d718-47a8-8109-d8877270ba74\3.jpeg" />
-    <Content Include="AdvertisementImages\d134b2dc-bab7-4c80-b205-3df63b929e10\0.jpeg" />
-    <Content Include="AdvertisementImages\d134b2dc-bab7-4c80-b205-3df63b929e10\1.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\067d08345422ad31cef8ed8d74d60319.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\0c2cde93dfc70bf94cffd8935844de05.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\1074fb3298151d4c19623b657ebacda3.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\1e75ef213e92264b380203deaaff9d64.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\24f1bd6488e28fe142bab3564837dc0a.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\28189870552edb1bc449a3592a79ce98.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\39c7a7e5c65ad056ef38525bac2511d9.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\3ac6c0c579bfdda04bda38b89a8ba5b8.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\44eeb871bd3791cdaa8fc70d5076eb34.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\44f1c1a48057d82fb147d066610a2a0a.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\4a38a3e86a366998759bf0cfc48cb5a2.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\4c1dd93618d5db43f95c42bc0d56c494.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\54c4a573eaa7392aefe1ebb15052f1f6.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\56c394ef5ae75efda1d5fe20c29337a9.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\67941bb43a496537025d235449aab46a.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\87fe03ca1a75af127114ccb579b7934e.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\92e8f572dd8ff3cc9cb488b029e67a68.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\94c06a09b9ec7275103d80e958345191.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\95e48d359c26b10cc38476d8b776ecc6.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\96c9aed880847f60168968e83bc3b576.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\9b202eb1dd6a0c04061863d2362e5b53.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\9c4cb5cd525807dde117b49066247518.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\a0baaf138416f4e20822948958f99fa4.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\a3fc8a1c88acbbeccc146b964469689f.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\ab379bd160df1bfdc7772bada4172a63.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\bd5c41743d39bf3afcf4e817a2a0ffa3.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\bf62bcbcf69b4eccf5ac3e582ab51715.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\ca51840b1fa5aa0f2674f2114cd798f3.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\d5c0ecf78448b68bf363478e989b7429.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\d78360a86cf86b4941cdbac361b9a036.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\e62819e938fd4cf20c968dbb727d3740.jpeg" />
-    <Content Include="AdvertisementImages\d41d8cd98f00b204e9800998ecf8427e\f11499403b2934e072ee1f1342b601b3.jpeg" />
-    <Content Include="AdvertisementImages\d71ae427-8f76-4c28-827e-cbe8d7301d09\0.jpeg" />
-    <Content Include="AdvertisementImages\d71ae427-8f76-4c28-827e-cbe8d7301d09\1.jpeg" />
     <Content Include="Advertisement\AddNewAdvertisement.aspx" />
     <Content Include="Advertisement\Advertisement.aspx" />
     <Content Include="Advertisement\EditAdvertisement.aspx" />
@@ -275,9 +166,6 @@
     <Content Include="StyleScript\NewAdTransportation.js" />
     <Content Include="UserControls\NewAd\NewAdTransportationControl.ascx" />
     <Content Include="UserControls\NewAd\NewAdCommonControl.ascx" />
-    <Content Include="UserControls\SearchCritetria\CommonSearchCriteriaControl.ascx" />
-    <Content Include="UserControls\SearchCritetria\SearchCriteriaAdTransportationControl.ascx" />
-    <Content Include="UserControls\SearchCritetria\searchCriteriaTrasportation.js" />
     <Content Include="UserControls\SingleAdItem.ascx" />
     <Content Include="UserControls\SingleUserAdItem.ascx" />
     <Content Include="UserControls\VerifyAd\VerifyAdControl.ascx" />
@@ -557,20 +445,6 @@
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UserControls\NewAd\INewAdOperations.cs" />
-    <Compile Include="UserControls\SearchCritetria\CommonSearchCriteriaControl.ascx.cs">
-      <DependentUpon>CommonSearchCriteriaControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\SearchCritetria\CommonSearchCriteriaControl.ascx.designer.cs">
-      <DependentUpon>CommonSearchCriteriaControl.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UserControls\SearchCritetria\SearchCriteriaAdTransportationControl.ascx.cs">
-      <DependentUpon>SearchCriteriaAdTransportationControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UserControls\SearchCritetria\SearchCriteriaAdTransportationControl.ascx.designer.cs">
-      <DependentUpon>SearchCriteriaAdTransportationControl.ascx</DependentUpon>
-    </Compile>
     <Compile Include="UserControls\SingleAdItem.ascx.cs">
       <DependentUpon>SingleAdItem.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -688,10 +562,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AdvertisementImages\f5dfc294-416b-456f-89bb-7c1689766aa9\" />
     <Folder Include="App_Code\" />
     <Folder Include="App_WebReferences\" />
-    <Folder Include="bin\" />
     <Folder Include="Images\" />
     <Folder Include="Services\" />
     <Folder Include="style\img\" />

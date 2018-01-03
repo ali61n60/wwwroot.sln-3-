@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 /* The dispatcher handles the storage of subsciptions and facilitates
   subscription, unsubscription and dispatching of the event */
-var EventDispatcher = /** @class */ (function () {
+var EventDispatcher = (function () {
     function EventDispatcher() {
         this._subscriptions = new Array();
     }

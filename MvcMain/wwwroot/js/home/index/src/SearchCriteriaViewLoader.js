@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var PartialViewCategorySpecific_1 = require("../../newAd/src/PartialViewCategorySpecific");
 var SearchCriteria_1 = require("./SearchCriteria");
-var SearchCriteriaViewLoader = /** @class */ (function () {
+var SearchCriteriaViewLoader = (function () {
     function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange) {
         this._url = "Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;

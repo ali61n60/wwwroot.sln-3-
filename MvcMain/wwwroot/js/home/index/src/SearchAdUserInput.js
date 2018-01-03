@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var SearchAdUserInput = /** @class */ (function () {
+var SearchAdUserInput = (function () {
     function SearchAdUserInput() {
         this.SearchParameters = {};
     }

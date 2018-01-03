@@ -26,7 +26,11 @@
     @Html.Partial("SideNav")
 }
 @section Body
-    {
+{
+    @* add Only With Pictures textbox
+        add Province,City,District selection
+        add priceType نقد اقساط
+        *@
     <div class="well">
         <div class="row">
             @await Component.InvokeAsync("CategorySelection")
