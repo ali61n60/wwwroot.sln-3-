@@ -1,4 +1,4 @@
-﻿import { PartialViewServerCallParameters} from "../../newAd/src/PartialViewCategorySpecific";
+﻿import { PartialViewServerCallParameters } from "../../newAd/src/NewAdPartialViewLoader";
 import {Index} from "./index";
 import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
 import {SearchCriteria} from "./SearchCriteria";

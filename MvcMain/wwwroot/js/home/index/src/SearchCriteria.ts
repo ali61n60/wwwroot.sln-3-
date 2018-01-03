@@ -5,11 +5,11 @@ import {DefaultSearchCriteria} from "./SearchCriteria/DefaultSearchCriteria";
 import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
 import { NumericDictionary } from "lodash";
 
-class MyNumericDictionary implements NumericDictionary<ISearchCriteria> {
+class SearchCriteriaNumericDictionary implements NumericDictionary<ISearchCriteria> {
     [index: number]: ISearchCriteria;
 }
 export class SearchCriteria {
-    private _searchCriteriaIocContainer: MyNumericDictionary=new MyNumericDictionary();
+    private _searchCriteriaIocContainer: SearchCriteriaNumericDictionary=new SearchCriteriaNumericDictionary();
     constructor() {
         this.initSearchCriteriaIocContainer();
         

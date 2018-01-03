@@ -65,7 +65,6 @@ namespace MvcMain.Controllers
                     default:
                         return ViewComponent("NewAdDefault");
             }
-            
         }
 
         [HttpGet]

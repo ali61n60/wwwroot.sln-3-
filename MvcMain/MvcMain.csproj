@@ -506,7 +506,8 @@
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria\ISearchCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\ServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\newAd.ts" />
-    <TypeScriptCompile Include="wwwroot\js\home\newAd\src\PartialViewCategorySpecific.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdCriteria.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdPartialViewLoader.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\PartialViews\NewAdTransformation.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\greet.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\main.ts" />

@@ -1,6 +1,6 @@
 ﻿import { Category } from "../../../Models/Category";
 import { CategorySelectionNewAd } from "../../../Components/Category/NewAd/CategorySelectionNewAd";
-import {PartialViewCategorySpecific} from "./PartialViewCategorySpecific";
+import { NewAdPartialViewLoader} from "./NewAdPartialViewLoader";
 
 
 class NewAd {
@@ -8,7 +8,7 @@ class NewAd {
     private _categorySelectionNewAd: CategorySelectionNewAd;
     private _categorySelectorParentDivId: string;
     private _categorySpecificPartialViewId:string;
-    private _partialView:PartialViewCategorySpecific;
+    private _partialViewLoader: NewAdPartialViewLoader;
 
     constructor(categorySelectorParentDivId: string,
         allCategoriesId: string,
@@ -23,7 +23,7 @@ class NewAd {
 
     private initPage(): void {
         this.initNewAdCategory();
-        this._partialView = new PartialViewCategorySpecific(this._categorySpecificPartialViewId);
+        this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId);
     }
 
     private initNewAdCategory():void {
@@ -36,8 +36,7 @@ class NewAd {
     private initEventHandlers(): void {
         this._categorySelectionNewAd.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             if (!this._categorySelectionNewAd.SelectedCategoryHasChildren()) {
-                //TODO load partial view for that category id from server and notify user 
-                this._partialView.GetPartialViewFromServer(args);
+                this._partialViewLoader.GetPartialViewFromServer(args);
             }
         });
     }

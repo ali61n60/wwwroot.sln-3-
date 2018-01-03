@@ -1,4 +1,4 @@
-﻿export class PartialViewCategorySpecific {
+﻿export class NewAdPartialViewLoader {
     private _partialViewDivId: string;
     private _url: string = "/Home/GetNewAdPartialView";
 

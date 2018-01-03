@@ -14,7 +14,6 @@ namespace MvcMain.Components.SearchAd.AdTransformation
         }
         public IViewComponentResult Invoke()
         {
-            //TODO get all brands from database and pass it to view to render
             IEnumerable<Brand> allBrands = _transportationRepository.GetAllBrands();
             IEnumerable<CarModel> allCarModels = _transportationRepository.GetAllModels();
             AllVihecles allVihecles=new AllVihecles
