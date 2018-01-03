@@ -1,5 +1,4 @@
-﻿
-export class PartialViewCategorySpecific {
+﻿export class PartialViewCategorySpecific {
     private _partialViewDivId: string;
     private _url: string = "/Home/GetNewAdPartialView";
 
@@ -22,7 +21,6 @@ export class PartialViewCategorySpecific {
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
         $("#" + this._partialViewDivId).children().remove();
-        $("#jsfile").remove();
         $("#"+this._partialViewDivId).html(msg);
     }//onSuccessGetTimeFromServer
 

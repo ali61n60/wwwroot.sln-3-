@@ -95,21 +95,15 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
         searchAdUserInput.SearchParameters[this.MileageToKey] =
         $("#" + this.MileageToInputId).val();//mileageTo
         searchAdUserInput.SearchParameters[this.GearboxKey] =
-            $("#" + this.GearboxTypeSelectId).find("option:selected").val();//gearboxType
-        
+            $("#" + this.GearboxTypeSelectId).find("option:selected").val();//gearboxType        
         searchAdUserInput.SearchParameters[this.BodyColorKey] =
         $("#" + this.BodyColorSelectId).find("option:selected").val();//bodyColor
-        
-
         searchAdUserInput.SearchParameters[this.InternalColorKey] =
-        $("#" + this.InternalColorSelectId).find("option:selected").val();//internalColor
-        
+        $("#" + this.InternalColorSelectId).find("option:selected").val();//internalColor        
         searchAdUserInput.SearchParameters[this.BodyStatusKey] =
         $("#" + this.BodyStatusSelectId).find("option:selected").val();//bodyStatus
-
         searchAdUserInput.SearchParameters[this.CarStatusKey] =
-        $("#" + this.CarStatusSelectId).find("option:selected").val();//carStatus
-        
+        $("#" + this.CarStatusSelectId).find("option:selected").val();//carStatus        
         searchAdUserInput.SearchParameters[this.PlateTypeKey] =
             $("#" + this.PlateTypeSelectId).find("option:selected").val();//plateType
     }
