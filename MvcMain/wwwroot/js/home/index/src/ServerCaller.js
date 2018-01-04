@@ -13,14 +13,14 @@ var ServerCaller = /** @class */ (function () {
     }
     ServerCaller.prototype.GetAdItemsFromServer = function (userInput) {
         var _this = this;
-        userInput.SearchParameters.StartIndex = this._start;
-        userInput.SearchParameters.Count = this._count;
+        userInput.ParametersDictionary.StartIndex = this._start;
+        userInput.ParametersDictionary.Count = this._count;
         this._currentRequestIndex++;
-        userInput.SearchParameters.RequestIndex = this._currentRequestIndex;
+        userInput.ParametersDictionary.RequestIndex = this._currentRequestIndex;
         $.ajax({
             type: "POST",
             url: this._url,
-            data: JSON.stringify(userInput.SearchParameters),
+            data: JSON.stringify(userInput.ParametersDictionary),
             contentType: 'application/json',
             success: function (msg, textStatus, jqXHR) { return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
             error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails

@@ -8,7 +8,7 @@ export class DefaultSearchCriteria implements ICriteria{
         userInput.ParametersDictionary.defaultParameter = 1234;
     }
 
-    BindEvents(searchCriteriaChange: ICriteriaChange): void {
+    BindEvents(criteriaChange: ICriteriaChange): void {
         
     }
 

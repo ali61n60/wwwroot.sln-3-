@@ -111,14 +111,14 @@ export class AdTransformationSearchCriteria implements ICriteria {
             $("#" + this.PlateTypeSelectId).find("option:selected").val();//plateType
     }
 
-    public BindEvents(searchCriteriaChange: ICriteriaChange): void {
-        this._searchCriteriaChange = searchCriteriaChange;
+    public BindEvents(criteriaChange: ICriteriaChange): void {
+        this._searchCriteriaChange = criteriaChange;
         this.initView();
 
         $("#" + this.BrandSelectId).on("change", (event) => {
             let selectedBrandId: number = parseInt($(event.currentTarget).find("option:selected").val().toString());
             this.updateCarModelSelect(selectedBrandId);
-            searchCriteriaChange.CustomCriteriChanged();
+            criteriaChange.CustomCriteriChanged();
         });
 
         this.bindCarModel();

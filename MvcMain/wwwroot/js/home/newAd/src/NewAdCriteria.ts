@@ -1,6 +1,10 @@
-﻿
+﻿import { CriteriaNumericDictionary } from "../../../Helper/CriteriaNumericDictionary";
+import { DefaultNewAdCriteria } from "./NewAdCriteria/DefaultNewAdCriteria";
+import {AdTransformationNewAdCriteria} from "./NewAdCriteria/AdTransformationNewAdCriteria";
+
+
 export class NewAdCriteria {
-    private _newAdCriteriaIocContainer: NewADCriteriaNumericDictionary = new NewADCriteriaNumericDictionary();
+    private _newAdCriteriaIocContainer: CriteriaNumericDictionary = new CriteriaNumericDictionary();
     constructor() {
         this.initSearchCriteriaIocContainer();
 
@@ -8,10 +12,8 @@ export class NewAdCriteria {
 
     private initSearchCriteriaIocContainer() {
         this._newAdCriteriaIocContainer[0] = new DefaultNewAdCriteria();
-        this._newAdCriteriaIocContainer[100] = new AdTransformationNewADCriteria();
+        this._newAdCriteriaIocContainer[100] = new AdTransformationNewAdCriteria();
     }
 }
 
-class NewADCriteriaNumericDictionary implements NumericDictionary<INewAdCriteria> {
-    [index: number]: INewAdCriteria;
-}
+

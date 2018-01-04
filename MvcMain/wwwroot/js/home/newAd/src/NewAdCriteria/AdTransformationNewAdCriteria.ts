@@ -45,7 +45,7 @@ export class AdTransformationNewAdCriteria implements ICriteria {
 
     public FillCriteria(userInput: UserInput): void { }
 
-    public BindEvents(searchCriteriaChange: ICriteriaChange): void {
+    public BindEvents(criteriaChange: ICriteriaChange): void {
         this.initView();
 
         $("#" + this.BrandSelectId).on("change", (event) => {

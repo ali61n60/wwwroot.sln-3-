@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AdTransformationSearchCriteria = /** @class */ (function () {
     function AdTransformationSearchCriteria() {
+        //TODO this code for brand is also used on new add extract a common method
         this.CarBrandIdKey = "BrandId";
         this.BrandSelectId = "brand";
         this.CarModelTemplateId = "modelTemplate";
@@ -57,49 +58,49 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
         this.bindCarModel();
     };
     //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
-    AdTransformationSearchCriteria.prototype.FillSearchCriteria = function (searchAdUserInput) {
-        searchAdUserInput.SearchParameters[this.CarBrandIdKey] =
+    AdTransformationSearchCriteria.prototype.FillCriteria = function (userInput) {
+        userInput.ParametersDictionary[this.CarBrandIdKey] =
             $("#" + this.BrandSelectId).find("option:selected").val(); //brandId
-        searchAdUserInput.SearchParameters[this.CarModelIdKey] =
+        userInput.ParametersDictionary[this.CarModelIdKey] =
             $("#" + this.ModelSelectId).find("option:selected").val(); //carModelId
-        searchAdUserInput.SearchParameters[this.MakeYearFromKey] =
+        userInput.ParametersDictionary[this.MakeYearFromKey] =
             $("#" + this.MakeYearFromInputId).val(); //makeYearFrom
-        searchAdUserInput.SearchParameters[this.MakeYearToKey] =
+        userInput.ParametersDictionary[this.MakeYearToKey] =
             $("#" + this.MakeYearToInputId).val(); //makeYearTo
-        searchAdUserInput.SearchParameters[this.FuelKey] =
+        userInput.ParametersDictionary[this.FuelKey] =
             $("#" + this.FuelSelectId).find("option:selected").val(); //fuel
-        searchAdUserInput.SearchParameters[this.MileageFromKey] =
+        userInput.ParametersDictionary[this.MileageFromKey] =
             $("#" + this.MileageFromInputId).val(); //mileageFrom
-        searchAdUserInput.SearchParameters[this.MileageToKey] =
+        userInput.ParametersDictionary[this.MileageToKey] =
             $("#" + this.MileageToInputId).val(); //mileageTo
-        searchAdUserInput.SearchParameters[this.GearboxKey] =
-            $("#" + this.GearboxTypeSelectId).find("option:selected").val(); //gearboxType
-        searchAdUserInput.SearchParameters[this.BodyColorKey] =
+        userInput.ParametersDictionary[this.GearboxKey] =
+            $("#" + this.GearboxTypeSelectId).find("option:selected").val(); //gearboxType        
+        userInput.ParametersDictionary[this.BodyColorKey] =
             $("#" + this.BodyColorSelectId).find("option:selected").val(); //bodyColor
-        searchAdUserInput.SearchParameters[this.InternalColorKey] =
-            $("#" + this.InternalColorSelectId).find("option:selected").val(); //internalColor
-        searchAdUserInput.SearchParameters[this.BodyStatusKey] =
+        userInput.ParametersDictionary[this.InternalColorKey] =
+            $("#" + this.InternalColorSelectId).find("option:selected").val(); //internalColor        
+        userInput.ParametersDictionary[this.BodyStatusKey] =
             $("#" + this.BodyStatusSelectId).find("option:selected").val(); //bodyStatus
-        searchAdUserInput.SearchParameters[this.CarStatusKey] =
-            $("#" + this.CarStatusSelectId).find("option:selected").val(); //carStatus
-        searchAdUserInput.SearchParameters[this.PlateTypeKey] =
+        userInput.ParametersDictionary[this.CarStatusKey] =
+            $("#" + this.CarStatusSelectId).find("option:selected").val(); //carStatus        
+        userInput.ParametersDictionary[this.PlateTypeKey] =
             $("#" + this.PlateTypeSelectId).find("option:selected").val(); //plateType
     };
-    AdTransformationSearchCriteria.prototype.BindEvents = function (searchCriteriaChange) {
+    AdTransformationSearchCriteria.prototype.BindEvents = function (criteriaChange) {
         var _this = this;
-        this._searchCriteriaChange = searchCriteriaChange;
+        this._searchCriteriaChange = criteriaChange;
         this.initView();
         $("#" + this.BrandSelectId).on("change", function (event) {
             var selectedBrandId = parseInt($(event.currentTarget).find("option:selected").val().toString());
             _this.updateCarModelSelect(selectedBrandId);
-            searchCriteriaChange.CustomSearchCriteriChanged();
+            criteriaChange.CustomCriteriChanged();
         });
         this.bindCarModel();
     };
     AdTransformationSearchCriteria.prototype.bindCarModel = function () {
         var _this = this;
         $("#" + this.ModelSelectId).on("change", function (event) {
-            _this._searchCriteriaChange.CustomSearchCriteriChanged();
+            _this._searchCriteriaChange.CustomCriteriChanged();
         });
     };
     AdTransformationSearchCriteria.prototype.UnBindEvents = function () {
@@ -112,14 +113,4 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
     return AdTransformationSearchCriteria;
 }());
 exports.AdTransformationSearchCriteria = AdTransformationSearchCriteria;
-var Brand = /** @class */ (function () {
-    function Brand() {
-    }
-    return Brand;
-}());
-var CarModel = /** @class */ (function () {
-    function CarModel() {
-    }
-    return CarModel;
-}());
 //# sourceMappingURL=AdTransformationSearchCriteria.js.map

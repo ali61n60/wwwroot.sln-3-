@@ -1,20 +1,15 @@
 ﻿import {AdTransformationSearchCriteria} from "./SearchCriteria/AdTransformationSearchCriteria";
 import {DefaultSearchCriteria} from "./SearchCriteria/DefaultSearchCriteria";
-import { NumericDictionary } from "lodash";
 import {ICriteria} from "../../../Helper/ICriteria";
 import {UserInput} from "../../../Helper/UserInput";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
+import {CriteriaNumericDictionary} from "../../../Helper/CriteriaNumericDictionary";
 
 
-
-class CriteriaNumericDictionary implements NumericDictionary<ICriteria> {
-    [index: number]: ICriteria;
-}
 export class SearchCriteria {
-    private _searchCriteriaIocContainer: CriteriaNumericDictionary=new CriteriaNumericDictionary();
+    private _searchCriteriaIocContainer: CriteriaNumericDictionary = new CriteriaNumericDictionary();
     constructor() {
         this.initSearchCriteriaIocContainer();
-        
     }
 
     private initSearchCriteriaIocContainer() {

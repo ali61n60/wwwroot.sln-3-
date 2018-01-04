@@ -2,14 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AdTransformationSearchCriteria_1 = require("./SearchCriteria/AdTransformationSearchCriteria");
 var DefaultSearchCriteria_1 = require("./SearchCriteria/DefaultSearchCriteria");
-var MyNumericDictionary = /** @class */ (function () {
-    function MyNumericDictionary() {
-    }
-    return MyNumericDictionary;
-}());
+var CriteriaNumericDictionary_1 = require("../../../Helper/CriteriaNumericDictionary");
 var SearchCriteria = /** @class */ (function () {
     function SearchCriteria() {
-        this._searchCriteriaIocContainer = new MyNumericDictionary();
+        this._searchCriteriaIocContainer = new CriteriaNumericDictionary_1.CriteriaNumericDictionary();
         this.initSearchCriteriaIocContainer();
     }
     SearchCriteria.prototype.initSearchCriteriaIocContainer = function () {
@@ -18,7 +14,7 @@ var SearchCriteria = /** @class */ (function () {
     };
     SearchCriteria.prototype.FillCategorySpecificSearchCriteria = function (categoryId, userInput) {
         var searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
-        searchCriteria.FillSearchCriteria(userInput);
+        searchCriteria.FillCriteria(userInput);
     };
     SearchCriteria.prototype.Bind = function (categoryId, searchCriteriaChange) {
         var searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);

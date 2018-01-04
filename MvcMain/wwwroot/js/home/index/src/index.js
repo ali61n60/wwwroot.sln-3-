@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/Category/SearchAd/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
 var SearchCriteriaViewLoader_1 = require("./SearchCriteriaViewLoader");
-var SearchAdUserInput_1 = require("./SearchAdUserInput");
 var SearchCriteria_1 = require("./SearchCriteria");
+var UserInput_1 = require("../../../Helper/UserInput");
 var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._orderBySelectIdDiv = "orderBy";
@@ -48,7 +48,7 @@ var Index = /** @class */ (function () {
             _this.searchCriteriaChanged();
         });
     };
-    Index.prototype.CustomSearchCriteriChanged = function () {
+    Index.prototype.CustomCriteriChanged = function () {
         this.searchCriteriaChanged();
     };
     Index.prototype.searchCriteriaChanged = function () {
@@ -60,15 +60,15 @@ var Index = /** @class */ (function () {
         var _this = this;
         $("#" + this._getAdFromServerId).on("click", function (event) {
             event.preventDefault();
-            var userInput = new SearchAdUserInput_1.SearchAdUserInput();
+            var userInput = new UserInput_1.UserInput();
             var categoryId = _this._categorySelection.GetSelectedCategoryId();
-            userInput.SearchParameters.CategoryId = categoryId; //100 for cars
+            userInput.ParametersDictionary.CategoryId = categoryId; //100 for cars
             var minPrice = parseInt($("#minPrice").val().toString());
-            userInput.SearchParameters.MinimumPrice = minPrice;
+            userInput.ParametersDictionary.MinimumPrice = minPrice;
             var maxPrice = parseInt($("#maxPrice").val().toString());
-            userInput.SearchParameters.MaximumPrice = maxPrice;
+            userInput.ParametersDictionary.MaximumPrice = maxPrice;
             var orderBy = $("#orderBy").val().toString();
-            userInput.SearchParameters.OrderBy = orderBy;
+            userInput.ParametersDictionary.OrderBy = orderBy;
             _this._searchCriteria.FillCategorySpecificSearchCriteria(categoryId, userInput); //fill category specific search parameters
             _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
@@ -88,6 +88,6 @@ var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";
 $(document).ready(function () {
     var index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
-    index.CustomSearchCriteriChanged(); //to initiate a server call on page load for first time
+    index.CustomCriteriChanged(); //to initiate a server call on page load for first time
 }); //ready
 //# sourceMappingURL=index.js.map

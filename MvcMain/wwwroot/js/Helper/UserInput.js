@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var SearchAdUserInput = /** @class */ (function () {
-    function SearchAdUserInput() {
-        this.SearchParameters = {};
+var UserInput = /** @class */ (function () {
+    function UserInput() {
+        this.ParametersDictionary = {};
     }
-    return SearchAdUserInput;
+    return UserInput;
 }());
-exports.SearchAdUserInput = SearchAdUserInput;
-//# sourceMappingURL=SearchAdUserInput.js.map
+exports.UserInput = UserInput;
+//# sourceMappingURL=UserInput.js.map

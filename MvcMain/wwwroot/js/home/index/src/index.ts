@@ -7,7 +7,7 @@ import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {UserInput} from "../../../Helper/UserInput";
 
 
-
+//TODO when category change before search criteia is loaded a search call is sent to server
 export class Index implements ICriteriaChange {
 
     private readonly _orderBySelectIdDiv = "orderBy";

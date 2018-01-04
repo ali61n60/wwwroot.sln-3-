@@ -5,9 +5,15 @@ import { CarModel } from "../../../../Models/AdTransportation/CarModel";
 
 
 export class DefaultNewAdCriteria implements ICriteria {
-    FillCriteria(searchAdUserInput: UserInput): void { throw new Error("Not implemented"); }
+    FillCriteria(searchAdUserInput: UserInput): void {
+        
+    }
 
-    BindEvents(criteriaChange: Object): void { throw new Error("Not implemented"); }
+    BindEvents(criteriaChange: Object): void {
+        
+    }
 
-    UnBindEvents(): void { throw new Error("Not implemented"); }
+    UnBindEvents(): void {
+        
+    }
 }

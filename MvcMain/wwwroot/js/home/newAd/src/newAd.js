@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/CategorySelectionNewAd");
-var PartialViewCategorySpecific_1 = require("./PartialViewCategorySpecific");
+var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
 var NewAd = /** @class */ (function () {
     function NewAd(categorySelectorParentDivId, allCategoriesId, categorySpecificPartialViewId) {
         this._categorySelectorParentDivId = categorySelectorParentDivId;
@@ -12,7 +12,7 @@ var NewAd = /** @class */ (function () {
     }
     NewAd.prototype.initPage = function () {
         this.initNewAdCategory();
-        this._partialView = new PartialViewCategorySpecific_1.PartialViewCategorySpecific(this._categorySpecificPartialViewId);
+        this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this._categorySpecificPartialViewId);
     };
     NewAd.prototype.initNewAdCategory = function () {
         var allCategoriesString = $("#" + this._allCategoriesId).val().toString();
@@ -24,8 +24,7 @@ var NewAd = /** @class */ (function () {
         var _this = this;
         this._categorySelectionNewAd.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
             if (!_this._categorySelectionNewAd.SelectedCategoryHasChildren()) {
-                //TODO load partial view for that category id from server and notify user 
-                _this._partialView.GetPartialViewFromServer(args);
+                _this._partialViewLoader.GetPartialViewFromServer(args);
             }
         });
     };

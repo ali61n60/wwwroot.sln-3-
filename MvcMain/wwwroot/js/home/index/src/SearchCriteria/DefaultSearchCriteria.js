@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var DefaultSearchCriteria = /** @class */ (function () {
     function DefaultSearchCriteria() {
     }
-    DefaultSearchCriteria.prototype.FillSearchCriteria = function (userInput) {
-        userInput.SearchParameters.defaultParameter = 1234;
+    DefaultSearchCriteria.prototype.FillCriteria = function (userInput) {
+        userInput.ParametersDictionary.defaultParameter = 1234;
     };
-    DefaultSearchCriteria.prototype.BindEvents = function (searchCriteriaChange) {
+    DefaultSearchCriteria.prototype.BindEvents = function (criteriaChange) {
     };
     DefaultSearchCriteria.prototype.UnBindEvents = function () {
     };

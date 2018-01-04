@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var PartialViewCategorySpecific_1 = require("../../newAd/src/PartialViewCategorySpecific");
+var NewAdPartialViewLoader_1 = require("../../newAd/src/NewAdPartialViewLoader");
 var SearchCriteria_1 = require("./SearchCriteria");
 var SearchCriteriaViewLoader = /** @class */ (function () {
     function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange) {
@@ -15,7 +15,7 @@ var SearchCriteriaViewLoader = /** @class */ (function () {
         var _this = this;
         //TODO get view from server and add it to page
         this._currentCategoryId = categoryId;
-        var callParams = new PartialViewCategorySpecific_1.PartialViewServerCallParameters();
+        var callParams = new NewAdPartialViewLoader_1.PartialViewServerCallParameters();
         callParams.CategoryId = categoryId;
         $.ajax({
             type: "GET",

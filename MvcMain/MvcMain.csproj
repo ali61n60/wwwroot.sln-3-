@@ -496,6 +496,7 @@
     <TypeScriptCompile Include="wwwroot\js\Events\EventDispatcher.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Helper\CriteriaNumericDictionary.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\ICriteriaChange.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\UserInput.ts" />
