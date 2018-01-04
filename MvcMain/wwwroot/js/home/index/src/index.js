@@ -49,7 +49,7 @@ var Index = /** @class */ (function () {
             _this.searchCriteriaChanged();
         });
     };
-    Index.prototype.CustomCriteriChanged = function () {
+    Index.prototype.CustomCriteriaChanged = function () {
         this.searchCriteriaChanged();
     };
     Index.prototype.searchCriteriaChanged = function () {
@@ -89,6 +89,6 @@ var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";
 $(document).ready(function () {
     var index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
-    index.CustomCriteriChanged(); //to initiate a server call on page load for first time
+    index.CustomCriteriaChanged(); //to initiate a server call on page load for first time
 }); //ready
 //# sourceMappingURL=index.js.map

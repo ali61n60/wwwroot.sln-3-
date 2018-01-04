@@ -22,7 +22,7 @@ var PulseGenerator = /** @class */ (function () {
         setTimeout(function () {
             _this.start();
             //dispatch event by calling the dispatcher 
-            _this._onPulsate.dispatch(_this, _this.FrequencyInHz);
+            _this._onPulsate.Dispatch(_this, _this.FrequencyInHz);
         }, 1000 / this.FrequencyInHz);
     };
     return PulseGenerator;

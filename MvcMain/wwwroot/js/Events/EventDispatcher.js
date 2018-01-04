@@ -17,7 +17,7 @@ var EventDispatcher = /** @class */ (function () {
             this._subscriptions.splice(i, 1);
         }
     };
-    EventDispatcher.prototype.dispatch = function (sender, args) {
+    EventDispatcher.prototype.Dispatch = function (sender, args) {
         for (var _i = 0, _a = this._subscriptions; _i < _a.length; _i++) {
             var handler = _a[_i];
             handler(sender, args);

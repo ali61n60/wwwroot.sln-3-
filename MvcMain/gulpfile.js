@@ -1,4 +1,4 @@
-﻿/// <binding />
+/// <binding BeforeBuild='HomeIndex, HomeNewAd' />
 /*
 This file is the main entry point for defining Gulp tasks and using Gulp plugins.
 Click here to learn more. https://go.microsoft.com/fwlink/?LinkId=518007

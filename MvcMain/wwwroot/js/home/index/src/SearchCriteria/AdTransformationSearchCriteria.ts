@@ -91,13 +91,11 @@ export class AdTransformationSearchCriteria implements ICriteria {
 
 
     public UnBindEvents(): void {
-        $("#" + this.BrandSelectId).off("change");
-        this.unBindCarModel();
-    }
+        this._carModelBrandContoller.UnBindEvents();
 
-    private unBindCarModel(): void {
-        $("#" + this.ModelSelectId).off("change");
-    }
+           }
+
+  
 }
 
 

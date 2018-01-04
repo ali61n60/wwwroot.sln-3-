@@ -53,7 +53,7 @@ var CategorySelection = /** @class */ (function () {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelOne = selectedId;
             _this.createSecondLevel(selectedId);
-            _this.SelectedCategoryChangedEvent.dispatch(_this, _this.GetSelectedCategoryId());
+            _this.SelectedCategoryChangedEvent.Dispatch(_this, _this.GetSelectedCategoryId());
         }); //change
     }; //CreateFirstLevel
     CategorySelection.prototype.createSecondLevel = function (firstLevelCategoryId) {
@@ -79,7 +79,7 @@ var CategorySelection = /** @class */ (function () {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelTwo = selectedId;
             _this.createThirdLevel(selectedId);
-            _this.SelectedCategoryChangedEvent.dispatch(_this, _this.GetSelectedCategoryId());
+            _this.SelectedCategoryChangedEvent.Dispatch(_this, _this.GetSelectedCategoryId());
         }); //change
     };
     CategorySelection.prototype.createThirdLevel = function (secondLevelCategoryId) {
@@ -104,7 +104,7 @@ var CategorySelection = /** @class */ (function () {
         $("#" + this._parentDivId).append(html);
         $("#" + this._thirdLevelSelect).change(function (event) {
             _this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
-            _this.SelectedCategoryChangedEvent.dispatch(_this, _this.GetSelectedCategoryId());
+            _this.SelectedCategoryChangedEvent.Dispatch(_this, _this.GetSelectedCategoryId());
         }); //change
     };
     return CategorySelection;

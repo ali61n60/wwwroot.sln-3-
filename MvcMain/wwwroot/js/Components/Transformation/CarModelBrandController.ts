@@ -17,6 +17,9 @@ export class CarModelBrandController implements ICriteria {
     private readonly ModelSelectId: string = "model";
     private _allCarModels: CarModel[];
 
+    private _searchCriteriaChange:ICriteriaChange;
+
+
     constructor() {
         this.initView();
     }
@@ -43,7 +46,7 @@ export class CarModelBrandController implements ICriteria {
     private bindCarModel(): void {
         $("#" + this.ModelSelectId).on("change",
             (event) => {
-                this._searchCriteriaChange.CustomCriteriChanged();
+                this._searchCriteriaChange.CustomCriteriaChanged();
             });
     }
 
@@ -68,7 +71,8 @@ export class CarModelBrandController implements ICriteria {
 
     }
 
-    BindEvents(criteriaChange:ICriteriaChange):void {
+    BindEvents(criteriaChange: ICriteriaChange): void {
+        this._searchCriteriaChange = criteriaChange;
         $("#" + this.BrandSelectId).on("change", (event) => {
             let selectedBrandId: number = parseInt($(event.currentTarget).find("option:selected").val().toString());
             this.updateCarModelSelect(selectedBrandId);
@@ -76,5 +80,13 @@ export class CarModelBrandController implements ICriteria {
         });
 
         this.bindCarModel();
+    }
+
+    UnBindEvents(): void {
+        $("#" + this.BrandSelectId).off("change");
+        this.unBindCarModel();
+    }
+    private unBindCarModel(): void {
+        $("#" + this.ModelSelectId).off("change");
     }
 }

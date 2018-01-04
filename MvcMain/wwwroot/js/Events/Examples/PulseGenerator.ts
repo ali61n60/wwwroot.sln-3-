@@ -24,7 +24,7 @@ class PulseGenerator {
             this.start();
 
             //dispatch event by calling the dispatcher 
-            this._onPulsate.dispatch(this, this.FrequencyInHz);
+            this._onPulsate.Dispatch(this, this.FrequencyInHz);
 
         }, 1000 / this.FrequencyInHz);
     }

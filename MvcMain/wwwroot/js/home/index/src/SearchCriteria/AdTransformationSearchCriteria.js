@@ -1,15 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var CarModelBrandController_1 = require("../../../../Components/Transformation/CarModelBrandController");
 var AdTransformationSearchCriteria = /** @class */ (function () {
     function AdTransformationSearchCriteria() {
-        //TODO this code for brand is also used on new add extract a common method
-        this.CarBrandIdKey = "BrandId";
-        this.BrandSelectId = "brand";
-        this.CarModelTemplateId = "modelTemplate";
-        this.CarModelDivPlaceHolderId = "modelPlaceHolder";
-        this.CarModelIdKey = "CarModelId";
-        this.AllCarModelsInputId = "allCarModels";
-        this.ModelSelectId = "model";
         this.MakeYearFromKey = "MakeYearFrom";
         this.MakeYearFromInputId = "fromYear";
         this.MakeYearToKey = "MakeYearTo";
@@ -34,35 +27,11 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
         this.PlateTypeSelectId = "plateType";
     }
     AdTransformationSearchCriteria.prototype.initView = function () {
-        var allCarModelssString = $("#" + this.AllCarModelsInputId).val().toString();
-        this._allCarModels = $.parseJSON(allCarModelssString);
-        this.initCarModel();
-    };
-    AdTransformationSearchCriteria.prototype.initCarModel = function () {
-        this.createCarModelElement(new Array());
-    };
-    AdTransformationSearchCriteria.prototype.updateCarModelSelect = function (brandId) {
-        var carModels = new Array();
-        this._allCarModels.forEach(function (carModel, index, array) {
-            if (carModel.brandId === brandId)
-                carModels.push(carModel);
-        });
-        this.createCarModelElement(carModels);
-    };
-    AdTransformationSearchCriteria.prototype.createCarModelElement = function (carModels) {
-        $("#" + this.CarModelDivPlaceHolderId).children().remove();
-        var template = $("#" + this.CarModelTemplateId).html();
-        var data = { carModels: carModels };
-        var html = Mustache.to_html(template, data);
-        $("#" + this.CarModelDivPlaceHolderId).append(html);
-        this.bindCarModel();
+        this._carModelBrandContoller = new CarModelBrandController_1.CarModelBrandController();
     };
     //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
     AdTransformationSearchCriteria.prototype.FillCriteria = function (userInput) {
-        userInput.ParametersDictionary[this.CarBrandIdKey] =
-            $("#" + this.BrandSelectId).find("option:selected").val(); //brandId
-        userInput.ParametersDictionary[this.CarModelIdKey] =
-            $("#" + this.ModelSelectId).find("option:selected").val(); //carModelId
+        this._carModelBrandContoller.FillCriteria(userInput);
         userInput.ParametersDictionary[this.MakeYearFromKey] =
             $("#" + this.MakeYearFromInputId).val(); //makeYearFrom
         userInput.ParametersDictionary[this.MakeYearToKey] =
@@ -87,28 +56,12 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
             $("#" + this.PlateTypeSelectId).find("option:selected").val(); //plateType
     };
     AdTransformationSearchCriteria.prototype.BindEvents = function (criteriaChange) {
-        var _this = this;
         this._searchCriteriaChange = criteriaChange;
         this.initView();
-        $("#" + this.BrandSelectId).on("change", function (event) {
-            var selectedBrandId = parseInt($(event.currentTarget).find("option:selected").val().toString());
-            _this.updateCarModelSelect(selectedBrandId);
-            criteriaChange.CustomCriteriChanged();
-        });
-        this.bindCarModel();
-    };
-    AdTransformationSearchCriteria.prototype.bindCarModel = function () {
-        var _this = this;
-        $("#" + this.ModelSelectId).on("change", function (event) {
-            _this._searchCriteriaChange.CustomCriteriChanged();
-        });
+        this._carModelBrandContoller.BindEvents(criteriaChange);
     };
     AdTransformationSearchCriteria.prototype.UnBindEvents = function () {
-        $("#" + this.BrandSelectId).off("change");
-        this.unBindCarModel();
-    };
-    AdTransformationSearchCriteria.prototype.unBindCarModel = function () {
-        $("#" + this.ModelSelectId).off("change");
+        this._carModelBrandContoller.UnBindEvents();
     };
     return AdTransformationSearchCriteria;
 }());
