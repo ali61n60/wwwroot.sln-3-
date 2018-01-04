@@ -43,8 +43,11 @@ export class AdTransformationSearchCriteria implements ICriteria {
 
     public readonly PlateTypeKey: string = "PlateType";
     public  readonly PlateTypeSelectId:string= "plateType";
-    
-
+    private x:number;
+    constructor() {
+        let x = 10;
+        x = 20;
+    }
 
     private initView(): void {
         this._carModelBrandContoller = new CarModelBrandController();

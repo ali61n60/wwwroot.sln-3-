@@ -50,9 +50,6 @@ export class CarModelBrandController implements ICriteria {
             });
     }
 
-    
-
-
     private updateCarModelSelect(brandId: number): void {
         let carModels = new Array<CarModel>();
         this._allCarModels.forEach((carModel, index, array) => {
@@ -63,7 +60,7 @@ export class CarModelBrandController implements ICriteria {
     }
 
 
-    public  FillCriteria(userInput:UserInput) {
+    public FillCriteria(userInput:UserInput) {
         userInput.ParametersDictionary[this.CarBrandIdKey] =
             $("#" + this.BrandSelectId).find("option:selected").val();//brandId
         userInput.ParametersDictionary[this.CarModelIdKey] =

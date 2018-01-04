@@ -79,7 +79,7 @@ export class Index implements ICriteriaChange {
     private searchCriteriaChanged(): void {
         $("#adPlaceHolder").children().remove();
         this._serverCaller.ResetSearchParameters();
-        $("#" + this._getAdFromServerId).trigger("click");
+       // $("#" + this._getAdFromServerId).trigger("click");
 
     }
 

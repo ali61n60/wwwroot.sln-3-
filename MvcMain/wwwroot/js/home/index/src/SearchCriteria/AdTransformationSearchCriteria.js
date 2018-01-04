@@ -25,6 +25,8 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
         this.CarStatusSelectId = "carStatus";
         this.PlateTypeKey = "PlateType";
         this.PlateTypeSelectId = "plateType";
+        var x = 10;
+        x = 20;
     }
     AdTransformationSearchCriteria.prototype.initView = function () {
         this._carModelBrandContoller = new CarModelBrandController_1.CarModelBrandController();

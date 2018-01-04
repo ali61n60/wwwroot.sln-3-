@@ -55,7 +55,7 @@ var Index = /** @class */ (function () {
     Index.prototype.searchCriteriaChanged = function () {
         $("#adPlaceHolder").children().remove();
         this._serverCaller.ResetSearchParameters();
-        $("#" + this._getAdFromServerId).trigger("click");
+        // $("#" + this._getAdFromServerId).trigger("click");
     };
     Index.prototype.initGetAdFromServer = function () {
         var _this = this;
