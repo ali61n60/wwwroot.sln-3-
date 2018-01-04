@@ -1,9 +1,12 @@
-﻿import { SearchAdUserInput } from "../SearchAdUserInput";
-import { ISearchCriteria } from "./ISearchCriteria";
-import { ISearchCriteriaChange } from "../ISearchCriteriaChange";
+﻿import { UserInput } from "../../../../Helper/UserInput";
+import { ICriteriaChange } from "../../../../Helper/ICriteriaChange";
+import {ICriteria} from "../../../../Helper/ICriteria";
+import {CarModel} from "../../../../Models/AdTransportation/CarModel";
 
-export class AdTransformationSearchCriteria implements ISearchCriteria {
-    private _searchCriteriaChange: ISearchCriteriaChange;
+
+
+export class AdTransformationSearchCriteria implements ICriteria {
+    private _searchCriteriaChange: ICriteriaChange;
     //TODO this code for brand is also used on new add extract a common method
     private readonly CarBrandIdKey: string = "BrandId";
     private readonly BrandSelectId: string = "brand";
@@ -79,43 +82,43 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
     }
 
     //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
-    public FillSearchCriteria(searchAdUserInput: SearchAdUserInput): void {
-        searchAdUserInput.SearchParameters[this.CarBrandIdKey] =
+    public FillCriteria(userInput: UserInput): void {
+        userInput.ParametersDictionary[this.CarBrandIdKey] =
             $("#" + this.BrandSelectId).find("option:selected").val();//brandId
-        searchAdUserInput.SearchParameters[this.CarModelIdKey] =
+        userInput.ParametersDictionary[this.CarModelIdKey] =
             $("#" + this.ModelSelectId).find("option:selected").val();//carModelId
-        searchAdUserInput.SearchParameters[this.MakeYearFromKey] =
+        userInput.ParametersDictionary[this.MakeYearFromKey] =
             $("#" + this.MakeYearFromInputId).val();//makeYearFrom
-        searchAdUserInput.SearchParameters[this.MakeYearToKey] =
+        userInput.ParametersDictionary[this.MakeYearToKey] =
             $("#" + this.MakeYearToInputId).val();//makeYearTo
-        searchAdUserInput.SearchParameters[this.FuelKey] =
+        userInput.ParametersDictionary[this.FuelKey] =
             $("#" + this.FuelSelectId).find("option:selected").val();//fuel
-        searchAdUserInput.SearchParameters[this.MileageFromKey] =
+        userInput.ParametersDictionary[this.MileageFromKey] =
             $("#" + this.MileageFromInputId).val();//mileageFrom
-        searchAdUserInput.SearchParameters[this.MileageToKey] =
+        userInput.ParametersDictionary[this.MileageToKey] =
         $("#" + this.MileageToInputId).val();//mileageTo
-        searchAdUserInput.SearchParameters[this.GearboxKey] =
+        userInput.ParametersDictionary[this.GearboxKey] =
             $("#" + this.GearboxTypeSelectId).find("option:selected").val();//gearboxType        
-        searchAdUserInput.SearchParameters[this.BodyColorKey] =
+        userInput.ParametersDictionary[this.BodyColorKey] =
         $("#" + this.BodyColorSelectId).find("option:selected").val();//bodyColor
-        searchAdUserInput.SearchParameters[this.InternalColorKey] =
+        userInput.ParametersDictionary[this.InternalColorKey] =
         $("#" + this.InternalColorSelectId).find("option:selected").val();//internalColor        
-        searchAdUserInput.SearchParameters[this.BodyStatusKey] =
+        userInput.ParametersDictionary[this.BodyStatusKey] =
         $("#" + this.BodyStatusSelectId).find("option:selected").val();//bodyStatus
-        searchAdUserInput.SearchParameters[this.CarStatusKey] =
+        userInput.ParametersDictionary[this.CarStatusKey] =
         $("#" + this.CarStatusSelectId).find("option:selected").val();//carStatus        
-        searchAdUserInput.SearchParameters[this.PlateTypeKey] =
+        userInput.ParametersDictionary[this.PlateTypeKey] =
             $("#" + this.PlateTypeSelectId).find("option:selected").val();//plateType
     }
 
-    public BindEvents(searchCriteriaChange: ISearchCriteriaChange): void {
+    public BindEvents(searchCriteriaChange: ICriteriaChange): void {
         this._searchCriteriaChange = searchCriteriaChange;
         this.initView();
 
         $("#" + this.BrandSelectId).on("change", (event) => {
             let selectedBrandId: number = parseInt($(event.currentTarget).find("option:selected").val().toString());
             this.updateCarModelSelect(selectedBrandId);
-            searchCriteriaChange.CustomSearchCriteriChanged();
+            searchCriteriaChange.CustomCriteriChanged();
         });
 
         this.bindCarModel();
@@ -124,7 +127,7 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
     private bindCarModel():void {
         $("#" + this.ModelSelectId).on("change",
             (event) => {
-                this._searchCriteriaChange.CustomSearchCriteriChanged();
+                this._searchCriteriaChange.CustomCriteriChanged();
             });
     }
 
@@ -139,12 +142,5 @@ export class AdTransformationSearchCriteria implements ISearchCriteria {
     }
 }
 
-class Brand {
-    public brandId: number;
-    public brandName: string;
-}
-export class CarModel {
-    public modelId: number;
-    public modelName: string;
-    public brandId: number;
-}
+
+

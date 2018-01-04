@@ -1,14 +1,14 @@
-﻿import {ISearchCriteria} from "./ISearchCriteria";
-import {SearchAdUserInput} from "../SearchAdUserInput";
-import {ISearchCriteriaChange} from "../ISearchCriteriaChange";
+﻿import {ICriteria} from "../../../../Helper/ICriteria";
+import { UserInput } from "../../../../Helper/UserInput";
+import { ICriteriaChange } from "../../../../Helper/ICriteriaChange";
 
 
-export class DefaultSearchCriteria implements ISearchCriteria{
-    public FillSearchCriteria(userInput: SearchAdUserInput): void {
-        userInput.SearchParameters.defaultParameter = 1234;
+export class DefaultSearchCriteria implements ICriteria{
+    public FillCriteria(userInput: UserInput): void {
+        userInput.ParametersDictionary.defaultParameter = 1234;
     }
 
-    BindEvents(searchCriteriaChange: ISearchCriteriaChange): void {
+    BindEvents(searchCriteriaChange: ICriteriaChange): void {
         
     }
 

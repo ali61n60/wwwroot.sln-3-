@@ -2,13 +2,13 @@
 import { CategorySelection } from "../../../Components/Category/SearchAd/CategorySelection";
 import { ServerCaller } from "./ServerCaller";
 import { SearchCriteriaViewLoader} from "./SearchCriteriaViewLoader";
-import { SearchAdUserInput } from "./SearchAdUserInput";
 import {SearchCriteria} from "./SearchCriteria";
-import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
+import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
+import {UserInput} from "../../../Helper/UserInput";
 
 
 
-export class Index implements ISearchCriteriaChange {
+export class Index implements ICriteriaChange {
 
     private readonly _orderBySelectIdDiv = "orderBy";
     private readonly _minPriceInputId= "minPrice";
@@ -72,7 +72,7 @@ export class Index implements ISearchCriteriaChange {
             });
     }
 
-    public CustomSearchCriteriChanged():void {
+    public CustomCriteriChanged():void {
         this.searchCriteriaChanged();
     }
 
@@ -86,19 +86,19 @@ export class Index implements ISearchCriteriaChange {
     private initGetAdFromServer(): void {
         $("#" + this._getAdFromServerId).on("click", (event) => {
             event.preventDefault();
-            let userInput = new SearchAdUserInput();
+            let userInput = new UserInput();
 
             let categoryId = this._categorySelection.GetSelectedCategoryId();
-            userInput.SearchParameters.CategoryId = categoryId;//100 for cars
+            userInput.ParametersDictionary.CategoryId = categoryId;//100 for cars
 
             let minPrice = parseInt($("#minPrice").val().toString());
-            userInput.SearchParameters.MinimumPrice = minPrice;
+            userInput.ParametersDictionary.MinimumPrice = minPrice;
 
             let maxPrice = parseInt($("#maxPrice").val().toString());
-            userInput.SearchParameters.MaximumPrice = maxPrice;
+            userInput.ParametersDictionary.MaximumPrice = maxPrice;
 
             let orderBy = $("#orderBy").val().toString();
-            userInput.SearchParameters.OrderBy = orderBy;
+            userInput.ParametersDictionary.OrderBy = orderBy;
             
             this._searchCriteria.FillCategorySpecificSearchCriteria(categoryId, userInput);//fill category specific search parameters
             
@@ -123,7 +123,7 @@ let allCategoriesId = "allCategories";
 
 $(document).ready(() => {
     let index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
-    index.CustomSearchCriteriChanged();//to initiate a server call on page load for first time
+    index.CustomCriteriChanged();//to initiate a server call on page load for first time
 });//ready
 
 

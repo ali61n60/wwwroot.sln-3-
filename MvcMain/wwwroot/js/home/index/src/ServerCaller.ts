@@ -1,4 +1,5 @@
-﻿import { SearchAdUserInput } from "./SearchAdUserInput";
+﻿import { UserInput  } from "../../../Helper/UserInput";
+
 export class ServerCaller {
     private readonly  _initialStart: number = 1;
     private _start: number = 1;
@@ -9,16 +10,16 @@ export class ServerCaller {
     private _numberOfStartServerCallNotification: number = 0;
     private _url: string = "api/AdApi/GetAdvertisementCommon";
 
-    public GetAdItemsFromServer(userInput: SearchAdUserInput): void {
-        userInput.SearchParameters.StartIndex = this._start;
-        userInput.SearchParameters.Count = this._count;
+    public GetAdItemsFromServer(userInput: UserInput): void {
+        userInput.ParametersDictionary.StartIndex = this._start;
+        userInput.ParametersDictionary.Count = this._count;
         this._currentRequestIndex++;
-        userInput.SearchParameters.RequestIndex = this._currentRequestIndex;
+        userInput.ParametersDictionary.RequestIndex = this._currentRequestIndex;
         
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
             url: this._url,
-            data:JSON.stringify(userInput.SearchParameters), //Data sent to server
+            data:JSON.stringify(userInput.ParametersDictionary), //Data sent to server
             contentType: 'application/json', // content type sent to server
             success: (msg,textStatus,jqXHR)=> this.onSuccessGetItemsFromServer(msg,textStatus,jqXHR), //On Successfull service call
             error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails

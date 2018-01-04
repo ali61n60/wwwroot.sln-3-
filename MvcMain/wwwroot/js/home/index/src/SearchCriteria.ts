@@ -1,15 +1,17 @@
-﻿import {SearchAdUserInput} from "./SearchAdUserInput";
-import {AdTransformationSearchCriteria} from "./SearchCriteria/AdTransformationSearchCriteria";
-import {ISearchCriteria } from "./SearchCriteria/ISearchCriteria";
+﻿import {AdTransformationSearchCriteria} from "./SearchCriteria/AdTransformationSearchCriteria";
 import {DefaultSearchCriteria} from "./SearchCriteria/DefaultSearchCriteria";
-import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
 import { NumericDictionary } from "lodash";
+import {ICriteria} from "../../../Helper/ICriteria";
+import {UserInput} from "../../../Helper/UserInput";
+import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 
-class SearchCriteriaNumericDictionary implements NumericDictionary<ISearchCriteria> {
-    [index: number]: ISearchCriteria;
+
+
+class CriteriaNumericDictionary implements NumericDictionary<ICriteria> {
+    [index: number]: ICriteria;
 }
 export class SearchCriteria {
-    private _searchCriteriaIocContainer: SearchCriteriaNumericDictionary=new SearchCriteriaNumericDictionary();
+    private _searchCriteriaIocContainer: CriteriaNumericDictionary=new CriteriaNumericDictionary();
     constructor() {
         this.initSearchCriteriaIocContainer();
         
@@ -20,12 +22,12 @@ export class SearchCriteria {
         this._searchCriteriaIocContainer[100] = new AdTransformationSearchCriteria();
     }
 
-    public FillCategorySpecificSearchCriteria(categoryId: number, userInput: SearchAdUserInput): void {
+    public FillCategorySpecificSearchCriteria(categoryId: number, userInput: UserInput): void {
         let searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
-        searchCriteria.FillSearchCriteria(userInput);
+        searchCriteria.FillCriteria(userInput);
     }
 
-    public Bind(categoryId: number, searchCriteriaChange: ISearchCriteriaChange) {
+    public Bind(categoryId: number, searchCriteriaChange: ICriteriaChange) {
         let searchCriteria = this.polymorphicDispatchSearchCriteria(categoryId);
         searchCriteria.BindEvents(searchCriteriaChange);
     }
@@ -35,8 +37,8 @@ export class SearchCriteria {
         searchCriteria.UnBindEvents();
     }
 
-    private polymorphicDispatchSearchCriteria(categoryId:number): ISearchCriteria {
-        let returnValue: ISearchCriteria = this._searchCriteriaIocContainer[categoryId];
+    private polymorphicDispatchSearchCriteria(categoryId:number): ICriteria {
+        let returnValue: ICriteria = this._searchCriteriaIocContainer[categoryId];
         if (returnValue===undefined || returnValue===null) {
             returnValue = this._searchCriteriaIocContainer[0];
         }

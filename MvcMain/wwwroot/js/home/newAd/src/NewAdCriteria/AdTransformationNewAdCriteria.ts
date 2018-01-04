@@ -1,11 +1,10 @@
-﻿import {ISearchCriteria} from "../../../index/src/SearchCriteria/ISearchCriteria";
-import {SearchAdUserInput} from"../../../index/src/SearchAdUserInput";
-import {ISearchCriteriaChange} from "../../../index/src/ISearchCriteriaChange";
-import { CarModel} from "../../../index/src/SearchCriteria/AdTransformationSearchCriteria";
+﻿import {ICriteria} from "../../../../Helper/ICriteria";
+import {UserInput} from "../../../../Helper/UserInput";
+import {ICriteriaChange} from "../../../../Helper/ICriteriaChange";
+import {CarModel} from "../../../../Models/AdTransportation/CarModel";
 
 
-
-export class NewAdTransformation implements ISearchCriteria {
+export class AdTransformationNewAdCriteria implements ICriteria {
     private readonly CarBrandIdKey: string = "BrandId";
     private readonly BrandSelectId: string = "brand";
 
@@ -44,9 +43,9 @@ export class NewAdTransformation implements ISearchCriteria {
         this.bindCarModel();
     }
 
-    public FillSearchCriteria(searchAdUserInput: SearchAdUserInput): void { }
+    public FillCriteria(userInput: UserInput): void { }
 
-    public BindEvents(searchCriteriaChange: ISearchCriteriaChange): void {
+    public BindEvents(searchCriteriaChange: ICriteriaChange): void {
         this.initView();
 
         $("#" + this.BrandSelectId).on("change", (event) => {

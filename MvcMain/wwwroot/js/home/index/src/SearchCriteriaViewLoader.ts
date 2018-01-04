@@ -1,19 +1,18 @@
 ﻿import { PartialViewServerCallParameters } from "../../newAd/src/NewAdPartialViewLoader";
-import {Index} from "./index";
-import {ISearchCriteriaChange} from "./ISearchCriteriaChange";
+import {ICriteriaChange } from "../../../Helper/ICriteriaChange";
 import {SearchCriteria} from "./SearchCriteria";
 
 
 
 export class SearchCriteriaViewLoader {
     private _parentDivId: string;
-    private _searchCriteriaChange: ISearchCriteriaChange;
+    private _searchCriteriaChange: ICriteriaChange;
     private _url: string = "Home/GetSearchCriteriaView";
     private _previousCategoryId:number = 0;
     private _currentCategoryId: number = 0;
     private _searchCriteria=new SearchCriteria();
 
-    constructor(parentDivId: string, searchCriteriaChange: ISearchCriteriaChange) {
+    constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange) {
         this._parentDivId = parentDivId;
         this._searchCriteriaChange = searchCriteriaChange;
     }
