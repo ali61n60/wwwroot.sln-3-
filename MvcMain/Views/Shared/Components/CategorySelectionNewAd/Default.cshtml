@@ -1,8 +1,8 @@
 ﻿@using ModelStd.Advertisements
 @model IEnumerable<Category>
 
-<div id="categorySelector">
-    <input id="allCategories" type="hidden" value='@Json.Serialize(Model)' />
+<div id="allCategoriesDiv">
+    <input id="allCategoriesInput" type="hidden" value='@Json.Serialize(Model)' />
 </div>
 
 <script id="category1Template" type="text/template">

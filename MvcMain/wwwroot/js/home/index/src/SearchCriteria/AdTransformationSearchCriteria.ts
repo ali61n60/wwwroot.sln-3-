@@ -2,21 +2,14 @@
 import { ICriteriaChange } from "../../../../Helper/ICriteriaChange";
 import {ICriteria} from "../../../../Helper/ICriteria";
 import {CarModel} from "../../../../Models/AdTransportation/CarModel";
+import {CarModelBrandController} from "../../../../Components/Transformation/CarModelBrandController";
 
 
 
 export class AdTransformationSearchCriteria implements ICriteria {
     private _searchCriteriaChange: ICriteriaChange;
-    //TODO this code for brand is also used on new add extract a common method
-    private readonly CarBrandIdKey: string = "BrandId";
-    private readonly BrandSelectId: string = "brand";
 
-    private readonly CarModelTemplateId: string = "modelTemplate";
-    private readonly CarModelDivPlaceHolderId: string = "modelPlaceHolder";
-    private readonly CarModelIdKey:string = "CarModelId";
-    private readonly AllCarModelsInputId: string = "allCarModels";
-    private readonly ModelSelectId: string = "model";
-    private _allCarModels: CarModel[];
+    private _carModelBrandContoller: CarModelBrandController;
 
     private readonly MakeYearFromKey: string = "MakeYearFrom";
     private readonly MakeYearFromInputId: string = "fromYear";
@@ -54,39 +47,13 @@ export class AdTransformationSearchCriteria implements ICriteria {
 
 
     private initView(): void {
-        let allCarModelssString = $("#" + this.AllCarModelsInputId).val().toString();
-        this._allCarModels = $.parseJSON(allCarModelssString) as CarModel[];
-        this.initCarModel();
+        this._carModelBrandContoller = new CarModelBrandController();
     }
-
-    private initCarModel(): void {
-        this.createCarModelElement(new Array<CarModel>());
-    }
-
-    private updateCarModelSelect(brandId: number): void {
-        let carModels = new Array<CarModel>();
-        this._allCarModels.forEach((carModel, index, array) => {
-            if (carModel.brandId === brandId)
-                carModels.push(carModel);
-        });
-        this.createCarModelElement(carModels);
-    }
-
-    private createCarModelElement(carModels: CarModel[]) {
-        $("#" + this.CarModelDivPlaceHolderId).children().remove();
-        let template = $("#" + this.CarModelTemplateId).html();
-        let data = { carModels: carModels }
-        let html = Mustache.to_html(template, data);
-        $("#" + this.CarModelDivPlaceHolderId).append(html);
-        this.bindCarModel();
-    }
-
+    
     //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
     public FillCriteria(userInput: UserInput): void {
-        userInput.ParametersDictionary[this.CarBrandIdKey] =
-            $("#" + this.BrandSelectId).find("option:selected").val();//brandId
-        userInput.ParametersDictionary[this.CarModelIdKey] =
-            $("#" + this.ModelSelectId).find("option:selected").val();//carModelId
+        this._carModelBrandContoller.FillCriteria(userInput);
+
         userInput.ParametersDictionary[this.MakeYearFromKey] =
             $("#" + this.MakeYearFromInputId).val();//makeYearFrom
         userInput.ParametersDictionary[this.MakeYearToKey] =
@@ -115,21 +82,12 @@ export class AdTransformationSearchCriteria implements ICriteria {
         this._searchCriteriaChange = criteriaChange;
         this.initView();
 
-        $("#" + this.BrandSelectId).on("change", (event) => {
-            let selectedBrandId: number = parseInt($(event.currentTarget).find("option:selected").val().toString());
-            this.updateCarModelSelect(selectedBrandId);
-            criteriaChange.CustomCriteriChanged();
-        });
+        this._carModelBrandContoller.BindEvents(criteriaChange);
 
-        this.bindCarModel();
+        
     }
 
-    private bindCarModel():void {
-        $("#" + this.ModelSelectId).on("change",
-            (event) => {
-                this._searchCriteriaChange.CustomCriteriChanged();
-            });
-    }
+    
 
 
     public UnBindEvents(): void {

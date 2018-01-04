@@ -1,3 +1,3 @@
 ﻿export interface ICriteriaChange {
-    CustomCriteriChanged(): void;
+    CustomCriteriaChanged(): void;
 }

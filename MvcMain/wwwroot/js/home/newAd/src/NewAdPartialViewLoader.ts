@@ -29,6 +29,7 @@
     }//onErrorGetTimeFromServer
 }
 
+//TODO refactor this
 export class PartialViewServerCallParameters {
     public CategoryId:number;
 }

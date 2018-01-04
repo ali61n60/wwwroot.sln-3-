@@ -28,6 +28,7 @@ var NewAdPartialViewLoader = /** @class */ (function () {
     return NewAdPartialViewLoader;
 }());
 exports.NewAdPartialViewLoader = NewAdPartialViewLoader;
+//TODO refactor this
 var PartialViewServerCallParameters = /** @class */ (function () {
     function PartialViewServerCallParameters() {
     }

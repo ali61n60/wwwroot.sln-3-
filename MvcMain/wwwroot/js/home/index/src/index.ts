@@ -72,7 +72,7 @@ export class Index implements ICriteriaChange {
             });
     }
 
-    public CustomCriteriChanged():void {
+    public CustomCriteriaChanged():void {
         this.searchCriteriaChanged();
     }
 
@@ -123,7 +123,7 @@ let allCategoriesId = "allCategories";
 
 $(document).ready(() => {
     let index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
-    index.CustomCriteriChanged();//to initiate a server call on page load for first time
+    index.CustomCriteriaChanged();//to initiate a server call on page load for first time
 });//ready
 
 

@@ -81,7 +81,7 @@ export class CategorySelectionNewAd {
             let selectedId = parseInt($(event.currentTarget).val().toString());
             this._selectedCategoryIdLevelOne = selectedId;
             this.createSecondLevel(selectedId);
-            this.SelectedCategoryChangedEvent.dispatch(this, this.GetSelectedCategoryId());
+            this.SelectedCategoryChangedEvent.Dispatch(this, this.GetSelectedCategoryId());
         });//change
 
     }//CreateFirstLevel
@@ -113,7 +113,7 @@ export class CategorySelectionNewAd {
             let selectedId = parseInt($(event.currentTarget).val().toString());
             this._selectedCategoryIdLevelTwo = selectedId;
             this.createThirdLevel(selectedId);
-            this.SelectedCategoryChangedEvent.dispatch(this, this.GetSelectedCategoryId());
+            this.SelectedCategoryChangedEvent.Dispatch(this, this.GetSelectedCategoryId());
         });//change
     }
 
@@ -142,7 +142,7 @@ export class CategorySelectionNewAd {
 
         $("#" + this._thirdLevelSelect).change((event) => {
             this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
-            this.SelectedCategoryChangedEvent.dispatch(this, this.GetSelectedCategoryId());
+            this.SelectedCategoryChangedEvent.Dispatch(this, this.GetSelectedCategoryId());
         });//change
     }
 

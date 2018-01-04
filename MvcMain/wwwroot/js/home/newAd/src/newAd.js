@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/CategorySelectionNewAd");
 var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
 var NewAd = /** @class */ (function () {
-    function NewAd(categorySelectorParentDivId, allCategoriesId, categorySpecificPartialViewId) {
-        this._categorySelectorParentDivId = categorySelectorParentDivId;
-        this._allCategoriesId = allCategoriesId;
+    function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
+        this._allCategoriesDivId = allCategoriesDiv;
+        this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
         this.initPage();
         this.initEventHandlers();
@@ -15,9 +15,9 @@ var NewAd = /** @class */ (function () {
         this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this._categorySpecificPartialViewId);
     };
     NewAd.prototype.initNewAdCategory = function () {
-        var allCategoriesString = $("#" + this._allCategoriesId).val().toString();
+        var allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();
         var allCategories = $.parseJSON(allCategoriesString);
-        this._categorySelectionNewAd = new CategorySelectionNewAd_1.CategorySelectionNewAd(this._categorySelectorParentDivId, allCategories);
+        this._categorySelectionNewAd = new CategorySelectionNewAd_1.CategorySelectionNewAd(this._allCategoriesDivId, allCategories);
         this._categorySelectionNewAd.CreateFirstLevel();
     };
     NewAd.prototype.initEventHandlers = function () {
@@ -36,10 +36,10 @@ $(document).ready(function () {
         alert($apiAddress);
     });
 }); //ready
-var categorySelectorParentDivId = "categorySelector";
-var allCategoriesId = "allCategories";
-var categorySpecificPartialViewId = "NewAdPlaceHolder";
+var allCategoriesDivId = "allCategoriesDiv";
+var allCategoriesInputId = "allCategoriesInput";
+var categorySpecificPartialViewId = "CategorySpecificCriteria";
 $(document).ready(function () {
-    var newAd = new NewAd(categorySelectorParentDivId, allCategoriesId, categorySpecificPartialViewId);
+    var newAd = new NewAd(allCategoriesDivId, allCategoriesInputId, categorySpecificPartialViewId);
 }); //ready
 //# sourceMappingURL=newAd.js.map

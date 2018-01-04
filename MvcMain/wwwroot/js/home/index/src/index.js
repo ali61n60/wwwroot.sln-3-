@@ -5,6 +5,7 @@ var ServerCaller_1 = require("./ServerCaller");
 var SearchCriteriaViewLoader_1 = require("./SearchCriteriaViewLoader");
 var SearchCriteria_1 = require("./SearchCriteria");
 var UserInput_1 = require("../../../Helper/UserInput");
+//TODO when category change before search criteia is loaded a search call is sent to server
 var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._orderBySelectIdDiv = "orderBy";

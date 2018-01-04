@@ -4,18 +4,18 @@ import { NewAdPartialViewLoader} from "./NewAdPartialViewLoader";
 
 
 class NewAd {
-    private _allCategoriesId: string;
+    private _allCategoriesInputId: string;
     private _categorySelectionNewAd: CategorySelectionNewAd;
-    private _categorySelectorParentDivId: string;
+    private _allCategoriesDivId: string;
     private _categorySpecificPartialViewId:string;
     private _partialViewLoader: NewAdPartialViewLoader;
 
-    constructor(categorySelectorParentDivId: string,
-        allCategoriesId: string,
+    constructor(allCategoriesDiv: string,
+        allCategoriesInputId: string,
         categorySpecificPartialViewId:string) {
 
-        this._categorySelectorParentDivId = categorySelectorParentDivId;
-        this._allCategoriesId = allCategoriesId;
+        this._allCategoriesDivId = allCategoriesDiv;
+        this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
         this.initPage();
         this.initEventHandlers();
@@ -27,9 +27,9 @@ class NewAd {
     }
 
     private initNewAdCategory():void {
-        let allCategoriesString = $("#" + this._allCategoriesId).val().toString();
+        let allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();
         let allCategories = $.parseJSON(allCategoriesString) as Category[];
-        this._categorySelectionNewAd = new CategorySelectionNewAd(this._categorySelectorParentDivId, allCategories);
+        this._categorySelectionNewAd = new CategorySelectionNewAd(this._allCategoriesDivId, allCategories);
         this._categorySelectionNewAd.CreateFirstLevel();
     }
 
@@ -52,9 +52,9 @@ $(document).ready(function () {
 });//ready
 
 
-let categorySelectorParentDivId: string = "categorySelector";
-let allCategoriesId:string = "allCategories";
-let categorySpecificPartialViewId:string = "NewAdPlaceHolder";
+let allCategoriesDivId: string = "allCategoriesDiv";
+let allCategoriesInputId: string = "allCategoriesInput";
+let categorySpecificPartialViewId: string = "CategorySpecificCriteria";
 $(document).ready(() => {
-    let newAd = new NewAd(categorySelectorParentDivId, allCategoriesId,categorySpecificPartialViewId);
+    let newAd = new NewAd(allCategoriesDivId, allCategoriesInputId,categorySpecificPartialViewId);
 });//ready
