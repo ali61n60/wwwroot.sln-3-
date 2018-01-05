@@ -6,44 +6,11 @@
     private _addedImageTemplateId: string = "addedImage";
 
     private _sendFilesToServerUrl: string = "/api/AdApi/AddTempImage";
+    private _removeFileFromServerUrl: string = "/api/AdApi/RemoveTempImage";
 
     constructor() {
         this.initView();
     }
-
-    private sendFilesToServer(fileList: FileList): void {
-        var data = new FormData();
-        for (var i = 0; i < fileList.length; i++) {
-            data.append(fileList[i].name, fileList[i]);
-        }//for
-        $.ajax({
-            type: "POST",
-            url: this._sendFilesToServerUrl,
-            contentType: false,
-            processData: false,
-            data: data,
-            success: (msg, textStatus, jqXHR) => this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR), //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
-
-        });//ajax
-        this.showSendingImage();
-    }
-
-    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        this.showMessageToUser("");
-        $("#imageUpload").val("");
-        //TODO check for data.success parameter
-        if (msg.success == true) {
-            this.addNewImageToPage(msg.responseData);
-        }//if
-        else {
-            this.showMessageToUser(msg.messag + " ," + msg.errorCode);
-        }//else
-    }//onSuccessGetItemsFromServer
-
-    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        this.showMessageToUser("خطا در ارسال");
-    } //end OnErrorGetTimeFromServer
 
     private initView(): void {
         $(document).ready(() => {
@@ -52,69 +19,108 @@
                 let files: FileList = fileUpload.files;
                 this.sendFilesToServer(files);
 
-            });//change
+            }); //change
 
-            $(document).on('click', '.addedImage > input', function (event) {
-                //todo call server to remove temp file and also remove it from page
-                alert($(this).parent().attr("id"));
-            });//click
+            $(document).on("click",
+                ".addedImage > input",
+                (event) => {
+                    //todo call server to remove temp file and also remove it from page
+                    //create a method to use ajax and call
+                    // server to remove the image from the server 
+                    //also remove the image from current page
+                    this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
+                    //alert($(event.currentTarget).parent().attr("id"));
+                }); //click
 
-        });//ready
+        }); //ready
+    }
+
+    private sendFilesToServer(fileList: FileList): void {
+        var data = new FormData();
+        for (var i = 0; i < fileList.length; i++) {
+            data.append(fileList[i].name, fileList[i]);
+        } //for
+        $.ajax({
+            type: "POST",
+            url: this._sendFilesToServerUrl,
+            contentType: false,
+            processData: false,
+            data: data,
+            success: (msg, textStatus, jqXHR) =>
+                this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR), //On Successfull service call
+            error: (jqXHR, textStatus, errorThrown) =>
+                this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
+
+        }); //ajax
+        this.showSendingImage();
+    }
+
+    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
+        this.showMessageToUser("");
+        $("#" + this._imageUploadInputId).val("");
+        if (msg.success == true) {
+            this.addNewImageToPage(msg.responseData);
+        } //if
+        else {
+            this.showMessageToUser(msg.messag + " ," + msg.errorCode);
+        } //else
+    } //onSuccessGetItemsFromServer
+
+    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
+        this.showMessageToUser("خطا در ارسال");
+    } //end OnErrorGetTimeFromServer
+
+    private showSendingImage() {
+        var $sendingImageTemplate = $("#" + this._sendingImageTemplateId).clone();
+        this.showMessageToUser($sendingImageTemplate.html());
+    }
+
+    private addNewImageToPage(data) {
+        let template: string = $("#" + this._addedImageTemplateId).html();
+        let uploadedImage: UploadedImage = new UploadedImage();
+        uploadedImage.ImageFileName = data.imageFileName;
+        uploadedImage.Image = "data:image/jpg;base64," + data.image;
+        var html = Mustache.to_html(template, uploadedImage);
+        $("#" + this._loadedImagesDivId).append(html);
+    }
+
+    private showMessageToUser(msg) {
+        $("#" + this._messageToUserDivId).html(msg);
     }
 
 
-    private showSendingImage() {
-        var $sendingImageTemplate = $("#sendingImageTemplate").clone();
-        this.showMessageToUser($sendingImageTemplate.html());
-    }//showSendingImage
+    //TODO refactor this method 
+    private removeImageFromServer(fileName: string) {
+        let callParams = {
+            FileNameToBeRemoved: fileName
+        };
+
+        $.ajax({
+            type: "GET", //GET or POST or PUT or DELETE verb
+            url: this._removeFileFromServerUrl,
+            data: callParams, //Data sent to server
+            success: (msg, textStatus, jqXHR) =>
+                this.onSuccessRemoveFileFromServer(msg, textStatus, jqXHR), //On Successfull service call
+            error: (jqXHR, textStatus, errorThrown) =>
+                this.onErrorRemoveFileFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
+        }); //.ajax
+        this.showMessageToUser("removing file from server");
+    }
 
 
-    private addNewImageToPage(data) {
-        //TODO create a copy of newImage template and add it to page
-        var responseImage = "data:image/jpg;base64," + data.image;
-        var template = $('#addedImage').html();
-        var templateData = {
-            imageId: data.imageFileName,
-            imageSrc: responseImage
-        } //data
-        var html = Mustache.to_html(template, templateData);
-        $("#loadedImageView").append(html);
-    }//addNewImageToPage
+    private onSuccessRemoveFileFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
+        this.showMessageToUser("done removing file from server");
+        //TODO also remove the image from the page
+    }
 
-    private showMessageToUser(msg) {
-        $("#labelMessageToUser").html(msg);
-    }//serverResult
+    private onErrorRemoveFileFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
+        this.showMessageToUser("error removing file from server, " + errorThrown);
+    }
+
+}
 
 
-
-    private removeImageFromSession(event) {
-        var form_data = new FormData();                  // Creating object of FormData class
-        form_data.append("method", "deleteImage");               // Adding extra parameters to form_data
-        form_data.append("imageId", event.data.imageId);
-        this.reportMessageToUser("در حال حذف فایل");
-        $.ajax({//C# Method call
-            type: 'POST',
-            processData: false, // important
-            contentType: false, // important
-            data: form_data,
-            async: true,
-            url: "<%= Page.ResolveClientUrl(imageWebUserControlHandlerAddress) %>",
-            success: function (msg) {
-                var jsonMessage = JSON.parse(msg);
-                this.reportMessageToUser(jsonMessage.message);
-                $(event.target).parent().remove();
-            },
-            error: function (XMLHttpRequest, textStatus, errorThrown) {
-                this.reportMessageToUser(textStatus + "  ," + errorThrown);
-            }
-        });//end $.ajax C# call
-    }//end removeImageFromSession
-
-    private reportMessageToUser(message) {
-       let $newMessage = $("<span style=\"color:red\">" + message + "</span><br />");
-        $newMessage.hide();
-        $("#labelUploadResult").children().remove();
-        $("#labelUploadResult").append($newMessage);
-        $newMessage.show().delay(2000).hide(1000);
-    }//end reportMessageToUser
+class UploadedImage {
+    public Image: string;
+    public ImageFileName: string;
 }

@@ -33,7 +33,7 @@ namespace MvcMain.Controllers
         private readonly TemperatureRepository _temperatureRepository;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
         private readonly string numberOfItemsKey = "numberOfItems";
-        private readonly string onlyWithPicturesKey= "OnlyWithPictures";
+        private readonly string onlyWithPicturesKey = "OnlyWithPictures";
         private readonly string requestIndexKey = "RequestIndex";
 
         public AdApiController()
@@ -64,12 +64,12 @@ namespace MvcMain.Controllers
 
         public JsonResult InsertTemperature([FromQuery] int temperature)
         {
-            TemperatureModel temperatureModel=new TemperatureModel()
+            TemperatureModel temperatureModel = new TemperatureModel()
             {
                 InsertDateTime = DateTime.Now,
                 Temp = temperature
             };
-            
+
             try
             {
                 _temperatureRepository.Insert(temperatureModel);
@@ -87,27 +87,27 @@ namespace MvcMain.Controllers
             return ip;
         }
 
-        
+
         //Called from android and home controller
         //TODO based on categoryId call specific repository 
         public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
-            
+
             string errorCode = "AdApiController.GetAdvertisementCommon";
-            int categoryId = ParameterExtractor.ExtractInt(userInput,AdvertisementCommonRepository.CategoryIdKey,AdvertisementCommonRepository.CategoryIdDefault);
+            int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
             IFindRepository findRepository = _repositoryContainer.GetFindRepository(categoryId);//polymorphyic dispatch
             try
             {
-                response.ResponseData =findRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
+                response.ResponseData = findRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
                 FillFirstImage(response.ResponseData);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(response, userInput);
-                Dictionary<string, string> customDictionary =new Dictionary<string, string>
+                Dictionary<string, string> customDictionary = new Dictionary<string, string>
                 {
                     { numberOfItemsKey, response.ResponseData.Count.ToString() }
                 };
-                
+
                 response.SetSuccessResponse("OK");
                 response.CustomDictionary = customDictionary;
             }
@@ -125,10 +125,10 @@ namespace MvcMain.Controllers
             {
                 advertisementCommon.AdvertisementImages[0] =
                     _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
-                
+
             }
         }
-        
+
 
         public void FillAllImages(AdvertisementCommon[] advertisementCommons)
         {
@@ -139,7 +139,7 @@ namespace MvcMain.Controllers
         {
             advertisementCommon.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdvertisementId);
         }
-        
+
         private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<IList<AdvertisementCommon>> response, Dictionary<string, string> userInput)
         {
             if (userInput.ContainsKey(onlyWithPicturesKey) && userInput[onlyWithPicturesKey] == "True") // OnlyWithPictures filter set
@@ -151,7 +151,7 @@ namespace MvcMain.Controllers
                 }
             }
         }
-        
+
         public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string userName, string password, bool userPassIsEncrypted)
         {
             throw new NotImplementedException();
@@ -210,26 +210,47 @@ namespace MvcMain.Controllers
         public async Task<ResponseBase<UploadedImage>> AddTempImage()
         {
             string errorCode = "AdApiController.AddTempImage";
-            ResponseBase<UploadedImage> response =new ResponseBase<UploadedImage>()
+            ResponseBase<UploadedImage> response = new ResponseBase<UploadedImage>()
             {
                 ResponseData = new UploadedImage()
             };
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                IFormFile uploadedFile = Request.Form.Files[0];
-                //TODO create a thumbnail file from uploadedFile
-                ResponseBase<byte[]> thumbnailResponse= ImageService.ConvertImage(100, 100, uploadedFile.OpenReadStream());
+                IFormFile uploadedFile = Request.Form.Files[0];//only one file
+
+                ResponseBase<byte[]> thumbnailResponse = ImageService.ConvertImage(100, 100, uploadedFile.OpenReadStream());
                 if (!thumbnailResponse.Success)
                 {
-                    response.SetFailureResponse(thumbnailResponse.Message,errorCode+" ,"+thumbnailResponse.ErrorCode);
+                    response.SetFailureResponse(thumbnailResponse.Message, errorCode + " ," + thumbnailResponse.ErrorCode);
                     return response;
                 }
                 response.ResponseData.Image = Convert.ToBase64String(thumbnailResponse.ResponseData);
-                response.ResponseData.ImageFileName = "ToBeSet"+DateTime.Now.ToLocalTime();
+                response.ResponseData.ImageFileName = "ToBeSet" + DateTime.Now.ToLocalTime();
 
-                await _imageRepository.SaveTempFile(uploadedFile,thumbnailResponse.ResponseData, user.Email);
+                await _imageRepository.SaveTempFile(uploadedFile, thumbnailResponse.ResponseData, user.Email);
                 response.SetSuccessResponse("files saved in temp folder");
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message, errorCode);
+            }
+            return response;
+        }
+
+        [Authorize]
+        public async Task<ResponseBase> RemoveTempImage([FromQuery] Dictionary<string, string> userInput)
+        {
+            string errorCode = "AdApiController.RemoveTempImage";
+            ResponseBase response = new ResponseBase();
+            try
+            {
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                string fileNameToBeRemoved =
+                    ParameterExtractor.ExtractString(userInput, "FileNameToBeRemoved", "default.jpg");
+                //TODO remove the file
+                response.SetSuccessResponse("OK");
+
             }
             catch (Exception ex)
             {
@@ -368,11 +389,11 @@ namespace MvcMain.Controllers
 
         public ResponseBase<AdvertisementTransportation> GetTransportationAdDetail([FromBody] Guid adId)
         {
-            IAdvertisementTransportationService transportationService =MyService.Inst.GetService<IAdvertisementTransportationService>();
+            IAdvertisementTransportationService transportationService = MyService.Inst.GetService<IAdvertisementTransportationService>();
             return transportationService.GetAdDetail(adId);
         }
 
-       
+
         private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<IList<AdvertisementCommon>> response)
         {
             if (userInput.ContainsKey(requestIndexKey))
