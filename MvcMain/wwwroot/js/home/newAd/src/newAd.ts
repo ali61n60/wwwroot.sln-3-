@@ -3,22 +3,26 @@ import { CategorySelectionNewAd } from "../../../Components/Category/NewAd/Categ
 import { NewAdPartialViewLoader} from "./NewAdPartialViewLoader";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {NewAdCriteria} from "./NewAdCriteria";
+import {ImageUploader} from "./ImageUploader";
+
 
 class NewAd implements ICriteriaChange {
     
     private _allCategoriesInputId: string;
-    private _categorySelectionNewAd: CategorySelectionNewAd;
     private _allCategoriesDivId: string;
-    private _categorySpecificPartialViewId:string;
-    private _partialViewLoader: NewAdPartialViewLoader;
+    private _categorySpecificPartialViewId: string;
 
-    private _newAdCriteria:NewAdCriteria;
+    private _categorySelectionNewAd: CategorySelectionNewAd;
+    private _partialViewLoader: NewAdPartialViewLoader;
+    private _newAdCriteria: NewAdCriteria;
+    private _imageUploader:ImageUploader;
 
     constructor(allCategoriesDiv: string,allCategoriesInputId: string,categorySpecificPartialViewId:string) {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
         this._newAdCriteria = new NewAdCriteria();
+        this._imageUploader = new ImageUploader();
         this.initPage();
         this.initEventHandlers();
     }

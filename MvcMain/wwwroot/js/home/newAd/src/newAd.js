@@ -3,12 +3,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/CategorySelectionNewAd");
 var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
 var NewAdCriteria_1 = require("./NewAdCriteria");
+var ImageUploader_1 = require("./ImageUploader");
 var NewAd = /** @class */ (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
         this._newAdCriteria = new NewAdCriteria_1.NewAdCriteria();
+        this._imageUploader = new ImageUploader_1.ImageUploader();
         this.initPage();
         this.initEventHandlers();
     }
