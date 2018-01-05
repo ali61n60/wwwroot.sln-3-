@@ -16,18 +16,18 @@ namespace RepositoryStd
             _directoryPath = directoryPath;
         }
 
-        public void SaveImages(Guid advertisementGuid, string[] Images)
+        public void SaveImages(Guid advertisementGuid, string[] images)
         {
             string directoryPathString = _directoryPath + advertisementGuid;
             Directory.CreateDirectory(directoryPathString);
 
-            for (int i = 0, fileName = 0; i < Images.Length; i++)
-                if (Images[i] != null)
+            for (int i = 0, fileName = 0; i < images.Length; i++)
+                if (images[i] != null)
                 {
                     string fullFileName = directoryPathString + "/" + fileName++ + ".jpeg";
                     using (FileStream imageFileStream = File.Create(fullFileName))
                     {
-                        byte[] byteImage = Convert.FromBase64String(Images[i]);
+                        byte[] byteImage = Convert.FromBase64String(images[i]);
                         imageFileStream.Write(byteImage, 0, byteImage.Length);
                     }
                 }
