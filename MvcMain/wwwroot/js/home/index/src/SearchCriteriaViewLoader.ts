@@ -2,8 +2,6 @@
 import {ICriteriaChange } from "../../../Helper/ICriteriaChange";
 import {SearchCriteria} from "./SearchCriteria";
 
-
-
 export class SearchCriteriaViewLoader {
     private _parentDivId: string;
     private _searchCriteriaChange: ICriteriaChange;

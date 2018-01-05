@@ -7,8 +7,9 @@ import {CriteriaNumericDictionary} from "../../../Helper/CriteriaNumericDictiona
 
 
 export class SearchCriteria {
-    private _searchCriteriaIocContainer: CriteriaNumericDictionary = new CriteriaNumericDictionary();
+    private _searchCriteriaIocContainer: CriteriaNumericDictionary ;
     constructor() {
+        this._searchCriteriaIocContainer = new CriteriaNumericDictionary();
         this.initSearchCriteriaIocContainer();
     }
 

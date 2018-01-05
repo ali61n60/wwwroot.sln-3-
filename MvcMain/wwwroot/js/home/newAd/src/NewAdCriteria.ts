@@ -6,8 +6,9 @@ import {ICriteria} from "../../../Helper/ICriteria";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 
 export class NewAdCriteria {
-    private _newAdCriteriaIocContainer: CriteriaNumericDictionary = new CriteriaNumericDictionary();
+    private _newAdCriteriaIocContainer: CriteriaNumericDictionary ;
     constructor() {
+        this._newAdCriteriaIocContainer = new CriteriaNumericDictionary();
         this.initNewAdCriteriaIocContainer();
     }
 

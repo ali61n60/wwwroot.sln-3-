@@ -14,10 +14,10 @@ export class Index implements ICriteriaChange {
     private readonly _minPriceInputId= "minPrice";
     private readonly _maxPriceInputId ="maxPrice";
 
-    private _serverCaller = new ServerCaller();
+    private _serverCaller:ServerCaller;
     private _categorySelection: CategorySelection;
-    private _searchCriteria=new SearchCriteria();
-    private _searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this,this._searchCriteria);
+    private _searchCriteria:SearchCriteria;
+    private _searchCriteriaViewLoader:SearchCriteriaViewLoader;
 
     private _categorySelectorParentDivId: string;
     private _getAdFromServerId: string;
@@ -25,10 +25,15 @@ export class Index implements ICriteriaChange {
 
     constructor(categorySelectorParentDivId: string,
         allCategoriesId: string,
-        getAdFromServerId: string) {
+        getAdFromServerId: string)
+    {
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
         this._getAdFromServerId = getAdFromServerId;
+
+        this._serverCaller = new ServerCaller();
+        this._searchCriteria = new SearchCriteria();
+        this._searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
 
         this.initPage();
         this.initEventHandlers();
