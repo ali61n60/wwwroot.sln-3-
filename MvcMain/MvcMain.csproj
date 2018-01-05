@@ -507,6 +507,7 @@
     <TypeScriptCompile Include="wwwroot\js\home\index\src\SearchCriteria\DefaultSearchCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\ICriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\ServerCaller.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\newAd\src\ImageUploader.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\newAd.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdCriteria\DefaultNewAdCriteria.ts" />

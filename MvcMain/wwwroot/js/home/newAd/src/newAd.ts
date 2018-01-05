@@ -1,29 +1,35 @@
 ﻿import { Category } from "../../../Models/Category";
 import { CategorySelectionNewAd } from "../../../Components/Category/NewAd/CategorySelectionNewAd";
 import { NewAdPartialViewLoader} from "./NewAdPartialViewLoader";
+import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
+import {NewAdCriteria} from "./NewAdCriteria";
 
-
-class NewAd {
+class NewAd implements ICriteriaChange {
+    
     private _allCategoriesInputId: string;
     private _categorySelectionNewAd: CategorySelectionNewAd;
     private _allCategoriesDivId: string;
     private _categorySpecificPartialViewId:string;
     private _partialViewLoader: NewAdPartialViewLoader;
 
-    constructor(allCategoriesDiv: string,
-        allCategoriesInputId: string,
-        categorySpecificPartialViewId:string) {
+    private _newAdCriteria:NewAdCriteria;
 
+    constructor(allCategoriesDiv: string,allCategoriesInputId: string,categorySpecificPartialViewId:string) {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
+        this._newAdCriteria = new NewAdCriteria();
         this.initPage();
         this.initEventHandlers();
     }
 
+    public CustomCriteriaChanged(): void {
+        
+    }
+
     private initPage(): void {
         this.initNewAdCategory();
-        this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId);
+        this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId,this,this._newAdCriteria);
     }
 
     private initNewAdCategory():void {

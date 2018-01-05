@@ -8,6 +8,8 @@ import {UserInput} from "../../../Helper/UserInput";
 
 
 //TODO when category change before search criteia is loaded a search call is sent to server
+//add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
+//durng inProgress end enable it after completed
 export class Index implements ICriteriaChange {
 
     private readonly _orderBySelectIdDiv = "orderBy";

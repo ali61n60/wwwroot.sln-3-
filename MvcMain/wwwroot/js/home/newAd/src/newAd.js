@@ -2,17 +2,21 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/CategorySelectionNewAd");
 var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
+var NewAdCriteria_1 = require("./NewAdCriteria");
 var NewAd = /** @class */ (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
+        this._newAdCriteria = new NewAdCriteria_1.NewAdCriteria();
         this.initPage();
         this.initEventHandlers();
     }
+    NewAd.prototype.CustomCriteriaChanged = function () {
+    };
     NewAd.prototype.initPage = function () {
         this.initNewAdCategory();
-        this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this._categorySpecificPartialViewId);
+        this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
     };
     NewAd.prototype.initNewAdCategory = function () {
         var allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();

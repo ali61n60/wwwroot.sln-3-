@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader_1 = require("../../newAd/src/NewAdPartialViewLoader");
 var SearchCriteriaViewLoader = /** @class */ (function () {
     function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange, searchCriteria) {
-        this._url = "Home/GetSearchCriteriaView";
+        this._url = "/Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
         this._parentDivId = parentDivId;
@@ -12,7 +12,6 @@ var SearchCriteriaViewLoader = /** @class */ (function () {
     }
     SearchCriteriaViewLoader.prototype.GetSearchCriteriaViewFromServer = function (categoryId) {
         var _this = this;
-        //TODO get view from server and add it to page
         this._currentCategoryId = categoryId;
         var callParams = new NewAdPartialViewLoader_1.PartialViewServerCallParameters();
         callParams.CategoryId = categoryId;

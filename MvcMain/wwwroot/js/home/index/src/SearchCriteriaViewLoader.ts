@@ -5,7 +5,7 @@ import {SearchCriteria} from "./SearchCriteria";
 export class SearchCriteriaViewLoader {
     private _parentDivId: string;
     private _searchCriteriaChange: ICriteriaChange;
-    private _url: string = "Home/GetSearchCriteriaView";
+    private _url: string = "/Home/GetSearchCriteriaView";
     private _previousCategoryId:number = 0;
     private _currentCategoryId: number = 0;
     private _searchCriteria:SearchCriteria;
@@ -17,7 +17,6 @@ export class SearchCriteriaViewLoader {
     }
 
     public GetSearchCriteriaViewFromServer(categoryId: number) {
-        //TODO get view from server and add it to page
         this._currentCategoryId = categoryId;
         let callParams = new PartialViewServerCallParameters();
         callParams.CategoryId = categoryId;

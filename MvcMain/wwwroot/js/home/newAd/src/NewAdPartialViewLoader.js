@@ -1,12 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader = /** @class */ (function () {
-    function NewAdPartialViewLoader(partialViewDivId) {
+    function NewAdPartialViewLoader(partialViewDivId, newAdCriteriaChange, newAdCriteria) {
         this._url = "/Home/GetNewAdPartialView";
+        this._previousCategoryId = 0;
+        this._currentCategoryId = 0;
         this._partialViewDivId = partialViewDivId;
+        this._newAdCriteriaChange = newAdCriteriaChange;
+        this._newAdCriteria = newAdCriteria;
     }
     NewAdPartialViewLoader.prototype.GetPartialViewFromServer = function (categoryId) {
         var _this = this;
+        this._currentCategoryId = categoryId;
         var callParams = new PartialViewServerCallParameters();
         callParams.CategoryId = categoryId;
         $.ajax({
@@ -19,8 +24,11 @@ var NewAdPartialViewLoader = /** @class */ (function () {
         }); //.ajax
     };
     NewAdPartialViewLoader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
+        this._newAdCriteria.UnBind(this._previousCategoryId);
         $("#" + this._partialViewDivId).children().remove();
         $("#" + this._partialViewDivId).html(msg);
+        this._newAdCriteria.Bind(this._currentCategoryId, this._newAdCriteriaChange);
+        this._previousCategoryId = this._currentCategoryId;
     }; //onSuccessGetTimeFromServer
     NewAdPartialViewLoader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         alert(errorThrown);

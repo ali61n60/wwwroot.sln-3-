@@ -6,17 +6,19 @@ var SearchCriteriaViewLoader_1 = require("./SearchCriteriaViewLoader");
 var SearchCriteria_1 = require("./SearchCriteria");
 var UserInput_1 = require("../../../Helper/UserInput");
 //TODO when category change before search criteia is loaded a search call is sent to server
+//add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
+//durng inProgress end enable it after completed
 var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this._orderBySelectIdDiv = "orderBy";
         this._minPriceInputId = "minPrice";
         this._maxPriceInputId = "maxPrice";
-        this._serverCaller = new ServerCaller_1.ServerCaller();
-        this._searchCriteria = new SearchCriteria_1.SearchCriteria();
-        this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
         this._getAdFromServerId = getAdFromServerId;
+        this._serverCaller = new ServerCaller_1.ServerCaller();
+        this._searchCriteria = new SearchCriteria_1.SearchCriteria();
+        this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
         this.initPage();
         this.initEventHandlers();
     }

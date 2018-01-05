@@ -13,18 +13,18 @@ var NewAdCriteria = /** @class */ (function () {
         this._newAdCriteriaIocContainer[100] = new AdTransformationNewAdCriteria_1.AdTransformationNewAdCriteria();
     };
     NewAdCriteria.prototype.FillCategorySpecificNewAdCriteria = function (categoryId, userInput) {
-        var newAdCriteria = this.polymorphicDispatchNeaAdCriteria(categoryId);
+        var newAdCriteria = this.polymorphicDispatchNewAdCriteria(categoryId);
         newAdCriteria.FillCriteria(userInput);
     };
-    NewAdCriteria.prototype.Bind = function (categoryId, searchCriteriaChange) {
-        var searchCriteria = this.polymorphicDispatchNeaAdCriteria(categoryId);
-        searchCriteria.BindEvents(searchCriteriaChange);
+    NewAdCriteria.prototype.Bind = function (categoryId, criteriaChange) {
+        var criteria = this.polymorphicDispatchNewAdCriteria(categoryId);
+        criteria.BindEvents(criteriaChange);
     };
     NewAdCriteria.prototype.UnBind = function (categoryId) {
-        var searchCriteria = this.polymorphicDispatchNeaAdCriteria(categoryId);
-        searchCriteria.UnBindEvents();
+        var criteria = this.polymorphicDispatchNewAdCriteria(categoryId);
+        criteria.UnBindEvents();
     };
-    NewAdCriteria.prototype.polymorphicDispatchNeaAdCriteria = function (categoryId) {
+    NewAdCriteria.prototype.polymorphicDispatchNewAdCriteria = function (categoryId) {
         var returnValue = this._newAdCriteriaIocContainer[categoryId];
         if (returnValue === undefined || returnValue === null) {
             returnValue = this._newAdCriteriaIocContainer[0];

@@ -18,21 +18,21 @@ export class NewAdCriteria {
     }
 
     public FillCategorySpecificNewAdCriteria(categoryId: number, userInput: UserInput): void {
-        let newAdCriteria = this.polymorphicDispatchNeaAdCriteria(categoryId);
+        let newAdCriteria = this.polymorphicDispatchNewAdCriteria(categoryId);
         newAdCriteria.FillCriteria(userInput);
     }
 
-    public Bind(categoryId: number, searchCriteriaChange: ICriteriaChange) {
-        let searchCriteria = this.polymorphicDispatchNeaAdCriteria(categoryId);
-        searchCriteria.BindEvents(searchCriteriaChange);
+    public Bind(categoryId: number, criteriaChange: ICriteriaChange) {
+        let criteria = this.polymorphicDispatchNewAdCriteria(categoryId);
+        criteria.BindEvents(criteriaChange);
     }
 
     public UnBind(categoryId: number) {
-        let searchCriteria = this.polymorphicDispatchNeaAdCriteria(categoryId);
-        searchCriteria.UnBindEvents();
+        let criteria = this.polymorphicDispatchNewAdCriteria(categoryId);
+        criteria.UnBindEvents();
     }
 
-    private polymorphicDispatchNeaAdCriteria(categoryId: number): ICriteria {
+    private polymorphicDispatchNewAdCriteria(categoryId: number): ICriteria {
         let returnValue: ICriteria = this._newAdCriteriaIocContainer[categoryId];
         if (returnValue === undefined || returnValue === null) {
             returnValue = this._newAdCriteriaIocContainer[0];
