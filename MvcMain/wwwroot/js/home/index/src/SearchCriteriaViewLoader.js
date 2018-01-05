@@ -1,15 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader_1 = require("../../newAd/src/NewAdPartialViewLoader");
-var SearchCriteria_1 = require("./SearchCriteria");
 var SearchCriteriaViewLoader = /** @class */ (function () {
-    function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange) {
+    function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange, searchCriteria) {
         this._url = "Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
-        this._searchCriteria = new SearchCriteria_1.SearchCriteria();
         this._parentDivId = parentDivId;
         this._searchCriteriaChange = searchCriteriaChange;
+        this._searchCriteria = searchCriteria;
     }
     SearchCriteriaViewLoader.prototype.GetSearchCriteriaViewFromServer = function (categoryId) {
         var _this = this;

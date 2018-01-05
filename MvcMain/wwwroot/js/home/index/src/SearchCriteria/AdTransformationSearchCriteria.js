@@ -25,14 +25,15 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
         this.CarStatusSelectId = "carStatus";
         this.PlateTypeKey = "PlateType";
         this.PlateTypeSelectId = "plateType";
-        var x = 10;
-        x = 20;
+        this.x = 20;
     }
     AdTransformationSearchCriteria.prototype.initView = function () {
         this._carModelBrandContoller = new CarModelBrandController_1.CarModelBrandController();
+        this.x = 10;
     };
     //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
     AdTransformationSearchCriteria.prototype.FillCriteria = function (userInput) {
+        alert(this.x);
         this._carModelBrandContoller.FillCriteria(userInput);
         userInput.ParametersDictionary[this.MakeYearFromKey] =
             $("#" + this.MakeYearFromInputId).val(); //makeYearFrom

@@ -10,11 +10,12 @@ export class SearchCriteriaViewLoader {
     private _url: string = "Home/GetSearchCriteriaView";
     private _previousCategoryId:number = 0;
     private _currentCategoryId: number = 0;
-    private _searchCriteria=new SearchCriteria();
+    private _searchCriteria:SearchCriteria;
 
-    constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange) {
+    constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange,searchCriteria:SearchCriteria) {
         this._parentDivId = parentDivId;
         this._searchCriteriaChange = searchCriteriaChange;
+        this._searchCriteria = searchCriteria;
     }
 
     public GetSearchCriteriaViewFromServer(categoryId: number) {

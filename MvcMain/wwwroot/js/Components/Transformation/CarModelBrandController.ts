@@ -60,12 +60,11 @@ export class CarModelBrandController implements ICriteria {
     }
 
 
-    public FillCriteria(userInput:UserInput) {
+    public FillCriteria(userInput:UserInput):void {
         userInput.ParametersDictionary[this.CarBrandIdKey] =
             $("#" + this.BrandSelectId).find("option:selected").val();//brandId
         userInput.ParametersDictionary[this.CarModelIdKey] =
             $("#" + this.ModelSelectId).find("option:selected").val();//carModelId
-
     }
 
     BindEvents(criteriaChange: ICriteriaChange): void {

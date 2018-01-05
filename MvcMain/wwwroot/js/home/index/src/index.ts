@@ -16,8 +16,8 @@ export class Index implements ICriteriaChange {
 
     private _serverCaller = new ServerCaller();
     private _categorySelection: CategorySelection;
-    private _searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this);
     private _searchCriteria=new SearchCriteria();
+    private _searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this,this._searchCriteria);
 
     private _categorySelectorParentDivId: string;
     private _getAdFromServerId: string;

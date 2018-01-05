@@ -145,9 +145,9 @@ namespace RepositoryStd.Repository.Transportation
         private IQueryable<Advertisements> whereInternalColor(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             string internalColor = ParameterExtractor.ExtractString(queryParameters, InternalColorKey, InternalColorDefault);
-            if (internalColor != BodyColorDefault)
+            if (internalColor != InternalColorDefault)
             {
-                list = list.Where(advertisement => advertisement.AdAttributeTransportation.BodyColor == internalColor);
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.InternalColor == internalColor);
             }
 
             return list;

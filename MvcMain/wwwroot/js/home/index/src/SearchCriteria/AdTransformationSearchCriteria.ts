@@ -1,7 +1,6 @@
 ﻿import { UserInput } from "../../../../Helper/UserInput";
 import { ICriteriaChange } from "../../../../Helper/ICriteriaChange";
 import {ICriteria} from "../../../../Helper/ICriteria";
-import {CarModel} from "../../../../Models/AdTransportation/CarModel";
 import {CarModelBrandController} from "../../../../Components/Transformation/CarModelBrandController";
 
 
@@ -9,7 +8,7 @@ import {CarModelBrandController} from "../../../../Components/Transformation/Car
 export class AdTransformationSearchCriteria implements ICriteria {
     private _searchCriteriaChange: ICriteriaChange;
 
-    private _carModelBrandContoller: CarModelBrandController;
+    public  _carModelBrandContoller: CarModelBrandController;
 
     private readonly MakeYearFromKey: string = "MakeYearFrom";
     private readonly MakeYearFromInputId: string = "fromYear";
@@ -43,12 +42,8 @@ export class AdTransformationSearchCriteria implements ICriteria {
 
     public readonly PlateTypeKey: string = "PlateType";
     public  readonly PlateTypeSelectId:string= "plateType";
-    private x:number;
-    constructor() {
-        let x = 10;
-        x = 20;
-    }
-
+    
+   
     private initView(): void {
         this._carModelBrandContoller = new CarModelBrandController();
     }
