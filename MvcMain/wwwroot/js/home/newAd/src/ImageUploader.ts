@@ -91,7 +91,7 @@
         var form_data = new FormData();                  // Creating object of FormData class
         form_data.append("method", "deleteImage");               // Adding extra parameters to form_data
         form_data.append("imageId", event.data.imageId);
-        reportMessageToUser("در حال حذف فایل");
+        this.reportMessageToUser("در حال حذف فایل");
         $.ajax({//C# Method call
             type: 'POST',
             processData: false, // important
@@ -101,17 +101,17 @@
             url: "<%= Page.ResolveClientUrl(imageWebUserControlHandlerAddress) %>",
             success: function (msg) {
                 var jsonMessage = JSON.parse(msg);
-                reportMessageToUser(jsonMessage.message);
+                this.reportMessageToUser(jsonMessage.message);
                 $(event.target).parent().remove();
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
-                reportMessageToUser(textStatus + "  ," + errorThrown);
+                this.reportMessageToUser(textStatus + "  ," + errorThrown);
             }
         });//end $.ajax C# call
     }//end removeImageFromSession
 
     private reportMessageToUser(message) {
-        $newMessage = $("<span style=\"color:red\">" + message + "</span><br />");
+       let $newMessage = $("<span style=\"color:red\">" + message + "</span><br />");
         $newMessage.hide();
         $("#labelUploadResult").children().remove();
         $("#labelUploadResult").append($newMessage);
