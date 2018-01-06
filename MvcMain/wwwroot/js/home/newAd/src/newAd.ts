@@ -57,7 +57,10 @@ class NewAd implements ICriteriaChange {
     }
 
     private submitAd() {
-        alert("Hello Ali");
+        //TODO get user input
+        //send user input to an api server method
+        //on the server push data into database and also get user's pictures
+        //from TempImage Directory
     }
 }
 

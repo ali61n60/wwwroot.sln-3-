@@ -1,20 +1,30 @@
 ﻿import { UserInput  } from "../../../Helper/UserInput";
-
+//TODO make count optional to user
 export class ServerCaller {
-    private readonly  _initialStart: number = 1;
+    private readonly StartIndexKey: string ="StartIndex";
+    private readonly _initialStart: number = 1;
     private _start: number = 1;
+
+    private readonly CountKey: string ="Count";
     private _count: number = 5;
+
+    private readonly RequestIndexKey: string ="RequestIndex";
     private _currentRequestIndex: number = 0;
-    private readonly  _initialRequestIndex: number = 0;
+    private readonly _initialRequestIndex: number = 0;
+
+    private readonly NumberOfItemsKey: string ="numberOfItems";
+
+    private readonly CallImageId: string ="serverCalledImage";
     private _isServerCalled: boolean = false;
     private _numberOfStartServerCallNotification: number = 0;
-    private _url: string = "api/AdApi/GetAdvertisementCommon";
+    private readonly  _url: string = "api/AdApi/GetAdvertisementCommon";
+    private readonly  _adPlaceHolderDivId: string ="adPlaceHolder";
 
     public GetAdItemsFromServer(userInput: UserInput): void {
-        userInput.ParametersDictionary.StartIndex = this._start;
-        userInput.ParametersDictionary.Count = this._count;
+        userInput.ParametersDictionary[this.StartIndexKey] = this._start;
+        userInput.ParametersDictionary[this.CountKey] = this._count;
         this._currentRequestIndex++;
-        userInput.ParametersDictionary.RequestIndex = this._currentRequestIndex;
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
         
         $.ajax({
             type: "POST", //GET or POST or PUT or DELETE verb
@@ -30,18 +40,13 @@ export class ServerCaller {
 
      
     private onSuccessGetItemsFromServer(msg:any,textStatus:string, jqXHR:JQueryXHR) {
-        //notifyUserAjaxCallFinished();
         //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
-        console.log("server response request index:" +
-            msg.customDictionary["RequestIndex"] +
-            ", client current request index:" + this._currentRequestIndex);
         if (this._isServerCalled) {
-            if (msg.customDictionary["RequestIndex"] == this._currentRequestIndex) { //last call response
+            if (msg.customDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
                 this._isServerCalled = false;
                 this.notifyUserAjaxCallFinished();
                 if (msg.success == true) {
-                    console.log("processing request index:" + this._currentRequestIndex);
-                    this._start += parseInt(msg.customDictionary["numberOfItems"]);
+                    this._start += parseInt(msg.customDictionary[this.NumberOfItemsKey]);
                     var template = $('#singleAdItem').html();
                     var data;
                     for (var i = 0; i < msg.responseData.length; i++) {
@@ -61,7 +66,7 @@ export class ServerCaller {
                         } //end data
 
                         var html = Mustache.to_html(template, data);
-                        $("#adPlaceHolder").append(html);
+                        $("#" +this._adPlaceHolderDivId).append(html);
                     } //end for
                 } //if (msg.success == true)
                 else {
@@ -85,12 +90,12 @@ export class ServerCaller {
 
     private notifyUserAjaxCallStarted() {
         console.log("Started Ajax Call");
-        $("#serverCalledImage").show();
+        $("#"+this.CallImageId).show();
     }
 
     notifyUserAjaxCallFinished() {
         console.log("Finished Ajax Call");
-        $("#serverCalledImage").hide();
+        $("#" + this.CallImageId).hide();
     }
 }
 
