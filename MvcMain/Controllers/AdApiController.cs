@@ -12,6 +12,7 @@ using ModelStd.Services;
 using MvcMain.Infrastructure.Services;
 using RepositoryStd.Context.Helper;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Net.Http.Headers;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
@@ -62,6 +63,7 @@ namespace MvcMain.Controllers
             return "REZANEJATI";
         }
 
+        //TODO move this method to its controller
         public JsonResult InsertTemperature([FromQuery] int temperature)
         {
             TemperatureModel temperatureModel = new TemperatureModel()
@@ -128,7 +130,6 @@ namespace MvcMain.Controllers
 
             }
         }
-
 
         public void FillAllImages(AdvertisementCommon[] advertisementCommons)
         {
@@ -218,6 +219,7 @@ namespace MvcMain.Controllers
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
                 IFormFile uploadedFile = Request.Form.Files[0];//only one file
+                string filename = ContentDispositionHeaderValue.Parse(uploadedFile.ContentDisposition).FileName.Trim('"');
 
                 ResponseBase<byte[]> thumbnailResponse = ImageService.ConvertImage(100, 100, uploadedFile.OpenReadStream());
                 if (!thumbnailResponse.Success)
@@ -226,7 +228,7 @@ namespace MvcMain.Controllers
                     return response;
                 }
                 response.ResponseData.Image = Convert.ToBase64String(thumbnailResponse.ResponseData);
-                response.ResponseData.ImageFileName = "ToBeSet" + DateTime.Now.ToLocalTime();
+                response.ResponseData.ImageFileName = filename;
 
                 await _imageRepository.SaveTempFile(uploadedFile, thumbnailResponse.ResponseData, user.Email);
                 response.SetSuccessResponse("files saved in temp folder");
@@ -239,23 +241,29 @@ namespace MvcMain.Controllers
         }
 
         [Authorize]
-        public async Task<ResponseBase> RemoveTempImage([FromQuery] Dictionary<string, string> userInput)
+        public async Task<ResponseBase<string>> RemoveTempImage([FromQuery] Dictionary<string, string> userInput)
         {
             string errorCode = "AdApiController.RemoveTempImage";
-            ResponseBase response = new ResponseBase();
+            string FileNameToBeRemovedKey = "FileNameToBeRemoved";
+            string defaultFileName = "__dddsss.jpg";
+            ResponseBase<string> response = new ResponseBase<string>();
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                string fileNameToBeRemoved =
-                    ParameterExtractor.ExtractString(userInput, "FileNameToBeRemoved", "default.jpg");
-                //TODO remove the file
-                response.SetSuccessResponse("OK");
+                string fileNameToBeRemoved = ParameterExtractor.ExtractString(userInput, FileNameToBeRemovedKey, defaultFileName);
 
+                if (fileNameToBeRemoved != defaultFileName)
+                {
+                    await _imageRepository.RemoveTempFile(fileNameToBeRemoved, user.Email);
+                }
+                response.ResponseData = fileNameToBeRemoved;
+                response.SetSuccessResponse("OK");
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse(ex.Message,errorCode);
+                response.SetFailureResponse(ex.Message, errorCode);
             }
+
             return response;
         }
 

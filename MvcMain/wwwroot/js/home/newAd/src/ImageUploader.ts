@@ -1,4 +1,5 @@
-﻿export class ImageUploader {
+﻿//TODO when 2 files are send to server messages to user are not correct OR when deleting 2 files
+export class ImageUploader {
     private _imageUploadInputId: string = "imageUpload";
     private _messageToUserDivId: string = "labelMessageToUser";
     private _loadedImagesDivId: string = "loadedImageView";
@@ -21,15 +22,8 @@
 
             }); //change
 
-            $(document).on("click",
-                ".addedImage > input",
-                (event) => {
-                    //todo call server to remove temp file and also remove it from page
-                    //create a method to use ajax and call
-                    // server to remove the image from the server 
-                    //also remove the image from current page
+            $(document).on("click",".addedImage > input",(event) => {
                     this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
-                    //alert($(event.currentTarget).parent().attr("id"));
                 }); //click
 
         }); //ready
@@ -90,6 +84,7 @@
 
 
     //TODO refactor this method 
+    
     private removeImageFromServer(fileName: string) {
         let callParams = {
             FileNameToBeRemoved: fileName
@@ -99,26 +94,29 @@
             type: "GET", //GET or POST or PUT or DELETE verb
             url: this._removeFileFromServerUrl,
             data: callParams, //Data sent to server
-            success: (msg, textStatus, jqXHR) =>
-                this.onSuccessRemoveFileFromServer(msg, textStatus, jqXHR), //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) =>
-                this.onErrorRemoveFileFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
+            success: (msg, textStatus, jqXHR) =>this.onSuccessRemoveFileFromServer(msg, textStatus, jqXHR), //On Successfull service call
+            error: (jqXHR, textStatus, errorThrown) =>this.onErrorRemoveFileFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
         }); //.ajax
         this.showMessageToUser("removing file from server");
     }
 
 
     private onSuccessRemoveFileFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        this.showMessageToUser("done removing file from server");
-        //TODO also remove the image from the page
+        if (msg.success == true) {
+            this.showMessageToUser("done removing file from server");
+            let fileName: string = msg.responseData;
+            $(`[id="${fileName}"]`).remove();
+            
+
+        } else {
+            this.showMessageToUser(msg.message);
+        }
     }
 
     private onErrorRemoveFileFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        this.showMessageToUser("error removing file from server, " + errorThrown);
+        this.showMessageToUser("error, " + errorThrown);
     }
-
 }
-
 
 class UploadedImage {
     public Image: string;

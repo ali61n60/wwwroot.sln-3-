@@ -1,5 +1,5 @@
 ﻿import { ICriteria} from "./ICriteria";
-import { NumericDictionary } from "lodash/dist/lodash";
+import { NumericDictionary } from "lodash/index";
 
 
 export class CriteriaNumericDictionary implements NumericDictionary<ICriteria> {

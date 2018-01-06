@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CarModelBrandController_1 = require("../../../../Components/Transformation/CarModelBrandController");
-var AdTransformationNewAdCriteria = /** @class */ (function () {
+var AdTransformationNewAdCriteria = (function () {
     function AdTransformationNewAdCriteria() {
     }
     AdTransformationNewAdCriteria.prototype.initView = function () {

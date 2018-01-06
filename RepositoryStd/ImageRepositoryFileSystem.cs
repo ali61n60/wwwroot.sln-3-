@@ -154,6 +154,17 @@ namespace RepositoryStd
                 fs.Flush();
             }
         }
+
+        public async Task RemoveTempFile(string fileNameToBeRemoved, string userEmail)
+        {
+            string tempFilesDirectoryPath = _directoryPath + "TempFiles/" + userEmail;
+            if (!Directory.Exists(tempFilesDirectoryPath))
+                return;
+            string fileName = tempFilesDirectoryPath + $@"\{fileNameToBeRemoved}";
+            string thumnNalFileName = tempFilesDirectoryPath + $@"\thumbnail-{fileNameToBeRemoved}";
+            File.Delete(fileName);
+            File.Delete(thumnNalFileName);
+        }
     }
 }
 

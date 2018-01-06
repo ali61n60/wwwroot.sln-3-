@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ImageUploader = /** @class */ (function () {
+var ImageUploader = (function () {
     function ImageUploader() {
         this._imageUploadInputId = "imageUpload";
         this._messageToUserDivId = "labelMessageToUser";
@@ -20,12 +20,7 @@ var ImageUploader = /** @class */ (function () {
                 _this.sendFilesToServer(files);
             }); //change
             $(document).on("click", ".addedImage > input", function (event) {
-                //todo call server to remove temp file and also remove it from page
-                //create a method to use ajax and call
-                // server to remove the image from the server 
-                //also remove the image from current page
                 _this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
-                //alert($(event.currentTarget).parent().attr("id"));
             }); //click
         }); //ready
     };
@@ -88,25 +83,28 @@ var ImageUploader = /** @class */ (function () {
             type: "GET",
             url: this._removeFileFromServerUrl,
             data: callParams,
-            success: function (msg, textStatus, jqXHR) {
-                return _this.onSuccessRemoveFileFromServer(msg, textStatus, jqXHR);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                return _this.onErrorRemoveFileFromServer(jqXHR, textStatus, errorThrown);
-            } // When Service call fails
+            success: function (msg, textStatus, jqXHR) { return _this.onSuccessRemoveFileFromServer(msg, textStatus, jqXHR); },
+            error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorRemoveFileFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails
         }); //.ajax
         this.showMessageToUser("removing file from server");
     };
     ImageUploader.prototype.onSuccessRemoveFileFromServer = function (msg, textStatus, jqXHR) {
-        this.showMessageToUser("done removing file from server");
+        if (msg.success == true) {
+            this.showMessageToUser("done removing file from server");
+            var fileName = msg.responseData;
+            $("[id=\"" + fileName + "\"]").remove();
+        }
+        else {
+            this.showMessageToUser(msg.message);
+        }
     };
     ImageUploader.prototype.onErrorRemoveFileFromServer = function (jqXHR, textStatus, errorThrown) {
-        this.showMessageToUser("error removing file from server, " + errorThrown);
+        this.showMessageToUser("error, " + errorThrown);
     };
     return ImageUploader;
 }());
 exports.ImageUploader = ImageUploader;
-var UploadedImage = /** @class */ (function () {
+var UploadedImage = (function () {
     function UploadedImage() {
     }
     return UploadedImage;
