@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//TODO when 2 files are send to server messages to user are not correct OR when deleting 2 files
 var ImageUploader = (function () {
     function ImageUploader() {
         this._imageUploadInputId = "imageUpload";

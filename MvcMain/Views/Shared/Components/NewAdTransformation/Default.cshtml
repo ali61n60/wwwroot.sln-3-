@@ -1,267 +1,207 @@
 ﻿@model object
 
 <div class="well">
-<div class="row">
-    @await Component.InvokeAsync("BrandsTransformation")
-</div>
-<br />
-<div class="row">
-    <div class="col-sm-2 col-sm-push-10">
-        <label>سال تولید</label>
-    </div>
-    <div class="col-sm-4 col-sm-push-4">
-        <select id='makeYear' class='form-control'>
-            <option value="1394">1396</option>
-            <option value="1394">1395</option>
-            <option value="1394">1394</option>
-            <option value="1394">1393</option>
-            <option value="1392">1392</option>
-            <option value="1391">1391</option>
-            <option value="1390">1390</option>
-            <option value="1389">1389</option>
-            <option value="1388">1388</option>
-            <option value="1387">1387</option>
-            <option value="1386">1386</option>
-            <option value="1385">1385</option>
-            <option value="1384">1384</option>
-            <option value="1383">1383</option>
-            <option value="1382">1382</option>
-            <option value="1381">1381</option>
-            <option value="1380">1380</option>
-            <option value="1379">1379</option>
-            <option value="1378">1378</option>
-            <option value="1377">1377</option>
-            <option value="1376">1376</option>
-            <option value="1375">1375</option>
-            <option value="1374">1374</option>
-            <option value="1373">1373</option>
-            <option value="1372">1372</option>
-            <option value="1371">1371</option>
-            <option value="1370">1370</option>
-            <option value="1369">1369</option>
-            <option value="1368">1368</option>
-            <option value="1367">1367</option>
-            <option value="1366">1366</option>
-            <option value="1365">1365</option>
-            <option value="1364">1364</option>
-            <option value="1363">1363</option>
-            <option value="1362">1362</option>
-            <option value="1361">1361</option>
-            <option value="1360">1360</option>
-            <option value="1359">1359</option>
-            <option value="1358">1358</option>
-            <option value="1357">1357</option>
-            <option value="1356">1356</option>
-            <option value="1355">1355</option>
-            <option value="1354">1354</option>
-            <option value="1353">1353</option>
-            <option value="1352">1352</option>
-            <option value="1351">1351</option>
-            <option value="1350">1350</option>
-        </select>
-    </div>
-    <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-        <label>سوخت</label>
-    </div>
-    <div class="col-sm-4 col-sm-pull-8 col-sm-push-0">
-        <select id='fuel' class='form-control'>
-            <option value="0">بنزین</option>
-            <option value="1">دوگانه سوز</option>
-            <option value="2">دیزل</option>
-            <option value="3">گاز</option>
-            <option value="4">الکتریکی</option>
-            <option value="5">هیبرید</option>
-        </select>
-    </div>
-</div>
-<br/>
-<div class="row">
-    <div class="col-sm-2 col-sm-push-10">
-        <input type="radio" name="newUsed" value="used" checked="checked"/>کارکرده<br/>
-        <input type="radio" name="newUsed" value="draft"/>حواله<br/>
-        <input type="radio" name="newUsed" value="new"/>صفر <br/>
-    </div>
-    <div class="col-sm-4 col-sm-push-4">
-        <input class="form-control" placeholder="کارکرد بر حسب کیلومتر" />
-    </div>
-    <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-        <label>گیربکس</label>
-    </div>
-    <div class="col-sm-4 col-sm-pull-8 col-sm-push-0 text-right">
-        <input type="radio" name="gearbox" value="manual" checked="checked" />دنده ای<br/>
-        <input type="radio" name="gearbox" value="automatic"/>اتوماتیک
-    </div>
-</div>
-<br/>
-<div class="well">
     <div class="row">
-
-        <div class="col-sm-2 col-sm-push-10">
-            <input type="radio" name="payment" value="cash" checked="checked">نقد<br/><br/>
-            <input type="radio" name="payment" value="insatllment">قسطی<br/>
+        <div class="col-sm-4">
+            @await Component.InvokeAsync("BrandsTransformation")
         </div>
-        <div class="col-sm-4 col-sm-push-4">
-            <input id="priceCash" class="form-control" placeholder="قیمت نقدی" />
-                
-            <br/>
-            <br/>
-            <input id="numberOfInstallments" class="form-control" placeholder="تعداد اقساط" disabled="disabled" />
-            <br/>
-            <br/>
-            <input id="distanceBetweenPerPayment" class="form-control" placeholder="فاصله بین اقساط بر حسب ماه" disabled="disabled" />
-            <br/>
-            <br/>
-            <input id="payPerInstallment" class="form-control" placeholder="مبلغ هر قسط" disabled="disabled" />
+        <div class="col-sm-4 ">
+            <input id="makeYear" class="form-control" placeholder="سال تولید" />
+            <br />
+            <select id="fuel" class="form-control">
+                <option value="UnSpecified" selected="selected">سوخت</option>
+                <option value="Petrol">بنزین</option>
+                <option value="GasPetrol">دوگانه سوز</option>
+                <option value="Disel">دیزل</option>
+                <option value="Gas">گاز</option>
+                <option value="Electric">الکتریکی</option>
+                <option value="Hybrid">هیبرید</option>
+            </select>
         </div>
-        <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-            <label>نوع پلاک</label>
-        </div>
-        <div class="col-sm-4 col-sm-pull-8 col-sm-push-0 text-right">
-            <input type="radio" name="plate" value="nationalPlate" checked="checked" />پلاک ملی<br/>
-            <input type="radio" name="plate" value="freeRegionPlate" />منطقه آزاد<br />
-            <input type="radio" name="plate" value="temporaryPlate"/>گذر موقت
+        <div class="col-sm-4">
+            <div class="col-sm-6">
+                <label>گیربکس</label>
+            </div>
+            <div class="col-sm-6">
+                <input type="radio" name="gearbox" value="manual" checked="checked" />دنده ای<br />
+                <input type="radio" name="gearbox" value="automatic" />اتوماتیک
+            </div>
         </div>
     </div>
     <br />
-</div>
-<br />
-
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="col-sm-4">
+                <input type="radio" name="newUsed" value="used" checked="checked" />کارکرده<br />
+                <input type="radio" name="newUsed" value="draft" />حواله<br />
+                <input type="radio" name="newUsed" value="new" />صفر <br />
+            </div>
+            <div class="col-sm-8">
+                <input class="form-control" placeholder="کارکرد بر حسب کیلومتر" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <input type="radio" name="plate" value="nationalPlate" checked="checked" />پلاک ملی<br />
+            <input type="radio" name="plate" value="freeRegionPlate" />منطقه آزاد<br />
+            <input type="radio" name="plate" value="temporaryPlate" />گذر موقت
+        </div>
+        <div class="col-sm-4">
+            <div class="col-sm-4">
+                <label>وضعیت بدنه</label>
+            </div>
+            <div class="col-sm-8">
+                <select id='bodyStatus' class='form-control'>
+                    <option value="0" selected="selected">بدون رنگ</option>
+                    <option value="1">یک لکه رنگ</option>
+                    <option value="2">دو لکه رنگ</option>
+                    <option value="3">چند لکه رنگ</option>
+                    <option value="4">گلگیر رنگ</option>
+                    <option value="5">گلگیر تعویض</option>
+                    <option value="6">کاپوت رنگ</option>
+                    <option value="7">دور رنگ</option>
+                    <option value="8">کامل رنگ</option>
+                    <option value="9">تصادفی</option>
+                    <option value="10">اوراقی</option>
+                    <option value="11">اتاق تعویض</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <br />
 <div class="row">
-    <div class="col-sm-2 col-sm-push-10">
-        <label>رنگ بدنه</label>
+    <div class="col-sm-4">
+        <div class="col-sm-4">
+            <label>رنگ بدنه</label>
+        </div>
+        <div class="col-sm-8">
+            <select id='bodyColor' class='form-control'>
+                <option value="1">آبی</option>
+                <option value="8">آلبالویی</option>
+                <option value="9">اخرائی</option>
+                <option value="10">اطلسی</option>
+                <option value="11">بادمجانی</option>
+                <option value="36">برنز</option>
+                <option value="12">بژ</option>
+                <option value="13">بنفش</option>
+                <option value="14">پوست پیازی</option>
+                <option value="15">خاکستری</option>
+                <option value="16">خاکی</option>
+                <option value="37">دلفینی</option>
+                <option value="17">زرد</option>
+                <option value="18">زرشکی</option>
+                <option value="34">زیتونی</option>
+                <option value="3">سبز</option>
+                <option value="19">سربی</option>
+                <option value="20">سرمه ای</option>
+                <option value="5" selected="selected">سفید</option>
+                <option value="40">سفید صدفی</option>
+                <option value="35">شتری</option>
+                <option value="21">صورتی</option>
+                <option value="22">طلائی</option>
+                <option value="33">طوسی</option>
+                <option value="23">عدسی</option>
+                <option value="24">عنابی</option>
+                <option value="2">قرمز</option>
+                <option value="25">قهوه ای</option>
+                <option value="38">گیلاسی</option>
+                <option value="32">مارون</option>
+                <option value="27">مسی</option>
+                <option value="6">مشکی</option>
+                <option value="41">موکا</option>
+                <option value="4">نارنجی</option>
+                <option value="0">نامشخص</option>
+                <option value="28">نقرآبی</option>
+                <option value="29">نقره ای</option>
+                <option value="30">نوک مدادی</option>
+                <option value="42">کربن بلک</option>
+                <option value="26">کرم</option>
+                <option value="39">یاسی</option>
+                <option value="31">یشمی</option>
+            </select>
+        </div>
     </div>
-    <div class="col-sm-4 col-sm-push-4">
-        <select id='bodyColor' class='form-control'>
-            <option value="1">آبی</option>
-            <option value="8">آلبالویی</option>
-            <option value="9">اخرائی</option>
-            <option value="10">اطلسی</option>
-            <option value="11">بادمجانی</option>
-            <option value="36">برنز</option>
-            <option value="12">بژ</option>
-            <option value="13">بنفش</option>
-            <option value="14">پوست پیازی</option>
-            <option value="15">خاکستری</option>
-            <option value="16">خاکی</option>
-            <option value="37">دلفینی</option>
-            <option value="17">زرد</option>
-            <option value="18">زرشکی</option>
-            <option value="34">زیتونی</option>
-            <option value="3">سبز</option>
-            <option value="19">سربی</option>
-            <option value="20">سرمه ای</option>
-            <option value="5"  selected="selected">سفید</option>
-            <option value="40">سفید صدفی</option>
-            <option value="35">شتری</option>
-            <option value="21">صورتی</option>
-            <option value="22">طلائی</option>
-            <option value="33">طوسی</option>
-            <option value="23">عدسی</option>
-            <option value="24">عنابی</option>
-            <option value="2">قرمز</option>
-            <option value="25">قهوه ای</option>
-            <option value="38">گیلاسی</option>
-            <option value="32">مارون</option>
-            <option value="27">مسی</option>
-            <option value="6">مشکی</option>
-            <option value="41">موکا</option>
-            <option value="4">نارنجی</option>
-            <option value="0">نامشخص</option>
-            <option value="28">نقرآبی</option>
-            <option value="29">نقره ای</option>
-            <option value="30">نوک مدادی</option>
-            <option value="42">کربن بلک</option>
-            <option value="26">کرم</option>
-            <option value="39">یاسی</option>
-            <option value="31">یشمی</option>
-        </select>
+    <div class="col-sm-4">
+        <div class="col-sm-4">
+            <label>رنگ داخلی</label>
+        </div>
+        <div class="col-sm-8">
+            <select id='internalColor' class='form-control'>
+                <option value="1">آبی</option>
+                <option value="8">آلبالویی</option>
+                <option value="9">اخرائی</option>
+                <option value="10">اطلسی</option>
+                <option value="11">بادمجانی</option>
+                <option value="36">برنز</option>
+                <option value="12">بژ</option>
+                <option value="13">بنفش</option>
+                <option value="14">پوست پیازی</option>
+                <option value="15">خاکستری</option>
+                <option value="16">خاکی</option>
+                <option value="37">دلفینی</option>
+                <option value="17">زرد</option>
+                <option value="18">زرشکی</option>
+                <option value="34">زیتونی</option>
+                <option value="3">سبز</option>
+                <option value="19">سربی</option>
+                <option value="20">سرمه ای</option>
+                <option value="5">سفید</option>
+                <option value="40">سفید صدفی</option>
+                <option value="35">شتری</option>
+                <option value="21">صورتی</option>
+                <option value="22">طلائی</option>
+                <option value="33">طوسی</option>
+                <option value="23">عدسی</option>
+                <option value="24">عنابی</option>
+                <option value="2">قرمز</option>
+                <option value="25">قهوه ای</option>
+                <option value="38">گیلاسی</option>
+                <option value="32">مارون</option>
+                <option value="27">مسی</option>
+                <option value="6" selected="selected">مشکی</option>
+                <option value="41">موکا</option>
+                <option value="4">نارنجی</option>
+                <option value="0">نامشخص</option>
+                <option value="28">نقرآبی</option>
+                <option value="29">نقره ای</option>
+                <option value="30">نوک مدادی</option>
+                <option value="42">کربن بلک</option>
+                <option value="26">کرم</option>
+                <option value="39">یاسی</option>
+                <option value="31">یشمی</option>
+            </select>
+        </div>
     </div>
-    <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-        <label>رنگ داخلی</label>
-    </div>
-    <div class="col-sm-4 col-sm-pull-8 col-sm-push-0">
-        <select id='internalColor' class='form-control'>
-            <option value="1">آبی</option>
-            <option value="8">آلبالویی</option>
-            <option value="9">اخرائی</option>
-            <option value="10">اطلسی</option>
-            <option value="11">بادمجانی</option>
-            <option value="36">برنز</option>
-            <option value="12">بژ</option>
-            <option value="13">بنفش</option>
-            <option value="14">پوست پیازی</option>
-            <option value="15">خاکستری</option>
-            <option value="16">خاکی</option>
-            <option value="37">دلفینی</option>
-            <option value="17">زرد</option>
-            <option value="18">زرشکی</option>
-            <option value="34">زیتونی</option>
-            <option value="3">سبز</option>
-            <option value="19">سربی</option>
-            <option value="20">سرمه ای</option>
-            <option value="5">سفید</option>
-            <option value="40">سفید صدفی</option>
-            <option value="35">شتری</option>
-            <option value="21">صورتی</option>
-            <option value="22">طلائی</option>
-            <option value="33">طوسی</option>
-            <option value="23">عدسی</option>
-            <option value="24">عنابی</option>
-            <option value="2">قرمز</option>
-            <option value="25">قهوه ای</option>
-            <option value="38">گیلاسی</option>
-            <option value="32">مارون</option>
-            <option value="27">مسی</option>
-            <option value="6" selected="selected">مشکی</option>
-            <option value="41">موکا</option>
-            <option value="4">نارنجی</option>
-            <option value="0">نامشخص</option>
-            <option value="28">نقرآبی</option>
-            <option value="29">نقره ای</option>
-            <option value="30">نوک مدادی</option>
-            <option value="42">کربن بلک</option>
-            <option value="26">کرم</option>
-            <option value="39">یاسی</option>
-            <option value="31">یشمی</option>
-        </select>
     </div>
 </div>
-<br />
 
-<div class="row">
-    <div class="col-sm-2 col-sm-push-10">
-        <label>وضعیت بدنه</label>
-    </div>
-    <div class="col-sm-4 col-sm-push-4">
-        <select id='bodyStatus' class='form-control'>
-            <option value="0" selected="selected">بدون رنگ</option>
-            <option value="1">یک لکه رنگ</option>
-            <option value="2">دو لکه رنگ</option>
-            <option value="3">چند لکه رنگ</option>
-            <option value="4">گلگیر رنگ</option>
-            <option value="5">گلگیر تعویض</option>
-            <option value="6">کاپوت رنگ</option>
-            <option value="7">دور رنگ</option>
-            <option value="8">کامل رنگ</option>
-            <option value="9">تصادفی</option>
-            <option value="10">اوراقی</option>
-            <option value="11">اتاق تعویض</option>
-        </select>
-    </div>
-    <div class="col-sm-2 col-sm-pull-2 col-sm-push-0">
-        <label>نوع خودرو</label>
-    </div>
-    <div class="col-sm-4 col-sm-pull-8 col-sm-push-0">
-        @* TODO decide it on the server not asking user *@
-        <select id='carType' class='form-control'>
-            <option value="0">سواری</option>
-            <option value="1">وانت</option>
-            <option value="2">شاسی بلند</option>
-            <option value="3">ون</option>
-            <option value="4">کروک</option>
-            <option value="5">کوپه</option>
-        </select>
-    </div>
-</div>
-<button type="button" id="test" class="btn btn-primary btn-block">test</button>
-</div>
+        <div class="well">
+            <div class="row">
+
+                <div class="col-sm-2 col-sm-push-10">
+                    <input type="radio" name="payment" value="cash" checked="checked">نقد<br /><br />
+                    <input type="radio" name="payment" value="insatllment">قسطی<br />
+                </div>
+                <div class="col-sm-4 col-sm-push-4">
+                    <input id="priceCash" class="form-control" placeholder="قیمت نقدی" />
+
+                    <br />
+                    <br />
+                    <input id="numberOfInstallments" class="form-control" placeholder="تعداد اقساط" disabled="disabled" />
+                    <br />
+                    <br />
+                    <input id="distanceBetweenPerPayment" class="form-control" placeholder="فاصله بین اقساط بر حسب ماه" disabled="disabled" />
+                    <br />
+                    <br />
+                    <input id="payPerInstallment" class="form-control" placeholder="مبلغ هر قسط" disabled="disabled" />
+                </div>
+
+            </div>
+            <br />
+        </div>
+        <br />
+
+        
+
+
+
+    
