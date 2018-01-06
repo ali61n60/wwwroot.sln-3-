@@ -10,6 +10,9 @@ var DefaultSearchCriteria = /** @class */ (function () {
     };
     DefaultSearchCriteria.prototype.UnBindEvents = function () {
     };
+    DefaultSearchCriteria.prototype.ValidateCriteria = function () {
+        throw new Error("Not implemented");
+    };
     return DefaultSearchCriteria;
 }());
 exports.DefaultSearchCriteria = DefaultSearchCriteria;

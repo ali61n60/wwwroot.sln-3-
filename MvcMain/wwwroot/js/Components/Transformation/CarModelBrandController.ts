@@ -1,12 +1,14 @@
 ﻿import {CarModel} from "../../Models/AdTransportation/CarModel";
 import {UserInput} from "../../Helper/UserInput";
-import Criteria = require("../../Helper/ICriteria");
-import ICriteria = Criteria.ICriteria;
+import {ICriteria,CriteriaValidator} from "../../Helper/ICriteria";
+
 import {ICriteriaChange} from "../../Helper/ICriteriaChange";
 
 
 
 export class CarModelBrandController implements ICriteria {
+    ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
+
     private readonly CarBrandIdKey: string = "BrandId";
     private readonly BrandSelectId: string = "brand";
 
@@ -80,9 +82,6 @@ export class CarModelBrandController implements ICriteria {
 
     UnBindEvents(): void {
         $("#" + this.BrandSelectId).off("change");
-        this.unBindCarModel();
-    }
-    private unBindCarModel(): void {
         $("#" + this.ModelSelectId).off("change");
     }
 }

@@ -6,6 +6,7 @@ var NewAdCriteria_1 = require("./NewAdCriteria");
 var ImageUploader_1 = require("./ImageUploader");
 var NewAd = /** @class */ (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
+        this._submitAdInputId = "submitNewAd";
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
@@ -33,15 +34,12 @@ var NewAd = /** @class */ (function () {
                 _this._partialViewLoader.GetPartialViewFromServer(args);
             }
         });
+        $("#" + this._submitAdInputId).on("click", function (event) {
+            alert("submit ad clicked");
+        });
     };
     return NewAd;
 }());
-$(document).ready(function () {
-    $("#submitNewAd").on("click", function (event) {
-        var $apiAddress = "getApiAddress()";
-        alert($apiAddress);
-    });
-}); //ready
 var allCategoriesDivId = "allCategoriesDiv";
 var allCategoriesInputId = "allCategoriesInput";
 var categorySpecificPartialViewId = "CategorySpecificCriteria";

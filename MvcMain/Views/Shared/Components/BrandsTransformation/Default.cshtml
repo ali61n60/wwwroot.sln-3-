@@ -8,28 +8,27 @@
 </div>
 
 <div>
-    <select id="brand" class="form-control">
-        <option value='0'>برند</option>
+    <select id="brand" class="form-control" dir="rtl">
+        <option dir="ltr" value="0" >برند</option>
         @foreach (Brand brand in Model.AllBrands)
         {
-            @:
-            <option value="@brand.BrandId">@brand.BrandName</option>
+            @:<option dir="ltr" value="@brand.BrandId">@brand.BrandName</option>
         }
     </select>
     <br/>
     <div id="modelPlaceHolder">
-        <select id="model" class="form-control">
-            <option value='0'>مدل</option>
+        <select id="model" class="form-control" dir="rtl">
+            <option value="0">مدل</option>
         </select>
     </div>
 </div>
 
 
 <script id="modelTemplate" type="text/template">
-    <select id="model" class="form-control">
-        <option value="0" selected="selected">مدل</option>
+    <select id="model" class="form-control" dir="rtl">
+        <option dir="ltr" value="0" selected="selected">مدل</option>
         {{#carModels}}
-        <option value="{{modelId}}">{{modelName}}</option>
+        <option dir="ltr" value="{{modelId}}">{{modelName}}</option>
         {{/carModels}}
     </select>
 </script>

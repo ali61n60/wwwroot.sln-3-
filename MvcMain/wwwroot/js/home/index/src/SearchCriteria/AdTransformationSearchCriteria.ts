@@ -1,11 +1,12 @@
 ﻿import { UserInput } from "../../../../Helper/UserInput";
 import { ICriteriaChange } from "../../../../Helper/ICriteriaChange";
-import { ICriteria } from "../../../../Helper/ICriteria";
+import { ICriteria, CriteriaValidator } from "../../../../Helper/ICriteria";
 import { CarModelBrandController } from "../../../../Components/Transformation/CarModelBrandController";
 
 
 
 export class AdTransformationSearchCriteria implements ICriteria {
+    ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
 
     private _carModelBrandContoller: CarModelBrandController;
 

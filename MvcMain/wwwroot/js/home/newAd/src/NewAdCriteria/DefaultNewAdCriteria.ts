@@ -1,4 +1,4 @@
-﻿import { ICriteria } from "../../../../Helper/ICriteria";
+﻿import { ICriteria,CriteriaValidator } from "../../../../Helper/ICriteria";
 import { UserInput } from "../../../../Helper/UserInput";
 
 
@@ -13,5 +13,9 @@ export class DefaultNewAdCriteria implements ICriteria {
 
     UnBindEvents(): void {
         
+    }
+
+    ValidateCriteria(): CriteriaValidator {
+        throw new Error("Not implemented");
     }
 }

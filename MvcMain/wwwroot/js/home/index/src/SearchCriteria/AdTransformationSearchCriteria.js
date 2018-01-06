@@ -26,6 +26,7 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
         this.PlateTypeKey = "PlateType";
         this.PlateTypeSelectId = "plateType";
     }
+    AdTransformationSearchCriteria.prototype.ValidateCriteria = function () { throw new Error("Not implemented"); };
     AdTransformationSearchCriteria.prototype.initView = function () {
         this._carModelBrandContoller = new CarModelBrandController_1.CarModelBrandController();
     };

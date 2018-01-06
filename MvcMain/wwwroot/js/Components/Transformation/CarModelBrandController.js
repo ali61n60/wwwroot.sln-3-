@@ -11,6 +11,7 @@ var CarModelBrandController = /** @class */ (function () {
         this.ModelSelectId = "model";
         this.initView();
     }
+    CarModelBrandController.prototype.ValidateCriteria = function () { throw new Error("Not implemented"); };
     CarModelBrandController.prototype.initView = function () {
         var allCarModelsString = $("#" + this.AllCarModelsInputId).val().toString();
         this._allCarModels = $.parseJSON(allCarModelsString);
@@ -59,9 +60,6 @@ var CarModelBrandController = /** @class */ (function () {
     };
     CarModelBrandController.prototype.UnBindEvents = function () {
         $("#" + this.BrandSelectId).off("change");
-        this.unBindCarModel();
-    };
-    CarModelBrandController.prototype.unBindCarModel = function () {
         $("#" + this.ModelSelectId).off("change");
     };
     return CarModelBrandController;

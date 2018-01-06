@@ -9,6 +9,9 @@ var DefaultNewAdCriteria = /** @class */ (function () {
     };
     DefaultNewAdCriteria.prototype.UnBindEvents = function () {
     };
+    DefaultNewAdCriteria.prototype.ValidateCriteria = function () {
+        throw new Error("Not implemented");
+    };
     return DefaultNewAdCriteria;
 }());
 exports.DefaultNewAdCriteria = DefaultNewAdCriteria;

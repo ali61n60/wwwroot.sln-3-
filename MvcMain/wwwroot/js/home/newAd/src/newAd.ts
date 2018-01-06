@@ -11,6 +11,7 @@ class NewAd implements ICriteriaChange {
     private _allCategoriesInputId: string;
     private _allCategoriesDivId: string;
     private _categorySpecificPartialViewId: string;
+    private _submitAdInputId: string ="submitNewAd";
 
     private _categorySelectionNewAd: CategorySelectionNewAd;
     private _partialViewLoader: NewAdPartialViewLoader;
@@ -33,7 +34,8 @@ class NewAd implements ICriteriaChange {
 
     private initPage(): void {
         this.initNewAdCategory();
-        this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId,this,this._newAdCriteria);
+        this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
+        
     }
 
     private initNewAdCategory():void {
@@ -49,17 +51,16 @@ class NewAd implements ICriteriaChange {
                 this._partialViewLoader.GetPartialViewFromServer(args);
             }
         });
+        $("#"+this._submitAdInputId).on("click", (event)=> {
+            this.submitAd();
+        });
+    }
+
+    private submitAd() {
+        alert("Hello Ali");
     }
 }
 
-$(document).ready(function () {
-   
-
-    $("#submitNewAd").on("click", function (event) {
-        var $apiAddress = "getApiAddress()";
-        alert($apiAddress);
-    });
-});//ready
 
 
 let allCategoriesDivId: string = "allCategoriesDiv";
