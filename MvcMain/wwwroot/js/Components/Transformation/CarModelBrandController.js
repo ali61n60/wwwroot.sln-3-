@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CarModelBrandController = (function () {
+var CarModelBrandController = /** @class */ (function () {
     function CarModelBrandController() {
         this.CarBrandIdKey = "BrandId";
         this.BrandSelectId = "brand";

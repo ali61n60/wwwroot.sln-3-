@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var DefaultSearchCriteria = (function () {
+var DefaultSearchCriteria = /** @class */ (function () {
     function DefaultSearchCriteria() {
     }
     DefaultSearchCriteria.prototype.FillCriteria = function (userInput) {
