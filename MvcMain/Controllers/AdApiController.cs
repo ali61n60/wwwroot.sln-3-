@@ -93,7 +93,15 @@ namespace MvcMain.Controllers
             string errorCode = "AdApiController.AddAdvertisement";
             int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
             ResponseBase response=new ResponseBase();
-            //TODO call specific repository based on category Id use Repository Container
+            try
+            {
+                //TODO call specific repository based on category Id use Repository Container
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
 
 
 

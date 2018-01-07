@@ -214,6 +214,7 @@ namespace RepositoryStd.Repository.Common
         public void Add(Dictionary<string, string> queryParameters, string userId)
         {
             //Cannot Insert a new ad from Common Repository
+            throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
         }
 
         public void Remove(AdvertisementCommon entity)

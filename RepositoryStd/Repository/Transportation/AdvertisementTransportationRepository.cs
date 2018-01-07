@@ -245,13 +245,13 @@ namespace RepositoryStd.Repository.Transportation
 
 
         
-        public ResponseBase Add(Dictionary<string, string> queryParameters, string userId)
+        public void Add(Dictionary<string, string> queryParameters, string userId)
         {
             ResponseBase response = new ResponseBase();
-           
+            //TODO create a AdvertisementTransportation entity from queryParameters and userId
+            AdvertisementTransportation entity=new AdvertisementTransportation();
+            entity.AdvertisementCommon=new AdvertisementCommon();
 
-            
-            //AdvertisementTransportation entity
 
             Advertisements ad = _commonRepository.GetAdvertisement(entity.AdvertisementCommon);
             AdAttributeTransportation adAttribute = getAdAtribute(entity);
@@ -260,7 +260,7 @@ namespace RepositoryStd.Repository.Transportation
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             _adDbContext.SaveChanges();
 
-            return response;
+            
         }
 
         //TODO the method implementation is not complete

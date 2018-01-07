@@ -1,8 +1,9 @@
 ﻿namespace ModelStd.Advertisements
 {
 
-    public class AdvertisementTransportation : AdvertisementBase
+    public class AdvertisementTransportation
     {
+        public AdvertisementCommon AdvertisementCommon { get; set; }
         public int ModelId;
 
         public string ModelName;
@@ -28,6 +29,11 @@
         public CarStatus CarStatus;
 
         public PlateType PlateType;
+
+        public AdvertisementTransportation()
+        {
+            AdvertisementCommon = new AdvertisementCommon();
+        }
 
         public static string GetFuelTypeString(FuelType fuelType)
         {
