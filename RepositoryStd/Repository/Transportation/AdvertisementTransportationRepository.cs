@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
+using ModelStd.Services;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
@@ -16,7 +17,7 @@ using RepositoryStd.Repository.Common;
 namespace RepositoryStd.Repository.Transportation
 {
     //TODO add CarStatus and PlateType to database table
-    public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IFindRepository
+    public class AdvertisementTransportationRepository : IRepository<AdvertisementTransportation>, IAdRepository
     {
         //AdTransportation Properties
 
@@ -224,7 +225,6 @@ namespace RepositoryStd.Repository.Transportation
             return list;
         }
 
-
         private IQueryable<Advertisements> whereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int carModelId = ParameterExtractor.ExtractInt(queryParameters,CarModelIdKey,CarModelIdDefault);
@@ -244,9 +244,14 @@ namespace RepositoryStd.Repository.Transportation
         }
 
 
-        //TODO use EF
-        public void Add(AdvertisementTransportation entity)
+        
+        public ResponseBase Add(Dictionary<string, string> queryParameters, string userId)
         {
+            ResponseBase response = new ResponseBase();
+           
+
+            
+            //AdvertisementTransportation entity
 
             Advertisements ad = _commonRepository.GetAdvertisement(entity.AdvertisementCommon);
             AdAttributeTransportation adAttribute = getAdAtribute(entity);
@@ -254,6 +259,8 @@ namespace RepositoryStd.Repository.Transportation
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             _adDbContext.SaveChanges();
+
+            return response;
         }
 
         //TODO the method implementation is not complete

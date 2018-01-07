@@ -5,7 +5,7 @@ namespace RepositoryStd.Repository
 {
     public class RepositoryContainer
     {
-        private readonly Dictionary<int,IFindRepository> _container=new Dictionary<int, IFindRepository>();
+        private readonly Dictionary<int,IAdRepository> _container=new Dictionary<int, IAdRepository>();
         private readonly int _defaultCategoryId;
 
         public RepositoryContainer(int defaultCategoryId)
@@ -13,12 +13,12 @@ namespace RepositoryStd.Repository
             _defaultCategoryId = defaultCategoryId;
         }
 
-        public void RegisterRepository(int categoryId, IFindRepository findRepository)
+        public void RegisterRepository(int categoryId, IAdRepository adRepository)
         {
-            _container[categoryId] = findRepository;
+            _container[categoryId] = adRepository;
         }
 
-        public IFindRepository GetFindRepository(int categoryId)
+        public IAdRepository GetFindRepository(int categoryId)
         {
             if (_container.ContainsKey(categoryId))
                 return _container[categoryId];

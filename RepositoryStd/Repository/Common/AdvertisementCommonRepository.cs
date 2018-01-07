@@ -10,6 +10,7 @@ using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
 
 using ModelStd.IRepository;
+using ModelStd.Services;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
@@ -18,7 +19,7 @@ using RepositoryStd.QueryPattern;
 
 namespace RepositoryStd.Repository.Common
 {
-    public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>, IFindRepository, ICommonRepository
+    public class AdvertisementCommonRepository : IRepository<AdvertisementCommon>, IAdRepository, ICommonRepository
     {
         //Common Properties
 
@@ -209,10 +210,10 @@ namespace RepositoryStd.Repository.Common
             return tempAdvertisementCommon;
         }
 
-        public void Add(AdvertisementCommon entity)
+        
+        public void Add(Dictionary<string, string> queryParameters, string userId)
         {
             //Cannot Insert a new ad from Common Repository
-            throw new NotImplementedException();
         }
 
         public void Remove(AdvertisementCommon entity)

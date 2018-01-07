@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -89,6 +88,20 @@ namespace MvcMain.Controllers
             return ip;
         }
 
+        public ResponseBase  AddAdvertisement([FromBody] Dictionary<string, string> userInput)
+        {
+            string errorCode = "AdApiController.AddAdvertisement";
+            int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
+            ResponseBase response=new ResponseBase();
+            //TODO call specific repository based on category Id use Repository Container
+
+
+
+
+
+            return response;
+        }
+
 
         //Called from android and home controller
         //TODO based on categoryId call specific repository 
@@ -98,10 +111,10 @@ namespace MvcMain.Controllers
             string errorCode = "AdApiController.GetAdvertisementCommon";
             int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
-            IFindRepository findRepository = _repositoryContainer.GetFindRepository(categoryId);//polymorphyic dispatch
+            IAdRepository adRepository = _repositoryContainer.GetFindRepository(categoryId);//polymorphyic dispatch
             try
             {
-                response.ResponseData = findRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
+                response.ResponseData = adRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
                 FillFirstImage(response.ResponseData);//get Images
                 //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(response, userInput);

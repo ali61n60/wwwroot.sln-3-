@@ -115,12 +115,12 @@ namespace MvcMain
             AdDbContext adDbContext,AppIdentityDbContext appIdentityDbContext,ICategoryRepository categoryRepository)
         {
             RepositoryContainer repositoryContainer=new RepositoryContainer(int.Parse(_configuration["Data:DefaultCategoryId"]));
-            IFindRepository defaulyFindRepository=new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository);
-            repositoryContainer.RegisterRepository(0,defaulyFindRepository);
-            IFindRepository adTaransportationFindRepository=
+            IAdRepository defaulyAdRepository=new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository);
+            repositoryContainer.RegisterRepository(0,defaulyAdRepository);
+            IAdRepository adTaransportationAdRepository=
                 new AdvertisementTransportationRepository(adDbContext,appIdentityDbContext,
                 new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository));
-            repositoryContainer.RegisterRepository(100,adTaransportationFindRepository);
+            repositoryContainer.RegisterRepository(100,adTaransportationAdRepository);
             services.AddTransient<RepositoryContainer>(provider => repositoryContainer);
         }
 

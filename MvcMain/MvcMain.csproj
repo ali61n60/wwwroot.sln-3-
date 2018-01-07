@@ -14,10 +14,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="wwwroot\js\home\newAd\src\NewAdServerCaller.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="node_modules\%40types\jquery\package.json" />
     <Content Include="node_modules\%40types\lodash\package.json" />
     <Content Include="node_modules\%40types\mustache\package.json" />
@@ -819,6 +815,7 @@
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdCriteria\DefaultNewAdCriteria.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdPartialViewLoader.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdCriteria\AdTransformationNewAdCriteria.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\greet.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\main.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdTransportation\Brand.ts" />
