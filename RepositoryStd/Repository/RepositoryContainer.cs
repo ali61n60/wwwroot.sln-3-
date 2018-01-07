@@ -18,7 +18,7 @@ namespace RepositoryStd.Repository
             _container[categoryId] = adRepository;
         }
 
-        public IAdRepository GetFindRepository(int categoryId)
+        public IAdRepository GetAdRepository(int categoryId)
         {
             if (_container.ContainsKey(categoryId))
                 return _container[categoryId];

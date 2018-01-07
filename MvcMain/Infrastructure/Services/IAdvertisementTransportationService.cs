@@ -16,6 +16,5 @@ namespace MvcMain.Infrastructure.Services
         ResponseBase<IEnumerable<Brand>> GetAllTransportationBrands();
         ResponseBase<IEnumerable<CarModel>> GetAllTransportationModels();
         ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId);
-        Task<ResponseBase> AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation);
     }
 }

@@ -48,14 +48,7 @@ export class CategorySelectionNewAd {
         return this._allCategories.filter
             ((category) => { return category.parentCategoryId === selectedCategoryId }).length > 0;
     }
-
-    private addOptionElementToSelectElement(selectElementId: string, category: Category): void {
-        $("#" + selectElementId).append($("<option>", {
-            value: category.categoryId,
-            text: category.categoryName
-        }));
-    }
-
+    
     public CreateFirstLevel(): void {
         this.removeElement(this._firstLevelDiv);
         this._selectedCategoryIdLevelOne = this._rootCategoryId;

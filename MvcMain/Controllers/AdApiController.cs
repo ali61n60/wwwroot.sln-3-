@@ -88,18 +88,30 @@ namespace MvcMain.Controllers
             return ip;
         }
 
-        public ResponseBase  AddAdvertisement([FromBody] Dictionary<string, string> userInput)
+        public async Task<ResponseBase> AddAdvertisement([FromBody] Dictionary<string, string> userInput)
         {
             string errorCode = "AdApiController.AddAdvertisement";
             int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
             ResponseBase response=new ResponseBase();
+            IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
             try
             {
                 //TODO call specific repository based on category Id use Repository Container
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                if (user == null)
+                {
+                    response.SetFailureResponse("user is null", errorCode);
+                    return response;
+                }
+                await adRepository.Add(userInput,user.Id);
+                //TODO manage Ad Images and also remove Temp Images
+                response.SetSuccessResponse("OK");
+
             }
             catch (Exception ex)
             {
-                
+                response.SetFailureResponse(ex.Message, errorCode);
+                return response;
             }
             
 
@@ -115,11 +127,10 @@ namespace MvcMain.Controllers
         //TODO based on categoryId call specific repository 
         public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
-
             string errorCode = "AdApiController.GetAdvertisementCommon";
             int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
-            IAdRepository adRepository = _repositoryContainer.GetFindRepository(categoryId);//polymorphyic dispatch
+            IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
             try
             {
                 response.ResponseData = adRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 

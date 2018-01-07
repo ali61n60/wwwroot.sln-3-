@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
@@ -244,23 +245,60 @@ namespace RepositoryStd.Repository.Transportation
         }
 
 
-        
-        public void Add(Dictionary<string, string> queryParameters, string userId)
+
+        public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             ResponseBase response = new ResponseBase();
             //TODO create a AdvertisementTransportation entity from queryParameters and userId
-            AdvertisementTransportation entity=new AdvertisementTransportation();
-            entity.AdvertisementCommon=new AdvertisementCommon();
-
+            AdvertisementTransportation entity = new AdvertisementTransportation();
+            fillAdvertisementTransportationFromUserInputDictionary(entity, userInputDictionary);
+            entity.AdvertisementCommon.AdvertisementStatusId = 1; //submitted
+            entity.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
+            entity.AdvertisementCommon.AdvertisementTime = DateTime.Now;
+            entity.AdvertisementCommon.UserId = userId;
 
             Advertisements ad = _commonRepository.GetAdvertisement(entity.AdvertisementCommon);
             AdAttributeTransportation adAttribute = getAdAtribute(entity);
 
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
-            _adDbContext.SaveChanges();
-
+            await _adDbContext.SaveChangesAsync();
+        }
+        /*
+        
+                   
+        
+        
+        
+        try
+        {
+            //TODO why first insert Ad images and then attributes are saved in database????
+            response = _advertisementCommonService.SaveAdImages(advertisementTransportation.AdvertisementCommon);//save images
+            if (!response.Success)
+            {
+                return response;
+            }
+           // _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
+            response.SetSuccessResponse();
+        }
+        catch (Exception ex)
+        {
+            //TODO images saved and error in database==> delete images 
+            response.SetFailureResponse(ex.Message, errorCode);
+        }
+        return response;
+         
+         
+         */
             
+
+
+
+        
+
+        private void fillAdvertisementTransportationFromUserInputDictionary(AdvertisementTransportation entity, Dictionary<string, string> userInputDictionary)
+        {
+            //TODO fill entity
         }
 
         //TODO the method implementation is not complete

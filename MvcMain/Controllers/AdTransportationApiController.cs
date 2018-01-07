@@ -57,43 +57,7 @@ namespace MvcMain.Controllers
             return responseBase;
         }
 
-        [Authorize]
-        public async Task<ResponseBase> AddNewAdvertisementTransportation(AdvertisementTransportation advertisementTransportation)
-        {
-            string errorCode = "AdTransportationApiController.AddNewAdvertisementTransportation";
-            ResponseBase response = new ResponseBase();
-
-            if (!inputParametersOk(advertisementTransportation))
-                response.SetFailureResponse("Input Parameters Error", errorCode);
-            
-            AppUser user =await _userManager.GetUserAsync(HttpContext.User);
-            if (user == null)
-            {
-                response.SetFailureResponse("user is null", errorCode);
-                return response;
-            }
-            advertisementTransportation.AdvertisementCommon.AdvertisementStatusId = 1;//submitted
-            advertisementTransportation.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
-            advertisementTransportation.AdvertisementCommon.AdvertisementTime = DateTime.Now;
-            advertisementTransportation.AdvertisementCommon.UserId =user.Id;
-            try
-            {
-                //TODO why first insert Ad images and then attributes are saved in database????
-                response = _advertisementCommonService.SaveAdImages(advertisementTransportation.AdvertisementCommon);//save images
-                if (!response.Success)
-                {
-                    return response;
-                }
-               // _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
-                response.SetSuccessResponse();
-            }
-            catch (Exception ex)
-            {
-                //TODO images saved and error in database==> delete images 
-                response.SetFailureResponse(ex.Message, errorCode);
-            }
-            return response;
-        }
+        
         private bool inputParametersOk(AdvertisementTransportation advertisementTransportation)
         {
             //TODO check input data in AdTransportation and return false if error
