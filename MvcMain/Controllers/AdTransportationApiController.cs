@@ -84,7 +84,7 @@ namespace MvcMain.Controllers
                 {
                     return response;
                 }
-                _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
+               // _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
                 response.SetSuccessResponse();
             }
             catch (Exception ex)
