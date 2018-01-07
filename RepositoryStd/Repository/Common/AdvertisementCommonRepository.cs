@@ -42,10 +42,17 @@ namespace RepositoryStd.Repository.Common
         public static readonly decimal MaxPriceDefault = 1000000000000;
 
         public static readonly string DistrictIdKey = "DistrictId";
-        public static readonly List<int> DistrctIdDefault = new List<int>();
+        public static readonly List<int> ListDistrctIdDefault = new List<int>();
+        public static readonly int SingleDistrctIdDefault = 0;
 
         public static readonly string OrderByKey = "OrderBy";
         public static readonly OrderBy OrderByDefault = OrderBy.DateAsc;
+
+        public static readonly string AdTitleKey = "AdTitle";
+        public static readonly string AddTitleDefault = "Default Title";
+
+        public static readonly string AdCommentKey = "AdComment";
+        public static readonly string AdCommentDefault = "Default Comment";
 
 
         private readonly ICategoryRepository _categoryRepository;
@@ -175,7 +182,7 @@ namespace RepositoryStd.Repository.Common
         }
         private IQueryable<Advertisements> whereClauseDistrictId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters,DistrictIdKey,DistrctIdDefault);
+            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters,DistrictIdKey,ListDistrctIdDefault);
             if (districtList.Count > 0)
                 list = list.Where(advertisement => districtList.Contains(advertisement.DistrictId));
             return list;
@@ -211,14 +218,11 @@ namespace RepositoryStd.Repository.Common
         public Advertisements GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
             Advertisements ad=new Advertisements();
-            //TODO get userinput and put data in ad
-            //ad.CategoryId
-            //ad.DistrictId
-            //ad.AdLink
-            //ad.AdStatusId
-            //ad.AdTitle
-            //ad.AdComments
-            //ad.AdNumberOfVisited
+            ad.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, CategoryIdKey, CategoryIdDefault);
+            ad.DistrictId = ParameterExtractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
+            ad.AdTitle = ParameterExtractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
+            ad.AdComments = ParameterExtractor.ExtractString(userInputDictionary, AdCommentKey, AdCommentDefault);
+            
             return ad;
         }
 

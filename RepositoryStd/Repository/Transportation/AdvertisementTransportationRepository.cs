@@ -34,15 +34,21 @@ namespace RepositoryStd.Repository.Transportation
         public static readonly string MakeYearToKey = "MakeYearTo";
         public static readonly int MakeYearToDefault = 1400;
 
+        public static readonly string MakeYearKey = "MakeYear";
+        public static readonly int MakeYearDefault = 0;
+
         public static readonly string FuelTypeKey = "Fuel";
         public static readonly FuelType FuelTypeDefault = FuelType.UnSpecified;
-        
+
         public static readonly string MileageFromKey = "MileageFrom";
         public static readonly int MileageFromDefault = 0;
 
         public static readonly string MileageToKey = "MileageTo";
         public static readonly int MileageToDefault = 100000000;
-        
+
+        public static readonly string MileageKey = "Mileage";
+        public static readonly int MileageDefault = 0;
+
         public static readonly string GearboxKey = "Gearbox";
         public static readonly GearboxType GearboxDefault = GearboxType.UnSpecified;
 
@@ -74,10 +80,10 @@ namespace RepositoryStd.Repository.Transportation
             _commonRepository = commonRepository;
         }
 
-       public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
+        public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
-            IQueryable<Advertisements> list=_commonRepository.GetCommonQueryableList(queryParameters);
+            IQueryable<Advertisements> list = _commonRepository.GetCommonQueryableList(queryParameters);
             //TODO add category specific query to the list
             list = whereClauseCarModelAndBrand(queryParameters, list);
             list = whereClauseMakeYear(queryParameters, list);
@@ -117,7 +123,7 @@ namespace RepositoryStd.Repository.Transportation
 
         private IQueryable<Advertisements> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
-            CarStatus carStatus= AdvertisementTransportation.GetCarStatus(
+            CarStatus carStatus = AdvertisementTransportation.GetCarStatus(
                 ParameterExtractor.ExtractString(queryParameters, CarStatusKey,
                     AdvertisementTransportation.GetCarStatusString(CarStatusDefault)),
                 CarStatusDefault);
@@ -190,7 +196,7 @@ namespace RepositoryStd.Repository.Transportation
 
             if (mileageFrom != MileageFromDefault)
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.Mileage >= mileageFrom);
-            
+
             if (mileageTo != MileageToDefault)
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.Mileage <= mileageTo);
 
@@ -199,7 +205,7 @@ namespace RepositoryStd.Repository.Transportation
 
         private IQueryable<Advertisements> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
-            FuelType fuelType =AdvertisementTransportation.GetFuelType(
+            FuelType fuelType = AdvertisementTransportation.GetFuelType(
                 ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault)),
                 FuelTypeDefault);
             if (fuelType != FuelTypeDefault)
@@ -213,16 +219,16 @@ namespace RepositoryStd.Repository.Transportation
 
         private IQueryable<Advertisements> whereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
-            int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters,MakeYearFromKey,MakeYearFromDefault);
+            int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters, MakeYearFromKey, MakeYearFromDefault);
             int makeYearTo = ParameterExtractor.ExtractInt(queryParameters, MakeYearToKey, MakeYearToDefault);
 
             if (makeYearFrom != MakeYearFromDefault)
             {
-                list = list.Where(advertisement =>advertisement.AdAttributeTransportation.MakeYear >= makeYearFrom);
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.MakeYear >= makeYearFrom);
             }
             if (makeYearTo != MakeYearToDefault)
             {
-                list = list.Where(advertisement =>advertisement.AdAttributeTransportation.MakeYear <= makeYearTo);
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.MakeYear <= makeYearTo);
             }
 
             return list;
@@ -230,9 +236,9 @@ namespace RepositoryStd.Repository.Transportation
 
         private IQueryable<Advertisements> whereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
-            int carModelId = ParameterExtractor.ExtractInt(queryParameters,CarModelIdKey,CarModelIdDefault);
-            int brandId = ParameterExtractor.ExtractInt(queryParameters,CarBrandIdKey,CarBrandIdDefault);
-            
+            int carModelId = ParameterExtractor.ExtractInt(queryParameters, CarModelIdKey, CarModelIdDefault);
+            int brandId = ParameterExtractor.ExtractInt(queryParameters, CarBrandIdKey, CarBrandIdDefault);
+
             if (carModelId != CarModelIdDefault)//when carModel is selected certainly brand is selected
             {
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.ModelId == carModelId);
@@ -250,21 +256,19 @@ namespace RepositoryStd.Repository.Transportation
 
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
-            ResponseBase response = new ResponseBase();
-            AdvertisementTransportation entity = new AdvertisementTransportation();
-
             Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
-            AdAttributeTransportation adAttribute= getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
+            AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
             ad.AdStatusId = 1; //submitted
             ad.AdId = Guid.NewGuid();
-            ad.AdInsertDateTime=DateTime.Now;
+            ad.AdInsertDateTime = DateTime.Now;
             ad.UserId = userId;
+            ad.AdNumberOfVisited = 0;//just being added
 
             adAttribute.AdId = ad.AdId;
 
-            
-            
+
+
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             await _adDbContext.SaveChangesAsync();
@@ -273,9 +277,24 @@ namespace RepositoryStd.Repository.Transportation
         //TODO maybe this is a method of AdAttributeTransportation class
         private AdAttributeTransportation getAdAttributeTransportationFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
-            AdAttributeTransportation adAttribute=new AdAttributeTransportation();
-
-
+            AdAttributeTransportation adAttribute = new AdAttributeTransportation();
+            adAttribute.ModelId = ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
+            adAttribute.MakeYear = ParameterExtractor.ExtractInt(userInputDictionary, MakeYearKey, MakeYearDefault);
+            adAttribute.Fuel = ParameterExtractor.ExtractString(userInputDictionary, FuelTypeKey,
+                AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault));
+            adAttribute.Mileage = ParameterExtractor.ExtractInt(userInputDictionary, MileageKey, MileageDefault);
+            adAttribute.Gearbox = ParameterExtractor.ExtractString(userInputDictionary, GearboxKey,
+                AdvertisementTransportation.GetGearboxTypeString(GearboxDefault));
+            adAttribute.BodyColor =
+                ParameterExtractor.ExtractString(userInputDictionary, BodyColorKey, BodyColorDefault);
+            adAttribute.InternalColor =
+                ParameterExtractor.ExtractString(userInputDictionary, InternalColorKey, InternalColorDefault);
+            adAttribute.BodyStatus = ParameterExtractor.ExtractString(userInputDictionary, BodyStatusKey,
+                AdvertisementTransportation.GetBodyStatusString(BodyStatusDefault));
+            adAttribute.CarStatus = ParameterExtractor.ExtractString(userInputDictionary, CarStatusKey,
+                AdvertisementTransportation.GetCarStatusString(CarStatusDefault));
+            adAttribute.PlateType = ParameterExtractor.ExtractString(userInputDictionary, PlateTypeKey, AdvertisementTransportation.GetPlateTypeString(PlateTypeDefault));
+            
             return adAttribute;
         }
 
@@ -287,7 +306,7 @@ namespace RepositoryStd.Repository.Transportation
             adAttribute.AdId = entity.AdvertisementCommon.AdvertisementId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
-            adAttribute.Fuel =AdvertisementTransportation.GetFuelTypeString(entity.Fuel);
+            adAttribute.Fuel = AdvertisementTransportation.GetFuelTypeString(entity.Fuel);
             adAttribute.Mileage = entity.Mileage;
             adAttribute.Gearbox = entity.Gearbox;
             adAttribute.BodyColor = entity.BodyColor;
@@ -422,7 +441,7 @@ namespace RepositoryStd.Repository.Transportation
                 _commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements);
             adTrans.BodyColor = advertisements.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisements.AdAttributeTransportation.InternalColor;
-            adTrans.BodyStatus=AdvertisementTransportation.GetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus,BodyStatusDefault);
+            adTrans.BodyStatus = AdvertisementTransportation.GetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus, BodyStatusDefault);
             adTrans.BrandId = advertisements.AdAttributeTransportation.Model.BrandId;
             adTrans.BrandName = advertisements.AdAttributeTransportation.Model.Brand.BrandName;
             adTrans.ModelName = advertisements.AdAttributeTransportation.Model.ModelName;
@@ -453,7 +472,7 @@ namespace RepositoryStd.Repository.Transportation
                 }
                 advertisementTransportation.ModelId = (int)dataReader["modelId"];
                 advertisementTransportation.MakeYear = (int)dataReader["makeYear"];
-                advertisementTransportation.Fuel = AdvertisementTransportation.GetFuelType((string)dataReader["fuel"],FuelTypeDefault);
+                advertisementTransportation.Fuel = AdvertisementTransportation.GetFuelType((string)dataReader["fuel"], FuelTypeDefault);
                 advertisementTransportation.Mileage = (int)dataReader["mileage"];
                 advertisementTransportation.Gearbox = (string)dataReader["gearbox"];
                 advertisementTransportation.BodyColor = (string)dataReader["bodyColor"];
