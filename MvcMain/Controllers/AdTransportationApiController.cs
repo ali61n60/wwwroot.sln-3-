@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -57,12 +55,7 @@ namespace MvcMain.Controllers
             return responseBase;
         }
 
-        
-        private bool inputParametersOk(AdvertisementTransportation advertisementTransportation)
-        {
-            //TODO check input data in AdTransportation and return false if error
-            return true;
-        }
+       
 
         //public ResponseBase RemoveAd(AdvertisementCommon advertisementCommon)
         //{

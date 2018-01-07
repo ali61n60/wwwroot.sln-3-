@@ -113,12 +113,6 @@ namespace MvcMain.Controllers
                 response.SetFailureResponse(ex.Message, errorCode);
                 return response;
             }
-            
-
-
-
-
-
             return response;
         }
 

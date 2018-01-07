@@ -65,6 +65,8 @@ namespace RepositoryStd.Repository.Transportation
         private readonly AdDbContext _adDbContext;
         private readonly AppIdentityDbContext _appIdentityDbContext;
 
+
+
         public AdvertisementTransportationRepository(AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICommonRepository commonRepository)
         {
             _adDbContext = adDbContext;
@@ -249,57 +251,34 @@ namespace RepositoryStd.Repository.Transportation
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             ResponseBase response = new ResponseBase();
-            //TODO create a AdvertisementTransportation entity from queryParameters and userId
             AdvertisementTransportation entity = new AdvertisementTransportation();
-            fillAdvertisementTransportationFromUserInputDictionary(entity, userInputDictionary);
-            entity.AdvertisementCommon.AdvertisementStatusId = 1; //submitted
-            entity.AdvertisementCommon.AdvertisementId = Guid.NewGuid();
-            entity.AdvertisementCommon.AdvertisementTime = DateTime.Now;
-            entity.AdvertisementCommon.UserId = userId;
 
-            Advertisements ad = _commonRepository.GetAdvertisement(entity.AdvertisementCommon);
-            AdAttributeTransportation adAttribute = getAdAtribute(entity);
+            Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
+            AdAttributeTransportation adAttribute= getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
+            ad.AdStatusId = 1; //submitted
+            ad.AdId = Guid.NewGuid();
+            ad.AdInsertDateTime=DateTime.Now;
+            ad.UserId = userId;
+
+            adAttribute.AdId = ad.AdId;
+
+            
+            
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             await _adDbContext.SaveChangesAsync();
         }
-        /*
-        
-                   
-        
-        
-        
-        try
+
+        //TODO maybe this is a method of AdAttributeTransportation class
+        private AdAttributeTransportation getAdAttributeTransportationFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
-            //TODO why first insert Ad images and then attributes are saved in database????
-            response = _advertisementCommonService.SaveAdImages(advertisementTransportation.AdvertisementCommon);//save images
-            if (!response.Success)
-            {
-                return response;
-            }
-           // _advertisementTransportationRepository.Add(advertisementTransportation);//save attributes
-            response.SetSuccessResponse();
+            AdAttributeTransportation adAttribute=new AdAttributeTransportation();
+
+
+            return adAttribute;
         }
-        catch (Exception ex)
-        {
-            //TODO images saved and error in database==> delete images 
-            response.SetFailureResponse(ex.Message, errorCode);
-        }
-        return response;
-         
-         
-         */
-            
 
-
-
-        
-
-        private void fillAdvertisementTransportationFromUserInputDictionary(AdvertisementTransportation entity, Dictionary<string, string> userInputDictionary)
-        {
-            //TODO fill entity
-        }
 
         //TODO the method implementation is not complete
         private AdAttributeTransportation getAdAtribute(AdvertisementTransportation entity)

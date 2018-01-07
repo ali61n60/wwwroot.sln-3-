@@ -8,9 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
-
 using ModelStd.IRepository;
-using ModelStd.Services;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
@@ -187,7 +185,6 @@ namespace RepositoryStd.Repository.Common
         {
             AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon()
             {
-
                 AdvertisementId = advertisement.AdId,
                 UserId = advertisement.UserId,
                 AdvertisementTitle = advertisement.AdTitle,//TODO test for null
@@ -210,7 +207,22 @@ namespace RepositoryStd.Repository.Common
             return tempAdvertisementCommon;
         }
 
-        
+        //TODO maybe it is a method of Advertisements class
+        public Advertisements GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
+        {
+            Advertisements ad=new Advertisements();
+            //TODO get userinput and put data in ad
+            //ad.CategoryId
+            //ad.DistrictId
+            //ad.AdLink
+            //ad.AdStatusId
+            //ad.AdTitle
+            //ad.AdComments
+            //ad.AdNumberOfVisited
+            return ad;
+        }
+
+
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
