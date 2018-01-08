@@ -60,6 +60,20 @@ gulp.task("HomeNewAd",
             .pipe(gulp.dest("./wwwroot/js/home/newAd/dist"));
     });
 
+gulp.task("Temperature",
+    function () {
+        return browserify({
+                debug: true,
+                entries: ["./wwwroot/js/Temperature/src/Temperature.ts"],
+                cache: {},
+                packageCache: {}
+            })
+            .plugin(tsify)
+            .bundle()
+            .pipe(source("bundle.js"))
+            .pipe(gulp.dest("./wwwroot/js/Temperature/dist"));
+    });
+
 gulp.task("EventExample",
     function() {
         return browserify({

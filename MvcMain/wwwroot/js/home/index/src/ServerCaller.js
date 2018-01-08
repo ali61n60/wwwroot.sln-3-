@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 //TODO make count optional to user
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this.StartIndexKey = "StartIndex";
         this._initialStart = 1;
