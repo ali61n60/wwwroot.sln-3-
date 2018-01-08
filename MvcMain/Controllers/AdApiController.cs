@@ -96,7 +96,6 @@ namespace MvcMain.Controllers
             IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
             try
             {
-                //TODO call specific repository based on category Id use Repository Container
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
                 if (user == null)
                 {

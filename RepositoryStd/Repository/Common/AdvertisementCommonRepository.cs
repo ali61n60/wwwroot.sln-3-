@@ -232,6 +232,13 @@ namespace RepositoryStd.Repository.Common
             throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
         }
 
+
+
+
+
+
+
+
         public void Remove(AdvertisementCommon entity)
         {
             //Cannot Remove an ad from Common Repository
@@ -241,59 +248,12 @@ namespace RepositoryStd.Repository.Common
         //TODO use EF
         public void Save(AdvertisementCommon entity)
         {
-            using (SqlConnection connection = new SqlConnection(""))//_conectionString))
-            {
-                using (SqlCommand command = new SqlCommand("sp_saveAdCommon", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    FillSaveCommandParameters(command, entity); //insert input parameters
-                    AddReturnParameterToCommand(command);
-                    try
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        if (command.Parameters["returnValue"].Value.ToString() == "0")
-                        {
-                            throw new Exception(" خطا در دیتا بیس");
-                        }
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-            }
+           
         }
 
-        public void FillSaveCommandParameters(SqlCommand command, AdvertisementCommon entity)
-        {
-            command.Parameters.Add("@adStatusId", SqlDbType.Int).Value = entity.AdvertisementStatusId;
+       
 
-            command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = entity.AdvertisementId;
-            command.Parameters.Add("@districtId", SqlDbType.Int).Value = entity.DistrictId;
-            command.Parameters.Add("@adInsertDateTime", SqlDbType.SmallDateTime).Value = entity.AdvertisementTime;
-            command.Parameters.Add("@adTitle", SqlDbType.NVarChar).Value = entity.AdvertisementTitle;
-            command.Parameters.Add("@adComments", SqlDbType.NChar).Value = entity.AdvertisementComments;
-            command.Parameters.Add("@adNumberOfVisited", SqlDbType.Int).Value = entity.NumberOfVisit;
-            //command.Parameters.Add("@price", SqlDbType.Money).Value = entity.AdvertisementPrice.price1;
-            //command.Parameters.Add("@priceType", SqlDbType.NVarChar).Value = entity.AdvertisementPrice.priceType;
-            command.Parameters.Add("@privilageId", SqlDbType.Int).Value = entity.AdPrivilegeId;
-
-            //Added from adTransRepo
-            command.Parameters.Add("@UserId", SqlDbType.UniqueIdentifier).Value = entity.UserId;
-            command.Parameters.Add("@categoryId", SqlDbType.Int).Value = entity.AdvertisementCategoryId;
-            command.Parameters.Add("@adLink", SqlDbType.NVarChar).Value = "the link is not in the design yet";
-        }
-
-        public void AddReturnParameterToCommand(SqlCommand command)
-        {
-            SqlParameter returnParameter = new SqlParameter
-            {
-                ParameterName = "returnValue",
-                Direction = ParameterDirection.ReturnValue
-            };
-            command.Parameters.Add(returnParameter);
-        }
+        
 
 
         public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string userEmail)

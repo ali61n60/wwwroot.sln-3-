@@ -4,14 +4,16 @@ import { NewAdPartialViewLoader} from "./NewAdPartialViewLoader";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {NewAdCriteria} from "./NewAdCriteria";
 import {ImageUploader} from "./ImageUploader";
-
+import {UserInput} from "../../../Helper/UserInput";
 
 class NewAd implements ICriteriaChange {
-    
+    private readonly TitleInputId: string ="title";
+
+
     private _allCategoriesInputId: string;
     private _allCategoriesDivId: string;
     private _categorySpecificPartialViewId: string;
-    private _submitAdInputId: string ="submitNewAd";
+    private readonly  _submitAdInputId: string ="submitNewAd";
 
     private _categorySelectionNewAd: CategorySelectionNewAd;
     private _partialViewLoader: NewAdPartialViewLoader;
@@ -52,6 +54,7 @@ class NewAd implements ICriteriaChange {
             }
         });
         $("#"+this._submitAdInputId).on("click", (event)=> {
+            event.preventDefault();
             this.submitAd();
         });
     }
@@ -61,6 +64,11 @@ class NewAd implements ICriteriaChange {
         //send user input to an api server method
         //on the server push data into database and also get user's pictures
         //from TempImage Directory
+        
+        let userInput = new UserInput();
+
+        let categoryId = this._categorySelectionNewAd.GetSelectedCategoryId();
+        userInput.ParametersDictionary.CategoryId = categoryId;//100 for cars
     }
 }
 

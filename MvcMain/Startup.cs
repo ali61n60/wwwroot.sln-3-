@@ -117,6 +117,7 @@ namespace MvcMain
             RepositoryContainer repositoryContainer=new RepositoryContainer(int.Parse(_configuration["Data:DefaultCategoryId"]));
             IAdRepository defaulyAdRepository=new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository);
             repositoryContainer.RegisterRepository(0,defaulyAdRepository);
+
             IAdRepository adTaransportationAdRepository=
                 new AdvertisementTransportationRepository(adDbContext,appIdentityDbContext,
                 new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository));

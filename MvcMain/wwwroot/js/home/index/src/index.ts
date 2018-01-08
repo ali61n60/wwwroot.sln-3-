@@ -12,8 +12,13 @@ import {UserInput} from "../../../Helper/UserInput";
 //durng inProgress end enable it after completed
 export class Index implements ICriteriaChange {
 
+    private readonly OrderByKey ="OrderBy";
     private readonly _orderBySelectIdDiv = "orderBy";
-    private readonly _minPriceInputId= "minPrice";
+
+    private readonly MinimumPriceKey ="MinimumPrice";
+    private readonly _minPriceInputId = "minPrice";
+
+    private readonly MaximumPriceKey ="MaximumPrice";
     private readonly _maxPriceInputId ="maxPrice";
 
     private _serverCaller:ServerCaller;
@@ -95,19 +100,18 @@ export class Index implements ICriteriaChange {
             event.preventDefault();
             let userInput = new UserInput();
 
-            let categoryId = this._categorySelection.GetSelectedCategoryId();
-            userInput.ParametersDictionary.CategoryId = categoryId;//100 for cars
-
+            this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+            
             let minPrice = parseInt($("#minPrice").val().toString());
-            userInput.ParametersDictionary.MinimumPrice = minPrice;
+            userInput.ParametersDictionary[this.MinimumPriceKey] = minPrice;
 
             let maxPrice = parseInt($("#maxPrice").val().toString());
-            userInput.ParametersDictionary.MaximumPrice = maxPrice;
+            userInput.ParametersDictionary[this.MaximumPriceKey] = maxPrice;
 
             let orderBy = $("#orderBy").val().toString();
-            userInput.ParametersDictionary.OrderBy = orderBy;
+            userInput.ParametersDictionary[this.OrderByKey] = orderBy;
             
-            this._searchCriteria.FillCategorySpecificSearchCriteria(categoryId, userInput);//fill category specific search parameters
+            this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters
             
             this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click

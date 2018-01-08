@@ -259,15 +259,14 @@ namespace RepositoryStd.Repository.Transportation
             Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
-            ad.AdStatusId = 1; //submitted
+            ad.AdStatusId = 1; //submitted TODO use AdvertisementCommon Class to set it from an enum
             ad.AdId = Guid.NewGuid();
             ad.AdInsertDateTime = DateTime.Now;
             ad.UserId = userId;
             ad.AdNumberOfVisited = 0;//just being added
 
             adAttribute.AdId = ad.AdId;
-
-
+            
 
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);

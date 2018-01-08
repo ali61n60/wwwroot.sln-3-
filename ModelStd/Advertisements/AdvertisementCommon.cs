@@ -50,4 +50,16 @@ namespace ModelStd.Advertisements
         
         public string[] AdvertisementImages { get; set; }
     }
+
+    //TODO use it in AdvertisementCommon Class
+    public enum AdStatus
+    {
+        Submitted=1,
+        UnderReview=2,
+        Approved=3,
+        Rejected=4,
+        Expired=5,
+        ReSubmitted=6,
+        Deleted=7
+    }
 }

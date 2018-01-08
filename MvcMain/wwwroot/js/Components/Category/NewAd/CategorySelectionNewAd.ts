@@ -1,9 +1,16 @@
-﻿import { EventDispatcher } from "../../../Events/EventDispatcher";
+﻿//TODO merge this class with CategorySelection Class
+import { EventDispatcher } from "../../../Events/EventDispatcher";
 import { Category } from "../../../Models/Category";
+import {UserInput} from "../../../Helper/UserInput";
+
 
 export class CategorySelectionNewAd {
     
-
+    private readonly CategoryIdKey = "CategoryId";
+    InsertCategoryIdInUserInputDictionary(userInput: UserInput) {
+        let categoryId = this.GetSelectedCategoryId();
+        userInput.ParametersDictionary[this.CategoryIdKey] = categoryId;//100 for cars
+    }
     private _parentDivId: string;//div element that holds all CategorySelection elements
     private _allCategories: Category[];
 
