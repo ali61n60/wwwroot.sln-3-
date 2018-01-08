@@ -264,12 +264,13 @@ namespace RepositoryStd.Repository.Transportation
             ad.AdInsertDateTime = DateTime.Now;
             ad.UserId = userId;
             ad.AdNumberOfVisited = 0;//just being added
-
+            
             adAttribute.AdId = ad.AdId;
             
 
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
+            
             await _adDbContext.SaveChangesAsync();
         }
 

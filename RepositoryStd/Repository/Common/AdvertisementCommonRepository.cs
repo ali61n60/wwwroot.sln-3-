@@ -43,7 +43,7 @@ namespace RepositoryStd.Repository.Common
 
         public static readonly string DistrictIdKey = "DistrictId";
         public static readonly List<int> ListDistrctIdDefault = new List<int>();
-        public static readonly int SingleDistrctIdDefault = 0;
+        public static readonly int SingleDistrctIdDefault = 1;
 
         public static readonly string OrderByKey = "OrderBy";
         public static readonly OrderBy OrderByDefault = OrderBy.DateAsc;
@@ -222,7 +222,8 @@ namespace RepositoryStd.Repository.Common
             ad.DistrictId = ParameterExtractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
             ad.AdTitle = ParameterExtractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
             ad.AdComments = ParameterExtractor.ExtractString(userInputDictionary, AdCommentKey, AdCommentDefault);
-            
+            ad.AdLink = "ToBeSet";
+
             return ad;
         }
 
