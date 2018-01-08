@@ -60,14 +60,14 @@ export class Temerature {
             {
                 animationEnabled: true,
                 title: {
-                    text: "Hourly Average CPU Utilization"
+                    text: "دما"
                 },
                 axisX: {
-                    title: "Time"
+                    title: "زمان"
                 },
                 axisY: {
-                    title: "Percentage",
-                    suffix: "%"
+                    title: "دما",
+                    suffix: "C"
                 },
                 data: [
                     {
@@ -77,7 +77,7 @@ export class Temerature {
                         //nullDataLineDashType: "solid",
                         xValueType: "dateTime",
                         xValueFormatString: "DD MMM hh:mm TT",
-                        yValueFormatString: "#,##0.##\"%\"",
+                        yValueFormatString: "#,##0.##",
                         dataPoints: this._dataPoints
                     }
                 ]
