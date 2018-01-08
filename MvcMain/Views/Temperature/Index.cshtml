@@ -28,7 +28,8 @@
     @Html.Partial("SideNav")
 }
 @section Body
-    {
+{
+    <input id="inputTemperature" type="hidden" value='@Json.Serialize(Model)'/>
     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
     <form asp-controller="Temperature" asp-action="CustomResult" method="post">
         <div>

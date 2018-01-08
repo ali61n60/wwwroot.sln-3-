@@ -17,6 +17,8 @@
     <Content Include="node_modules\%40types\jquery\package.json" />
     <Content Include="node_modules\%40types\lodash\package.json" />
     <Content Include="node_modules\%40types\mustache\package.json" />
+    <Content Include="node_modules\%40types\canvasJS\LICENSE.txt" />
+    <Content Include="node_modules\%40types\canvasJS\package.json" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff" />
@@ -176,7 +178,6 @@
     <Folder Include="Infrastructure\IOC\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
-    <Folder Include="wwwroot\js\Temperature\dist\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -186,6 +187,7 @@
     <None Include="node_modules\%40types\lodash\README.md" />
     <None Include="node_modules\%40types\mustache\LICENSE" />
     <None Include="node_modules\%40types\mustache\README.md" />
+    <None Include="node_modules\%40types\canvasJS\README.md" />
     <None Include="Views\Shared\Components\SearchCriteriaTransformation\Default.cshtml" />
     <None Include="wwwroot\cmd.exe" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
@@ -280,7 +282,7 @@
     <None Include="wwwroot\js\LearnGulp\dist\bundle.js" />
     <None Include="wwwroot\js\LearnGulp\src\greet.js" />
     <None Include="wwwroot\js\LearnGulp\src\main.js" />
-    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\js\Temperature\dist\bundle.js" />
     <None Include="wwwroot\js\TypeScript\classes.js" />
     <None Include="wwwroot\js\TypeScript\classes.js.map" />
     <None Include="wwwroot\js\TypeScript\classes2.js" />
@@ -895,6 +897,7 @@
     <TypeScriptCompile Include="node_modules\%40types\lodash\zipObjectDeep.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\lodash\zipWith.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\mustache\index.d.ts" />
+    <TypeScriptCompile Include="node_modules\%40types\canvasJS\index.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\Category\NewAd\CategorySelectionNewAd.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\Transformation\CarModelBrandController.ts" />
