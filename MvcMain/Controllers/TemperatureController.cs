@@ -10,6 +10,7 @@ using RepositoryStd.TepmeratureRepository;
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 //https://canvasjs.com/
+//TODO make updates by ajax
 namespace MvcMain.Controllers
 {
     public class TemperatureController : Controller
@@ -24,8 +25,9 @@ namespace MvcMain.Controllers
        
         public IActionResult Index()
         {
-            //TODO get temp data from database and send data to view
+            
             TemperatureRepository temperatureRepository=new TemperatureRepository(_adDbContext);
+
             return View(temperatureRepository.GetNLastTemperatures(_initialNumberOfItems));
         }
 
