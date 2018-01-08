@@ -5,6 +5,7 @@ var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
 var NewAdCriteria_1 = require("./NewAdCriteria");
 var ImageUploader_1 = require("./ImageUploader");
 var UserInput_1 = require("../../../Helper/UserInput");
+var NewAdServerCaller_1 = require("./NewAdServerCaller");
 var NewAd = (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
         this.AdTitleKey = "AdTitle";
@@ -17,6 +18,7 @@ var NewAd = (function () {
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
         this._newAdCriteria = new NewAdCriteria_1.NewAdCriteria();
         this._imageUploader = new ImageUploader_1.ImageUploader();
+        this._newAdServerCaller = new NewAdServerCaller_1.NewAdServerCaller();
         this.initPage();
         this.initEventHandlers();
     }
@@ -45,15 +47,14 @@ var NewAd = (function () {
         });
     };
     NewAd.prototype.submitAd = function () {
-        //TODO get user input
-        //send user input to an api server method
-        //on the server push data into database and also get user's pictures
-        //from TempImage Directory
+        //TODO manage  get user's pictures from TempImage Directory
+        //TODO disable submitAd Button until current submission is ok or errornous 
         var userInput = new UserInput_1.UserInput();
         this._categorySelectionNewAd.InsertCategoryIdInUserInputDictionary(userInput);
         userInput.ParametersDictionary[this.AdTitleKey] = $("#" + this.AdTitleInputId).val();
         userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();
         this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelectionNewAd.GetSelectedCategoryId(), userInput);
+        this._newAdServerCaller.SaveAd(userInput);
     };
     return NewAd;
 }());

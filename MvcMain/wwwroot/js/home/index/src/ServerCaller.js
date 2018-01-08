@@ -70,12 +70,12 @@ var ServerCaller = (function () {
                 }
             } //if (msg.customDictionary["RequestIndex"]
         } //if (this._isServerCalled)
-    }; //end OnSuccessGetTimeFromServer
+    };
     ServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         this._isServerCalled = false;
         this.notifyUserAjaxCallFinished();
         //showErrorMessage(textStatus + " , " + errorThrown);
-    }; //end OnErrorGetTimeFromServer
+    };
     ServerCaller.prototype.ResetSearchParameters = function () {
         this._start = this._initialStart;
     };

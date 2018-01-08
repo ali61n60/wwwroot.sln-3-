@@ -75,14 +75,14 @@ export class ServerCaller {
                 }
             } //if (msg.customDictionary["RequestIndex"]
         } //if (this._isServerCalled)
-    } //end OnSuccessGetTimeFromServer
+    } 
 
     
     private onErrorGetItemsFromServer(jqXHR:JQueryXHR, textStatus:string, errorThrown:string) {
         this._isServerCalled = false;
         this.notifyUserAjaxCallFinished();
         //showErrorMessage(textStatus + " , " + errorThrown);
-    } //end OnErrorGetTimeFromServer
+    } 
 
     public ResetSearchParameters(): void {
         this._start = this._initialStart;
