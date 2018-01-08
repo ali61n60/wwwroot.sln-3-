@@ -102,13 +102,13 @@ export class Index implements ICriteriaChange {
 
             this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
             
-            let minPrice = parseInt($("#minPrice").val().toString());
+            let minPrice = parseInt($("#"+this._minPriceInputId).val().toString());
             userInput.ParametersDictionary[this.MinimumPriceKey] = minPrice;
 
-            let maxPrice = parseInt($("#maxPrice").val().toString());
+            let maxPrice = parseInt($("#"+this._maxPriceInputId).val().toString());
             userInput.ParametersDictionary[this.MaximumPriceKey] = maxPrice;
 
-            let orderBy = $("#orderBy").val().toString();
+            let orderBy = $("#"+this._orderBySelectIdDiv).val().toString();
             userInput.ParametersDictionary[this.OrderByKey] = orderBy;
             
             this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters

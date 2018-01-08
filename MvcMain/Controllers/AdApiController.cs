@@ -23,6 +23,7 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO work on District,City,Province component
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {

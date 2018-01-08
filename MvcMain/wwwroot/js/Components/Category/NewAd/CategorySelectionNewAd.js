@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+//TODO merge this class with CategorySelection Class
 var EventDispatcher_1 = require("../../../Events/EventDispatcher");
 var CategorySelectionNewAd = (function () {
     function CategorySelectionNewAd(parentDivId, allCategories) {
+        this.CategoryIdKey = "CategoryId";
         this._firstLevelTemplate = "category1Template";
         this._firstLevelDiv = "category1";
         this._firstLevelSelect = "select1";
@@ -17,6 +19,10 @@ var CategorySelectionNewAd = (function () {
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
+    CategorySelectionNewAd.prototype.InsertCategoryIdInUserInputDictionary = function (userInput) {
+        var categoryId = this.GetSelectedCategoryId();
+        userInput.ParametersDictionary[this.CategoryIdKey] = categoryId; //100 for cars
+    };
     CategorySelectionNewAd.prototype.GetSelectedCategoryId = function () {
         if (this._selectedCategoryIdLevelThree !== undefined &&
             this._selectedCategoryIdLevelThree !== this._rootCategoryId)

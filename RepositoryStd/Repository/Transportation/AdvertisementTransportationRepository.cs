@@ -279,8 +279,7 @@ namespace RepositoryStd.Repository.Transportation
             AdAttributeTransportation adAttribute = new AdAttributeTransportation();
             adAttribute.ModelId = ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
             adAttribute.MakeYear = ParameterExtractor.ExtractInt(userInputDictionary, MakeYearKey, MakeYearDefault);
-            adAttribute.Fuel = ParameterExtractor.ExtractString(userInputDictionary, FuelTypeKey,
-                AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault));
+            adAttribute.Fuel = ParameterExtractor.ExtractString(userInputDictionary, FuelTypeKey,AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault));
             adAttribute.Mileage = ParameterExtractor.ExtractInt(userInputDictionary, MileageKey, MileageDefault);
             adAttribute.Gearbox = ParameterExtractor.ExtractString(userInputDictionary, GearboxKey,
                 AdvertisementTransportation.GetGearboxTypeString(GearboxDefault));

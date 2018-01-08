@@ -4,8 +4,13 @@ var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/Categ
 var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
 var NewAdCriteria_1 = require("./NewAdCriteria");
 var ImageUploader_1 = require("./ImageUploader");
+var UserInput_1 = require("../../../Helper/UserInput");
 var NewAd = (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
+        this.AdTitleKey = "AdTitle";
+        this.AdTitleInputId = "adTitle";
+        this.AdCommentKey = "AdComment";
+        this.AdCommentInputId = "adComment";
         this._submitAdInputId = "submitNewAd";
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
@@ -35,6 +40,7 @@ var NewAd = (function () {
             }
         });
         $("#" + this._submitAdInputId).on("click", function (event) {
+            event.preventDefault();
             _this.submitAd();
         });
     };
@@ -43,6 +49,11 @@ var NewAd = (function () {
         //send user input to an api server method
         //on the server push data into database and also get user's pictures
         //from TempImage Directory
+        var userInput = new UserInput_1.UserInput();
+        this._categorySelectionNewAd.InsertCategoryIdInUserInputDictionary(userInput);
+        userInput.ParametersDictionary[this.AdTitleKey] = $("#" + this.AdTitleInputId).val();
+        userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();
+        this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelectionNewAd.GetSelectedCategoryId(), userInput);
     };
     return NewAd;
 }());

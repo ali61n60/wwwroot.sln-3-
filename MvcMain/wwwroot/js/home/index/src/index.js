@@ -10,8 +10,11 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //durng inProgress end enable it after completed
 var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
+        this.OrderByKey = "OrderBy";
         this._orderBySelectIdDiv = "orderBy";
+        this.MinimumPriceKey = "MinimumPrice";
         this._minPriceInputId = "minPrice";
+        this.MaximumPriceKey = "MaximumPrice";
         this._maxPriceInputId = "maxPrice";
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
@@ -64,15 +67,14 @@ var Index = (function () {
         $("#" + this._getAdFromServerId).on("click", function (event) {
             event.preventDefault();
             var userInput = new UserInput_1.UserInput();
-            var categoryId = _this._categorySelection.GetSelectedCategoryId();
-            userInput.ParametersDictionary.CategoryId = categoryId; //100 for cars
-            var minPrice = parseInt($("#minPrice").val().toString());
-            userInput.ParametersDictionary.MinimumPrice = minPrice;
-            var maxPrice = parseInt($("#maxPrice").val().toString());
-            userInput.ParametersDictionary.MaximumPrice = maxPrice;
-            var orderBy = $("#orderBy").val().toString();
-            userInput.ParametersDictionary.OrderBy = orderBy;
-            _this._searchCriteria.FillCategorySpecificSearchCriteria(categoryId, userInput); //fill category specific search parameters
+            _this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+            var minPrice = parseInt($("#" + _this._minPriceInputId).val().toString());
+            userInput.ParametersDictionary[_this.MinimumPriceKey] = minPrice;
+            var maxPrice = parseInt($("#" + _this._maxPriceInputId).val().toString());
+            userInput.ParametersDictionary[_this.MaximumPriceKey] = maxPrice;
+            var orderBy = $("#" + _this._orderBySelectIdDiv).val().toString();
+            userInput.ParametersDictionary[_this.OrderByKey] = orderBy;
+            _this._searchCriteria.FillCategorySpecificSearchCriteria(_this._categorySelection.GetSelectedCategoryId(), userInput); //fill category specific search parameters
             _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }; //initGetAdFromServer

@@ -7,8 +7,11 @@ import {ImageUploader} from "./ImageUploader";
 import {UserInput} from "../../../Helper/UserInput";
 
 class NewAd implements ICriteriaChange {
-    private readonly TitleInputId: string ="title";
+    private readonly AdTitleKey = "AdTitle";
+    private readonly AdTitleInputId: string = "adTitle";
 
+    private readonly AdCommentKey ="AdComment";
+    private readonly AdCommentInputId ="adComment";
 
     private _allCategoriesInputId: string;
     private _allCategoriesDivId: string;
@@ -67,8 +70,10 @@ class NewAd implements ICriteriaChange {
         
         let userInput = new UserInput();
 
-        let categoryId = this._categorySelectionNewAd.GetSelectedCategoryId();
-        userInput.ParametersDictionary.CategoryId = categoryId;//100 for cars
+        this._categorySelectionNewAd.InsertCategoryIdInUserInputDictionary(userInput);
+        userInput.ParametersDictionary[this.AdTitleKey] = $("#" + this.AdTitleInputId).val();
+        userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();
+        this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelectionNewAd.GetSelectedCategoryId(),userInput);
     }
 }
 
