@@ -24,6 +24,10 @@ using RepositoryStd.TepmeratureRepository;
 namespace MvcMain.Controllers
 {
     //TODO work on District,City,Province component
+    //TODO Create Verify Ad Controller and View For Admin
+    //TODO Create LetMeKnow Controoler and View for users to register their need
+    //TODO Manage newAd Images from Temp Image Directory
+    //TODO Create and Run SMS sending
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {
@@ -45,8 +49,6 @@ namespace MvcMain.Controllers
             _userManager = MyService.Inst.GetService<UserManager<AppUser>>();
             _temperatureRepository = MyService.Inst.GetService<TemperatureRepository>();
         }
-
-
 
         public JsonResult SayHello([FromQuery][FromBody] string name, int numberOfCalls)
         {
@@ -115,7 +117,6 @@ namespace MvcMain.Controllers
             }
             return response;
         }
-
 
         //Called from android and home controller
         //TODO based on categoryId call specific repository 
@@ -292,10 +293,6 @@ namespace MvcMain.Controllers
 
             return response;
         }
-
-
-
-
 
         //public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string username, string password, bool userPassIsEncrypted)
         //{

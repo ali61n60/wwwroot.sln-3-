@@ -265,7 +265,9 @@ namespace RepositoryStd.Repository.Transportation
             ad.UserId = userId;
             ad.AdNumberOfVisited = 0;//just being added
             
+
             adAttribute.AdId = ad.AdId;
+            
             
 
             _adDbContext.Advertisements.Add(ad);

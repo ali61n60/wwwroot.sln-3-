@@ -138,9 +138,7 @@ namespace RepositoryStd.Context.AD
                     .HasMaxLength(150);
             });
 
-           
-
-            modelBuilder.Entity<Brand>(entity =>
+           modelBuilder.Entity<Brand>(entity =>
             {
                 entity.HasKey(e => e.BrandId)
                     .HasName("PK_CarMakers");
@@ -234,8 +232,6 @@ namespace RepositoryStd.Context.AD
                     .HasConstraintName("FK_Districts_Cities");
             });
 
-            
-
             modelBuilder.Entity<MobileBrands>(entity =>
             {
                 entity.HasKey(e => e.BrandId)
@@ -257,26 +253,8 @@ namespace RepositoryStd.Context.AD
 
             modelBuilder.Entity<Price>(entity =>
             {
-                entity.HasKey(e => e.AdId)
-                    .HasName("PK_Price");
-
-                entity.ToTable("Price", "ad");
-
-                entity.Property(e => e.AdId)
-                    .HasColumnName("adId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.price)
-                    .HasColumnName("price")
-                    .HasColumnType("money");
-
-                entity.Property(e => e.priceType)
-                    .HasColumnName("priceType")
-                    .HasMaxLength(150);
-
-                entity.HasOne(d => d.Ad)
-                    .WithOne(p => p.Price)
-                    .HasForeignKey<Price>(d => d.AdId)
+               entity.HasOne(d => d.Ad)
+                    .WithOne(advertisements => advertisements.Price)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Price_Advertisements");
             });

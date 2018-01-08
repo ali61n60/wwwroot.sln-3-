@@ -18,6 +18,9 @@ namespace ModelStd.Db.Ad
         [Column("adId")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public Guid AdId { get; set; }
+
+        [Column("UserId")]
+        [MaxLength(200)]
         public string UserId { get; set; }
 
         [Column("categoryId")]

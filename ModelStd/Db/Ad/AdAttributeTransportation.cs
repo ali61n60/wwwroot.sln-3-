@@ -7,8 +7,6 @@ namespace ModelStd.Db.Ad
     [Table("AdAttributeTransportation",Schema = "ad")]
     public class AdAttributeTransportation
     {
-       
-
         [Column("adId")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
