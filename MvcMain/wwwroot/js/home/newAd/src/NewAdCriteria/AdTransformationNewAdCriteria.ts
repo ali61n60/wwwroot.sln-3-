@@ -49,9 +49,9 @@ export class AdTransformationNewAdCriteria implements ICriteria {
         userInput.ParametersDictionary[this.GearboxKey] = $("#" + this.GearboxTypeParentDivId).children(":checked").val();
         userInput.ParametersDictionary[this.BodyColorKey] = $("#" + this.BodyColorSelectId).find("option=selected").val();
         userInput.ParametersDictionary[this.InternalColorKey] = $("#" + this.InternalColorSelectId).find("option=selected").val();
-
-
-        //TODO fill other parameters
+        userInput.ParametersDictionary[this.BodyStatusKey] = $("#" + this.BodyStatusSelectId).find("option=selected").val();
+        userInput.ParametersDictionary[this.CarStatusKey] = $("#" + this.CarStatusParentDivId).children(":checked").val();
+        userInput.ParametersDictionary[this.PlateTypeKey] = $("#" + this.PlateTypeParentDivId).children(":checked").val();
     }
 
     public BindEvents(criteriaChange: ICriteriaChange): void {
