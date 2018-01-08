@@ -28,7 +28,7 @@
     @Html.Partial("SideNav")
 }
 @section Body
-{
+    {
     <div id="chartContainer" style="height: 300px; width: 100%;"></div>
     <form asp-controller="Temperature" asp-action="CustomResult" method="post">
         <div>
@@ -65,7 +65,7 @@
             </tr>
         }
     </table>
-    
+
 
 }
 
@@ -75,8 +75,9 @@
 }
 
 @section scripts{
-   
-<script src="~/js/CanvasJs/jquery.canvasjs.min.js"></script>
-<script src="~/js/CanvasJs/canvasjs.min.js"></script>
-    
+
+    <script src="~/js/CanvasJs/jquery.canvasjs.min.js"></script>
+    <script src="~/js/CanvasJs/canvasjs.min.js"></script>
+    <script src="~/js/Temperature/dist/bundle.js"></script>
+
 }
