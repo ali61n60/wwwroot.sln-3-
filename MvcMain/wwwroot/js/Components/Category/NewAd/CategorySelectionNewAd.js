@@ -31,12 +31,6 @@ var CategorySelectionNewAd = (function () {
         var selectedCategoryId = this.GetSelectedCategoryId();
         return this._allCategories.filter(function (category) { return category.parentCategoryId === selectedCategoryId; }).length > 0;
     };
-    CategorySelectionNewAd.prototype.addOptionElementToSelectElement = function (selectElementId, category) {
-        $("#" + selectElementId).append($("<option>", {
-            value: category.categoryId,
-            text: category.categoryName
-        }));
-    };
     CategorySelectionNewAd.prototype.CreateFirstLevel = function () {
         var _this = this;
         this.removeElement(this._firstLevelDiv);
