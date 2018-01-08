@@ -4,7 +4,7 @@ var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/Categ
 var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
 var NewAdCriteria_1 = require("./NewAdCriteria");
 var ImageUploader_1 = require("./ImageUploader");
-var NewAd = (function () {
+var NewAd = /** @class */ (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
         this._submitAdInputId = "submitNewAd";
         this._allCategoriesDivId = allCategoriesDiv;

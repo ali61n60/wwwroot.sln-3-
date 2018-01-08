@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../../Events/EventDispatcher");
-var CategorySelectionNewAd = (function () {
+var CategorySelectionNewAd = /** @class */ (function () {
     function CategorySelectionNewAd(parentDivId, allCategories) {
         this._firstLevelTemplate = "category1Template";
         this._firstLevelDiv = "category1";
@@ -30,12 +30,6 @@ var CategorySelectionNewAd = (function () {
     CategorySelectionNewAd.prototype.SelectedCategoryHasChildren = function () {
         var selectedCategoryId = this.GetSelectedCategoryId();
         return this._allCategories.filter(function (category) { return category.parentCategoryId === selectedCategoryId; }).length > 0;
-    };
-    CategorySelectionNewAd.prototype.addOptionElementToSelectElement = function (selectElementId, category) {
-        $("#" + selectElementId).append($("<option>", {
-            value: category.categoryId,
-            text: category.categoryName
-        }));
     };
     CategorySelectionNewAd.prototype.CreateFirstLevel = function () {
         var _this = this;
