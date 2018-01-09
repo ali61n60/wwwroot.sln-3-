@@ -17,7 +17,6 @@
     <Content Include="node_modules\%40types\jquery\package.json" />
     <Content Include="node_modules\%40types\lodash\package.json" />
     <Content Include="node_modules\%40types\mustache\package.json" />
-    <Content Include="node_modules\%40types\canvasJS\LICENSE.txt" />
     <Content Include="node_modules\%40types\canvasJS\package.json" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="wwwroot\css\fonts\glyphicons-halflings-regular.ttf" />
@@ -181,6 +180,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="node_modules\%40types\canvasjs\LICENSE" />
     <None Include="node_modules\%40types\jquery\LICENSE" />
     <None Include="node_modules\%40types\jquery\README.md" />
     <None Include="node_modules\%40types\lodash\LICENSE" />
@@ -905,6 +905,7 @@
     <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\CriteriaNumericDictionary.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Helper\IResultHandler.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\ICriteriaChange.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\UserInput.ts" />

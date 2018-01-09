@@ -1,4 +1,5 @@
-﻿class SingleTemperature {
+﻿//npm install --save @types/canvasjs
+class SingleTemperature {
     public temperatureId: number;
     public temp: number;
     public insertDateTime:number;

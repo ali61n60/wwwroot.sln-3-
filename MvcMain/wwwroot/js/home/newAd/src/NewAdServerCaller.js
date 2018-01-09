@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NewAdServerCaller = /** @class */ (function () {
+var NewAdServerCaller = (function () {
     function NewAdServerCaller() {
         //TODO call server and send userinput fro new ad
         //get result and show to user
@@ -18,8 +18,10 @@ var NewAdServerCaller = /** @class */ (function () {
         }); //.ajax
     };
     NewAdServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
+        //TODO redirect user to a new page
     };
     NewAdServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
+        //TODO inform error to user
     };
     return NewAdServerCaller;
 }());

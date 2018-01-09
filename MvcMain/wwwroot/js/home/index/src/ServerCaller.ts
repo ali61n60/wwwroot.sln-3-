@@ -1,5 +1,6 @@
 ﻿import { UserInput  } from "../../../Helper/UserInput";
 //TODO make count optional to user
+//TODO instead of adding new ads to the page here call a method on index class to add it by defining an interface in the index class 
 export class ServerCaller {
     private readonly StartIndexKey: string ="StartIndex";
     private readonly _initialStart: number = 1;
@@ -17,7 +18,8 @@ export class ServerCaller {
     private readonly CallImageId: string ="serverCalledImage";
     private _isServerCalled: boolean = false;
     private _numberOfStartServerCallNotification: number = 0;
-    private readonly  _url: string = "api/AdApi/GetAdvertisementCommon";
+    private readonly _url: string = "api/AdApi/GetAdvertisementCommon";
+
     private readonly  _adPlaceHolderDivId: string ="adPlaceHolder";
 
     public GetAdItemsFromServer(userInput: UserInput): void {

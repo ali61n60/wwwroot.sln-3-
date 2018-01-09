@@ -19,11 +19,11 @@ export class NewAdServerCaller {
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        
+        //TODO redirect user to a new page
     } 
 
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        
+        //TODO inform error to user
     } 
 }
