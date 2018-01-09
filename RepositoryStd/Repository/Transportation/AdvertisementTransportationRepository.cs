@@ -254,7 +254,7 @@ namespace RepositoryStd.Repository.Transportation
 
 
 
-        public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
+        public async Task<Guid> Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
@@ -264,16 +264,16 @@ namespace RepositoryStd.Repository.Transportation
             ad.AdInsertDateTime = DateTime.Now;
             ad.UserId = userId;
             ad.AdNumberOfVisited = 0;//just being added
-            
 
             adAttribute.AdId = ad.AdId;
-            
-            
 
             _adDbContext.Advertisements.Add(ad);
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             
             await _adDbContext.SaveChangesAsync();
+            
+
+            return ad.AdId;
         }
 
         //TODO maybe this is a method of AdAttributeTransportation class

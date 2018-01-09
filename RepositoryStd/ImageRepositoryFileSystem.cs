@@ -9,16 +9,18 @@ namespace RepositoryStd
 {
     public class ImageRepositoryFileSystem : IImageRepository
     {
-        private readonly string _directoryPath;
+        private readonly string DirectoryPath;
+        private readonly string TempImagesFolderName = "TempImagesFolderName/";
+        private readonly string FirstAdImageName = "0.jpeg";
 
         public ImageRepositoryFileSystem(string directoryPath)
         {
-            _directoryPath = directoryPath;
+            DirectoryPath = directoryPath;
         }
 
         public void SaveImages(Guid advertisementGuid, string[] images)
         {
-            string directoryPathString = _directoryPath + advertisementGuid;
+            string directoryPathString = DirectoryPath + advertisementGuid;
             Directory.CreateDirectory(directoryPathString);
 
             for (int i = 0, fileName = 0; i < images.Length; i++)
@@ -40,7 +42,7 @@ namespace RepositoryStd
 
             try
             {
-                string directoryPathString = _directoryPath + advertisementGuid;
+                string directoryPathString = DirectoryPath + advertisementGuid;
                 string[] fileImages = Directory.GetFiles(directoryPathString, "*.jpeg", SearchOption.TopDirectoryOnly);
                 advertisementImages = new string[fileImages.Length];
 
@@ -69,20 +71,20 @@ namespace RepositoryStd
             string firstAdvertisementImage = null;
             try
             {
-                string directoryPathString = _directoryPath + advertisementGuid.ToString();
+                string directoryPathString = DirectoryPath + advertisementGuid.ToString();
                 //DirectoryInfo dir = Directory.CreateDirectory(directoryPathString);
                 string[] fileImages = Directory.GetFiles(directoryPathString, "*.jpeg", SearchOption.TopDirectoryOnly);
 
 
                 if (fileImages.Length > 0)
                 {
-                    for (int i = 0; i < fileImages.Length; i++)
+                    foreach (string fileImage in fileImages)
                     {
                         // ReSharper disable once StringIndexOfIsCultureSpecific.1
-                        if (fileImages[i].IndexOf("0.jpeg") > 0)
+                        if (fileImage.IndexOf(FirstAdImageName) > 0)
                         {
                             FileStream fileStream;
-                            using (fileStream = new FileStream(fileImages[i], FileMode.Open, FileAccess.Read))
+                            using (fileStream = new FileStream(fileImage, FileMode.Open, FileAccess.Read))
                             {
                                 if (fileStream.CanRead)
                                 {
@@ -105,7 +107,7 @@ namespace RepositoryStd
 
         public void RemoveAdvertisementImages(Guid advertisementGuid)
         {
-            string directoryPathString = _directoryPath + advertisementGuid;
+            string directoryPathString = DirectoryPath + advertisementGuid;
             if (Directory.Exists(directoryPathString))
             {
                 string[] fileNames = Directory.GetFiles(directoryPathString, "*.jpeg", SearchOption.TopDirectoryOnly);
@@ -136,7 +138,7 @@ namespace RepositoryStd
 
         public async Task SaveTempFile(IFormFile file, byte[] thumbnailFile, string userEmail)
         {
-            string tempFilesDirectoryPath = _directoryPath + "TempFiles/" + userEmail;
+            string tempFilesDirectoryPath = DirectoryPath + TempImagesFolderName + userEmail;
             if (!Directory.Exists(tempFilesDirectoryPath))
                 Directory.CreateDirectory(tempFilesDirectoryPath);
             string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
@@ -157,13 +159,34 @@ namespace RepositoryStd
 
         public async Task RemoveTempFile(string fileNameToBeRemoved, string userEmail)
         {
-            string tempFilesDirectoryPath = _directoryPath + "TempFiles/" + userEmail;
+            string tempFilesDirectoryPath = DirectoryPath + "TempFiles/" + userEmail;
             if (!Directory.Exists(tempFilesDirectoryPath))
                 return;
             string fileName = tempFilesDirectoryPath + $@"\{fileNameToBeRemoved}";
             string thumnNalFileName = tempFilesDirectoryPath + $@"\thumbnail-{fileNameToBeRemoved}";
             File.Delete(fileName);
             File.Delete(thumnNalFileName);
+        }
+
+        public async Task<bool> PermanentTempImages(Guid newAdGuid, string userEmail)
+        {
+            //TODO move users temp imeage into its own ad folder image
+            string tempFilesDirectoryPathString = DirectoryPath + TempImagesFolderName + userEmail;
+            string targetDirectoryPathString = DirectoryPath + newAdGuid;
+
+            string[] fileImages = Directory.GetFiles(tempFilesDirectoryPathString, "*.jpeg", SearchOption.TopDirectoryOnly);
+            
+            if (fileImages.Length > 0)
+            {
+                foreach (string fileImage in fileImages)
+                {
+                    File.Move(fileImage, targetDirectoryPathString);
+                    File.Delete(fileImage);
+                }
+            }
+
+
+            return false;
         }
     }
 }

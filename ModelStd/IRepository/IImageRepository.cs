@@ -14,5 +14,6 @@ namespace ModelStd.IRepository
        int MaximumImageSizeInByte();
        Task SaveTempFile(IFormFile file, byte[] thumbnailFile, string userEmail);
        Task RemoveTempFile(string fileNameToBeRemoved, string userEmail);
+       Task<bool> PermanentTempImages(Guid newAdGuid, string userEmail);
    }
 }
