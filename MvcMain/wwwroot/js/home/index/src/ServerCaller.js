@@ -17,10 +17,10 @@ var ServerCaller = (function () {
         this._isServerCalled = false;
         this._numberOfStartServerCallNotification = 0;
         this._url = "api/AdApi/GetAdvertisementCommon";
-        this._adPlaceHolderDivId = "adPlaceHolder";
     }
-    ServerCaller.prototype.GetAdItemsFromServer = function (userInput) {
+    ServerCaller.prototype.GetAdItemsFromServer = function (userInput, resultHandler) {
         var _this = this;
+        this._resultHandler = resultHandler;
         userInput.ParametersDictionary[this.StartIndexKey] = this._start;
         userInput.ParametersDictionary[this.CountKey] = this._count;
         this._currentRequestIndex++;
@@ -44,48 +44,28 @@ var ServerCaller = (function () {
                 this.notifyUserAjaxCallFinished();
                 if (msg.success == true) {
                     this._start += parseInt(msg.customDictionary[this.NumberOfItemsKey]);
-                    var template = $('#singleAdItem').html();
-                    var data;
-                    for (var i = 0; i < msg.responseData.length; i++) {
-                        var adImage = null;
-                        if (msg.responseData[i].advertisementImages[0] != null) {
-                            adImage = "data:image/jpg;base64," + msg.responseData[i].advertisementImages[0];
-                        } //end if
-                        data = {
-                            AdvertisementId: msg.responseData[i].advertisementId,
-                            AdvertisementCategoryId: msg.responseData[i].advertisementCategoryId,
-                            AdvertisementCategory: msg.responseData[i].advertisementCategory,
-                            adImage: adImage,
-                            adPrice: msg.responseData[i].advertisementPrice.price,
-                            AdvertisementTitle: msg.responseData[i].advertisementTitle,
-                            AdvertisementStatus: msg.responseData[i].advertisementStatus
-                            //adDate: msg.ResponseData[i].AdTime
-                        }; //end data
-                        var html = Mustache.to_html(template, data);
-                        $("#" + this._adPlaceHolderDivId).append(html);
-                    } //end for
+                    //TODO create AdvertisementCommon[] object from msg.responseData
+                    this._resultHandler.OnResultOk(msg.responseData);
                 } //if (msg.success == true)
                 else {
-                    //TODO show error message to user
-                    //showErrorMessage(msg.Message + " , " + msg.ErrorCode);
+                    this._resultHandler.OnResultError(msg.Message + " , " + msg.ErrorCode);
                 }
-            } //if (msg.customDictionary["RequestIndex"]
-        } //if (this._isServerCalled)
+            }
+        }
     };
     ServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         this._isServerCalled = false;
         this.notifyUserAjaxCallFinished();
+        this._resultHandler.OnResultError(textStatus + " , " + errorThrown);
         //showErrorMessage(textStatus + " , " + errorThrown);
     };
     ServerCaller.prototype.ResetSearchParameters = function () {
         this._start = this._initialStart;
     };
     ServerCaller.prototype.notifyUserAjaxCallStarted = function () {
-        console.log("Started Ajax Call");
         $("#" + this.CallImageId).show();
     };
     ServerCaller.prototype.notifyUserAjaxCallFinished = function () {
-        console.log("Finished Ajax Call");
         $("#" + this.CallImageId).hide();
     };
     return ServerCaller;

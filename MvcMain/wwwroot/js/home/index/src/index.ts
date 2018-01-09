@@ -5,12 +5,15 @@ import { SearchCriteriaViewLoader} from "./SearchCriteriaViewLoader";
 import {SearchCriteria} from "./SearchCriteria";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {UserInput} from "../../../Helper/UserInput";
+import {IResultHandler} from "../../../Helper/IResultHandler";
+import {AdvertisementCommon} from "../../../Models/AdvertisementCommon";
+
 
 
 //TODO when category change before search criteia is loaded a search call is sent to server
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
-export class Index implements ICriteriaChange {
+export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommon[]> {
 
     private readonly OrderByKey ="OrderBy";
     private readonly _orderBySelectIdDiv = "orderBy";
@@ -19,7 +22,9 @@ export class Index implements ICriteriaChange {
     private readonly _minPriceInputId = "minPrice";
 
     private readonly MaximumPriceKey ="MaximumPrice";
-    private readonly _maxPriceInputId ="maxPrice";
+    private readonly _maxPriceInputId = "maxPrice";
+
+    private readonly _adPlaceHolderDivId: string = "adPlaceHolder";
 
     private _serverCaller:ServerCaller;
     private _categorySelection: CategorySelection;
@@ -113,12 +118,37 @@ export class Index implements ICriteriaChange {
             
             this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters
             
-            this._serverCaller.GetAdItemsFromServer(userInput);
+            this._serverCaller.GetAdItemsFromServer(userInput,this);
         }); //click
     }//initGetAdFromServer
 
-   
+    public OnResultOk(advertisementCommons: AdvertisementCommon[]): void {
+        var template = $('#singleAdItem').html();
+        var data;
+        for (var i = 0; i < advertisementCommons.length; i++) {
+            var adImage = null;
+            if (advertisementCommons[i].advertisementImages[0] != null) {
+                adImage = "data:image/jpg;base64," + advertisementCommons[i].advertisementImages[0];
+            } //end if
+            data = {
+                AdvertisementId: advertisementCommons[i].advertisementId,
+                AdvertisementCategoryId: advertisementCommons[i].advertisementCategoryId,
+                AdvertisementCategory: advertisementCommons[i].advertisementCategory,
+                adImage: adImage,
+                adPrice: advertisementCommons[i].advertisementPrice, //todo check the price type
+                AdvertisementTitle: advertisementCommons[i].advertisementTitle,
+                AdvertisementStatus: advertisementCommons[i].advertisementStatus
+                //adDate: msg.ResponseData[i].AdTime
+            } //end data
 
+            var html = Mustache.to_html(template, data);
+            $("#" + this._adPlaceHolderDivId).append(html);
+        } //end for
+    }
+    public OnResultError(message: string): void {
+        alert(message);
+    }
+    
     private initSingleAdItemStyle(): void {
         //show detail of singleAdItem when mouse over
         $(document).on("mouseenter mouseleave", ".blockDisplay", (event: JQuery.Event<HTMLElement, null>) => {

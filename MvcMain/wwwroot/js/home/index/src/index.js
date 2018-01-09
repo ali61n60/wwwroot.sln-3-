@@ -16,6 +16,7 @@ var Index = (function () {
         this._minPriceInputId = "minPrice";
         this.MaximumPriceKey = "MaximumPrice";
         this._maxPriceInputId = "maxPrice";
+        this._adPlaceHolderDivId = "adPlaceHolder";
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
         this._getAdFromServerId = getAdFromServerId;
@@ -75,9 +76,34 @@ var Index = (function () {
             var orderBy = $("#" + _this._orderBySelectIdDiv).val().toString();
             userInput.ParametersDictionary[_this.OrderByKey] = orderBy;
             _this._searchCriteria.FillCategorySpecificSearchCriteria(_this._categorySelection.GetSelectedCategoryId(), userInput); //fill category specific search parameters
-            _this._serverCaller.GetAdItemsFromServer(userInput);
+            _this._serverCaller.GetAdItemsFromServer(userInput, _this);
         }); //click
     }; //initGetAdFromServer
+    Index.prototype.OnResultOk = function (advertisementCommons) {
+        var template = $('#singleAdItem').html();
+        var data;
+        for (var i = 0; i < advertisementCommons.length; i++) {
+            var adImage = null;
+            if (advertisementCommons[i].advertisementImages[0] != null) {
+                adImage = "data:image/jpg;base64," + advertisementCommons[i].advertisementImages[0];
+            } //end if
+            data = {
+                AdvertisementId: advertisementCommons[i].advertisementId,
+                AdvertisementCategoryId: advertisementCommons[i].advertisementCategoryId,
+                AdvertisementCategory: advertisementCommons[i].advertisementCategory,
+                adImage: adImage,
+                adPrice: advertisementCommons[i].advertisementPrice,
+                AdvertisementTitle: advertisementCommons[i].advertisementTitle,
+                AdvertisementStatus: advertisementCommons[i].advertisementStatus
+                //adDate: msg.ResponseData[i].AdTime
+            }; //end data
+            var html = Mustache.to_html(template, data);
+            $("#" + this._adPlaceHolderDivId).append(html);
+        } //end for
+    };
+    Index.prototype.OnResultError = function (message) {
+        alert(message);
+    };
     Index.prototype.initSingleAdItemStyle = function () {
         //show detail of singleAdItem when mouse over
         $(document).on("mouseenter mouseleave", ".blockDisplay", function (event) {
