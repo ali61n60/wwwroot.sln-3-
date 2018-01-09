@@ -1,6 +1,9 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 //npm install --save @types/canvasjs
+//declare module 'canvasJS' {
+//    export =CanvasJS;
+//}
+Object.defineProperty(exports, "__esModule", { value: true });
 var SingleTemperature = (function () {
     function SingleTemperature() {
     }

@@ -1,4 +1,8 @@
 ﻿//npm install --save @types/canvasjs
+//declare module 'canvasJS' {
+//    export =CanvasJS;
+//}
+
 class SingleTemperature {
     public temperatureId: number;
     public temp: number;
@@ -34,7 +38,7 @@ export class Temerature {
    
     private draw(): void {
 
-        var chart = new CanvasJS.Chart("chartContainer",
+        let chart = new CanvasJS.Chart("chartContainer",
             {
                 animationEnabled: true,
                 title: {
