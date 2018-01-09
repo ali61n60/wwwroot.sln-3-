@@ -267,8 +267,9 @@ namespace RepositoryStd.Repository.Transportation
 
             adAttribute.AdId = ad.AdId;
 
+            ad.AdAttributeTransportation = adAttribute;
             _adDbContext.Advertisements.Add(ad);
-            _adDbContext.AdAttributeTransportation.Add(adAttribute);
+            //_adDbContext.AdAttributeTransportation.Add(adAttribute);
             
             await _adDbContext.SaveChangesAsync();
             
