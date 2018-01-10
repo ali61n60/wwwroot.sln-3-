@@ -249,6 +249,7 @@ namespace MvcMain.Controllers
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                Guid currentAdGuid = Guid.Parse(Request.Form["NewAdGuid"]);
                 IFormFile uploadedFile = Request.Form.Files[0];//only one file
                 string filename = ContentDispositionHeaderValue.Parse(uploadedFile.ContentDisposition).FileName.Trim('"');
 

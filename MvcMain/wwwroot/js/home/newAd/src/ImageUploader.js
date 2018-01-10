@@ -2,21 +2,22 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 //TODO when 2 files are send to server messages to user are not correct OR when deleting 2 files
 var ImageUploader = /** @class */ (function () {
-    function ImageUploader() {
-        this._imageUploadInputId = "imageUpload";
-        this._messageToUserDivId = "labelMessageToUser";
-        this._loadedImagesDivId = "loadedImageView";
-        this._sendingImageTemplateId = "sendingImageTemplate";
-        this._addedImageTemplateId = "addedImage";
+    function ImageUploader(currentNewAdGuid) {
+        this.ImageUploadInputId = "imageUpload";
+        this.MessageToUserDivId = "labelMessageToUser";
+        this.LoadedImagesDivId = "loadedImageView";
+        this.SendingImageTemplateId = "sendingImageTemplate";
+        this.AddedImageTemplateId = "addedImage";
         this._sendFilesToServerUrl = "/api/AdApi/AddTempImage";
         this._removeFileFromServerUrl = "/api/AdApi/RemoveTempImage";
+        this._currentNewADGuid = currentNewAdGuid;
         this.initView();
     }
     ImageUploader.prototype.initView = function () {
         var _this = this;
         $(document).ready(function () {
-            $("#" + _this._imageUploadInputId).change(function (event) {
-                var fileUpload = $("#" + _this._imageUploadInputId).get(0);
+            $("#" + _this.ImageUploadInputId).change(function (event) {
+                var fileUpload = $("#" + _this.ImageUploadInputId).get(0);
                 var files = fileUpload.files;
                 _this.sendFilesToServer(files);
             }); //change
@@ -28,6 +29,8 @@ var ImageUploader = /** @class */ (function () {
     ImageUploader.prototype.sendFilesToServer = function (fileList) {
         var _this = this;
         var data = new FormData();
+        alert(this._currentNewADGuid);
+        data.append("NewAdGuid", this._currentNewADGuid);
         for (var i = 0; i < fileList.length; i++) {
             data.append(fileList[i].name, fileList[i]);
         } //for
@@ -48,7 +51,7 @@ var ImageUploader = /** @class */ (function () {
     };
     ImageUploader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
         this.showMessageToUser("");
-        $("#" + this._imageUploadInputId).val("");
+        $("#" + this.ImageUploadInputId).val("");
         if (msg.success == true) {
             this.addNewImageToPage(msg.responseData);
         } //if
@@ -60,19 +63,19 @@ var ImageUploader = /** @class */ (function () {
         this.showMessageToUser("خطا در ارسال");
     }; //end OnErrorGetTimeFromServer
     ImageUploader.prototype.showSendingImage = function () {
-        var $sendingImageTemplate = $("#" + this._sendingImageTemplateId).clone();
+        var $sendingImageTemplate = $("#" + this.SendingImageTemplateId).clone();
         this.showMessageToUser($sendingImageTemplate.html());
     };
     ImageUploader.prototype.addNewImageToPage = function (data) {
-        var template = $("#" + this._addedImageTemplateId).html();
+        var template = $("#" + this.AddedImageTemplateId).html();
         var uploadedImage = new UploadedImage();
         uploadedImage.ImageFileName = data.imageFileName;
         uploadedImage.Image = "data:image/jpg;base64," + data.image;
         var html = Mustache.to_html(template, uploadedImage);
-        $("#" + this._loadedImagesDivId).append(html);
+        $("#" + this.LoadedImagesDivId).append(html);
     };
     ImageUploader.prototype.showMessageToUser = function (msg) {
-        $("#" + this._messageToUserDivId).html(msg);
+        $("#" + this.MessageToUserDivId).html(msg);
     };
     //TODO refactor this method 
     ImageUploader.prototype.removeImageFromServer = function (fileName) {

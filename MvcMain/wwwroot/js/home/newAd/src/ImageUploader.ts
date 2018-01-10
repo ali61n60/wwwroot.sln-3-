@@ -34,6 +34,8 @@ export class ImageUploader {
 
     private sendFilesToServer(fileList: FileList): void {
         var data = new FormData();
+        alert(this._currentNewADGuid);
+        data.append("NewAdGuid",this._currentNewADGuid);
         for (var i = 0; i < fileList.length; i++) {
             data.append(fileList[i].name, fileList[i]);
         } //for

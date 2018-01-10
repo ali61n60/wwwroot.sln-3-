@@ -17,10 +17,10 @@ var NewAd = /** @class */ (function () {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
-        this._newAdCriteria = new NewAdCriteria_1.NewAdCriteria();
-        this._imageUploader = new ImageUploader_1.ImageUploader();
-        this._newAdServerCaller = new NewAdServerCaller_1.NewAdServerCaller();
         this.initPage();
+        this._newAdCriteria = new NewAdCriteria_1.NewAdCriteria();
+        this._imageUploader = new ImageUploader_1.ImageUploader(this._currentNewAdGuid);
+        this._newAdServerCaller = new NewAdServerCaller_1.NewAdServerCaller();
         this.initEventHandlers();
     }
     NewAd.prototype.CustomCriteriaChanged = function () {
@@ -29,7 +29,6 @@ var NewAd = /** @class */ (function () {
         this.initNewAdCategory();
         this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
         this._currentNewAdGuid = $("#" + this.CurrentNewAdGuidInputId).val().toString();
-        alert(this._currentNewAdGuid);
     };
     NewAd.prototype.initNewAdCategory = function () {
         var allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();

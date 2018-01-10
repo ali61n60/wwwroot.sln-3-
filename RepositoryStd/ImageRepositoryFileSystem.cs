@@ -136,16 +136,18 @@ namespace RepositoryStd
             return maxImageSizeInByte;
         }
 
-        public async Task SaveTempFile(IFormFile file, byte[] thumbnailFile, string userEmail)
+        public async Task<string> SaveTempFile(IFormFile file, byte[] thumbnailFile, Guid currentAdGuid)
         {
-            string tempFilesDirectoryPath = DirectoryPath + TempImagesFolderName + userEmail;
-            if (!Directory.Exists(tempFilesDirectoryPath))
-                Directory.CreateDirectory(tempFilesDirectoryPath);
-            string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            string thumbnailFileName = "thumbnail-" + filename;
-            filename = tempFilesDirectoryPath + $@"\{filename}";
-            thumbnailFileName = tempFilesDirectoryPath + $@"\{thumbnailFileName}";
-            using (FileStream fs = File.Create(filename))
+            string currentAdDirectoryPath = DirectoryPath +currentAdGuid;
+            if (!Directory.Exists(currentAdDirectoryPath))
+                Directory.CreateDirectory(currentAdDirectoryPath);
+            //string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            string filename = "0.jpeg";
+            string thumbnailFileName = "thumbnail-" + filename;//magic string
+            string filenameWithPath = currentAdDirectoryPath + $@"\{filename}";
+            thumbnailFileName = currentAdDirectoryPath + $@"\{thumbnailFileName}";
+            
+            using (FileStream fs = File.Create(filenameWithPath))
             {
                 file.CopyTo(fs);
                 fs.Flush();
@@ -155,6 +157,7 @@ namespace RepositoryStd
                 fs.Write(thumbnailFile,0,thumbnailFile.Length);
                 fs.Flush();
             }
+            return "0";
         }
 
         public async Task RemoveTempFile(string fileNameToBeRemoved, string userEmail)
