@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 //TODO when 2 files are send to server messages to user are not correct OR when deleting 2 files
-var ImageUploader = /** @class */ (function () {
+var ImageUploader = (function () {
     function ImageUploader() {
         this._imageUploadInputId = "imageUpload";
         this._messageToUserDivId = "labelMessageToUser";
@@ -105,7 +105,7 @@ var ImageUploader = /** @class */ (function () {
     return ImageUploader;
 }());
 exports.ImageUploader = ImageUploader;
-var UploadedImage = /** @class */ (function () {
+var UploadedImage = (function () {
     function UploadedImage() {
     }
     return UploadedImage;

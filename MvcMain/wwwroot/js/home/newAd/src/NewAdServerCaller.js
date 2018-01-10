@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NewAdServerCaller = /** @class */ (function () {
+var NewAdServerCaller = (function () {
     function NewAdServerCaller() {
         //TODO call server and send userinput fro new ad
         //get result and show to user
