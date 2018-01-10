@@ -1,16 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//TODO when 2 files are send to server messages to user are not correct OR when deleting 2 files
+//TODO what if a send file request is sent but response.success is false, or OnError
+//it seems good practice to add a timer to the uploadingImageTemplate and remove template after timer ticks.
+//but if a response comes with success=true manually add the uploaded image to the loadedImageView
+//
 var ImageUploader = /** @class */ (function () {
     function ImageUploader(currentNewAdGuid) {
         this.ImageUploadInputId = "imageUpload";
         this.MessageToUserDivId = "labelMessageToUser";
         this.LoadedImagesDivId = "loadedImageView";
-        this.SendingImageTemplateId = "sendingImageTemplate";
-        this.AddedImageTemplateId = "addedImage";
+        this.UploadingImageTemplate = "uploadingImageTemplate";
         this._sendFilesToServerUrl = "/api/AdApi/AddTempImage";
         this._removeFileFromServerUrl = "/api/AdApi/RemoveTempImage";
-        this._currentNewADGuid = currentNewAdGuid;
+        this._requestIndex = 0;
+        this._currentNewAdGuid = currentNewAdGuid;
         this.initView();
     }
     ImageUploader.prototype.initView = function () {
@@ -28,9 +31,10 @@ var ImageUploader = /** @class */ (function () {
     };
     ImageUploader.prototype.sendFilesToServer = function (fileList) {
         var _this = this;
+        this._requestIndex++;
         var data = new FormData();
-        alert(this._currentNewADGuid);
-        data.append("NewAdGuid", this._currentNewADGuid);
+        data.append("NewAdGuid", this._currentNewAdGuid); //magic string
+        data.append("RequestIndex", this._requestIndex.toString());
         for (var i = 0; i < fileList.length; i++) {
             data.append(fileList[i].name, fileList[i]);
         } //for
@@ -40,39 +44,32 @@ var ImageUploader = /** @class */ (function () {
             contentType: false,
             processData: false,
             data: data,
-            success: function (msg, textStatus, jqXHR) {
-                return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown);
-            } // When Service call fails
+            success: function (msg, textStatus, jqXHR) { return _this.onSuccessSendFileToServer(msg, textStatus, jqXHR); },
+            error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorSendFileToServer(jqXHR, textStatus, errorThrown); } // When Service call fails
         }); //ajax
-        this.showSendingImage();
+        this.addUploadingImageTemplate();
     };
-    ImageUploader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
-        this.showMessageToUser("");
+    ImageUploader.prototype.onSuccessSendFileToServer = function (msg, textStatus, jqXHR) {
         $("#" + this.ImageUploadInputId).val("");
         if (msg.success == true) {
-            this.addNewImageToPage(msg.responseData);
+            this.updateSendingImageTemplate(msg.responseData);
         } //if
         else {
             this.showMessageToUser(msg.messag + " ," + msg.errorCode);
         } //else
     }; //onSuccessGetItemsFromServer
-    ImageUploader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
-        this.showMessageToUser("خطا در ارسال");
+    ImageUploader.prototype.onErrorSendFileToServer = function (jqXHR, textStatus, errorThrown) {
+        this.showMessageToUser("خطا در ارسال"); //magic string
     }; //end OnErrorGetTimeFromServer
-    ImageUploader.prototype.showSendingImage = function () {
-        var $sendingImageTemplate = $("#" + this.SendingImageTemplateId).clone();
-        this.showMessageToUser($sendingImageTemplate.html());
-    };
-    ImageUploader.prototype.addNewImageToPage = function (data) {
-        var template = $("#" + this.AddedImageTemplateId).html();
-        var uploadedImage = new UploadedImage();
-        uploadedImage.ImageFileName = data.imageFileName;
-        uploadedImage.Image = "data:image/jpg;base64," + data.image;
-        var html = Mustache.to_html(template, uploadedImage);
+    ImageUploader.prototype.addUploadingImageTemplate = function () {
+        var template = $("#" + this.UploadingImageTemplate).html(); //magic string
+        var data = { RequestIndex: this._requestIndex }; //magic string
+        var html = Mustache.to_html(template, data);
         $("#" + this.LoadedImagesDivId).append(html);
+    };
+    ImageUploader.prototype.updateSendingImageTemplate = function (data) {
+        $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img").
+            attr("src", "data:image/jpg;base64," + data.image);
     };
     ImageUploader.prototype.showMessageToUser = function (msg) {
         $("#" + this.MessageToUserDivId).html(msg);

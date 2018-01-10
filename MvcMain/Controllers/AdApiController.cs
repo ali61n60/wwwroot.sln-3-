@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -30,6 +32,7 @@ namespace MvcMain.Controllers
     //TODO Manage newAd Images from Temp Image Directory for each image being send to server create a component and add it to imageDiv and based on server result
     //for that image add server image to page or show error and error message
     //TODO Create and Run SMS sending
+    //TODO write code to delete folders in AdImages when the adId in database does not exist
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {
@@ -241,15 +244,20 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<ResponseBase<UploadedImage>> AddTempImage()
         {
+            Thread.Sleep(2000);
             string errorCode = "AdApiController.AddTempImage";
             ResponseBase<UploadedImage> response = new ResponseBase<UploadedImage>
             {
-                ResponseData = new UploadedImage()
+                ResponseData = new UploadedImage
+                {
+                    RequestIndex = Request.Form["RequestIndex"]
+                }
             };
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                Guid currentAdGuid = Guid.Parse(Request.Form["NewAdGuid"]);
+                Guid currentAdGuid = Guid.Parse(Request.Form["NewAdGuid"]);//magic string
+
                 IFormFile uploadedFile = Request.Form.Files[0];//only one file
                 string filename = ContentDispositionHeaderValue.Parse(uploadedFile.ContentDisposition).FileName.Trim('"');
 
@@ -259,11 +267,12 @@ namespace MvcMain.Controllers
                     response.SetFailureResponse(thumbnailResponse.Message, errorCode + " ," + thumbnailResponse.ErrorCode);
                     return response;
                 }
-                response.ResponseData.Image = Convert.ToBase64String(thumbnailResponse.ResponseData);
-                response.ResponseData.ImageFileName = filename;
 
-                await _imageRepository.SaveTempFile(uploadedFile, thumbnailResponse.ResponseData, user.Email);
-                response.SetSuccessResponse("files saved in temp folder");
+                string nameOfSavedFile = await _imageRepository.SaveTempFile(uploadedFile, thumbnailResponse.ResponseData, currentAdGuid);
+                response.ResponseData.Image = Convert.ToBase64String(thumbnailResponse.ResponseData);
+                response.ResponseData.ImageFileName = nameOfSavedFile;
+
+                response.SetSuccessResponse("files saved in temp folder");//magic string
             }
             catch (Exception ex)
             {
@@ -446,5 +455,6 @@ namespace MvcMain.Controllers
     {
         public string Image { get; set; }
         public string ImageFileName { get; set; }
+        public string RequestIndex { get; set; }
     }
 }

@@ -1,18 +1,21 @@
-﻿//TODO when 2 files are send to server messages to user are not correct OR when deleting 2 files
+﻿//TODO what if a send file request is sent but response.success is false, or OnError
+//it seems good practice to add a timer to the uploadingImageTemplate and remove template after timer ticks.
+//but if a response comes with success=true manually add the uploaded image to the loadedImageView
+//
 export class ImageUploader {
-    private readonly  ImageUploadInputId: string = "imageUpload";
-    private readonly  MessageToUserDivId: string = "labelMessageToUser";
-    private readonly  LoadedImagesDivId: string = "loadedImageView";
-    private readonly  SendingImageTemplateId: string = "sendingImageTemplate";
-    private readonly  AddedImageTemplateId: string = "addedImage";
+    private readonly ImageUploadInputId: string = "imageUpload";
+    private readonly MessageToUserDivId: string = "labelMessageToUser";
+    private readonly LoadedImagesDivId: string = "loadedImageView";
+    private readonly UploadingImageTemplate: string = "uploadingImageTemplate";
 
     private _sendFilesToServerUrl: string = "/api/AdApi/AddTempImage";
     private _removeFileFromServerUrl: string = "/api/AdApi/RemoveTempImage";
 
-    private _currentNewADGuid:string;
+    private _currentNewAdGuid: string;
+    private _requestIndex: number = 0;
 
     constructor(currentNewAdGuid: string) {
-        this._currentNewADGuid = currentNewAdGuid;
+        this._currentNewAdGuid = currentNewAdGuid;
         this.initView();
     }
 
@@ -25,17 +28,18 @@ export class ImageUploader {
 
             }); //change
 
-            $(document).on("click",".addedImage > input",(event) => {
-                    this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
-                }); //click
+            $(document).on("click", ".addedImage > input", (event) => {
+                this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
+            }); //click
 
         }); //ready
     }
 
     private sendFilesToServer(fileList: FileList): void {
+        this._requestIndex++;
         var data = new FormData();
-        alert(this._currentNewADGuid);
-        data.append("NewAdGuid",this._currentNewADGuid);
+        data.append("NewAdGuid", this._currentNewAdGuid);//magic string
+        data.append("RequestIndex", this._requestIndex.toString());
         for (var i = 0; i < fileList.length; i++) {
             data.append(fileList[i].name, fileList[i]);
         } //for
@@ -45,42 +49,41 @@ export class ImageUploader {
             contentType: false,
             processData: false,
             data: data,
-            success: (msg, textStatus, jqXHR) =>
-                this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR), //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) =>
-                this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
+            success: (msg, textStatus, jqXHR) => this.onSuccessSendFileToServer(msg, textStatus, jqXHR), //On Successfull service call
+            error: (jqXHR, textStatus, errorThrown) => this.onErrorSendFileToServer(jqXHR, textStatus, errorThrown) // When Service call fails
 
         }); //ajax
-        this.showSendingImage();
+        this.addUploadingImageTemplate();
     }
 
-    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        this.showMessageToUser("");
-        $("#" + this.ImageUploadInputId).val("");
+   private onSuccessSendFileToServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
+       $("#" + this.ImageUploadInputId).val("");
+       
         if (msg.success == true) {
-            this.addNewImageToPage(msg.responseData);
+            this.updateSendingImageTemplate(msg.responseData);
         } //if
         else {
             this.showMessageToUser(msg.messag + " ," + msg.errorCode);
+          
         } //else
     } //onSuccessGetItemsFromServer
 
-    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        this.showMessageToUser("خطا در ارسال");
+    private onErrorSendFileToServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
+        this.showMessageToUser("خطا در ارسال");//magic string
     } //end OnErrorGetTimeFromServer
 
-    private showSendingImage() {
-        var $sendingImageTemplate = $("#" + this.SendingImageTemplateId).clone();
-        this.showMessageToUser($sendingImageTemplate.html());
+    private addUploadingImageTemplate(): void {
+        let template = $("#" + this.UploadingImageTemplate).html();//magic string
+        let data = { RequestIndex: this._requestIndex };//magic string
+
+        let html = Mustache.to_html(template, data);
+        $("#" + this.LoadedImagesDivId).append(html);
     }
 
-    private addNewImageToPage(data) {
-        let template: string = $("#" + this.AddedImageTemplateId).html();
-        let uploadedImage: UploadedImage = new UploadedImage();
-        uploadedImage.ImageFileName = data.imageFileName;
-        uploadedImage.Image = "data:image/jpg;base64," + data.image;
-        var html = Mustache.to_html(template, uploadedImage);
-        $("#" + this.LoadedImagesDivId).append(html);
+   
+    private updateSendingImageTemplate(data) {
+        $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img").
+            attr("src", "data:image/jpg;base64," + data.image)
     }
 
     private showMessageToUser(msg) {
@@ -89,7 +92,7 @@ export class ImageUploader {
 
 
     //TODO refactor this method 
-    
+
     private removeImageFromServer(fileName: string) {
         let callParams = {
             FileNameToBeRemoved: fileName
@@ -99,8 +102,8 @@ export class ImageUploader {
             type: "GET", //GET or POST or PUT or DELETE verb
             url: this._removeFileFromServerUrl,
             data: callParams, //Data sent to server
-            success: (msg, textStatus, jqXHR) =>this.onSuccessRemoveFileFromServer(msg, textStatus, jqXHR), //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) =>this.onErrorRemoveFileFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
+            success: (msg, textStatus, jqXHR) => this.onSuccessRemoveFileFromServer(msg, textStatus, jqXHR), //On Successfull service call
+            error: (jqXHR, textStatus, errorThrown) => this.onErrorRemoveFileFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
         }); //.ajax
         this.showMessageToUser("removing file from server");
     }
@@ -111,7 +114,7 @@ export class ImageUploader {
             this.showMessageToUser("done removing file from server");
             let fileName: string = msg.responseData;
             $(`[id="${fileName}"]`).remove();
-            
+
 
         } else {
             this.showMessageToUser(msg.message);

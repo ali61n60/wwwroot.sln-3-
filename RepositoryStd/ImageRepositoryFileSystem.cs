@@ -142,22 +142,22 @@ namespace RepositoryStd
             if (!Directory.Exists(currentAdDirectoryPath))
                 Directory.CreateDirectory(currentAdDirectoryPath);
             //string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            string filename = "0.jpeg";
+            string filename = "0.jpeg";//TODO get file name based on files in directory
             string thumbnailFileName = "thumbnail-" + filename;//magic string
-            string filenameWithPath = currentAdDirectoryPath + $@"\{filename}";
-            thumbnailFileName = currentAdDirectoryPath + $@"\{thumbnailFileName}";
+            string filenameWithPath = currentAdDirectoryPath + $@"/{filename}";
+            string thumbnailFileNameWithPath = currentAdDirectoryPath + $@"/{thumbnailFileName}";
             
             using (FileStream fs = File.Create(filenameWithPath))
             {
-                file.CopyTo(fs);
+                await file.CopyToAsync(fs);
                 fs.Flush();
             }
-            using (FileStream fs=File.Create(thumbnailFileName))
+            using (FileStream fs=File.Create(thumbnailFileNameWithPath))
             {
-                fs.Write(thumbnailFile,0,thumbnailFile.Length);
+                await fs.WriteAsync(thumbnailFile,0,thumbnailFile.Length);
                 fs.Flush();
             }
-            return "0";
+            return filename;
         }
 
         public async Task RemoveTempFile(string fileNameToBeRemoved, string userEmail)
