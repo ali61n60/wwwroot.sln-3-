@@ -26,8 +26,9 @@ namespace MvcMain.Controllers
 {
     //TODO work on District,City,Province component
     //TODO Create Verify Ad Controller and View For Admin
-    //TODO Create LetMeKnow Controoler and View for users to register their need
-    //TODO Manage newAd Images from Temp Image Directory
+    //TODO Create LetMeKnow Controller and View for users to register their need
+    //TODO Manage newAd Images from Temp Image Directory for each image being send to server create a component and add it to imageDiv and based on server result
+    //for that image add server image to page or show error and error message
     //TODO Create and Run SMS sending
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
@@ -106,6 +107,7 @@ namespace MvcMain.Controllers
                     response.SetFailureResponse("user is null", errorCode);
                     return response;
                 }
+                //TODO Study about Transaction insert of data in database and saving images
                 Guid newAdGuid = await adRepository.Add(userInput, user.Id);
                 bool imagesMovedToPermanentLocation = await _imageRepository.PermanentTempImages(newAdGuid, user.Email);
                 if (imagesMovedToPermanentLocation)
