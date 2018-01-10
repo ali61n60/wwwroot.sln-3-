@@ -18,7 +18,11 @@ class NewAd implements ICriteriaChange {
     private _allCategoriesInputId: string;
     private _allCategoriesDivId: string;
     private _categorySpecificPartialViewId: string;
-    private readonly  _submitAdInputId: string ="submitNewAd";
+    private readonly _submitAdInputId: string = "submitNewAd";
+
+
+    private _currentNewAdGuid:string;
+    private readonly CurrentNewAdGuidInputId: string ="currentNewAdGuid";
 
     private _categorySelectionNewAd: CategorySelectionNewAd;
     private _partialViewLoader: NewAdPartialViewLoader;
@@ -30,10 +34,11 @@ class NewAd implements ICriteriaChange {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
-        this._newAdCriteria = new NewAdCriteria();
-        this._imageUploader = new ImageUploader();
-        this._newAdServerCaller = new NewAdServerCaller();
         this.initPage();
+        this._newAdCriteria = new NewAdCriteria();
+        this._imageUploader = new ImageUploader(this._currentNewAdGuid);
+        this._newAdServerCaller = new NewAdServerCaller();
+        
         this.initEventHandlers();
     }
 
@@ -44,8 +49,12 @@ class NewAd implements ICriteriaChange {
     private initPage(): void {
         this.initNewAdCategory();
         this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
+        this._currentNewAdGuid = $("#" + this.CurrentNewAdGuidInputId).val().toString();
         
+
     }
+
+   
 
     private initNewAdCategory():void {
         let allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();

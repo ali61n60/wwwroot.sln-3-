@@ -6,13 +6,14 @@ var NewAdCriteria_1 = require("./NewAdCriteria");
 var ImageUploader_1 = require("./ImageUploader");
 var UserInput_1 = require("../../../Helper/UserInput");
 var NewAdServerCaller_1 = require("./NewAdServerCaller");
-var NewAd = (function () {
+var NewAd = /** @class */ (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
         this.AdTitleKey = "AdTitle";
         this.AdTitleInputId = "adTitle";
         this.AdCommentKey = "AdComment";
         this.AdCommentInputId = "adComment";
         this._submitAdInputId = "submitNewAd";
+        this.CurrentNewAdGuidInputId = "currentNewAdGuid";
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
@@ -27,6 +28,8 @@ var NewAd = (function () {
     NewAd.prototype.initPage = function () {
         this.initNewAdCategory();
         this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
+        this._currentNewAdGuid = $("#" + this.CurrentNewAdGuidInputId).val().toString();
+        alert(this._currentNewAdGuid);
     };
     NewAd.prototype.initNewAdCategory = function () {
         var allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();

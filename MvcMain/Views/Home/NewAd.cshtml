@@ -1,4 +1,4 @@
-﻿@model object
+﻿@model Guid
 
 @{
     ViewData["Title"] = "NewAd";
@@ -27,7 +27,8 @@
     @Html.Partial("SideNav")
 }
 @section Body
-    {
+{
+    <input id="currentNewAdGuid" type="hidden" value="@Model"/>
     <div class="well">
         <div class="row">
             @await Component.InvokeAsync("CategorySelectionNewAd")

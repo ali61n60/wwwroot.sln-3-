@@ -242,7 +242,7 @@ namespace MvcMain.Controllers
         public async Task<ResponseBase<UploadedImage>> AddTempImage()
         {
             string errorCode = "AdApiController.AddTempImage";
-            ResponseBase<UploadedImage> response = new ResponseBase<UploadedImage>()
+            ResponseBase<UploadedImage> response = new ResponseBase<UploadedImage>
             {
                 ResponseData = new UploadedImage()
             };

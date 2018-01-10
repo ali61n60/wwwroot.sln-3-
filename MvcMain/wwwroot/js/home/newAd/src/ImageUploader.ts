@@ -1,22 +1,25 @@
 ﻿//TODO when 2 files are send to server messages to user are not correct OR when deleting 2 files
 export class ImageUploader {
-    private _imageUploadInputId: string = "imageUpload";
-    private _messageToUserDivId: string = "labelMessageToUser";
-    private _loadedImagesDivId: string = "loadedImageView";
-    private _sendingImageTemplateId: string = "sendingImageTemplate";
-    private _addedImageTemplateId: string = "addedImage";
+    private readonly  ImageUploadInputId: string = "imageUpload";
+    private readonly  MessageToUserDivId: string = "labelMessageToUser";
+    private readonly  LoadedImagesDivId: string = "loadedImageView";
+    private readonly  SendingImageTemplateId: string = "sendingImageTemplate";
+    private readonly  AddedImageTemplateId: string = "addedImage";
 
     private _sendFilesToServerUrl: string = "/api/AdApi/AddTempImage";
     private _removeFileFromServerUrl: string = "/api/AdApi/RemoveTempImage";
 
-    constructor() {
+    private _currentNewADGuid:string;
+
+    constructor(currentNewAdGuid: string) {
+        this._currentNewADGuid = currentNewAdGuid;
         this.initView();
     }
 
     private initView(): void {
         $(document).ready(() => {
-            $("#" + this._imageUploadInputId).change((event) => {
-                let fileUpload: HTMLInputElement = $("#" + this._imageUploadInputId).get(0) as HTMLInputElement;
+            $("#" + this.ImageUploadInputId).change((event) => {
+                let fileUpload: HTMLInputElement = $("#" + this.ImageUploadInputId).get(0) as HTMLInputElement;
                 let files: FileList = fileUpload.files;
                 this.sendFilesToServer(files);
 
@@ -51,7 +54,7 @@ export class ImageUploader {
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
         this.showMessageToUser("");
-        $("#" + this._imageUploadInputId).val("");
+        $("#" + this.ImageUploadInputId).val("");
         if (msg.success == true) {
             this.addNewImageToPage(msg.responseData);
         } //if
@@ -65,21 +68,21 @@ export class ImageUploader {
     } //end OnErrorGetTimeFromServer
 
     private showSendingImage() {
-        var $sendingImageTemplate = $("#" + this._sendingImageTemplateId).clone();
+        var $sendingImageTemplate = $("#" + this.SendingImageTemplateId).clone();
         this.showMessageToUser($sendingImageTemplate.html());
     }
 
     private addNewImageToPage(data) {
-        let template: string = $("#" + this._addedImageTemplateId).html();
+        let template: string = $("#" + this.AddedImageTemplateId).html();
         let uploadedImage: UploadedImage = new UploadedImage();
         uploadedImage.ImageFileName = data.imageFileName;
         uploadedImage.Image = "data:image/jpg;base64," + data.image;
         var html = Mustache.to_html(template, uploadedImage);
-        $("#" + this._loadedImagesDivId).append(html);
+        $("#" + this.LoadedImagesDivId).append(html);
     }
 
     private showMessageToUser(msg) {
-        $("#" + this._messageToUserDivId).html(msg);
+        $("#" + this.MessageToUserDivId).html(msg);
     }
 
 

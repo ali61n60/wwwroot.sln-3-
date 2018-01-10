@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 //TODO merge this class with CategorySelection Class
 var EventDispatcher_1 = require("../../../Events/EventDispatcher");
-var CategorySelectionNewAd = (function () {
+var CategorySelectionNewAd = /** @class */ (function () {
     function CategorySelectionNewAd(parentDivId, allCategories) {
         this.CategoryIdKey = "CategoryId";
         this._firstLevelTemplate = "category1Template";

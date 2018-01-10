@@ -45,7 +45,8 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> NewAd()
         {
-            return View();
+            Guid currentNewAdGuid=Guid.NewGuid();
+            return View(currentNewAdGuid);
         }
 
         [Authorize]
