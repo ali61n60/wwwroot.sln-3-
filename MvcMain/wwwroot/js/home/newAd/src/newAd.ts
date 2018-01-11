@@ -34,11 +34,10 @@ class NewAd implements ICriteriaChange {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
-        this.initPage();
         this._newAdCriteria = new NewAdCriteria();
+        this.initPage();
         this._imageUploader = new ImageUploader(this._currentNewAdGuid);
         this._newAdServerCaller = new NewAdServerCaller();
-        
         this.initEventHandlers();
     }
 

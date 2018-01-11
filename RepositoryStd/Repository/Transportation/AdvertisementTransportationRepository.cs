@@ -252,7 +252,7 @@ namespace RepositoryStd.Repository.Transportation
 
         }
         
-        public async Task<Guid> Add(Dictionary<string, string> userInputDictionary, string userId)
+        public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
@@ -271,8 +271,6 @@ namespace RepositoryStd.Repository.Transportation
 
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             await _adDbContext.SaveChangesAsync();
-            
-            return ad.AdId;
         }
 
         //TODO maybe this is a method of AdAttributeTransportation class

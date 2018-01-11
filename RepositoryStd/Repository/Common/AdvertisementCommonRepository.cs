@@ -228,7 +228,7 @@ namespace RepositoryStd.Repository.Common
         }
 
 
-        public async Task<Guid> Add(Dictionary<string, string> userInputDictionary, string userId)
+        public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
         }

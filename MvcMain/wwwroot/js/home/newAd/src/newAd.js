@@ -17,8 +17,8 @@ var NewAd = /** @class */ (function () {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
-        this.initPage();
         this._newAdCriteria = new NewAdCriteria_1.NewAdCriteria();
+        this.initPage();
         this._imageUploader = new ImageUploader_1.ImageUploader(this._currentNewAdGuid);
         this._newAdServerCaller = new NewAdServerCaller_1.NewAdServerCaller();
         this.initEventHandlers();
