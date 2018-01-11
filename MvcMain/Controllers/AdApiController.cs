@@ -244,7 +244,6 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<ResponseBase<UploadedImage>> AddTempImage()
         {
-            Thread.Sleep(2000);
             string errorCode = "AdApiController.AddTempImage";
             ResponseBase<UploadedImage> response = new ResponseBase<UploadedImage>
             {

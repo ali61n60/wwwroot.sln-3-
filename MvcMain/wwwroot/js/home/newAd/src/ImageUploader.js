@@ -1,11 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//TODO what if a send file request is sent but response.success is false, or OnError
-//it seems good practice to add a timer to the uploadingImageTemplate and remove template after timer ticks.
-//but if a response comes with success=true manually add the uploaded image to the loadedImageView
-//
+//TODO remove uploade image from server
 var ImageUploader = /** @class */ (function () {
     function ImageUploader(currentNewAdGuid) {
+        this.NewAdGuidKey = "NewAdGuid";
+        this.RequestIndexKey = "RequestIndex";
         this.ImageUploadInputId = "imageUpload";
         this.MessageToUserDivId = "labelMessageToUser";
         this.LoadedImagesDivId = "loadedImageView";
@@ -13,28 +12,27 @@ var ImageUploader = /** @class */ (function () {
         this._sendFilesToServerUrl = "/api/AdApi/AddTempImage";
         this._removeFileFromServerUrl = "/api/AdApi/RemoveTempImage";
         this._requestIndex = 0;
+        this.ValidUploadTime = 20000;
         this._currentNewAdGuid = currentNewAdGuid;
         this.initView();
     }
     ImageUploader.prototype.initView = function () {
         var _this = this;
-        $(document).ready(function () {
-            $("#" + _this.ImageUploadInputId).change(function (event) {
-                var fileUpload = $("#" + _this.ImageUploadInputId).get(0);
-                var files = fileUpload.files;
-                _this.sendFilesToServer(files);
-            }); //change
-            $(document).on("click", ".addedImage > input", function (event) {
-                _this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
-            }); //click
-        }); //ready
+        $("#" + this.ImageUploadInputId).change(function (event) {
+            var fileUpload = $("#" + _this.ImageUploadInputId).get(0);
+            var files = fileUpload.files;
+            _this.sendFilesToServer(files);
+        });
+        $(document).on("click", ".addedImage > input", function (event) {
+            _this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
+        });
     };
     ImageUploader.prototype.sendFilesToServer = function (fileList) {
         var _this = this;
         this._requestIndex++;
         var data = new FormData();
-        data.append("NewAdGuid", this._currentNewAdGuid); //magic string
-        data.append("RequestIndex", this._requestIndex.toString());
+        data.append(this.NewAdGuidKey, this._currentNewAdGuid);
+        data.append(this.RequestIndexKey, this._requestIndex.toString());
         for (var i = 0; i < fileList.length; i++) {
             data.append(fileList[i].name, fileList[i]);
         } //for
@@ -47,29 +45,43 @@ var ImageUploader = /** @class */ (function () {
             success: function (msg, textStatus, jqXHR) { return _this.onSuccessSendFileToServer(msg, textStatus, jqXHR); },
             error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorSendFileToServer(jqXHR, textStatus, errorThrown); } // When Service call fails
         }); //ajax
-        this.addUploadingImageTemplate();
+        this.addUploadingImageTemplate(this._requestIndex);
     };
     ImageUploader.prototype.onSuccessSendFileToServer = function (msg, textStatus, jqXHR) {
         $("#" + this.ImageUploadInputId).val("");
         if (msg.success == true) {
             this.updateSendingImageTemplate(msg.responseData);
-        } //if
+        }
         else {
             this.showMessageToUser(msg.messag + " ," + msg.errorCode);
-        } //else
-    }; //onSuccessGetItemsFromServer
+            this.uploadImageTimerExpire(parseInt(msg.responseData.requestIndex));
+        }
+    };
     ImageUploader.prototype.onErrorSendFileToServer = function (jqXHR, textStatus, errorThrown) {
         this.showMessageToUser("خطا در ارسال"); //magic string
-    }; //end OnErrorGetTimeFromServer
-    ImageUploader.prototype.addUploadingImageTemplate = function () {
+    };
+    ImageUploader.prototype.addUploadingImageTemplate = function (requestIndex) {
         var template = $("#" + this.UploadingImageTemplate).html(); //magic string
-        var data = { RequestIndex: this._requestIndex }; //magic string
+        var data = { RequestIndex: requestIndex }; //magic string
         var html = Mustache.to_html(template, data);
         $("#" + this.LoadedImagesDivId).append(html);
+        setTimeout(this.uploadImageTimerExpire, this.ValidUploadTime, this._requestIndex);
+    };
+    ImageUploader.prototype.uploadImageTimerExpire = function (uploadRequestIndex) {
+        if ($("#loadedImageView > #uploadingImage" + uploadRequestIndex + " > img").hasClass("gifImage")) {
+            $("#loadedImageView > #uploadingImage" + uploadRequestIndex).remove();
+        }
     };
     ImageUploader.prototype.updateSendingImageTemplate = function (data) {
-        $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img").
-            attr("src", "data:image/jpg;base64," + data.image);
+        if ($("#loadedImageView > #uploadingImage" + data.requestIndex).length === 0) {
+            this.addUploadingImageTemplate(parseInt(data.requestIndex));
+            this.updateSendingImageTemplate(data);
+        }
+        else {
+            $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img")
+                .attr("src", "data:image/jpg;base64," + data.image).removeClass("gifImage");
+            $("#loadedImageView > #uploadingImage" + data.requestIndex).attr("id", data.imageFileName);
+        }
     };
     ImageUploader.prototype.showMessageToUser = function (msg) {
         $("#" + this.MessageToUserDivId).html(msg);

@@ -1,8 +1,8 @@
-﻿//TODO what if a send file request is sent but response.success is false, or OnError
-//it seems good practice to add a timer to the uploadingImageTemplate and remove template after timer ticks.
-//but if a response comes with success=true manually add the uploaded image to the loadedImageView
-//
+﻿//TODO remove uploade image from server
 export class ImageUploader {
+        
+    private readonly NewAdGuidKey = "NewAdGuid";
+    private readonly RequestIndexKey ="RequestIndex";
     private readonly ImageUploadInputId: string = "imageUpload";
     private readonly MessageToUserDivId: string = "labelMessageToUser";
     private readonly LoadedImagesDivId: string = "loadedImageView";
@@ -13,6 +13,7 @@ export class ImageUploader {
 
     private _currentNewAdGuid: string;
     private _requestIndex: number = 0;
+    private readonly ValidUploadTime=20000;
 
     constructor(currentNewAdGuid: string) {
         this._currentNewAdGuid = currentNewAdGuid;
@@ -20,26 +21,22 @@ export class ImageUploader {
     }
 
     private initView(): void {
-        $(document).ready(() => {
-            $("#" + this.ImageUploadInputId).change((event) => {
-                let fileUpload: HTMLInputElement = $("#" + this.ImageUploadInputId).get(0) as HTMLInputElement;
-                let files: FileList = fileUpload.files;
-                this.sendFilesToServer(files);
+        $("#" + this.ImageUploadInputId).change((event) => {
+            let fileUpload: HTMLInputElement = $("#" + this.ImageUploadInputId).get(0) as HTMLInputElement;
+            let files: FileList = fileUpload.files;
+            this.sendFilesToServer(files);
+        });
 
-            }); //change
-
-            $(document).on("click", ".addedImage > input", (event) => {
-                this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
-            }); //click
-
-        }); //ready
+        $(document).on("click", ".addedImage > input", (event) => {
+            this.removeImageFromServer($(event.currentTarget).parent().attr("id").toString());
+        });
     }
 
     private sendFilesToServer(fileList: FileList): void {
         this._requestIndex++;
         var data = new FormData();
-        data.append("NewAdGuid", this._currentNewAdGuid);//magic string
-        data.append("RequestIndex", this._requestIndex.toString());
+        data.append(this.NewAdGuidKey, this._currentNewAdGuid);
+        data.append(this.RequestIndexKey, this._requestIndex.toString());
         for (var i = 0; i < fileList.length; i++) {
             data.append(fileList[i].name, fileList[i]);
         } //for
@@ -53,37 +50,51 @@ export class ImageUploader {
             error: (jqXHR, textStatus, errorThrown) => this.onErrorSendFileToServer(jqXHR, textStatus, errorThrown) // When Service call fails
 
         }); //ajax
-        this.addUploadingImageTemplate();
+        this.addUploadingImageTemplate(this._requestIndex);
     }
 
-   private onSuccessSendFileToServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-       $("#" + this.ImageUploadInputId).val("");
-       
+    private onSuccessSendFileToServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
+        $("#" + this.ImageUploadInputId).val("");
+
         if (msg.success == true) {
             this.updateSendingImageTemplate(msg.responseData);
-        } //if
+        }
         else {
             this.showMessageToUser(msg.messag + " ," + msg.errorCode);
-          
-        } //else
-    } //onSuccessGetItemsFromServer
+            this.uploadImageTimerExpire(parseInt(msg.responseData.requestIndex));
+        }
+    }
 
     private onErrorSendFileToServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
         this.showMessageToUser("خطا در ارسال");//magic string
-    } //end OnErrorGetTimeFromServer
-
-    private addUploadingImageTemplate(): void {
-        let template = $("#" + this.UploadingImageTemplate).html();//magic string
-        let data = { RequestIndex: this._requestIndex };//magic string
-
-        let html = Mustache.to_html(template, data);
-        $("#" + this.LoadedImagesDivId).append(html);
     }
 
-   
-    private updateSendingImageTemplate(data) {
-        $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img").
-            attr("src", "data:image/jpg;base64," + data.image)
+    private addUploadingImageTemplate(requestIndex:number): void {
+        let template = $("#" + this.UploadingImageTemplate).html();//magic string
+        let data = { RequestIndex: requestIndex };//magic string
+        let html = Mustache.to_html(template, data);
+        $("#" + this.LoadedImagesDivId).append(html);
+        
+        setTimeout(this.uploadImageTimerExpire,
+            this.ValidUploadTime,this._requestIndex);
+    }
+
+    private uploadImageTimerExpire(uploadRequestIndex: number) {
+        if ($("#loadedImageView > #uploadingImage" + uploadRequestIndex + " > img").hasClass("gifImage")) {
+            $("#loadedImageView > #uploadingImage" + uploadRequestIndex).remove();
+        }
+    }
+
+
+    private updateSendingImageTemplate(data: UploadedImage) {
+        if ($("#loadedImageView > #uploadingImage" + data.requestIndex).length === 0) {
+            this.addUploadingImageTemplate(parseInt(data.requestIndex));
+            this.updateSendingImageTemplate(data);
+        } else {
+            $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img")
+                .attr("src", "data:image/jpg;base64," + data.image).removeClass("gifImage");
+            $("#loadedImageView > #uploadingImage" + data.requestIndex).attr("id", data.imageFileName);
+        }
     }
 
     private showMessageToUser(msg) {
@@ -94,6 +105,7 @@ export class ImageUploader {
     //TODO refactor this method 
 
     private removeImageFromServer(fileName: string) {
+        alert(fileName);
         let callParams = {
             FileNameToBeRemoved: fileName
         };
@@ -127,6 +139,7 @@ export class ImageUploader {
 }
 
 class UploadedImage {
-    public Image: string;
-    public ImageFileName: string;
+    public image: string;
+    public imageFileName: string;
+    public requestIndex:string;
 }
