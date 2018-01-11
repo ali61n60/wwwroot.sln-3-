@@ -76,12 +76,10 @@ class NewAd implements ICriteriaChange {
     }
 
     private submitAd() {
-        
-        //TODO manage  get user's pictures from TempImage Directory
         //TODO disable submitAd Button until current submission is ok or errornous 
         
         let userInput = new UserInput();
-
+        userInput.ParametersDictionary["NewAdGuid"] = this._currentNewAdGuid;
         this._categorySelectionNewAd.InsertCategoryIdInUserInputDictionary(userInput);
         userInput.ParametersDictionary[this.AdTitleKey] = $("#" + this.AdTitleInputId).val();
         userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();

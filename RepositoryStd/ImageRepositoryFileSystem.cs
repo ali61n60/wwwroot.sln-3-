@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Net.Http.Headers;
@@ -7,6 +10,7 @@ using ModelStd.IRepository;
 
 namespace RepositoryStd
 {
+    //TODO this class only works for jpeg file extension. expand file extensions
     public class ImageRepositoryFileSystem : IImageRepository
     {
         private readonly string DirectoryPath;
@@ -142,7 +146,7 @@ namespace RepositoryStd
             if (!Directory.Exists(currentAdDirectoryPath))
                 Directory.CreateDirectory(currentAdDirectoryPath);
             //string filename = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
-            string filename = "0.jpeg";//TODO get file name based on files in directory
+            string filename =getFileName(currentAdDirectoryPath) ;//TODO get file name based on files in directory
             string thumbnailFileName = "thumbnail-" + filename;//magic string
             string filenameWithPath = currentAdDirectoryPath + $@"/{filename}";
             string thumbnailFileNameWithPath = currentAdDirectoryPath + $@"/{thumbnailFileName}";
@@ -160,36 +164,44 @@ namespace RepositoryStd
             return filename;
         }
 
-        public async Task RemoveTempFile(string fileNameToBeRemoved, string userEmail)
+        private string getFileName(string currentAdDirectoryPath)
         {
-            string tempFilesDirectoryPath = DirectoryPath + "TempFiles/" + userEmail;
-            if (!Directory.Exists(tempFilesDirectoryPath))
-                return;
-            string fileName = tempFilesDirectoryPath + $@"\{fileNameToBeRemoved}";
-            string thumnNalFileName = tempFilesDirectoryPath + $@"\thumbnail-{fileNameToBeRemoved}";
-            File.Delete(fileName);
-            File.Delete(thumnNalFileName);
-        }
-
-        public async Task<bool> PermanentTempImages(Guid newAdGuid, string userEmail)
-        {
-            //TODO move users temp imeage into its own ad folder image
-            string tempFilesDirectoryPathString = DirectoryPath + TempImagesFolderName + userEmail;
-            string targetDirectoryPathString = DirectoryPath + newAdGuid;
-
-            string[] fileImages = Directory.GetFiles(tempFilesDirectoryPathString, "*.jpeg", SearchOption.TopDirectoryOnly);
+            int availableFileNameMaxNumber=-1;
+            string[] allFilesInDirectory= Directory.GetFiles(currentAdDirectoryPath)
+                .Select(Path.GetFileNameWithoutExtension).ToArray();
             
-            if (fileImages.Length > 0)
+            List<string> fileNamesStartWithNumberList=new List<string>();
+            foreach (string fileName in allFilesInDirectory)
             {
-                foreach (string fileImage in fileImages)
+                if (Regex.IsMatch(fileName, @"^\d+"))
                 {
-                    File.Move(fileImage, targetDirectoryPathString);
-                    File.Delete(fileImage);
+                    fileNamesStartWithNumberList.Add(fileName);
                 }
             }
 
+            foreach (string fileName in fileNamesStartWithNumberList)
+            {
+                int intFileName = int.Parse(fileName);
+                if (intFileName > availableFileNameMaxNumber)
+                {
+                    availableFileNameMaxNumber = intFileName;
+                }
+            }
+            string returnFileName = (availableFileNameMaxNumber + 1).ToString() + ".jpeg";
 
-            return false;
+            return returnFileName;
+        }
+
+        public async Task RemoveTempFile(string fileNameToBeRemoved, Guid currentAdGuid)
+        {
+            string currentAdDirectoryPath = DirectoryPath + currentAdGuid;
+            
+            if (!Directory.Exists(currentAdDirectoryPath))
+                return;
+            string fileName = currentAdDirectoryPath + $@"\{fileNameToBeRemoved}";
+            string thumnNalFileName = currentAdDirectoryPath + $@"\thumbnail-{fileNameToBeRemoved}";//magic string
+            File.Delete(fileName);
+            File.Delete(thumnNalFileName);
         }
     }
 }

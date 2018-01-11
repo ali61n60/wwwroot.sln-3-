@@ -110,13 +110,7 @@ namespace MvcMain.Controllers
                     response.SetFailureResponse("user is null", errorCode);
                     return response;
                 }
-                //TODO Study about Transaction insert of data in database and saving images
-                Guid newAdGuid = await adRepository.Add(userInput, user.Id);
-                bool imagesMovedToPermanentLocation = await _imageRepository.PermanentTempImages(newAdGuid, user.Email);
-                if (imagesMovedToPermanentLocation)
-                    response.SetSuccessResponse("OK");
-                else
-                    response.SetFailureResponse("imagesMovedToPermanentLocation is flase.");
+                await adRepository.Add(userInput, user.Id);
             }
             catch (Exception ex)
             {
@@ -254,10 +248,9 @@ namespace MvcMain.Controllers
             };
             try
             {
-                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
                 Guid currentAdGuid = Guid.Parse(Request.Form["NewAdGuid"]);//magic string
-
                 IFormFile uploadedFile = Request.Form.Files[0];//only one file
+                //TODO what if uploadedFile is null
                 string filename = ContentDispositionHeaderValue.Parse(uploadedFile.ContentDisposition).FileName.Trim('"');
 
                 ResponseBase<byte[]> thumbnailResponse = ImageService.ConvertImage(100, 100, uploadedFile.OpenReadStream());
@@ -286,15 +279,18 @@ namespace MvcMain.Controllers
             string errorCode = "AdApiController.RemoveTempImage";
             string FileNameToBeRemovedKey = "FileNameToBeRemoved";
             string defaultFileName = "__dddsss.jpg";
+
+            string NewAdGuidKey = "NewAdGuid";
+            string defaultGuid=new Guid().ToString();
             ResponseBase<string> response = new ResponseBase<string>();
             try
             {
-                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
                 string fileNameToBeRemoved = ParameterExtractor.ExtractString(userInput, FileNameToBeRemovedKey, defaultFileName);
+                Guid cuurendNewAdGuid=Guid.Parse(ParameterExtractor.ExtractString(userInput, NewAdGuidKey,new Guid().ToString()));
 
                 if (fileNameToBeRemoved != defaultFileName)
                 {
-                    await _imageRepository.RemoveTempFile(fileNameToBeRemoved, user.Email);
+                    await _imageRepository.RemoveTempFile(fileNameToBeRemoved, cuurendNewAdGuid);
                 }
                 response.ResponseData = fileNameToBeRemoved;
                 response.SetSuccessResponse("OK");

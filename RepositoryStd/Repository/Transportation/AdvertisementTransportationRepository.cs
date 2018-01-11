@@ -251,30 +251,27 @@ namespace RepositoryStd.Repository.Transportation
             return list;
 
         }
-
-
-
+        
         public async Task<Guid> Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
             ad.AdStatusId = 1; //submitted TODO use AdvertisementCommon Class to set it from an enum
-            ad.AdId = Guid.NewGuid();
+            ad.AdId = Guid.Parse(ParameterExtractor.ExtractString(userInputDictionary, "NewAdGuid",
+                new Guid().ToString()));
             ad.AdInsertDateTime = DateTime.Now;
             ad.UserId = userId;
             ad.AdNumberOfVisited = 0;//just being added
 
             adAttribute.AdId = ad.AdId;
-
-           
+            
             _adDbContext.Advertisements.Add(ad);
             await _adDbContext.SaveChangesAsync();
 
             _adDbContext.AdAttributeTransportation.Add(adAttribute);
             await _adDbContext.SaveChangesAsync();
-
-
+            
             return ad.AdId;
         }
 

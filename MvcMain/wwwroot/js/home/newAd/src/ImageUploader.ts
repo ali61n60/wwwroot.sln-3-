@@ -87,27 +87,22 @@ export class ImageUploader {
 
 
     private updateSendingImageTemplate(data: UploadedImage) {
-        if ($("#loadedImageView > #uploadingImage" + data.requestIndex).length === 0) {
+        if ($("#loadedImageView > #uploadingImage" + data.requestIndex).length === 0) {//removed by timer
             this.addUploadingImageTemplate(parseInt(data.requestIndex));
             this.updateSendingImageTemplate(data);
         } else {
+            //TODO cancel timer
             $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img")
                 .attr("src", "data:image/jpg;base64," + data.image).removeClass("gifImage");
             $("#loadedImageView > #uploadingImage" + data.requestIndex).attr("id", data.imageFileName);
         }
     }
 
-    private showMessageToUser(msg) {
-        $("#" + this.MessageToUserDivId).html(msg);
-    }
-
-
-    //TODO refactor this method 
-
     private removeImageFromServer(fileName: string) {
         alert(fileName);
         let callParams = {
-            FileNameToBeRemoved: fileName
+            FileNameToBeRemoved: fileName,
+            NewAdGuid:this._currentNewAdGuid
         };
 
         $.ajax({
@@ -135,6 +130,10 @@ export class ImageUploader {
 
     private onErrorRemoveFileFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
         this.showMessageToUser("error, " + errorThrown);
+    }
+
+    private showMessageToUser(msg) {
+        $("#" + this.MessageToUserDivId).html(msg);
     }
 }
 

@@ -78,19 +78,18 @@ var ImageUploader = /** @class */ (function () {
             this.updateSendingImageTemplate(data);
         }
         else {
+            //TODO cancel timer
             $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img")
                 .attr("src", "data:image/jpg;base64," + data.image).removeClass("gifImage");
             $("#loadedImageView > #uploadingImage" + data.requestIndex).attr("id", data.imageFileName);
         }
     };
-    ImageUploader.prototype.showMessageToUser = function (msg) {
-        $("#" + this.MessageToUserDivId).html(msg);
-    };
-    //TODO refactor this method 
     ImageUploader.prototype.removeImageFromServer = function (fileName) {
         var _this = this;
+        alert(fileName);
         var callParams = {
-            FileNameToBeRemoved: fileName
+            FileNameToBeRemoved: fileName,
+            NewAdGuid: this._currentNewAdGuid
         };
         $.ajax({
             type: "GET",
@@ -113,6 +112,9 @@ var ImageUploader = /** @class */ (function () {
     };
     ImageUploader.prototype.onErrorRemoveFileFromServer = function (jqXHR, textStatus, errorThrown) {
         this.showMessageToUser("error, " + errorThrown);
+    };
+    ImageUploader.prototype.showMessageToUser = function (msg) {
+        $("#" + this.MessageToUserDivId).html(msg);
     };
     return ImageUploader;
 }());
