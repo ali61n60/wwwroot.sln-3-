@@ -20,7 +20,7 @@ var NewAdServerCaller = /** @class */ (function () {
     NewAdServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
         //TODO redirect user to a new page
         if (msg.success == true) {
-            document.location.replace("/Home/LetMeKnow");
+            document.location.replace("/NewAd/Confirm");
         }
     };
     NewAdServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {

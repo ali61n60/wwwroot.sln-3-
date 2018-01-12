@@ -18,6 +18,11 @@ namespace MvcMain.Controllers
             return View(currentNewAdGuid);
         }
 
+        public async Task<IActionResult> Confirm()
+        {
+            return View();
+        }
+
         [HttpGet]
         public IActionResult GetNewAdPartialView([FromQuery] Dictionary<string, string> userInput)
         {

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//TODO remove uploade image from server
 var ImageUploader = /** @class */ (function () {
     function ImageUploader(currentNewAdGuid) {
         this.NewAdGuidKey = "NewAdGuid";

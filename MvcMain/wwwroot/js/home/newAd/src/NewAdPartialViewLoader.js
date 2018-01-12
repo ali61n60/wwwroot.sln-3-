@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader = /** @class */ (function () {
     function NewAdPartialViewLoader(partialViewDivId, newAdCriteriaChange, newAdCriteria) {
-        this._url = "/Home/GetNewAdPartialView";
+        this._url = "/NewAd/GetNewAdPartialView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
         this._partialViewDivId = partialViewDivId;

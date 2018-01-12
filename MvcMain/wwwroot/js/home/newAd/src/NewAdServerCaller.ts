@@ -21,7 +21,7 @@ export class NewAdServerCaller {
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
         //TODO redirect user to a new page
         if (msg.success == true) {
-            document.location.replace("/Home/LetMeKnow");
+            document.location.replace("/NewAd/Confirm");
         }
     } 
 
