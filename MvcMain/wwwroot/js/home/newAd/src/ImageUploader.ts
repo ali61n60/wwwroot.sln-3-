@@ -1,5 +1,4 @@
-﻿//TODO remove uploade image from server
-export class ImageUploader {
+﻿export class ImageUploader {
         
     private readonly NewAdGuidKey = "NewAdGuid";
     private readonly RequestIndexKey ="RequestIndex";

@@ -3,7 +3,7 @@ import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 
 export class NewAdPartialViewLoader {
     private _partialViewDivId: string;
-    private _url: string = "/Home/GetNewAdPartialView";
+    private _url: string = "/NewAd/GetNewAdPartialView";
     private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
     private _newAdCriteriaChange: ICriteriaChange;

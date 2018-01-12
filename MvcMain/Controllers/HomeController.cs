@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Services;
-using MvcMain.Components.NewAd;
-using MvcMain.Infrastructure.Services;
 using MvcMain.Models;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Repository.Common;
@@ -19,7 +15,6 @@ namespace MvcMain.Controllers
 {
     public class HomeController : Controller
     {
-        
         public async Task<IActionResult> Index()
         {
             return View();
@@ -27,6 +22,7 @@ namespace MvcMain.Controllers
 
         public async Task<IActionResult> AdDetail(AdDetailInfo adDetailInfo)
         {
+            //TODO what is this??? Refactor 
             AdApiController adApiController=new AdApiController();
             switch (adDetailInfo.CategoryId)
             {
@@ -42,32 +38,12 @@ namespace MvcMain.Controllers
             }
         }
 
-        [Authorize]
-        public async Task<IActionResult> NewAd()
-        {
-            Guid currentNewAdGuid=Guid.NewGuid();
-            return View(currentNewAdGuid);
-        }
-
-        [Authorize]
+       [Authorize]
         public async Task<IActionResult> LetMeKnow()
         {
             return View();
         }
-
-        [HttpGet]
-        public IActionResult GetNewAdPartialView([FromQuery] Dictionary<string, string> userInput)
-        {
-            int categoryId = ParameterExtractor.ExtractInt(userInput,AdvertisementCommonRepository.CategoryIdKey,AdvertisementCommonRepository.CategoryIdDefault);
-            switch (categoryId)
-            {
-                case 100:
-                    return ViewComponent("NewAdTransformation");
-                    default:
-                        return ViewComponent("NewAdDefault");
-            }
-        }
-
+        
         [HttpGet]
         public IActionResult GetSearchCriteriaView([FromQuery] Dictionary<string, string> userInput)
         {
