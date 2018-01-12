@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MvcMain.Controllers
 {
+    //TODO enable users to register for items to be informed when a new ad meets user requirements
     public class LetMeKnow:Controller
     {
         [Authorize]

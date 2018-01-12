@@ -1,8 +1,43 @@
 ﻿@model object
 
 @{
-    ViewBag.Title = "title";
+    ViewData["Title"] = "Access Denied";
+    ViewData["PageTitle"] = "Access Denied";
     Layout = "_Layout";
 }
 
-<h2>Access Denied</h2>
+@section TopTop
+    {
+    @Html.Partial("TopTop")
+}
+@section NavBar
+    {
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+    {
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+    {
+
+}
+@section SideNav
+    {
+    @Html.Partial("SideNav")
+}
+@section Body
+    {
+    <h2>Access Denied</h2>
+}
+
+@section Footer
+    {
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}
+
+
