@@ -38,11 +38,8 @@ namespace MvcMain.Controllers
             }
         }
 
-       [Authorize]
-        public async Task<IActionResult> LetMeKnow()
-        {
-            return View();
-        }
+      
+        
         
         [HttpGet]
         public IActionResult GetSearchCriteriaView([FromQuery] Dictionary<string, string> userInput)
