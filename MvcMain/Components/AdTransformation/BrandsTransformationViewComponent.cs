@@ -5,6 +5,8 @@ using ModelStd.IRepository;
 
 namespace MvcMain.Components.SearchAd.AdTransformation
 {
+    //TODO use AdTransportaionApiController to access allBrands and allCarModels, instead of calling repository directly
+    //TODO error handling for repository calls
     public class BrandsTransformationViewComponent : ViewComponent
     {
         private readonly ITransportaionRepository _transportationRepository;

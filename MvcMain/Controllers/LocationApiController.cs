@@ -16,47 +16,47 @@ namespace MvcMain.Controllers
             {
                 ResponseData = 2
             };
-            response.SetSuccessResponse("OK");
+            response.SetSuccessResponse();
             return response;
         }
 
-        public ResponseBase<Province[]> GetAllProvinces()
+        public ResponseBase<IEnumerable<Province>> GetAllProvinces()
         {
             //TODO gat data from repository
             List<Province> provinces = new List<Province>();
-            ResponseBase<Province[]> response = new ResponseBase<Province[]>();
+            ResponseBase<IEnumerable<Province>> response = new ResponseBase<IEnumerable<Province>>();
             provinces.Add(new Province(1, "tehran", "tehran"));
             provinces.Add(new Province(2, "qom", "qom"));
             provinces.Add(new Province(3, "alborz", "karaj"));
             response.ResponseData = provinces.ToArray();
-            response.SetSuccessResponse("OK");
+            response.SetSuccessResponse();
             return response;
         }
 
-        public ResponseBase<City[]> GetAllCities()
+        public ResponseBase<IEnumerable<City>> GetAllCities()
         {
             //TODO gat data from repository
             List<City> cities = new List<City>();
-            ResponseBase<City[]> response = new ResponseBase<City[]>();
+            ResponseBase<IEnumerable<City>> response = new ResponseBase<IEnumerable<City>>();
             cities.Add(new City(1, "tehran", 1));
             cities.Add(new City(2, "eslamShar", 1));
             cities.Add(new City(3, "malard", 3));
             response.ResponseData = cities.ToArray();
-            response.SetSuccessResponse("OK");
+            response.SetSuccessResponse();
             return response;
         }
 
-        public ResponseBase<District[]> GetAllDistricts()
+        public ResponseBase<IEnumerable<District>> GetAllDistricts()
         {
             //TODO gat data from repository
             List<District> districts = new List<District>();
-            ResponseBase<District[]> response = new ResponseBase<District[]>();
+            ResponseBase<IEnumerable<District>> response = new ResponseBase<IEnumerable<District>>();
             districts.Add(new District(1, "poonak", 1, 1));
             districts.Add(new District(2, "valiasr", 1, 1));
             districts.Add(new District(3, "resalat", 1, 1));
             districts.Add(new District(29, "NematAbad", 1, 1));
             response.ResponseData = districts.ToArray();
-            response.SetSuccessResponse("OK");
+            response.SetSuccessResponse();
             return response;
         }
     }
