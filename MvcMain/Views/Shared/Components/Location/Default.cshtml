@@ -16,10 +16,11 @@
         <option value="@city.CityId">@city.CityName </option>
     }
 </select>
-
 <select id="district">
     @foreach (District district in Model.AllDistricts)
     {
-        @:<option value="@district.DistrictId>@district.DistrictName </option>
+        @:
+        <option value="@district.DistrictId>@district.DistrictName </option>
     }
+
 </select>
