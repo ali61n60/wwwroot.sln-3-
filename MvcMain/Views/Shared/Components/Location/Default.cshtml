@@ -1,0 +1,25 @@
+﻿@using ModelStd.Advertisements.Location
+@model MvcMain.Components.AllLocations
+
+<select id="province">
+    @foreach (Province province in Model.AllProvinces)
+    {
+        @:
+        <option value="@province.ProvinceId">@province.ProvinceName </option>
+    }
+</select>
+
+<select id="city">
+    @foreach (City city in Model.AllCities)
+    {
+        @:
+        <option value="@city.CityId">@city.CityName </option>
+    }
+</select>
+
+<select id="district">
+    @foreach (District district in Model.AllDistricts)
+    {
+        @:<option value="@district.DistrictId>@district.DistrictName </option>
+    }
+</select>

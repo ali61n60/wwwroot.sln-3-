@@ -78,6 +78,7 @@ namespace MvcMain
             services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController());
             
             services.AddTransient<CategoryApiController>();
+            services.AddTransient<LocationApiController>();
 
             services.AddTransient<AdDbContext>(provider =>new AdDbContext(_configuration["Data:ConnectionString"]));
 
