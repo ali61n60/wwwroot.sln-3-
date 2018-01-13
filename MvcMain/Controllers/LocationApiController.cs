@@ -5,6 +5,8 @@ using ModelStd.Services;
 
 namespace MvcMain.Controllers
 {
+    //TODO get data from repository and return it in method calls.
+    // a good practice maybe is to load data from database on app start and use that data instead of calling database each time 
     [Route("api/[controller]/[action]")]
     public class LocationApiController:Controller
     {

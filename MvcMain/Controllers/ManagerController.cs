@@ -13,7 +13,7 @@ namespace MvcMain.Controllers
     //TODO manage Ad image folder
     public class ManagerController:Controller
     {
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admins")]
         public async Task<IActionResult> Index()
         {
             return View();

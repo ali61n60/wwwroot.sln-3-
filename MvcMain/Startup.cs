@@ -81,8 +81,8 @@ namespace MvcMain
 
             services.AddTransient<AdDbContext>(provider =>new AdDbContext(_configuration["Data:ConnectionString"]));
 
-            services.AddTransient<AppIdentityDbContext>(provider =>
-                new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
+            services.AddTransient<AppIdentityDbContext>(provider =>new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
+           
            
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
@@ -151,7 +151,9 @@ namespace MvcMain
             app.UseIdentity();
             app.UseMvcWithDefaultRoute();
             MyService.Inst = app.ApplicationServices;
-            
+            AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
+                _configuration).Wait();
+
         }
     }
 
