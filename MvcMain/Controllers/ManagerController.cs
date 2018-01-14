@@ -65,7 +65,7 @@ namespace MvcMain.Controllers
                 return View("ManageAdImageFolder", ex.Message);
             }
             
-            return View("ManageAdImageFolder","Folders Removed");
+            return View("ManageAdImageFolder","Folders Removed at "+DateTime.Now);
         }
 
     }

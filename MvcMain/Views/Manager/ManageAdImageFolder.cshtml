@@ -29,7 +29,8 @@
 @section Body
     {
     <h1>@Model</h1>
-
+    <a asp-controller="Manager" asp-action="Index" class="btn btn-lg btn-primary">Back To Manager Page</a>
+        <br/>
     <form asp-action="RemoveFoldersWithNoDatabaseRecords" method="post">
         <div class="row well">
             <div class="col-sm-10">
