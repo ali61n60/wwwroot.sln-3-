@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Net.Http.Headers;
 using ModelStd.IRepository;
 
 namespace RepositoryStd
@@ -14,7 +13,7 @@ namespace RepositoryStd
     public class ImageRepositoryFileSystem : IImageRepository
     {
         private readonly string DirectoryPath;
-        private readonly string TempImagesFolderName = "TempImagesFolderName/";
+        private readonly string RemovedAdImagesFolderName = "RemovedAdImages/";
         private readonly string FirstAdImageName = "0.jpeg";
 
         public ImageRepositoryFileSystem(string directoryPath)
@@ -209,7 +208,17 @@ namespace RepositoryStd
 
         public void MoveFolderToImagesWithoutAdDirectory(string folder)
         {
-            throw new NotImplementedException();
+            string destinationFolder = DirectoryPath + RemovedAdImagesFolderName + folder;
+            string sourceFolder = DirectoryPath + folder;
+            try
+            {
+                Directory.Move(sourceFolder, destinationFolder);
+            }
+            catch (Exception ex)
+            {
+                Exception myException=new Exception($"{ex.Message}, destination folder: {destinationFolder}, source folder: {sourceFolder}");
+                throw myException;
+            }
         }
     }
 }

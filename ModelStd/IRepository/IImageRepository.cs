@@ -16,6 +16,6 @@ namespace ModelStd.IRepository
        Task<string> SaveTempFile(IFormFile file, byte[] thumbnailFile, Guid currentAdGuid);
        Task RemoveTempFile(string fileNameToBeRemoved, Guid currentAdGuid);
        Task<IEnumerable<string>> GetAllAdIdsFolderName();
-       void MoveFolderToImagesWithoutAdDirectory(string folder);
+       void MoveFolderToImagesWithoutAdDirectory(string folderName);
    }
 }

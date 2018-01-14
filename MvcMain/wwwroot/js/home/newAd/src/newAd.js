@@ -6,7 +6,7 @@ var NewAdCriteria_1 = require("./NewAdCriteria");
 var ImageUploader_1 = require("./ImageUploader");
 var UserInput_1 = require("../../../Helper/UserInput");
 var NewAdServerCaller_1 = require("./NewAdServerCaller");
-var NewAd = (function () {
+var NewAd = /** @class */ (function () {
     function NewAd(allCategoriesDiv, allCategoriesInputId, categorySpecificPartialViewId) {
         this.AdTitleKey = "AdTitle";
         this.AdTitleInputId = "adTitle";

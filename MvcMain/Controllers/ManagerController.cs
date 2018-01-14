@@ -44,27 +44,27 @@ namespace MvcMain.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> RemoveFoldersWithNoDatabaseRecords()
         {
-            //TODO implement RemoveFoldersWithNoDatabaseRecords
-            //Get All Folders from image repository
-            //Get All AdId from database
-            //foreach folder if there is on adId keep it elese remove it
             IEnumerable<string> AllFolders =await _imageRepository.GetAllAdIdsFolderName();
             List<Guid> AllAdsInDataBase = _adDbContext.Advertisements.Select(advertisements => advertisements.AdId).ToList();
-            List<string> FoldersWithAd=new List<string>();
-            List<string> FoldersWithoutAd = new List<string>();
-            foreach (string folder in AllFolders)
+            Guid temp;
+            try
             {
-                if (AllAdsInDataBase.Contains(Guid.Parse(folder)))
+                foreach (string folder in AllFolders)
                 {
-                    FoldersWithAd.Add(folder);
-                }
-                else
-                {
-                    //TODO first move FoldersWithoutAd to anoder location 
-                    FoldersWithoutAd.Add(folder);
-                    _imageRepository.MoveFolderToImagesWithoutAdDirectory(folder);
+                    if (Guid.TryParse(folder, out temp))
+                    {
+                        if (!AllAdsInDataBase.Contains(Guid.Parse(folder)))
+                        {
+                            _imageRepository.MoveFolderToImagesWithoutAdDirectory(folder);
+                        }
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                return View("ManageAdImageFolder", ex.Message);
+            }
+            
             return View("ManageAdImageFolder","Folders Removed");
         }
 
