@@ -1,4 +1,4 @@
-﻿namespace RepositoryStd.QueryPattern
+﻿namespace RepositoryStd.Context.Helper
 {
     public class OrderByHelper
     {

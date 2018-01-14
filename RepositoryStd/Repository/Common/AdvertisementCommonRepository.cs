@@ -13,7 +13,6 @@ using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
-using RepositoryStd.QueryPattern;
 
 namespace RepositoryStd.Repository.Common
 {

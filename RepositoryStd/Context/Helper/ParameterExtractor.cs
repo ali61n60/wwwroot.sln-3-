@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
-using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
-using RepositoryStd.QueryPattern;
-using RepositoryStd.Repository.Common;
 
 
 namespace RepositoryStd.Context.Helper
