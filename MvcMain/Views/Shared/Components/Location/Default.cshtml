@@ -1,26 +1,68 @@
 ﻿@using ModelStd.Advertisements.Location
 @model MvcMain.Components.AllLocations
+    
+<input id="allProvinces" type="hidden" value='Json.Serialize(@Model.AllProvinces)'/>
+<input id="allCities" type="hidden" value='Json.Serialize(@Model.AllCities)' />
+<input id="allDistricts" type="hidden" value='Json.Serialize(@Model.AllDistricts)' />
 
-<select id="province">
-    @foreach (Province province in Model.AllProvinces)
-    {
-        @:
-        <option value="@province.ProvinceId">@province.ProvinceName </option>
-    }
-</select>
+<div class="col-sm-3">
+    <select id="province" class="form-control">
+        @foreach (Province province in Model.AllProvinces)
+        {
+            @:
+            <option value="@province.ProvinceId">@province.ProvinceName </option>
+        }
+    </select>
+</div>
+<div class="col-sm-3">
+    <select id="city" class="form-control">
+        @foreach (City city in Model.AllCities)
+        {
+            @:
+            <option value="@city.CityId">@city.CityName </option>
+        }
+    </select>
+</div>
+<div class="col-sm-3">
+    <select id="district" class="form-control">
+        @foreach (District district in Model.AllDistricts)
+        {
+            @:
+            <option value="@district.DistrictId">@district.DistrictName</option>
+        }
+    </select>
+</div>
 
-<select id="city">
-    @foreach (City city in Model.AllCities)
-    {
-        @:
-        <option value="@city.CityId">@city.CityName </option>
-    }
-</select>
-<select id="district">
-    @foreach (District district in Model.AllDistricts)
-    {
-        @:
-        <option value="@district.DistrictId>@district.DistrictName </option>
-    }
+<script id="ProvinceTemplate" type="text/template">
+    <div id="provinceDiv" class="col-sm-3">
+        <select id="province" class="form-control">
+            <option value="0" selected="selected">تمام استانها</option>
+            {{#provinces}}
+            <option value="{{ProvinceId}}">{{ProvinceName}}</option>
+            {{/provinces}}
+        </select>
+    </div>
+</script>
 
-</select>
+<script id="CityTemplate" type="text/template">
+    <div id="CityDiv" class="col-sm-3">
+        <select id="city" class="form-control">
+            <option value="0" selected="selected">تمام شهرها</option>
+            {{#cities}}
+            <option value="{{CityId}}">{{CityName}}</option>
+            {{/cities}}
+        </select>
+    </div>
+</script>
+
+<script id="DistrictTemplate" type="text/template">
+    <div id="DistrictDiv" class="col-sm-3">
+        <select id="district" class="form-control">
+            <option value="0" selected="selected">تمام محله ها</option>
+            {{#districts}}
+            <option value="{{DistrictId}}">{{DistrictName}}</option>
+            {{/districts}}
+        </select>
+    </div>
+</script>
+
