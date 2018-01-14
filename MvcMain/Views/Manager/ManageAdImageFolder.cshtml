@@ -1,0 +1,50 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "ManageAdImageFolder";
+    ViewData["PageTitle"] = "ManageAdImageFolder";
+    Layout = "_Layout";
+}
+
+@section TopTop
+    {
+    @Html.Partial("TopTop")
+}
+@section NavBar
+    {
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+    {
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+    {
+
+}
+@section SideNav
+    {
+    @Html.Partial("SideNav")
+}
+@section Body
+    {
+    <h1>@Model</h1>
+
+    <form asp-action="RemoveFoldersWithNoDatabaseRecords" method="post">
+        <div class="row well">
+            <div class="col-sm-10">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Remove Folders With No Ad In Database</button>
+            </div>
+        </div>
+    </form>
+
+}
+
+@section Footer
+    {
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}

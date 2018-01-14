@@ -24,5 +24,22 @@ namespace MvcMain.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = "Admins")]
+        public async Task<IActionResult> ManageAdImageFolder()
+        {
+            return View("ManageAdImageFolder","");
+        }
+
+        [Authorize(Roles = "Admins")]
+        public async Task<IActionResult> RemoveFoldersWithNoDatabaseRecords()
+        {
+            //TODO implement RemoveFoldersWithNoDatabaseRecords
+            //Get All Folders from image repository
+            //Get All AdId from database
+            //foreach folder if there is on adId keep it elese remove it
+            return View("ManageAdImageFolder","Folders Removed");
+        }
+
     }
 }
