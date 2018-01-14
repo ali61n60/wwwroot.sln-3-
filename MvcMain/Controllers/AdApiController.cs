@@ -33,6 +33,8 @@ namespace MvcMain.Controllers
     //for that image add server image to page or show error and error message
     //TODO Create and Run SMS sending
     //TODO write code to delete folders in AdImages when the adId in database does not exist
+    //TODO work on Ad Price
+    //TODO Add Admin only visible links
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {

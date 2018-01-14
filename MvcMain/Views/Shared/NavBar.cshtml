@@ -20,7 +20,9 @@
                 <li><a asp-area="" asp-controller="LetMeKnow" asp-action="Index">به من اطلاع بده</a></li>
                 <li><a asp-area="" asp-controller="Home" asp-action="Index">تماس با ما</a></li>
                 <li><a asp-area="" asp-controller="Temperature" asp-action="Index">Temperature</a></li>
+                @await Component.InvokeAsync("Manager")
             </ul>
+            @await Component.InvokeAsync("LoginStatus")
         </div>
     </div>
 </nav>

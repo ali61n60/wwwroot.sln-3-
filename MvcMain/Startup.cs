@@ -71,7 +71,7 @@ namespace MvcMain
             addRepositoryContainer(services,_adDbContext,_appIdentityDbContext,_categoryRepository);
 
             services.AddTransient<TemperatureRepository>(provider => new TemperatureRepository(_adDbContext));
-            services.AddTransient<ILocationRepository>(provider => new LocationRepository());
+            services.AddTransient<ILocationRepository>(provider => new LocationRepository(_adDbContext));
             services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_configuration["Data:ConnectionString"]));
 
             services.AddTransient<IAdvertisementCommonService>(provider => new AdApiController());

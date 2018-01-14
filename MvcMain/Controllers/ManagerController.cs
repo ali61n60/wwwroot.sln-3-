@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace MvcMain.Controllers
 {
-    //TODO copy role management pages from AnamSerkan Project
+    
     //TODO manage submitted ads, inform users registerd in LetMeKnow page
     //TODO
     //TODO manage Ad image folder
