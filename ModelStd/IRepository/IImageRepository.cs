@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
@@ -14,5 +15,7 @@ namespace ModelStd.IRepository
        int MaximumImageSizeInByte();
        Task<string> SaveTempFile(IFormFile file, byte[] thumbnailFile, Guid currentAdGuid);
        Task RemoveTempFile(string fileNameToBeRemoved, Guid currentAdGuid);
+       Task<IEnumerable<string>> GetAllAdIdsFolderName();
+       void MoveFolderToImagesWithoutAdDirectory(string folder);
    }
 }

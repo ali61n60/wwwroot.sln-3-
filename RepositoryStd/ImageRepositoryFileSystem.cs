@@ -76,9 +76,7 @@ namespace RepositoryStd
             try
             {
                 string directoryPathString = DirectoryPath + advertisementGuid.ToString();
-                //DirectoryInfo dir = Directory.CreateDirectory(directoryPathString);
                 string[] fileImages = Directory.GetFiles(directoryPathString, "*.jpeg", SearchOption.TopDirectoryOnly);
-
 
                 if (fileImages.Length > 0)
                 {
@@ -202,6 +200,16 @@ namespace RepositoryStd
             string thumnNalFileName = currentAdDirectoryPath + $@"\thumbnail-{fileNameToBeRemoved}";//magic string
             File.Delete(fileName);
             File.Delete(thumnNalFileName);
+        }
+
+        public async Task<IEnumerable<string>> GetAllAdIdsFolderName()
+        {
+            return Directory.EnumerateDirectories(DirectoryPath).Select(Path.GetFileName);
+        }
+
+        public void MoveFolderToImagesWithoutAdDirectory(string folder)
+        {
+            throw new NotImplementedException();
         }
     }
 }
