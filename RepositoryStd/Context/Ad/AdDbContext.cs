@@ -33,29 +33,29 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<CarModel> CarModel { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
-        public virtual DbSet<Cities> Cities { get; set; }
-        public virtual DbSet<Districts> Districts { get; set; }
+        public virtual DbSet<City> Cities { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<MobileBrands> MobileBrands { get; set; }
         public virtual DbSet<Price> Price { get; set; }
         public virtual DbSet<Privilege> Privilege { get; set; }
-        public virtual DbSet<Provinces> Provinces { get; set; }
+        public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
         public virtual DbSet<Sms> Sms { get; set; }
         public virtual DbSet<TemperatureModel> TemperatueModels { get; set; }
 
-       
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AdAttributeTransportation>(entity =>
             {
-               
+
                 //modelBuilder.Entity<Blog>()
                 //    .HasOne(p => p.BlogImage)
                 //    .WithOne(i => i.Blog)
                 //    .HasForeignKey<BlogImage>(b => b.BlogForeignKey);
-                             
-                
+
+
                 entity.HasOne(d => d.Ad)
                     .WithOne(advertisements => advertisements.AdAttributeTransportation)
                     .OnDelete(DeleteBehavior.Restrict)
@@ -71,7 +71,7 @@ namespace RepositoryStd.Context.AD
             {
                 entity.HasKey(e => e.AdId)
                     .HasName("PK_Advertisements_1");
-                
+
                 entity.HasOne(d => d.AdStatus)
                     .WithMany(p => p.Advertisements)
                     .HasForeignKey(d => d.AdStatusId)
@@ -138,11 +138,11 @@ namespace RepositoryStd.Context.AD
                     .HasMaxLength(150);
             });
 
-           modelBuilder.Entity<Brand>(entity =>
-            {
-                entity.HasKey(e => e.BrandId)
-                    .HasName("PK_CarMakers");
-            });
+            modelBuilder.Entity<Brand>(entity =>
+             {
+                 entity.HasKey(e => e.BrandId)
+                     .HasName("PK_CarMakers");
+             });
 
             modelBuilder.Entity<CarModel>(entity =>
             {
@@ -181,50 +181,16 @@ namespace RepositoryStd.Context.AD
                     .HasColumnType("nchar(10)");
             });
 
-            modelBuilder.Entity<Cities>(entity =>
+            modelBuilder.Entity<City>(entity =>
             {
-                entity.HasKey(e => e.CityId)
-                    .HasName("PK_Cities");
-
-                entity.ToTable("Cities", "ad");
-
-                entity.Property(e => e.CityId)
-                    .HasColumnName("cityId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.CityName)
-                    .IsRequired()
-                    .HasColumnName("cityName")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.ProvinceId).HasColumnName("provinceId");
-
                 entity.HasOne(d => d.Province)
-                    .WithMany(p => p.Cities)
-                    .HasForeignKey(d => d.ProvinceId)
-                    .HasConstraintName("FK_Cities_Provinces");
+                     .WithMany(p => p.Cities)
+                     .HasForeignKey(d => d.ProvinceId)
+                     .HasConstraintName("FK_Cities_Provinces");
             });
 
-            modelBuilder.Entity<Districts>(entity =>
+            modelBuilder.Entity<District>(entity =>
             {
-                entity.HasKey(e => e.DistrictId)
-                    .HasName("PK_Districts");
-
-                entity.ToTable("Districts", "ad");
-
-                entity.Property(e => e.DistrictId)
-                    .HasColumnName("districtId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.CityId).HasColumnName("cityId");
-
-                entity.Property(e => e.DistrictName)
-                    .IsRequired()
-                    .HasColumnName("districtName")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.MunicipalId).HasColumnName("municipalId");
-
                 entity.HasOne(d => d.City)
                     .WithMany(p => p.Districts)
                     .HasForeignKey(d => d.CityId)
@@ -253,10 +219,10 @@ namespace RepositoryStd.Context.AD
 
             modelBuilder.Entity<Price>(entity =>
             {
-               entity.HasOne(d => d.Ad)
-                    .WithOne(advertisements => advertisements.Price)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Price_Advertisements");
+                entity.HasOne(d => d.Ad)
+                     .WithOne(advertisements => advertisements.Price)
+                     .OnDelete(DeleteBehavior.Restrict)
+                     .HasConstraintName("FK_Price_Advertisements");
             });
 
             modelBuilder.Entity<Privilege>(entity =>
@@ -273,44 +239,23 @@ namespace RepositoryStd.Context.AD
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<Provinces>(entity =>
-            {
-                entity.HasKey(e => e.ProvinceId)
-                    .HasName("PK_Provinces");
-
-                entity.ToTable("Provinces", "ad");
-
-                entity.Property(e => e.ProvinceId)
-                    .HasColumnName("provinceId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.ProvinceCenter)
-                    .HasColumnName("provinceCenter")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.ProvinceName)
-                    .IsRequired()
-                    .HasColumnName("provinceName")
-                    .HasMaxLength(150);
-            });
-
             modelBuilder.Entity<SimilarAds>(entity =>
-            {
-                entity.HasKey(e => new { e.AdId, e.SimilarAdId })
-                    .HasName("PK_SimilarAds");
+             {
+                 entity.HasKey(e => new { e.AdId, e.SimilarAdId })
+                     .HasName("PK_SimilarAds");
 
-                entity.ToTable("SimilarAds", "ad");
+                 entity.ToTable("SimilarAds", "ad");
 
-                entity.Property(e => e.AdId).HasColumnName("adId");
+                 entity.Property(e => e.AdId).HasColumnName("adId");
 
-                entity.Property(e => e.SimilarAdId).HasColumnName("similarAdId");
+                 entity.Property(e => e.SimilarAdId).HasColumnName("similarAdId");
 
-                entity.HasOne(d => d.Ad)
-                    .WithMany(p => p.SimilarAds)
-                    .HasForeignKey(d => d.AdId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_SimilarAds_Advertisements");
-            });
+                 entity.HasOne(d => d.Ad)
+                     .WithMany(p => p.SimilarAds)
+                     .HasForeignKey(d => d.AdId)
+                     .OnDelete(DeleteBehavior.Restrict)
+                     .HasConstraintName("FK_SimilarAds_Advertisements");
+             });
 
             modelBuilder.Entity<Sms>(entity =>
             {

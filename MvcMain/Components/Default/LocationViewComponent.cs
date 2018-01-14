@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using ModelStd.Advertisements.Location;
 using ModelStd.Db.Ad;
 using ModelStd.Services;
 using MvcMain.Controllers;

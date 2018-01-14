@@ -60,6 +60,6 @@ namespace ModelStd.Db.Ad
         public virtual ICollection<SimilarAds> SimilarAds { get; set; }
         public virtual AdStatus AdStatus { get; set; }
         public virtual Categories Category { get; set; }
-        public virtual Districts District { get; set; }
+        public virtual District District { get; set; }
     }
 }
