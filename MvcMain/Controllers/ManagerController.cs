@@ -18,5 +18,11 @@ namespace MvcMain.Controllers
         {
             return View();
         }
+
+        [Authorize(Roles = "Admins")]
+        public async Task<IActionResult> ManageSubmittedAds()
+        {
+            return View();
+        }
     }
 }
