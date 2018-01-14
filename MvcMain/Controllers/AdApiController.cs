@@ -29,12 +29,11 @@ namespace MvcMain.Controllers
     //TODO work on District,City,Province component
     //TODO Create Verify Ad Controller and View For Admin
     //TODO Create LetMeKnow Controller and View for users to register their need
-    //TODO Manage newAd Images from Temp Image Directory for each image being send to server create a component and add it to imageDiv and based on server result
-    //for that image add server image to page or show error and error message
     //TODO Create and Run SMS sending
     //TODO write code to delete folders in AdImages when the adId in database does not exist
     //TODO work on Ad Price
     //TODO Add Admin only visible links
+    //TODO work on the max number of images per Ad. for example decide it based on user
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {
