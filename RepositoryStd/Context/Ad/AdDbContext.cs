@@ -47,6 +47,8 @@ namespace RepositoryStd.Context.AD
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.HasDefaultSchema("ad");
+
             modelBuilder.Entity<AdAttributeTransportation>(entity =>
             {
 
@@ -289,8 +291,6 @@ namespace RepositoryStd.Context.AD
          * 
            protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasDefaultSchema("ad");
-            
             modelBuilder.Entity<AdPrivilege>().HasKey(privilege => new{ privilege.adId,privilege.insertionDate,privilege.privilegeId});
            
             modelBuilder.Entity<SimilarAd>().HasKey(ad =>new{ ad.adId,ad.similarAdId});
