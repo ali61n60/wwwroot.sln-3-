@@ -25,7 +25,8 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
-    //TODO 1- work on view Ad Detail 
+    //TODO 1- work on view Ad Detail, make their view ok, use similar ads, mark ad, share ad, ...
+    //   use a template view for ad detail and render each section by the view Model
     //TODO 1- work on Edit AD by Ad owner
     //TODO 1- work on delete Ad by Ad owner
     //TODO 2- Create Verify Ad Controller and View For Admin
@@ -439,9 +440,10 @@ namespace MvcMain.Controllers
             return transportationService.GetAdDetail(adId);
         }
 
-        public ResponseBase<AdvertisementBase> GetAdDetail([FromQuery] AdDetailInfo adDetailInfo)
+        
+        public ResponseBase<AdvertisementBase> GetAdDetail([FromQuery][FromBody] AdDetailInfo adDetailInfo)
         {
-            //TODO find a way to use Advertisement classes instead of object in ResponseBase<object>
+            //TODO 3- find a way to use Advertisement classes instead of object in ResponseBase<AdvertisementBase>
             string errorCode = "AdApiController.GetAdDetail";
 
             ResponseBase<AdvertisementBase> response=new ResponseBase<AdvertisementBase>();
