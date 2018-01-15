@@ -10,6 +10,6 @@ namespace ModelStd.IRepository
     {
         IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters);
         Task Add(Dictionary<string, string> userInputDictionary, string userId);
-        object GetAdDetail(Guid adGuid);
+        AdvertisementBase GetAdDetail(Guid adGuid);
     }
 }

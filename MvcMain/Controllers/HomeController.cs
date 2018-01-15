@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ModelStd.Advertisements;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using MvcMain.Infrastructure.IOC;
@@ -29,11 +30,11 @@ namespace MvcMain.Controllers
 
         public async Task<IActionResult> AdDetail(AdDetailInfo adDetailInfo)
         {
-           ResponseBase<object> response=_adApiController.GetAdDetail(adDetailInfo);
+           ResponseBase<AdvertisementBase> response=_adApiController.GetAdDetail(adDetailInfo);
 
             if(response.Success)
             {
-                return View(AdDetailViewContainer.GetViewName(adDetailInfo.CategoryId), response.ResponseData);
+                return View(AdViewContainer.GetAdDetailViewName(adDetailInfo.CategoryId), response.ResponseData);
             }
             else
             {
@@ -45,14 +46,9 @@ namespace MvcMain.Controllers
         [HttpGet]
         public IActionResult GetSearchCriteriaView([FromQuery] Dictionary<string, string> userInput)
         {
+            //TODO 3- put view's name in a container
             int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
-            switch (categoryId)
-            {
-                case 100:
-                    return ViewComponent("SearchCriteriaTransformation");
-                default:
-                    return ViewComponent("SearchCriteriaDefault");
-            }
+            return ViewComponent(AdViewContainer.GetSearchAdPartialViewName(categoryId));
         }
     }
 }

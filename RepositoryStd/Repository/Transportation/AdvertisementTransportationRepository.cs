@@ -273,7 +273,7 @@ namespace RepositoryStd.Repository.Transportation
             await _adDbContext.SaveChangesAsync();
         }
 
-        public object GetAdDetail(Guid adGuid)
+        public AdvertisementBase GetAdDetail(Guid adGuid)
         {
             return FindBy(adGuid);
         }

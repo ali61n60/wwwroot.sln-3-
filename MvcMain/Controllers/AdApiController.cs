@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -38,6 +36,7 @@ namespace MvcMain.Controllers
     //TODO 3- Make Response.Error an array and put all errors in it
     //TODO 3- work on District,City,Province component
     //TODO 3- work on ad status enum 
+    //TODO 3- study about rules to operate a web site and connect to bank  and register a company
 
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
@@ -440,21 +439,21 @@ namespace MvcMain.Controllers
             return transportationService.GetAdDetail(adId);
         }
 
-        public ResponseBase<object> GetAdDetail(AdDetailInfo adDetailInfo)
+        public ResponseBase<AdvertisementBase> GetAdDetail([FromQuery] AdDetailInfo adDetailInfo)
         {
             //TODO find a way to use Advertisement classes instead of object in ResponseBase<object>
             string errorCode = "AdApiController.GetAdDetail";
 
-            ResponseBase<object> response=new ResponseBase<object>();
+            ResponseBase<AdvertisementBase> response=new ResponseBase<AdvertisementBase>();
             IAdRepository adRepository = _repositoryContainer.GetAdRepository(adDetailInfo.CategoryId);
-            object adDetailObject;
+            AdvertisementBase adDetail;
             try
             {
-                adDetailObject = adRepository.GetAdDetail(adDetailInfo.AdId);
-                AdvertisementBase advertisementBase = (AdvertisementBase) adDetailObject;
-                if(advertisementBase.AdvertisementCommon.AdvertisementStatusId==3)//Magic number
-                advertisementBase.AdvertisementCommon.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
-                response.ResponseData = adDetailObject;
+                adDetail = adRepository.GetAdDetail(adDetailInfo.AdId);
+                
+                if(adDetail.AdvertisementCommon.AdvertisementStatusId==3)//Magic number
+                adDetail.AdvertisementCommon.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
+                response.ResponseData = adDetail;
                 response.SetSuccessResponse();
             }
             catch (Exception ex)

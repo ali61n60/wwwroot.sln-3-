@@ -234,7 +234,7 @@ namespace RepositoryStd.Repository.Common
         }
         
 
-        public object GetAdDetail(Guid adGuid)
+        public AdvertisementBase GetAdDetail(Guid adGuid)
         {
             throw new NotImplementedException();
         }
