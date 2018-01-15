@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Services;
+using MvcMain.Infrastructure.IOC;
 using MvcMain.Models;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Repository.Common;
@@ -29,12 +30,12 @@ namespace MvcMain.Controllers
                 case 100:
                     ResponseBase<AdvertisementTransportation> response = adApiController.GetTransportationAdDetail(adDetailInfo.AdId);
                     if (response.Success)
-                        return View("AdDetail/AdDetailTransportation", response.ResponseData);
+                        return View(AdDetailViewContainer.GetViewName(adDetailInfo.CategoryId), response.ResponseData);
                     else
                         //TODO show error
                         return null;
                 default:
-                    return View("AdDetail/AdDetailDefault", adDetailInfo);
+                    return View(AdDetailViewContainer.GetViewName(adDetailInfo.CategoryId), adDetailInfo);
             }
         }
 

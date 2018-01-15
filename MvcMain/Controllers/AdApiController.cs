@@ -26,13 +26,17 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
-    //TODO work on District,City,Province component
-    //TODO Create Verify Ad Controller and View For Admin
-    //TODO Create LetMeKnow Controller and View for users to register their need
-    //TODO Create and Run SMS sending
-    //TODO work on Ad Price
-    //TODO work on the max number of images per Ad. for example decide it based on user
-    //TODO Make Response.Error an array and put all errors in it
+    //TODO 1- work on view Ad Detail 
+    //TODO 1- work on Edit AD by Ad owner
+    //TODO 1- work on delete Ad by Ad owner
+    //TODO 2- Create Verify Ad Controller and View For Admin
+    //TODO 2- Create LetMeKnow Controller and View for users to register their need
+    //TODO 2- Create and Run SMS sending
+    //TODO 3- work on Ad Price
+    //TODO 3- work on the max number of images per Ad. for example decide it based on user
+    //TODO 3- Make Response.Error an array and put all errors in it
+    //TODO 3- work on District,City,Province component
+
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {
