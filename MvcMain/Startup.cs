@@ -44,7 +44,6 @@ namespace MvcMain
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json").Build();
-            
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -83,7 +82,7 @@ namespace MvcMain
             services.AddTransient<AdDbContext>(provider =>new AdDbContext(_configuration["Data:ConnectionString"]));
 
             services.AddTransient<AppIdentityDbContext>(provider =>new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
-           
+           services.AddTransient<AdApiController>();
            
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {

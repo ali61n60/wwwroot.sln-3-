@@ -9,6 +9,7 @@ using ModelStd.Advertisements;
 using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
+using ModelStd.Services;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
@@ -231,12 +232,12 @@ namespace RepositoryStd.Repository.Common
         {
             throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
         }
+        
 
-
-
-
-
-
+        public object GetAdDetail(Guid adGuid)
+        {
+            throw new NotImplementedException();
+        }
 
 
         public void Remove(AdvertisementCommon entity)

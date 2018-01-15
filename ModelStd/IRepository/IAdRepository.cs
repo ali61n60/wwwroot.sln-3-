@@ -9,6 +9,7 @@ namespace ModelStd.IRepository
     public interface IAdRepository
     {
         IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters);
-         Task Add(Dictionary<string, string> userInputDictionary, string userId);
+        Task Add(Dictionary<string, string> userInputDictionary, string userId);
+        object GetAdDetail(Guid adGuid);
     }
 }

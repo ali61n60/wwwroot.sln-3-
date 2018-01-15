@@ -273,6 +273,11 @@ namespace RepositoryStd.Repository.Transportation
             await _adDbContext.SaveChangesAsync();
         }
 
+        public object GetAdDetail(Guid adGuid)
+        {
+            return FindBy(adGuid);
+        }
+
         //TODO maybe this is a method of AdAttributeTransportation class
         private AdAttributeTransportation getAdAttributeTransportationFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {

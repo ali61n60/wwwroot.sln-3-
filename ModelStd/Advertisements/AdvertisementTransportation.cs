@@ -1,10 +1,9 @@
 ﻿namespace ModelStd.Advertisements
 {
 
-    public class AdvertisementTransportation
+    public class AdvertisementTransportation:AdvertisementBase
     {
-        public AdvertisementCommon AdvertisementCommon { get; set; }
-        public int ModelId;
+       public int ModelId;
 
         public string ModelName;
 

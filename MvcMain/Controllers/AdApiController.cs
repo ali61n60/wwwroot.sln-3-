@@ -18,6 +18,7 @@ using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Infrastructure;
+using MvcMain.Models;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 using RepositoryStd.TepmeratureRepository;
@@ -36,6 +37,7 @@ namespace MvcMain.Controllers
     //TODO 3- work on the max number of images per Ad. for example decide it based on user
     //TODO 3- Make Response.Error an array and put all errors in it
     //TODO 3- work on District,City,Province component
+    //TODO 3- work on ad status enum 
 
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
@@ -431,11 +433,35 @@ namespace MvcMain.Controllers
         //}
 
 
-
+            //TODO Remove this
         public ResponseBase<AdvertisementTransportation> GetTransportationAdDetail([FromBody] Guid adId)
         {
             IAdvertisementTransportationService transportationService = MyService.Inst.GetService<IAdvertisementTransportationService>();
             return transportationService.GetAdDetail(adId);
+        }
+
+        public ResponseBase<object> GetAdDetail(AdDetailInfo adDetailInfo)
+        {
+            //TODO find a way to use Advertisement classes instead of object in ResponseBase<object>
+            string errorCode = "AdApiController.GetAdDetail";
+
+            ResponseBase<object> response=new ResponseBase<object>();
+            IAdRepository adRepository = _repositoryContainer.GetAdRepository(adDetailInfo.CategoryId);
+            object adDetailObject;
+            try
+            {
+                adDetailObject = adRepository.GetAdDetail(adDetailInfo.AdId);
+                AdvertisementBase advertisementBase = (AdvertisementBase) adDetailObject;
+                if(advertisementBase.AdvertisementCommon.AdvertisementStatusId==3)//Magic number
+                advertisementBase.AdvertisementCommon.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
+                response.ResponseData = adDetailObject;
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message,errorCode);
+            }
+            return response;
         }
 
 
