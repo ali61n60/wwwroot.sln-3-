@@ -38,6 +38,12 @@ namespace MvcMain.Controllers
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> ManageAdImageFolder()
         {
+            //TODO create a mechanisem for ads with priority in Admin View
+            //TODO create a view component for Admin Ad.
+            //Get ad status from user and send it to repository to get ads
+            //modify, accept or reject ad
+            //inform ad owner about his ad new status
+
             return View("ManageAdImageFolder","");
         }
 

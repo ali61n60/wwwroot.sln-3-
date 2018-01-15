@@ -1,0 +1,34 @@
+﻿<script id="singleAdItem" type="text/template">
+    <div class="blockDisplay adDetail">
+        <a href="/Home/AdDetail?adId={{AdvertisementId}}&categoryId={{AdvertisementCategoryId}}">
+            <div>
+                @*image section*@
+                <div class="imageSection">
+                    <img class="image" src="{{adImage}}" />
+                    <span class="price">{{adPrice}} تومان</span>
+                    <span class="moreInfo">برای دیدن جزییات کلیک کنید</span>
+                </div>
+                @*other info section*@
+                <div class="otherInfo">
+                    <div class="col-xs-12 text-center">
+                        <span style="overflow: hidden;">{{AdvertisementTitle}}</span>
+                    </div>
+                    <div class="col-xs-12 text-right">
+                        <span>وضعیت آگهی</span>
+                        <span class="glyphicon glyphicon-arrow-left"></span>
+                        <span>{{AdvertisementStatus}}</span>
+                    </div>
+
+                    <div class="col-xs-12 text-right">
+                        <span>{{AdvertisementCategory}}</span>
+                    </div>
+
+                    <div class="col-xs-12 text-right">
+                        <span>{{adDate}}</span>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </a>
+    </div>
+</script>
