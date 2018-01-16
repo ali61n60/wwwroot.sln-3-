@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ImageUploader = /** @class */ (function () {
+var ImageUploader = (function () {
     function ImageUploader(currentNewAdGuid) {
         this.NewAdGuidKey = "NewAdGuid";
         this.RequestIndexKey = "RequestIndex";
@@ -118,7 +118,7 @@ var ImageUploader = /** @class */ (function () {
     return ImageUploader;
 }());
 exports.ImageUploader = ImageUploader;
-var UploadedImage = /** @class */ (function () {
+var UploadedImage = (function () {
     function UploadedImage() {
     }
     return UploadedImage;
