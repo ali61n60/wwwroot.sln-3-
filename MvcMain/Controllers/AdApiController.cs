@@ -25,8 +25,7 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
-    //TODO 1- work on view Ad Detail, make their view ok, use similar ads, mark ad, share ad, ...
-    //   create ad detail bundle.js file
+    //TODO 1- work on view Ad Detail, use similar ads, mark ad, share ad, ...
     //TODO 1- add mangeMyAd page for users
     //TODO 1- work on Edit AD by Ad owner
     //TODO 1- work on delete Ad by Ad owner
