@@ -3,7 +3,7 @@ using ModelStd.Db.Ad;
 
 namespace ModelStd.Advertisements
 {
-    public class AdvertisementCommon:AdvertisementBase
+    public class AdvertisementCommon
     {
         public AdvertisementCommon() : this(10) { }
         public AdvertisementCommon(int maxImageNumber)

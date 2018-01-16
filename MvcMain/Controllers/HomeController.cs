@@ -30,7 +30,7 @@ namespace MvcMain.Controllers
 
         public async Task<IActionResult> AdDetail(AdDetailInfo adDetailInfo)
         {
-           ResponseBase<AdvertisementBase> response=_adApiController.GetAdDetail(adDetailInfo);
+           ResponseBase<AdvertisementCommon> response=_adApiController.GetAdDetail(adDetailInfo);
 
             if(response.Success)
             {

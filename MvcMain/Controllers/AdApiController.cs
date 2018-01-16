@@ -442,20 +442,20 @@ namespace MvcMain.Controllers
         }
 
         
-        public ResponseBase<AdvertisementBase> GetAdDetail([FromQuery][FromBody] AdDetailInfo adDetailInfo)
+        public ResponseBase<AdvertisementCommon> GetAdDetail([FromQuery][FromBody] AdDetailInfo adDetailInfo)
         {
             //TODO 3- find a way to use Advertisement classes instead of object in ResponseBase<AdvertisementBase>
             string errorCode = "AdApiController.GetAdDetail";
 
-            ResponseBase<AdvertisementBase> response=new ResponseBase<AdvertisementBase>();
+            ResponseBase<AdvertisementCommon> response=new ResponseBase<AdvertisementCommon>();
             IAdRepository adRepository = _repositoryContainer.GetAdRepository(adDetailInfo.CategoryId);
-            AdvertisementBase adDetail;
+            AdvertisementCommon adDetail;
             try
             {
                 adDetail = adRepository.GetAdDetail(adDetailInfo.AdId);
                 
-                if(adDetail.AdvertisementCommon.AdvertisementStatusId==3)//Magic number
-                adDetail.AdvertisementCommon.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
+                if(adDetail.AdvertisementStatusId==3)//Magic number
+                adDetail.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();
             }

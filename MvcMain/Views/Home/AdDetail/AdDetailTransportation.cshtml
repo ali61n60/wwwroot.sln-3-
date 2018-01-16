@@ -30,10 +30,10 @@
     {
     <div class="row">
         <div class="col-sm-6">
-            @Html.Partial("AdDetail/CommonSections/ImageSection", Model.AdvertisementCommon.AdvertisementImages)
+            @Html.Partial("AdDetail/CommonSections/ImageSection", Model.AdvertisementImages)
         </div>
         <div class="col-sm-6">
-            @Html.Partial("AdDetail/CommonSections/AdCommonTop", Model.AdvertisementCommon)
+            @Html.Partial("AdDetail/CommonSections/AdCommonTop", Model)
         </div>
     </div>
 
@@ -48,7 +48,7 @@
     </div>
 
     <div class="row">
-        @Html.Partial("AdDetail/CommonSections/AdCommonButtom", Model.AdvertisementCommon)
+        @Html.Partial("AdDetail/CommonSections/AdCommonButtom", Model)
     </div>
     <div class="row">
         @Html.Partial("AdDetail/CommonSections/SimilarAds")

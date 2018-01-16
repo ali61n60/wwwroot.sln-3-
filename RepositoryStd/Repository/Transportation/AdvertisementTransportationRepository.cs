@@ -100,7 +100,9 @@ namespace RepositoryStd.Repository.Transportation
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
             {
-                searchResultItems.Add(_commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisement));
+                AdvertisementCommon temp=new AdvertisementCommon();
+                _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
+                searchResultItems.Add(temp);
             }
 
             return searchResultItems;
@@ -273,7 +275,7 @@ namespace RepositoryStd.Repository.Transportation
             await _adDbContext.SaveChangesAsync();
         }
 
-        public AdvertisementBase GetAdDetail(Guid adGuid)
+        public AdvertisementCommon GetAdDetail(Guid adGuid)
         {
             return FindBy(adGuid);
         }
@@ -306,7 +308,7 @@ namespace RepositoryStd.Repository.Transportation
         private AdAttributeTransportation getAdAtribute(AdvertisementTransportation entity)
         {
             AdAttributeTransportation adAttribute = new AdAttributeTransportation();
-            adAttribute.AdId = entity.AdvertisementCommon.AdvertisementId;
+            adAttribute.AdId = entity.AdvertisementId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
             adAttribute.Fuel = AdvertisementTransportation.GetFuelTypeString(entity.Fuel);
@@ -326,7 +328,7 @@ namespace RepositoryStd.Repository.Transportation
                 using (SqlCommand command = new SqlCommand("sp_removeAdTransportation", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = entity.AdvertisementCommon.AdvertisementId;
+                    command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = entity.AdvertisementId;
                     //  _advertisementCommonRepository.AddReturnParameterToCommand(command);
                     try
                     {
@@ -440,8 +442,7 @@ namespace RepositoryStd.Repository.Transportation
 
         private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisements advertisements)
         {
-            adTrans.AdvertisementCommon =
-                _commonRepository.GetAdvertisementCommonFromDatabaseResult(advertisements);
+            _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisements, adTrans);
             adTrans.BodyColor = advertisements.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisements.AdAttributeTransportation.InternalColor;
             adTrans.BodyStatus = AdvertisementTransportation.GetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus, BodyStatusDefault);
@@ -461,6 +462,7 @@ namespace RepositoryStd.Repository.Transportation
                 adTrans.MakeYear = -1;
         }
 
+        //TODO remove
         private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,
                                                                       SqlDataReader dataReader)
         {
@@ -468,7 +470,7 @@ namespace RepositoryStd.Repository.Transportation
             try
             {
                 responseBase = AdvertisementCommonRepository.fillAdvertisementCommonFromDataReader(
-                        advertisementTransportation.AdvertisementCommon, dataReader);//fill common attributes
+                        advertisementTransportation, dataReader);//fill common attributes
                 if (!responseBase.Success)
                 {
                     throw new Exception(responseBase.Message);

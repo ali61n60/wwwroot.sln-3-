@@ -1,7 +1,7 @@
 ﻿namespace ModelStd.Advertisements
 {
 
-    public class AdvertisementTransportation:AdvertisementBase
+    public class AdvertisementTransportation:AdvertisementCommon
     {
        public int ModelId;
 
@@ -31,7 +31,7 @@
 
         public AdvertisementTransportation()
         {
-            AdvertisementCommon = new AdvertisementCommon();
+            
         }
 
         public static string GetFuelTypeString(FuelType fuelType)

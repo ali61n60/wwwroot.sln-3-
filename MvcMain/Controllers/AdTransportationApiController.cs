@@ -42,7 +42,7 @@ namespace MvcMain.Controllers
                 if (responseBase.ResponseData != null)
                 {
                     _advertisementCommonService.IncrementNumberOfVisit(adId);
-                    _advertisementCommonService.FillAllImages(responseBase.ResponseData.AdvertisementCommon);
+                    _advertisementCommonService.FillAllImages(responseBase.ResponseData);
                     responseBase.SetSuccessResponse();
                 }
                 else
