@@ -15,7 +15,8 @@ namespace ModelStd.IRepository
         Db.Ad.Advertisements GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary);
         Task IncrementNumberOfVisit(Guid adGuid);
         Db.Ad.Advertisements GetAdvertisement(AdvertisementCommon advertisementCommon);
-        IEnumerable<AdvertisementCommon> GetUserAdvertisements(string userId);//In Progress
+        Task<IEnumerable<AdvertisementCommon>> GetUserAdvertisements(string userId);//In Progress
 
+        Task UpdateAd(Guid adGuid, string userId);
     }
 }

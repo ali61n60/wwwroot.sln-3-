@@ -48,42 +48,43 @@ namespace MvcMain
 
         public void ConfigureServices(IServiceCollection services)
         {
-            _advertisementDataClass=new AdvertisementDataClass(_configuration["Data:ConnectionString"]);
+            _advertisementDataClass = new AdvertisementDataClass(_configuration["Data:ConnectionString"]);
             services.AddSingleton(provider => _advertisementDataClass);
 
-            _categoryRepository=new CategoryRepositoryInCode();
+            _categoryRepository = new CategoryRepositoryInCode();
             services.AddTransient<ICategoryRepository>(provider => _categoryRepository);
 
             string directoryPath = _env.ContentRootPath + "/AdvertisementImages/";
             services.AddTransient<IImageRepository>(provider => new ImageRepositoryFileSystem(directoryPath));
 
-            _adDbContext=new AdDbContext(_configuration["Data:ConnectionString"]);
-            _appIdentityDbContext=new AppIdentityDbContext(_configuration["Data:ConnectionString"]);
+            _adDbContext = new AdDbContext(_configuration["Data:ConnectionString"]);
+            _appIdentityDbContext = new AppIdentityDbContext(_configuration["Data:ConnectionString"]);
             services.AddTransient<IRepository<AdvertisementCommon>>(provider =>
-            new AdvertisementCommonRepository(_adDbContext,_appIdentityDbContext,_categoryRepository));
+            new AdvertisementCommonRepository(_adDbContext, _appIdentityDbContext, _categoryRepository));
 
             services.AddTransient<ICommonRepository>(provider =>
-            new AdvertisementCommonRepository(_adDbContext,_appIdentityDbContext,_categoryRepository));
+            new AdvertisementCommonRepository(_adDbContext, _appIdentityDbContext, _categoryRepository));
 
-            services.AddTransient<IRepository<AdvertisementTransportation>>(provider => 
-            new AdvertisementTransportationRepository(_adDbContext,_appIdentityDbContext,MyService.Inst.GetService<ICommonRepository>()));
-            addRepositoryContainer(services,_adDbContext,_appIdentityDbContext,_categoryRepository);
+            services.AddTransient<IRepository<AdvertisementTransportation>>(provider =>
+            new AdvertisementTransportationRepository(_adDbContext, _appIdentityDbContext, MyService.Inst.GetService<ICommonRepository>()));
+            addRepositoryContainer(services, _adDbContext, _appIdentityDbContext, _categoryRepository);
 
             services.AddTransient<TemperatureRepository>(provider => new TemperatureRepository(_adDbContext));
             services.AddTransient<ILocationRepository>(provider => new LocationRepository(_adDbContext));
-            services.AddTransient<ITransportaionRepository>(provider=>new TransportationRepository(_configuration["Data:ConnectionString"]));
+            services.AddTransient<ITransportaionRepository>(provider => new TransportationRepository(_configuration["Data:ConnectionString"]));
 
             services.AddTransient<IAdvertisementCommonService>(provider => new AdApiController());
             services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController());
-            
+
             services.AddTransient<CategoryApiController>();
             services.AddTransient<LocationApiController>();
 
-            services.AddTransient<AdDbContext>(provider =>new AdDbContext(_configuration["Data:ConnectionString"]));
+            services.AddTransient<AdDbContext>(provider => new AdDbContext(_configuration["Data:ConnectionString"]));
 
-            services.AddTransient<AppIdentityDbContext>(provider =>new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
-           services.AddTransient<AdApiController>();
-           
+            services.AddTransient<AppIdentityDbContext>(provider => new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
+            services.AddTransient<AdApiController>();
+            services.AddTransient<UserAdApiController>();
+
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
                     options.Password.RequireUppercase = false;
@@ -107,21 +108,21 @@ namespace MvcMain
                         };
                 }
                 ).AddEntityFrameworkStores<AppIdentityDbContext>();
-            
+
             services.AddMvc();
         }
 
         private void addRepositoryContainer(IServiceCollection services,
-            AdDbContext adDbContext,AppIdentityDbContext appIdentityDbContext,ICategoryRepository categoryRepository)
+            AdDbContext adDbContext, AppIdentityDbContext appIdentityDbContext, ICategoryRepository categoryRepository)
         {
-            RepositoryContainer repositoryContainer=new RepositoryContainer(int.Parse(_configuration["Data:DefaultCategoryId"]));
-            IAdRepository defaulyAdRepository=new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository);
-            repositoryContainer.RegisterRepository(0,defaulyAdRepository);
+            RepositoryContainer repositoryContainer = new RepositoryContainer(int.Parse(_configuration["Data:DefaultCategoryId"]));
+            IAdRepository defaulyAdRepository = new AdvertisementCommonRepository(adDbContext, appIdentityDbContext, categoryRepository);
+            repositoryContainer.RegisterRepository(0, defaulyAdRepository);
 
-            IAdRepository adTaransportationAdRepository=
-                new AdvertisementTransportationRepository(adDbContext,appIdentityDbContext,
-                new AdvertisementCommonRepository(adDbContext,appIdentityDbContext,categoryRepository));
-            repositoryContainer.RegisterRepository(100,adTaransportationAdRepository);
+            IAdRepository adTaransportationAdRepository =
+                new AdvertisementTransportationRepository(adDbContext, appIdentityDbContext,
+                new AdvertisementCommonRepository(adDbContext, appIdentityDbContext, categoryRepository));
+            repositoryContainer.RegisterRepository(100, adTaransportationAdRepository);
             services.AddTransient<RepositoryContainer>(provider => repositoryContainer);
         }
 
@@ -134,7 +135,7 @@ namespace MvcMain
             //}
             app.UseStatusCodePages();
             app.UseStaticFiles();
-            
+
             app.UseJwtBearerAuthentication(new JwtBearerOptions
             {
                 AutomaticAuthenticate = true,

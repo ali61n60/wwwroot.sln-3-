@@ -25,6 +25,7 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO 1- create an error page to inform users about errors
     //TODO 1- work on view Ad Detail, use similar ads, mark ad, share ad, ...
     //TODO 1- add mangeMyAd page for users
     //TODO 1- work on Edit AD by Ad owner

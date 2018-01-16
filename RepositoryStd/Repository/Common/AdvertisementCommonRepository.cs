@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
@@ -254,9 +255,11 @@ namespace RepositoryStd.Repository.Common
 
         }
 
-        public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string userId)
+        public async Task<IEnumerable<AdvertisementCommon>> GetUserAdvertisements(string userId)
         {
-            List<Advertisements> userAdvertisements = _adDbContext.Advertisements.Include(advertisements => advertisements.AdStatus).Where(advertisements => advertisements.UserId == userId).ToList();
+            List<Advertisements> userAdvertisements = await _adDbContext.Advertisements
+                .Include(advertisements => advertisements.AdStatus)
+                .Where(advertisements => advertisements.UserId == userId).ToListAsync(CancellationToken.None);
             List<AdvertisementCommon> userAdvertisementCommons = new List<AdvertisementCommon>();
             foreach (Advertisements advertisement in userAdvertisements)
             {
@@ -266,6 +269,17 @@ namespace RepositoryStd.Repository.Common
             }
 
             return userAdvertisementCommons;
+        }
+
+        public async Task UpdateAd(Guid adGuid, string userId)
+        {
+            Advertisements updatingAD= _adDbContext.Advertisements.FirstOrDefault(advertisements =>
+                advertisements.AdId == adGuid && advertisements.UserId == userId);
+            if(updatingAD!=null)
+                updatingAD.AdInsertDateTime=DateTime.Now;
+            await _adDbContext.SaveChangesAsync();
+            
+            return;
         }
 
 

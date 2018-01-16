@@ -8,17 +8,17 @@ using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
+using ModelStd.Services;
 
 namespace MvcMain.Controllers
 {
     public class UserController:Controller
     {
-        private ICommonRepository _commonRepository;
-        private readonly UserManager<AppUser> _userManager;
-        public UserController(ICommonRepository commonRepository, UserManager<AppUser> userManager)
+        private UserAdApiController _userAdApiController;
+
+        public UserController(UserAdApiController userAdApiController, ICommonRepository commonRepository, UserManager<AppUser> userManager)
         {
-            _commonRepository = commonRepository;
-            _userManager = userManager;
+            _userAdApiController = userAdApiController;
         }
 
         [Authorize]
@@ -30,11 +30,15 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> UserAds()
         {
-            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-            IEnumerable<AdvertisementCommon> allUserAdvertisement= _commonRepository.GetUserAdvertisements(user.Id);
-            
-            
-            return View(allUserAdvertisement);
+            ResponseBase<IEnumerable<AdvertisementCommon>> response =await _userAdApiController.GetUserAds();
+            if (response.Success)
+                return View(response.ResponseData);
+            else
+            {
+                //TODO log error
+                //TODO show error to user
+                return View("Index");
+            }
         }
 
         [Authorize]
@@ -55,7 +59,19 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> UpdateAd(Guid adGuid)
         {
             //TODO Update Ad withot changing ad contents just set its insertion time to now
-            return RedirectToAction("Index");
+            //TODO make sure the ad owner is calling this method
+            ResponseBase response =await _userAdApiController.UpdateAd(adGuid);
+            if (response.Success)
+            {
+                //TODO show update ok
+                return RedirectToAction("UserAds");
+            }
+            else
+            {
+                //TODO log error
+                //TODO show error to user
+                return View("Index");
+            }
         }
 
         [Authorize]
