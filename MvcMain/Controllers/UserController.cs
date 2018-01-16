@@ -30,6 +30,7 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> UserAds()
         {
+            _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase<IEnumerable<AdvertisementCommon>> response =await _userAdApiController.GetUserAds();
             if (response.Success)
                 return View(response.ResponseData);

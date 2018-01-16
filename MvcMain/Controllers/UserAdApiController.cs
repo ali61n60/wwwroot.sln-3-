@@ -46,6 +46,7 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<ResponseBase> UpdateAd(Guid adGuid)
         {
+            //TODO limit the number of ad updates per ad in a single day
             string errorCode = "UserAdApiController/UpdateAd";
             ResponseBase response=new ResponseBase();
             try
