@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AdDetail = (function () {
+var AdDetail = /** @class */ (function () {
     function AdDetail() {
         $("#imageGallery").lightSlider({
             gallery: true,
