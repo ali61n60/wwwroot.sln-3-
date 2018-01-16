@@ -17,7 +17,7 @@ namespace ModelStd.IRepository
         
         void Remove(T entity);//Done
         void Save(T entity);//Update Database
-        IEnumerable<T> GetUserAdvertisements(string userEmail);//In Progress
+        
         IEnumerable<T> FindAll();//to Be Studied
         
         

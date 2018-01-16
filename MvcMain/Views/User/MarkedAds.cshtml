@@ -1,0 +1,43 @@
+﻿@model object
+
+@{
+    ViewData["Title"] = "نشان شده ها";
+    ViewData["PageTitle"] = "نشان شده ها";
+    Layout = "_Layout";
+}
+
+@section TopTop
+{
+    @Html.Partial("TopTop")
+}
+@section NavBar
+{
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+{
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+{
+
+}
+@section SideNav
+{
+    @Html.Partial("SideNav")
+}
+@section Body
+{
+    <a asp-controller="User" asp-action="Index" class="btn btn-lg btn-primary">بازگشت به صفحه مدیریت آگهی</a>
+    <br /><br />
+    نشان شده ها
+}
+
+@section Footer
+{
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}

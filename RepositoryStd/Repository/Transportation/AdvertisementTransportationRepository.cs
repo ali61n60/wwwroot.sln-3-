@@ -496,11 +496,5 @@ namespace RepositoryStd.Repository.Transportation
             }
             return responseBase;
         }
-
-        //ni
-        public IEnumerable<AdvertisementTransportation> GetUserAdvertisements(string userEmail)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -79,8 +79,8 @@ namespace RepositoryStd.Repository.Common
             list = EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
             {
-                AdvertisementCommon temp=new AdvertisementCommon();
-                FillAdvertisementCommonFromDatabaseResult(advertisement,temp);
+                AdvertisementCommon temp = new AdvertisementCommon();
+                FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
                 searchResultItems.Add(temp);
             }
             return searchResultItems;
@@ -184,7 +184,7 @@ namespace RepositoryStd.Repository.Common
         }
         private IQueryable<Advertisements> whereClauseDistrictId(IQueryable<Advertisements> list, Dictionary<string, string> queryParameters)
         {
-            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters,DistrictIdKey,ListDistrctIdDefault);
+            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters, DistrictIdKey, ListDistrctIdDefault);
             if (districtList.Count > 0)
                 list = list.Where(advertisement => districtList.Contains(advertisement.DistrictId));
             return list;
@@ -198,26 +198,27 @@ namespace RepositoryStd.Repository.Common
             adCommon.AdvertisementTitle = advertisement.AdTitle;//TODO test for null
             adCommon.AdvertisementTime = advertisement.AdInsertDateTime;
             adCommon.AdvertisementStatusId = advertisement.AdStatusId;
-            adCommon.AdvertisementStatus = advertisement.AdStatus.AdStatus1;
-            adCommon.AdvertisementCategory = advertisement.Category.CategoryName;
+            adCommon.AdvertisementStatus = advertisement.AdStatus.AdStatus1;//TODO test for null
+            if(advertisement.Category!=null) adCommon.AdvertisementCategory = advertisement.Category.CategoryName;
             adCommon.AdvertisementCategoryId = advertisement.CategoryId;
             adCommon.AdvertisementComments = advertisement.AdComments;//TODO test for null
             adCommon.NumberOfVisit = advertisement.AdNumberOfVisited;//TODO test for null
             adCommon.Email = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).Email;//TODO test for null
             adCommon.PhoneNumber = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber;//TODO test for null
             adCommon.DistrictId = advertisement.DistrictId;
-            adCommon.DistrictName = advertisement.District.DistrictName;
-            adCommon.CityName = advertisement.District.City.CityName;
-            adCommon.ProvinceName = advertisement.District.City.Province.ProvinceName;
-            adCommon.AdvertisementPrice = advertisement.Price;
+            if(advertisement.District!=null) adCommon.DistrictName = advertisement.District.DistrictName;
+            if(advertisement.District != null && advertisement.District.City != null) adCommon.CityName = advertisement.District.City.CityName;
+            if (advertisement.District != null && advertisement.District.City != null && advertisement.District.City.Province != null)
+                adCommon.ProvinceName = advertisement.District.City.Province.ProvinceName;
+            if(advertisement.Price!=null) adCommon.AdvertisementPrice = advertisement.Price;
 
-            adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
+            if(adCommon.AdvertisementPrice!=null) adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
         }
 
         //TODO maybe it is a method of Advertisements class
         public Advertisements GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
-            Advertisements ad=new Advertisements();
+            Advertisements ad = new Advertisements();
             ad.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, CategoryIdKey, CategoryIdDefault);
             ad.DistrictId = ParameterExtractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
             ad.AdTitle = ParameterExtractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
@@ -232,7 +233,7 @@ namespace RepositoryStd.Repository.Common
         {
             throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
         }
-        
+
 
         public AdvertisementCommon GetAdDetail(Guid adGuid)
         {
@@ -250,29 +251,21 @@ namespace RepositoryStd.Repository.Common
         //TODO use EF
         public void Save(AdvertisementCommon entity)
         {
-           
+
         }
 
-       public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string userEmail)
+        public IEnumerable<AdvertisementCommon> GetUserAdvertisements(string userId)
         {
-            List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
-            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
+            List<Advertisements> userAdvertisements = _adDbContext.Advertisements.Include(advertisements => advertisements.AdStatus).Where(advertisements => advertisements.UserId == userId).ToList();
+            List<AdvertisementCommon> userAdvertisementCommons = new List<AdvertisementCommon>();
+            foreach (Advertisements advertisement in userAdvertisements)
             {
-                using (SqlCommand command = new SqlCommand("sp_getUserAdvertisements", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@username", SqlDbType.NVarChar).Value = userEmail;//insert input parameters
-                    connection.Open();
-                    SqlDataReader sqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
-                    while (sqlDataReader.Read())
-                    {
-                        var tempAdvertisementCommon = new AdvertisementCommon();
-                        fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
-                        searchResultItems.Add(tempAdvertisementCommon);
-                    }
-                }
+                AdvertisementCommon temp = new AdvertisementCommon();
+                FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
+                userAdvertisementCommons.Add(temp);
             }
-            return searchResultItems;
+
+            return userAdvertisementCommons;
         }
 
 
@@ -316,8 +309,8 @@ namespace RepositoryStd.Repository.Common
                 .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId == adId);//only accepted ads
 
             Advertisements item = list.FirstOrDefault();
-            AdvertisementCommon adCommon=new AdvertisementCommon();
-            FillAdvertisementCommonFromDatabaseResult(item,adCommon);
+            AdvertisementCommon adCommon = new AdvertisementCommon();
+            FillAdvertisementCommonFromDatabaseResult(item, adCommon);
             return adCommon;
 
             //string commandText = "";//BaseSelectCommandText() + " WHERE adId=@adId ";

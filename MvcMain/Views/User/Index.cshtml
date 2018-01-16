@@ -1,8 +1,8 @@
 ﻿@model object
 
 @{
-    ViewData["Title"] = "آگهی های من";
-    ViewData["PageTitle"] = "آگهی های من";
+    ViewData["Title"] = "مدیریت آگهی";
+    ViewData["PageTitle"] = "مدیریت آگهی";
     Layout = "_Layout";
 }
 
@@ -28,7 +28,8 @@
 }
 @section Body
     {
-
+    <a asp-controller="User" asp-action="UserAds" class="btn btn-block btn-success">آگهی های من</a>
+    <a asp-controller="User" asp-action="MarkedAds" class="btn btn-block btn-primary">نشان شده ها</a>
 }
 
 @section Footer
