@@ -1,0 +1,51 @@
+﻿@model ModelStd.Advertisements.AdvertisementCommon
+<div class="dataSection">
+    <div class="row">
+        <div class="col-xs-12 text-center">
+            @Model.AdvertisementTitle
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8 text-right">
+            <span>@Model.PhoneNumber</span>
+        </div>
+        <div class="col-xs-4">
+            <span>تلفن</span>
+        </div>
+        <div class="col-xs-8 text-right">
+            <span>@Model.Email</span>
+        </div>
+        <div class="col-xs-4">
+            <span>ایمیل</span>
+        </div>
+        <div class="col-xs-8 text-right">
+            <span>@Model.AdvertisementPrice.price</span>
+        </div>
+        <div class="col-xs-4">
+            <span>قیمت</span>
+        </div>
+
+        <div class="col-xs-8 text-right">
+            <span>@Model.AdvertisementPrice.priceType</span>
+        </div>
+        <div class="col-xs-4">
+            <span>نوع قیمت</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8 text-right">
+            <span>@Model.AdvertisementTime</span>
+        </div>
+        <div class="col-xs-4">
+            <span>زمان</span>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-8 text-right">
+            <h3>Mark Ad</h3>
+        </div>
+        <div class="col-xs-4">
+            <h3>Tell Others</h3>
+        </div>
+    </div>
+</div>

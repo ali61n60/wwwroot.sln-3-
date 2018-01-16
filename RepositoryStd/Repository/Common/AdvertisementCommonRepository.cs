@@ -236,6 +236,7 @@ namespace RepositoryStd.Repository.Common
 
         public AdvertisementBase GetAdDetail(Guid adGuid)
         {
+            //TODO return an instance of AdvertisementCommon and fill it from database
             throw new NotImplementedException();
         }
 

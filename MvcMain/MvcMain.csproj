@@ -176,7 +176,6 @@
     <Folder Include="Documents\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
-    <Folder Include="wwwroot\js\home\adDetail\dist\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -267,6 +266,7 @@
     <None Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.js" />
     <None Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.js.map" />
     <None Include="wwwroot\js\Events\Examples\dist\bundle.js" />
+    <None Include="wwwroot\js\home\adDetail\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\dist\bundle.min.js" />
     <None Include="wwwroot\js\home\index\src\index.js" />

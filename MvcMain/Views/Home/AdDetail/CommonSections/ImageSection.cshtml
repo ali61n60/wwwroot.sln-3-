@@ -1,0 +1,15 @@
+﻿@model string[]
+<div class="imageSection">
+    @if (Model != null)
+    {
+        @:<img width="100px" height="100px" src="data:image/jpg;base64,@Model[0]"/>
+    }
+    <ul id="imageGallery" runat="server">
+        @*<li class=".lslide" data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/0.jpeg">
+                <img src="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/1.jpeg" />
+            </li>
+            <li data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/2.jpeg">
+                <img src="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/3.jpeg" />
+            </li>*@
+    </ul>
+</div>
