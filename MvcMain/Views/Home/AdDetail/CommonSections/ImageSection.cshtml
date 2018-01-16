@@ -1,15 +1,16 @@
 ﻿@model string[]
 <div class="imageSection">
-    @if (Model != null)
-    {
-        @:<img width="100px" height="100px" src="data:image/jpg;base64,@Model[0]"/>
-    }
-    <ul id="imageGallery" runat="server">
-        @*<li class=".lslide" data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/0.jpeg">
-                <img src="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/1.jpeg" />
-            </li>
-            <li data-thumb="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/2.jpeg">
-                <img src="../../AdvertisementImages/1e0bd8ee-f961-4376-a409-8c477fbc6bfe/3.jpeg" />
-            </li>*@
+    <ul id="imageGallery">
+        @if (Model != null)
+        {
+            for (int i = 0; i < Model.Length; i += 2)
+            {
+                @:<li data-thumb="data:image/jpg;base64,@Model[i]" >
+                    @:<img style="width: 100%; height: auto" src="data:image/jpg;base64,@Model[i+1]" />
+                @:</li>
+            }
+        }
     </ul>
 </div>
+
+@*http://sachinchoolur.github.io/lightslider/*@

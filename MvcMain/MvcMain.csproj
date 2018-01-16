@@ -930,6 +930,7 @@
     <TypeScriptCompile Include="wwwroot\js\Models\AdTransportation\CarModel.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdvertisementCommon.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\Category.ts" />
+    <TypeScriptCompile Include="wwwroot\js\MyTypes\jquery.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\Temperature\src\Temperature.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes.ts" />
     <TypeScriptCompile Include="wwwroot\js\TypeScript\classes2.ts" />
