@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ModelStd.Advertisements;
 
 namespace MvcMain.Components
 {
     public class UserSingleAdItem:ViewComponent
     {
-        public async Task<IViewComponentResult> InvokeAsync(Guid adGuid)
+        public async Task<IViewComponentResult> InvokeAsync(AdvertisementCommon advertisementCommon)
         {
-            return View(adGuid);
+            return View(advertisementCommon);
         }
     }
 }

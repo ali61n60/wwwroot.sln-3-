@@ -29,6 +29,7 @@ namespace MvcMain.Controllers
     //TODO 1- add mangeMyAd page for users
     //TODO 1- work on Edit AD by Ad owner
     //TODO 1- work on delete Ad by Ad owner
+    //TODO 2- study MVC book
     //TODO 2- Create Verify Ad Controller and View For Admin
     //TODO 2- Create LetMeKnow Controller and View for users to register their need
     //TODO 2- Create and Run SMS sending

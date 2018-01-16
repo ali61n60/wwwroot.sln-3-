@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Guid>
+﻿@using ModelStd.Advertisements
+@model IEnumerable<ModelStd.Advertisements.AdvertisementCommon>
 
 @{
     ViewData["Title"] = "آگهی های من";
@@ -30,12 +31,10 @@
 {
 <a asp-controller="User" asp-action="Index" class="btn btn-lg btn-primary">بازگشت به صفحه مدیریت آگهی</a>
 <br /><br />
-    <p>ad start</p> 
-    @foreach (Guid adGuid in Model)
+    @foreach (AdvertisementCommon adCommon in Model)
     {
-        @await Component.InvokeAsync("UserSingleAdItem", adGuid)
+        @await Component.InvokeAsync("UserSingleAdItem", adCommon)
     }
-    <p>ad finish</p>
 }
 
 @section Footer

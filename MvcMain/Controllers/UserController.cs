@@ -32,9 +32,30 @@ namespace MvcMain.Controllers
         {
             AppUser user = await _userManager.GetUserAsync(HttpContext.User);
             IEnumerable<AdvertisementCommon> allUserAdvertisement= _commonRepository.GetUserAdvertisements(user.Id);
-            IEnumerable<Guid> userAdsGuids = allUserAdvertisement.Select(common => common.AdvertisementId);
             
-            return View(userAdsGuids);
+            
+            return View(allUserAdvertisement);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DeleteAd(Guid adGuid)
+        {
+            //TODO delete Ad
+           return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> EditAd(Guid adGuid)
+        {
+            //TODO Edit Ad open new ad page with data pushed from adGuid to the page
+            return RedirectToAction("Index");
+        }
+
+        [Authorize]
+        public async Task<IActionResult> UpdateAd(Guid adGuid)
+        {
+            //TODO Update Ad withot changing ad contents just set its insertion time to now
+            return RedirectToAction("Index");
         }
 
         [Authorize]

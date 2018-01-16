@@ -195,14 +195,14 @@ namespace RepositoryStd.Repository.Common
 
             adCommon.AdvertisementId = advertisement.AdId;
             adCommon.UserId = advertisement.UserId;
-            adCommon.AdvertisementTitle = advertisement.AdTitle;//TODO test for null
+            adCommon.AdvertisementTitle = advertisement.AdTitle;
             adCommon.AdvertisementTime = advertisement.AdInsertDateTime;
             adCommon.AdvertisementStatusId = advertisement.AdStatusId;
-            adCommon.AdvertisementStatus = advertisement.AdStatus.AdStatus1;//TODO test for null
+            if(advertisement.AdStatus!=null) adCommon.AdvertisementStatus = advertisement.AdStatus.AdStatus1;
             if(advertisement.Category!=null) adCommon.AdvertisementCategory = advertisement.Category.CategoryName;
             adCommon.AdvertisementCategoryId = advertisement.CategoryId;
-            adCommon.AdvertisementComments = advertisement.AdComments;//TODO test for null
-            adCommon.NumberOfVisit = advertisement.AdNumberOfVisited;//TODO test for null
+            adCommon.AdvertisementComments = advertisement.AdComments;
+            adCommon.NumberOfVisit = advertisement.AdNumberOfVisited;
             adCommon.Email = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).Email;//TODO test for null
             adCommon.PhoneNumber = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber;//TODO test for null
             adCommon.DistrictId = advertisement.DistrictId;
