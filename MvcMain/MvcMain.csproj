@@ -176,6 +176,7 @@
     <Folder Include="Documents\" />
     <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
+    <Folder Include="wwwroot\js\home\adDetail\dist\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -906,6 +907,7 @@
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\CriteriaNumericDictionary.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\IResultHandler.ts" />
+    <TypeScriptCompile Include="wwwroot\js\home\adDetail\src\adDetail.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\index\src\index.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\ICriteriaChange.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\UserInput.ts" />
