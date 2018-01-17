@@ -2,7 +2,6 @@
 
 namespace ModelStd.Db.Identity
 {
-    [Table("AspNetUserTokens", Schema = "identity")]
     public partial class AspNetUserTokens
     {
         public string UserId { get; set; }

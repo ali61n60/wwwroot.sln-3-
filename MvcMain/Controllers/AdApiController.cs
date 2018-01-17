@@ -367,7 +367,7 @@ namespace MvcMain.Controllers
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                _commonRepository.MarkAd(adGuid, user.Id);
+                await _commonRepository.MarkAd(adGuid, user.Id);
                 response.SetSuccessResponse();
             }
             catch (Exception ex)

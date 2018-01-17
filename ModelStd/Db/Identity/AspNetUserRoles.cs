@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Identity
 {
-    [Table("AspNetUserRoles", Schema = "identity")]
     public partial class AspNetUserRoles
     {
         [Key]

@@ -2,7 +2,6 @@
 
 namespace ModelStd.Db.Identity
 {
-    [Table("AspNetRoleClaims", Schema = "identity")]
     public partial class AspNetRoleClaims
     {
         public int Id { get; set; }
