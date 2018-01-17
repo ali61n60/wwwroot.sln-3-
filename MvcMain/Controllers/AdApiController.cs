@@ -35,6 +35,7 @@ namespace MvcMain.Controllers
     //TODO 2- Create Verify Ad Controller and View For Admin
     //TODO 2- Create LetMeKnow Controller and View for users to register their need
     //TODO 2- Create and Run SMS sending
+    //TODO 2- return a responseBase object in api calls that need autherized access but caller is not logged in
     //TODO 3- work on Ad Price
     //TODO 3- work on the max number of images per Ad. for example decide it based on user
     //TODO 3- Make Response.Error an array and put all errors in it
@@ -105,8 +106,8 @@ namespace MvcMain.Controllers
 
         public string WhatIsMyIpAddress()
         {
-            string ip = Request.Host.ToString();
-            return ip;
+            return $"ip address={Request.HttpContext.Connection.RemoteIpAddress.ToString()}, " +
+                   $"port={Request.HttpContext.Connection.RemotePort}";
         }
 
         public async Task<ResponseBase> AddAdvertisement([FromBody] Dictionary<string, string> userInput)

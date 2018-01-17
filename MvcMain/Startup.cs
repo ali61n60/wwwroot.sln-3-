@@ -109,7 +109,8 @@ namespace MvcMain
                                 {
                                     context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                                     context.Response.ContentType = "application/json";
-                                    context.Response.WriteAsync("\"What did you say?\"");
+                                    //TODO Seriallize a responsebase object a return that 
+                                    context.Response.WriteAsync("\"Please Login?\"");
                                 }
                                 else
                                     context.Response.Redirect(context.RedirectUri);
