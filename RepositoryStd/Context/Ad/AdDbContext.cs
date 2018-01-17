@@ -97,17 +97,7 @@ namespace RepositoryStd.Context.AD
             {
                 entity.HasKey(e => new { e.AdId, e.PrivilegeId, e.InsertionDate })
                     .HasName("PK_AdPrivilage");
-
-                entity.ToTable("AdPrivilege", "ad");
-
-                entity.Property(e => e.AdId).HasColumnName("adId");
-
-                entity.Property(e => e.PrivilegeId).HasColumnName("privilegeId");
-
-                entity.Property(e => e.InsertionDate)
-                    .HasColumnName("insertionDate")
-                    .HasColumnType("smalldatetime");
-
+                
                 entity.HasOne(d => d.Ad)
                     .WithMany(p => p.AdPrivilege)
                     .HasForeignKey(d => d.AdId)
@@ -163,23 +153,9 @@ namespace RepositoryStd.Context.AD
                 entity.HasKey(e => e.CategoryId)
                     .HasName("PK_Categories");
 
-                entity.ToTable("Categories", "ad");
-
-                entity.Property(e => e.CategoryId)
-                    .HasColumnName("categoryId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.CategoryName)
-                    .IsRequired()
-                    .HasColumnName("categoryName")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.CategoryNameEnglish)
-                    .HasColumnName("categoryNameEnglish")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.CategoryParentId)
-                    .HasColumnName("categoryParentId")
+                
+                //TODO make its type int
+               entity.Property(e => e.CategoryParentId)
                     .HasColumnType("nchar(10)");
             });
 
@@ -198,6 +174,25 @@ namespace RepositoryStd.Context.AD
                     .HasForeignKey(d => d.CityId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_Districts_Cities");
+            });
+
+            modelBuilder.Entity<MarkedAd>(entity =>
+            {
+                entity.HasKey(markedAd =>
+                    new { markedAd.AdId, markedAd.UserId }
+                ).HasName("PK_MarkedAd");
+
+                entity.HasOne(markedAd => markedAd.Ad)
+                    .WithMany(advertisements => advertisements.MarkedAds)
+                    .HasForeignKey(markedAd => markedAd.AdId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_MarkedAds_Advertisements");
+
+                entity.HasOne(markedAd => markedAd.User)
+                    .WithMany(appUser => appUser.MarkedAds)
+                    .HasForeignKey(markedAd => markedAd.UserId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_MarkedAds_AspNetUsers");
             });
 
             modelBuilder.Entity<MobileBrands>(entity =>
@@ -286,15 +281,11 @@ namespace RepositoryStd.Context.AD
 
                 entity.Property(e => e.Sent).HasColumnName("sent");
             });
-        }
-        /*
-         * 
-           protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<AdPrivilege>().HasKey(privilege => new{ privilege.adId,privilege.insertionDate,privilege.privilegeId});
+
+            
+
            
-            modelBuilder.Entity<SimilarAd>().HasKey(ad =>new{ ad.adId,ad.similarAdId});
+
         }
-         * */
     }
 }

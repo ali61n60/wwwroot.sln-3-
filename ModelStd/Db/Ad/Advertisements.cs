@@ -12,6 +12,7 @@ namespace ModelStd.Db.Ad
         {
             AdPrivilege = new HashSet<AdPrivilege>();
             SimilarAds = new HashSet<SimilarAds>();
+            MarkedAds=new HashSet<MarkedAd>();
         }
 
         [Key]
@@ -56,6 +57,7 @@ namespace ModelStd.Db.Ad
 
         public virtual AdAttributeTransportation AdAttributeTransportation { get; set; }
         public virtual ICollection<AdPrivilege> AdPrivilege { get; set; }
+        public virtual ICollection<MarkedAd> MarkedAds { get; set; }
         public virtual Price Price { get; set; }
         public virtual ICollection<SimilarAds> SimilarAds { get; set; }
         public virtual AdStatus AdStatus { get; set; }

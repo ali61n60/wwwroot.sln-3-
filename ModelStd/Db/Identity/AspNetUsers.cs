@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using ModelStd.Db.Ad;
 
 namespace ModelStd.Db.Identity
 {
@@ -10,6 +11,8 @@ namespace ModelStd.Db.Identity
             AspNetUserClaims = new HashSet<AspNetUserClaims>();
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
+
+            initCustomizedCollections();
         }
 
         public string Id { get; set; }
@@ -31,5 +34,15 @@ namespace ModelStd.Db.Identity
         public virtual ICollection<AspNetUserClaims> AspNetUserClaims { get; set; }
         public virtual ICollection<AspNetUserLogins> AspNetUserLogins { get; set; }
         public virtual ICollection<AspNetUserRoles> AspNetUserRoles { get; set; }
+    }
+
+    public partial class AspNetUsers
+    {
+        public virtual ICollection<MarkedAd> MarkedAds { get; set; }
+
+        private void initCustomizedCollections()
+        {
+            MarkedAds=new HashSet<MarkedAd>();
+        }
     }
 }

@@ -19,7 +19,12 @@ namespace RepositoryStd.Context.Identity
         {
             _connectionString = connectionString;
         }
-        
+
+        public AppIdentityDbContext()
+        {
+            _connectionString = AdvertisementDataClass.DefaultConnectionString();
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(_connectionString,
@@ -30,6 +35,16 @@ namespace RepositoryStd.Context.Identity
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.HasDefaultSchema("identity");
+
+
+            modelBuilder.Entity<AspNetUserLogins>(entity =>
+            {
+                entity.HasKey(aspNetUserLogins =>
+                    new { aspNetUserLogins.LoginProvider, aspNetUserLogins.ProviderKey }
+                ).HasName("PK_AspNetUserLogins");
+
+            });
+
         }
      
 
