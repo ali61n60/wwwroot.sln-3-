@@ -241,12 +241,6 @@ namespace RepositoryStd.Context.AD
                  entity.HasKey(e => new { e.AdId, e.SimilarAdId })
                      .HasName("PK_SimilarAds");
 
-                 entity.ToTable("SimilarAds", "ad");
-
-                 entity.Property(e => e.AdId).HasColumnName("adId");
-
-                 entity.Property(e => e.SimilarAdId).HasColumnName("similarAdId");
-
                  entity.HasOne(d => d.Ad)
                      .WithMany(p => p.SimilarAds)
                      .HasForeignKey(d => d.AdId)

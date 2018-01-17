@@ -1,7 +1,10 @@
-﻿namespace ModelStd.Db.Identity
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ModelStd.Db.Identity
 {
     public partial class AspNetUserRoles
     {
+        [Key]
         public string UserId { get; set; }
         public string RoleId { get; set; }
 
