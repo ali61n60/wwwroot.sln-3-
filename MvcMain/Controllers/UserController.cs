@@ -9,16 +9,21 @@ using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
+using MvcMain.Infrastructure;
 
 namespace MvcMain.Controllers
 {
     public class UserController:Controller
     {
         private UserAdApiController _userAdApiController;
+        private ILogger _logger;
 
-        public UserController(UserAdApiController userAdApiController, ICommonRepository commonRepository, UserManager<AppUser> userManager)
+        private string _messageToUser = "";
+
+        public UserController(UserAdApiController userAdApiController, ILogger logger)
         {
             _userAdApiController = userAdApiController;
+            _logger = logger;
         }
 
         [Authorize]
@@ -30,10 +35,14 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> UserAds()
         {
+             _logger.LogError("UserController/UserAds "+ DateTime.Now);
             _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase<IEnumerable<AdvertisementCommon>> response =await _userAdApiController.GetUserAds();
             if (response.Success)
+            {
+                ViewData["Message"] = _messageToUser;
                 return View(response.ResponseData);
+            }
             else
             {
                 //TODO log error
@@ -61,6 +70,7 @@ namespace MvcMain.Controllers
         {
             //TODO Update Ad withot changing ad contents just set its insertion time to now
             //TODO make sure the ad owner is calling this method
+            _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase response =await _userAdApiController.UpdateAd(adGuid);
             if (response.Success)
             {

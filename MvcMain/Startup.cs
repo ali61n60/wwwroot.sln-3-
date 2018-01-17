@@ -15,6 +15,7 @@ using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Controllers;
+using MvcMain.Infrastructure;
 using MvcMain.Infrastructure.Services;
 using RepositoryStd;
 using RepositoryStd.Context.AD;
@@ -84,6 +85,8 @@ namespace MvcMain
             services.AddTransient<AppIdentityDbContext>(provider => new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
             services.AddTransient<AdApiController>();
             services.AddTransient<UserAdApiController>();
+
+            services.AddSingleton<Infrastructure.ILogger>(provider =>new Logger(_env.ContentRootPath + "/LogData/"));
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
