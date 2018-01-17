@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Identity
 {
-    [Table("AspNetUserLogins", Schema = "identity")]
+    [Table("AspNetUserLogins", Schema = "identity2")]
     public partial class AspNetUserLogins
     {
         [Key]

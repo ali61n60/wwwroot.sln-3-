@@ -2,7 +2,7 @@
 
 namespace ModelStd.Db.Identity
 {
-    [Table("AspNetUserClaims", Schema = "identity")]
+    [Table("AspNetUserClaims", Schema = "identity2")]
     public partial class AspNetUserClaims
     {
         public int Id { get; set; }

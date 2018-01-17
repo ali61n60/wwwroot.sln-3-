@@ -8,7 +8,7 @@ using RepositoryStd.Context.AD;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    [Migration("20180117170715_markingAds")]
+    [Migration("20180117171525_markingAds")]
     partial class markingAds
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -449,7 +449,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("AspNetRoles","identity");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Identity.AspNetUserClaims", b =>
@@ -467,7 +467,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("AspNetUserClaims","identity");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Identity.AspNetUserLogins", b =>
@@ -485,7 +485,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("AspNetUserLogins","identity");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Identity.AspNetUserRoles", b =>
@@ -503,7 +503,7 @@ namespace RepositoryStd.Migrations
 
                     b.HasIndex("UserId1");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("AspNetUserRoles","identity");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Identity.AspNetUsers", b =>

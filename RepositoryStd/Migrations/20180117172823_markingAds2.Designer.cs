@@ -8,9 +8,10 @@ using RepositoryStd.Context.AD;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180117172823_markingAds2")]
+    partial class markingAds2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("ad")
@@ -80,6 +81,8 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("AdId", "PrivilegeId", "InsertionDate")
                         .HasName("PK_AdPrivilage");
+
+                    b.HasAlternateKey("AdId");
 
                     b.HasIndex("PrivilegeId");
 
@@ -361,6 +364,8 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("AdId", "SimilarAdId")
                         .HasName("PK_SimilarAds");
+
+                    b.HasAlternateKey("AdId");
 
                     b.ToTable("SimilarAds","ad");
                 });
