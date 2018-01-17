@@ -60,7 +60,7 @@ namespace MvcMain.Infrastructure
                 }
                 catch (Exception ex)
                 {
-                    //TODO what todo when error in logging
+                    //TODO what todo when error in LogError
                 }
             });
         }

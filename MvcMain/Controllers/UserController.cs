@@ -35,19 +35,16 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> UserAds()
         {
-             
             _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase<IEnumerable<AdvertisementCommon>> response =await _userAdApiController.GetUserAds();
             if (response.Success)
             {
-                ViewData["Message"] = _messageToUser;
                 return View(response.ResponseData);
             }
             else
             {
-                //TODO log error
-                //TODO show error to user
-                return View("Index");
+                ViewData["Message"] = $"message={response.Message}, errorCode={response.ErrorCode}";
+                return View();
             }
         }
 
@@ -74,14 +71,14 @@ namespace MvcMain.Controllers
             ResponseBase response =await _userAdApiController.UpdateAd(adGuid);
             if (response.Success)
             {
-                _messageToUser = "آگهی بروزرسانی شد";
-                return RedirectToAction("UserAds");
+                ViewData["Message"] = "آگهی بروزرسانی شد";
+                return View("UserAds");
             }
             else
             {
                 //TODO log error
-                //TODO show error to user
-                return View("Index");
+                ViewData["Message"] = $"{response.Message} , {response.ErrorCode}";
+                return View("UserAds");
             }
         }
 
