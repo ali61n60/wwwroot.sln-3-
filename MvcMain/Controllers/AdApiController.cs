@@ -43,7 +43,8 @@ namespace MvcMain.Controllers
     //TODO 3- study about rules to operate a web site and connect to bank  and register a company
     //TODO 3- study Task and async
     //TODO 3- correct WhatIsMyIpAddress method
-    //TODO 3- improve database tables datatypse and properties
+    //TODO 3- improve database tables datatypse and 
+    //TODO 3- use Decorator pattern to log
 
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
@@ -356,6 +357,25 @@ namespace MvcMain.Controllers
                 else
                     response.CustomDictionary = new Dictionary<string, string> { { requestIndexKey, userInput[requestIndexKey] } };
             }
+        }
+
+        [Authorize]
+        public async Task<ResponseBase> MarkAd(Guid adGuid)
+        {
+            string errorCode = "AdApiController.MarkAd";
+            ResponseBase response=new ResponseBase();
+            try
+            {
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                _commonRepository.MarkAd(adGuid, user.Id);
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message,errorCode);
+            }
+
+            return response;
         }
     }
 

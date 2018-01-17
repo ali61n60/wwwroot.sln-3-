@@ -276,6 +276,18 @@ namespace RepositoryStd.Repository.Common
             return;
         }
 
+        public async Task MarkAd(Guid adGuid, string userId)
+        {
+            MarkedAd adToBeMarked = new MarkedAd()
+            {
+               AdId = adGuid,
+               UserId = userId
+            };
+            _adDbContext.MarkedAds.Add(adToBeMarked);
+            await _adDbContext.SaveChangesAsync();
+            return;
+        }
+
         //sp To be removed
         public IEnumerable<AdvertisementCommon> FindAll()
         {

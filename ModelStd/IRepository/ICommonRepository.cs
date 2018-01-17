@@ -20,5 +20,6 @@ namespace ModelStd.IRepository
 
         Task UpdateAd(Guid adGuid, string userId);
         Task DeleteAd(Guid adGuid, string userId);
+        Task MarkAd(Guid adGuid, string userId);
     }
 }
