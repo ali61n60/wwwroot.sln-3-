@@ -45,6 +45,13 @@ namespace MvcMain
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json").Build();
+
+
+        
+
+        
+
+
         }
 
         public void ConfigureServices(IServiceCollection services)

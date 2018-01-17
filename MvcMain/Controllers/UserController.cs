@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,14 +17,13 @@ namespace MvcMain.Controllers
     public class UserController:Controller
     {
         private UserAdApiController _userAdApiController;
-        private ILogger _logger;
+        
 
         private string _messageToUser = "";
 
-        public UserController(UserAdApiController userAdApiController, ILogger logger)
+        public UserController(UserAdApiController userAdApiController)
         {
             _userAdApiController = userAdApiController;
-            _logger = logger;
         }
 
         [Authorize]
@@ -35,7 +35,7 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> UserAds()
         {
-             _logger.LogError("UserController/UserAds "+ DateTime.Now);
+             
             _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase<IEnumerable<AdvertisementCommon>> response =await _userAdApiController.GetUserAds();
             if (response.Success)
@@ -74,7 +74,7 @@ namespace MvcMain.Controllers
             ResponseBase response =await _userAdApiController.UpdateAd(adGuid);
             if (response.Success)
             {
-                //TODO show update ok
+                _messageToUser = "آگهی بروزرسانی شد";
                 return RedirectToAction("UserAds");
             }
             else

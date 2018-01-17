@@ -9,6 +9,7 @@ using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
+using MvcMain.Infrastructure;
 
 namespace MvcMain.Controllers
 {
@@ -17,11 +18,13 @@ namespace MvcMain.Controllers
     {
         private ICommonRepository _commonRepository;
         private readonly UserManager<AppUser> _userManager;
+        private ILogger _logger;
 
-        public UserAdApiController(ICommonRepository commonRepository, UserManager<AppUser> userManager)
+        public UserAdApiController(ICommonRepository commonRepository, UserManager<AppUser> userManager, ILogger logger)
         {
             _commonRepository = commonRepository;
             _userManager = userManager;
+            _logger = logger;
         }
 
         [Authorize]
@@ -32,6 +35,7 @@ namespace MvcMain.Controllers
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                _logger.LogError($"{errorCode}, user={user.Email}, time= {DateTime.Now}");
                 response.ResponseData= await _commonRepository.GetUserAdvertisements(user.Id);
                 response.SetSuccessResponse();
             }

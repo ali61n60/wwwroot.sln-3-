@@ -1,3 +1,14 @@
-
-UserController/UserAds 1/17/2018 11:41:12 AM
-UserController/UserAds 1/17/2018 11:42:18 AM
+UserController/UserAds 1/17/2018 1:06:09 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:12:17 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:17:02 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:17:09 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:17:43 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:17:47 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:20:19 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:20:24 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:20:27 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:20:28 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:21:43 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:23:28 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:24:20 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:26:13 PM

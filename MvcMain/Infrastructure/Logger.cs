@@ -45,23 +45,24 @@ namespace MvcMain.Infrastructure
 
         public async Task LogError(string data)
         {
-            Thread.Sleep(5000);
-            string errorFile = DirectoryPath + ErrorFileName;
-            Stream errorStream;
-            try
+            await Task.Run(() =>
             {
-                errorStream = !File.Exists(errorFile) ? File.Create(errorFile) : File.Open(errorFile, FileMode.Append);
-                using (StreamWriter streamWriter = new StreamWriter(errorStream))
+                string errorFile = DirectoryPath + ErrorFileName;
+                Stream errorStream;
+                try
                 {
-                    streamWriter.WriteLine(data);
-                    streamWriter.Flush();
+                    errorStream = !File.Exists(errorFile) ? File.Create(errorFile) : File.Open(errorFile, FileMode.Append);
+                    using (StreamWriter streamWriter = new StreamWriter(errorStream))
+                    {
+                        streamWriter.WriteLine(data);
+                        streamWriter.Flush();
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                //TODO what todo when error in logging
-            }
-            
+                catch (Exception ex)
+                {
+                    //TODO what todo when error in logging
+                }
+            });
         }
 
         public void LogInformationSummary(string data)
