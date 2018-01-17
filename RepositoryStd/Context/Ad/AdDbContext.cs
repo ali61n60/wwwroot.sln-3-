@@ -60,7 +60,7 @@ namespace RepositoryStd.Context.AD
 
                 entity.HasOne(d => d.Ad)
                     .WithOne(advertisements => advertisements.AdAttributeTransportation)
-                    .OnDelete(DeleteBehavior.Restrict)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_AdAttributeTransportation_Advertisements");
 
                 entity.HasOne(d => d.Model)
@@ -111,7 +111,7 @@ namespace RepositoryStd.Context.AD
                 entity.HasOne(d => d.Ad)
                     .WithMany(p => p.AdPrivilege)
                     .HasForeignKey(d => d.AdId)
-                    .OnDelete(DeleteBehavior.Restrict)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_AdPrivilage_Advertisements");
 
                 entity.HasOne(d => d.Privilege)
@@ -223,7 +223,7 @@ namespace RepositoryStd.Context.AD
             {
                 entity.HasOne(d => d.Ad)
                      .WithOne(advertisements => advertisements.Price)
-                     .OnDelete(DeleteBehavior.Restrict)
+                     .OnDelete(DeleteBehavior.Cascade)
                      .HasConstraintName("FK_Price_Advertisements");
             });
 
@@ -255,7 +255,7 @@ namespace RepositoryStd.Context.AD
                  entity.HasOne(d => d.Ad)
                      .WithMany(p => p.SimilarAds)
                      .HasForeignKey(d => d.AdId)
-                     .OnDelete(DeleteBehavior.Restrict)
+                     .OnDelete(DeleteBehavior.Cascade)
                      .HasConstraintName("FK_SimilarAds_Advertisements");
              });
 

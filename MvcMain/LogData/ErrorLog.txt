@@ -25,3 +25,6 @@ UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 1:51:42
 UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 2:27:21 PM
 UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 2:31:26 PM
 UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 2:32:25 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 2:34:33 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 2:35:12 PM
+UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/17/2018 3:05:01 PM
