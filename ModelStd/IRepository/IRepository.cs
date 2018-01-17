@@ -15,9 +15,6 @@ namespace ModelStd.IRepository
     {
         T FindBy(Guid Id);//in progress
         
-        void Remove(T entity);//Done
-        void Save(T entity);//Update Database
-        
         IEnumerable<T> FindAll();//to Be Studied
         
         

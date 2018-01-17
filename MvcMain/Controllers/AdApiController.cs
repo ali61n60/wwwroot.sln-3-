@@ -40,7 +40,8 @@ namespace MvcMain.Controllers
     //TODO 3- work on District,City,Province component
     //TODO 3- work on ad status enum 
     //TODO 3- study about rules to operate a web site and connect to bank  and register a company
-    //TODO 3- studt Task and async
+    //TODO 3- study Task and async
+    //TODO 3- correct WhatIsMyIpAddress method
 
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
@@ -191,10 +192,7 @@ namespace MvcMain.Controllers
                 }
             }
 
-            public ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string userName, string password, bool userPassIsEncrypted)
-            {
-                throw new NotImplementedException();
-            }
+           
 
             public ResponseBase RemoveAdvertisement(AdvertisementCommon advertisementCommon)
             {

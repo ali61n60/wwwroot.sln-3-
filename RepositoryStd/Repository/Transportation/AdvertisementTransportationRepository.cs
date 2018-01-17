@@ -100,14 +100,13 @@ namespace RepositoryStd.Repository.Transportation
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisements advertisement in list)
             {
-                AdvertisementCommon temp=new AdvertisementCommon();
+                AdvertisementCommon temp = new AdvertisementCommon();
                 _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
                 searchResultItems.Add(temp);
             }
 
             return searchResultItems;
         }
-
         private IQueryable<Advertisements> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             PlateType plateType = AdvertisementTransportation.GetPlateType(
@@ -122,7 +121,6 @@ namespace RepositoryStd.Repository.Transportation
             }
             return list;
         }
-
         private IQueryable<Advertisements> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             CarStatus carStatus = AdvertisementTransportation.GetCarStatus(
@@ -138,7 +136,6 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-
         private IQueryable<Advertisements> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             BodyStatus bodyStatus = AdvertisementTransportation.GetBodyStatus(
@@ -153,7 +150,6 @@ namespace RepositoryStd.Repository.Transportation
             }
             return list;
         }
-
         private IQueryable<Advertisements> whereInternalColor(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             string internalColor = ParameterExtractor.ExtractString(queryParameters, InternalColorKey, InternalColorDefault);
@@ -164,7 +160,6 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-
         private IQueryable<Advertisements> whereBodyColor(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             string bodyColor = ParameterExtractor.ExtractString(queryParameters, BodyColorKey, BodyColorDefault);
@@ -175,7 +170,6 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-
         private IQueryable<Advertisements> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             GearboxType gearboxType = AdvertisementTransportation.GetGearboxType(
@@ -190,7 +184,6 @@ namespace RepositoryStd.Repository.Transportation
             }
             return list;
         }
-
         private IQueryable<Advertisements> whereMileage(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int mileageFrom = ParameterExtractor.ExtractInt(queryParameters, MileageFromKey, MileageFromDefault);
@@ -204,7 +197,6 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-
         private IQueryable<Advertisements> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             FuelType fuelType = AdvertisementTransportation.GetFuelType(
@@ -218,7 +210,6 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-
         private IQueryable<Advertisements> whereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters, MakeYearFromKey, MakeYearFromDefault);
@@ -235,7 +226,6 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-
         private IQueryable<Advertisements> whereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
         {
             int carModelId = ParameterExtractor.ExtractInt(queryParameters, CarModelIdKey, CarModelIdDefault);
@@ -253,7 +243,7 @@ namespace RepositoryStd.Repository.Transportation
             return list;
 
         }
-        
+
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
@@ -267,7 +257,7 @@ namespace RepositoryStd.Repository.Transportation
             ad.AdNumberOfVisited = 0;//just being added
 
             adAttribute.AdId = ad.AdId;
-            
+
             _adDbContext.Advertisements.Add(ad);
             await _adDbContext.SaveChangesAsync();
 
@@ -286,7 +276,7 @@ namespace RepositoryStd.Repository.Transportation
             AdAttributeTransportation adAttribute = new AdAttributeTransportation();
             adAttribute.ModelId = ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
             adAttribute.MakeYear = ParameterExtractor.ExtractInt(userInputDictionary, MakeYearKey, MakeYearDefault);
-            adAttribute.Fuel = ParameterExtractor.ExtractString(userInputDictionary, FuelTypeKey,AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault));
+            adAttribute.Fuel = ParameterExtractor.ExtractString(userInputDictionary, FuelTypeKey, AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault));
             adAttribute.Mileage = ParameterExtractor.ExtractInt(userInputDictionary, MileageKey, MileageDefault);
             adAttribute.Gearbox = ParameterExtractor.ExtractString(userInputDictionary, GearboxKey,
                 AdvertisementTransportation.GetGearboxTypeString(GearboxDefault));
@@ -299,10 +289,9 @@ namespace RepositoryStd.Repository.Transportation
             adAttribute.CarStatus = ParameterExtractor.ExtractString(userInputDictionary, CarStatusKey,
                 AdvertisementTransportation.GetCarStatusString(CarStatusDefault));
             adAttribute.PlateType = ParameterExtractor.ExtractString(userInputDictionary, PlateTypeKey, AdvertisementTransportation.GetPlateTypeString(PlateTypeDefault));
-            
+
             return adAttribute;
         }
-
 
         //TODO the method implementation is not complete
         private AdAttributeTransportation getAdAtribute(AdvertisementTransportation entity)
@@ -321,58 +310,7 @@ namespace RepositoryStd.Repository.Transportation
             return adAttribute;
         }
 
-        public void Remove(AdvertisementTransportation entity)// entity only has advertisementCommon attributes
-        {
-            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
-            {
-                using (SqlCommand command = new SqlCommand("sp_removeAdTransportation", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = entity.AdvertisementId;
-                    //  _advertisementCommonRepository.AddReturnParameterToCommand(command);
-                    try
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        if (command.Parameters["returnValue"].Value.ToString() == "0")
-                        {
-                            throw new Exception(" خطا در دیتا بیس");
-                        }
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-            }
-        }
-
-        public void Save(AdvertisementTransportation entity)
-        {
-            using (SqlConnection connection = new SqlConnection(""))// _conectionString))
-            {
-                using (SqlCommand command = new SqlCommand("sp_saveAdTransportation", connection))
-                {
-                    command.CommandType = CommandType.StoredProcedure;
-                    //fillAddCommandParameters(command, entity);
-                    //_advertisementCommonRepository.AddReturnParameterToCommand(command);
-                    try
-                    {
-                        connection.Open();
-                        command.ExecuteNonQuery();
-                        if (command.Parameters["returnValue"].Value.ToString() == "0")
-                        {
-                            throw new Exception(" خطا در دیتا بیس");
-                        }
-                    }
-                    finally
-                    {
-                        connection.Close();
-                    }
-                }
-            }
-        }
-
+        //TODO remove or use EF
         public IEnumerable<AdvertisementTransportation> FindAll()
         {
             List<AdvertisementTransportation> searchResultItems = new List<AdvertisementTransportation>();
@@ -392,11 +330,11 @@ namespace RepositoryStd.Repository.Transportation
                         while (dataReader.Read())
                         {
                             AdvertisementTransportation tempAdvertisementTransportation = new AdvertisementTransportation();
-                            responseBase = fillAdvertisementTransportationFromDataReader(tempAdvertisementTransportation, dataReader);
-                            if (!responseBase.Success)
-                            {
-                                throw new Exception(responseBase.Message);
-                            }
+                            //responseBase = fillAdvertisementTransportationFromDataReader(tempAdvertisementTransportation, dataReader);
+                            //if (!responseBase.Success)
+                            //{
+                            //    throw new Exception(responseBase.Message);
+                            //}
                             searchResultItems.Add(tempAdvertisementTransportation);
                         }
                     }
@@ -410,11 +348,6 @@ namespace RepositoryStd.Repository.Transportation
             return searchResultItems;
         }
 
-        /// <summary>
-        /// Find AdvertisementTransportation from database 
-        /// </summary>
-        /// <param name="adId">Advertisement key</param>
-        /// <returns>if ad is not found returns NULL </returns>
         public AdvertisementTransportation FindBy(Guid adId)
         {
             AdvertisementTransportation advertisementTransportation = new AdvertisementTransportation();
@@ -461,40 +394,6 @@ namespace RepositoryStd.Repository.Transportation
             else
                 adTrans.MakeYear = -1;
         }
-
-        //TODO remove
-        private RepositoryResponse fillAdvertisementTransportationFromDataReader(AdvertisementTransportation advertisementTransportation,
-                                                                      SqlDataReader dataReader)
-        {
-            RepositoryResponse responseBase = new RepositoryResponse();
-            try
-            {
-                responseBase = AdvertisementCommonRepository.fillAdvertisementCommonFromDataReader(
-                        advertisementTransportation, dataReader);//fill common attributes
-                if (!responseBase.Success)
-                {
-                    throw new Exception(responseBase.Message);
-                }
-                advertisementTransportation.ModelId = (int)dataReader["modelId"];
-                advertisementTransportation.MakeYear = (int)dataReader["makeYear"];
-                advertisementTransportation.Fuel = AdvertisementTransportation.GetFuelType((string)dataReader["fuel"], FuelTypeDefault);
-                advertisementTransportation.Mileage = (int)dataReader["mileage"];
-                advertisementTransportation.Gearbox = (string)dataReader["gearbox"];
-                advertisementTransportation.BodyColor = (string)dataReader["bodyColor"];
-                advertisementTransportation.InternalColor = (string)dataReader["internalColor"];
-                //advertisementTransportation.BodyStatusName = (string)dataReader["bodyStatus"];
-                advertisementTransportation.ModelName = (string)dataReader["modelName"];
-                advertisementTransportation.BrandName = (string)dataReader["brandName"];
-
-                responseBase.Success = true;
-                responseBase.Message = "OK";
-            }
-            catch (Exception ex)
-            {
-                responseBase.Success = false;
-                responseBase.Message = ex.Message;
-            }
-            return responseBase;
-        }
+        
     }
 }

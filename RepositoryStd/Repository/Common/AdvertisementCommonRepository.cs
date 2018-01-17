@@ -229,30 +229,14 @@ namespace RepositoryStd.Repository.Common
             return ad;
         }
 
-
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
             throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
         }
-
-
+        
         public AdvertisementCommon GetAdDetail(Guid adGuid)
         {
-            //TODO return an instance of AdvertisementCommon and fill it from database
             return FindBy(adGuid);
-        }
-
-
-        public void Remove(AdvertisementCommon entity)
-        {
-            //Cannot Remove an ad from Common Repository
-            throw new NotImplementedException();
-        }
-
-        //TODO use EF
-        public void Save(AdvertisementCommon entity)
-        {
-
         }
 
         public async Task<IEnumerable<AdvertisementCommon>> GetUserAdvertisements(string userId)
@@ -281,11 +265,11 @@ namespace RepositoryStd.Repository.Common
             
             return;
         }
-
-
+        
         //sp To be removed
         public IEnumerable<AdvertisementCommon> FindAll()
         {
+            //TODO remove this method or use EF
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             using (SqlConnection connection = new SqlConnection(""))// _conectionString))
             {
@@ -309,7 +293,6 @@ namespace RepositoryStd.Repository.Common
             return searchResultItems;
         }
 
-        //TODO use EF
         public AdvertisementCommon FindBy(Guid adId)
         {
             IQueryable<Advertisements> list = _adDbContext.Advertisements
@@ -326,32 +309,6 @@ namespace RepositoryStd.Repository.Common
             AdvertisementCommon adCommon = new AdvertisementCommon();
             FillAdvertisementCommonFromDatabaseResult(item, adCommon);
             return adCommon;
-
-            //string commandText = "";//BaseSelectCommandText() + " WHERE adId=@adId ";
-            //AdvertisementCommon tempAdvertisementCommon;
-            //using (SqlConnection connection = new SqlConnection(""))// _conectionString))
-            //{
-            //    using (SqlCommand command = new SqlCommand(commandText, connection))
-            //    {
-            //        command.Parameters.Add("@adId", SqlDbType.UniqueIdentifier).Value = Id;
-            //        connection.Open();
-            //        SqlDataReader sqlDataReader = command.ExecuteReader(CommandBehavior.CloseConnection);
-            //        if (sqlDataReader.Read())
-            //        {
-            //            tempAdvertisementCommon = new AdvertisementCommon();
-            //            RepositoryResponse responseBase = fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
-            //            if (!responseBase.Success)
-            //            {
-            //                throw new Exception(responseBase.Message);
-            //            }
-            //        }
-            //        else
-            //        {
-            //            throw new AdvertisementNotFoundException();
-            //        }
-            //    }
-            //}
-            //return tempAdvertisementCommon;
         }
 
         public async Task IncrementNumberOfVisit(Guid adGuid)

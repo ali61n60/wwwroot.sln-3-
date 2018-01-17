@@ -66,5 +66,24 @@ namespace MvcMain.Controllers
             
             return response;
         }
+
+        [Authorize]
+        public async Task<ResponseBase> DeleteAd(Guid adGuid)
+        {
+            string errorCode = "UserAdApiController/DeleteAd";
+            ResponseBase response = new ResponseBase();
+            try
+            {
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                await _commonRepository.DeleteAd(adGuid, user.Id);
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                ; response.SetFailureResponse(ex.Message, errorCode);
+            }
+
+            return response;
+        }
     }
 }

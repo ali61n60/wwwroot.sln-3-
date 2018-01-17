@@ -9,9 +9,7 @@ namespace MvcMain.Infrastructure.Services
     //TODO 2- try to refactor or remove this interface
     public interface IAdvertisementCommonService
     {
-       //Done
-       ResponseBase<AdvertisementCommon[]> GetCustomerAdvertisementCommon(string userName,string password,bool userPassIsEncrypted);
-        
+       
         //Done
        ResponseBase RemoveAdvertisement(AdvertisementCommon advertisementCommon);
 

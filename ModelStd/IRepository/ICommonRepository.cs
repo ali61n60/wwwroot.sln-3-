@@ -18,5 +18,6 @@ namespace ModelStd.IRepository
         Task<IEnumerable<AdvertisementCommon>> GetUserAdvertisements(string userId);//In Progress
 
         Task UpdateAd(Guid adGuid, string userId);
+        Task DeleteAd(Guid adGuid, string userId);
     }
 }
