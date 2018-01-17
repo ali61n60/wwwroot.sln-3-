@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 //TODO make count optional to user
 //TODO instead of adding new ads to the page here call a method on index class to add it by defining an interface in the index class 
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller() {
         this.StartIndexKey = "StartIndex";
         this._initialStart = 1;
