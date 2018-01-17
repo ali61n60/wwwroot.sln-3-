@@ -80,7 +80,14 @@ namespace MvcMain.Controllers
             }
             catch (Exception ex)
             {
-                ; response.SetFailureResponse(ex.Message, errorCode);
+                if (ex.InnerException != null)
+                {
+                    response.SetFailureResponse(ex.Message+" ,innerMessage="+ex.InnerException.Message, errorCode);
+                }
+                else
+                {
+                    response.SetFailureResponse(ex.Message, errorCode);
+                }
             }
 
             return response;

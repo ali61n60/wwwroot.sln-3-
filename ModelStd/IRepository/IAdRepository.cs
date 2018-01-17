@@ -6,6 +6,7 @@ using ModelStd.Services;
 
 namespace ModelStd.IRepository
 {
+    //Implemented by all category specific repositories
     public interface IAdRepository
     {
         IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters);

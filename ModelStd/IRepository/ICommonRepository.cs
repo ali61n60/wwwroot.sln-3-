@@ -7,6 +7,7 @@ using ModelStd.Advertisements;
 
 namespace ModelStd.IRepository
 {
+    //Implemented by AdvertisementCommonRepository
     public interface ICommonRepository
     {
         IQueryable<Db.Ad.Advertisements> GetCommonQueryableList(Dictionary<string, string> queryParameters);

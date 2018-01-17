@@ -265,7 +265,17 @@ namespace RepositoryStd.Repository.Common
             
             return;
         }
-        
+
+        public async Task DeleteAd(Guid adGuid, string userId)
+        {
+            Advertisements deletingAD = _adDbContext.Advertisements.FirstOrDefault(advertisements =>
+                advertisements.AdId == adGuid && advertisements.UserId == userId);
+            _adDbContext.Remove(deletingAD);
+            await _adDbContext.SaveChangesAsync();
+
+            return;
+        }
+
         //sp To be removed
         public IEnumerable<AdvertisementCommon> FindAll()
         {
