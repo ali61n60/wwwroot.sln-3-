@@ -97,7 +97,7 @@ namespace RepositoryStd.Context.AD
             {
                 entity.HasKey(e => new { e.AdId, e.PrivilegeId, e.InsertionDate })
                     .HasName("PK_AdPrivilage");
-                
+
                 entity.HasOne(d => d.Ad)
                     .WithMany(p => p.AdPrivilege)
                     .HasForeignKey(d => d.AdId)
@@ -153,10 +153,10 @@ namespace RepositoryStd.Context.AD
                 entity.HasKey(e => e.CategoryId)
                     .HasName("PK_Categories");
 
-                
+
                 //TODO make its type int
-               entity.Property(e => e.CategoryParentId)
-                    .HasColumnType("nchar(10)");
+                entity.Property(e => e.CategoryParentId)
+                     .HasColumnType("nchar(10)");
             });
 
             modelBuilder.Entity<City>(entity =>
@@ -275,10 +275,6 @@ namespace RepositoryStd.Context.AD
 
                 entity.Property(e => e.Sent).HasColumnName("sent");
             });
-
-            
-
-           
 
         }
     }

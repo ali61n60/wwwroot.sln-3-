@@ -1,5 +1,8 @@
-﻿namespace ModelStd.Db.Identity
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ModelStd.Db.Identity
 {
+    [Table("AspNetUserClaims", Schema = "identity")]
     public partial class AspNetUserClaims
     {
         public int Id { get; set; }

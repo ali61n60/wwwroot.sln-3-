@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using ModelStd.Db.Ad;
 
 namespace ModelStd.Db.Identity
 {
+    [Table("AspNetUsers", Schema = "identity")]
     public partial class AspNetUsers
     {
         public AspNetUsers()
