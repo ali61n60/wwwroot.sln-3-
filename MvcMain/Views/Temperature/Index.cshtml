@@ -1,5 +1,5 @@
 ﻿@using ModelStd.Db.Ad
-@model List<ModelStd.Db.Ad.TemperatureModel>
+@model List<ModelStd.Db.Ad.Temperature>
 
 @{
     ViewData["Title"] = "دماسنج";
@@ -57,7 +57,7 @@
                 <th>Temperature</th>
             </tr>
         </thead>
-        @foreach (TemperatureModel temperature in Model)
+        @foreach (Temperature temperature in Model)
         {
             <tr>
                 <td>@temperature.TemperatureId</td>

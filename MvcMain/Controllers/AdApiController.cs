@@ -25,11 +25,12 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
-    //TODO 1- create an error page to inform users about errors
+    
     //TODO 1- work on view Ad Detail, use similar ads, mark ad, share ad, ...
-    //TODO 1- add mangeMyAd page for users
+    //TODO 1- add mangeMyAd page for users myAds, MarkedAds
+    //TODO 1- work on users credits and money pay and ...
     //TODO 1- work on Edit AD by Ad owner
-    //TODO 1- work on delete Ad by Ad owner
+    
     //TODO 2- study MVC book
     //TODO 2- Create Verify Ad Controller and View For Admin
     //TODO 2- Create LetMeKnow Controller and View for users to register their need
@@ -83,7 +84,7 @@ namespace MvcMain.Controllers
         //TODO move this method to its controller
         public JsonResult InsertTemperature([FromQuery] int temperature)
         {
-            TemperatureModel temperatureModel = new TemperatureModel()
+            Temperature temperatureModel = new Temperature()
             {
                 InsertDateTime = DateTime.Now,
                 Temp = temperature

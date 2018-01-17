@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using ModelStd.Db.Ad;
-using SQLitePCL;
 
 
 namespace RepositoryStd.Context.AD
 {
-    public partial class AdDbContext : DbContext
+    public class AdDbContext : DbContext
     {
         private readonly string _connectionString;
 
@@ -41,7 +40,8 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
         public virtual DbSet<Sms> Sms { get; set; }
-        public virtual DbSet<TemperatureModel> TemperatueModels { get; set; }
+        public virtual DbSet<Temperature> Temperatures { get; set; }
+        public virtual DbSet<MarkedAd> MarkedAds { get; set; }
 
 
 

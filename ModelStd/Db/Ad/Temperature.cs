@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("Temperatures", Schema = "ad")]
-    public class TemperatureModel
+    public class Temperature
     {
         [Key]
         [Column("temperatureId")]

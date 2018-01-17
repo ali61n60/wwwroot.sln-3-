@@ -14,21 +14,21 @@ namespace RepositoryStd.TepmeratureRepository
         {
             _adDbContext = adDbContext;
         }
-        public void Insert(TemperatureModel temperature)
+        public void Insert(Temperature temperature)
         {
-            _adDbContext.TemperatueModels.Add(temperature);
+            _adDbContext.Temperatures.Add(temperature);
             _adDbContext.SaveChanges();
         }
 
-        public List<TemperatureModel> GetAllTemperatures()
+        public List<Temperature> GetAllTemperatures()
         {
-            return _adDbContext.TemperatueModels.ToList();
+            return _adDbContext.Temperatures.ToList();
         }
 
-        public List<TemperatureModel> GetNLastTemperatures(int n)
+        public List<Temperature> GetNLastTemperatures(int n)
         {
-            int numberOfItems= _adDbContext.TemperatueModels.Count(model => true);
-            return _adDbContext.TemperatueModels.Skip(Math.Max(0, numberOfItems - n)).ToList();
+            int numberOfItems= _adDbContext.Temperatures.Count(model => true);
+            return _adDbContext.Temperatures.Skip(Math.Max(0, numberOfItems - n)).ToList();
         }
     }
 }
