@@ -106,7 +106,7 @@ namespace MvcMain.Controllers
 
         public string WhatIsMyIpAddress()
         {
-            return $"ip address={Request.HttpContext.Connection.RemoteIpAddress.ToString()}, " +
+            return $"ip address={Request.HttpContext.Connection.RemoteIpAddress}, " +
                    $"port={Request.HttpContext.Connection.RemotePort}";
         }
 

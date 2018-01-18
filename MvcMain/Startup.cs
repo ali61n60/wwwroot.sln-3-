@@ -14,9 +14,11 @@ using Microsoft.IdentityModel.Tokens;
 using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
+using ModelStd.Services;
 using MvcMain.Controllers;
 using MvcMain.Infrastructure;
 using MvcMain.Infrastructure.Services;
+using Newtonsoft.Json;
 using RepositoryStd;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Identity;
@@ -24,6 +26,7 @@ using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 using RepositoryStd.Repository.Transportation;
 using RepositoryStd.TepmeratureRepository;
+
 
 
 namespace MvcMain
@@ -109,8 +112,10 @@ namespace MvcMain
                                 {
                                     context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
                                     context.Response.ContentType = "application/json";
-                                    //TODO Seriallize a responsebase object a return that 
-                                    context.Response.WriteAsync("\"Please Login?\"");
+                                    //TODO Seriallize a responsebase object a return that
+                                    ResponseBase response=new ResponseBase();
+                                    response.SetFailureResponse("User must be logged in", "Startup/ConfigureServices");
+                                    context.Response.WriteAsync(JsonConvert.SerializeObject(response));
                                 }
                                 else
                                     context.Response.Redirect(context.RedirectUri);
@@ -120,7 +125,8 @@ namespace MvcMain
                 }
                 ).AddEntityFrameworkStores<AppIdentityDbContext>();
 
-            services.AddMvc();
+            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver
+                = new Newtonsoft.Json.Serialization.DefaultContractResolver());
         }
 
         private void addRepositoryContainer(IServiceCollection services,
