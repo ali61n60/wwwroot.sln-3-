@@ -11,8 +11,8 @@ namespace ModelStd.Db.Ad
     {
         [Key]
         [Column("messageId")]
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public Guid MessageId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int MessageId { get; set; }
 
         [Column("textMessage")]
         [Required]

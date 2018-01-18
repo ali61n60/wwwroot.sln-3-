@@ -31,7 +31,8 @@ namespace MvcMain.Controllers
     //TODO 1- add mangeMyAd page for users myAds, MarkedAds
     //TODO 1- work on users credits and money pay and ...
     //TODO 1- work on Edit AD by Ad owner
-
+    
+    //TODO 2- improve Android Send Sms App
     //TODO 2- study MVC book
     //TODO 2- Create LetMeKnow Controller and View for users to register their need
     //TODO 2- return a responseBase object in api calls that need autherized access but caller is not logged in
