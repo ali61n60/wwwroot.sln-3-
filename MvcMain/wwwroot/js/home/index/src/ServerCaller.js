@@ -43,9 +43,9 @@ var ServerCaller = /** @class */ (function () {
                 this._isServerCalled = false;
                 this.notifyUserAjaxCallFinished();
                 if (msg.Success == true) {
-                    this._start += parseInt(msg.customDictionary[this.NumberOfItemsKey]);
+                    this._start += parseInt(msg.CustomDictionary[this.NumberOfItemsKey]);
                     //TODO create AdvertisementCommon[] object from msg.responseData
-                    this._resultHandler.OnResultOk(msg.responseData);
+                    this._resultHandler.OnResultOk(msg.ResponseData);
                 } //if (msg.success == true)
                 else {
                     this._resultHandler.OnResultError(msg.Message + " , " + msg.ErrorCode);

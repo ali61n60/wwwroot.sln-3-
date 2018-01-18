@@ -34,6 +34,8 @@
         </div>
         <div class="col-sm-6">
             @Html.Partial("AdDetail/CommonSections/AdCommonTop", Model)
+            <br />
+            @await Component.InvokeAsync("AdDetailMarkAd")
         </div>
     </div>
 
