@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ModelStd
 {
-    public class EmailMessage
+    public class EmailMessageSingle
     {
     }
 }

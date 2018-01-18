@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
+using ModelStd;
 using ModelStd.Db.Identity;
 using MvcMain.Infrastructure;
 using MvcMain.Models;
-using MvcMain.Models.Email;
+
 
 namespace MvcMain.Controllers
 {
@@ -15,12 +15,15 @@ namespace MvcMain.Controllers
         //TODO Error messages are in English, Try to make them Persian
         private UserManager<AppUser> _userManager;
         private SignInManager<AppUser> _signInManager;
-        private ConfigurationRoot _appConfiguration;
+        private MessageApiController _messageApiController;
+        
 
-        public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr)
+        public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr
+            ,MessageApiController messageApiController)
         {
             _userManager = userMgr;
             _signInManager = signinMgr;
+            _messageApiController = messageApiController;
         }
 
         [AllowAnonymous]
@@ -72,17 +75,28 @@ namespace MvcMain.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PasswordForget(PasswordForgetModel detail, string returnUrl)
         {
-            //TODO Email user password or do appropriate action
+            //TODO change user password and then call MessageApi to add an email
+            //Email user password or do appropriate action
+            AppUser user=await _userManager.FindByEmailAsync(detail.Email);
+            if (user == null)
+            {
+                //tell user there is not such an email in our database
+            }
+
+            EmailMessageSingle emailMessageSingle=new EmailMessageSingle();
+            //emailMessage.EmailAddress = "Get it from user in database";
+            //emailMessage.
+            _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle);
             //TODO Make your action as an API to be able to use that from android app
             Email email=new Email();
-            EmailMessage emailMessage=new EmailMessage()
-            {
-                Title = "فراموشی رمز عبور",
-                MessageDetail = "رمز عبور شما عبارت زیر میباشد: "
-            };
-            emailMessage.MessageDetail += "\n\n\n\n";
-            emailMessage.MessageDetail += "hello";
-            email.SendEmail(detail.Email,emailMessage);
+            //EmailMessage emailMessage=new EmailMessage()
+          //  {
+          //      Title = "فراموشی رمز عبور",
+           //     MessageDetail = "رمز عبور شما عبارت زیر میباشد: "
+          //  };
+           // emailMessage.MessageDetail += "\n\n\n\n";
+          //  emailMessage.MessageDetail += "hello";
+         //   email.SendEmail(detail.Email,emailMessage);
             return RedirectToAction("Login",new { returnUrl =returnUrl?? "/" });
         }
 

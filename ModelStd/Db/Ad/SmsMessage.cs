@@ -6,8 +6,8 @@ using ModelStd.Db.Identity;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("Messages",Schema = "ad")]
-    public partial class Message
+    [Table("SmsMessages",Schema = "ad")]
+    public partial class SmsMessage
     {
         [Key]
         [Column("messageId")]
@@ -36,10 +36,6 @@ namespace ModelStd.Db.Ad
         [Required]
         public MessagePriority Priority { get; set; }
 
-        [Column("emailOrSms",TypeName = "int")]
-        [Required]
-        public EmailOrSms EmailOrSms { get; set; }
-
         public virtual AspNetUsers User { get; set; }
 
     }
@@ -49,12 +45,5 @@ namespace ModelStd.Db.Ad
         High=0,
         Medium=1,
         Low=2
-    }
-
-    public enum EmailOrSms
-    {
-        Email=0,
-        Sms=1,
-        Both=2
     }
 }

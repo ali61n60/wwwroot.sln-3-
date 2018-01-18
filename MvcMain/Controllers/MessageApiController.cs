@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ModelStd;
-using ModelStd.Db.Ad;
 using ModelStd.Services;
 using RepositoryStd.Context.AD;
+using SmsMessage = ModelStd.Db.Ad.SmsMessage;
 
 namespace MvcMain.Controllers
 {
@@ -23,7 +22,7 @@ namespace MvcMain.Controllers
             _adDbContext = adDbContext;
         }
 
-        public ResponseBase InsertSmsMessageInDataBase(Message message)
+        public ResponseBase InsertSmsMessageInDataBase(SmsMessage smsMessage)
         {
             throw new NotImplementedException();
             string errorCode = "MessageApiController/InsertSmsMessageInDataBase";
@@ -41,19 +40,19 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public ResponseBase<List<SmsMessage>> GetUnSentSmsMesseges()
+        public ResponseBase<List<ModelStd.SmsMessageSingle>> GetUnSentSmsMesseges()
         {
             string errorCode = "MessageApiController/GetUnSentSmsMesseges";
-            ResponseBase<List<SmsMessage>> response=new ResponseBase<List<SmsMessage>>();
+            ResponseBase<List<SmsMessageSingle>> response=new ResponseBase<List<SmsMessageSingle>>();
             try
             {
-                List<Message> smsMessages = _adDbContext.Messages
+                List<SmsMessage> smsMessages = _adDbContext.SmsMessages
                     .Include(message => message.User)
-                    .Where(message => message.Sent == false && message.EmailOrSms != EmailOrSms.Email)
+                    .Where(message => message.Sent == false)
                     .OrderBy(message => message.Priority)
                     .ThenBy(message => message.MessageDate).ToList();
-                response.ResponseData = new List<SmsMessage>(smsMessages.Count);
-                foreach (Message message in smsMessages)
+                response.ResponseData = new List<SmsMessageSingle>(smsMessages.Count);
+                foreach (SmsMessage message in smsMessages)
                 {
                     response.ResponseData.Add(convertMessageToSmsMessage(message));
                 }
@@ -74,13 +73,13 @@ namespace MvcMain.Controllers
             throw new NotImplementedException();
         }
 
-        public ResponseBase InsertEmailMessageInDataBase(EmailMessage emailMessage)
+        public ResponseBase InsertEmailMessageInDataBase(EmailMessageSingle emailMessageSingle)
         {
             string errorCode = "MessageApiController/InsertEmailMessageInDataBase";
             throw new NotImplementedException();
         }
 
-        public ResponseBase<List<EmailMessage>> GetUnSentEmailMesseges()
+        public ResponseBase<List<EmailMessageSingle>> GetUnSentEmailMesseges()
         {
             string errorCode = "MessageApiController/GetUnSentEmailMesseges";
             throw new NotImplementedException();
@@ -92,14 +91,14 @@ namespace MvcMain.Controllers
             throw new NotImplementedException();
         }
 
-        private SmsMessage convertMessageToSmsMessage(Message message)
+        private ModelStd.SmsMessageSingle convertMessageToSmsMessage(SmsMessage smsMessage)
         {
-            SmsMessage tempSmsMessage = new SmsMessage();
-            tempSmsMessage.PhoneNumber = message.User.PhoneNumber;
-            tempSmsMessage.TextMessage = message.TextMessage;
-            tempSmsMessage.MessageId = message.MessageId;
+            ModelStd.SmsMessageSingle tempSmsMessageSingle = new ModelStd.SmsMessageSingle();
+            tempSmsMessageSingle.PhoneNumber = smsMessage.User.PhoneNumber;
+            tempSmsMessageSingle.TextMessage = smsMessage.TextMessage;
+            tempSmsMessageSingle.MessageId = smsMessage.MessageId;
 
-            return tempSmsMessage;
+            return tempSmsMessageSingle;
         }
     }
 }

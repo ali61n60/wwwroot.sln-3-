@@ -34,15 +34,17 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<Categories> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<EmailMessage> EmailMessages { get; set; }
+        public virtual DbSet<MarkedAd> MarkedAds { get; set; }
         public virtual DbSet<MobileBrands> MobileBrands { get; set; }
         public virtual DbSet<Price> Price { get; set; }
         public virtual DbSet<Privilege> Privilege { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<SmsMessage> SmsMessages { get; set; }
         public virtual DbSet<Temperature> Temperatures { get; set; }
-        public virtual DbSet<MarkedAd> MarkedAds { get; set; }
-
+        
+        
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -51,13 +53,6 @@ namespace RepositoryStd.Context.AD
 
             modelBuilder.Entity<AdAttributeTransportation>(entity =>
             {
-
-                //modelBuilder.Entity<Blog>()
-                //    .HasOne(p => p.BlogImage)
-                //    .WithOne(i => i.Blog)
-                //    .HasForeignKey<BlogImage>(b => b.BlogForeignKey);
-
-
                 entity.HasOne(d => d.Ad)
                     .WithOne(advertisements => advertisements.AdAttributeTransportation)
                     .OnDelete(DeleteBehavior.Cascade)
@@ -176,6 +171,17 @@ namespace RepositoryStd.Context.AD
                     .HasConstraintName("FK_Districts_Cities");
             });
 
+            modelBuilder.Entity<EmailMessage>(entity =>
+            {
+                entity.HasKey(e => e.MessageId)
+                    .HasName("PK_EmailMessage");
+
+                entity.HasOne(emailMessage => emailMessage.User)
+                    .WithMany()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasForeignKey(emailMessage => emailMessage.UserId);
+            });
+
             modelBuilder.Entity<MarkedAd>(entity =>
             {
                 entity.HasKey(markedAd =>
@@ -248,10 +254,10 @@ namespace RepositoryStd.Context.AD
                      .HasConstraintName("FK_SimilarAds_Advertisements");
              });
 
-            modelBuilder.Entity<Message>(entity =>
+            modelBuilder.Entity<SmsMessage>(entity =>
             {
                 entity.HasKey(e => e.MessageId)
-                    .HasName("PK_Message");
+                    .HasName("PK_SmsMessage");
 
                 entity.HasOne(m => m.User)
                     .WithMany()

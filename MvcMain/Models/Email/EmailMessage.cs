@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MvcMain.Models.Email
 {
+    //TODO Refactor this
     [Table("Messages")]
     public class EmailMessage
     {

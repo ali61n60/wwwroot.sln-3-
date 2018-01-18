@@ -31,6 +31,8 @@ namespace MvcMain.Controllers
     //TODO 1- add mangeMyAd page for users myAds, MarkedAds
     //TODO 1- work on users credits and money pay and ...
     //TODO 1- work on Edit AD by Ad owner
+    //TODO 1- forget password sends an email to user. Do that by adding a record in Messages Table and
+    // emeil sender does the sending instead of sending it dirctly
     
     //TODO 2- improve Android Send Sms App
     //TODO 2- study MVC book

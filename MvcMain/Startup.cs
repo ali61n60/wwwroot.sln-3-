@@ -48,13 +48,6 @@ namespace MvcMain
             _configuration = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json").Build();
-
-
-        
-
-        
-
-
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -95,6 +88,7 @@ namespace MvcMain
             services.AddTransient<AppIdentityDbContext>(provider => new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
             services.AddTransient<AdApiController>();
             services.AddTransient<UserAdApiController>();
+            services.AddTransient<MessageApiController>();
 
             services.AddSingleton<Infrastructure.ILogger>(provider =>new Logger(_env.ContentRootPath + "/LogData/"));
 
