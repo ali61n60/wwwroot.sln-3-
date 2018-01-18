@@ -37,7 +37,7 @@ var CarModelBrandController = /** @class */ (function () {
     CarModelBrandController.prototype.updateCarModelSelect = function (brandId) {
         var carModels = new Array();
         this._allCarModels.forEach(function (carModel, index, array) {
-            if (carModel.brandId === brandId)
+            if (carModel.BrandId === brandId)
                 carModels.push(carModel);
         });
         this.createCarModelElement(carModels);

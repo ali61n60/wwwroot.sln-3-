@@ -4,9 +4,9 @@
 //}
 
 class SingleTemperature {
-    public temperatureId: number;
-    public temp: number;
-    public insertDateTime:number;
+    public TemperatureId: number;
+    public Temp: number;
+    public InsertDateTime:number;
 }
 
 class SinglePoint {
@@ -28,9 +28,9 @@ export class Temerature {
         let allTemperatures = $.parseJSON(dataString) as SingleTemperature[];
 
         allTemperatures.forEach((temperature) => {
-            var date = new Date(temperature.insertDateTime); // some mock date
+            var date = new Date(temperature.InsertDateTime); // some mock date
             var milliseconds = date.getTime(); 
-            this._dataPoints.push({ x: milliseconds , y: temperature.temp });
+            this._dataPoints.push({ x: milliseconds , y: temperature.Temp });
         });
     }
 

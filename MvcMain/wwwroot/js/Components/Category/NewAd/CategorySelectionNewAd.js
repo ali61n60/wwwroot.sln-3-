@@ -35,7 +35,7 @@ var CategorySelectionNewAd = /** @class */ (function () {
     }; //GetSelectedCategoryId
     CategorySelectionNewAd.prototype.SelectedCategoryHasChildren = function () {
         var selectedCategoryId = this.GetSelectedCategoryId();
-        return this._allCategories.filter(function (category) { return category.parentCategoryId === selectedCategoryId; }).length > 0;
+        return this._allCategories.filter(function (category) { return category.ParentCategoryId === selectedCategoryId; }).length > 0;
     };
     CategorySelectionNewAd.prototype.CreateFirstLevel = function () {
         var _this = this;
@@ -50,7 +50,7 @@ var CategorySelectionNewAd = /** @class */ (function () {
         var data = { categories: categories };
         this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this._allCategories.forEach(function (category) {
-            if (category.parentCategoryId === _this._rootCategoryId) {
+            if (category.ParentCategoryId === _this._rootCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach
@@ -76,7 +76,7 @@ var CategorySelectionNewAd = /** @class */ (function () {
         var categories = new Array();
         var data = { categories: categories };
         this._allCategories.forEach(function (category) {
-            if (category.parentCategoryId === firstLevelCategoryId) {
+            if (category.ParentCategoryId === firstLevelCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach
@@ -100,7 +100,7 @@ var CategorySelectionNewAd = /** @class */ (function () {
         var categories = new Array();
         var data = { categories: categories };
         this._allCategories.forEach(function (category) {
-            if (category.parentCategoryId === secondLevelCategoryId) {
+            if (category.ParentCategoryId === secondLevelCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach

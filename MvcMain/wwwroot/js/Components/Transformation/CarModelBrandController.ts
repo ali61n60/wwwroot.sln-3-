@@ -55,7 +55,7 @@ export class CarModelBrandController implements ICriteria {
     private updateCarModelSelect(brandId: number): void {
         let carModels = new Array<CarModel>();
         this._allCarModels.forEach((carModel, index, array) => {
-            if (carModel.brandId === brandId)
+            if (carModel.BrandId === brandId)
                 carModels.push(carModel);
         });
         this.createCarModelElement(carModels);

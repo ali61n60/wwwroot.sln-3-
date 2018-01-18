@@ -49,7 +49,7 @@ var CategorySelection = /** @class */ (function () {
         var data = { categories: categories };
         this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this._allCategories.forEach(function (category) {
-            if (category.parentCategoryId === _this._rootCategoryId) {
+            if (category.ParentCategoryId === _this._rootCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach
@@ -75,7 +75,7 @@ var CategorySelection = /** @class */ (function () {
         var categories = new Array();
         var data = { categories: categories };
         this._allCategories.forEach(function (category) {
-            if (category.parentCategoryId === firstLevelCategoryId) {
+            if (category.ParentCategoryId === firstLevelCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach
@@ -99,7 +99,7 @@ var CategorySelection = /** @class */ (function () {
         var categories = new Array();
         var data = { categories: categories };
         this._allCategories.forEach(function (category) {
-            if (category.parentCategoryId === secondLevelCategoryId) {
+            if (category.ParentCategoryId === secondLevelCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach

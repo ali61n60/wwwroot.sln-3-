@@ -26,9 +26,9 @@ var Temerature = /** @class */ (function () {
         var dataString = $("#" + this.dataInputId).val().toString();
         var allTemperatures = $.parseJSON(dataString);
         allTemperatures.forEach(function (temperature) {
-            var date = new Date(temperature.insertDateTime); // some mock date
+            var date = new Date(temperature.InsertDateTime); // some mock date
             var milliseconds = date.getTime();
-            _this._dataPoints.push({ x: milliseconds, y: temperature.temp });
+            _this._dataPoints.push({ x: milliseconds, y: temperature.Temp });
         });
     };
     Temerature.prototype.draw = function () {

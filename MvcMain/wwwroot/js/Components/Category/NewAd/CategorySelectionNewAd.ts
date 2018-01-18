@@ -53,7 +53,7 @@ export class CategorySelectionNewAd {
     public SelectedCategoryHasChildren(): boolean {
         let selectedCategoryId = this.GetSelectedCategoryId();
         return this._allCategories.filter
-            ((category) => { return category.parentCategoryId === selectedCategoryId }).length > 0;
+            ((category) => { return category.ParentCategoryId === selectedCategoryId }).length > 0;
     }
     
     public CreateFirstLevel(): void {
@@ -69,7 +69,7 @@ export class CategorySelectionNewAd {
         let data = { categories: categories }
         this._selectedCategoryIdLevelOne = this._rootCategoryId;
         this._allCategories.forEach(category => {
-            if (category.parentCategoryId === this._rootCategoryId) {
+            if (category.ParentCategoryId === this._rootCategoryId) {
                 categories.push(category);
             }//if
         });//forEach
@@ -101,7 +101,7 @@ export class CategorySelectionNewAd {
         let data = { categories: categories }
 
         this._allCategories.forEach(category => {
-            if (category.parentCategoryId === firstLevelCategoryId) {
+            if (category.ParentCategoryId === firstLevelCategoryId) {
                 categories.push(category);
             }//if
         });//forEach
@@ -130,7 +130,7 @@ export class CategorySelectionNewAd {
         let data = { categories: categories }
 
         this._allCategories.forEach(category => {
-            if (category.parentCategoryId === secondLevelCategoryId) {
+            if (category.ParentCategoryId === secondLevelCategoryId) {
                 categories.push(category);
             }//if
         });//forEach

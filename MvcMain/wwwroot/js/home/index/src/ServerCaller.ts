@@ -50,13 +50,13 @@ export class ServerCaller {
     private onSuccessGetItemsFromServer(msg:any,textStatus:string, jqXHR:JQueryXHR) {
         //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
         if (this._isServerCalled) {
-            if (msg.customDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
+            if (msg.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
                 this._isServerCalled = false;
                 this.notifyUserAjaxCallFinished();
-                if (msg.success == true) {
-                    this._start += parseInt(msg.customDictionary[this.NumberOfItemsKey]);
+                if (msg.Success == true) {
+                    this._start += parseInt(msg.CustomDictionary[this.NumberOfItemsKey]);
                     //TODO create AdvertisementCommon[] object from msg.responseData
-                    this._resultHandler.OnResultOk(msg.responseData);
+                    this._resultHandler.OnResultOk(msg.ResponseData);
                 } //if (msg.success == true)
                 else {
                     this._resultHandler.OnResultError(msg.Message + " , " + msg.ErrorCode);

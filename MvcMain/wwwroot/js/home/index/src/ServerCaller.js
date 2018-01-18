@@ -39,10 +39,10 @@ var ServerCaller = /** @class */ (function () {
     ServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
         //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
         if (this._isServerCalled) {
-            if (msg.customDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
+            if (msg.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
                 this._isServerCalled = false;
                 this.notifyUserAjaxCallFinished();
-                if (msg.success == true) {
+                if (msg.Success == true) {
                     this._start += parseInt(msg.customDictionary[this.NumberOfItemsKey]);
                     //TODO create AdvertisementCommon[] object from msg.responseData
                     this._resultHandler.OnResultOk(msg.responseData);

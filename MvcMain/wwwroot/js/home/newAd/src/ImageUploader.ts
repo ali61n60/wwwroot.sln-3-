@@ -55,12 +55,12 @@
     private onSuccessSendFileToServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
         $("#" + this.ImageUploadInputId).val("");
 
-        if (msg.success == true) {
-            this.updateSendingImageTemplate(msg.responseData);
+        if (msg.Success == true) {
+            this.updateSendingImageTemplate(msg.ResponseData);
         }
         else {
-            this.showMessageToUser(msg.messag + " ," + msg.errorCode);
-            this.uploadImageTimerExpire(parseInt(msg.responseData.requestIndex));
+            this.showMessageToUser(msg.Messag + " ," + msg.ErrorCode);
+            this.uploadImageTimerExpire(parseInt(msg.ResponseData.RequestIndex));
         }
     }
 
@@ -86,14 +86,14 @@
 
 
     private updateSendingImageTemplate(data: UploadedImage) {
-        if ($("#loadedImageView > #uploadingImage" + data.requestIndex).length === 0) {//removed by timer
-            this.addUploadingImageTemplate(parseInt(data.requestIndex));
+        if ($("#loadedImageView > #uploadingImage" + data.RequestIndex).length === 0) {//removed by timer
+            this.addUploadingImageTemplate(parseInt(data.RequestIndex));
             this.updateSendingImageTemplate(data);
         } else {
             //TODO cancel timer
-            $("#loadedImageView > #uploadingImage" + data.requestIndex + " >img")
-                .attr("src", "data:image/jpg;base64," + data.image).removeClass("gifImage");
-            $("#loadedImageView > #uploadingImage" + data.requestIndex).attr("id", data.imageFileName);
+            $("#loadedImageView > #uploadingImage" + data.RequestIndex + " >img")
+                .attr("src", "data:image/jpg;base64," + data.Image).removeClass("gifImage");
+            $("#loadedImageView > #uploadingImage" + data.RequestIndex).attr("id", data.ImageFileName);
         }
     }
 
@@ -116,14 +116,14 @@
 
 
     private onSuccessRemoveFileFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        if (msg.success == true) {
+        if (msg.Success == true) {
             this.showMessageToUser("done removing file from server");
-            let fileName: string = msg.responseData;
+            let fileName: string = msg.ResponseData;
             $(`[id="${fileName}"]`).remove();
 
 
         } else {
-            this.showMessageToUser(msg.message);
+            this.showMessageToUser(msg.Message);
         }
     }
 
@@ -137,7 +137,7 @@
 }
 
 class UploadedImage {
-    public image: string;
-    public imageFileName: string;
-    public requestIndex:string;
+    public Image: string;
+    public ImageFileName: string;
+    public RequestIndex:string;
 }

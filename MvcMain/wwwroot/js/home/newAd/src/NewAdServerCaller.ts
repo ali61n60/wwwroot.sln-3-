@@ -20,7 +20,7 @@ export class NewAdServerCaller {
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
         //TODO redirect user to a new page
-        if (msg.success == true) {
+        if (msg.Success == true) {
             document.location.replace("/NewAd/Confirm");
         }
     } 

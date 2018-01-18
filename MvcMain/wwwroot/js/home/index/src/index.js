@@ -84,17 +84,17 @@ var Index = /** @class */ (function () {
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
             var adImage = null;
-            if (advertisementCommons[i].advertisementImages[0] != null) {
-                adImage = "data:image/jpg;base64," + advertisementCommons[i].advertisementImages[0];
+            if (advertisementCommons[i].AdvertisementImages[0] != null) {
+                adImage = "data:image/jpg;base64," + advertisementCommons[i].AdvertisementImages[0];
             } //end if
             data = {
-                AdvertisementId: advertisementCommons[i].advertisementId,
-                AdvertisementCategoryId: advertisementCommons[i].advertisementCategoryId,
-                AdvertisementCategory: advertisementCommons[i].advertisementCategory,
+                AdvertisementId: advertisementCommons[i].AdvertisementId,
+                AdvertisementCategoryId: advertisementCommons[i].AdvertisementCategoryId,
+                AdvertisementCategory: advertisementCommons[i].AdvertisementCategory,
                 adImage: adImage,
-                adPrice: advertisementCommons[i].advertisementPrice,
-                AdvertisementTitle: advertisementCommons[i].advertisementTitle,
-                AdvertisementStatus: advertisementCommons[i].advertisementStatus
+                adPrice: advertisementCommons[i].AdvertisementPrice,
+                AdvertisementTitle: advertisementCommons[i].AdvertisementTitle,
+                AdvertisementStatus: advertisementCommons[i].AdvertisementStatus
                 //adDate: msg.ResponseData[i].AdTime
             }; //end data
             var html = Mustache.to_html(template, data);

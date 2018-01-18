@@ -127,17 +127,17 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
             var adImage = null;
-            if (advertisementCommons[i].advertisementImages[0] != null) {
-                adImage = "data:image/jpg;base64," + advertisementCommons[i].advertisementImages[0];
+            if (advertisementCommons[i].AdvertisementImages[0] != null) {
+                adImage = "data:image/jpg;base64," + advertisementCommons[i].AdvertisementImages[0];
             } //end if
             data = {
-                AdvertisementId: advertisementCommons[i].advertisementId,
-                AdvertisementCategoryId: advertisementCommons[i].advertisementCategoryId,
-                AdvertisementCategory: advertisementCommons[i].advertisementCategory,
+                AdvertisementId: advertisementCommons[i].AdvertisementId,
+                AdvertisementCategoryId: advertisementCommons[i].AdvertisementCategoryId,
+                AdvertisementCategory: advertisementCommons[i].AdvertisementCategory,
                 adImage: adImage,
-                adPrice: advertisementCommons[i].advertisementPrice, //todo check the price type
-                AdvertisementTitle: advertisementCommons[i].advertisementTitle,
-                AdvertisementStatus: advertisementCommons[i].advertisementStatus
+                adPrice: advertisementCommons[i].AdvertisementPrice, //todo check the price type
+                AdvertisementTitle: advertisementCommons[i].AdvertisementTitle,
+                AdvertisementStatus: advertisementCommons[i].AdvertisementStatus
                 //adDate: msg.ResponseData[i].AdTime
             } //end data
 
