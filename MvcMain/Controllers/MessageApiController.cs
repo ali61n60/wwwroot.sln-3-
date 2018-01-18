@@ -23,7 +23,7 @@ namespace MvcMain.Controllers
     {
         private AdDbContext _adDbContext;
         private UserManager<AppUser> _userManager;
-        private ILogger _logger;
+        private static ILogger _logger;
 
         public MessageApiController(AdDbContext adDbContext, UserManager<AppUser> userManager, ILogger logger)
         {
@@ -136,45 +136,60 @@ namespace MvcMain.Controllers
             throw new NotImplementedException();
         }
 
-        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
-        protected readonly int ExecutionLoopDelayMs = 0;
-        private Task TheNeverEndingTask;
-        public void SendEmailsFromDatabase()
+        private readonly static CancellationTokenSource _cts = new CancellationTokenSource();
+        protected readonly static int ExecutionLoopDelayMs = 0;
+        private static Task TheNeverEndingTask;
+        private static void SendEmailsFromDatabase()
         {
-            TheNeverEndingTask = new Task(async
-            () =>
+            try
             {
-                // Wait to see if we get cancelled...
-                while (!_cts.Token.WaitHandle.WaitOne(ExecutionLoopDelayMs))
-                {
-                    // Otherwise execute our code...
-                    await _logger.LogError("SendEmailsFromDatabase " + DateTime.Now);
-                    await Task.Delay(1000);
+                TheNeverEndingTask = new Task(async () =>
+                            {
+                                // Wait to see if we get cancelled...
+                                while (!_cts.Token.WaitHandle.WaitOne(ExecutionLoopDelayMs))
+                                {
+                                    // Otherwise execute our code...
+                                    if (_logger != null)
+                                        await _logger.LogError("SendEmailsFromDatabase " + DateTime.Now);
+                                    await Task.Delay(1000);
 
-                    //TODO get email from databse and send it 
-                    // set sent in the database for email
-                    //get next email and do it again
-                }
-                _cts.Token.ThrowIfCancellationRequested();
-            },
-            _cts.Token,
-            TaskCreationOptions.DenyChildAttach | TaskCreationOptions.LongRunning);
-            // Do not forget to observe faulted tasks - for NeverEndingTask faults are probably never desirable
-            TheNeverEndingTask.ContinueWith(x =>
+                                    //TODO get email from databse and send it 
+                                    // set sent in the database for email
+                                    //get next email and do it again
+                                }
+                                _cts.Token.ThrowIfCancellationRequested();
+                            },
+                            _cts.Token,
+                            TaskCreationOptions.DenyChildAttach | TaskCreationOptions.LongRunning);
+                // Do not forget to observe faulted tasks - for NeverEndingTask faults are probably never desirable
+                //TheNeverEndingTask.ContinueWith(x =>
+                //{
+                //    string kk = "";
+                //    // Log/Fire Events etc.
+                //}, TaskContinuationOptions.OnlyOnFaulted);
+
+                TheNeverEndingTask.Start();
+            }
+            catch (Exception ex)
             {
-                string kk = "";
-                // Log/Fire Events etc.
-            }, TaskContinuationOptions.OnlyOnFaulted);
 
-            TheNeverEndingTask.Start();
-
+            }
         }
 
-        public void StopSendEmailsFromDatabase()
+        public string StartSendEmailsFromDatabase()
+        {
+            SendEmailsFromDatabase();
+
+            return "Started";
+        }
+
+        public string StopSendEmailsFromDatabase()
         {
             // This code should be reentrant...
             _cts.Cancel();
             TheNeverEndingTask.Wait();
+
+            return "Stopped";
         }
 
         private ModelStd.SmsMessageSingle convertMessageToSmsMessage(SmsMessage smsMessage)

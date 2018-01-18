@@ -44,7 +44,7 @@ namespace MvcMain.Controllers
     //TODO 3- work on District,City,Province component
     //TODO 3- work on ad status enum 
     //TODO 3- study about rules to operate a web site and connect to bank  and register a company
-    //TODO 3- study Task and async
+    //TODO 2- study Task and async
     //TODO 3- improve database tables datatypse and 
     //TODO 3- use Decorator pattern to log
     //TODO 3- work on MarkAd , share ad
