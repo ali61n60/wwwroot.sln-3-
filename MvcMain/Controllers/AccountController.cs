@@ -16,13 +16,15 @@ namespace MvcMain.Controllers
         private UserManager<AppUser> _userManager;
         private SignInManager<AppUser> _signInManager;
         private MessageApiController _messageApiController;
-        
+        private IPasswordHasher<AppUser> _passwordHasher;
+
 
         public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr
-            ,MessageApiController messageApiController)
+            , IPasswordHasher<AppUser> passwordHasher, MessageApiController messageApiController)
         {
             _userManager = userMgr;
             _signInManager = signinMgr;
+            _passwordHasher = passwordHasher;
             _messageApiController = messageApiController;
         }
 
@@ -75,29 +77,44 @@ namespace MvcMain.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> PasswordForget(PasswordForgetModel detail, string returnUrl)
         {
-            //TODO change user password and then call MessageApi to add an email
-            //Email user password or do appropriate action
-            AppUser user=await _userManager.FindByEmailAsync(detail.Email);
+            //TODO Make your action as an API to be able to use that from android app
+            AppUser user =await _userManager.FindByEmailAsync(detail.Email);
             if (user == null)
             {
                 //tell user there is not such an email in our database
+                ViewData["Message"] = "ایمیل وارد شده در دیتابیس یافت نشد";
+                return View();
             }
+            string serverGeneratedNewPassword = "1234@Ali";
+            user.PasswordHash = _passwordHasher.HashPassword(user,serverGeneratedNewPassword);
+            IdentityResult changePassResult = await _userManager.UpdateAsync(user);
+            if (changePassResult.Succeeded)
+            {
+                EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
+                emailMessageSingle.EmailAddress = detail.Email;
+                string messageText = "<p>";
+                messageText+="رمز عبور شما عبارت زیر میباشد: ";
 
-            EmailMessageSingle emailMessageSingle=new EmailMessageSingle();
-            //emailMessage.EmailAddress = "Get it from user in database";
-            //emailMessage.
-            _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle);
-            //TODO Make your action as an API to be able to use that from android app
-            Email email=new Email();
-            //EmailMessage emailMessage=new EmailMessage()
-          //  {
-          //      Title = "فراموشی رمز عبور",
-           //     MessageDetail = "رمز عبور شما عبارت زیر میباشد: "
-          //  };
-           // emailMessage.MessageDetail += "\n\n\n\n";
-          //  emailMessage.MessageDetail += "hello";
-         //   email.SendEmail(detail.Email,emailMessage);
-            return RedirectToAction("Login",new { returnUrl =returnUrl?? "/" });
+                messageText += "</p?<br/><br/>";
+                messageText += serverGeneratedNewPassword;
+                emailMessageSingle.Subject =messageText;
+                emailMessageSingle.Title = "فراموشی رمز عبور";
+                emailMessageSingle.TextMessage = "";
+                await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,user.Id);
+                return RedirectToAction("Login", new { returnUrl = returnUrl ?? "/" });
+            }
+            else
+            {
+                string errorMessage = "";
+                foreach (IdentityError identityError in changePassResult.Errors)
+                {
+                    errorMessage+= identityError.Description+"  ";
+                }
+                ViewData["Message"] = errorMessage;
+                return View();
+            }
+         
+            
         }
 
         [AllowAnonymous]

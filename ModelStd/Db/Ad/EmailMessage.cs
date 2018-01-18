@@ -15,11 +15,6 @@ namespace ModelStd.Db.Ad
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int MessageId { get; set; }
 
-        [Column("emailAddress")]
-        [Required]
-        [MaxLength(300)]
-        public string EmailAddress { get; set; }
-
         [Column("subject")]
         [Required]
         [MaxLength(300)]

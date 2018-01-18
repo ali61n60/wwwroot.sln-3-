@@ -165,6 +165,7 @@ namespace MvcMain
             MyService.Inst = app.ApplicationServices;
             AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
                 _configuration).Wait();
+            MyService.Inst.GetService<MessageApiController>().SendEmailsFromDatabase();
 
         }
     }
