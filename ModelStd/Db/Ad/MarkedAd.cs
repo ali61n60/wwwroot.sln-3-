@@ -10,7 +10,7 @@ namespace ModelStd.Db.Ad
     [Table("MarkedA", Schema = "ad")]
     public class MarkedAd
     {
-        [Key]
+        
         [Column("adId")]
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]

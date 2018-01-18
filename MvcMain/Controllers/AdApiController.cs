@@ -25,16 +25,15 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
-
-    //TODO 1- work on view Ad Detail, use similar ads, mark ad, share ad, ...
+    //TODO 1- Create and Run SMS sending
+    //TODO 1- Create Verify Ad Controller and View For Admin
+    //TODO 1- work on view Ad Detail, use similar ads,...
     //TODO 1- add mangeMyAd page for users myAds, MarkedAds
     //TODO 1- work on users credits and money pay and ...
     //TODO 1- work on Edit AD by Ad owner
 
     //TODO 2- study MVC book
-    //TODO 2- Create Verify Ad Controller and View For Admin
     //TODO 2- Create LetMeKnow Controller and View for users to register their need
-    //TODO 2- Create and Run SMS sending
     //TODO 2- return a responseBase object in api calls that need autherized access but caller is not logged in
     //TODO 3- work on Ad Price
     //TODO 3- work on the max number of images per Ad. for example decide it based on user
@@ -43,9 +42,9 @@ namespace MvcMain.Controllers
     //TODO 3- work on ad status enum 
     //TODO 3- study about rules to operate a web site and connect to bank  and register a company
     //TODO 3- study Task and async
-    //TODO 3- correct WhatIsMyIpAddress method
     //TODO 3- improve database tables datatypse and 
     //TODO 3- use Decorator pattern to log
+    //TODO 3- work on MarkAd , share ad
 
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService

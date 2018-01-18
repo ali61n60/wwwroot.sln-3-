@@ -39,7 +39,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<Privilege> Privilege { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
-        public virtual DbSet<Sms> Sms { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
         public virtual DbSet<Temperature> Temperatures { get; set; }
         public virtual DbSet<MarkedAd> MarkedAds { get; set; }
 
@@ -248,32 +248,15 @@ namespace RepositoryStd.Context.AD
                      .HasConstraintName("FK_SimilarAds_Advertisements");
              });
 
-            modelBuilder.Entity<Sms>(entity =>
+            modelBuilder.Entity<Message>(entity =>
             {
                 entity.HasKey(e => e.MessageId)
-                    .HasName("PK_SMS");
+                    .HasName("PK_Message");
 
-                entity.ToTable("SMS", "ad");
-
-                entity.Property(e => e.MessageId)
-                    .HasColumnName("messageId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.Message)
-                    .IsRequired()
-                    .HasColumnName("message")
-                    .HasMaxLength(256);
-
-                entity.Property(e => e.MessageDate)
-                    .HasColumnName("messageDate")
-                    .HasColumnType("datetime");
-
-                entity.Property(e => e.PhoneNumber)
-                    .IsRequired()
-                    .HasColumnName("phoneNumber")
-                    .HasMaxLength(256);
-
-                entity.Property(e => e.Sent).HasColumnName("sent");
+                entity.HasOne(m => m.User)
+                    .WithMany()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasForeignKey(message => message.UserId);
             });
 
         }

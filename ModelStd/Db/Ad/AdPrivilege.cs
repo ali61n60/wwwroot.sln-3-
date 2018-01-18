@@ -8,7 +8,7 @@ namespace ModelStd.Db.Ad
     [Table("AdPrivilege",Schema = "ad")]
     public partial class AdPrivilege
     {
-        [Key]
+        
         [Column("adId")]
         public Guid AdId { get; set; }
 

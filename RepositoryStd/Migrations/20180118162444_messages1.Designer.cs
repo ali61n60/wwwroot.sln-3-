@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using RepositoryStd.Context.AD;
-using ModelStd.Db.Ad;
 
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180118162444_messages1")]
+    partial class messages1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("ad")
@@ -280,44 +280,6 @@ namespace RepositoryStd.Migrations
                     b.ToTable("MarkedA","ad");
                 });
 
-            modelBuilder.Entity("ModelStd.Db.Ad.Message", b =>
-                {
-                    b.Property<Guid>("MessageId")
-                        .HasColumnName("messageId");
-
-                    b.Property<int>("EmailOrSms")
-                        .HasColumnName("emailOrSms")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("MessageDate")
-                        .HasColumnName("messageDate")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("Priority")
-                        .HasColumnName("messagePriority")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Sent")
-                        .HasColumnName("sent");
-
-                    b.Property<string>("TextMessage")
-                        .IsRequired()
-                        .HasColumnName("textMessage")
-                        .HasMaxLength(1000);
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnName("userId")
-                        .HasMaxLength(450);
-
-                    b.HasKey("MessageId")
-                        .HasName("PK_Message");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Messages","ad");
-                });
-
             modelBuilder.Entity("ModelStd.Db.Ad.MobileBrands", b =>
                 {
                     b.Property<int>("BrandId")
@@ -402,6 +364,34 @@ namespace RepositoryStd.Migrations
                         .HasName("PK_SimilarAds");
 
                     b.ToTable("SimilarAds","ad");
+                });
+
+            modelBuilder.Entity("ModelStd.Db.Ad.Sms", b =>
+                {
+                    b.Property<Guid>("MessageId")
+                        .HasColumnName("messageId");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnName("message")
+                        .HasMaxLength(256);
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnName("messageDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnName("phoneNumber")
+                        .HasMaxLength(256);
+
+                    b.Property<bool>("Sent")
+                        .HasColumnName("sent");
+
+                    b.HasKey("MessageId")
+                        .HasName("PK_SMS");
+
+                    b.ToTable("Messages","ad");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.Temperature", b =>
@@ -631,14 +621,6 @@ namespace RepositoryStd.Migrations
                         .WithMany("MarkedAds")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_MarkedAds_AspNetUsers")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ModelStd.Db.Ad.Message", b =>
-                {
-                    b.HasOne("ModelStd.Db.Identity.AspNetUsers", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

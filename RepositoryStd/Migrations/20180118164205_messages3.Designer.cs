@@ -9,9 +9,10 @@ using ModelStd.Db.Ad;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180118164205_messages3")]
+    partial class messages3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("ad")
@@ -312,8 +313,6 @@ namespace RepositoryStd.Migrations
 
                     b.HasKey("MessageId")
                         .HasName("PK_Message");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Messages","ad");
                 });
@@ -631,14 +630,6 @@ namespace RepositoryStd.Migrations
                         .WithMany("MarkedAds")
                         .HasForeignKey("UserId")
                         .HasConstraintName("FK_MarkedAds_AspNetUsers")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("ModelStd.Db.Ad.Message", b =>
-                {
-                    b.HasOne("ModelStd.Db.Identity.AspNetUsers", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

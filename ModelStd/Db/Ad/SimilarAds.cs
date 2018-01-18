@@ -8,7 +8,7 @@ namespace ModelStd.Db.Ad
     [Table("SimilarAds",Schema = "ad")]
     public partial class SimilarAds
     {
-        [Key]
+        
         [Column("adId")]
         public Guid AdId { get; set; }
 
