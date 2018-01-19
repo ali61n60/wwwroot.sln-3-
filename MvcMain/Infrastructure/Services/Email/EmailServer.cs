@@ -1,17 +1,19 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
-using MailKit.Net.Smtp;
+using MailKit;
 using MimeKit;
+using MailKit.Net.Smtp;
 using ModelStd;
 using ModelStd.Services;
 
 namespace MvcMain.Infrastructure.Services.Email
 {
-    public class EmailYahoo:IEmail
+    public class EmailServer : IEmail
     {
         public async Task<ResponseBase> SendEmailAsync(EmailMessageSingle emailMessageSingle)
         {
-            string errorCode = "EmailYahoo/SendEmailAsync";
+            string errorCode = "EmailServer/SendEmailAsync";
             ResponseBase response = new ResponseBase();
             MimeMessage emailMessage = new MimeMessage();
             BodyBuilder bodyBuilder = new BodyBuilder();
@@ -23,20 +25,20 @@ namespace MvcMain.Infrastructure.Services.Email
                                    $"<br/>";
 
             emailMessage.Body = bodyBuilder.ToMessageBody();
-            emailMessage.From.Add(new MailboxAddress("Admin of whereismycar.ir", "ali62n62@yahoo.com"));
+            emailMessage.From.Add(new MailboxAddress("Admin of whereismycar.ir", "admin@whereismycar.ir"));
             emailMessage.To.Add(new MailboxAddress(emailMessageSingle.EmailAddress));
             emailMessage.Subject = emailMessageSingle.Subject;
             try
             {
                 using (var client = new SmtpClient())
                 {
-                    client.Connect("smtp.mail.yahoo.com", 465);
+                    client.Connect("mail.whereismycar.ir", 25);
                     // Note: since we don't have an OAuth2 token, disable
                     // the XOAUTH2 authentication mechanism.
                     client.AuthenticationMechanisms.Remove("XOAUTH2");
 
                     // Note: only needed if the SMTP server requires authentication
-                    client.Authenticate("ali62n62@yahoo.com", "a11980*");
+                    client.Authenticate("admin@whereismycar.ir", "119801");
 
                     await client.SendAsync(emailMessage);
                     client.Disconnect(true);

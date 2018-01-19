@@ -92,16 +92,17 @@ namespace MvcMain.Controllers
             {
                 EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
                 emailMessageSingle.EmailAddress = detail.Email;
-                string messageText = "<p>";
+                string messageText = $"<p dir=\"rtl\">";
                 messageText+="رمز عبور شما عبارت زیر میباشد: ";
 
-                messageText += "</p?<br/><br/>";
-                messageText += serverGeneratedNewPassword;
-                emailMessageSingle.Subject =messageText;
+                messageText += "</p><br/><br/>";
+                messageText += $"<span style=\"color:red\">{serverGeneratedNewPassword}</span>";
+                emailMessageSingle.Subject = "فراموشی رمز عبور";
                 emailMessageSingle.Title = "فراموشی رمز عبور";
-                emailMessageSingle.TextMessage = "";
+                emailMessageSingle.TextMessage = messageText;
                 await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,user.Id);
-                return RedirectToAction("Login", new { returnUrl = returnUrl ?? "/" });
+                ViewBag.returnUrl = returnUrl ?? "/";
+                return View("Login");
             }
             else
             {

@@ -92,9 +92,18 @@ namespace MvcMain
             services.AddTransient<MessageApiController>();
 
             services.AddSingleton<ILogger>(provider =>new Logger(_env.ContentRootPath + "/LogData/"));
-            services.AddSingleton<IEmail>(provider => new Email());
-            services.AddSingleton<IEmail>(provider => new EmailYahoo());
-
+            if (_configuration["Data:Email"] == "EmailServer")
+            {
+                services.AddSingleton<IEmail>(provider => new EmailServer());
+            }
+            else if (_configuration["Data:Email"] == "EmailYahoo")
+            {
+                services.AddSingleton<IEmail>(provider => new EmailYahoo());
+            }
+            else if(_configuration["Data:Email"] == "EmailGoogle")
+            {
+                services.AddSingleton<IEmail>(provider => new EmailGoogle());
+            }
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
                     options.Password.RequireUppercase = false;

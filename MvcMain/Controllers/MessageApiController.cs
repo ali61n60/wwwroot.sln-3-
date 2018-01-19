@@ -14,7 +14,6 @@ using ModelStd.Services;
 using MvcMain.Infrastructure.Services.Email;
 using MvcMain.Infrastructure.Services.Log;
 using RepositoryStd.Context.AD;
-using SmsMessage = ModelStd.Db.Ad.SmsMessage;
 
 namespace MvcMain.Controllers
 {
@@ -22,10 +21,10 @@ namespace MvcMain.Controllers
     [Authorize(Roles = "Admins")]
     public class MessageApiController : Controller
     {
-        private AdDbContext _adDbContext;
-        private UserManager<AppUser> _userManager;
-        private IEmail _email;
-        private ILogger _logger;
+        private readonly AdDbContext _adDbContext;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly IEmail _email;
+        private readonly ILogger _logger;
 
 
         public MessageApiController(AdDbContext adDbContext, UserManager<AppUser> userManager
@@ -55,7 +54,7 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public ResponseBase<List<ModelStd.SmsMessageSingle>> GetUnSentSmsMesseges()
+        public ResponseBase<List<SmsMessageSingle>> GetUnSentSmsMesseges()
         {
             string errorCode = "MessageApiController/GetUnSentSmsMesseges";
             ResponseBase<List<SmsMessageSingle>> response = new ResponseBase<List<SmsMessageSingle>>();
@@ -178,66 +177,77 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        private readonly static CancellationTokenSource _cts = new CancellationTokenSource();
-        protected readonly static int ExecutionLoopDelayMs = 0;
+        private static readonly CancellationTokenSource _cts = new CancellationTokenSource();
+        protected static readonly int ExecutionLoopDelayMs = 0;
         private static Task TheNeverEndingTask;
         private static void SendEmailsFromDatabase(MessageApiController messageApiController)
         {
+            string errorCode = "MessageApiController/SendEmailsFromDatabase";
             try
             {
+                //TODO refactor this
                 TheNeverEndingTask = new Task(async () =>
+                    {
+                        try
+                        {
+                            // Wait to see if we get cancelled...
+                            while (!_cts.Token.WaitHandle.WaitOne(ExecutionLoopDelayMs))
                             {
-                                // Wait to see if we get cancelled...
-                                while (!_cts.Token.WaitHandle.WaitOne(ExecutionLoopDelayMs))
+                                // Otherwise execute our code...
+                                ResponseBase<List<EmailMessageSingle>> response =
+                                    await messageApiController.GetUnSentEmailMesseges();
+                                if (response.Success)
                                 {
-                                    // Otherwise execute our code...
-                                    ResponseBase<List<EmailMessageSingle>> response =await messageApiController.GetUnSentEmailMesseges();
-                                    if (response.Success)
+                                    foreach (EmailMessageSingle emailMessageSingle in response.ResponseData)
                                     {
-                                        foreach (EmailMessageSingle emailMessageSingle in response.ResponseData)
+                                        ResponseBase responseBaseSendEmail =
+                                            await messageApiController._email.SendEmailAsync(emailMessageSingle);
+                                        if (responseBaseSendEmail.Success)
                                         {
-                                           ResponseBase responseBaseSendEmail= await messageApiController._email.SendEmailAsync(emailMessageSingle);
-                                            if (responseBaseSendEmail.Success)
-                                            {
-                                                ResponseBase responseBaseSetEmailStatus=await messageApiController.SetEmailMessageStatusAsSent(emailMessageSingle.MessageId);
-                                                if (!responseBaseSetEmailStatus.Success)
-                                                {
-                                                    await messageApiController._logger.LogError(
-                                                        "email is sent but its status in database fails to be set as sent " +
-                                                        responseBaseSetEmailStatus.Message + " " +
-                                                        responseBaseSetEmailStatus.ErrorCode);
-                                                    //TODO what todo when email is sent but its status in database fails to be set as sent
-                                                }
-                                            }
-                                            else
+                                            ResponseBase responseBaseSetEmailStatus =
+                                                await messageApiController.SetEmailMessageStatusAsSent(
+                                                    emailMessageSingle.MessageId);
+                                            if (!responseBaseSetEmailStatus.Success)
                                             {
                                                 await messageApiController._logger.LogError(
-                                                    "sening email fails " +
-                                                    responseBaseSendEmail.Message + " " +
-                                                    responseBaseSendEmail.ErrorCode);
-                                                //TODO what to do when sening email fails
+                                                    "email is sent but its status in database fails to be set as sent " +
+                                                    responseBaseSetEmailStatus.Message + " " +
+                                                    responseBaseSetEmailStatus.ErrorCode);
+                                                //TODO what todo when email is sent but its status in database fails to be set as sent
                                             }
                                         }
+                                        else
+                                        {
+                                            await messageApiController._logger.LogError(
+                                                "sening email fails " +
+                                                responseBaseSendEmail.Message + " " +
+                                                responseBaseSendEmail.ErrorCode);
+                                            //TODO what to do when sening email fails
+                                        }
                                     }
-                                    else
-                                    {
-                                        await messageApiController._logger.LogError(
-                                            "Getting unsent emails from database fails " +
-                                            response.Message + " " +
-                                            response.ErrorCode);
-                                        //TODO what to do Getting unsent emails from database fails
-                                    }
-
-
-                                    
-                                    await Task.Delay(1000);
-
-                                    //TODO get email from databse and send it 
-                                    // set sent in the database for email
-                                    //get next email and do it again
                                 }
-                                _cts.Token.ThrowIfCancellationRequested();
-                            },
+                                else
+                                {
+                                    await messageApiController._logger.LogError(
+                                        "Getting unsent emails from database fails " +
+                                        response.Message + " " +
+                                        response.ErrorCode);
+                                    //TODO what to do Getting unsent emails from database fails
+                                }
+                            }
+                            _cts.Token.ThrowIfCancellationRequested();
+                        }
+                        catch (OperationCanceledException opEx)
+                        {
+                            throw;
+                        }
+                        catch (Exception ex)
+                        {
+                            await messageApiController._logger.LogError(
+                                ex.Message + " ," + errorCode + " ,TheNeverEndingTask");
+                            SendEmailsFromDatabase(messageApiController); //recursive call
+                        }
+                    },
                             _cts.Token,
                             TaskCreationOptions.DenyChildAttach | TaskCreationOptions.LongRunning);
                 // Do not forget to observe faulted tasks - for NeverEndingTask faults are probably never desirable
@@ -251,7 +261,7 @@ namespace MvcMain.Controllers
             }
             catch (Exception ex)
             {
-
+                messageApiController._logger.LogError(ex.Message + " ," + errorCode);
             }
         }
 

@@ -1,19 +1,19 @@
 ﻿using System;
-using System.Net;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
-using MailKit;
-using MimeKit;
 using MailKit.Net.Smtp;
+using MimeKit;
 using ModelStd;
 using ModelStd.Services;
 
 namespace MvcMain.Infrastructure.Services.Email
 {
-    public class Email : IEmail
+    public class EmailGoogle:IEmail
     {
         public async Task<ResponseBase> SendEmailAsync(EmailMessageSingle emailMessageSingle)
         {
-            string errorCode = "Email/SendEmailAsync";
+            string errorCode = "EmailGoogle/SendEmailAsync";
             ResponseBase response = new ResponseBase();
             MimeMessage emailMessage = new MimeMessage();
             BodyBuilder bodyBuilder = new BodyBuilder();
@@ -25,23 +25,20 @@ namespace MvcMain.Infrastructure.Services.Email
                                    $"<br/>";
 
             emailMessage.Body = bodyBuilder.ToMessageBody();
-            emailMessage.From.Add(new MailboxAddress("Admin of whereismycar.ir", "admin@whereismycar.ir"));
+            emailMessage.From.Add(new MailboxAddress("Admin of whereismycar.ir", "alinejati1983@gmail.com"));
             emailMessage.To.Add(new MailboxAddress(emailMessageSingle.EmailAddress));
             emailMessage.Subject = emailMessageSingle.Subject;
             try
             {
                 using (var client = new SmtpClient())
                 {
-
-
-                    //mail.whereismycar.ir,25
-                    client.Connect("mail.whereismycar.ir", 25);
+                    client.Connect("smtp.gmail.com", 465);
                     // Note: since we don't have an OAuth2 token, disable
                     // the XOAUTH2 authentication mechanism.
-                    client.AuthenticationMechanisms.Remove("XOAUTH2");
+                     client.AuthenticationMechanisms.Remove("XOAUTH2");
 
                     // Note: only needed if the SMTP server requires authentication
-                    client.Authenticate("admin@whereismycar.ir", "119801");
+                    client.Authenticate("alinejati1983@gmail.com", "ali1362nejati");
 
                     await client.SendAsync(emailMessage);
                     client.Disconnect(true);
