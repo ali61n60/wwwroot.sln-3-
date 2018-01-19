@@ -4,7 +4,6 @@ using MimeKit;
 using MailKit.Net.Smtp;
 using ModelStd;
 using ModelStd.Services;
-using MvcMain.Models.Email;
 
 namespace MvcMain.Infrastructure
 {
@@ -31,6 +30,8 @@ namespace MvcMain.Infrastructure
             {
                 using (var client = new SmtpClient())
                 {
+                    client.LocalDomain = "www.whereismycar.ir";
+                    //mail.whereismycar.ir,25
                     client.Connect("mail.whereismycar.ir", 25);
                     // Note: since we don't have an OAuth2 token, disable
                     // the XOAUTH2 authentication mechanism.

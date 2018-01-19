@@ -5,6 +5,7 @@ using ModelStd.Db.Ad;
 
 namespace ModelStd.Db.Identity
 {
+    [Table("AspNetUsers",Schema = "identity")]
     public partial class AspNetUsers
     {
         public AspNetUsers()
