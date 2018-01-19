@@ -598,11 +598,6 @@
     <ProjectReference Include="..\RepositoryStd\RepositoryStd.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="ModelStd">
-      <HintPath>..\packages\ModelStd.1.0.18\lib\netstandard1.4\ModelStd.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\lodash\add.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\lodash\after.d.ts" />
