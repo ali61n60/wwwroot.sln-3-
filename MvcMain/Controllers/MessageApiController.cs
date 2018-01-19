@@ -11,7 +11,8 @@ using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.Services;
-using MvcMain.Infrastructure;
+using MvcMain.Infrastructure.Services.Email;
+using MvcMain.Infrastructure.Services.Log;
 using RepositoryStd.Context.AD;
 using SmsMessage = ModelStd.Db.Ad.SmsMessage;
 

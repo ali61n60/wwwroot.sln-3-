@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
 using ModelStd;
 using ModelStd.Services;
-using MvcMain.Models.Email;
 
-namespace MvcMain.Infrastructure  
+namespace MvcMain.Infrastructure.Services.Email
 {
    public interface IEmail
     {

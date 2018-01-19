@@ -16,8 +16,9 @@ using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using MvcMain.Controllers;
-using MvcMain.Infrastructure;
 using MvcMain.Infrastructure.Services;
+using MvcMain.Infrastructure.Services.Email;
+using MvcMain.Infrastructure.Services.Log;
 using Newtonsoft.Json;
 using RepositoryStd;
 using RepositoryStd.Context.AD;
@@ -26,7 +27,7 @@ using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 using RepositoryStd.Repository.Transportation;
 using RepositoryStd.TepmeratureRepository;
-
+using ILogger = MvcMain.Infrastructure.Services.Log.ILogger;
 
 
 namespace MvcMain
@@ -90,8 +91,9 @@ namespace MvcMain
             services.AddTransient<UserAdApiController>();
             services.AddTransient<MessageApiController>();
 
-            services.AddSingleton<Infrastructure.ILogger>(provider =>new Logger(_env.ContentRootPath + "/LogData/"));
+            services.AddSingleton<ILogger>(provider =>new Logger(_env.ContentRootPath + "/LogData/"));
             services.AddSingleton<IEmail>(provider => new Email());
+            services.AddSingleton<IEmail>(provider => new EmailYahoo());
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {

@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
+using MailKit;
 using MimeKit;
 using MailKit.Net.Smtp;
 using ModelStd;
 using ModelStd.Services;
 
-namespace MvcMain.Infrastructure
+namespace MvcMain.Infrastructure.Services.Email
 {
     public class Email : IEmail
     {
         public async Task<ResponseBase> SendEmailAsync(EmailMessageSingle emailMessageSingle)
         {
             string errorCode = "Email/SendEmailAsync";
-            ResponseBase response=new ResponseBase();
+            ResponseBase response = new ResponseBase();
             MimeMessage emailMessage = new MimeMessage();
             BodyBuilder bodyBuilder = new BodyBuilder();
 
@@ -30,7 +32,8 @@ namespace MvcMain.Infrastructure
             {
                 using (var client = new SmtpClient())
                 {
-                    client.LocalDomain = "www.whereismycar.ir";
+
+
                     //mail.whereismycar.ir,25
                     client.Connect("mail.whereismycar.ir", 25);
                     // Note: since we don't have an OAuth2 token, disable
@@ -47,7 +50,7 @@ namespace MvcMain.Infrastructure
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse(ex.Message,errorCode);
+                response.SetFailureResponse(ex.Message, errorCode);
             }
 
             return response;
