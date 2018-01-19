@@ -23,12 +23,16 @@ namespace MvcMain.Controllers
     {
         private AdDbContext _adDbContext;
         private UserManager<AppUser> _userManager;
-        private static ILogger _logger;
+        private IEmail _email;
+        private ILogger _logger;
 
-        public MessageApiController(AdDbContext adDbContext, UserManager<AppUser> userManager, ILogger logger)
+
+        public MessageApiController(AdDbContext adDbContext, UserManager<AppUser> userManager
+            , IEmail email, ILogger logger)
         {
             _adDbContext = adDbContext;
             _userManager = userManager;
+            _email = email;
             _logger = logger;
         }
 
@@ -64,7 +68,7 @@ namespace MvcMain.Controllers
                 response.ResponseData = new List<SmsMessageSingle>(smsMessages.Count);
                 foreach (SmsMessage message in smsMessages)
                 {
-                    response.ResponseData.Add(convertMessageToSmsMessage(message));
+                    response.ResponseData.Add(convertSmsMessageToSmsMessageSingle(message));
                 }
                 response.SetSuccessResponse();
             }
@@ -124,25 +128,59 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public ResponseBase<List<EmailMessageSingle>> GetUnSentEmailMesseges()
+        public async Task<ResponseBase<List<EmailMessageSingle>>> GetUnSentEmailMesseges()
         {
             string errorCode = "MessageApiController/GetUnSentEmailMesseges";
             ResponseBase<List<EmailMessageSingle>> response = new ResponseBase<List<EmailMessageSingle>>();
+            try
+            {
+                List<EmailMessage> unSentEmails = await _adDbContext.EmailMessages
+                    .Include(message => message.User)
+                    .Where(message => message.Sent == false)
+                    .OrderBy(message => message.Priority)
+                    .ThenBy(message => message.MessageDate).ToListAsync();
+                List<EmailMessageSingle> emailMessageSingles = new List<EmailMessageSingle>(unSentEmails.Count);
+                EmailMessageSingle tempEmailMessageSingle;
+                foreach (EmailMessage emailMessage in unSentEmails)
+                {
+                    tempEmailMessageSingle = convertEmailMessageToEmailMessageSingle(emailMessage);
+                    emailMessageSingles.Add(tempEmailMessageSingle);
+                }
+                response.ResponseData = emailMessageSingles;
+                response.SetSuccessResponse();
 
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message, errorCode);
+            }
 
             return response;
         }
 
-        public ResponseBase SetEmailMessageStatusAsSent(int messageId)
+        public async Task<ResponseBase> SetEmailMessageStatusAsSent(int messageId)
         {
             string errorCode = "MessageApiController/SetEmailMessageStatusAsSent";
-            throw new NotImplementedException();
+            ResponseBase response=new ResponseBase();
+            try
+            {
+                EmailMessage emailMessage=await _adDbContext.EmailMessages.FirstAsync(message => message.MessageId == messageId);
+                emailMessage.Sent = true;
+                await _adDbContext.SaveChangesAsync();
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message,errorCode);
+            }
+
+            return response;
         }
 
         private readonly static CancellationTokenSource _cts = new CancellationTokenSource();
         protected readonly static int ExecutionLoopDelayMs = 0;
         private static Task TheNeverEndingTask;
-        private static void SendEmailsFromDatabase()
+        private static void SendEmailsFromDatabase(MessageApiController messageApiController)
         {
             try
             {
@@ -152,9 +190,45 @@ namespace MvcMain.Controllers
                                 while (!_cts.Token.WaitHandle.WaitOne(ExecutionLoopDelayMs))
                                 {
                                     // Otherwise execute our code...
+                                    ResponseBase<List<EmailMessageSingle>> response =await messageApiController.GetUnSentEmailMesseges();
+                                    if (response.Success)
+                                    {
+                                        foreach (EmailMessageSingle emailMessageSingle in response.ResponseData)
+                                        {
+                                           ResponseBase responseBaseSendEmail= await messageApiController._email.SendEmailAsync(emailMessageSingle);
+                                            if (responseBaseSendEmail.Success)
+                                            {
+                                                ResponseBase responseBaseSetEmailStatus=await messageApiController.SetEmailMessageStatusAsSent(emailMessageSingle.MessageId);
+                                                if (!responseBaseSetEmailStatus.Success)
+                                                {
+                                                    await messageApiController._logger.LogError(
+                                                        "email is sent but its status in database fails to be set as sent " +
+                                                        responseBaseSetEmailStatus.Message + " " +
+                                                        responseBaseSetEmailStatus.ErrorCode);
+                                                    //TODO what todo when email is sent but its status in database fails to be set as sent
+                                                }
+                                            }
+                                            else
+                                            {
+                                                await messageApiController._logger.LogError(
+                                                    "sening email fails " +
+                                                    responseBaseSendEmail.Message + " " +
+                                                    responseBaseSendEmail.ErrorCode);
+                                                //TODO what to do when sening email fails
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        await messageApiController._logger.LogError(
+                                            "Getting unsent emails from database fails " +
+                                            response.Message + " " +
+                                            response.ErrorCode);
+                                        //TODO what to do Getting unsent emails from database fails
+                                    }
+
+
                                     
-                                    if (_logger != null)
-                                        await _logger.LogError("SendEmailsFromDatabase " + DateTime.Now);
                                     await Task.Delay(1000);
 
                                     //TODO get email from databse and send it 
@@ -182,7 +256,7 @@ namespace MvcMain.Controllers
 
         public string StartSendEmailsFromDatabase()
         {
-            SendEmailsFromDatabase();
+            SendEmailsFromDatabase(this);
 
             return "Started";
         }
@@ -196,14 +270,26 @@ namespace MvcMain.Controllers
             return "Stopped";
         }
 
-        private ModelStd.SmsMessageSingle convertMessageToSmsMessage(SmsMessage smsMessage)
+        private SmsMessageSingle convertSmsMessageToSmsMessageSingle(SmsMessage smsMessage)
         {
-            ModelStd.SmsMessageSingle tempSmsMessageSingle = new ModelStd.SmsMessageSingle();
+            SmsMessageSingle tempSmsMessageSingle = new SmsMessageSingle();
             tempSmsMessageSingle.PhoneNumber = smsMessage.User.PhoneNumber;
             tempSmsMessageSingle.TextMessage = smsMessage.TextMessage;
             tempSmsMessageSingle.MessageId = smsMessage.MessageId;
 
             return tempSmsMessageSingle;
+        }
+
+        private EmailMessageSingle convertEmailMessageToEmailMessageSingle(EmailMessage emailMessage)
+        {
+            EmailMessageSingle tempEmailMessageSingle = new EmailMessageSingle();
+            tempEmailMessageSingle.EmailAddress = emailMessage.User.Email;
+            tempEmailMessageSingle.Subject = emailMessage.Subject;
+            tempEmailMessageSingle.Title = emailMessage.TitleMessage;
+            tempEmailMessageSingle.TextMessage = emailMessage.TextMessage;
+            tempEmailMessageSingle.MessageId = emailMessage.MessageId;
+
+            return tempEmailMessageSingle;
         }
     }
 

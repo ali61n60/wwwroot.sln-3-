@@ -73,7 +73,7 @@ namespace MvcMain
             new AdvertisementTransportationRepository(_adDbContext, _appIdentityDbContext, MyService.Inst.GetService<ICommonRepository>()));
             addRepositoryContainer(services, _adDbContext, _appIdentityDbContext, _categoryRepository);
 
-            services.AddTransient<TemperatureRepository>(provider => new TemperatureRepository(_adDbContext));
+            services.AddTransient(provider => new TemperatureRepository(_adDbContext));
             services.AddTransient<ILocationRepository>(provider => new LocationRepository(_adDbContext));
             services.AddTransient<ITransportaionRepository>(provider => new TransportationRepository(_configuration["Data:ConnectionString"]));
 
@@ -83,14 +83,15 @@ namespace MvcMain
             services.AddTransient<CategoryApiController>();
             services.AddTransient<LocationApiController>();
 
-            services.AddTransient<AdDbContext>(provider => new AdDbContext(_configuration["Data:ConnectionString"]));
+            services.AddTransient(provider => new AdDbContext(_configuration["Data:ConnectionString"]));
 
-            services.AddTransient<AppIdentityDbContext>(provider => new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
+            services.AddTransient(provider => new AppIdentityDbContext(_configuration["Data:ConnectionString"]));
             services.AddTransient<AdApiController>();
             services.AddTransient<UserAdApiController>();
             services.AddTransient<MessageApiController>();
 
             services.AddSingleton<Infrastructure.ILogger>(provider =>new Logger(_env.ContentRootPath + "/LogData/"));
+            services.AddSingleton<IEmail>(provider => new Email());
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
                 {
