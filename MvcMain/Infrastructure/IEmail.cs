@@ -1,9 +1,11 @@
-﻿using MvcMain.Models.Email;
+﻿using System.Threading.Tasks;
+using ModelStd;
+using MvcMain.Models.Email;
 
 namespace MvcMain.Infrastructure  
 {
    public interface IEmail
     {
-        void SendEmail(string emailAddress, EmailMessage message);
+        Task SendEmail(EmailMessageSingle emailMessageSingle);
     }
 }

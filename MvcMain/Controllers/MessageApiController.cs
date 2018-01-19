@@ -127,7 +127,10 @@ namespace MvcMain.Controllers
         public ResponseBase<List<EmailMessageSingle>> GetUnSentEmailMesseges()
         {
             string errorCode = "MessageApiController/GetUnSentEmailMesseges";
-            throw new NotImplementedException();
+            ResponseBase<List<EmailMessageSingle>> response = new ResponseBase<List<EmailMessageSingle>>();
+
+
+            return response;
         }
 
         public ResponseBase SetEmailMessageStatusAsSent(int messageId)
@@ -149,6 +152,7 @@ namespace MvcMain.Controllers
                                 while (!_cts.Token.WaitHandle.WaitOne(ExecutionLoopDelayMs))
                                 {
                                     // Otherwise execute our code...
+                                    
                                     if (_logger != null)
                                         await _logger.LogError("SendEmailsFromDatabase " + DateTime.Now);
                                     await Task.Delay(1000);

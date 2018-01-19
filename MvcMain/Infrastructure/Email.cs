@@ -1,28 +1,28 @@
-﻿using MimeKit;
+﻿using System.Threading.Tasks;
+using MimeKit;
 using MailKit.Net.Smtp;
+using ModelStd;
 using MvcMain.Models.Email;
 
 namespace MvcMain.Infrastructure
 {
     public class Email : IEmail
     {
-       public void SendEmail(string emailAddress, EmailMessage message)
+        public async Task SendEmail(EmailMessageSingle emailMessageSingle)
         {
             MimeMessage emailMessage = new MimeMessage();
             BodyBuilder bodyBuilder = new BodyBuilder();
 
-            bodyBuilder.HtmlBody = $"<h1>{message.Title}</h1><br/>" +
+            bodyBuilder.HtmlBody = $"<h1>{emailMessageSingle.Title}</h1><br/>" +
                                    $"متن پیام" +
                                    $"<br/>" +
-                                   $"{message.MessageDetail}" +
-                                   $"<br/>" +
-                                   $"{message.Email}<br/>";
+                                   $"{emailMessageSingle.TextMessage}" +
+                                   $"<br/>";
 
             emailMessage.Body = bodyBuilder.ToMessageBody();
-
             emailMessage.From.Add(new MailboxAddress("Admin of whereismycar.ir", "admin@whereismycar.ir"));
-            emailMessage.To.Add(new MailboxAddress("", emailAddress));
-            emailMessage.Subject = message.Title;
+            emailMessage.To.Add(new MailboxAddress(emailMessageSingle.EmailAddress));
+            emailMessage.Subject = emailMessageSingle.Subject;
 
             using (var client = new SmtpClient())
             {
@@ -33,8 +33,8 @@ namespace MvcMain.Infrastructure
 
                 // Note: only needed if the SMTP server requires authentication
                 client.Authenticate("admin@whereismycar.ir", "119801");
-                
-                client.Send(emailMessage);
+
+                await client.SendAsync(emailMessage);
                 client.Disconnect(true);
             }
         }
