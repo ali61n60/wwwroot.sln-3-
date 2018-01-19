@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
@@ -24,7 +25,7 @@ namespace MvcMain.Controllers
         private readonly AdDbContext _adDbContext;
         private readonly UserManager<AppUser> _userManager;
         private readonly IEmail _email;
-        private readonly ILogger _logger;
+        private static  ILogger _logger;
 
 
         public MessageApiController(AdDbContext adDbContext, UserManager<AppUser> userManager
@@ -128,7 +129,7 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public async Task<ResponseBase<List<EmailMessageSingle>>> GetUnSentEmailMesseges()
+        public async Task<ResponseBase<List<EmailMessageSingle>>> GetUnSentEmailMesseges(int maxResponseCount)
         {
             string errorCode = "MessageApiController/GetUnSentEmailMesseges";
             ResponseBase<List<EmailMessageSingle>> response = new ResponseBase<List<EmailMessageSingle>>();
@@ -138,7 +139,7 @@ namespace MvcMain.Controllers
                     .Include(message => message.User)
                     .Where(message => message.Sent == false)
                     .OrderBy(message => message.Priority)
-                    .ThenBy(message => message.MessageDate).ToListAsync();
+                    .ThenBy(message => message.MessageDate).Take(maxResponseCount).ToListAsync();
                 List<EmailMessageSingle> emailMessageSingles = new List<EmailMessageSingle>(unSentEmails.Count);
                 EmailMessageSingle tempEmailMessageSingle;
                 foreach (EmailMessage emailMessage in unSentEmails)
@@ -177,17 +178,19 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        private static readonly CancellationTokenSource _cts = new CancellationTokenSource();
+        private static CancellationTokenSource _cts = new CancellationTokenSource();
         protected static readonly int ExecutionLoopDelayMs = 0;
         private static Task TheNeverEndingTask;
-        private static void SendEmailsFromDatabase(MessageApiController messageApiController)
+        private static void SendEmailsFromDatabase()
         {
             string errorCode = "MessageApiController/SendEmailsFromDatabase";
             try
             {
                 //TODO refactor this
-                TheNeverEndingTask = new Task(async () =>
+                TheNeverEndingTask = new Task(async ()=>
                     {
+                        MessageApiController messageApiControllerTask =
+                            MyService.Inst.GetService<MessageApiController>();
                         try
                         {
                             // Wait to see if we get cancelled...
@@ -195,21 +198,26 @@ namespace MvcMain.Controllers
                             {
                                 // Otherwise execute our code...
                                 ResponseBase<List<EmailMessageSingle>> response =
-                                    await messageApiController.GetUnSentEmailMesseges();
+                                    await messageApiControllerTask.GetUnSentEmailMesseges(10);
                                 if (response.Success)
                                 {
+                                    if (response.ResponseData.Count == 0)
+                                    {
+                                        await Task.Delay(100000); //No email in database wait 10 sec
+                                        continue;
+                                    }
                                     foreach (EmailMessageSingle emailMessageSingle in response.ResponseData)
                                     {
                                         ResponseBase responseBaseSendEmail =
-                                            await messageApiController._email.SendEmailAsync(emailMessageSingle);
+                                            await messageApiControllerTask._email.SendEmailAsync(emailMessageSingle);
                                         if (responseBaseSendEmail.Success)
                                         {
                                             ResponseBase responseBaseSetEmailStatus =
-                                                await messageApiController.SetEmailMessageStatusAsSent(
+                                                await messageApiControllerTask.SetEmailMessageStatusAsSent(
                                                     emailMessageSingle.MessageId);
                                             if (!responseBaseSetEmailStatus.Success)
                                             {
-                                                await messageApiController._logger.LogError(
+                                                await _logger.LogError(
                                                     "email is sent but its status in database fails to be set as sent " +
                                                     responseBaseSetEmailStatus.Message + " " +
                                                     responseBaseSetEmailStatus.ErrorCode);
@@ -218,7 +226,7 @@ namespace MvcMain.Controllers
                                         }
                                         else
                                         {
-                                            await messageApiController._logger.LogError(
+                                            await _logger.LogError(
                                                 "sening email fails " +
                                                 responseBaseSendEmail.Message + " " +
                                                 responseBaseSendEmail.ErrorCode);
@@ -228,24 +236,20 @@ namespace MvcMain.Controllers
                                 }
                                 else
                                 {
-                                    await messageApiController._logger.LogError(
+                                    await _logger.LogError(
                                         "Getting unsent emails from database fails " +
                                         response.Message + " " +
                                         response.ErrorCode);
                                     //TODO what to do Getting unsent emails from database fails
                                 }
                             }
-                            _cts.Token.ThrowIfCancellationRequested();
-                        }
-                        catch (OperationCanceledException opEx)
-                        {
-                            throw;
+                            //_cts.Token.ThrowIfCancellationRequested();
                         }
                         catch (Exception ex)
                         {
-                            await messageApiController._logger.LogError(
+                            await _logger.LogError(
                                 ex.Message + " ," + errorCode + " ,TheNeverEndingTask");
-                            SendEmailsFromDatabase(messageApiController); //recursive call
+                            SendEmailsFromDatabase(); //recursive call
                         }
                     },
                             _cts.Token,
@@ -256,27 +260,40 @@ namespace MvcMain.Controllers
                 //    string kk = "";
                 //    // Log/Fire Events etc.
                 //}, TaskContinuationOptions.OnlyOnFaulted);
-
+                
                 TheNeverEndingTask.Start();
             }
             catch (Exception ex)
             {
-                messageApiController._logger.LogError(ex.Message + " ," + errorCode);
+                _logger.LogError(ex.Message + " ," + errorCode);
             }
         }
 
+        private static bool NeverEndingTaskStarted = false;
         public string StartSendEmailsFromDatabase()
         {
-            SendEmailsFromDatabase(this);
-
-            return "Started";
+            if (!NeverEndingTaskStarted)
+            {
+                NeverEndingTaskStarted = true;
+                _cts=new CancellationTokenSource();
+                SendEmailsFromDatabase();
+                return "Started";
+            }
+            else
+            {
+                return "Already runing";
+            }
         }
 
-        public string StopSendEmailsFromDatabase()
+        public  string StopSendEmailsFromDatabase()
         {
             // This code should be reentrant...
-            _cts.Cancel();
-            TheNeverEndingTask.Wait();
+            if (NeverEndingTaskStarted)
+            {
+                NeverEndingTaskStarted = false;
+                _cts.Cancel();
+                TheNeverEndingTask.Wait();
+            }
 
             return "Stopped";
         }

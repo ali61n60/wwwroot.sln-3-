@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd;
+using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using MvcMain.Infrastructure;
 using MvcMain.Models;
@@ -100,8 +101,9 @@ namespace MvcMain.Controllers
                 emailMessageSingle.Subject = "فراموشی رمز عبور";
                 emailMessageSingle.Title = "فراموشی رمز عبور";
                 emailMessageSingle.TextMessage = messageText;
-                await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,user.Id);
+                await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,user.Id,MessagePriority.High);
                 ViewBag.returnUrl = returnUrl ?? "/";
+                ViewData["Message"] = "کاربر گرامی. رمز عبور جدیدی به ایمیل شما ارسال میشود. لطفا با رمز جدید وارد شده و به منظور افزایش امنیت در اولین فرصت رمز خود را تغییر دهید.";
                 return View("Login");
             }
             else

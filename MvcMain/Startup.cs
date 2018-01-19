@@ -178,7 +178,7 @@ namespace MvcMain
             AppIdentityDbContext.CreateAdminAccount(app.ApplicationServices,
                 _configuration).Wait();
             MyService.Inst.GetService<MessageApiController>().StartSendEmailsFromDatabase();
-
+            
         }
     }
 
