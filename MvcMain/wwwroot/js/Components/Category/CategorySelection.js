@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../Events/EventDispatcher");
-//TODO implement setCategoryId method which gets an integer an update view
 var CategorySelection = (function () {
     function CategorySelection(parentDivId, allCategories) {
+        this.SelectedCategoryChangedEvent = new EventDispatcher_1.EventDispatcher();
         this.CategoryIdKey = "CategoryId";
         this._firstLevelTemplate = "category1Template";
         this._firstLevelDiv = "category1";
@@ -15,10 +15,13 @@ var CategorySelection = (function () {
         this._thirdLevelDiv = "category3";
         this._thirdLevelSelect = "select3";
         this._rootCategoryId = 0;
-        this.SelectedCategoryChangedEvent = new EventDispatcher_1.EventDispatcher();
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
+    CategorySelection.prototype.SetSelectedCategoryId = function (selectedCategoryId) {
+        //TODO implement setCategoryId method which gets an integer an update view
+        alert(selectedCategoryId);
+    };
     CategorySelection.prototype.InsertCategoryIdInUserInputDictionary = function (userInput) {
         var categoryId = this.GetSelectedCategoryId();
         userInput.ParametersDictionary[this.CategoryIdKey] = categoryId; //100 for cars
@@ -32,13 +35,6 @@ var CategorySelection = (function () {
             return this._selectedCategoryIdLevelTwo;
         else
             return this._selectedCategoryIdLevelOne;
-    };
-    CategorySelection.prototype.SelectedCategoryHasChildren = function () {
-        var selectedCategoryId = this.GetSelectedCategoryId();
-        return this._allCategories.filter(function (category) { return category.ParentCategoryId === selectedCategoryId; }).length > 0;
-    };
-    CategorySelection.prototype.removeElement = function (id) {
-        $("#" + id).remove();
     };
     CategorySelection.prototype.CreateFirstLevel = function () {
         var _this = this;
@@ -65,7 +61,7 @@ var CategorySelection = (function () {
             _this.createSecondLevel(selectedId);
             var eventArg = new CategoryCahngedEventArg();
             eventArg.SelectedCategoryId = _this.GetSelectedCategoryId();
-            eventArg.SelectedCategoryHasChild = _this.SelectedCategoryHasChildren();
+            eventArg.SelectedCategoryHasChild = _this.selectedCategoryHasChildren();
             _this.SelectedCategoryChangedEvent.Dispatch(_this, eventArg);
         }); //change
     }; //CreateFirstLevel
@@ -94,7 +90,7 @@ var CategorySelection = (function () {
             _this.createThirdLevel(selectedId);
             var eventArg = new CategoryCahngedEventArg();
             eventArg.SelectedCategoryId = _this.GetSelectedCategoryId();
-            eventArg.SelectedCategoryHasChild = _this.SelectedCategoryHasChildren();
+            eventArg.SelectedCategoryHasChild = _this.selectedCategoryHasChildren();
             _this.SelectedCategoryChangedEvent.Dispatch(_this, eventArg);
         }); //change
     };
@@ -122,9 +118,16 @@ var CategorySelection = (function () {
             _this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
             var eventArg = new CategoryCahngedEventArg();
             eventArg.SelectedCategoryId = _this.GetSelectedCategoryId();
-            eventArg.SelectedCategoryHasChild = _this.SelectedCategoryHasChildren();
+            eventArg.SelectedCategoryHasChild = _this.selectedCategoryHasChildren();
             _this.SelectedCategoryChangedEvent.Dispatch(_this, eventArg);
         }); //change
+    };
+    CategorySelection.prototype.selectedCategoryHasChildren = function () {
+        var selectedCategoryId = this.GetSelectedCategoryId();
+        return this._allCategories.filter(function (category) { return category.ParentCategoryId === selectedCategoryId; }).length > 0;
+    };
+    CategorySelection.prototype.removeElement = function (id) {
+        $("#" + id).remove();
     };
     return CategorySelection;
 }());

@@ -60,8 +60,8 @@ var NewAd = (function () {
     };
     return NewAd;
 }());
-var allCategoriesDivId = "allCategoriesDiv";
-var allCategoriesInputId = "allCategoriesInput";
+var allCategoriesDivId = "categorySelector";
+var allCategoriesInputId = "allCategories";
 var categorySpecificPartialViewId = "CategorySpecificCriteria";
 $(document).ready(function () {
     var newAd = new NewAd(allCategoriesDivId, allCategoriesInputId, categorySpecificPartialViewId);

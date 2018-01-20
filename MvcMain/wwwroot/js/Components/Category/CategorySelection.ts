@@ -1,14 +1,13 @@
 ﻿import { EventDispatcher } from "../../Events/EventDispatcher";
 import { Category } from "../../Models/Category";
 import { UserInput } from "../../Helper/UserInput";
-//TODO implement setCategoryId method which gets an integer an update view
-export class CategorySelection {
-    private readonly CategoryIdKey = "CategoryId";
-    InsertCategoryIdInUserInputDictionary(userInput: UserInput) {
-        let categoryId = this.GetSelectedCategoryId();
-        userInput.ParametersDictionary[this.CategoryIdKey] = categoryId;//100 for cars
-    }
 
+export class CategorySelection {
+
+    public SelectedCategoryChangedEvent: EventDispatcher<CategorySelection, CategoryCahngedEventArg> = new EventDispatcher<CategorySelection, CategoryCahngedEventArg>();
+
+    private readonly CategoryIdKey = "CategoryId";
+   
     private _parentDivId: string;//div element that holds all CategorySelection elements
     private _allCategories: Category[];
 
@@ -29,13 +28,22 @@ export class CategorySelection {
     private _selectedCategoryIdLevelTwo: number;
     private _selectedCategoryIdLevelThree: number;
 
-    public SelectedCategoryChangedEvent: EventDispatcher<CategorySelection, CategoryCahngedEventArg> = new EventDispatcher<CategorySelection, CategoryCahngedEventArg>();
 
     constructor(parentDivId: string, allCategories: Category[]) {
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
 
+    public SetSelectedCategoryId(selectedCategoryId: number): void {
+        //TODO implement setCategoryId method which gets an integer an update view
+        alert(selectedCategoryId);
+    }
+
+    public InsertCategoryIdInUserInputDictionary(userInput: UserInput): void {
+        let categoryId = this.GetSelectedCategoryId();
+        userInput.ParametersDictionary[this.CategoryIdKey] = categoryId;//100 for cars
+    }
+    
     public GetSelectedCategoryId(): number {
         if (this._selectedCategoryIdLevelThree !== undefined &&
             this._selectedCategoryIdLevelThree !== this._rootCategoryId)
@@ -45,16 +53,6 @@ export class CategorySelection {
             return this._selectedCategoryIdLevelTwo;
         else
             return this._selectedCategoryIdLevelOne;
-    }
-
-    private  SelectedCategoryHasChildren(): boolean {
-        let selectedCategoryId = this.GetSelectedCategoryId();
-        return this._allCategories.filter
-            ((category) => { return category.ParentCategoryId === selectedCategoryId }).length > 0;
-    }
-
-    private removeElement(id: string): void {
-        $("#" + id).remove();
     }
 
     public CreateFirstLevel(): void {
@@ -84,7 +82,7 @@ export class CategorySelection {
             this.createSecondLevel(selectedId);
             let eventArg = new CategoryCahngedEventArg();
             eventArg.SelectedCategoryId = this.GetSelectedCategoryId();
-            eventArg.SelectedCategoryHasChild = this.SelectedCategoryHasChildren();
+            eventArg.SelectedCategoryHasChild = this.selectedCategoryHasChildren();
             this.SelectedCategoryChangedEvent.Dispatch(this, eventArg);
         });//change
     }//CreateFirstLevel
@@ -117,7 +115,7 @@ export class CategorySelection {
             this.createThirdLevel(selectedId);
             let eventArg = new CategoryCahngedEventArg();
             eventArg.SelectedCategoryId = this.GetSelectedCategoryId();
-            eventArg.SelectedCategoryHasChild = this.SelectedCategoryHasChildren();
+            eventArg.SelectedCategoryHasChild = this.selectedCategoryHasChildren();
             this.SelectedCategoryChangedEvent.Dispatch(this, eventArg);
         });//change
     }
@@ -149,9 +147,19 @@ export class CategorySelection {
             this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
             let eventArg = new CategoryCahngedEventArg();
             eventArg.SelectedCategoryId = this.GetSelectedCategoryId();
-            eventArg.SelectedCategoryHasChild = this.SelectedCategoryHasChildren();
+            eventArg.SelectedCategoryHasChild = this.selectedCategoryHasChildren();
             this.SelectedCategoryChangedEvent.Dispatch(this, eventArg);
         });//change
+    }
+
+    private selectedCategoryHasChildren(): boolean {
+        let selectedCategoryId = this.GetSelectedCategoryId();
+        return this._allCategories.filter
+            ((category) => { return category.ParentCategoryId === selectedCategoryId }).length > 0;
+    }
+
+    private removeElement(id: string): void {
+        $("#" + id).remove();
     }
 }
 
