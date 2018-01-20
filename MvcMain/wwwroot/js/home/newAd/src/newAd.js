@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CategorySelectionNewAd_1 = require("../../../Components/Category/NewAd/CategorySelectionNewAd");
+var CategorySelection_1 = require("../../../Components/Category/CategorySelection");
 var NewAdPartialViewLoader_1 = require("./NewAdPartialViewLoader");
 var NewAdCriteria_1 = require("./NewAdCriteria");
 var ImageUploader_1 = require("./ImageUploader");
@@ -33,14 +33,14 @@ var NewAd = (function () {
     NewAd.prototype.initNewAdCategory = function () {
         var allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();
         var allCategories = $.parseJSON(allCategoriesString);
-        this._categorySelectionNewAd = new CategorySelectionNewAd_1.CategorySelectionNewAd(this._allCategoriesDivId, allCategories);
-        this._categorySelectionNewAd.CreateFirstLevel();
+        this._categorySelection = new CategorySelection_1.CategorySelection(this._allCategoriesDivId, allCategories);
+        this._categorySelection.CreateFirstLevel();
     };
     NewAd.prototype.initEventHandlers = function () {
         var _this = this;
-        this._categorySelectionNewAd.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
-            if (!_this._categorySelectionNewAd.SelectedCategoryHasChildren()) {
-                _this._partialViewLoader.GetPartialViewFromServer(args);
+        this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
+            if (!args.SelectedCategoryHasChild) {
+                _this._partialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
             }
         });
         $("#" + this._submitAdInputId).on("click", function (event) {
@@ -52,10 +52,10 @@ var NewAd = (function () {
         //TODO disable submitAd Button until current submission is ok or errornous 
         var userInput = new UserInput_1.UserInput();
         userInput.ParametersDictionary["NewAdGuid"] = this._currentNewAdGuid;
-        this._categorySelectionNewAd.InsertCategoryIdInUserInputDictionary(userInput);
+        this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
         userInput.ParametersDictionary[this.AdTitleKey] = $("#" + this.AdTitleInputId).val();
         userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();
-        this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelectionNewAd.GetSelectedCategoryId(), userInput);
+        this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);
         this._newAdServerCaller.SaveAd(userInput);
     };
     return NewAd;

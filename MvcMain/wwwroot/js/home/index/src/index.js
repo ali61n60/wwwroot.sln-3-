@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CategorySelection_1 = require("../../../Components/Category/SearchAd/CategorySelection");
+var CategorySelection_1 = require("../../../Components/Category/CategorySelection");
 var ServerCaller_1 = require("./ServerCaller");
 var SearchCriteriaViewLoader_1 = require("./SearchCriteriaViewLoader");
 var SearchCriteria_1 = require("./SearchCriteria");
@@ -42,7 +42,7 @@ var Index = (function () {
         var _this = this;
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
             _this.searchCriteriaChanged();
-            _this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args);
+            _this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
         });
         $("#" + this._orderBySelectIdDiv).on("change", function (event) {
             _this.searchCriteriaChanged();

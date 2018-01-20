@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-//TODO merge this class with CategorySelectionNewAd Class
-var EventDispatcher_1 = require("../../../Events/EventDispatcher");
+var EventDispatcher_1 = require("../../Events/EventDispatcher");
+//TODO implement setCategoryId method which gets an integer an update view
 var CategorySelection = (function () {
     function CategorySelection(parentDivId, allCategories) {
         this.CategoryIdKey = "CategoryId";
@@ -32,7 +32,11 @@ var CategorySelection = (function () {
             return this._selectedCategoryIdLevelTwo;
         else
             return this._selectedCategoryIdLevelOne;
-    }; //GetSelectedCategoryId
+    };
+    CategorySelection.prototype.SelectedCategoryHasChildren = function () {
+        var selectedCategoryId = this.GetSelectedCategoryId();
+        return this._allCategories.filter(function (category) { return category.ParentCategoryId === selectedCategoryId; }).length > 0;
+    };
     CategorySelection.prototype.removeElement = function (id) {
         $("#" + id).remove();
     };
@@ -47,7 +51,7 @@ var CategorySelection = (function () {
         var template = $("#" + this._firstLevelTemplate).html();
         var categories = new Array();
         var data = { categories: categories };
-        this._selectedCategoryIdLevelOne = this._rootCategoryId;
+        this._selectedCategoryIdLevelOne = this._rootCategoryId; //
         this._allCategories.forEach(function (category) {
             if (category.ParentCategoryId === _this._rootCategoryId) {
                 categories.push(category);
@@ -59,7 +63,10 @@ var CategorySelection = (function () {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelOne = selectedId;
             _this.createSecondLevel(selectedId);
-            _this.SelectedCategoryChangedEvent.Dispatch(_this, _this.GetSelectedCategoryId());
+            var eventArg = new CategoryCahngedEventArg();
+            eventArg.SelectedCategoryId = _this.GetSelectedCategoryId();
+            eventArg.SelectedCategoryHasChild = _this.SelectedCategoryHasChildren();
+            _this.SelectedCategoryChangedEvent.Dispatch(_this, eventArg);
         }); //change
     }; //CreateFirstLevel
     CategorySelection.prototype.createSecondLevel = function (firstLevelCategoryId) {
@@ -85,7 +92,10 @@ var CategorySelection = (function () {
             var selectedId = parseInt($(event.currentTarget).val().toString());
             _this._selectedCategoryIdLevelTwo = selectedId;
             _this.createThirdLevel(selectedId);
-            _this.SelectedCategoryChangedEvent.Dispatch(_this, _this.GetSelectedCategoryId());
+            var eventArg = new CategoryCahngedEventArg();
+            eventArg.SelectedCategoryId = _this.GetSelectedCategoryId();
+            eventArg.SelectedCategoryHasChild = _this.SelectedCategoryHasChildren();
+            _this.SelectedCategoryChangedEvent.Dispatch(_this, eventArg);
         }); //change
     };
     CategorySelection.prototype.createThirdLevel = function (secondLevelCategoryId) {
@@ -110,10 +120,19 @@ var CategorySelection = (function () {
         $("#" + this._parentDivId).append(html);
         $("#" + this._thirdLevelSelect).change(function (event) {
             _this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
-            _this.SelectedCategoryChangedEvent.Dispatch(_this, _this.GetSelectedCategoryId());
+            var eventArg = new CategoryCahngedEventArg();
+            eventArg.SelectedCategoryId = _this.GetSelectedCategoryId();
+            eventArg.SelectedCategoryHasChild = _this.SelectedCategoryHasChildren();
+            _this.SelectedCategoryChangedEvent.Dispatch(_this, eventArg);
         }); //change
     };
     return CategorySelection;
 }());
 exports.CategorySelection = CategorySelection;
+var CategoryCahngedEventArg = (function () {
+    function CategoryCahngedEventArg() {
+    }
+    return CategoryCahngedEventArg;
+}());
+exports.CategoryCahngedEventArg = CategoryCahngedEventArg;
 //# sourceMappingURL=CategorySelection.js.map

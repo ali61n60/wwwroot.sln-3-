@@ -174,7 +174,6 @@
   <ItemGroup>
     <Folder Include="Connected Services\" />
     <Folder Include="Documents\" />
-    <Folder Include="Views\Shared\Components\CategorySelection\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
   </ItemGroup>
 
