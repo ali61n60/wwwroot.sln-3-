@@ -18,9 +18,47 @@ var CategorySelection = /** @class */ (function () {
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
-    CategorySelection.prototype.SetSelectedCategoryId = function (selectedCategoryId) {
+    CategorySelection.prototype.SetCategoryId = function (selectedCategoryId) {
         //TODO implement setCategoryId method which gets an integer an update view
-        alert(selectedCategoryId);
+        //based on sci calculate its level
+        //create level and its lowers
+        //set _selectedCategoryIdIevel(i) parameters
+        var categoryLevel = this.getCategoryLevel(selectedCategoryId);
+        switch (categoryLevel) {
+            case CategoryLevel.Unkown:
+                this.CreateFirstLevel();
+                break;
+            case CategoryLevel.Level1:
+                this.CreateFirstLevel();
+                this.setFirstLevelToSpecificId(selectedCategoryId);
+                break;
+            case CategoryLevel.Level2:
+                //
+                break;
+            case CategoryLevel.Level3:
+                //
+                break;
+        }
+        alert("categoryLevel=" + categoryLevel);
+    };
+    CategorySelection.prototype.setFirstLevelToSpecificId = function (categoryId) {
+        $("#" + this._firstLevelSelect).val(categoryId);
+    };
+    CategorySelection.prototype.getCategoryLevel = function (categoryId) {
+        var tempCategoryArray = this._allCategories.filter(function (category) { return category.CategoryId === categoryId; });
+        var tempCategory;
+        if (tempCategoryArray.length === 0) {
+            return CategoryLevel.Unkown;
+        }
+        tempCategory = tempCategoryArray[0];
+        if (tempCategory.ParentCategoryId === this._rootCategoryId) {
+            return CategoryLevel.Level1;
+        }
+        tempCategory = this._allCategories.filter(function (category) { return category.CategoryId === tempCategory.ParentCategoryId; })[0];
+        if (tempCategory.ParentCategoryId === this._rootCategoryId) {
+            return CategoryLevel.Level2;
+        }
+        return CategoryLevel.Level3;
     };
     CategorySelection.prototype.InsertCategoryIdInUserInputDictionary = function (userInput) {
         var categoryId = this.GetSelectedCategoryId();
@@ -138,4 +176,11 @@ var CategoryCahngedEventArg = /** @class */ (function () {
     return CategoryCahngedEventArg;
 }());
 exports.CategoryCahngedEventArg = CategoryCahngedEventArg;
+var CategoryLevel;
+(function (CategoryLevel) {
+    CategoryLevel[CategoryLevel["Level1"] = 1] = "Level1";
+    CategoryLevel[CategoryLevel["Level2"] = 2] = "Level2";
+    CategoryLevel[CategoryLevel["Level3"] = 3] = "Level3";
+    CategoryLevel[CategoryLevel["Unkown"] = 4] = "Unkown";
+})(CategoryLevel || (CategoryLevel = {}));
 //# sourceMappingURL=CategorySelection.js.map

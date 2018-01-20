@@ -7,7 +7,7 @@ export class CategorySelection {
     public SelectedCategoryChangedEvent: EventDispatcher<CategorySelection, CategoryCahngedEventArg> = new EventDispatcher<CategorySelection, CategoryCahngedEventArg>();
 
     private readonly CategoryIdKey = "CategoryId";
-   
+
     private _parentDivId: string;//div element that holds all CategorySelection elements
     private _allCategories: Category[];
 
@@ -34,16 +34,78 @@ export class CategorySelection {
         this._allCategories = allCategories;
     }
 
-    public SetSelectedCategoryId(selectedCategoryId: number): void {
-        //TODO implement setCategoryId method which gets an integer an update view
-        alert(selectedCategoryId);
+    public SetCategoryId(selectedCategoryId: number): void {
+        let firstLevelId: number;
+        let secondLevelId: number;
+        let categoryLevel = this.getCategoryLevel(selectedCategoryId);
+        switch (categoryLevel) {
+        case CategoryLevel.Unkown:
+            this.CreateFirstLevel();
+                break;
+            case CategoryLevel.Level1:
+                this.CreateFirstLevel();
+                this.setFirstLevelToSpecificId(selectedCategoryId);
+                this.createSecondLevel(selectedCategoryId);
+                $("#" + this._firstLevelSelect).trigger("change");
+                break;
+            case CategoryLevel.Level2:
+                this.CreateFirstLevel();
+                firstLevelId = this._allCategories.filter(category => category.CategoryId === selectedCategoryId)[0]
+                    .ParentCategoryId;
+                this.setFirstLevelToSpecificId(firstLevelId);
+                this.createSecondLevel(firstLevelId);
+                this.setSecondLevelToSpecificId(selectedCategoryId);
+                this.createThirdLevel(selectedCategoryId);
+                $("#" + this._secondLevelSelect).trigger("change");
+                break;
+        case CategoryLevel.Level3:
+            this.CreateFirstLevel();
+            secondLevelId = this._allCategories.filter(category => category.CategoryId === selectedCategoryId)[0]
+                    .ParentCategoryId;
+            firstLevelId = this._allCategories.filter(category => category.CategoryId === secondLevelId)[0]
+                .ParentCategoryId;
+            this.setFirstLevelToSpecificId(firstLevelId);
+            this.createSecondLevel(firstLevelId);
+            this.setSecondLevelToSpecificId(secondLevelId);
+                this.createThirdLevel(secondLevelId);
+                this.setThirdLevelToSpecificId(selectedCategoryId);
+            $("#" + this._thirdLevelSelect).trigger("change");
+            break;
+        }
+    }
+
+    private setFirstLevelToSpecificId(categoryId: number) {
+        $("#" + this._firstLevelSelect).val(categoryId);
+    }
+    private setSecondLevelToSpecificId(categoryId: number) {
+        $("#" + this._secondLevelSelect).val(categoryId);
+    }
+    private setThirdLevelToSpecificId(categoryId: number) {
+        $("#" + this._thirdLevelSelect).val(categoryId);
+    }
+    private getCategoryLevel(categoryId: number): CategoryLevel {
+
+        let tempCategoryArray = this._allCategories.filter(category => category.CategoryId === categoryId);
+        let tempCategory;
+        if (tempCategoryArray.length === 0) {
+            return CategoryLevel.Unkown;
+        }
+        tempCategory = tempCategoryArray[0];
+        if (tempCategory.ParentCategoryId === this._rootCategoryId) {
+            return CategoryLevel.Level1;
+        }
+        tempCategory = this._allCategories.filter(category => category.CategoryId === tempCategory.ParentCategoryId)[0];
+        if (tempCategory.ParentCategoryId === this._rootCategoryId) {
+            return CategoryLevel.Level2;
+        }
+        return CategoryLevel.Level3;
     }
 
     public InsertCategoryIdInUserInputDictionary(userInput: UserInput): void {
         let categoryId = this.GetSelectedCategoryId();
         userInput.ParametersDictionary[this.CategoryIdKey] = categoryId;//100 for cars
     }
-    
+
     public GetSelectedCategoryId(): number {
         if (this._selectedCategoryIdLevelThree !== undefined &&
             this._selectedCategoryIdLevelThree !== this._rootCategoryId)
@@ -137,7 +199,7 @@ export class CategorySelection {
                 categories.push(category);
             }//if
         });//forEach
-        if (categories.length === 0) {//No Itme in third level category
+        if (categories.length === 0) {//No Item in third level category
             return;
         }
         let html = Mustache.to_html(template, data);
@@ -166,5 +228,12 @@ export class CategorySelection {
 export class CategoryCahngedEventArg {
     public SelectedCategoryId: number;
     public SelectedCategoryHasChild: boolean;
+}
+
+enum CategoryLevel {
+    Level1 = 1,
+    Level2 = 2,
+    Level3 = 3,
+    Unkown=4
 }
 
