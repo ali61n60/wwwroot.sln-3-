@@ -1,16 +1,14 @@
-﻿//TODO merge this class with CategorySelection Class
-import { EventDispatcher } from "../../../Events/EventDispatcher";
-import { Category } from "../../../Models/Category";
-import {UserInput} from "../../../Helper/UserInput";
-
-
-export class CategorySelectionNewAd {
-    
+﻿import { EventDispatcher } from "../../Events/EventDispatcher";
+import { Category } from "../../Models/Category";
+import { UserInput } from "../../Helper/UserInput";
+//TODO implement setCategoryId method which gets an integer an update view
+export class CategorySelection {
     private readonly CategoryIdKey = "CategoryId";
     InsertCategoryIdInUserInputDictionary(userInput: UserInput) {
         let categoryId = this.GetSelectedCategoryId();
         userInput.ParametersDictionary[this.CategoryIdKey] = categoryId;//100 for cars
     }
+
     private _parentDivId: string;//div element that holds all CategorySelection elements
     private _allCategories: Category[];
 
@@ -31,14 +29,13 @@ export class CategorySelectionNewAd {
     private _selectedCategoryIdLevelTwo: number;
     private _selectedCategoryIdLevelThree: number;
 
-    public SelectedCategoryChangedEvent: EventDispatcher<CategorySelectionNewAd, number> =
-        new EventDispatcher<CategorySelectionNewAd, number>();
+    public SelectedCategoryChangedEvent: EventDispatcher<CategorySelection, CategoryCahngedEventArg> = new EventDispatcher<CategorySelection, CategoryCahngedEventArg>();
 
-    
     constructor(parentDivId: string, allCategories: Category[]) {
         this._parentDivId = parentDivId;
         this._allCategories = allCategories;
     }
+
     public GetSelectedCategoryId(): number {
         if (this._selectedCategoryIdLevelThree !== undefined &&
             this._selectedCategoryIdLevelThree !== this._rootCategoryId)
@@ -48,14 +45,18 @@ export class CategorySelectionNewAd {
             return this._selectedCategoryIdLevelTwo;
         else
             return this._selectedCategoryIdLevelOne;
-    }//GetSelectedCategoryId
+    }
 
-    public SelectedCategoryHasChildren(): boolean {
+    private  SelectedCategoryHasChildren(): boolean {
         let selectedCategoryId = this.GetSelectedCategoryId();
         return this._allCategories.filter
             ((category) => { return category.ParentCategoryId === selectedCategoryId }).length > 0;
     }
-    
+
+    private removeElement(id: string): void {
+        $("#" + id).remove();
+    }
+
     public CreateFirstLevel(): void {
         this.removeElement(this._firstLevelDiv);
         this._selectedCategoryIdLevelOne = this._rootCategoryId;
@@ -67,7 +68,7 @@ export class CategorySelectionNewAd {
         let template = $("#" + this._firstLevelTemplate).html();
         let categories: Category[] = new Array<Category>();
         let data = { categories: categories }
-        this._selectedCategoryIdLevelOne = this._rootCategoryId;
+        this._selectedCategoryIdLevelOne = this._rootCategoryId;//
         this._allCategories.forEach(category => {
             if (category.ParentCategoryId === this._rootCategoryId) {
                 categories.push(category);
@@ -81,9 +82,11 @@ export class CategorySelectionNewAd {
             let selectedId = parseInt($(event.currentTarget).val().toString());
             this._selectedCategoryIdLevelOne = selectedId;
             this.createSecondLevel(selectedId);
-            this.SelectedCategoryChangedEvent.Dispatch(this, this.GetSelectedCategoryId());
+            let eventArg = new CategoryCahngedEventArg();
+            eventArg.SelectedCategoryId = this.GetSelectedCategoryId();
+            eventArg.SelectedCategoryHasChild = this.SelectedCategoryHasChildren();
+            this.SelectedCategoryChangedEvent.Dispatch(this, eventArg);
         });//change
-
     }//CreateFirstLevel
 
     private createSecondLevel(firstLevelCategoryId: number): void {
@@ -91,7 +94,6 @@ export class CategorySelectionNewAd {
         this._selectedCategoryIdLevelTwo = this._rootCategoryId;
         this.removeElement(this._thirdLevelDiv);
         this._selectedCategoryIdLevelThree = this._rootCategoryId;
-        
         if (firstLevelCategoryId === this._rootCategoryId) {
             return;
         }
@@ -113,7 +115,10 @@ export class CategorySelectionNewAd {
             let selectedId = parseInt($(event.currentTarget).val().toString());
             this._selectedCategoryIdLevelTwo = selectedId;
             this.createThirdLevel(selectedId);
-            this.SelectedCategoryChangedEvent.Dispatch(this, this.GetSelectedCategoryId());
+            let eventArg = new CategoryCahngedEventArg();
+            eventArg.SelectedCategoryId = this.GetSelectedCategoryId();
+            eventArg.SelectedCategoryHasChild = this.SelectedCategoryHasChildren();
+            this.SelectedCategoryChangedEvent.Dispatch(this, eventArg);
         });//change
     }
 
@@ -142,11 +147,16 @@ export class CategorySelectionNewAd {
 
         $("#" + this._thirdLevelSelect).change((event) => {
             this._selectedCategoryIdLevelThree = parseInt($(event.currentTarget).val().toString());
-            this.SelectedCategoryChangedEvent.Dispatch(this, this.GetSelectedCategoryId());
+            let eventArg = new CategoryCahngedEventArg();
+            eventArg.SelectedCategoryId = this.GetSelectedCategoryId();
+            eventArg.SelectedCategoryHasChild = this.SelectedCategoryHasChildren();
+            this.SelectedCategoryChangedEvent.Dispatch(this, eventArg);
         });//change
     }
-
-    private removeElement(id: string): void {
-        $("#" + id).remove();
-    }
 }
+
+export class CategoryCahngedEventArg {
+    public SelectedCategoryId: number;
+    public SelectedCategoryHasChild: boolean;
+}
+

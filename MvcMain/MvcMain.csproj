@@ -263,8 +263,8 @@
     <None Include="wwwroot\css\site.css.map" />
     <None Include="wwwroot\js\CanvasJs\canvasjs.min.js" />
     <None Include="wwwroot\js\CanvasJs\jquery.canvasjs.min.js" />
-    <None Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.js" />
-    <None Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.js.map" />
+    <None Include="wwwroot\js\Components\Category\CategorySelection.js" />
+    <None Include="wwwroot\js\Components\Category\CategorySelection.js.map" />
     <None Include="wwwroot\js\Events\Examples\dist\bundle.js" />
     <None Include="wwwroot\js\home\adDetail\dist\bundle.js" />
     <None Include="wwwroot\js\home\index\dist\bundle.js" />
@@ -900,8 +900,7 @@
     <TypeScriptCompile Include="node_modules\%40types\lodash\zipWith.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\mustache\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\canvasJS\index.d.ts" />
-    <TypeScriptCompile Include="wwwroot\js\Components\Category\NewAd\CategorySelectionNewAd.ts" />
-    <TypeScriptCompile Include="wwwroot\js\Components\Category\SearchAd\CategorySelection.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Components\Category\CategorySelection.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\Transformation\CarModelBrandController.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\EventDispatcher.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />

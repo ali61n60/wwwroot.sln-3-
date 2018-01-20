@@ -1,5 +1,5 @@
 ﻿import { Category } from "../../../Models/Category";
-import { CategorySelectionNewAd } from "../../../Components/Category/NewAd/CategorySelectionNewAd";
+import { CategorySelection } from "../../../Components/Category/CategorySelection";
 import { NewAdPartialViewLoader} from "./NewAdPartialViewLoader";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {NewAdCriteria} from "./NewAdCriteria";
@@ -24,7 +24,7 @@ class NewAd implements ICriteriaChange {
     private _currentNewAdGuid:string;
     private readonly CurrentNewAdGuidInputId: string ="currentNewAdGuid";
 
-    private _categorySelectionNewAd: CategorySelectionNewAd;
+    private _categorySelection: CategorySelection;
     private _partialViewLoader: NewAdPartialViewLoader;
     private _newAdCriteria: NewAdCriteria;
     private _imageUploader: ImageUploader;
@@ -58,14 +58,14 @@ class NewAd implements ICriteriaChange {
     private initNewAdCategory():void {
         let allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();
         let allCategories = $.parseJSON(allCategoriesString) as Category[];
-        this._categorySelectionNewAd = new CategorySelectionNewAd(this._allCategoriesDivId, allCategories);
-        this._categorySelectionNewAd.CreateFirstLevel();
+        this._categorySelection = new CategorySelection(this._allCategoriesDivId, allCategories);
+        this._categorySelection.CreateFirstLevel();
     }
 
     private initEventHandlers(): void {
-        this._categorySelectionNewAd.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
-            if (!this._categorySelectionNewAd.SelectedCategoryHasChildren()) {
-                this._partialViewLoader.GetPartialViewFromServer(args);
+        this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
+            if (!args.SelectedCategoryHasChild) {
+                this._partialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
             }
         });
         $("#"+this._submitAdInputId).on("click", (event)=> {
@@ -79,10 +79,10 @@ class NewAd implements ICriteriaChange {
         
         let userInput = new UserInput();
         userInput.ParametersDictionary["NewAdGuid"] = this._currentNewAdGuid;
-        this._categorySelectionNewAd.InsertCategoryIdInUserInputDictionary(userInput);
+        this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
         userInput.ParametersDictionary[this.AdTitleKey] = $("#" + this.AdTitleInputId).val();
         userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();
-        this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelectionNewAd.GetSelectedCategoryId(), userInput);
+        this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);
         this._newAdServerCaller.SaveAd(userInput);
     }
 }

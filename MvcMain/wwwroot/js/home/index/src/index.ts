@@ -1,5 +1,5 @@
 ﻿import { Category } from "../../../Models/Category";
-import { CategorySelection } from "../../../Components/Category/SearchAd/CategorySelection";
+import { CategorySelection } from "../../../Components/Category/CategorySelection";
 import { ServerCaller } from "./ServerCaller";
 import { SearchCriteriaViewLoader} from "./SearchCriteriaViewLoader";
 import {SearchCriteria} from "./SearchCriteria";
@@ -71,7 +71,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
     private initEventHandlers(): void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             this.searchCriteriaChanged();
-            this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args);
+            this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
         });
 
         $("#" + this._orderBySelectIdDiv).on("change",
