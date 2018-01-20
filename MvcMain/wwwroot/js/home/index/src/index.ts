@@ -27,7 +27,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
     private readonly _adPlaceHolderDivId: string = "adPlaceHolder";
 
     private _serverCaller:ServerCaller;
-    public _categorySelection: CategorySelection;//TODO public for test. Make it private
+    private _categorySelection: CategorySelection;
     private _searchCriteria:SearchCriteria;
     private _searchCriteriaViewLoader:SearchCriteriaViewLoader;
 
@@ -162,11 +162,14 @@ let categorySelectorParentDivId: string = "categorySelector";
 let getAdFromServerId = "getAdFromServer";
 let allCategoriesId = "allCategories";
 
-var index: Index;
+declare let window: any;
+var index:Index;
+
 
 $(document).ready(() => {
     index= new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
     index.CustomCriteriaChanged();//to initiate a server call on page load for first time
+    window.AliIndex = index;
 });//ready
 
 

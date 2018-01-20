@@ -117,7 +117,6 @@ exports.Index = Index;
 var categorySelectorParentDivId = "categorySelector";
 var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";
-var index;
 $(document).ready(function () {
     index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
     index.CustomCriteriaChanged(); //to initiate a server call on page load for first time
