@@ -1,19 +1,19 @@
 ﻿import { Category } from "../../../Models/Category";
 import { CategorySelection } from "../../../Components/Category/CategorySelection";
-import { NewAdPartialViewLoader} from "./NewAdPartialViewLoader";
-import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
-import {NewAdCriteria} from "./NewAdCriteria";
-import {ImageUploader} from "./ImageUploader";
-import {UserInput} from "../../../Helper/UserInput";
-import {NewAdServerCaller} from "./NewAdServerCaller";
+import { NewAdPartialViewLoader } from "./NewAdPartialViewLoader";
+import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
+import { NewAdCriteria } from "./NewAdCriteria";
+import { ImageUploader } from "./ImageUploader";
+import { UserInput } from "../../../Helper/UserInput";
+import { NewAdServerCaller } from "./NewAdServerCaller";
 
 
 class NewAd implements ICriteriaChange {
     private readonly AdTitleKey = "AdTitle";
     private readonly AdTitleInputId: string = "adTitle";
 
-    private readonly AdCommentKey ="AdComment";
-    private readonly AdCommentInputId ="adComment";
+    private readonly AdCommentKey = "AdComment";
+    private readonly AdCommentInputId = "adComment";
 
     private _allCategoriesInputId: string;
     private _allCategoriesDivId: string;
@@ -21,16 +21,16 @@ class NewAd implements ICriteriaChange {
     private readonly _submitAdInputId: string = "submitNewAd";
 
 
-    private _currentNewAdGuid:string;
-    private readonly CurrentNewAdGuidInputId: string ="currentNewAdGuid";
+    private _currentNewAdGuid: string;
+    private readonly CurrentNewAdGuidInputId: string = "currentNewAdGuid";
 
     private _categorySelection: CategorySelection;
     private _partialViewLoader: NewAdPartialViewLoader;
     private _newAdCriteria: NewAdCriteria;
     private _imageUploader: ImageUploader;
-    private _newAdServerCaller:NewAdServerCaller;
+    private _newAdServerCaller: NewAdServerCaller;
 
-    constructor(allCategoriesDiv: string,allCategoriesInputId: string,categorySpecificPartialViewId:string) {
+    constructor(allCategoriesDiv: string, allCategoriesInputId: string, categorySpecificPartialViewId: string) {
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
@@ -42,20 +42,18 @@ class NewAd implements ICriteriaChange {
     }
 
     public CustomCriteriaChanged(): void {
-        
+
     }
 
     private initPage(): void {
         this.initNewAdCategory();
         this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
         this._currentNewAdGuid = $("#" + this.CurrentNewAdGuidInputId).val().toString();
-        
+
 
     }
 
-   
-
-    private initNewAdCategory():void {
+    private initNewAdCategory(): void {
         let allCategoriesString = $("#" + this._allCategoriesInputId).val().toString();
         let allCategories = $.parseJSON(allCategoriesString) as Category[];
         this._categorySelection = new CategorySelection(this._allCategoriesDivId, allCategories);
@@ -68,7 +66,7 @@ class NewAd implements ICriteriaChange {
                 this._partialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
             }
         });
-        $("#"+this._submitAdInputId).on("click", (event)=> {
+        $("#" + this._submitAdInputId).on("click", (event) => {
             event.preventDefault();
             this.submitAd();
         });
@@ -76,7 +74,7 @@ class NewAd implements ICriteriaChange {
 
     private submitAd() {
         //TODO disable submitAd Button until current submission is ok or errornous 
-        
+
         let userInput = new UserInput();
         userInput.ParametersDictionary["NewAdGuid"] = this._currentNewAdGuid;
         this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
@@ -89,9 +87,9 @@ class NewAd implements ICriteriaChange {
 
 
 
-let allCategoriesDivId: string = "allCategoriesDiv";
-let allCategoriesInputId: string = "allCategoriesInput";
+let allCategoriesDivId: string = "categorySelector";
+let allCategoriesInputId: string = "allCategories";
 let categorySpecificPartialViewId: string = "CategorySpecificCriteria";
 $(document).ready(() => {
-    let newAd = new NewAd(allCategoriesDivId, allCategoriesInputId,categorySpecificPartialViewId);
+    let newAd = new NewAd(allCategoriesDivId, allCategoriesInputId, categorySpecificPartialViewId);
 });//ready
