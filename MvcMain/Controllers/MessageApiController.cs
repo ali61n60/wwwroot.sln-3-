@@ -13,7 +13,7 @@ using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.Services;
 using MvcMain.Infrastructure.Services.Email;
-using MvcMain.Infrastructure.Services.Log;
+using MvcMain.Infrastructure.Services.Logger;
 using RepositoryStd.Context.AD;
 
 namespace MvcMain.Controllers

@@ -8,7 +8,7 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //TODO when category change before search criteia is loaded a search call is sent to server
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
-var Index = (function () {
+var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this.OrderByKey = "OrderBy";
         this._orderBySelectIdDiv = "orderBy";
@@ -117,8 +117,10 @@ exports.Index = Index;
 var categorySelectorParentDivId = "categorySelector";
 var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";
+var index;
 $(document).ready(function () {
     index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
     index.CustomCriteriaChanged(); //to initiate a server call on page load for first time
+    window.AliIndex = index;
 }); //ready
 //# sourceMappingURL=index.js.map

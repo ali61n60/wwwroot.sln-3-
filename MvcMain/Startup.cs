@@ -18,7 +18,7 @@ using ModelStd.Services;
 using MvcMain.Controllers;
 using MvcMain.Infrastructure.Services;
 using MvcMain.Infrastructure.Services.Email;
-using MvcMain.Infrastructure.Services.Log;
+using MvcMain.Infrastructure.Services.Logger;
 using Newtonsoft.Json;
 using RepositoryStd;
 using RepositoryStd.Context.AD;
@@ -27,7 +27,7 @@ using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 using RepositoryStd.Repository.Transportation;
 using RepositoryStd.TepmeratureRepository;
-using ILogger = MvcMain.Infrastructure.Services.Log.ILogger;
+using ILogger = MvcMain.Infrastructure.Services.Logger.ILogger;
 
 
 namespace MvcMain
