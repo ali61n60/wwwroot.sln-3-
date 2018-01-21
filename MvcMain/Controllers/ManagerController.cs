@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 
@@ -17,10 +19,12 @@ namespace MvcMain.Controllers
     {
         private IImageRepository _imageRepository;
         private AdDbContext _adDbContext;
-        public ManagerController(IImageRepository imageRepository,AdDbContext adDbContext)
+        private MessageApiController _messageApiController;
+        public ManagerController(IImageRepository imageRepository,AdDbContext adDbContext, MessageApiController messageApiController)
         {
             _imageRepository = imageRepository;
             _adDbContext = adDbContext;
+            _messageApiController = messageApiController;
         }
 
         [Authorize(Roles = "Admins")]
@@ -72,6 +76,54 @@ namespace MvcMain.Controllers
             }
             
             return View("ManageAdImageFolder","Folders Removed at "+DateTime.Now);
+        }
+
+        [Authorize(Roles = "Admins")]
+        public async Task<IActionResult> ManageLetMeKnow()
+        {
+            return View("ManageLetMeKnow","");
+        }
+
+        [Authorize(Roles = "Admins")]
+        public async Task<IActionResult> EmailAndSmsRegisterdLetMeKnowRecords()
+        {
+            //TODO get requested let me know
+            //Get ApprovedAds with managed by admin false
+            //foreach approved ad check each requsted let me know and if thay macth based on email/sms/bot  call messageApi to add a record in sms/email
+            List<LetMeKnow> letMeKnowList= _adDbContext.LetMeKnows.ToList();
+            List<ApprovedAd> approvedAdList = _adDbContext.ApprovedAds
+                .Include(ad => ad.Ad)
+                .Where(ad => ad.ManagedByAdmin == false).ToList();
+
+            foreach (ApprovedAd approvedAd in approvedAdList)
+            {
+                foreach (LetMeKnow letMeKnow in letMeKnowList)
+                {
+                    if (approvedAd.Ad.CategoryId == letMeKnow.CategoryId)
+                    {
+                        switch (letMeKnow.EmailOrSms)
+                        {
+                            case EmailOrSms.Email:
+                                //_messageApiController.InsertEmailMessageInDataBase()
+                                //add email
+                                break;
+                            case EmailOrSms.Sms:
+                                //_messageApiController.InsertSmsMessageInDataBase()
+                                //add sms
+                                break;
+                            case EmailOrSms.Both:
+                                //_messageApiController.InsertEmailMessageInDataBase()
+                                //_messageApiController.InsertSmsMessageInDataBase()
+                                //add email and sms
+                                break;
+                        }
+                            
+                    }
+                }
+            }
+
+
+            return View("ManageLetMeKnow","ToBeDone");
         }
 
     }

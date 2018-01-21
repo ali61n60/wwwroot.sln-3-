@@ -1,0 +1,51 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "ManageLetMeKnow";
+    ViewData["PageTitle"] = "ManageLetMeKnow";
+    Layout = "_Layout";
+}
+
+@section TopTop
+{
+    @Html.Partial("TopTop")
+}
+@section NavBar
+{
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+{
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+{
+
+}
+@section SideNav
+{
+    @Html.Partial("SideNav")
+}
+@section Body
+{
+    <h1>@Model</h1>
+    <a asp-controller="Manager" asp-action="Index" class="btn btn-lg btn-primary">Back To Manager Page</a>
+    <br/><br/>
+    <form asp-action="EmailAndSmsRegisterdLetMeKnowRecords" method="post">
+        <div class="row well">
+            <div class="col-sm-10">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Manage LetMeKnow Ads</button>
+            </div>
+        </div>
+    </form>
+
+}
+
+@section Footer
+{
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}
