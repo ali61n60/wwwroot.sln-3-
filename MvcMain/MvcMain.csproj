@@ -282,6 +282,9 @@
     <None Include="wwwroot\js\LearnGulp\dist\bundle.js" />
     <None Include="wwwroot\js\LearnGulp\src\greet.js" />
     <None Include="wwwroot\js\LearnGulp\src\main.js" />
+    <None Include="wwwroot\js\LetMeKnow\index\dist\bundle.js" />
+    <None Include="wwwroot\js\LetMeKnow\index\src\LetMeKnow.js" />
+    <None Include="wwwroot\js\LetMeKnow\index\src\LetMeKnow.js.map" />
     <None Include="wwwroot\js\Temperature\dist\bundle.js" />
     <None Include="wwwroot\js\TypeScript\classes.js" />
     <None Include="wwwroot\js\TypeScript\classes.js.map" />
@@ -925,6 +928,7 @@
     <TypeScriptCompile Include="wwwroot\js\home\newAd\src\NewAdServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\greet.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\main.ts" />
+    <TypeScriptCompile Include="wwwroot\js\LetMeKnow\index\src\LetMeKnow.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdTransportation\Brand.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdTransportation\CarModel.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdvertisementCommon.ts" />

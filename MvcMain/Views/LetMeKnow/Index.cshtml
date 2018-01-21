@@ -31,6 +31,7 @@
     <h1 class="text-right">در این صفحه کالایی که به دنبال آن می گردید را انتخاب کنید. در آینده هنگام دریافت آگهی جدید در صورتی که با مشخصات شما هماهنگ باشد، به شما اطلاع میدهیم </h1>
     <p>user chooses category</p>
     1- make category selection ts DRY
+    @await Component.InvokeAsync("CategorySelection")
     <br/><br/>
     <p>based on selected category partial view is loaded by ajax</p>
     <p>user fills form data and submit it to a web api method(common  with android)</p>

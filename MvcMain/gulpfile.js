@@ -74,6 +74,20 @@ gulp.task("AdDetail",
             .pipe(gulp.dest("./wwwroot/js/home/adDetail/dist"));
     });
 
+gulp.task("LetMeKnow",
+    function () {
+        return browserify({
+                debug: true,
+                entries: ["./wwwroot/js/LetMeKnow/index/src/LetMeKnow.ts"],
+                cache: {},
+                packageCache: {}
+            })
+            .plugin(tsify)
+            .bundle()
+            .pipe(source("bundle.js"))
+            .pipe(gulp.dest("./wwwroot/js/LetMeKnow/index/dist"));
+    });
+
 gulp.task("Temperature",
     function () {
         return browserify({
