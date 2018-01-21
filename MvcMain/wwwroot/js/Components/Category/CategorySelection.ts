@@ -34,6 +34,8 @@ export class CategorySelection {
         this._allCategories = allCategories;
     }
 
+    
+
     public SetCategoryId(selectedCategoryId: number): void {
         let firstLevelId: number;
         let secondLevelId: number;
