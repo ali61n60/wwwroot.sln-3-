@@ -27,6 +27,13 @@ namespace ModelStd.Db.Ad
         [Required]
         public EmailOrSms EmailOrSms { get; set; }
 
+        [Column("requestInsertDateTime", TypeName = "smalldatetime")]
+        [Required]
+        public DateTime RequestInsertDateTime { get; set; }
+
+        [Column("requetsPrivilege", TypeName = "int")]
+        [Required]
+        public RequetsPrivilege RequetsPrivilege { get; set; }
 
         public virtual AspNetUsers User { get; set; }
         public virtual Categories Category { get; set; }
@@ -37,5 +44,12 @@ namespace ModelStd.Db.Ad
         Email=1,
         Sms=2,
         Both=3
+    }
+
+    public enum RequetsPrivilege
+    {
+        Gold=1,
+        Silver=2,
+        Normal=3
     }
 }

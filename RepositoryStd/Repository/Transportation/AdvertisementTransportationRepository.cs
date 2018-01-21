@@ -12,6 +12,7 @@ using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
 using RepositoryStd.Messages;
+using RepositoryStd.Repository.Common;
 
 namespace RepositoryStd.Repository.Transportation
 {
@@ -194,9 +195,17 @@ namespace RepositoryStd.Repository.Transportation
 
         public async Task AddLetMeKnow(Dictionary<string, string> userInputDictionary, string userId)
         {
-            //TODO insert let me know in database
+            LetMeKnow tempLetMeKnow=new LetMeKnow();
+            //TODO move common properties to commonRepository
+            tempLetMeKnow.UserId = userId;
+            tempLetMeKnow.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary,
+                AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
+            tempLetMeKnow.EmailOrSms = EmailOrSms.Email;//TODO get it from user
+            tempLetMeKnow.RequetsPrivilege = RequetsPrivilege.Normal;//TODO get it from user
+            tempLetMeKnow.RequestInsertDateTime=DateTime.Now;
+            _adDbContext.LetMeKnows.Add(tempLetMeKnow);
 
-            return;
+            await _adDbContext.SaveChangesAsync();
         }
 
         //TODO maybe this is a method of AdAttributeTransportation class

@@ -20,7 +20,7 @@ var LetMeKnowServerCaller = (function () {
     LetMeKnowServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
         //TODO redirect user to a new page
         if (msg.Success == true) {
-            document.location.replace("/NewAd/Confirm");
+            document.location.replace("/LetMeKnow/Confirm");
         }
     };
     LetMeKnowServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {

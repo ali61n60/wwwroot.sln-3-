@@ -28,7 +28,7 @@ namespace MvcMain.Controllers
         }
 
         [Authorize]
-        public async Task<ResponseBase> AddNewLetMeKnowRecord(Dictionary<string, string> userInput)
+        public async Task<ResponseBase> AddNewLetMeKnowRecord([FromBody] Dictionary<string, string> userInput)
         {
             string errorCode = "LetMeKnowApi/AddNewLetMeKnowRecord";
             ResponseBase response=new ResponseBase();

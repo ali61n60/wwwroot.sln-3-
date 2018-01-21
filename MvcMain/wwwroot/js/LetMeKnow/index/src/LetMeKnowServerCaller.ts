@@ -19,7 +19,7 @@ export class LetMeKnowServerCaller {
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
         //TODO redirect user to a new page
         if (msg.Success == true) {
-            document.location.replace("/NewAd/Confirm");
+            document.location.replace("/LetMeKnow/Confirm");
         }
     }
 
