@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../Events/EventDispatcher");
-var CategorySelection = /** @class */ (function () {
+var CategorySelection = (function () {
     function CategorySelection(parentDivId, allCategories) {
         this.SelectedCategoryChangedEvent = new EventDispatcher_1.EventDispatcher();
         this.CategoryIdKey = "CategoryId";
@@ -19,10 +19,8 @@ var CategorySelection = /** @class */ (function () {
         this._allCategories = allCategories;
     }
     CategorySelection.prototype.SetCategoryId = function (selectedCategoryId) {
-        //TODO implement setCategoryId method which gets an integer an update view
-        //based on sci calculate its level
-        //create level and its lowers
-        //set _selectedCategoryIdIevel(i) parameters
+        var firstLevelId;
+        var secondLevelId;
         var categoryLevel = this.getCategoryLevel(selectedCategoryId);
         switch (categoryLevel) {
             case CategoryLevel.Unkown:
@@ -31,18 +29,42 @@ var CategorySelection = /** @class */ (function () {
             case CategoryLevel.Level1:
                 this.CreateFirstLevel();
                 this.setFirstLevelToSpecificId(selectedCategoryId);
+                this.createSecondLevel(selectedCategoryId);
+                $("#" + this._firstLevelSelect).trigger("change");
                 break;
             case CategoryLevel.Level2:
-                //
+                this.CreateFirstLevel();
+                firstLevelId = this._allCategories.filter(function (category) { return category.CategoryId === selectedCategoryId; })[0]
+                    .ParentCategoryId;
+                this.setFirstLevelToSpecificId(firstLevelId);
+                this.createSecondLevel(firstLevelId);
+                this.setSecondLevelToSpecificId(selectedCategoryId);
+                this.createThirdLevel(selectedCategoryId);
+                $("#" + this._secondLevelSelect).trigger("change");
                 break;
             case CategoryLevel.Level3:
-                //
+                this.CreateFirstLevel();
+                secondLevelId = this._allCategories.filter(function (category) { return category.CategoryId === selectedCategoryId; })[0]
+                    .ParentCategoryId;
+                firstLevelId = this._allCategories.filter(function (category) { return category.CategoryId === secondLevelId; })[0]
+                    .ParentCategoryId;
+                this.setFirstLevelToSpecificId(firstLevelId);
+                this.createSecondLevel(firstLevelId);
+                this.setSecondLevelToSpecificId(secondLevelId);
+                this.createThirdLevel(secondLevelId);
+                this.setThirdLevelToSpecificId(selectedCategoryId);
+                $("#" + this._thirdLevelSelect).trigger("change");
                 break;
         }
-        alert("categoryLevel=" + categoryLevel);
     };
     CategorySelection.prototype.setFirstLevelToSpecificId = function (categoryId) {
         $("#" + this._firstLevelSelect).val(categoryId);
+    };
+    CategorySelection.prototype.setSecondLevelToSpecificId = function (categoryId) {
+        $("#" + this._secondLevelSelect).val(categoryId);
+    };
+    CategorySelection.prototype.setThirdLevelToSpecificId = function (categoryId) {
+        $("#" + this._thirdLevelSelect).val(categoryId);
     };
     CategorySelection.prototype.getCategoryLevel = function (categoryId) {
         var tempCategoryArray = this._allCategories.filter(function (category) { return category.CategoryId === categoryId; });
@@ -170,7 +192,7 @@ var CategorySelection = /** @class */ (function () {
     return CategorySelection;
 }());
 exports.CategorySelection = CategorySelection;
-var CategoryCahngedEventArg = /** @class */ (function () {
+var CategoryCahngedEventArg = (function () {
     function CategoryCahngedEventArg() {
     }
     return CategoryCahngedEventArg;
