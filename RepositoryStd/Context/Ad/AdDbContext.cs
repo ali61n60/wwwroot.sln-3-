@@ -29,6 +29,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<AdPrivilege> AdPrivilege { get; set; }
         public virtual DbSet<AdStatus> AdStatus { get; set; }
         public virtual DbSet<Advertisements> Advertisements { get; set; }
+        public virtual DbSet<ApprovedAd> ApprovedAds { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<CarModel> CarModel { get; set; }
         public virtual DbSet<Categories> Categories { get; set; }
@@ -63,30 +64,6 @@ namespace RepositoryStd.Context.AD
                     .WithMany(p => p.AdAttributeTransportation)
                     .HasForeignKey(d => d.ModelId)
                     .HasConstraintName("FK_AdAttributeTransportation_CarBrands");
-            });
-
-            modelBuilder.Entity<Advertisements>(entity =>
-            {
-                entity.HasKey(e => e.AdId)
-                    .HasName("PK_Advertisements_1");
-
-                entity.HasOne(d => d.AdStatus)
-                    .WithMany(p => p.Advertisements)
-                    .HasForeignKey(d => d.AdStatusId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Advertisements_AdTypes");
-
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.Advertisements)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Advertisements_Categories");
-
-                entity.HasOne(d => d.District)
-                    .WithMany(p => p.Advertisements)
-                    .HasForeignKey(d => d.DistrictId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Advertisements_Districts");
             });
 
             modelBuilder.Entity<AdPrivilege>(entity =>
@@ -124,6 +101,41 @@ namespace RepositoryStd.Context.AD
                     .IsRequired()
                     .HasColumnName("adStatusEnglish")
                     .HasMaxLength(150);
+            });
+
+            modelBuilder.Entity<Advertisements>(entity =>
+            {
+                entity.HasKey(e => e.AdId)
+                    .HasName("PK_Advertisements_1");
+
+                entity.HasOne(d => d.AdStatus)
+                    .WithMany(p => p.Advertisements)
+                    .HasForeignKey(d => d.AdStatusId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Advertisements_AdTypes");
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Advertisements)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Advertisements_Categories");
+
+                entity.HasOne(d => d.District)
+                    .WithMany(p => p.Advertisements)
+                    .HasForeignKey(d => d.DistrictId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Advertisements_Districts");
+            });
+
+            modelBuilder.Entity<ApprovedAd>(entity =>
+            {
+                entity.HasKey(approvedAd => approvedAd.AdId)
+                    .HasName("PK_ApprovedAd");
+
+                entity.HasOne(approvedAd=> approvedAd.Ad)
+                    .WithOne()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ApprovedAd_Advertisements");
             });
 
             modelBuilder.Entity<Brand>(entity =>
