@@ -72,7 +72,7 @@ class NewAd implements ICriteriaChange {
         });
     }
 
-    private submitAd() {
+    private submitAd():void {
         //TODO disable submitAd Button until current submission is ok or errornous 
 
         let userInput = new UserInput();

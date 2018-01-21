@@ -23,9 +23,9 @@ namespace ModelStd.Db.Ad
         [Column("categoryId")]
         public int CategoryId { get; set; }
 
-        [Column("emailOrSms")]
+        [Column("emailOrSms", TypeName = "int")]
         [Required]
-        public EmailOrSms EmailOrSms;
+        public EmailOrSms EmailOrSms { get; set; }
 
 
         public virtual AspNetUsers User { get; set; }

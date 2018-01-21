@@ -18,6 +18,7 @@ namespace MvcMain.Controllers
             return View(currentNewAdGuid);
         }
 
+        [Authorize]
         public async Task<IActionResult> Confirm()
         {
             return View();

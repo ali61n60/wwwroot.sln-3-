@@ -929,6 +929,7 @@
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\greet.ts" />
     <TypeScriptCompile Include="wwwroot\js\LearnGulp\src\main.ts" />
     <TypeScriptCompile Include="wwwroot\js\LetMeKnow\index\src\LetMeKnow.ts" />
+    <TypeScriptCompile Include="wwwroot\js\LetMeKnow\index\src\LetMeKnowServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdTransportation\Brand.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdTransportation\CarModel.ts" />
     <TypeScriptCompile Include="wwwroot\js\Models\AdvertisementCommon.ts" />

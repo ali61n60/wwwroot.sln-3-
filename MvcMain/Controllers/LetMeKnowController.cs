@@ -15,5 +15,11 @@ namespace MvcMain.Controllers
         {
             return View();
         }
+
+        [Authorize]
+        public async Task<IActionResult> Confirm()
+        {
+            return View();
+        }
     }
 }
