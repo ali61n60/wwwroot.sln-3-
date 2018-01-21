@@ -26,7 +26,7 @@ using RepositoryStd.TepmeratureRepository;
 namespace MvcMain.Controllers
 {
     //TODO 1- Create LetMeKnow Controller and View for users to register their need
-    // gold user pays 3x, silver user pay 2x and get notifyed sooner
+    // gold user pays 3x, silver user pay 2x and get notifyed sooner -golden user in first 20 minutes,silver 20-40, normal user after 40 minutes
     // manage user credits (reduce and add credits and log credit activity
     // **** on Approving new or editted Ads by Admin insert it in ApprovedAd Table ****
     //TODO 1- Create Change My Password for users
