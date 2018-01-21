@@ -35,6 +35,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<EmailMessage> EmailMessages { get; set; }
+        public virtual DbSet<LetMeKnow> LetMeKnows { get; set; }
         public virtual DbSet<MarkedAd> MarkedAds { get; set; }
         public virtual DbSet<MobileBrands> MobileBrands { get; set; }
         public virtual DbSet<Price> Price { get; set; }
@@ -180,6 +181,26 @@ namespace RepositoryStd.Context.AD
                     .WithMany()
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasForeignKey(emailMessage => emailMessage.UserId);
+            });
+
+            modelBuilder.Entity<LetMeKnow>(entity =>
+            {
+                entity.HasKey(letMeKnow=>
+                    new { letMeKnow.Id }
+                ).HasName("PK_Id");
+
+                entity.HasOne(letMeKnow => letMeKnow.Category)
+                    .WithMany()
+                    .HasForeignKey(letMeKnow => letMeKnow.CategoryId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_LetMeKnows_Categories");
+
+                entity.HasOne(letMeKnow => letMeKnow.User)
+                    .WithMany()
+                    .HasForeignKey(letMeKnow => letMeKnow.UserId)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_LetMeKnows_AspNetUsers");
+
             });
 
             modelBuilder.Entity<MarkedAd>(entity =>

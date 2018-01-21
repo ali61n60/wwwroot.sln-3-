@@ -43,14 +43,13 @@ namespace MvcMain.Controllers
 
                 int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
                 IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
+                await adRepository.AddLetMeKnow(userInput, user.Id);
+                response.SetSuccessResponse();
             }
             catch (Exception ex)
             {
                 response.SetFailureResponse(ex.Message, errorCode);
             }
-            
-
-
 
             return response;
         }

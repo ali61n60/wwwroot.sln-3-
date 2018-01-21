@@ -33,6 +33,8 @@ namespace MvcMain.Controllers
     //TODO 1- add mangeMyAd page for users myAds, MarkedAds
     //TODO 1- work on users credits and money pay and ...
     //TODO 1- work on Edit AD by Ad owner
+    //TODO 1- complete Create New User Account. Remove Name because it must be unique
+    //TODO 1- How to send a message to user's Telegram 
 
 
     //TODO 2- improve Android Send Sms App
