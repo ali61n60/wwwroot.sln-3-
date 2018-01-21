@@ -88,10 +88,7 @@ namespace MvcMain.Controllers
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseBase> InsertEmailMessageInDataBase(
-            EmailMessageSingle emailMessageSingle,
-            string userId = "",
-            MessagePriority messagePriority = MessagePriority.Low)
+        public async Task<ResponseBase> InsertEmailMessageInDataBase(EmailMessageSingle emailMessageSingle,string userId = "",MessagePriority messagePriority = MessagePriority.Low)
         {
             string errorCode = "MessageApiController/InsertEmailMessageInDataBase";
             ResponseBase response = new ResponseBase();

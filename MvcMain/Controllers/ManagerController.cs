@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
@@ -90,36 +91,56 @@ namespace MvcMain.Controllers
             //TODO get requested let me know
             //Get ApprovedAds with managed by admin false
             //foreach approved ad check each requsted let me know and if thay macth based on email/sms/bot  call messageApi to add a record in sms/email
-            List<LetMeKnow> letMeKnowList= _adDbContext.LetMeKnows.ToList();
-            List<ApprovedAd> approvedAdList = _adDbContext.ApprovedAds
-                .Include(ad => ad.Ad)
-                .Where(ad => ad.ManagedByAdmin == false).ToList();
+            List<LetMeKnow> letMeKnowList= _adDbContext.LetMeKnows.Include(know => know.User).ToList();
+            List<ApprovedAd> approvedAdList = _adDbContext.ApprovedAds.Include(ad => ad.Ad).Where(ad => ad.ManagedByAdmin == false).ToList();
 
             foreach (ApprovedAd approvedAd in approvedAdList)
             {
                 foreach (LetMeKnow letMeKnow in letMeKnowList)
                 {
-                    if (approvedAd.Ad.CategoryId == letMeKnow.CategoryId)
+                    if (approvedAd.ApprovedDateTime > letMeKnow.RequestInsertDateTime)
                     {
-                        switch (letMeKnow.EmailOrSms)
+                        if (approvedAd.Ad.CategoryId == letMeKnow.CategoryId)
                         {
-                            case EmailOrSms.Email:
-                                //_messageApiController.InsertEmailMessageInDataBase()
-                                //add email
-                                break;
-                            case EmailOrSms.Sms:
-                                //_messageApiController.InsertSmsMessageInDataBase()
-                                //add sms
-                                break;
-                            case EmailOrSms.Both:
-                                //_messageApiController.InsertEmailMessageInDataBase()
-                                //_messageApiController.InsertSmsMessageInDataBase()
-                                //add email and sms
-                                break;
+                            EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
+                            SmsMessage smsMessage = new SmsMessage();
+                            switch (letMeKnow.EmailOrSms)
+                            {
+                                case EmailOrSms.Email:
+                                    emailMessageSingle.EmailAddress = letMeKnow.User.Email;
+                                    emailMessageSingle.Subject = "به من اطلاع بده";
+                                    emailMessageSingle.Title =
+                                        "یک آگهی جدید منطبق با درخواست شما به سایت ارسال شده است";
+                                    emailMessageSingle.TextMessage = "کاربر گرامی";
+                                    emailMessageSingle.TextMessage += "<br/><br/>";
+                                    emailMessageSingle.TextMessage += "با سلام و احترام";
+                                    emailMessageSingle.TextMessage += "<br/><br/>";
+                                    emailMessageSingle.TextMessage +=
+                                        "یک آگهی جدید منطبق با درخواست شما به سایت ارسال شده است";
+                                    emailMessageSingle.TextMessage += "<br/><br/>";
+                                    emailMessageSingle.TextMessage += "لینک آگهی";
+                                    emailMessageSingle.TextMessage += "<br/><br/>";
+                                    emailMessageSingle.TextMessage +=
+                                        $"<a href=\"http://whereismycar.ir/Home/AdDetail?adId={approvedAd.AdId}&categoryId={letMeKnow.CategoryId}\" target=\"_blank\">لینک آگهی</a>";
+                                    await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,
+                                        letMeKnow.UserId);
+                                    break;
+                                case EmailOrSms.Sms:
+                                    //TODO fill sms
+                                    _messageApiController.InsertSmsMessageInDataBase(smsMessage);
+                                    break;
+                                case EmailOrSms.Both:
+                                    await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,
+                                        letMeKnow.UserId);
+                                    _messageApiController.InsertSmsMessageInDataBase(smsMessage);
+
+                                    break;
+                            }
                         }
-                            
                     }
                 }
+                approvedAd.ManagedByAdmin = true;
+               await _adDbContext.SaveChangesAsync();
             }
 
 
