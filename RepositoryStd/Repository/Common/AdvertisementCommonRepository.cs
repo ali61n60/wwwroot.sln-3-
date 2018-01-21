@@ -239,6 +239,11 @@ namespace RepositoryStd.Repository.Common
             return FindBy(adGuid);
         }
 
+        public async Task AddLetMeKnow(Dictionary<string, string> userInputDictionary, string userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IEnumerable<AdvertisementCommon>> GetUserAdvertisements(string userId)
         {
             List<Advertisements> userAdvertisements = await _adDbContext.Advertisements
