@@ -9,7 +9,7 @@ using ModelStd.Advertisements;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
-using MvcMain.Infrastructure.Services.Log;
+using MvcMain.Infrastructure.Services.Logger;
 
 namespace MvcMain.Controllers
 {
