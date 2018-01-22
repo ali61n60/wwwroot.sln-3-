@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 
-namespace MvcMain.Components.SearchAd.AdTransformation
+namespace MvcMain.Components.AdTransformation
 {
     //TODO use AdTransportaionApiController to access allBrands and allCarModels, instead of calling repository directly
     //TODO error handling for repository calls

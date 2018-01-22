@@ -3,13 +3,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/Category/CategorySelection");
 var UserInput_1 = require("../../../Helper/UserInput");
 var LetMeKnowServerCaller_1 = require("./LetMeKnowServerCaller");
+var LetMeKnowPartialViewLoader_1 = require("./LetMeKnowPartialViewLoader");
+var LetMeKnowCriteria_1 = require("./LetMeKnowCriteria");
 var LetMeKnow = /** @class */ (function () {
     function LetMeKnow(categorySelectorParentDivId, allCategoriesId) {
         this._registerLetMeKnowInputId = "registerLetMeKnow";
+        this._categorySpecificCriteriaDivId = "CategorySpecificCriteria";
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
         this._letMeKnowServerCaller = new LetMeKnowServerCaller_1.LetMeKnowServerCaller();
+        this._letMeKnowCriteria = new LetMeKnowCriteria_1.LetMeKnowCriteria();
+        this._letMeKnowPartialViewLoader =
+            new LetMeKnowPartialViewLoader_1.LetMeKnowPartialViewLoader(this._categorySpecificCriteriaDivId, this, this._letMeKnowCriteria);
         this.initEventHandlers();
     }
+    LetMeKnow.prototype.CustomCriteriaChanged = function () {
+    };
     LetMeKnow.prototype.initCategorySelect = function (categorySelectorParentDivId, allCategoriesId) {
         var allCategoriesString = $("#" + allCategoriesId).val().toString();
         var allCategories = $.parseJSON(allCategoriesString);
@@ -19,7 +27,7 @@ var LetMeKnow = /** @class */ (function () {
     LetMeKnow.prototype.initEventHandlers = function () {
         var _this = this;
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
-            //TODO load specific LetMeKnow View based on category id
+            _this._letMeKnowPartialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
         });
         $("#" + this._registerLetMeKnowInputId).on("click", function (event) {
             event.preventDefault();
