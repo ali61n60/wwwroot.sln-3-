@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CategorySelection_1 = require("../../../Components/Category/CategorySelection");
 var UserInput_1 = require("../../../Helper/UserInput");
 var LetMeKnowServerCaller_1 = require("./LetMeKnowServerCaller");
-var LetMeKnow = (function () {
+var LetMeKnow = /** @class */ (function () {
     function LetMeKnow(categorySelectorParentDivId, allCategoriesId) {
         this._registerLetMeKnowInputId = "registerLetMeKnow";
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
@@ -40,4 +40,4 @@ var allCategoriesId = "allCategories";
 $(document).ready(function () {
     var letMeKnow = new LetMeKnow(categorySelectorParentDivId, allCategoriesId);
 });
-//# sourceMappingURL=letMeKnow.js.map
+//# sourceMappingURL=LetMeKnow.js.map
