@@ -4,19 +4,24 @@ import {UserInput} from "../../../Helper/UserInput";
 import {LetMeKnowServerCaller} from "./LetMeKnowServerCaller";
 import {LetMeKnowPartialViewLoader} from "./LetMeKnowPartialViewLoader";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
+import {LetMeKnowCriteria}  from "./LetMeKnowCriteria";
 
 
 export class LetMeKnow implements ICriteriaChange {
     private readonly _registerLetMeKnowInputId: string = "registerLetMeKnow";
+    private readonly _categorySpecificCriteriaDivId: string ="CategorySpecificCriteria";
 
     private _categorySelection: CategorySelection;
+    private _letMeKnowCriteria:LetMeKnowCriteria;
     private _letMeKnowServerCaller: LetMeKnowServerCaller;
     private _letMeKnowPartialViewLoader:LetMeKnowPartialViewLoader;
 
     constructor(categorySelectorParentDivId: string, allCategoriesId: string) {
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
         this._letMeKnowServerCaller = new LetMeKnowServerCaller();
-        this._letMeKnowPartialViewLoader = new LetMeKnowPartialViewLoader("CategorySpecificCriteria",this)
+        this._letMeKnowCriteria = new LetMeKnowCriteria();
+        this._letMeKnowPartialViewLoader =
+            new LetMeKnowPartialViewLoader(this._categorySpecificCriteriaDivId, this, this._letMeKnowCriteria);
         this.initEventHandlers();
     }
 
