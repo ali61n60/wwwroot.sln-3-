@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -41,20 +42,36 @@ namespace MvcMain.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginModel details, string returnUrl)
         {
+            string errorCode = "AccountController/Login";
             if (ModelState.IsValid)
             {
-                AppUser user = await _userManager.FindByEmailAsync(details.Email);
-                if (user != null)
+                try
                 {
-                    await _signInManager.SignOutAsync();
-                    Microsoft.AspNetCore.Identity.SignInResult result =
-                        await _signInManager.PasswordSignInAsync(user, details.Password, details.RememberMe, false);
-                    if (result.Succeeded)
+                    AppUser user = await _userManager.FindByEmailAsync(details.Email);
+                    if (user != null)
                     {
-                        return Redirect(returnUrl ?? "/");
+                        await _signInManager.SignOutAsync();
+                        Microsoft.AspNetCore.Identity.SignInResult result =
+                            await _signInManager.PasswordSignInAsync(user, details.Password, details.RememberMe, false);
+                        if (result.Succeeded)
+                        {
+                            return Redirect(returnUrl ?? "/");
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Password", "خطا در رمز ورود");
+                        }
                     }
+                    else
+                    {
+                        ModelState.AddModelError("UserNull", "ایمیل وارد شده در دیتابیس وجود ندارد");
+                    }
+                    
                 }
-                ModelState.AddModelError(nameof(LoginModel.Email),"Invalid user or password");
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Exception", ex.Message + " " + errorCode);
+                }
             }
             return View(details);
         }
@@ -79,43 +96,60 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> PasswordForget(PasswordForgetModel detail, string returnUrl)
         {
             //TODO Make your action as an API to be able to use that from android app
-            AppUser user =await _userManager.FindByEmailAsync(detail.Email);
-            if (user == null)
+            string errorCode = "AccountController/PasswordForget";
+            if (ModelState.IsValid)
             {
-                //tell user there is not such an email in our database
-                ViewData["Message"] = "ایمیل وارد شده در دیتابیس یافت نشد";
-                return View();
-            }
-            string serverGeneratedNewPassword = "1234@Ali";
-            user.PasswordHash = _passwordHasher.HashPassword(user,serverGeneratedNewPassword);
-            IdentityResult changePassResult = await _userManager.UpdateAsync(user);
-            if (changePassResult.Succeeded)
-            {
-                EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
-                emailMessageSingle.EmailAddress = detail.Email;
-                string messageText = $"<p dir=\"rtl\">";
-                messageText+="رمز عبور شما عبارت زیر میباشد: ";
-
-                messageText += "</p><br/><br/>";
-                messageText += $"<span style=\"color:red\">{serverGeneratedNewPassword}</span>";
-                emailMessageSingle.Subject = "فراموشی رمز عبور";
-                emailMessageSingle.Title = "فراموشی رمز عبور";
-                emailMessageSingle.TextMessage = messageText;
-                await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,user.Id,MessagePriority.High);
-                ViewBag.returnUrl = returnUrl ?? "/";
-                ViewData["Message"] = "کاربر گرامی. رمز عبور جدیدی به ایمیل شما ارسال میشود. لطفا با رمز جدید وارد شده و به منظور افزایش امنیت در اولین فرصت رمز خود را تغییر دهید.";
-                return View("Login");
-            }
-            else
-            {
-                string errorMessage = "";
-                foreach (IdentityError identityError in changePassResult.Errors)
+                try
                 {
-                    errorMessage+= identityError.Description+"  ";
+                    AppUser user = await _userManager.FindByEmailAsync(detail.Email);
+                    if (user != null)
+                    {
+                        string serverGeneratedNewPassword = "1234@Ali";//TODO make it a random password
+                        user.PasswordHash = _passwordHasher.HashPassword(user, serverGeneratedNewPassword);
+                        IdentityResult changePassResult = await _userManager.UpdateAsync(user);
+                        if (changePassResult.Succeeded)
+                        {
+                            EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
+                            emailMessageSingle.EmailAddress = detail.Email;
+                            string messageText = $"<p dir=\"rtl\">";
+                            messageText += "رمز عبور شما عبارت زیر میباشد: ";
+
+                            messageText += "</p><br/><br/>";
+                            messageText += $"<span style=\"color:red\">{serverGeneratedNewPassword}</span>";
+                            emailMessageSingle.Subject = "فراموشی رمز عبور";
+                            emailMessageSingle.Title = "فراموشی رمز عبور";
+                            emailMessageSingle.TextMessage = messageText;
+                            await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle, user.Id, MessagePriority.High);
+                            ViewBag.returnUrl = returnUrl ?? "/";
+                            ViewData["Message"] = "کاربر گرامی. رمز عبور جدیدی به ایمیل شما ارسال میشود. لطفا با رمز جدید وارد شده و به منظور افزایش امنیت در اولین فرصت رمز خود را تغییر دهید.";
+                            return View("Login");
+                        }
+                        else
+                        {
+                            string errorMessage = "";
+                            foreach (IdentityError identityError in changePassResult.Errors)
+                            {
+                                errorMessage += identityError.Description + "  ";
+                            }
+                            ViewData["Message"] = errorMessage;
+                            return View();
+                        }
+                    }
+                    else
+                    {
+                        //tell user there is not such an email in our database
+                        ModelState.AddModelError("UserNull", "ایمیل وارد شده در دیتابیس یافت نشد");
+                        return View();
+                    }
                 }
-                ViewData["Message"] = errorMessage;
-                return View();
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Exception", ex.Message + " " + errorCode);
+                }
             }
+            return View(detail);
+            
+            
          
             
         }

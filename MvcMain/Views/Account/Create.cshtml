@@ -28,7 +28,7 @@
 }
 @section Body
 {
-<div class="text-danger" asp-validation-summary="All"></div>
+<div class="text-danger text-right" dir="rtl" asp-validation-summary="All"></div>
 <div class="well">
     <form asp-action="Create" method="post">
         <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
@@ -77,7 +77,7 @@
         <form asp-action="PasswordForget" method="get">
             <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
             <div class="col-sm-2"></div>
-            <div class="col-sm-4"><button class="btn btn-success btn-block" type="submit">ارسال کلمه عبور به ایمیل</button></div>
+            <div class="col-sm-4"><button class="btn btn-success btn-block" type="submit">رمز خود را فراموش کرده ام</button></div>
         </form>
     </div>
 </div>

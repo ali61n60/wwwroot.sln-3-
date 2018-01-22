@@ -20,10 +20,11 @@ namespace MvcMain.Models
 
     public class LoginModel
     {
-        [Required]
+        [Required(ErrorMessage = "فیلد ایمیل خالی است")]
         [UIHint("email")]
+        
         public string Email { get; set; }
-        [Required]
+        [Required(ErrorMessage = "فیلد رمز ورود خالی است")]
         [UIHint("password")]
         public string Password { get; set; }
         
@@ -34,7 +35,7 @@ namespace MvcMain.Models
 
     public class PasswordForgetModel
     {
-        [Required]
+        [Required(ErrorMessage = "فیلد ایمیل خالی است")]
         [UIHint("email")]
         public string Email { get; set; }
     }
