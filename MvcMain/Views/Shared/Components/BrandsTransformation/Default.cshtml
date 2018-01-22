@@ -1,5 +1,5 @@
 ﻿@using ModelStd.Db.Ad
-@using MvcMain.Components.SearchAd.AdTransformation
+@using MvcMain.Components.AdTransformation
 @model AllVihecles
 
 
@@ -28,7 +28,7 @@
     <select id="model" class="form-control" dir="rtl">
         <option dir="ltr" value="0" selected="selected">مدل</option>
         {{#carModels}}
-        <option dir="ltr" value="{{modelId}}">{{modelName}}</option>
+        <option dir="ltr" value="{{ModelId}}">{{ModelName}}</option>
         {{/carModels}}
     </select>
 </script>
