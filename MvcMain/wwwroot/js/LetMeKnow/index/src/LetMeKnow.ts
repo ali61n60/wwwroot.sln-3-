@@ -3,9 +3,10 @@ import { Category } from "../../../Models/Category";
 import {UserInput} from "../../../Helper/UserInput";
 import {LetMeKnowServerCaller} from "./LetMeKnowServerCaller";
 import {LetMeKnowPartialViewLoader} from "./LetMeKnowPartialViewLoader";
+import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 
 
-export class LetMeKnow {
+export class LetMeKnow implements ICriteriaChange {
     private readonly _registerLetMeKnowInputId: string = "registerLetMeKnow";
 
     private _categorySelection: CategorySelection;
@@ -17,6 +18,10 @@ export class LetMeKnow {
         this._letMeKnowServerCaller = new LetMeKnowServerCaller();
         this._letMeKnowPartialViewLoader = new LetMeKnowPartialViewLoader("CategorySpecificCriteria",this)
         this.initEventHandlers();
+    }
+
+    public CustomCriteriaChanged(): void {
+
     }
 
     private initCategorySelect(categorySelectorParentDivId: string, allCategoriesId: string):void {

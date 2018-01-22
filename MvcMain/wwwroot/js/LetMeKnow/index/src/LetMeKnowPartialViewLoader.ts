@@ -1,6 +1,7 @@
 ﻿import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {NewAdCriteria} from "../../../home/newAd/src/NewAdCriteria";
 import {PartialViewServerCallParameters} from "../../../home/newAd/src/NewAdPartialViewLoader";
+import {LetMeKnowCriteria} from "./LetMeKnowCriteria";
 
 
 export class LetMeKnowPartialViewLoader {
@@ -8,13 +9,13 @@ export class LetMeKnowPartialViewLoader {
     private _url: string = "/LetMeKnow/GetLetMeKnowPartialView";
     private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
-    private _newAdCriteriaChange: ICriteriaChange;
-    private _newAdCriteria: NewAdCriteria;
+    private _criteriaChange: ICriteriaChange;
+    private _letMeKnowCriteria: LetMeKnowCriteria;
 
-    constructor(partialViewDivId: string, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria) {
+    constructor(partialViewDivId: string, criteriaChange: ICriteriaChange, letMeKnowCriteria: LetMeKnowCriteria) {
         this._partialViewDivId = partialViewDivId;
-        this._newAdCriteriaChange = newAdCriteriaChange;
-        this._newAdCriteria = newAdCriteria;
+        this._criteriaChange = criteriaChange;
+        this._letMeKnowCriteria = letMeKnowCriteria;
     }
 
     public GetPartialViewFromServer(categoryId: number) {
@@ -31,10 +32,10 @@ export class LetMeKnowPartialViewLoader {
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        this._newAdCriteria.UnBind(this._previousCategoryId);
+        this._letMeKnowCriteria.UnBind(this._previousCategoryId);
         $("#" + this._partialViewDivId).children().remove();
         $("#" + this._partialViewDivId).html(msg);
-        this._newAdCriteria.Bind(this._currentCategoryId, this._newAdCriteriaChange);
+        this._letMeKnowCriteria.Bind(this._currentCategoryId, this._criteriaChange);
         this._previousCategoryId = this._currentCategoryId;
     }//onSuccessGetTimeFromServer
 
