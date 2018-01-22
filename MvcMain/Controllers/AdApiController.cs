@@ -43,7 +43,6 @@ namespace MvcMain.Controllers
 
     //TODO 2- improve Android Send Sms App
     //TODO 2- study MVC book
-    //TODO 2- return a responseBase object in api calls that need autherized access but caller is not logged in
     //TODO 3- work on Ad Price
     //TODO 3- work on the max number of images per Ad. for example decide it based on user
     //TODO 3- Make Response.Error an array and put all errors in it
