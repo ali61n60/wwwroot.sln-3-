@@ -7,14 +7,16 @@ namespace MvcMain.Models
 {
     public class CreateModel
     {
-        [Required]
-        public string Name { get; set; }
-        [Required]
+        [Required(ErrorMessage = "فیلد ایمیل خالی است")]
         public string Email { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "فیلد رمز ورود خالی است")]
         public string Password { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "فیلد تکرار رمز ورود خالی است")]
         public string RepeatPassword { get; set; }
+
+        [Required(ErrorMessage = "فیلد تلفن همراه خالی است")]
         public string PhoneNumber { get; set; }
     }
 

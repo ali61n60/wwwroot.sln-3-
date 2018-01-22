@@ -33,7 +33,7 @@
     <div class="well">
         @if (ViewData["Message"] != null)
         {
-            <p>@ViewData["Message"].ToString()</p>
+            <p class="text-right" dir="rtl">@ViewData["Message"].ToString()</p>
         }
         <form asp-action="Login" method="post">
             <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl"/>

@@ -38,7 +38,7 @@ namespace MvcMain.Controllers
             {
                 AppUser user = new AppUser
                 {
-                    UserName = model.Name,
+                    UserName = model.Email,
                     Email = model.Email
                 };
                 IdentityResult result

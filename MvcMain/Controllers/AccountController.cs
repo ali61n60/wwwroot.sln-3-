@@ -13,7 +13,7 @@ using MvcMain.Models;
 
 namespace MvcMain.Controllers
 {
-    public class AccountController:Controller
+    public class AccountController : Controller
     {
         //TODO Error messages are in English, Try to make them Persian
         private UserManager<AppUser> _userManager;
@@ -67,7 +67,7 @@ namespace MvcMain.Controllers
                     {
                         ModelState.AddModelError("UserNull", "ایمیل وارد شده در دیتابیس وجود ندارد");
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
@@ -105,7 +105,7 @@ namespace MvcMain.Controllers
                     AppUser user = await _userManager.FindByEmailAsync(detail.Email);
                     if (user != null)
                     {
-                        string serverGeneratedNewPassword = "1234@Ali";//TODO make it a random password
+                        string serverGeneratedNewPassword = createRandomPassword();
                         user.PasswordHash = _passwordHasher.HashPassword(user, serverGeneratedNewPassword);
                         IdentityResult changePassResult = await _userManager.UpdateAsync(user);
                         if (changePassResult.Succeeded)
@@ -120,7 +120,7 @@ namespace MvcMain.Controllers
                             emailMessageSingle.Subject = "فراموشی رمز عبور";
                             emailMessageSingle.Title = "فراموشی رمز عبور";
                             emailMessageSingle.TextMessage = messageText;
-                            ResponseBase emailResponse= await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle, user.Id, MessagePriority.High);
+                            ResponseBase emailResponse = await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle, user.Id, MessagePriority.High);
                             if (emailResponse.Success)
                             {
                                 ViewBag.returnUrl = returnUrl ?? "/";
@@ -129,7 +129,7 @@ namespace MvcMain.Controllers
                             }
                             else
                             {
-                                ModelState.AddModelError("EmailResponse",emailResponse.Message+", "+emailResponse.ErrorCode);
+                                ModelState.AddModelError("EmailResponse", emailResponse.Message + ", " + emailResponse.ErrorCode);
                             }
                         }
                         else
@@ -137,7 +137,7 @@ namespace MvcMain.Controllers
                             int errorIndex = 0;
                             foreach (IdentityError identityError in changePassResult.Errors)
                             {
-                                ModelState.AddModelError("ChangePassResult"+errorIndex,identityError.Description);
+                                ModelState.AddModelError("ChangePassResult" + errorIndex, identityError.Description);
                                 errorIndex++;
                             }
                         }
@@ -154,6 +154,8 @@ namespace MvcMain.Controllers
             }
             return View(detail);
         }
+
+
 
         [AllowAnonymous]
         public ViewResult Create(string returnUrl)
@@ -176,27 +178,30 @@ namespace MvcMain.Controllers
             {
                 if (model.Password != model.RepeatPassword)
                 {
-                    ModelState.AddModelError("","Password and Repeated Password are not equal.");
-                    return View(model);
-                }
-                AppUser user = new AppUser
-                {
-                    UserName = model.Name,
-                    Email = model.Email,
-                    PhoneNumber = model.PhoneNumber
-                };
-                IdentityResult result= await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
-                {
-                    return RedirectToRoute("/");
+                    ModelState.AddModelError("PasswordRepeat", "فیلد رمز ورود و فیلد تکرار رمز ورود باید برابر باشد");
                 }
                 else
                 {
-                    foreach (IdentityError error in result.Errors)
+                    AppUser user = new AppUser
                     {
-                        ModelState.AddModelError("", error.Description);
+                        UserName = model.Email,
+                        Email = model.Email,
+                        PhoneNumber = model.PhoneNumber
+                    };
+                    IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return Redirect(returnUrl ?? "/");
+                    }
+                    else
+                    {
+                        foreach (IdentityError error in result.Errors)
+                        {
+                            ModelState.AddModelError("", error.Description);
+                        }
                     }
                 }
+                
             }
             return View(model);
         }
@@ -208,6 +213,19 @@ namespace MvcMain.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        private string createRandomPassword()
+        {
+            Random random = new Random();
+            string password = "";
+            for (int i = 0; i < 3; i++)
+                password += Convert.ToChar(random.Next(65, 90));//65==>A ,  90=>Z 
+            password += "@9";
+            for (int i = 0; i < 3; i++)
+                password += Convert.ToChar(random.Next(97, 122));//97=>a ,  122=>z
+
+            return password;
         }
 
     }

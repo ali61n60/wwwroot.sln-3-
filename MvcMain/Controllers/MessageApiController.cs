@@ -117,6 +117,7 @@ namespace MvcMain.Controllers
             {
                 _adDbContext.EmailMessages.Add(emailMessage);
                 await _adDbContext.SaveChangesAsync();
+                response.SetSuccessResponse();
             }
             catch (Exception ex)
             {
