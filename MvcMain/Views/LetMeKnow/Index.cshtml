@@ -7,43 +7,47 @@
 }
 
 @section TopTop
-{
+    {
     @Html.Partial("TopTop")
 }
 @section NavBar
-{
+    {
     @Html.Partial("NavBar")
 }
 @section PageTitle
-{
+    {
     @Html.Partial("PageTitle")
 }
 @section TopHeader
-{
+    {
 
 }
 @section SideNav
-{
+    {
     @Html.Partial("SideNav")
 }
 @section Body
-{
+    {
     <h1 class="text-right">در این صفحه کالایی که به دنبال آن می گردید را انتخاب کنید. در آینده هنگام دریافت آگهی جدید در صورتی که با مشخصات شما هماهنگ باشد، به شما اطلاع میدهیم </h1>
-    @await Component.InvokeAsync("CategorySelection")
-    <br/><br/>
+    <div class="well">
+        <div class="row">
+            @await Component.InvokeAsync("CategorySelection")
+        </div>
+    </div>
     <p>based on selected category partial view is loaded by ajax</p>
+    <div id="CategorySpecificCriteria" class="row"></div>
     <p>user fills form data and submit it to a web api method(common  with android)</p>
-    <br /><br/>
+    <br /><br />
     <button type="button" id="registerLetMeKnow" class="btn btn-primary btn-block">ثبت</button>
     <p>whan a new ad in inserted by someone A Server Task checks new ad with LetMeKnow Tables and sends emails and sms when matches found</p>
-    
+
 }
 
 @section Footer
-{
+    {
     @Html.Partial("Footer")
 }
 
 @section scripts{
-<script src="~/js/LetMeKnow/index/dist/bundle.js"></script>
+    <script src="~/js/LetMeKnow/index/dist/bundle.js"></script>
 }

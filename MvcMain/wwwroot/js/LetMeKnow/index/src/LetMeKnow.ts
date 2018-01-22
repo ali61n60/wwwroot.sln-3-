@@ -2,16 +2,20 @@
 import { Category } from "../../../Models/Category";
 import {UserInput} from "../../../Helper/UserInput";
 import {LetMeKnowServerCaller} from "./LetMeKnowServerCaller";
+import {LetMeKnowPartialViewLoader} from "./LetMeKnowPartialViewLoader";
 
 
 export class LetMeKnow {
     private readonly _registerLetMeKnowInputId: string = "registerLetMeKnow";
 
     private _categorySelection: CategorySelection;
-    private _letMeKnowServerCaller:LetMeKnowServerCaller;
+    private _letMeKnowServerCaller: LetMeKnowServerCaller;
+    private _letMeKnowPartialViewLoader:LetMeKnowPartialViewLoader;
+
     constructor(categorySelectorParentDivId: string, allCategoriesId: string) {
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
         this._letMeKnowServerCaller = new LetMeKnowServerCaller();
+        this._letMeKnowPartialViewLoader = new LetMeKnowPartialViewLoader("CategorySpecificCriteria",this)
         this.initEventHandlers();
     }
 
@@ -24,7 +28,7 @@ export class LetMeKnow {
 
     private initEventHandlers():void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
-            //TODO load specific LetMeKnow View based on category id
+            this._letMeKnowPartialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
         });
 
         $("#" + this._registerLetMeKnowInputId).on("click", (event) => {
