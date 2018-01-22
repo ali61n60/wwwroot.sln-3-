@@ -1,0 +1,45 @@
+﻿@model ModelStd.Db.Ad.LetMeKnow
+
+<div class="well">
+    <div class="row">
+        <div class="col-sm-2 text-right">
+            عنوان
+        </div>
+        <div class="col-sm-4">
+            <p>CategoryIs= @Model.CategoryId ,Email/Sms= @Model.EmailOrSms</p>
+        </div>
+        <div class="col-sm-2 text-right">
+
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 text-right">
+
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2 text-right">
+
+        </div>
+        <div class="col-sm-4">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-12">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-3">
+            <a asp-controller="User" asp-action="DeleteLetMeKnow"
+               asp-route-id="@Model.Id" class="btn btn-lg btn-danger">حذف</a>
+        </div>
+    </div>
+</div>

@@ -29,6 +29,8 @@ namespace MvcMain.Controllers
     // gold user pays 3x, silver user pay 2x and get notifyed sooner -golden user in first 20 minutes,silver 20-40, normal user after 40 minutes
     // manage user credits (reduce and add credits and log credit activity
     // **** on Approving new or editted Ads by Admin insert it in ApprovedAd Table ****
+    //make a link to letmeknow email to cancel user registration
+    //Create SingleLetMeKnowModel and view component
     
     //TODO 1- Create Change My Password for users, create a seperate table to store users extra info such as first name and last name
     
@@ -46,6 +48,7 @@ namespace MvcMain.Controllers
     //TODO 2- study MVC book
     //TODO 2- work on ad status enum 
     //TODO 2- work on MarkAd , share ad
+    //TODO 2- study of multi-language website approach in MVC
 
     //TODO 3- work on Ad Price
     //TODO 3- work on the max number of images per Ad. for example decide it based on user

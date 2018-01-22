@@ -8,6 +8,7 @@ using ModelStd.Services;
 
 namespace MvcMain.Controllers
 {
+    //TODO delete ad, update ad , delete letmeknow return to wrong view
     public class UserController:Controller
     {
         private readonly UserAdApiController _userAdApiController;
@@ -61,7 +62,6 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> DeleteAd(Guid adGuid)
         {
-            //TODO delete Ad
             _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase response = await _userAdApiController.DeleteAd(adGuid);
             if (response.Success)
@@ -89,6 +89,41 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> MarkedAds()
         {
             return View();
+        }
+
+        [Authorize]
+        public async Task<IActionResult> UserLetMeKnows()
+        {
+            _userAdApiController.ControllerContext.HttpContext = HttpContext;
+            ResponseBase<List<ModelStd.Db.Ad.LetMeKnow>> response= await _userAdApiController.GetUserLetMeKnows();
+            if (response.Success)
+            {
+                return View(response.ResponseData);
+            }
+            else
+            {
+                ViewData["Message"] = $"{response.Message} , {response.ErrorCode}";
+                return View();
+            }
+            
+        }
+
+        [Authorize]
+        public async Task<IActionResult> DeleteLetMeKnow(int id)
+        {
+            _userAdApiController.ControllerContext.HttpContext = HttpContext;
+            ResponseBase response = await _userAdApiController.DeleteLetMeKnow(id);
+            if (response.Success)
+            {
+                ViewData["Message"] = "به من اطلاع بده حذف شد";
+                return View("UserLetMeKnows");
+            }
+            else
+            {
+                //TODO log error
+                ViewData["Message"] = $"{response.Message} , {response.ErrorCode}";
+                return View("UserLetMeKnows");
+            }
         }
     }
 }

@@ -293,6 +293,22 @@ namespace RepositoryStd.Repository.Common
             return;
         }
 
+        public List<LetMeKnow> GetUserLetMeKnows(string userId)
+        {
+            return _adDbContext.LetMeKnows.Where(know => know.UserId == userId).ToList();
+        }
+
+        public async Task DeleteLetMeKnow(int letMeKnowId, string userId)
+        {
+            LetMeKnow deletingLetMeKnow = _adDbContext.LetMeKnows.FirstOrDefault(letMeKnow =>
+                letMeKnow.Id==letMeKnowId && letMeKnow.UserId == userId);
+            if (deletingLetMeKnow != null)
+            {
+                _adDbContext.Remove(deletingLetMeKnow);
+                await _adDbContext.SaveChangesAsync();
+            }
+        }
+
         //sp To be removed
         public IEnumerable<AdvertisementCommon> FindAll()
         {

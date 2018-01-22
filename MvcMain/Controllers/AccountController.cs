@@ -172,6 +172,7 @@ namespace MvcMain.Controllers
         {
             //TODO Make your action as an API to be able to use that from android app
             //TODO check email and phone number by regex
+            //TODO Check email not exist already 
             //TODO Check EmailConfiremed AND PhoneNumberConfiremed Are Flase
             ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)

@@ -1,0 +1,55 @@
+﻿@using ModelStd.Db.Ad
+@model List<ModelStd.Db.Ad.LetMeKnow>
+
+@{
+    ViewData["Title"] = "مدیریت به من اطلاع بده";
+    ViewData["PageTitle"] = "مدیریت به من اطلاع بده";
+    Layout = "_Layout";
+}
+
+@section TopTop
+    {
+    @Html.Partial("TopTop")
+}
+@section NavBar
+    {
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+    {
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+    {
+
+}
+@section SideNav
+    {
+    @Html.Partial("SideNav")
+}
+@section Body
+    {
+    @if (ViewData["Message"] != null && ViewData["Message"].ToString() != "")
+    {
+        @:<p>@ViewData["Message"].ToString()</p>
+    }
+    <a asp-controller="User" asp-action="Index" class="btn btn-lg btn-primary">بازگشت به صفحه مدیریت آگهی</a>
+    <br /><br />
+    مدیریت به من اطلاع بده
+    @if (Model != null)
+    {
+        foreach (LetMeKnow letMeKnow in Model)
+        {
+            @await Component.InvokeAsync("UserSingleLetMeKnowItem", letMeKnow)
+        }
+    }
+}
+
+@section Footer
+    {
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}

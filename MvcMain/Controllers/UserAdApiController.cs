@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
@@ -89,6 +90,46 @@ namespace MvcMain.Controllers
                 {
                     response.SetFailureResponse(ex.Message, errorCode);
                 }
+            }
+
+            return response;
+        }
+
+        public async Task<ResponseBase<List<LetMeKnow>>> GetUserLetMeKnows()
+        {
+            string errorCode = "UserAdApiController/GetUserLetMeKnows";
+            ResponseBase<List<LetMeKnow>> response=new ResponseBase<List<LetMeKnow>>();
+            try
+            {
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                List<LetMeKnow> letMeKnows =_commonRepository.GetUserLetMeKnows(user.Id);
+                response.ResponseData = letMeKnows;
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse("test message", errorCode);
+            }
+
+            return response;
+        }
+
+        [Authorize]
+        public async Task<ResponseBase> DeleteLetMeKnow(int id)
+        {
+            string errorCode = "UserAdApiController/DeleteLetMeKnow";
+            //MAke sure user owns letmeknow item
+            ResponseBase response=new ResponseBase();
+            try
+            {
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                _commonRepository.DeleteLetMeKnow(id, user.Id);
+
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message,errorCode);
             }
 
             return response;
