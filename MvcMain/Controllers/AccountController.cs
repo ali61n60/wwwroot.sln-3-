@@ -171,7 +171,7 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> Create(CreateModel model, string returnUrl)
         {
             //TODO Make your action as an API to be able to use that from android app
-            //TODO Check password and repeatPassword are equal
+            //TODO check email and phone number by regex
             //TODO Check EmailConfiremed AND PhoneNumberConfiremed Are Flase
             ViewBag.returnUrl = returnUrl;
             if (ModelState.IsValid)
