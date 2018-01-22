@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -9,8 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
-using NuGet.Configuration;
-using NuGet.Protocol.Core.v3;
 using RepositoryStd.Context.AD;
 using Telegram.Bot;
 using Telegram.Bot.Types;
@@ -164,12 +161,12 @@ namespace MvcMain.Controllers
         [HttpPost]
         public async Task<IActionResult> TelegramMessage(string meesage)
         {
+            
             TelegramBotClient botClient=new TelegramBotClient("513492179:AAFzCqA5jZArPoRhqMt_7M3hRVDDbsgyshI");
-            //botClient.SendTextMessageAsync(new ChatId(), )
-            ChatId chatId = new ChatId("@WhereIsMyCarChannel");
-            await botClient.SendTextMessageAsync(chatId, "Hello from AliBot");
+            ChatId chatId=new ChatId("+98 912 201 2908");
+            await botClient.SendTextMessageAsync(chatId, "this is a test from ali");
 
-            return View();
+            return View("TelegramMessage","test");
         }
 
 
