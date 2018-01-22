@@ -31,11 +31,12 @@ namespace MvcMain.Controllers
     // **** on Approving new or editted Ads by Admin insert it in ApprovedAd Table ****
     //make a link to letmeknow email to cancel user registration
     //Create SingleLetMeKnowModel and view component
+    //Ask user time for recieving Sms ok
     
     //TODO 1- Create Change My Password for users, create a seperate table to store users extra info such as first name and last name
     
     
-    //TODO 1- Create and Run SMS sending improve Android Send Sms App
+    //TODO 1- Create and Run SMS sending improve Android Send Sms App, Ask user Time for sms
     //TODO 1- Create Verify Ad Controller and View For Admin
     //TODO 1- work on view Ad Detail, use similar ads,...
     //TODO 1- add mangeMyAd page for users myAds, MarkedAds
