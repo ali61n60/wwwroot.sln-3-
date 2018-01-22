@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
+using ModelStd.Services;
 using MvcMain.Infrastructure;
 using MvcMain.Models;
 
@@ -119,27 +120,31 @@ namespace MvcMain.Controllers
                             emailMessageSingle.Subject = "فراموشی رمز عبور";
                             emailMessageSingle.Title = "فراموشی رمز عبور";
                             emailMessageSingle.TextMessage = messageText;
-                            await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle, user.Id, MessagePriority.High);
-                            ViewBag.returnUrl = returnUrl ?? "/";
-                            ViewData["Message"] = "کاربر گرامی. رمز عبور جدیدی به ایمیل شما ارسال میشود. لطفا با رمز جدید وارد شده و به منظور افزایش امنیت در اولین فرصت رمز خود را تغییر دهید.";
-                            return View("Login");
+                            ResponseBase emailResponse= await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle, user.Id, MessagePriority.High);
+                            if (emailResponse.Success)
+                            {
+                                ViewBag.returnUrl = returnUrl ?? "/";
+                                ViewData["Message"] = "کاربر گرامی. رمز عبور جدید به ایمیل شما ارسال میشود. لطفا با رمز جدید وارد شده و به منظور افزایش امنیت در اولین فرصت رمز خود را تغییر دهید.";
+                                return View("Login");
+                            }
+                            else
+                            {
+                                ModelState.AddModelError("EmailResponse",emailResponse.Message+", "+emailResponse.ErrorCode);
+                            }
                         }
                         else
                         {
-                            string errorMessage = "";
+                            int errorIndex = 0;
                             foreach (IdentityError identityError in changePassResult.Errors)
                             {
-                                errorMessage += identityError.Description + "  ";
+                                ModelState.AddModelError("ChangePassResult"+errorIndex,identityError.Description);
+                                errorIndex++;
                             }
-                            ViewData["Message"] = errorMessage;
-                            return View();
                         }
                     }
                     else
                     {
-                        //tell user there is not such an email in our database
                         ModelState.AddModelError("UserNull", "ایمیل وارد شده در دیتابیس یافت نشد");
-                        return View();
                     }
                 }
                 catch (Exception ex)
@@ -148,10 +153,6 @@ namespace MvcMain.Controllers
                 }
             }
             return View(detail);
-            
-            
-         
-            
         }
 
         [AllowAnonymous]

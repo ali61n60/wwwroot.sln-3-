@@ -29,7 +29,10 @@ namespace MvcMain.Controllers
     // gold user pays 3x, silver user pay 2x and get notifyed sooner -golden user in first 20 minutes,silver 20-40, normal user after 40 minutes
     // manage user credits (reduce and add credits and log credit activity
     // **** on Approving new or editted Ads by Admin insert it in ApprovedAd Table ****
+    
     //TODO 1- Create Change My Password for users, create a seperate table to store users extra info such as first name and last name
+    //Create new user not Ok
+    
     //TODO 1- Create and Run SMS sending improve Android Send Sms App
     //TODO 1- Create Verify Ad Controller and View For Admin
     //TODO 1- work on view Ad Detail, use similar ads,...
