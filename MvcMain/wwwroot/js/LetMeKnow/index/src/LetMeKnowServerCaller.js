@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var LetMeKnowServerCaller = /** @class */ (function () {
+var LetMeKnowServerCaller = (function () {
     function LetMeKnowServerCaller() {
         //TODO call server and send userinput fro new ad
         //get result and show to user
