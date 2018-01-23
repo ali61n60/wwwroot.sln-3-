@@ -32,9 +32,10 @@ namespace MvcMain.Controllers
     //make a link to letmeknow email to cancel user registration
     //Create SingleLetMeKnowModel and view component
     //Ask user time for recieving Sms ok
-    
+
     //TODO 1- Create Change My Password for users, create a seperate table to store users extra info such as first name and last name
-    
+    //TODO 1- Whan Ajax call is made infrom user by gif image and when error ocurrs show error to user for every Ajax Call 
+    //design main ts files and server callers to cooperate with each other 
     
     //TODO 1- Create and Run SMS sending improve Android Send Sms App, Ask user Time for sms, send  a SMS of Important Error to admin(email sending errors)
     //TODO 1- Create Verify Ad Controller and View For Admin

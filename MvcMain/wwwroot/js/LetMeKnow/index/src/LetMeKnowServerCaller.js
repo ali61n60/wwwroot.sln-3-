@@ -5,6 +5,7 @@ var LetMeKnowServerCaller = (function () {
         //TODO call server and send userinput fro new ad
         //get result and show to user
         this._url = "/api/LetMeKnowApi/AddNewLetMeKnowRecord";
+        this.MessageDivId = "message";
     }
     LetMeKnowServerCaller.prototype.SaveAd = function (userInput) {
         var _this = this;
@@ -22,9 +23,13 @@ var LetMeKnowServerCaller = (function () {
         if (msg.Success == true) {
             document.location.replace("/LetMeKnow/Confirm");
         }
+        else {
+            //$("#" + this.MessageDivId).children().remove();
+            $("#" + this.MessageDivId).html("<p>" + msg.Message + " ," + msg.ErrorCode + "</p>");
+        }
     };
     LetMeKnowServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
-        //TODO inform error to user
+        $("#" + this.MessageDivId).html("<p>خطا در ارسال</p>");
     };
     return LetMeKnowServerCaller;
 }());

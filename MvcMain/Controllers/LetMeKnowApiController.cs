@@ -34,7 +34,6 @@ namespace MvcMain.Controllers
             ResponseBase response=new ResponseBase();
             try
             {
-                throw new Exception("test ex"+DateTime.Now);
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
                 if (user == null)
                 {

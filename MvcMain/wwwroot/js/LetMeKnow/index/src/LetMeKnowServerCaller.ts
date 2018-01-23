@@ -30,6 +30,6 @@ export class LetMeKnowServerCaller {
 
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        //TODO inform error to user
+        $("#" + this.MessageDivId).html("<p>خطا در ارسال</p>");
     } 
 }
