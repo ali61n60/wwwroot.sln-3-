@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using ModelStd.Services;
 

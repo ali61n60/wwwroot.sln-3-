@@ -1,68 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
-using ModelStd.Advertisements;
+using System.Linq;
 using ModelStd.Advertisements.CustomExceptions;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
+using RepositoryStd.Context.AD;
 
 namespace RepositoryStd
 {
-    
-
-   public class CategoryRepositoryDataBase : ICategoryRepository
+    public class CategoryRepositoryDataBase : ICategoryRepository
     {
-        private readonly string _conectionString;
+        private readonly AdDbContext _adDbContext;
 
         public int CategoryVersion { get { return 1; } }
        
 
 
-        public CategoryRepositoryDataBase(string connectionString)
+        public CategoryRepositoryDataBase(AdDbContext adDbContext)
         {
-            _conectionString = connectionString;
+            _adDbContext = adDbContext;
         }
-
-       
-
+        
         public Category FindCategoryById(int CategoryId)
         {
-            Category tempCategory;
-            SqlDataReader dataReader;
-            SqlConnection connection = new SqlConnection(_conectionString);
-            SqlCommand command = new SqlCommand("SELECT  categoryId, categoryName, categoryParentId, categoryNameEnglish " +
-                                                 " FROM   Categories WHERE categoryId=@CategoryId  ", connection);
-            command.Parameters.Add("@CategoryId", System.Data.SqlDbType.Int).Value = CategoryId;
-            try
-            {
-                connection.Open();
-                dataReader = command.ExecuteReader(System.Data.CommandBehavior.CloseConnection);
-                if (dataReader.Read())
-                {
-                    tempCategory=new Category((int) dataReader["categoryId"],
-                         (int)dataReader["categoryParentId"],
-                        (string)dataReader["categoryName"],
-                        (string)dataReader["categoryNameEnglish"]);
-                }
-                else
-                {
-                    throw new CategoryNotFoundException();
-                }
-                
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return tempCategory;
+            return _adDbContext.Categories.FirstOrDefault(category => category.CategoryId == CategoryId);
         }
 
         public IList<Category> GetAllCategories()
         {
-            throw new Exception();
+            return _adDbContext.Categories.ToList();
         }
 
         public IList<Category> GetAllChildernCategories(int ParentCategoryId)

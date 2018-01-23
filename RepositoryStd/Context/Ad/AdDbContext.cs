@@ -32,7 +32,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<ApprovedAd> ApprovedAds { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<CarModel> CarModel { get; set; }
-        public virtual DbSet<Categories> Categories { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<EmailMessage> EmailMessages { get; set; }
@@ -157,7 +157,7 @@ namespace RepositoryStd.Context.AD
                     .HasConstraintName("FK_CarBrands_Makers");
             });
 
-            modelBuilder.Entity<Categories>(entity =>
+            modelBuilder.Entity<Category>(entity =>
             {
                 entity.HasKey(e => e.CategoryId)
                     .HasName("PK_Categories");

@@ -14,7 +14,7 @@ namespace MvcMain.Components.Category.SearchAd
         }
         public IViewComponentResult Invoke()
         {
-            ResponseBase<IEnumerable<ModelStd.Advertisements.Category>> response = _categoryApi.GetAllCategories();
+            ResponseBase<IEnumerable<ModelStd.Db.Ad.Category>> response = _categoryApi.GetAllCategories();
             if (!response.Success)
                 return View("ComponentError", response.Message + ", " + response.ErrorCode);
 

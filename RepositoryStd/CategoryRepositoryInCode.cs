@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 
 namespace RepositoryStd
@@ -12,7 +12,7 @@ namespace RepositoryStd
 
         public CategoryRepositoryInCode()
         {
-           fillAllCategories();
+            fillAllCategories();
         }
 
         public Category FindCategoryById(int CategoryId)
@@ -36,10 +36,10 @@ namespace RepositoryStd
 
         public IList<Category> GetAllChildernCategories(int ParentCategoryId)
         {
-            List<Category> tempList=new List<Category>();
+            List<Category> tempList = new List<Category>();
             foreach (Category category in allCategories)
             {
-                if (category.ParentCategoryId == ParentCategoryId)
+                if (category.CategoryParentId == ParentCategoryId)
                 {
                     tempList.Add(category);
                 }
@@ -52,7 +52,7 @@ namespace RepositoryStd
             Category tempCategory = null;
             foreach (Category category in allCategories)
             {
-                if (category.EnglishCategoryName == EnglishCategoryName)
+                if (category.CategoryNameEnglish == EnglishCategoryName)
                 {
                     tempCategory = category;
                     break;
@@ -68,7 +68,7 @@ namespace RepositoryStd
             {
                 if (category.CategoryId == categoryId)
                 {
-                    tempCategory = this.FindCategoryById(category.ParentCategoryId);
+                    tempCategory = this.FindCategoryById(category.CategoryParentId);
                     break;
                 }
             }
@@ -81,14 +81,14 @@ namespace RepositoryStd
             Category rootParentCategory = null;
             while (temCategory != null)
             {
-                if (temCategory.ParentCategoryId == 0)
+                if (temCategory.CategoryParentId == 0)
                 {
                     rootParentCategory = temCategory;
                     break;
                 }
                 else
                 {
-                    temCategory = findCategoryById(temCategory.ParentCategoryId);
+                    temCategory = findCategoryById(temCategory.CategoryParentId);
                 }
             }
 
@@ -97,7 +97,7 @@ namespace RepositoryStd
 
         private Category findCategoryById(int categoryId)
         {
-            Category tempCategory=null;
+            Category tempCategory = null;
             foreach (Category category in allCategories)
             {
                 if (category.CategoryId == categoryId)
@@ -112,229 +112,230 @@ namespace RepositoryStd
         private void fillAllCategories()
         {
             allCategories = new List<Category>();
-            allCategories.Add(new Category(1, 0, "املاک", "Estate"));
-            allCategories.Add(new Category(2, 0, "وسایل نقلیه", "TransportationRepository"));
-            allCategories.Add(new Category(3, 0, "استخدام و کاریابی", "Recruitment"));
-            allCategories.Add(new Category(4, 0, "مربوط به خانه", "Housing"));
-            allCategories.Add(new Category(5, 0, "خدمات", "Services"));
-            allCategories.Add(new Category(6, 0, "وسایل شخصی", "PersonalStuff"));
-            allCategories.Add(new Category(7, 0, "لوازم الکترونیکی", "Electronics"));
-            allCategories.Add(new Category(8, 0, "سرگرمی و فراغت", "Entertainment"));
-            allCategories.Add(new Category(9, 0, "اجتماعی", "Social"));
-            allCategories.Add(new Category(10, 0, "برای کسب و کار", "Business"));
-            allCategories.Add(new Category(11, 1, "خدمات املاک", ""));
-            allCategories.Add(new Category(12, 1, "فروش مسکونی", ""));
-            allCategories.Add(new Category(13, 1, "اجاره مسکونی", ""));
-            allCategories.Add(new Category(14, 1, "فروش اداری و تجاری", ""));
-            allCategories.Add(new Category(15, 1, "اجاره اداری و تجاری", ""));
-            allCategories.Add(new Category(16, 1, "متفرقه", ""));
-            allCategories.Add(new Category(17, 2, "خودرو", ""));
-            allCategories.Add(new Category(18, 2, "قطعات یدکی و لوازم جانبی خودرو", ""));
-            allCategories.Add(new Category(19, 2, "قایق و لوازم جانبی", ""));
-            allCategories.Add(new Category(20, 2, "موتور سیکلت و لوازم جانبی", ""));
-            allCategories.Add(new Category(21, 2, "متفرقه", ""));
-            allCategories.Add(new Category(22, 3, "اداری و مدیریت", ""));
-            allCategories.Add(new Category(23, 3, "معماری و ساختمانی", ""));
-            allCategories.Add(new Category(24, 3, "رایانه و فناوری اطلاعات", ""));
-            allCategories.Add(new Category(25, 3, "مالی و حسابداری و حقوقی", ""));
-            allCategories.Add(new Category(26, 3, "بازاریابی و فروش", ""));
-            allCategories.Add(new Category(27, 3, "صنعتی و فنی و مهندسی", ""));
-            allCategories.Add(new Category(28, 3, "آموزشی", ""));
-            allCategories.Add(new Category(29, 3, "حمل و نقل", ""));
-            allCategories.Add(new Category(30, 3, "درمانی و زیبایی و بهداشتی", ""));
-            allCategories.Add(new Category(31, 3, "هنری و رسانه", ""));
-            allCategories.Add(new Category(32, 3, "خدمات فروشگاه و رستوران", ""));
-            allCategories.Add(new Category(33, 3, "سرایداری و نظافت", ""));
-            allCategories.Add(new Category(34, 3, "متفرقه", ""));
-            allCategories.Add(new Category(35, 4, "ساختمان و حیاط", ""));
-            allCategories.Add(new Category(36, 4, "وسایل و تزیینات خانه", ""));
-            allCategories.Add(new Category(37, 4, "وسایل آشپزخانه", ""));
-            allCategories.Add(new Category(38, 4, "ابزار", ""));
-            allCategories.Add(new Category(39, 4, "متفرقه", ""));
-            allCategories.Add(new Category(40, 5, "موتور و ماشین", ""));
-            allCategories.Add(new Category(41, 5, "پذیرایی و مراسم", ""));
-            allCategories.Add(new Category(42, 5, "خدمات رایانه و موبایل", ""));
-            allCategories.Add(new Category(43, 5, "مالی، حسابداری و بیمه", ""));
-            allCategories.Add(new Category(44, 5, "حمل و نقل", ""));
-            allCategories.Add(new Category(45, 5, "پیشه و مهارت", ""));
-            allCategories.Add(new Category(46, 5, "آرایشگری و زیبایی", ""));
-            allCategories.Add(new Category(47, 5, "سرگرمی", ""));
-            allCategories.Add(new Category(48, 5, "نظافت", ""));
-            allCategories.Add(new Category(49, 5, "باغبانی و درختکاری", ""));
-            allCategories.Add(new Category(50, 5, "آموزشی", ""));
-            allCategories.Add(new Category(51, 5, "متفرقه", ""));
-            allCategories.Add(new Category(52, 6, "کیف، کفش و لباس", ""));
-            allCategories.Add(new Category(53, 6, "تزیینی", ""));
-            allCategories.Add(new Category(54, 6, "کفش و لباس بچه", ""));
-            allCategories.Add(new Category(55, 6, "وسایل بچه و اسباب بازی", ""));
-            allCategories.Add(new Category(56, 6, "آرایشی، بهداشتی و درمانی", ""));
-            allCategories.Add(new Category(57, 6, "متفرقه", ""));
-            allCategories.Add(new Category(58, 7, "رایانه", ""));
-            allCategories.Add(new Category(59, 7, "صوتی و تصویری", ""));
-            allCategories.Add(new Category(60, 7, "موبایل و تبلت", ""));
-            allCategories.Add(new Category(61, 7, "کنسول بازی ویدئویی و آنلاین", ""));
-            allCategories.Add(new Category(62, 7, "دستگاه تلفن", ""));
-            allCategories.Add(new Category(63, 7, "متفرقه", ""));
-            allCategories.Add(new Category(64, 8, "بلیط", ""));
-            allCategories.Add(new Category(65, 8, "کتاب و مجله", ""));
-            allCategories.Add(new Category(66, 8, "دوچرخه، اسکیت و اسکوتر", ""));
-            allCategories.Add(new Category(67, 8, "حیوانات", ""));
-            allCategories.Add(new Category(68, 8, "کلکسیون و سرگرمی", ""));
-            allCategories.Add(new Category(69, 8, "آلات موسیقی", ""));
-            allCategories.Add(new Category(70, 8, "ورزش و تناسب اندام", ""));
-            allCategories.Add(new Category(71, 8, "اسباب بازی", ""));
-            allCategories.Add(new Category(72, 8, "تور و چارتر", ""));
-            allCategories.Add(new Category(73, 8, "متفرقه", ""));
-            allCategories.Add(new Category(74, 9, "رویداد", ""));
-            allCategories.Add(new Category(75, 9, "داوطلبانه", ""));
-            allCategories.Add(new Category(76, 9, "متفرقه", ""));
-            allCategories.Add(new Category(77, 10, "تجهیزات و ماشین آلات", ""));
-            allCategories.Add(new Category(78, 10, "عمده فروشی", ""));
-            allCategories.Add(new Category(79, 10, "متفرقه", ""));
-            allCategories.Add(new Category(80, 11, "آژانس املاک", ""));
-            allCategories.Add(new Category(81, 11, "مشارکت در ساخت", ""));
-            allCategories.Add(new Category(82, 11, "امور مالی و حقوقی", ""));
-            allCategories.Add(new Category(83, 11, "پیش فروش", ""));
-            allCategories.Add(new Category(84, 11, "متفرقه", ""));
-            allCategories.Add(new Category(85, 12, "آپارتمان", ""));
-            allCategories.Add(new Category(86, 12, "خانه و ویلایی", ""));
-            allCategories.Add(new Category(87, 12, "زمین و کلنگی", ""));
-            allCategories.Add(new Category(88, 12, "متفرقه", ""));
-            allCategories.Add(new Category(89, 13, "آپارتمان", ""));
-            allCategories.Add(new Category(90, 13, "خانه و ویلا", ""));
-            allCategories.Add(new Category(91, 13, "متفرقه", ""));
-            allCategories.Add(new Category(92, 14, "دفتر کار، اتاق اداری و مطب", ""));
-            allCategories.Add(new Category(93, 14, "مغازه و غرفه", ""));
-            allCategories.Add(new Category(94, 14, "صنعتی، کشاورزی و تجاری", ""));
-            allCategories.Add(new Category(95, 14, "متفرقه", ""));
-            allCategories.Add(new Category(96, 15, "دفتر کار، اتاق اداری و مطب", ""));
-            allCategories.Add(new Category(97, 15, "مغازه و غرفه", ""));
-            allCategories.Add(new Category(98, 15, "صنعتی، کشاورزی و تجاری", ""));
-            allCategories.Add(new Category(99, 15, "متفرقه", ""));
-            allCategories.Add(new Category(100, 17, "سواری", ""));
-            allCategories.Add(new Category(101, 17, "سنگین", ""));
-            allCategories.Add(new Category(102, 17, "متفرقه", ""));
-            allCategories.Add(new Category(103, 35, "سرویس بهداشتی و سونا", ""));
-            allCategories.Add(new Category(104, 35, "سیستم گرمایشیو سرمایشی و گاز", ""));
-            allCategories.Add(new Category(105, 35, "آشپزخانه", ""));
-            allCategories.Add(new Category(106, 35, "حیاط و ایوان", ""));
-            allCategories.Add(new Category(107, 35, "ابزار باغبانی", ""));
-            allCategories.Add(new Category(108, 35, "متفرقه", ""));
-            allCategories.Add(new Category(109, 36, "تزیینی و آثار هنری", ""));
-            allCategories.Add(new Category(110, 36, "لوازم روشنایی", ""));
-            allCategories.Add(new Category(111, 36, "میز و صندلی", ""));
-            allCategories.Add(new Category(112, 36, "فرش و گلیم", ""));
-            allCategories.Add(new Category(113, 36, "کمد و بوفه", ""));
-            allCategories.Add(new Category(114, 36, "پرده و رومیزی", ""));
-            allCategories.Add(new Category(115, 36, "تخت و اتاق خواب", ""));
-            allCategories.Add(new Category(116, 36, "مبلمان و صندلی راحتی", ""));
-            allCategories.Add(new Category(117, 36, "میز تلوزیون و وسایل سیستم پخش", ""));
-            allCategories.Add(new Category(118, 36, "متفرقه", ""));
-            allCategories.Add(new Category(119, 37, "ماشین ظرفشویی", ""));
-            allCategories.Add(new Category(120, 37, "یخچال و فریزر", ""));
-            allCategories.Add(new Category(121, 37, "وسایل آشپزی و غذا خوری", ""));
-            allCategories.Add(new Category(122, 37, "مایکروویو و گاز", ""));
-            allCategories.Add(new Category(123, 37, "ماشین لباسشویی و خشک کننده", ""));
-            allCategories.Add(new Category(124, 37, "متفرقه", ""));
-            allCategories.Add(new Category(125, 38, "نظافت و خیاطی و اتو", ""));
-            allCategories.Add(new Category(126, 38, "تعمیرات", ""));
-            allCategories.Add(new Category(127, 38, "متفرقه", ""));
-            allCategories.Add(new Category(128, 42, "فروش دامنه و سایت", ""));
-            allCategories.Add(new Category(129, 42, "میزبانی و طراحی سایت", ""));
-            allCategories.Add(new Category(130, 42, "خدمات پهنای باند اینترنت", ""));
-            allCategories.Add(new Category(131, 42, "خدمات نزم افزار و سخت افزار کامپیوتر", ""));
-            allCategories.Add(new Category(132, 42, "تعمیرات نرم افزار و سخت افزار گوشی موبایل", ""));
-            allCategories.Add(new Category(133, 42, "متفرقه", ""));
-            allCategories.Add(new Category(134, 50, "زبان خارجی", ""));
-            allCategories.Add(new Category(135, 50, "دروس مدرسه و دانشگاه", ""));
-            allCategories.Add(new Category(136, 50, "نرم افزار", ""));
-            allCategories.Add(new Category(137, 50, "هنری", ""));
-            allCategories.Add(new Category(138, 50, "ورزشی", ""));
-            allCategories.Add(new Category(139, 50, "مشاوره تحصیلی", ""));
-            allCategories.Add(new Category(140, 50, "متفرقه", ""));
-            allCategories.Add(new Category(141, 52, "کیف، کفش و کمربند", ""));
-            allCategories.Add(new Category(142, 52, "لباس", ""));
-            allCategories.Add(new Category(143, 52, "متفرقه", ""));
-            allCategories.Add(new Category(144, 53, "ساعت", ""));
-            allCategories.Add(new Category(145, 53, "جواهرات", ""));
-            allCategories.Add(new Category(146, 53, "بدلیجات", ""));
-            allCategories.Add(new Category(147, 53, "متفرقه", ""));
-            allCategories.Add(new Category(148, 55, "اسباب بازی", ""));
-            allCategories.Add(new Category(149, 55, "کالسکه و لوازم جانبی", ""));
-            allCategories.Add(new Category(150, 55, "صندلی بچه", ""));
-            allCategories.Add(new Category(151, 55, "اسباب و اثاث بچه", ""));
-            allCategories.Add(new Category(152, 55, "متفرقه", ""));
-            allCategories.Add(new Category(153, 58, "رایانه رومیزی", ""));
-            allCategories.Add(new Category(154, 58, "رایانه همراه", ""));
-            allCategories.Add(new Category(155, 58, "پرینتر، اسکنر، کپی و فکس", ""));
-            allCategories.Add(new Category(156, 58, "قطعات و لوازم جانبی", ""));
-            allCategories.Add(new Category(157, 58, "مودم و تجهیزات شبکه", ""));
-            allCategories.Add(new Category(158, 58, "متفرقه", ""));
-            allCategories.Add(new Category(159, 59, "فیلم و موسیقی", ""));
-            allCategories.Add(new Category(160, 59, "دوربین عکاسی و فیلمبرداری", ""));
-            allCategories.Add(new Category(161, 59, "پخش کننده همراه", ""));
-            allCategories.Add(new Category(162, 59, "سیستم صوتی و خانگی", ""));
-            allCategories.Add(new Category(163, 59, "DVD ویدئو و پخش کننده", ""));
-            allCategories.Add(new Category(164, 59, "تلوزیون و پروژکتور", ""));
-            allCategories.Add(new Category(165, 59, "متفرقه", ""));
-            allCategories.Add(new Category(166, 60, "گوشی موبایل", ""));
-            allCategories.Add(new Category(167, 60, "تبلت", ""));
-            allCategories.Add(new Category(168, 60, "لوازم جانبی و موبایل و تبلت", ""));
-            allCategories.Add(new Category(169, 60, "سیم کارت", ""));
-            allCategories.Add(new Category(170, 60, "متفرقه", ""));
-            allCategories.Add(new Category(171, 64, "کنسرت", ""));
-            allCategories.Add(new Category(172, 64, "تئاتر و سینما", ""));
-            allCategories.Add(new Category(173, 64, "کارت هدیه و تخفیف", ""));
-            allCategories.Add(new Category(174, 64, "ورزشی", ""));
-            allCategories.Add(new Category(175, 64, "اتوبوس، مترو و قطار", ""));
-            allCategories.Add(new Category(176, 64, "اماکن و مسابقات ورزشی", ""));
-            allCategories.Add(new Category(177, 64, "متفرقه", ""));
-            allCategories.Add(new Category(178, 65, "آموزشی", ""));
-            allCategories.Add(new Category(179, 65, "تاریخی", ""));
-            allCategories.Add(new Category(180, 65, "ادبی", ""));
-            allCategories.Add(new Category(181, 65, "مذهبی", ""));
-            allCategories.Add(new Category(182, 65, "مجلات", ""));
-            allCategories.Add(new Category(183, 65, "متفرقه", ""));
-            allCategories.Add(new Category(184, 67, "گربه", ""));
-            allCategories.Add(new Category(185, 67, "موش و خرگوش", ""));
-            allCategories.Add(new Category(186, 67, "خزنده", ""));
-            allCategories.Add(new Category(187, 67, "پرنده", ""));
-            allCategories.Add(new Category(188, 67, "ماهی", ""));
-            allCategories.Add(new Category(189, 67, "لوازم جانبی", ""));
-            allCategories.Add(new Category(190, 67, "حیوانات مزرعه", ""));
-            allCategories.Add(new Category(191, 67, "متفرقه", ""));
-            allCategories.Add(new Category(192, 68, "سکه، تمبر و اسکناس", ""));
-            allCategories.Add(new Category(193, 68, "اشیای عتیقه", ""));
-            allCategories.Add(new Category(194, 68, "متفرقه", ""));
-            allCategories.Add(new Category(195, 69, "گیتار، بیس و امپلیفایر", ""));
-            allCategories.Add(new Category(196, 69, "پیانو، کیبورد و آکاردئون", ""));
-            allCategories.Add(new Category(197, 69, "سنتی", ""));
-            allCategories.Add(new Category(198, 69, "درام و پراکشن", ""));
-            allCategories.Add(new Category(199, 69, "سازهای بادی", ""));
-            allCategories.Add(new Category(200, 69, "ویولن", ""));
-            allCategories.Add(new Category(201, 69, "متفرقه", ""));
-            allCategories.Add(new Category(202, 70, "ورزش های توپی", ""));
-            allCategories.Add(new Category(203, 70, "کوهنوردی و کمپینگ", ""));
-            allCategories.Add(new Category(204, 70, "غواصی و ورزش های آبی", ""));
-            allCategories.Add(new Category(205, 70, "تجهیزات ورزشی", ""));
-            allCategories.Add(new Category(206, 70, "ورزش های زمستانی", ""));
-            allCategories.Add(new Category(207, 70, "اسب و تجهیزات اسب سواری", ""));
-            allCategories.Add(new Category(208, 70, "ماهیگیری", ""));
-            allCategories.Add(new Category(209, 70, "متفرقه", ""));
-            allCategories.Add(new Category(210, 74, "حراج", ""));
-            allCategories.Add(new Category(211, 74, "گردهمایی و همایش", ""));
-            allCategories.Add(new Category(212, 74, "موسیقی و تئاتر", ""));
-            allCategories.Add(new Category(213, 74, "ورزشی", ""));
-            allCategories.Add(new Category(214, 74, "متفرقه", ""));
-            allCategories.Add(new Category(215, 75, "خیریه و کمک رسانی", ""));
-            allCategories.Add(new Category(216, 75, "تحقیقاتی", ""));
-            allCategories.Add(new Category(217, 75, "متفرقه", ""));
-            allCategories.Add(new Category(218, 77, "فروشگاه و مغازه", ""));
-            allCategories.Add(new Category(219, 77, "آرایشگاه و سالن های زیبایی", ""));
-            allCategories.Add(new Category(220, 77, "دفتر کار", ""));
-            allCategories.Add(new Category(221, 77, "صنعتی", ""));
-            allCategories.Add(new Category(222, 77, "کافی شاپ و رستوران", ""));
-            allCategories.Add(new Category(223, 77, "متفرقه", ""));
+
+            allCategories.Add(new Category() { CategoryId = 1, CategoryParentId = 0, CategoryName = "املاک", CategoryNameEnglish = "Estate" });
+            allCategories.Add(new Category() { CategoryId = 2, CategoryParentId = 0, CategoryName = "وسایل نقلیه", CategoryNameEnglish = "Transportation" });
+            allCategories.Add(new Category() { CategoryId = 3, CategoryParentId = 0, CategoryName = "استخدام و کاریابی", CategoryNameEnglish = "Recruitment" });
+            allCategories.Add(new Category() { CategoryId = 4, CategoryParentId = 0, CategoryName = "مربوط به خانه", CategoryNameEnglish = "Housing" });
+            allCategories.Add(new Category() { CategoryId = 5, CategoryParentId = 0, CategoryName = "خدمات", CategoryNameEnglish = "Services" });
+            allCategories.Add(new Category() { CategoryId = 6, CategoryParentId = 0, CategoryName = "وسایل شخصی", CategoryNameEnglish = "PersonalStuff" });
+            allCategories.Add(new Category() { CategoryId = 7, CategoryParentId = 0, CategoryName = "لوازم الکترونیکی", CategoryNameEnglish = "Electronics" });
+            allCategories.Add(new Category() { CategoryId = 8, CategoryParentId = 0, CategoryName = "سرگرمی و فراغت", CategoryNameEnglish = "Entertainment" });
+            allCategories.Add(new Category() { CategoryId = 9, CategoryParentId = 0, CategoryName = "اجتماعی", CategoryNameEnglish = "Social" });
+            allCategories.Add(new Category() { CategoryId = 10, CategoryParentId = 0, CategoryName = "برای کسب و کار", CategoryNameEnglish = "Business" });
+            allCategories.Add(new Category() { CategoryId = 11, CategoryParentId = 1, CategoryName = "خدمات املاک", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 12, CategoryParentId = 1, CategoryName = "فروش مسکونی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 13, CategoryParentId = 1, CategoryName = "اجاره مسکونی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 14, CategoryParentId = 1, CategoryName = "فروش اداری و تجاری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 15, CategoryParentId = 1, CategoryName = "اجاره اداری و تجاری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 16, CategoryParentId = 1, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 17, CategoryParentId = 2, CategoryName = "خودرو", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 18, CategoryParentId = 2, CategoryName = "قطعات یدکی و لوازم جانبی خودرو", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 19, CategoryParentId = 2, CategoryName = "قایق و لوازم جانبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 20, CategoryParentId = 2, CategoryName = "موتور سیکلت و لوازم جانبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 21, CategoryParentId = 2, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 22, CategoryParentId = 3, CategoryName = "اداری و مدیریت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 23, CategoryParentId = 3, CategoryName = "معماری و ساختمانی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 24, CategoryParentId = 3, CategoryName = "رایانه و فناوری اطلاعات", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 25, CategoryParentId = 3, CategoryName = "مالی و حسابداری و حقوقی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 26, CategoryParentId = 3, CategoryName = "بازاریابی و فروش", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 27, CategoryParentId = 3, CategoryName = "صنعتی و فنی و مهندسی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 28, CategoryParentId = 3, CategoryName = "آموزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 29, CategoryParentId = 3, CategoryName = "حمل و نقل", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 30, CategoryParentId = 3, CategoryName = "درمانی و زیبایی و بهداشتی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 31, CategoryParentId = 3, CategoryName = "هنری و رسانه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 32, CategoryParentId = 3, CategoryName = "خدمات فروشگاه و رستوران", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 33, CategoryParentId = 3, CategoryName = "سرایداری و نظافت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 34, CategoryParentId = 3, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 35, CategoryParentId = 4, CategoryName = "ساختمان و حیاط", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 36, CategoryParentId = 4, CategoryName = "وسایل و تزیینات خانه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 37, CategoryParentId = 4, CategoryName = "وسایل آشپزخانه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 38, CategoryParentId = 4, CategoryName = "ابزار", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 39, CategoryParentId = 4, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 40, CategoryParentId = 5, CategoryName = "موتور و ماشین", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 41, CategoryParentId = 5, CategoryName = "پذیرایی و مراسم", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 42, CategoryParentId = 5, CategoryName = "خدمات رایانه و موبایل", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 43, CategoryParentId = 5, CategoryName = "مالی، حسابداری و بیمه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 44, CategoryParentId = 5, CategoryName = "حمل و نقل", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 45, CategoryParentId = 5, CategoryName = "پیشه و مهارت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 46, CategoryParentId = 5, CategoryName = "آرایشگری و زیبایی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 47, CategoryParentId = 5, CategoryName = "سرگرمی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 48, CategoryParentId = 5, CategoryName = "نظافت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 49, CategoryParentId = 5, CategoryName = "باغبانی و درختکاری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 50, CategoryParentId = 5, CategoryName = "آموزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 51, CategoryParentId = 5, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 52, CategoryParentId = 6, CategoryName = "کیف، کفش و لباس", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 53, CategoryParentId = 6, CategoryName = "تزیینی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 54, CategoryParentId = 6, CategoryName = "کفش و لباس بچه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 55, CategoryParentId = 6, CategoryName = "وسایل بچه و اسباب بازی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 56, CategoryParentId = 6, CategoryName = "آرایشی، بهداشتی و درمانی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 57, CategoryParentId = 6, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 58, CategoryParentId = 7, CategoryName = "رایانه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 59, CategoryParentId = 7, CategoryName = "صوتی و تصویری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 60, CategoryParentId = 7, CategoryName = "موبایل و تبلت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 61, CategoryParentId = 7, CategoryName = "کنسول بازی ویدئویی و آنلاین", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 62, CategoryParentId = 7, CategoryName = "دستگاه تلفن", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 63, CategoryParentId = 7, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 64, CategoryParentId = 8, CategoryName = "بلیط", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 65, CategoryParentId = 8, CategoryName = "کتاب و مجله", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 66, CategoryParentId = 8, CategoryName = "دوچرخه، اسکیت و اسکوتر", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 67, CategoryParentId = 8, CategoryName = "حیوانات", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 68, CategoryParentId = 8, CategoryName = "کلکسیون و سرگرمی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 69, CategoryParentId = 8, CategoryName = "آلات موسیقی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 70, CategoryParentId = 8, CategoryName = "ورزش و تناسب اندام", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 71, CategoryParentId = 8, CategoryName = "اسباب بازی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 72, CategoryParentId = 8, CategoryName = "تور و چارتر", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 73, CategoryParentId = 8, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 74, CategoryParentId = 9, CategoryName = "رویداد", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 75, CategoryParentId = 9, CategoryName = "داوطلبانه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 76, CategoryParentId = 9, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 77, CategoryParentId = 10, CategoryName = "تجهیزات و ماشین آلات", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 78, CategoryParentId = 10, CategoryName = "عمده فروشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 79, CategoryParentId = 10, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 80, CategoryParentId = 11, CategoryName = "آژانس املاک", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 81, CategoryParentId = 11, CategoryName = "مشارکت در ساخت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 82, CategoryParentId = 11, CategoryName = "امور مالی و حقوقی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 83, CategoryParentId = 11, CategoryName = "پیش فروش", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 84, CategoryParentId = 11, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 85, CategoryParentId = 12, CategoryName = "آپارتمان", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 86, CategoryParentId = 12, CategoryName = "خانه و ویلایی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 87, CategoryParentId = 12, CategoryName = "زمین و کلنگی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 88, CategoryParentId = 12, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 89, CategoryParentId = 13, CategoryName = "آپارتمان", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 90, CategoryParentId = 13, CategoryName = "خانه و ویلا", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 91, CategoryParentId = 13, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 92, CategoryParentId = 14, CategoryName = "دفتر کار، اتاق اداری و مطب", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 93, CategoryParentId = 14, CategoryName = "مغازه و غرفه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 94, CategoryParentId = 14, CategoryName = "صنعتی، کشاورزی و تجاری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 95, CategoryParentId = 14, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 96, CategoryParentId = 15, CategoryName = "دفتر کار، اتاق اداری و مطب", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 97, CategoryParentId = 15, CategoryName = "مغازه و غرفه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 98, CategoryParentId = 15, CategoryName = "صنعتی، کشاورزی و تجاری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 99, CategoryParentId = 15, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 100, CategoryParentId = 17, CategoryName = "سواری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 101, CategoryParentId = 17, CategoryName = "سنگین", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 102, CategoryParentId = 17, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 103, CategoryParentId = 35, CategoryName = "سرویس بهداشتی و سونا", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 104, CategoryParentId = 35, CategoryName = "سیستم گرمایشیو سرمایشی و گاز", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 105, CategoryParentId = 35, CategoryName = "آشپزخانه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 106, CategoryParentId = 35, CategoryName = "حیاط و ایوان", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 107, CategoryParentId = 35, CategoryName = "ابزار باغبانی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 108, CategoryParentId = 35, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 109, CategoryParentId = 36, CategoryName = "تزیینی و آثار هنری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 110, CategoryParentId = 36, CategoryName = "لوازم روشنایی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 111, CategoryParentId = 36, CategoryName = "میز و صندلی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 112, CategoryParentId = 36, CategoryName = "فرش و گلیم", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 113, CategoryParentId = 36, CategoryName = "کمد و بوفه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 114, CategoryParentId = 36, CategoryName = "پرده و رومیزی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 115, CategoryParentId = 36, CategoryName = "تخت و اتاق خواب", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 116, CategoryParentId = 36, CategoryName = "مبلمان و صندلی راحتی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 117, CategoryParentId = 36, CategoryName = "میز تلوزیون و وسایل سیستم پخش", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 118, CategoryParentId = 36, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 119, CategoryParentId = 37, CategoryName = "ماشین ظرفشویی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 120, CategoryParentId = 37, CategoryName = "یخچال و فریزر", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 121, CategoryParentId = 37, CategoryName = "وسایل آشپزی و غذا خوری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 122, CategoryParentId = 37, CategoryName = "مایکروویو و گاز", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 123, CategoryParentId = 37, CategoryName = "ماشین لباسشویی و خشک کننده", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 124, CategoryParentId = 37, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 125, CategoryParentId = 38, CategoryName = "نظافت و خیاطی و اتو", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 126, CategoryParentId = 38, CategoryName = "تعمیرات", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 127, CategoryParentId = 38, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 128, CategoryParentId = 42, CategoryName = "فروش دامنه و سایت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 129, CategoryParentId = 42, CategoryName = "میزبانی و طراحی سایت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 130, CategoryParentId = 42, CategoryName = "خدمات پهنای باند اینترنت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 131, CategoryParentId = 42, CategoryName = "خدمات نزم افزار و سخت افزار کامپیوتر", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 132, CategoryParentId = 42, CategoryName = "تعمیرات نرم افزار و سخت افزار گوشی موبایل", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 133, CategoryParentId = 42, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 134, CategoryParentId = 50, CategoryName = "زبان خارجی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 135, CategoryParentId = 50, CategoryName = "دروس مدرسه و دانشگاه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 136, CategoryParentId = 50, CategoryName = "نرم افزار", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 137, CategoryParentId = 50, CategoryName = "هنری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 138, CategoryParentId = 50, CategoryName = "ورزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 139, CategoryParentId = 50, CategoryName = "مشاوره تحصیلی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 140, CategoryParentId = 50, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 141, CategoryParentId = 52, CategoryName = "کیف، کفش و کمربند", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 142, CategoryParentId = 52, CategoryName = "لباس", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 143, CategoryParentId = 52, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 144, CategoryParentId = 53, CategoryName = "ساعت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 145, CategoryParentId = 53, CategoryName = "جواهرات", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 146, CategoryParentId = 53, CategoryName = "بدلیجات", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 147, CategoryParentId = 53, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 148, CategoryParentId = 55, CategoryName = "اسباب بازی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 149, CategoryParentId = 55, CategoryName = "کالسکه و لوازم جانبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 150, CategoryParentId = 55, CategoryName = "صندلی بچه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 151, CategoryParentId = 55, CategoryName = "اسباب و اثاث بچه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 152, CategoryParentId = 55, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 153, CategoryParentId = 58, CategoryName = "رایانه رومیزی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 154, CategoryParentId = 58, CategoryName = "رایانه همراه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 155, CategoryParentId = 58, CategoryName = "پرینتر، اسکنر، کپی و فکس", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 156, CategoryParentId = 58, CategoryName = "قطعات و لوازم جانبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 157, CategoryParentId = 58, CategoryName = "مودم و تجهیزات شبکه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 158, CategoryParentId = 58, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 159, CategoryParentId = 59, CategoryName = "فیلم و موسیقی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 160, CategoryParentId = 59, CategoryName = "دوربین عکاسی و فیلمبرداری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 161, CategoryParentId = 59, CategoryName = "پخش کننده همراه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 162, CategoryParentId = 59, CategoryName = "سیستم صوتی و خانگی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 163, CategoryParentId = 59, CategoryName = "DVD ویدئو و پخش کننده", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 164, CategoryParentId = 59, CategoryName = "تلوزیون و پروژکتور", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 165, CategoryParentId = 59, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 166, CategoryParentId = 60, CategoryName = "گوشی موبایل", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 167, CategoryParentId = 60, CategoryName = "تبلت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 168, CategoryParentId = 60, CategoryName = "لوازم جانبی و موبایل و تبلت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 169, CategoryParentId = 60, CategoryName = "سیم کارت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 170, CategoryParentId = 60, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 171, CategoryParentId = 64, CategoryName = "کنسرت", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 172, CategoryParentId = 64, CategoryName = "تئاتر و سینما", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 173, CategoryParentId = 64, CategoryName = "کارت هدیه و تخفیف", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 174, CategoryParentId = 64, CategoryName = "ورزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 175, CategoryParentId = 64, CategoryName = "اتوبوس، مترو و قطار", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 176, CategoryParentId = 64, CategoryName = "اماکن و مسابقات ورزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 177, CategoryParentId = 64, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 178, CategoryParentId = 65, CategoryName = "آموزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 179, CategoryParentId = 65, CategoryName = "تاریخی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 180, CategoryParentId = 65, CategoryName = "ادبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 181, CategoryParentId = 65, CategoryName = "مذهبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 182, CategoryParentId = 65, CategoryName = "مجلات", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 183, CategoryParentId = 65, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 184, CategoryParentId = 67, CategoryName = "گربه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 185, CategoryParentId = 67, CategoryName = "موش و خرگوش", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 186, CategoryParentId = 67, CategoryName = "خزنده", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 187, CategoryParentId = 67, CategoryName = "پرنده", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 188, CategoryParentId = 67, CategoryName = "ماهی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 189, CategoryParentId = 67, CategoryName = "لوازم جانبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 190, CategoryParentId = 67, CategoryName = "حیوانات مزرعه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 191, CategoryParentId = 67, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 192, CategoryParentId = 68, CategoryName = "سکه، تمبر و اسکناس", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 193, CategoryParentId = 68, CategoryName = "اشیای عتیقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 194, CategoryParentId = 68, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 195, CategoryParentId = 69, CategoryName = "گیتار، بیس و امپلیفایر", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 196, CategoryParentId = 69, CategoryName = "پیانو، کیبورد و آکاردئون", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 197, CategoryParentId = 69, CategoryName = "سنتی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 198, CategoryParentId = 69, CategoryName = "درام و پراکشن", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 199, CategoryParentId = 69, CategoryName = "سازهای بادی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 200, CategoryParentId = 69, CategoryName = "ویولن", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 201, CategoryParentId = 69, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 202, CategoryParentId = 70, CategoryName = "ورزش های توپی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 203, CategoryParentId = 70, CategoryName = "کوهنوردی و کمپینگ", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 204, CategoryParentId = 70, CategoryName = "غواصی و ورزش های آبی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 205, CategoryParentId = 70, CategoryName = "تجهیزات ورزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 206, CategoryParentId = 70, CategoryName = "ورزش های زمستانی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 207, CategoryParentId = 70, CategoryName = "اسب و تجهیزات اسب سواری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 208, CategoryParentId = 70, CategoryName = "ماهیگیری", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 209, CategoryParentId = 70, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 210, CategoryParentId = 74, CategoryName = "حراج", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 211, CategoryParentId = 74, CategoryName = "گردهمایی و همایش", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 212, CategoryParentId = 74, CategoryName = "موسیقی و تئاتر", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 213, CategoryParentId = 74, CategoryName = "ورزشی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 214, CategoryParentId = 74, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 215, CategoryParentId = 75, CategoryName = "خیریه و کمک رسانی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 216, CategoryParentId = 75, CategoryName = "تحقیقاتی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 217, CategoryParentId = 75, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 218, CategoryParentId = 77, CategoryName = "فروشگاه و مغازه", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 219, CategoryParentId = 77, CategoryName = "آرایشگاه و سالن های زیبایی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 220, CategoryParentId = 77, CategoryName = "دفتر کار", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 221, CategoryParentId = 77, CategoryName = "صنعتی", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 222, CategoryParentId = 77, CategoryName = "کافی شاپ و رستوران", CategoryNameEnglish = "" });
+            allCategories.Add(new Category() { CategoryId = 223, CategoryParentId = 77, CategoryName = "متفرقه", CategoryNameEnglish = "" });
         }
     }
 }

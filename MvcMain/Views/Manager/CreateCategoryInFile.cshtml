@@ -1,0 +1,50 @@
+﻿@using ModelStd.Db.Ad
+@model List<ModelStd.Db.Ad.Category>
+
+@{
+    ViewData["Title"] = "ManageLetMeKnow";
+    ViewData["PageTitle"] = "ManageLetMeKnow";
+    Layout = "_Layout";
+}
+
+@section TopTop
+{
+    @Html.Partial("TopTop")
+}
+@section NavBar
+{
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+{
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+{
+
+}
+@section SideNav
+{
+    @Html.Partial("SideNav")
+}
+@section Body
+{
+    <h1>@Model</h1>
+    <a asp-controller="Manager" asp-action="Index" class="btn btn-lg btn-primary">Back To Manager Page</a>
+    <br /><br />
+    @foreach (Category category in Model)
+    {
+        @:allCategories.Add(new Category(){CategoryId = @category.CategoryId,CategoryParentId = @category.CategoryParentId,CategoryName = "@category.CategoryName",CategoryNameEnglish = "@category.CategoryNameEnglish" });
+        <br/>
+    }
+
+}
+
+@section Footer
+{
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}

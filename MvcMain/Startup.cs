@@ -56,14 +56,17 @@ namespace MvcMain
             _advertisementDataClass = new AdvertisementDataClass(_configuration["Data:ConnectionString"]);
             services.AddSingleton(provider => _advertisementDataClass);
 
-            _categoryRepository = new CategoryRepositoryInCode();
-            services.AddTransient<ICategoryRepository>(provider => _categoryRepository);
-
             string directoryPath = _env.ContentRootPath + "/AdvertisementImages/";
             services.AddTransient<IImageRepository>(provider => new ImageRepositoryFileSystem(directoryPath));
 
             _adDbContext = new AdDbContext(_configuration["Data:ConnectionString"]);
             _appIdentityDbContext = new AppIdentityDbContext(_configuration["Data:ConnectionString"]);
+
+            _categoryRepository = new CategoryRepositoryInCode();
+            //_categoryRepository = new CategoryRepositoryDataBase(_adDbContext);
+            services.AddTransient<ICategoryRepository>(provider => _categoryRepository);
+
+
             services.AddTransient<IRepository<AdvertisementCommon>>(provider =>
             new AdvertisementCommonRepository(_adDbContext, _appIdentityDbContext, _categoryRepository));
 
@@ -76,7 +79,7 @@ namespace MvcMain
 
             services.AddTransient(provider => new TemperatureRepository(_adDbContext));
             services.AddTransient<ILocationRepository>(provider => new LocationRepository(_adDbContext));
-            services.AddTransient<ITransportaionRepository>(provider => new TransportationRepository(_configuration["Data:ConnectionString"]));
+            services.AddTransient<ITransportaionRepository>(provider => new TransportationRepository(_adDbContext));
 
             services.AddTransient<IAdvertisementCommonService>(provider => new AdApiController());
             services.AddTransient<IAdvertisementTransportationService>(provider => new AdTransportationApiController());

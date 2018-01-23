@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using ModelStd.Advertisements;
+﻿using System.Collections.Generic;
+using ModelStd.Db.Ad;
 
 namespace ModelStd.IRepository
 {

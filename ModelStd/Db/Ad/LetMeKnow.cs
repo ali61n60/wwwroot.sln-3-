@@ -36,7 +36,7 @@ namespace ModelStd.Db.Ad
         public RequetsPrivilege RequetsPrivilege { get; set; }
 
         public virtual AspNetUsers User { get; set; }
-        public virtual Categories Category { get; set; }
+        public virtual Category Category { get; set; }
     }
 
     public enum EmailOrSms

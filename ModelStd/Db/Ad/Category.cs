@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("Categories", Schema = "ad")]
-    public partial class Categories
+    public partial class Category
     {
-        public Categories()
+        public Category()
         {
             Advertisements = new HashSet<Advertisements>();
         }
@@ -24,10 +24,12 @@ namespace ModelStd.Db.Ad
         public string CategoryName { get; set; }
 
         [Column("categoryParentId")]
-        public string CategoryParentId { get; set; }
+        [Required]
+        public int CategoryParentId { get; set; }
 
         [Column("categoryNameEnglish")]
         [MaxLength(150)]
+        [Required]
         public string CategoryNameEnglish { get; set; }
 
         public virtual ICollection<Advertisements> Advertisements { get; set; }

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
@@ -169,6 +170,13 @@ namespace MvcMain.Controllers
             return View("TelegramMessage","test");
         }
 
+
+        [Authorize(Roles = "Admins")]
+        [HttpGet]
+        public async Task<IActionResult> CreateCategoryInFile()
+        {
+            return View(MyService.Inst.GetService<ICategoryRepository>().GetAllCategories().ToList());
+        }
 
 
     }
