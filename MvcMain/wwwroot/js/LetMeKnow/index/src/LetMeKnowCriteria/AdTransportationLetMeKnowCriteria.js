@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CarModelBrandController_1 = require("../../../../Components/Transformation/CarModelBrandController");
-var AdTransportationLetMeKnowCriteria = (function () {
+var AdTransportationLetMeKnowCriteria = /** @class */ (function () {
     function AdTransportationLetMeKnowCriteria() {
         this.MakeYearKey = "MakeYear";
         this.MakeYearInputId = "makeYear";
