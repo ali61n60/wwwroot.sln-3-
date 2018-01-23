@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
-using ModelStd.IRepository;
 using ModelStd.Services;
 using MvcMain.Infrastructure.IOC;
 using MvcMain.Models;
 using RepositoryStd.Context.Helper;
-using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860

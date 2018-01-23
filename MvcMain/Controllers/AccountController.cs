@@ -7,7 +7,6 @@ using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.Services;
-using MvcMain.Infrastructure;
 using MvcMain.Models;
 
 
@@ -16,10 +15,10 @@ namespace MvcMain.Controllers
     public class AccountController : Controller
     {
         //TODO Error messages are in English, Try to make them Persian
-        private UserManager<AppUser> _userManager;
-        private SignInManager<AppUser> _signInManager;
-        private MessageApiController _messageApiController;
-        private IPasswordHasher<AppUser> _passwordHasher;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
+        private readonly MessageApiController _messageApiController;
+        private readonly IPasswordHasher<AppUser> _passwordHasher;
 
 
         public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,10 +11,10 @@ namespace MvcMain.Controllers
     [Authorize(Roles = "Admins")]
     public class AdminController : Controller
     {
-        private UserManager<AppUser> userManager;
-        private IUserValidator<AppUser> userValidator;
-        private IPasswordValidator<AppUser> passwordValidator;
-        private IPasswordHasher<AppUser> passwordHasher;
+        private readonly UserManager<AppUser> userManager;
+        private readonly IUserValidator<AppUser> userValidator;
+        private readonly IPasswordValidator<AppUser> passwordValidator;
+        private readonly IPasswordHasher<AppUser> passwordHasher;
 
         public AdminController(UserManager<AppUser> usrMgr,IUserValidator<AppUser> userValid,IPasswordValidator<AppUser> passValid,IPasswordHasher<AppUser> passwordHash)
         {

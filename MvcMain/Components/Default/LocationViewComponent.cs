@@ -4,7 +4,8 @@ using ModelStd.Db.Ad;
 using ModelStd.Services;
 using MvcMain.Controllers;
 
-namespace MvcMain.Components
+namespace MvcMain.Components.Default
+
 {
     //TODO error handling for repository calls
     public class LocationViewComponent : ViewComponent

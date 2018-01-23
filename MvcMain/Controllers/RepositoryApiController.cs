@@ -8,7 +8,6 @@ namespace MvcMain.Controllers
     {
         public ResponseBase<int> GetServerMainDataVersion()
         {
-            string errorCode = "RepositoryApiController.GetServerMainDataVersion";
             ResponseBase<int> response = new ResponseBase<int>
             {
                 ResponseData = 4 //TODO create an xml-base file and read this value from xml file

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using ModelStd.Services;
 using MvcMain.Controllers;
 
-namespace MvcMain.Components.Category.SearchAd
+namespace MvcMain.Components.Default.Category
 {
     public class CategorySelectionViewComponent : ViewComponent
     {

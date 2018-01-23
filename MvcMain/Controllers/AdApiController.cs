@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
@@ -86,12 +87,12 @@ namespace MvcMain.Controllers
 
         public JsonResult SayHello([FromQuery][FromBody] string name, int numberOfCalls)
         {
-            return Json(String.Format("Hello {0},Number is {1} current server time is: {2}", name, numberOfCalls, DateTime.Now.ToString()));
+            return Json(String.Format("Hello {0},Number is {1} current server time is: {2}", name, numberOfCalls, DateTime.Now.ToString(CultureInfo.InvariantCulture)));
         }
 
         public string WhatTimeIsIt()
         {
-            return DateTime.Now.ToString();
+            return DateTime.Now.ToString(CultureInfo.InvariantCulture);
         }
 
         public string Ali()
@@ -278,7 +279,7 @@ namespace MvcMain.Controllers
                 Guid currentAdGuid = Guid.Parse(Request.Form["NewAdGuid"]);//magic string
                 IFormFile uploadedFile = Request.Form.Files[0];//only one file
                 //TODO what if uploadedFile is null
-                string filename = ContentDispositionHeaderValue.Parse(uploadedFile.ContentDisposition).FileName.Trim('"');
+                ContentDispositionHeaderValue.Parse(uploadedFile.ContentDisposition).FileName.Trim('"');
 
                 ResponseBase<byte[]> thumbnailResponse = ImageService.ConvertImage(100, 100, uploadedFile.OpenReadStream());
                 if (!thumbnailResponse.Success)
@@ -308,7 +309,6 @@ namespace MvcMain.Controllers
             string defaultFileName = "__dddsss.jpg";
 
             string NewAdGuidKey = "NewAdGuid";
-            string defaultGuid = new Guid().ToString();
             ResponseBase<string> response = new ResponseBase<string>();
             try
             {

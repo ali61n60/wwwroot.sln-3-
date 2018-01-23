@@ -21,9 +21,9 @@ namespace MvcMain.Controllers
     //TODO manage Ad image folder
     public class ManagerController:Controller
     {
-        private IImageRepository _imageRepository;
-        private AdDbContext _adDbContext;
-        private MessageApiController _messageApiController;
+        private readonly IImageRepository _imageRepository;
+        private readonly AdDbContext _adDbContext;
+        private readonly MessageApiController _messageApiController;
         public ManagerController(IImageRepository imageRepository,AdDbContext adDbContext, MessageApiController messageApiController)
         {
             _imageRepository = imageRepository;
@@ -59,7 +59,7 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> RemoveFoldersWithNoDatabaseRecords()
         {
             IEnumerable<string> AllFolders =await _imageRepository.GetAllAdIdsFolderName();
-            List<Guid> AllAdsInDataBase = _adDbContext.Advertisements.Select(advertisements => advertisements.AdId).ToList();
+            List<Guid> allAdsInDataBase = _adDbContext.Advertisements.Select(advertisements => advertisements.AdId).ToList();
             Guid temp;
             try
             {
@@ -67,7 +67,7 @@ namespace MvcMain.Controllers
                 {
                     if (Guid.TryParse(folder, out temp))
                     {
-                        if (!AllAdsInDataBase.Contains(Guid.Parse(folder)))
+                        if (!allAdsInDataBase.Contains(Guid.Parse(folder)))
                         {
                             _imageRepository.MoveFolderToImagesWithoutAdDirectory(folder);
                         }

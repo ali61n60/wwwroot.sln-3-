@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
-using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using MvcMain.Infrastructure.Services;
@@ -13,25 +11,20 @@ using MvcMain.Infrastructure.Services;
 namespace MvcMain.Controllers
 {
     [Route("api/[controller]/[action]")]
-    public class AdTransportationApiController:Controller, IAdvertisementTransportationService
+    public class AdTransportationApiController : Controller, IAdvertisementTransportationService
     {
         private readonly ITransportaionRepository _transportaionRepository;
         private readonly IRepository<AdvertisementTransportation> _advertisementTransportationRepository;
         private readonly IAdvertisementCommonService _advertisementCommonService;
-        //RegistrationService registrationService;//TODO put it in Bootstrapper
-        private IImageRepository im;
-        private readonly UserManager<AppUser> _userManager;
 
         public AdTransportationApiController()
         {
-            _transportaionRepository =MyService.Inst.GetService<ITransportaionRepository>();
+            _transportaionRepository = MyService.Inst.GetService<ITransportaionRepository>();
             _advertisementTransportationRepository = MyService.Inst.GetService<IRepository<AdvertisementTransportation>>();
             _advertisementCommonService = MyService.Inst.GetService<IAdvertisementCommonService>();
-            // registrationService = new RegistrationService();
-            _userManager = MyService.Inst.GetService<UserManager<AppUser>>();
         }
-        
-       
+
+
         public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
         {
             string errorCode = "AdTransportationApiController.GetAdDetail";
@@ -55,7 +48,7 @@ namespace MvcMain.Controllers
             return responseBase;
         }
 
-       
+
 
         //public ResponseBase RemoveAd(AdvertisementCommon advertisementCommon)
         //{
@@ -102,9 +95,9 @@ namespace MvcMain.Controllers
         //    }
         //    return response;
         //}
-        
 
-       public ResponseBase<int> GetServerDataVersion()
+
+        public ResponseBase<int> GetServerDataVersion()
         {
             ResponseBase<int> response = new ResponseBase<int>
             {
