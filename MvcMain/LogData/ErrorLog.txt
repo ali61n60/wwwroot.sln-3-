@@ -1,0 +1,12 @@
+sening email fails Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host. EmailYahoo/SendEmailAsync
+sening email fails No such host is known EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync

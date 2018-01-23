@@ -7,14 +7,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
-using ModelStd.Advertisements.CustomExceptions;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
-using RepositoryStd.Messages;
+
 
 namespace RepositoryStd.Repository.Common
 {
@@ -270,7 +269,7 @@ namespace RepositoryStd.Repository.Common
                     while (sqlDataReader.Read())
                     {
                         AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon();
-                        RepositoryResponse repositoryResponse=new RepositoryResponse();// = fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
+                        ResponseBase repositoryResponse=new ResponseBase();// = fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
                         if (!repositoryResponse.Success)
                         {
                             throw new Exception(repositoryResponse.Message);

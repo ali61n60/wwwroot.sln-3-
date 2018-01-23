@@ -14,6 +14,7 @@ namespace RepositoryStd.Repository.Transportation
         {
             _connectionString = connectionString;
         }
+        //TODO use EF
         public Vehicle[] GetAllVehicles()
         {
             string query = " SELECT CarModel.modelName,CarModel.modelId,Brands.brandName,CarModel.brandId " +
@@ -45,6 +46,7 @@ namespace RepositoryStd.Repository.Transportation
             return searchResultItems.ToArray();
         }
 
+        //TODO use EF
         public IEnumerable<Brand> GetAllBrands()
         {
             string query = " SELECT ad.Brands.brandId,ad.Brands.brandName " +
@@ -75,6 +77,7 @@ namespace RepositoryStd.Repository.Transportation
             return listOfTransportationBrands;
         }
 
+        //TODO use EF
         public IEnumerable<CarModel> GetAllModels()
         {
             string query = " SELECT ad.CarModel.modelId, ad.CarModel.modelName, ad.CarModel.brandId " +

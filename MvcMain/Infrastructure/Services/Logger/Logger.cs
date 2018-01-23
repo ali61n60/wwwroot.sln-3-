@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace MvcMain.Infrastructure.Services.Logger
 {
-    public class Logger:ILogger
+    public class Logger : ILogger
     {
         private string DirectoryPath;
         private string ErrorFileName = "ErrorLog.txt";
@@ -45,14 +45,15 @@ namespace MvcMain.Infrastructure.Services.Logger
             await Task.Run(() =>
             {
                 string errorFile = DirectoryPath + ErrorFileName;
-                Stream errorStream;
                 try
                 {
-                    errorStream = !File.Exists(errorFile) ? File.Create(errorFile) : File.Open(errorFile, FileMode.Append);
-                    using (StreamWriter streamWriter = new StreamWriter(errorStream))
+                    using (Stream errorStream = !File.Exists(errorFile) ? File.Create(errorFile) : File.Open(errorFile, FileMode.Append))
                     {
-                        streamWriter.WriteLine(data);
-                        streamWriter.Flush();
+                        using (StreamWriter streamWriter = new StreamWriter(errorStream))
+                        {
+                            streamWriter.WriteLine(data + " " + DateTime.Now);
+                            streamWriter.Flush();
+                        }
                     }
                 }
                 catch (Exception ex)

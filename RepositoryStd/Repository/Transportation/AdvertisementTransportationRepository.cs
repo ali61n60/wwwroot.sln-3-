@@ -11,8 +11,6 @@ using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
-using RepositoryStd.Messages;
-using RepositoryStd.Repository.Common;
 
 namespace RepositoryStd.Repository.Transportation
 {
@@ -118,6 +116,7 @@ namespace RepositoryStd.Repository.Transportation
         {
             AdvertisementTransportation advertisementTransportation = new AdvertisementTransportation();
 
+            //TODO verify that good query is generated
             IQueryable<Advertisements> list = _adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
                 .Include(advertisement => advertisement.District)
@@ -130,9 +129,7 @@ namespace RepositoryStd.Repository.Transportation
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model)
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
                 .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId == adId);//only accepted ads
-
-            //TODO verify that good query is generated
-            string query = list.ToSql();
+            
             Advertisements item = list.FirstOrDefault();
             fillAdTransportation(advertisementTransportation, item);
 
