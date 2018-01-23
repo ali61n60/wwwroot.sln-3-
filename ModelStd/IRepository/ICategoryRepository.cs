@@ -7,13 +7,13 @@ namespace ModelStd.IRepository
     {
         int CategoryVersion { get;}
 
-        Category FindCategoryById(int CategoryId);
+        Category FindCategoryById(int categoryId);
 
         IList<Category> GetAllCategories();
 
-        IList<Category> GetAllChildernCategories(int ParentCategoryId);
+        IList<Category> GetAllChildernCategories(int parentCategoryId);
 
-        Category FindCategoryByEnglishName(string EnglishCategoryName);
+        Category FindCategoryByEnglishName(string englishCategoryName);
 
         Category FindParentCategoryById(int categoryId);
 

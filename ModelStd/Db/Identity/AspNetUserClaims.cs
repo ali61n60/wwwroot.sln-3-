@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ModelStd.Db.Identity
+﻿namespace ModelStd.Db.Identity
 {
-    public partial class AspNetUserClaims
+    public class AspNetUserClaims
     {
         public int Id { get; set; }
         public string ClaimType { get; set; }

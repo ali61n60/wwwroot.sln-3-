@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace ModelStd.Db.Ad
 {
-    public partial class AdStatus
+    public class AdStatus
     {
         public AdStatus()
         {

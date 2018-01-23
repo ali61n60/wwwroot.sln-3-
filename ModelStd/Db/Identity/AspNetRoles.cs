@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Identity
 {
-    public partial class AspNetRoles
+    public class AspNetRoles
     {
         public AspNetRoles()
         {

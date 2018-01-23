@@ -1,9 +1,8 @@
 ﻿namespace ModelStd.Advertisements
 {
-
-    public class AdvertisementTransportation:AdvertisementCommon
+    public class AdvertisementTransportation : AdvertisementCommon
     {
-       public int ModelId;
+        public int ModelId;
 
         public string ModelName;
 
@@ -29,11 +28,6 @@
 
         public PlateType PlateType;
 
-        public AdvertisementTransportation()
-        {
-            
-        }
-
         public static string GetFuelTypeString(FuelType fuelType)
         {
             switch (fuelType)
@@ -49,7 +43,7 @@
             return "UnSpecified";
         }
 
-        public static FuelType GetFuelType(string fuelTypeString,FuelType defaultValue)
+        public static FuelType GetFuelType(string fuelTypeString, FuelType defaultValue)
         {
             switch (fuelTypeString)
             {
@@ -84,7 +78,7 @@
             }
             return dedaultValue;
         }
-        
+
         public static BodyStatus GetBodyStatus(string bodyStatusString, BodyStatus defaultValue)
         {
             switch (bodyStatusString)
@@ -196,7 +190,7 @@
         UnSpecified
     }
 
-  
+
 
     public enum BodyStatus
     {

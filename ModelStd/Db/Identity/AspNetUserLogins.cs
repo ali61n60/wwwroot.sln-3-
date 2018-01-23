@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Identity
 {
-    public partial class AspNetUserLogins
+    public class AspNetUserLogins
     {
         [Key]
         public string LoginProvider { get; set; }

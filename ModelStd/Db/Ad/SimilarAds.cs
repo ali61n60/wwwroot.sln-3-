@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
     [Table("SimilarAds",Schema = "ad")]
-    public partial class SimilarAds
+    public class SimilarAds
     {
         
         [Column("adId")]

@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
     [Table("AdPrivilege",Schema = "ad")]
-    public partial class AdPrivilege
+    public class AdPrivilege
     {
         
         [Column("adId")]

@@ -7,7 +7,7 @@ namespace ModelStd.IRepository
 {
    public interface IImageRepository
    {
-       void SaveImages(Guid advertisementGuid,string[] Images);
+       void SaveImages(Guid advertisementGuid,string[] images);
        string[] GetAllAdvertisementImages(Guid advertisementGuid);
        string GetFirstAdvertisementImage(Guid advertisementGuid);
        void RemoveAdvertisementImages(Guid advertisementGuid);

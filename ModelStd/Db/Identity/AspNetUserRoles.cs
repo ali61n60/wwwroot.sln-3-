@@ -1,9 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Identity
 {
-    public partial class AspNetUserRoles
+    public class AspNetUserRoles
     {
         [Key]
         public string UserId { get; set; }

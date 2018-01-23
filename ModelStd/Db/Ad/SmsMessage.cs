@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using ModelStd.Db.Identity;
@@ -7,7 +6,7 @@ using ModelStd.Db.Identity;
 namespace ModelStd.Db.Ad
 {
     [Table("SmsMessages",Schema = "ad")]
-    public partial class SmsMessage
+    public class SmsMessage
     {
         [Key]
         [Column("messageId")]

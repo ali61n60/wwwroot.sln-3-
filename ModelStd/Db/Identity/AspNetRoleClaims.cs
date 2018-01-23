@@ -1,8 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace ModelStd.Db.Identity
+﻿namespace ModelStd.Db.Identity
 {
-    public partial class AspNetRoleClaims
+    public class AspNetRoleClaims
     {
         public int Id { get; set; }
         public string ClaimType { get; set; }
