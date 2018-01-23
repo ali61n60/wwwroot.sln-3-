@@ -53,7 +53,7 @@ export class CategorySelection {
             case CategoryLevel.Level2:
                 this.CreateFirstLevel();
                 firstLevelId = this._allCategories.filter(category => category.CategoryId === selectedCategoryId)[0]
-                    .ParentCategoryId;
+                    .CategoryParentId;
                 this.setFirstLevelToSpecificId(firstLevelId);
                 this.createSecondLevel(firstLevelId);
                 this.setSecondLevelToSpecificId(selectedCategoryId);
@@ -63,9 +63,9 @@ export class CategorySelection {
         case CategoryLevel.Level3:
             this.CreateFirstLevel();
             secondLevelId = this._allCategories.filter(category => category.CategoryId === selectedCategoryId)[0]
-                    .ParentCategoryId;
+                    .CategoryParentId;
             firstLevelId = this._allCategories.filter(category => category.CategoryId === secondLevelId)[0]
-                .ParentCategoryId;
+                .CategoryParentId;
             this.setFirstLevelToSpecificId(firstLevelId);
             this.createSecondLevel(firstLevelId);
             this.setSecondLevelToSpecificId(secondLevelId);
@@ -132,7 +132,7 @@ export class CategorySelection {
         let data = { categories: categories }
         this._selectedCategoryIdLevelOne = this._rootCategoryId;//
         this._allCategories.forEach(category => {
-            if (category.ParentCategoryId === this._rootCategoryId) {
+            if (category.CategoryParentId === this._rootCategoryId) {
                 categories.push(category);
             }//if
         });//forEach
@@ -165,7 +165,7 @@ export class CategorySelection {
         let data = { categories: categories }
 
         this._allCategories.forEach(category => {
-            if (category.ParentCategoryId === firstLevelCategoryId) {
+            if (category.CategoryParentId === firstLevelCategoryId) {
                 categories.push(category);
             }//if
         });//forEach
@@ -197,7 +197,7 @@ export class CategorySelection {
         let data = { categories: categories }
 
         this._allCategories.forEach(category => {
-            if (category.ParentCategoryId === secondLevelCategoryId) {
+            if (category.CategoryParentId === secondLevelCategoryId) {
                 categories.push(category);
             }//if
         });//forEach
@@ -219,7 +219,7 @@ export class CategorySelection {
     private selectedCategoryHasChildren(): boolean {
         let selectedCategoryId = this.GetSelectedCategoryId();
         return this._allCategories.filter
-            ((category) => { return category.ParentCategoryId === selectedCategoryId }).length > 0;
+            ((category) => { return category.CategoryParentId === selectedCategoryId }).length > 0;
     }
 
     private removeElement(id: string): void {

@@ -1,6 +1,6 @@
 ﻿export class Category {
     public CategoryId: number;
-    public ParentCategoryId: number;
+    public CategoryParentId: number;
     public CategoryName: string;
-    public EnglishCategoryName: string;
+    public CategoryNameEnglish: string;
 }

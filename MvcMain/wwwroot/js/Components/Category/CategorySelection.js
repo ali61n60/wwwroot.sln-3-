@@ -35,7 +35,7 @@ var CategorySelection = /** @class */ (function () {
             case CategoryLevel.Level2:
                 this.CreateFirstLevel();
                 firstLevelId = this._allCategories.filter(function (category) { return category.CategoryId === selectedCategoryId; })[0]
-                    .ParentCategoryId;
+                    .CategoryParentId;
                 this.setFirstLevelToSpecificId(firstLevelId);
                 this.createSecondLevel(firstLevelId);
                 this.setSecondLevelToSpecificId(selectedCategoryId);
@@ -45,9 +45,9 @@ var CategorySelection = /** @class */ (function () {
             case CategoryLevel.Level3:
                 this.CreateFirstLevel();
                 secondLevelId = this._allCategories.filter(function (category) { return category.CategoryId === selectedCategoryId; })[0]
-                    .ParentCategoryId;
+                    .CategoryParentId;
                 firstLevelId = this._allCategories.filter(function (category) { return category.CategoryId === secondLevelId; })[0]
-                    .ParentCategoryId;
+                    .CategoryParentId;
                 this.setFirstLevelToSpecificId(firstLevelId);
                 this.createSecondLevel(firstLevelId);
                 this.setSecondLevelToSpecificId(secondLevelId);
@@ -109,7 +109,7 @@ var CategorySelection = /** @class */ (function () {
         var data = { categories: categories };
         this._selectedCategoryIdLevelOne = this._rootCategoryId; //
         this._allCategories.forEach(function (category) {
-            if (category.ParentCategoryId === _this._rootCategoryId) {
+            if (category.CategoryParentId === _this._rootCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach
@@ -138,7 +138,7 @@ var CategorySelection = /** @class */ (function () {
         var categories = new Array();
         var data = { categories: categories };
         this._allCategories.forEach(function (category) {
-            if (category.ParentCategoryId === firstLevelCategoryId) {
+            if (category.CategoryParentId === firstLevelCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach
@@ -165,7 +165,7 @@ var CategorySelection = /** @class */ (function () {
         var categories = new Array();
         var data = { categories: categories };
         this._allCategories.forEach(function (category) {
-            if (category.ParentCategoryId === secondLevelCategoryId) {
+            if (category.CategoryParentId === secondLevelCategoryId) {
                 categories.push(category);
             } //if
         }); //forEach
@@ -184,7 +184,7 @@ var CategorySelection = /** @class */ (function () {
     };
     CategorySelection.prototype.selectedCategoryHasChildren = function () {
         var selectedCategoryId = this.GetSelectedCategoryId();
-        return this._allCategories.filter(function (category) { return category.ParentCategoryId === selectedCategoryId; }).length > 0;
+        return this._allCategories.filter(function (category) { return category.CategoryParentId === selectedCategoryId; }).length > 0;
     };
     CategorySelection.prototype.removeElement = function (id) {
         $("#" + id).remove();
