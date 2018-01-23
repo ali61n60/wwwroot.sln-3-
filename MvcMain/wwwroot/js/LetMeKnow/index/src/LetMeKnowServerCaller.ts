@@ -4,6 +4,8 @@ export class LetMeKnowServerCaller {
     //TODO call server and send userinput fro new ad
     //get result and show to user
     private readonly _url: string = "/api/LetMeKnowApi/AddNewLetMeKnowRecord";
+    private readonly MessageDivId: string ="message";
+
 
     public SaveAd(userInput: UserInput): void {
         $.ajax({
@@ -20,6 +22,9 @@ export class LetMeKnowServerCaller {
         //TODO redirect user to a new page
         if (msg.Success == true) {
             document.location.replace("/LetMeKnow/Confirm");
+        } else {
+            //$("#" + this.MessageDivId).children().remove();
+            $("#" + this.MessageDivId).html("<p>"+msg.Message+ " ,"+msg.ErrorCode+"</p>");
         }
     }
 

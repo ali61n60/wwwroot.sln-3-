@@ -36,10 +36,12 @@ var CarModelBrandController = (function () {
     };
     CarModelBrandController.prototype.updateCarModelSelect = function (brandId) {
         var carModels = new Array();
-        this._allCarModels.forEach(function (carModel, index, array) {
-            if (carModel.BrandId === brandId)
-                carModels.push(carModel);
-        });
+        if (brandId !== 0) {
+            this._allCarModels.forEach(function (carModel, index, array) {
+                if (carModel.BrandId === brandId)
+                    carModels.push(carModel);
+            });
+        }
         this.createCarModelElement(carModels);
     };
     CarModelBrandController.prototype.FillCriteria = function (userInput) {

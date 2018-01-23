@@ -29,7 +29,10 @@
 @section Body
     {
     <h1 class="text-right">در این صفحه کالایی که به دنبال آن می گردید را انتخاب کنید. در آینده هنگام دریافت آگهی جدید در صورتی که با مشخصات شما هماهنگ باشد، به شما اطلاع میدهیم </h1>
-    <div class="well">
+    <div id="message" class="row">
+        
+    </div>
+        <div class="well">
         <div class="row">
             @await Component.InvokeAsync("CategorySelection")
         </div>

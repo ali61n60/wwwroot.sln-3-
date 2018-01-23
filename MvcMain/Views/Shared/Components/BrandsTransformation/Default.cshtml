@@ -9,7 +9,6 @@
 
 <div>
     <select id="brand" class="form-control" dir="rtl">
-        <option dir="ltr" value="0" >برند</option>
         @foreach (Brand brand in Model.AllBrands)
         {
             @:<option dir="ltr" value="@brand.BrandId">@brand.BrandName</option>

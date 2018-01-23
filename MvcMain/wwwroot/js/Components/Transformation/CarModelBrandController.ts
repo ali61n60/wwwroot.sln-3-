@@ -46,18 +46,19 @@ export class CarModelBrandController implements ICriteria {
     }
 
     private bindCarModel(): void {
-        $("#" + this.ModelSelectId).on("change",
-            (event) => {
+        $("#" + this.ModelSelectId).on("change",(event) => {
                 this._searchCriteriaChange.CustomCriteriaChanged();
             });
     }
 
     private updateCarModelSelect(brandId: number): void {
         let carModels = new Array<CarModel>();
-        this._allCarModels.forEach((carModel, index, array) => {
-            if (carModel.BrandId === brandId)
-                carModels.push(carModel);
-        });
+        if (brandId !== 0) {
+            this._allCarModels.forEach((carModel, index, array) => {
+                if (carModel.BrandId === brandId)
+                    carModels.push(carModel);
+            });
+        }
         this.createCarModelElement(carModels);
     }
 
