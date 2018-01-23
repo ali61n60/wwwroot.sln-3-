@@ -9,7 +9,6 @@ var LetMeKnow = (function () {
     function LetMeKnow(categorySelectorParentDivId, allCategoriesId) {
         this.EmailOrSmsKey = "EmailOrSms";
         this.EmailOrSmsParentDivId = "emailOrSms";
-        this.EmailOrSmsDefault = 1;
         this._registerLetMeKnowInputId = "registerLetMeKnow";
         this._categorySpecificCriteriaDivId = "CategorySpecificCriteria";
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);

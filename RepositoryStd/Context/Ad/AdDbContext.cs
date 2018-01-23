@@ -37,6 +37,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<EmailMessage> EmailMessages { get; set; }
         public virtual DbSet<LetMeKnow> LetMeKnows { get; set; }
+        public virtual DbSet<LetMeKnowAttributeTransportaion> LetMeKnowAttributeTransportaions { get; set; }
         public virtual DbSet<MarkedAd> MarkedAds { get; set; }
         public virtual DbSet<MobileBrands> MobileBrands { get; set; }
         public virtual DbSet<Price> Price { get; set; }
@@ -213,6 +214,26 @@ namespace RepositoryStd.Context.AD
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_LetMeKnows_AspNetUsers");
 
+            });
+
+            modelBuilder.Entity<LetMeKnowAttributeTransportaion>(entity =>
+            {
+                entity.HasKey(transportaion => new {transportaion.Id}).HasName("PK_LetMeKnowAttributeTransportaion");
+
+                entity.HasOne(transportation => transportation.LetMeKnow)
+                    .WithOne()
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_LetMeKnow");
+
+                entity.HasOne(transportation => transportation.Brand)
+                    .WithOne()
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_Brand");
+
+                entity.HasOne(transportation => transportation.CarModel)
+                    .WithOne()
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_CarModel");
             });
 
             modelBuilder.Entity<MarkedAd>(entity =>

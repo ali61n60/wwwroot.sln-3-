@@ -11,13 +11,20 @@ namespace ModelStd.Db.Ad
     {
         [Column("id")]
         [Key]
+        [ForeignKey("LetMeKnow")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Column("modelId")]
+        [Required]
         public int? ModelId { get; set; }
 
         [Column("brandId")]
+        [Required]
         public int? BrandId { get; set; }
+
+        public virtual LetMeKnow LetMeKnow { get; set; }
+        public virtual Brand Brand { get; set; }
+        public virtual CarModel CarModel { get; set; }
     }
 }

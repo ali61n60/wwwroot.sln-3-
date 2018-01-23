@@ -199,7 +199,9 @@ namespace RepositoryStd.Repository.Transportation
             LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion =
                 getLetMeKnowAttributeTransportaionFromUserInputDictionary(userInputDictionary);
             _adDbContext.LetMeKnows.Add(tempLetMeKnow);
-
+            await _adDbContext.SaveChangesAsync();
+            letMeKnowAttributeTransportaion.Id = tempLetMeKnow.Id;
+            _adDbContext.LetMeKnowAttributeTransportaions.Add(letMeKnowAttributeTransportaion);
             await _adDbContext.SaveChangesAsync();
         }
 
@@ -208,6 +210,8 @@ namespace RepositoryStd.Repository.Transportation
             LetMeKnowAttributeTransportaion tempLetMeKnowAttributeTransportaion=new LetMeKnowAttributeTransportaion();
             tempLetMeKnowAttributeTransportaion.BrandId =ParameterExtractor.ExtractInt(userInputDictionary, CarBrandIdKey, CarBrandIdDefault);
             tempLetMeKnowAttributeTransportaion.ModelId =ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
+
+            return tempLetMeKnowAttributeTransportaion;
         }
 
         //TODO maybe this is a method of AdAttributeTransportation class
