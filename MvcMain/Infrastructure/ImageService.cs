@@ -1,9 +1,5 @@
 ﻿using System;
 using System.IO;
-
-//using System.Drawing;
-//using System.Drawing.Drawing2D;
-//using System.Drawing.Imaging;
 using ModelStd.Services;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.Formats.Jpeg;

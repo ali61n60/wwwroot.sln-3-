@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using ModelStd.Advertisements;
-using ModelStd.Advertisements.Transportation;
 using ModelStd.Db.Ad;
 using ModelStd.Services;
 

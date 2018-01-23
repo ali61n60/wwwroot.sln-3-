@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -17,9 +16,9 @@ namespace MvcMain.Controllers
     [Route("api/[controller]/[action]")]
     public class UserAdApiController:Controller
     {
-        private ICommonRepository _commonRepository;
+        private readonly ICommonRepository _commonRepository;
         private readonly UserManager<AppUser> _userManager;
-        private ILogger _logger;
+        private readonly ILogger _logger;
 
         public UserAdApiController(ICommonRepository commonRepository, UserManager<AppUser> userManager, ILogger logger)
         {
@@ -63,7 +62,7 @@ namespace MvcMain.Controllers
             }
             catch (Exception ex)
             {
-                ; response.SetFailureResponse(ex.Message, errorCode);
+                response.SetFailureResponse(ex.Message, errorCode);
             }
             
             return response;
@@ -108,7 +107,7 @@ namespace MvcMain.Controllers
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse("test message", errorCode);
+                response.SetFailureResponse(ex.Message, errorCode);
             }
 
             return response;
@@ -118,12 +117,11 @@ namespace MvcMain.Controllers
         public async Task<ResponseBase> DeleteLetMeKnow(int id)
         {
             string errorCode = "UserAdApiController/DeleteLetMeKnow";
-            //MAke sure user owns letmeknow item
             ResponseBase response=new ResponseBase();
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                _commonRepository.DeleteLetMeKnow(id, user.Id);
+                await _commonRepository.DeleteLetMeKnow(id, user.Id);
 
                 response.SetSuccessResponse();
             }

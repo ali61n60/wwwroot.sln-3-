@@ -1,5 +1,6 @@
 ﻿@using ModelStd.Db.Ad
-@model MvcMain.Components.AllLocations
+@using MvcMain.Components.Default
+@model AllLocations
     
 <input id="allProvinces" type="hidden" value='Json.Serialize(@Model.AllProvinces)'/>
 <input id="allCities" type="hidden" value='Json.Serialize(@Model.AllCities)' />

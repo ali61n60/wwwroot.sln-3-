@@ -7,7 +7,7 @@ namespace MvcMain.Infrastructure.Services.Logger
 {
     public class Logger : ILogger
     {
-        private string DirectoryPath;
+        private readonly string DirectoryPath;
         private string ErrorFileName = "ErrorLog.txt";
 
         public Logger(string directoryPath)

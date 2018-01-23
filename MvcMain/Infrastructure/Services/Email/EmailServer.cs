@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Net;
 using System.Threading.Tasks;
-using MailKit;
 using MimeKit;
 using MailKit.Net.Smtp;
 using ModelStd;

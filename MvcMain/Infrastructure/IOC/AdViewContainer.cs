@@ -9,8 +9,8 @@ namespace MvcMain.Infrastructure.IOC
 {
     public class AdViewContainer
     {
-        private static Dictionary<int, string> _adDetailViewContainer=new Dictionary<int, string>();
-        private static Dictionary<int, string> _searchAdPartialViewContainer = new Dictionary<int, string>();
+        private static readonly Dictionary<int, string> _adDetailViewContainer=new Dictionary<int, string>();
+        private static readonly Dictionary<int, string> _searchAdPartialViewContainer = new Dictionary<int, string>();
        
         private static int defaultCategoryId = 0;
         static AdViewContainer()
