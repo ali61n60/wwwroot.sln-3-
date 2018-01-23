@@ -7,6 +7,9 @@ var LetMeKnowPartialViewLoader_1 = require("./LetMeKnowPartialViewLoader");
 var LetMeKnowCriteria_1 = require("./LetMeKnowCriteria");
 var LetMeKnow = (function () {
     function LetMeKnow(categorySelectorParentDivId, allCategoriesId) {
+        this.EmailOrSmsKey = "EmailOrSms";
+        this.EmailOrSmsParentDivId = "emailOrSms";
+        this.EmailOrSmsDefault = 1;
         this._registerLetMeKnowInputId = "registerLetMeKnow";
         this._categorySpecificCriteriaDivId = "CategorySpecificCriteria";
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
@@ -38,6 +41,9 @@ var LetMeKnow = (function () {
         //TODO disable submitAd Button until current submission is ok or errornous 
         var userInput = new UserInput_1.UserInput();
         this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+        userInput.ParametersDictionary[this.EmailOrSmsKey] = $("#" + this.EmailOrSmsParentDivId).children(":checked").val();
+        ; //TODO make a ui view (radio button)
+        this._letMeKnowCriteria.FillCategorySpecificLetMeKnowCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);
         this._letMeKnowServerCaller.SaveAd(userInput);
     };
     return LetMeKnow;

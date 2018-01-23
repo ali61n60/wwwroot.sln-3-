@@ -8,6 +8,10 @@ import {LetMeKnowCriteria}  from "./LetMeKnowCriteria";
 
 
 export class LetMeKnow implements ICriteriaChange {
+
+    private readonly EmailOrSmsKey: string = "EmailOrSms";
+    public readonly  EmailOrSmsParentDivId: string = "emailOrSms";
+    
     private readonly _registerLetMeKnowInputId: string = "registerLetMeKnow";
     private readonly _categorySpecificCriteriaDivId: string ="CategorySpecificCriteria";
 
@@ -52,8 +56,9 @@ export class LetMeKnow implements ICriteriaChange {
 
         let userInput = new UserInput();
         this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+        userInput.ParametersDictionary[this.EmailOrSmsKey] = $("#" + this.EmailOrSmsParentDivId).children(":checked").val();;//TODO make a ui view (radio button)
+        this._letMeKnowCriteria.FillCategorySpecificLetMeKnowCriteria(this._categorySelection.GetSelectedCategoryId(),userInput);
 
-        
         this._letMeKnowServerCaller.SaveAd(userInput);
     }
 }

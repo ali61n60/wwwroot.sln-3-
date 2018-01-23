@@ -195,17 +195,19 @@ namespace RepositoryStd.Repository.Transportation
 
         public async Task AddLetMeKnow(Dictionary<string, string> userInputDictionary, string userId)
         {
-            LetMeKnow tempLetMeKnow=new LetMeKnow();
-            //TODO move common properties to commonRepository
-            tempLetMeKnow.UserId = userId;
-            tempLetMeKnow.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary,
-                AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
-            tempLetMeKnow.EmailOrSms = EmailOrSms.Email;//TODO get it from user
-            tempLetMeKnow.RequetsPrivilege = RequetsPrivilege.Normal;//TODO get it from user
-            tempLetMeKnow.RequestInsertDateTime=DateTime.Now;
+            LetMeKnow tempLetMeKnow = _commonRepository.GetLetMeKnowFormUserInput(userInputDictionary, userId);
+            LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion =
+                getLetMeKnowAttributeTransportaionFromUserInputDictionary(userInputDictionary);
             _adDbContext.LetMeKnows.Add(tempLetMeKnow);
 
             await _adDbContext.SaveChangesAsync();
+        }
+
+        private LetMeKnowAttributeTransportaion getLetMeKnowAttributeTransportaionFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
+        {
+            LetMeKnowAttributeTransportaion tempLetMeKnowAttributeTransportaion=new LetMeKnowAttributeTransportaion();
+            tempLetMeKnowAttributeTransportaion.BrandId =ParameterExtractor.ExtractInt(userInputDictionary, CarBrandIdKey, CarBrandIdDefault);
+            tempLetMeKnowAttributeTransportaion.ModelId =ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
         }
 
         //TODO maybe this is a method of AdAttributeTransportation class

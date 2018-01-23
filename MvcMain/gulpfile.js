@@ -78,7 +78,7 @@ gulp.task("LetMeKnow",
     function () {
         return browserify({
                 debug: true,
-                entries: ["./wwwroot/js/LetMeKnow/index/src/letMeKnow.ts"],
+                entries: ["./wwwroot/js/LetMeKnow/index/src/LetMeKnow.ts"],
                 cache: {},
                 packageCache: {}
             })

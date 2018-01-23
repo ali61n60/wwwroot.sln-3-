@@ -34,6 +34,13 @@
             @await Component.InvokeAsync("CategorySelection")
         </div>
     </div>
+    <div class="row">
+        <div id="emailOrSms" class="col-sm-4">
+            <input type="radio" name="plate" value="1" checked="checked" />ایمیل<br />
+            <input type="radio" name="plate" value="2" />اس ام اس<br />
+            <input type="radio" name="plate" value="3" />هر دو 
+        </div>
+    </div>
     <p>based on selected category partial view is loaded by ajax</p>
     <div id="CategorySpecificCriteria" class="row"></div>
     <p>user fills form data and submit it to a web api method(common  with android)</p>

@@ -24,5 +24,6 @@ namespace ModelStd.IRepository
         Task MarkAd(Guid adGuid, string userId);
         List<LetMeKnow> GetUserLetMeKnows(string userId);
         Task DeleteLetMeKnow(int letMeKnowId, string userId);
+        LetMeKnow GetLetMeKnowFormUserInput(Dictionary<string, string> userInputDictionary, string userId);
     }
 }
