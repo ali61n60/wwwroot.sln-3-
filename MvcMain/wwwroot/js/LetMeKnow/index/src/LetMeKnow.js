@@ -5,7 +5,7 @@ var UserInput_1 = require("../../../Helper/UserInput");
 var LetMeKnowServerCaller_1 = require("./LetMeKnowServerCaller");
 var LetMeKnowPartialViewLoader_1 = require("./LetMeKnowPartialViewLoader");
 var LetMeKnowCriteria_1 = require("./LetMeKnowCriteria");
-var LetMeKnow = /** @class */ (function () {
+var LetMeKnow = (function () {
     function LetMeKnow(categorySelectorParentDivId, allCategoriesId) {
         this.EmailOrSmsKey = "EmailOrSms";
         this.EmailOrSmsParentDivId = "emailOrSms";

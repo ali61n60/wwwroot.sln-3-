@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader_1 = require("../../newAd/src/NewAdPartialViewLoader");
-var SearchCriteriaViewLoader = /** @class */ (function () {
+var SearchCriteriaViewLoader = (function () {
     function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange, searchCriteria) {
         this._url = "/Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;

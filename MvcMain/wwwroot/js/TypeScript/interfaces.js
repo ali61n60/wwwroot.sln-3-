@@ -1,4 +1,4 @@
-var TraditionalPhone = /** @class */ (function () {
+var TraditionalPhone = (function () {
     function TraditionalPhone(model, version) {
         this.model = model;
         this.version = version;
@@ -8,7 +8,7 @@ var TraditionalPhone = /** @class */ (function () {
     };
     return TraditionalPhone;
 }());
-var ModernPhone = /** @class */ (function () {
+var ModernPhone = (function () {
     function ModernPhone(model, version) {
         this.model = model;
         this.version = version;

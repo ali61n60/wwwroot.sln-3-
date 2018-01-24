@@ -1,4 +1,4 @@
-var Person2 = /** @class */ (function () {
+var Person2 = (function () {
     function Person2(fisrtName, lastName, email, age) {
         this.fisrtName = fisrtName;
         this.lastName = lastName;
