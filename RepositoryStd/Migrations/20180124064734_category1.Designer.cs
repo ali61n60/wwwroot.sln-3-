@@ -9,9 +9,10 @@ using ModelStd.Db.Ad;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180124064734_category1")]
+    partial class category1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("ad")

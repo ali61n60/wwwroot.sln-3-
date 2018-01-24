@@ -28,7 +28,6 @@ namespace ModelStd.Db.Ad
 
         [Column("categoryNameEnglish")]
         [MaxLength(150)]
-        [Required]
         public string CategoryNameEnglish { get; set; }
 
         public virtual ICollection<Advertisements> Advertisements { get; set; }

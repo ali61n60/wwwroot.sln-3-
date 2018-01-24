@@ -89,10 +89,38 @@ namespace MvcMain.Controllers
         }
 
         [Authorize(Roles = "Admins")]
+        [HttpGet]
+        public async Task<IActionResult> TelegramMessage()
+        {
+            return View();
+        }
+
+        [Authorize(Roles = "Admins")]
+        [HttpPost]
+        public async Task<IActionResult> TelegramMessage(string meesage)
+        {
+
+            TelegramBotClient botClient = new TelegramBotClient("513492179:AAFzCqA5jZArPoRhqMt_7M3hRVDDbsgyshI");
+            ChatId chatId = new ChatId("+98 912 201 2908");
+            await botClient.SendTextMessageAsync(chatId, "this is a test from ali");
+
+            return View("TelegramMessage", "test");
+        }
+
+
+        [Authorize(Roles = "Admins")]
+        [HttpGet]
+        public async Task<IActionResult> CreateCategoryInFile()
+        {
+            return View(MyService.Inst.GetService<ICategoryRepository>().GetAllCategories().ToList());
+        }
+
+
+        [Authorize(Roles = "Admins")]
         public async Task<IActionResult> EmailAndSmsRegisterdLetMeKnowRecords()
         {
-            //TODO get requested let me know
-            //Get ApprovedAds with managed by admin false
+            //TODO Run This Method as an independent Never-Ending-TASK
+            
             //foreach approved ad check each requsted let me know and if thay macth based on email/sms/bot  call messageApi to add a record in sms/email
             List<LetMeKnow> letMeKnowList= _adDbContext.LetMeKnows.Include(know => know.User).ToList();
             List<ApprovedAd> approvedAdList = _adDbContext.ApprovedAds.Include(ad => ad.Ad).Where(ad => ad.ManagedByAdmin == false).ToList();
@@ -151,32 +179,7 @@ namespace MvcMain.Controllers
         }
 
         
-        [Authorize(Roles = "Admins")]
-        [HttpGet]
-        public async Task<IActionResult> TelegramMessage()
-        {
-            return View();
-        }
-
-        [Authorize(Roles = "Admins")]
-        [HttpPost]
-        public async Task<IActionResult> TelegramMessage(string meesage)
-        {
-            
-            TelegramBotClient botClient=new TelegramBotClient("513492179:AAFzCqA5jZArPoRhqMt_7M3hRVDDbsgyshI");
-            ChatId chatId=new ChatId("+98 912 201 2908");
-            await botClient.SendTextMessageAsync(chatId, "this is a test from ali");
-
-            return View("TelegramMessage","test");
-        }
-
-
-        [Authorize(Roles = "Admins")]
-        [HttpGet]
-        public async Task<IActionResult> CreateCategoryInFile()
-        {
-            return View(MyService.Inst.GetService<ICategoryRepository>().GetAllCategories().ToList());
-        }
+        
 
 
     }

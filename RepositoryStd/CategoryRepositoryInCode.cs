@@ -113,6 +113,7 @@ namespace RepositoryStd
         {
             allCategories = new List<Category>();
 
+            allCategories.Add(new Category() { CategoryId = 0, CategoryParentId = 0, CategoryName = "تمام آگهی ها", CategoryNameEnglish = "All Categories" });
             allCategories.Add(new Category() { CategoryId = 1, CategoryParentId = 0, CategoryName = "املاک", CategoryNameEnglish = "Estate" });
             allCategories.Add(new Category() { CategoryId = 2, CategoryParentId = 0, CategoryName = "وسایل نقلیه", CategoryNameEnglish = "Transportation" });
             allCategories.Add(new Category() { CategoryId = 3, CategoryParentId = 0, CategoryName = "استخدام و کاریابی", CategoryNameEnglish = "Recruitment" });
