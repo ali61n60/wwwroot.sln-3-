@@ -111,7 +111,7 @@ export class Temerature {
                 },
                 axisY: {
                     title: "نقطه شبنم",
-                    suffix: "k"
+                    suffix: ""
                 },
                 data: [
                     {

@@ -17,7 +17,9 @@ var SinglePoint = /** @class */ (function () {
 var Temerature = /** @class */ (function () {
     function Temerature() {
         this.dataInputId = "inputTemperature";
-        this._dataPoints = [];
+        this._degreePoints = [];
+        this._humidityPoints = [];
+        this._viewpointPoints = [];
         this.initDataPoints();
         this.draw();
     }
@@ -28,11 +30,13 @@ var Temerature = /** @class */ (function () {
         allTemperatures.forEach(function (temperature) {
             var date = new Date(temperature.InsertDateTime); // some mock date
             var milliseconds = date.getTime();
-            _this._dataPoints.push({ x: milliseconds, y: temperature.Temp });
+            _this._degreePoints.push({ x: milliseconds, y: temperature.Degree });
+            _this._humidityPoints.push({ x: milliseconds, y: temperature.Humidity });
+            _this._viewpointPoints.push({ x: milliseconds, y: temperature.ViewPoint });
         });
     };
     Temerature.prototype.draw = function () {
-        var chart = new CanvasJS.Chart("chartContainer", {
+        var dgreeChart = new CanvasJS.Chart("degreeContainer", {
             animationEnabled: true,
             title: {
                 text: "دما"
@@ -53,11 +57,63 @@ var Temerature = /** @class */ (function () {
                     xValueType: "dateTime",
                     xValueFormatString: "DD MMM hh:mm TT",
                     yValueFormatString: "#,##0.##",
-                    dataPoints: this._dataPoints
+                    dataPoints: this._degreePoints
                 }
             ]
         });
-        chart.render();
+        var humidityChart = new CanvasJS.Chart("humidityContainer", {
+            animationEnabled: true,
+            title: {
+                text: "رطوبت"
+            },
+            axisX: {
+                title: "زمان"
+            },
+            axisY: {
+                title: "رطوبت",
+                suffix: "%"
+            },
+            data: [
+                {
+                    type: "line",
+                    name: "CPU Utilization",
+                    connectNullData: true,
+                    //nullDataLineDashType: "solid",
+                    xValueType: "dateTime",
+                    xValueFormatString: "DD MMM hh:mm TT",
+                    yValueFormatString: "#,##0.##",
+                    dataPoints: this._humidityPoints
+                }
+            ]
+        });
+        var viewPointChart = new CanvasJS.Chart("viewPointContainer", {
+            animationEnabled: true,
+            title: {
+                text: "نقطه شبنم"
+            },
+            axisX: {
+                title: "زمان"
+            },
+            axisY: {
+                title: "نقطه شبنم",
+                suffix: "k"
+            },
+            data: [
+                {
+                    type: "line",
+                    name: "CPU Utilization",
+                    connectNullData: true,
+                    //nullDataLineDashType: "solid",
+                    xValueType: "dateTime",
+                    xValueFormatString: "DD MMM hh:mm TT",
+                    yValueFormatString: "#,##0.##",
+                    dataPoints: this._viewpointPoints
+                }
+            ]
+        });
+        dgreeChart.render();
+        humidityChart.render();
+        viewPointChart.render();
     };
     return Temerature;
 }());
