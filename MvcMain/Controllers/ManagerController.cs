@@ -10,8 +10,6 @@ using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
-using Telegram.Bot;
-using Telegram.Bot.Types;
 
 namespace MvcMain.Controllers
 {
@@ -99,11 +97,6 @@ namespace MvcMain.Controllers
         [HttpPost]
         public async Task<IActionResult> TelegramMessage(string meesage)
         {
-
-            TelegramBotClient botClient = new TelegramBotClient("513492179:AAFzCqA5jZArPoRhqMt_7M3hRVDDbsgyshI");
-            ChatId chatId = new ChatId("+98 912 201 2908");
-            await botClient.SendTextMessageAsync(chatId, "this is a test from ali");
-
             return View("TelegramMessage", "test");
         }
 
@@ -125,18 +118,16 @@ namespace MvcMain.Controllers
             List<ApprovedAd> approvedAdList = _adDbContext.ApprovedAds.Include(ad => ad.Ad).Where(ad => ad.ManagedByAdmin == false).ToList();
             try
             {
-                //throw new Exception("test error");
                 foreach (ApprovedAd approvedAd in approvedAdList)
                 {
                     foreach (LetMeKnow letMeKnow in letMeKnowList)
                     {
-                        if (approvedAd.ApprovedDateTime > letMeKnow.RequestInsertDateTime)
-                        {
+                        
                             if (approvedAdMatchsLetMeKnow(approvedAd, letMeKnow))
                             {
                                 await putLetMeKnowEmailAndSms(approvedAd, letMeKnow);
                             }
-                        }
+                        
                     }
                     approvedAd.ManagedByAdmin = true;
                     await _adDbContext.SaveChangesAsync();
@@ -152,6 +143,10 @@ namespace MvcMain.Controllers
 
         private bool approvedAdMatchsLetMeKnow(ApprovedAd approvedAd,LetMeKnow letMeKnow)
         {
+            if (approvedAd.ApprovedDateTime < letMeKnow.RequestInsertDateTime)
+            {
+                return false;
+            }
             if (approvedAd.Ad.CategoryId == letMeKnow.CategoryId)
             {
                 
