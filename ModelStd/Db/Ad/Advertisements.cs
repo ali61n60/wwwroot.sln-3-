@@ -12,7 +12,7 @@ namespace ModelStd.Db.Ad
         {
             AdPrivilege = new HashSet<AdPrivilege>();
             SimilarAds = new HashSet<SimilarAds>();
-            MarkedAds=new HashSet<MarkedAd>();
+            MarkedAds = new HashSet<MarkedAd>();
         }
 
         [Key]
@@ -30,7 +30,7 @@ namespace ModelStd.Db.Ad
         [Column("districtId")]
         public int DistrictId { get; set; }
 
-        [Column("adInsertDateTime",TypeName = "smalldatetime")]
+        [Column("adInsertDateTime", TypeName = "smalldatetime")]
         public DateTime AdInsertDateTime { get; set; }
 
         [Column("adLink")]
@@ -55,6 +55,10 @@ namespace ModelStd.Db.Ad
         [Column("adNumberOfVisited")]
         public int AdNumberOfVisited { get; set; }
 
+        [Column("adType")]
+        [Required]
+        public AdType AdType { get; set; }
+
         public virtual AdAttributeTransportation AdAttributeTransportation { get; set; }
         public virtual ICollection<AdPrivilege> AdPrivilege { get; set; }
         public virtual ICollection<MarkedAd> MarkedAds { get; set; }
@@ -63,5 +67,11 @@ namespace ModelStd.Db.Ad
         public virtual AdStatus AdStatus { get; set; }
         public virtual Category Category { get; set; }
         public virtual District District { get; set; }
+    }
+
+    public enum AdType
+    {
+        Offer = 1,
+        Demand = 2
     }
 }

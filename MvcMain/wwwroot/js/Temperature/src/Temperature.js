@@ -96,7 +96,7 @@ var Temerature = /** @class */ (function () {
             },
             axisY: {
                 title: "نقطه شبنم",
-                suffix: "k"
+                suffix: ""
             },
             data: [
                 {
