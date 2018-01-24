@@ -204,7 +204,29 @@ namespace RepositoryStd.Repository.Transportation
 
         public bool CriteriaMatch(ApprovedAd approvedAd, LetMeKnow letMeKnow)
         {
-            throw new NotImplementedException("RepositoryTrans");
+            AdAttributeTransportation approvedadAttributeTransportation = _adDbContext.AdAttributeTransportation
+                .Include(tr=>tr.Model)
+                .Include(tr=>tr.Model.Brand)
+                .FirstOrDefault(transportation =>
+                transportation.AdId == approvedAd.AdId);
+            LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion = _adDbContext.LetMeKnowAttributeTransportaions.FirstOrDefault(let => let.Id == letMeKnow.Id);
+            if (approvedadAttributeTransportation == null || letMeKnowAttributeTransportaion == null)
+            {
+                return false;
+            }
+            CarModel approvedCarModel = approvedadAttributeTransportation.Model;
+            Brand approvedBrand = approvedCarModel.Brand;
+
+            int letMeKnowBrandId = letMeKnowAttributeTransportaion.BrandId;
+            int letMeKnowCarModelId = letMeKnowAttributeTransportaion.ModelId;
+            if ((letMeKnowBrandId==CarBrandIdDefault) ||
+                (letMeKnowBrandId == approvedBrand.BrandId && letMeKnowCarModelId == CarModelIdDefault ) ||
+                (letMeKnowCarModelId == approvedCarModel.ModelId))
+            {
+                return true;
+            }
+            return false;
+            
         }
 
         private LetMeKnowAttributeTransportaion getLetMeKnowAttributeTransportaionFromUserInputDictionary(Dictionary<string, string> userInputDictionary)

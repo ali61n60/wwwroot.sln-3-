@@ -179,28 +179,7 @@ namespace RepositoryStd.Repository.Common
 
         public bool CriteriaMatch(ApprovedAd approvedAd, LetMeKnow letMeKnow)
         {
-            AdAttributeTransportation approvedadAttributeTransportation = _adDbContext.AdAttributeTransportation.FirstOrDefault(transportation =>
-                transportation.AdId == approvedAd.AdId);
-            LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion = _adDbContext.LetMeKnowAttributeTransportaions.FirstOrDefault(let => let.Id == letMeKnow.Id);
-            if (approvedadAttributeTransportation == null || letMeKnowAttributeTransportaion==null)
-            {
-                return false;
-            }
-            CarModel approvedCarModel = approvedadAttributeTransportation.Model;
-            Brand approvedBrand = approvedCarModel.Brand;
-
-            int letMeKnowBrandId= letMeKnowAttributeTransportaion.BrandId;
-            int letMeKnowCarModelId = letMeKnowAttributeTransportaion.ModelId;
-          //  if(let)
-
-
-            
-
-
-
-
-
-            return false;
+            throw new NotImplementedException("AdCommonRepository/CriteriaMatch");
         }
 
         public LetMeKnow GetLetMeKnowFormUserInput(Dictionary<string, string> userInputDictionary, string userId)

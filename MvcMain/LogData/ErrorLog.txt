@@ -10,3 +10,30 @@ sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect 
 sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
 sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
 sening email fails AuthenticationInvalidCredentials: 5.7.0 (#MBR1212) Incorrect username or password. EmailYahoo/SendEmailAsync
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:47 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:48 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:50 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:51 PM
+sening email fails Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host. EmailGoogle/SendEmailAsync 1/24/2018 3:04:52 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:53 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:55 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:56 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:57 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:58 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:04:59 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:01 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:02 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:04 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:05 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:06 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:09 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:11 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:13 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:15 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:17 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:19 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:22 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:23 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:25 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:26 PM
+sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:29 PM
