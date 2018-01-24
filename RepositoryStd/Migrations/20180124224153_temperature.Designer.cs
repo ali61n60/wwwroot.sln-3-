@@ -9,9 +9,10 @@ using ModelStd.Db.Ad;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180124224153_temperature")]
+    partial class temperature
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("ad")
@@ -530,7 +531,7 @@ namespace RepositoryStd.Migrations
                         .HasColumnName("temperatureId");
 
                     b.Property<double>("Degree")
-                        .HasColumnName("degree");
+                        .HasColumnName("temp");
 
                     b.Property<double>("Humidity")
                         .HasColumnName("humidity");

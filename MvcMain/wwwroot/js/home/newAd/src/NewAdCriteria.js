@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CriteriaNumericDictionary_1 = require("../../../Helper/CriteriaNumericDictionary");
 var DefaultNewAdCriteria_1 = require("./NewAdCriteria/DefaultNewAdCriteria");
 var AdTransformationNewAdCriteria_1 = require("./NewAdCriteria/AdTransformationNewAdCriteria");
-var NewAdCriteria = (function () {
+var NewAdCriteria = /** @class */ (function () {
     function NewAdCriteria() {
         this._newAdCriteriaIocContainer = new CriteriaNumericDictionary_1.CriteriaNumericDictionary();
         this.initNewAdCriteriaIocContainer();

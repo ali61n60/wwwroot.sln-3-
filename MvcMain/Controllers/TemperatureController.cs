@@ -11,7 +11,7 @@ namespace MvcMain.Controllers
     public class TemperatureController : Controller
     {
         private readonly AdDbContext _adDbContext;
-        private readonly int _initialNumberOfItems = 2;
+        private readonly int _initialNumberOfItems = 20;
 
         public TemperatureController(AdDbContext adDbContext)
         {

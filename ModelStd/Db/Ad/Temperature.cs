@@ -12,8 +12,16 @@ namespace ModelStd.Db.Ad
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int TemperatureId { get; set; }
 
-        [Column("temp")]
-        public int Temp { get; set; }
+        [Column("degree")]
+        public double Degree { get; set; }
+
+        [Column("humidity")]
+        public double Humidity { get; set; }
+
+
+        [Column("viewPoint")]
+        public double ViewPoint { get; set; }
+
 
         [Column("insertDateTime", TypeName = "smalldatetime")]
         public DateTime InsertDateTime { get; set; }

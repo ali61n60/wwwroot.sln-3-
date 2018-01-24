@@ -28,9 +28,11 @@
     @Html.Partial("SideNav")
 }
 @section Body
-{
-    <input id="inputTemperature" type="hidden" value='@Json.Serialize(Model)'/>
-    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+    {
+    <input id="inputTemperature" type="hidden" value='@Json.Serialize(Model)' />
+    <div id="degreeContainer" style="height: 500px; width: 100%;"></div>
+    <div id="humidityContainer" style="height: 500px; width: 100%;"></div>
+    <div id="viewPointContainer" style="height: 500px; width: 100%;"></div>
     <form asp-controller="Temperature" asp-action="CustomResult" method="post">
         <div>
             <span>انتخاب تعداد رکورد</span>
@@ -62,7 +64,7 @@
             <tr>
                 <td>@temperature.TemperatureId</td>
                 <td>@temperature.InsertDateTime</td>
-                <td>@temperature.Temp</td>
+                <td>@temperature.Degree</td>
             </tr>
         }
     </table>

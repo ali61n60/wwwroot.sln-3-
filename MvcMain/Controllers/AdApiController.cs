@@ -101,12 +101,15 @@ namespace MvcMain.Controllers
         }
 
         //TODO move this method to its controller
-        public JsonResult InsertTemperature([FromQuery] int temperature)
+        public JsonResult InsertTemperature([FromQuery] double temperature, [FromQuery] double humidity, [FromQuery] double viewPoint)
         {
+            string errorCode = "AdApiController/InsertTemperature";
             Temperature temperatureModel = new Temperature()
             {
                 InsertDateTime = DateTime.Now,
-                Temp = temperature
+                Degree = temperature,
+                Humidity = humidity,
+                ViewPoint = viewPoint
             };
 
             try
@@ -115,7 +118,7 @@ namespace MvcMain.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Error " + ex.Message);
+                return Json("Error " + ex.Message+" , "+errorCode);
             }
             return Json("OK");
         }
