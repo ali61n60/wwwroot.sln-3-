@@ -19,7 +19,7 @@ namespace ModelStd.Db.Ad
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public string UserId { get; set; }
 
-        public virtual Advertisements Ad { get; set; }
+        public virtual Advertisement Ad { get; set; }
         public virtual AspNetUsers User { get; set; }
     }
 }

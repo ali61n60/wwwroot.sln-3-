@@ -21,6 +21,6 @@ namespace ModelStd.Db.Ad
         [Required]
         public bool ManagedByAdmin { get; set; }
 
-        public virtual Advertisements Ad { get; set; }
+        public virtual Advertisement Ad { get; set; }
     }
 }

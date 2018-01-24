@@ -13,6 +13,6 @@ namespace ModelStd.Db.Ad
         [Column("similarAdId")]
         public Guid SimilarAdId { get; set; }
 
-        public virtual Advertisements Ad { get; set; }
+        public virtual Advertisement Ad { get; set; }
     }
 }

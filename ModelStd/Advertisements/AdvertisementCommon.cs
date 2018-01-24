@@ -49,6 +49,11 @@ namespace ModelStd.Advertisements
         public int AdPrivilegeId { get; set; } 
         
         public string[] AdvertisementImages { get; set; }
+
+        public static AdvertisementCommon GetAdvertisementCommonFromAdvertisement(Db.Ad.Advertisement advertisement)
+        {
+            
+        }
     }
 
     //TODO use it in AdvertisementCommon Class

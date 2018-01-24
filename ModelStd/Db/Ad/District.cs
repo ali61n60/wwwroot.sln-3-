@@ -9,7 +9,7 @@ namespace ModelStd.Db.Ad
     {
         public District()
         {
-            Advertisements = new HashSet<Advertisements>();
+            Advertisements = new HashSet<Advertisement>();
         }
 
         [Key]
@@ -29,7 +29,7 @@ namespace ModelStd.Db.Ad
         [Column("municipalId")]
         public int? MunicipalId { get; set; }
 
-        public virtual ICollection<Advertisements> Advertisements { get; set; }
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
         public virtual City City { get; set; }
     }
 }

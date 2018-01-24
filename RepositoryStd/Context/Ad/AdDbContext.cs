@@ -28,7 +28,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<AdAttributeTransportation> AdAttributeTransportation { get; set; }
         public virtual DbSet<AdPrivilege> AdPrivilege { get; set; }
         public virtual DbSet<AdStatus> AdStatus { get; set; }
-        public virtual DbSet<Advertisements> Advertisements { get; set; }
+        public virtual DbSet<Advertisement> Advertisements { get; set; }
         public virtual DbSet<ApprovedAd> ApprovedAds { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
         public virtual DbSet<CarModel> CarModel { get; set; }
@@ -104,7 +104,7 @@ namespace RepositoryStd.Context.AD
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<Advertisements>(entity =>
+            modelBuilder.Entity<Advertisement>(entity =>
             {
                 entity.HasKey(e => e.AdId)
                     .HasName("PK_Advertisements_1");

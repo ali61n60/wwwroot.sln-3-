@@ -117,7 +117,7 @@ namespace RepositoryStd.Repository.Transportation
             AdvertisementTransportation advertisementTransportation = new AdvertisementTransportation();
 
             //TODO verify that good query is generated
-            IQueryable<Advertisements> list = _adDbContext.Advertisements
+            IQueryable<Advertisement> list = _adDbContext.Advertisements
                 .Include(advertisement => advertisement.Category)
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
@@ -130,7 +130,7 @@ namespace RepositoryStd.Repository.Transportation
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
                 .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId == adId);//only accepted ads
             
-            Advertisements item = list.FirstOrDefault();
+            Advertisement item = list.FirstOrDefault();
             fillAdTransportation(advertisementTransportation, item);
 
             return advertisementTransportation;
@@ -139,7 +139,7 @@ namespace RepositoryStd.Repository.Transportation
         public IEnumerable<AdvertisementCommon> FindAdvertisementCommons(Dictionary<string, string> queryParameters)
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
-            IQueryable<Advertisements> list = _commonRepository.GetCommonQueryableList(queryParameters);
+            IQueryable<Advertisement> list = _commonRepository.GetCommonQueryableList(queryParameters);
             //TODO add category specific query to the list
             list = whereClauseCarModelAndBrand(queryParameters, list);
             list = whereClauseMakeYear(queryParameters, list);
@@ -154,7 +154,7 @@ namespace RepositoryStd.Repository.Transportation
 
 
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
-            foreach (Advertisements advertisement in list)
+            foreach (Advertisement advertisement in list)
             {
                 AdvertisementCommon temp = new AdvertisementCommon();
                 _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
@@ -166,7 +166,7 @@ namespace RepositoryStd.Repository.Transportation
        
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
-            Advertisements ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
+            Advertisement ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
             ad.AdStatusId = 1; //submitted TODO use AdvertisementCommon Class to set it from an enum
@@ -279,7 +279,7 @@ namespace RepositoryStd.Repository.Transportation
         }
 
        
-        private IQueryable<Advertisements> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             PlateType plateType = AdvertisementTransportation.GetPlateType(
                 ParameterExtractor.ExtractString(queryParameters, PlateTypeKey,
@@ -293,7 +293,7 @@ namespace RepositoryStd.Repository.Transportation
             }
             return list;
         }
-        private IQueryable<Advertisements> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             CarStatus carStatus = AdvertisementTransportation.GetCarStatus(
                 ParameterExtractor.ExtractString(queryParameters, CarStatusKey,
@@ -308,7 +308,7 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-        private IQueryable<Advertisements> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             BodyStatus bodyStatus = AdvertisementTransportation.GetBodyStatus(
                 ParameterExtractor.ExtractString(queryParameters, BodyStatusKey,
@@ -322,7 +322,7 @@ namespace RepositoryStd.Repository.Transportation
             }
             return list;
         }
-        private IQueryable<Advertisements> whereInternalColor(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereInternalColor(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             string internalColor = ParameterExtractor.ExtractString(queryParameters, InternalColorKey, InternalColorDefault);
             if (internalColor != InternalColorDefault)
@@ -332,7 +332,7 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-        private IQueryable<Advertisements> whereBodyColor(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereBodyColor(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             string bodyColor = ParameterExtractor.ExtractString(queryParameters, BodyColorKey, BodyColorDefault);
             if (bodyColor != BodyColorDefault)
@@ -342,7 +342,7 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-        private IQueryable<Advertisements> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             GearboxType gearboxType = AdvertisementTransportation.GetGearboxType(
                 ParameterExtractor.ExtractString(queryParameters, GearboxKey,
@@ -356,7 +356,7 @@ namespace RepositoryStd.Repository.Transportation
             }
             return list;
         }
-        private IQueryable<Advertisements> whereMileage(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereMileage(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             int mileageFrom = ParameterExtractor.ExtractInt(queryParameters, MileageFromKey, MileageFromDefault);
             int mileageTo = ParameterExtractor.ExtractInt(queryParameters, MileageToKey, MileageToDefault);
@@ -369,7 +369,7 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-        private IQueryable<Advertisements> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             FuelType fuelType = AdvertisementTransportation.GetFuelType(
                 ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault)),
@@ -382,7 +382,7 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-        private IQueryable<Advertisements> whereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters, MakeYearFromKey, MakeYearFromDefault);
             int makeYearTo = ParameterExtractor.ExtractInt(queryParameters, MakeYearToKey, MakeYearToDefault);
@@ -398,7 +398,7 @@ namespace RepositoryStd.Repository.Transportation
 
             return list;
         }
-        private IQueryable<Advertisements> whereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisements> list)
+        private IQueryable<Advertisement> whereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             int carModelId = ParameterExtractor.ExtractInt(queryParameters, CarModelIdKey, CarModelIdDefault);
             int brandId = ParameterExtractor.ExtractInt(queryParameters, CarBrandIdKey, CarBrandIdDefault);
@@ -416,24 +416,24 @@ namespace RepositoryStd.Repository.Transportation
 
         }
         
-        private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisements advertisements)
+        private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisement advertisement)
         {
-            _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisements, adTrans);
-            adTrans.BodyColor = advertisements.AdAttributeTransportation.BodyColor;
-            adTrans.InternalColor = advertisements.AdAttributeTransportation.InternalColor;
-            adTrans.BodyStatus = AdvertisementTransportation.GetBodyStatus(advertisements.AdAttributeTransportation.BodyStatus, BodyStatusDefault);
-            adTrans.BrandId = advertisements.AdAttributeTransportation.Model.BrandId;
-            adTrans.BrandName = advertisements.AdAttributeTransportation.Model.Brand.BrandName;
-            adTrans.ModelName = advertisements.AdAttributeTransportation.Model.ModelName;
-            adTrans.Gearbox = advertisements.AdAttributeTransportation.Gearbox;
+            _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisement, adTrans);
+            adTrans.BodyColor = advertisement.AdAttributeTransportation.BodyColor;
+            adTrans.InternalColor = advertisement.AdAttributeTransportation.InternalColor;
+            adTrans.BodyStatus = AdvertisementTransportation.GetBodyStatus(advertisement.AdAttributeTransportation.BodyStatus, BodyStatusDefault);
+            adTrans.BrandId = advertisement.AdAttributeTransportation.Model.BrandId;
+            adTrans.BrandName = advertisement.AdAttributeTransportation.Model.Brand.BrandName;
+            adTrans.ModelName = advertisement.AdAttributeTransportation.Model.ModelName;
+            adTrans.Gearbox = advertisement.AdAttributeTransportation.Gearbox;
 
-            if (advertisements.AdAttributeTransportation.Mileage != null)
-                adTrans.Mileage = advertisements.AdAttributeTransportation.Mileage.Value;
+            if (advertisement.AdAttributeTransportation.Mileage != null)
+                adTrans.Mileage = advertisement.AdAttributeTransportation.Mileage.Value;
             else
                 adTrans.Mileage = -1;
 
-            if (advertisements.AdAttributeTransportation.MakeYear != null)
-                adTrans.MakeYear = advertisements.AdAttributeTransportation.MakeYear.Value;
+            if (advertisement.AdAttributeTransportation.MakeYear != null)
+                adTrans.MakeYear = advertisement.AdAttributeTransportation.MakeYear.Value;
             else
                 adTrans.MakeYear = -1;
         }

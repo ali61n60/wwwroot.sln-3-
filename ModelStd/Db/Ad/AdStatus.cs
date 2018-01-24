@@ -6,13 +6,13 @@ namespace ModelStd.Db.Ad
     {
         public AdStatus()
         {
-            Advertisements = new HashSet<Advertisements>();
+            Advertisements = new HashSet<Advertisement>();
         }
 
         public int AdStatusId { get; set; }
         public string AdStatus1 { get; set; }
         public string AdStatusEnglish { get; set; }
 
-        public virtual ICollection<Advertisements> Advertisements { get; set; }
+        public virtual ICollection<Advertisement> Advertisements { get; set; }
     }
 }

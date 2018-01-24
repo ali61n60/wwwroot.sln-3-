@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("Advertisements", Schema = "ad")]
-    public class Advertisements
+    public class Advertisement
     {
-        public Advertisements()
+        public Advertisement()
         {
             AdPrivilege = new HashSet<AdPrivilege>();
             SimilarAds = new HashSet<SimilarAds>();
