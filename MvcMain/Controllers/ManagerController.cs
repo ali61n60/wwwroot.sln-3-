@@ -120,67 +120,81 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> EmailAndSmsRegisterdLetMeKnowRecords()
         {
             //TODO Run This Method as an independent Never-Ending-TASK
-            
-            //foreach approved ad check each requsted let me know and if thay macth based on email/sms/bot  call messageApi to add a record in sms/email
+            string errorCode = "ManagerController/EmailAndSmsRegisterdLetMeKnowRecords";
             List<LetMeKnow> letMeKnowList= _adDbContext.LetMeKnows.Include(know => know.User).ToList();
             List<ApprovedAd> approvedAdList = _adDbContext.ApprovedAds.Include(ad => ad.Ad).Where(ad => ad.ManagedByAdmin == false).ToList();
-
-            foreach (ApprovedAd approvedAd in approvedAdList)
+            try
             {
-                foreach (LetMeKnow letMeKnow in letMeKnowList)
+                //throw new Exception("test error");
+                foreach (ApprovedAd approvedAd in approvedAdList)
                 {
-                    if (approvedAd.ApprovedDateTime > letMeKnow.RequestInsertDateTime)
+                    foreach (LetMeKnow letMeKnow in letMeKnowList)
                     {
-                        if (approvedAd.Ad.CategoryId == letMeKnow.CategoryId)
+                        if (approvedAd.ApprovedDateTime > letMeKnow.RequestInsertDateTime)
                         {
-                            EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
-                            SmsMessage smsMessage = new SmsMessage();
-                            switch (letMeKnow.EmailOrSms)
+                            if (approvedAdMatchsLetMeKnow(approvedAd, letMeKnow))
                             {
-                                case EmailOrSms.Email:
-                                    emailMessageSingle.EmailAddress = letMeKnow.User.Email;
-                                    emailMessageSingle.Subject = "به من اطلاع بده";
-                                    emailMessageSingle.Title =
-                                        "یک آگهی جدید منطبق با درخواست شما به سایت ارسال شده است";
-                                    emailMessageSingle.TextMessage = "کاربر گرامی";
-                                    emailMessageSingle.TextMessage += "<br/><br/>";
-                                    emailMessageSingle.TextMessage += "با سلام و احترام";
-                                    emailMessageSingle.TextMessage += "<br/><br/>";
-                                    emailMessageSingle.TextMessage +=
-                                        "یک آگهی جدید منطبق با درخواست شما به سایت ارسال شده است";
-                                    emailMessageSingle.TextMessage += "<br/><br/>";
-                                    emailMessageSingle.TextMessage += "لینک آگهی";
-                                    emailMessageSingle.TextMessage += "<br/><br/>";
-                                    emailMessageSingle.TextMessage +=
-                                        $"<a href=\"http://whereismycar.ir/Home/AdDetail?adId={approvedAd.AdId}&categoryId={letMeKnow.CategoryId}\" target=\"_blank\">لینک آگهی</a>";
-                                    await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,
-                                        letMeKnow.UserId);
-                                    break;
-                                case EmailOrSms.Sms:
-                                    //TODO fill sms
-                                    _messageApiController.InsertSmsMessageInDataBase(smsMessage);
-                                    break;
-                                case EmailOrSms.Both:
-                                    await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,
-                                        letMeKnow.UserId);
-                                    _messageApiController.InsertSmsMessageInDataBase(smsMessage);
-
-                                    break;
+                                await putLetMeKnowEmailAndSms(approvedAd, letMeKnow);
                             }
                         }
                     }
+                    approvedAd.ManagedByAdmin = true;
+                    await _adDbContext.SaveChangesAsync();
                 }
-                approvedAd.ManagedByAdmin = true;
-               await _adDbContext.SaveChangesAsync();
             }
-
-
-            return View("ManageLetMeKnow","ToBeDone");
+            catch (Exception ex)
+            {
+                return View("ManageLetMeKnow", ex.Message+" ,"+errorCode);
+            }
+            
+            return View("ManageLetMeKnow","Ok");
         }
 
-        
-        
+        private bool approvedAdMatchsLetMeKnow(ApprovedAd approvedAd,LetMeKnow letMeKnow)
+        {
+            if (approvedAd.Ad.CategoryId == letMeKnow.CategoryId)
+            {
+                
+            }
+            return false;
+        }
 
+        private async Task putLetMeKnowEmailAndSms(ApprovedAd approvedAd, LetMeKnow letMeKnow)
+        {
+            EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
+            SmsMessage smsMessage = new SmsMessage();
+            switch (letMeKnow.EmailOrSms)
+            {
+                case EmailOrSms.Email:
+                    emailMessageSingle.EmailAddress = letMeKnow.User.Email;
+                    emailMessageSingle.Subject = "به من اطلاع بده";
+                    emailMessageSingle.Title =
+                        "یک آگهی جدید منطبق با درخواست شما به سایت ارسال شده است";
+                    emailMessageSingle.TextMessage = "کاربر گرامی";
+                    emailMessageSingle.TextMessage += "<br/><br/>";
+                    emailMessageSingle.TextMessage += "با سلام و احترام";
+                    emailMessageSingle.TextMessage += "<br/><br/>";
+                    emailMessageSingle.TextMessage +=
+                        "یک آگهی جدید منطبق با درخواست شما به سایت ارسال شده است";
+                    emailMessageSingle.TextMessage += "<br/><br/>";
+                    emailMessageSingle.TextMessage += "لینک آگهی";
+                    emailMessageSingle.TextMessage += "<br/><br/>";
+                    emailMessageSingle.TextMessage +=
+                        $"<a href=\"http://whereismycar.ir/Home/AdDetail?adId={approvedAd.AdId}&categoryId={letMeKnow.CategoryId}\" target=\"_blank\">لینک آگهی</a>";
+                    await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,
+                        letMeKnow.UserId);
+                    break;
+                case EmailOrSms.Sms:
+                    //TODO fill sms
+                    _messageApiController.InsertSmsMessageInDataBase(smsMessage);
+                    break;
+                case EmailOrSms.Both:
+                    await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle,
+                        letMeKnow.UserId);
+                    _messageApiController.InsertSmsMessageInDataBase(smsMessage);
 
+                    break;
+            }
+        }
     }
 }

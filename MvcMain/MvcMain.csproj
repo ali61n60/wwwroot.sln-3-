@@ -600,6 +600,11 @@
     <ProjectReference Include="..\RepositoryStd\RepositoryStd.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="System.Private.CoreLib">
+      <HintPath>C:\Program Files\dotnet\shared\Microsoft.NETCore.App\1.0.5\System.Private.CoreLib.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <TypeScriptCompile Include="node_modules\%40types\jquery\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\lodash\add.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\lodash\after.d.ts" />
