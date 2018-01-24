@@ -10,19 +10,20 @@ using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
+using RepositoryStd.Repository;
 
 namespace MvcMain.Controllers
 {
-    
+
     //TODO manage submitted ads, inform users registerd in LetMeKnow page
     //TODO
     //TODO manage Ad image folder
-    public class ManagerController:Controller
+    public class ManagerController : Controller
     {
         private readonly IImageRepository _imageRepository;
         private readonly AdDbContext _adDbContext;
         private readonly MessageApiController _messageApiController;
-        public ManagerController(IImageRepository imageRepository,AdDbContext adDbContext, MessageApiController messageApiController)
+        public ManagerController(IImageRepository imageRepository, AdDbContext adDbContext, MessageApiController messageApiController)
         {
             _imageRepository = imageRepository;
             _adDbContext = adDbContext;
@@ -50,13 +51,13 @@ namespace MvcMain.Controllers
             //modify, accept or reject ad
             //inform ad owner about his ad new status
 
-            return View("ManageAdImageFolder","");
+            return View("ManageAdImageFolder", "");
         }
 
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> RemoveFoldersWithNoDatabaseRecords()
         {
-            IEnumerable<string> AllFolders =await _imageRepository.GetAllAdIdsFolderName();
+            IEnumerable<string> AllFolders = await _imageRepository.GetAllAdIdsFolderName();
             List<Guid> allAdsInDataBase = _adDbContext.Advertisements.Select(advertisements => advertisements.AdId).ToList();
             Guid temp;
             try
@@ -76,14 +77,14 @@ namespace MvcMain.Controllers
             {
                 return View("ManageAdImageFolder", ex.Message);
             }
-            
-            return View("ManageAdImageFolder","Folders Removed at "+DateTime.Now);
+
+            return View("ManageAdImageFolder", "Folders Removed at " + DateTime.Now);
         }
 
         [Authorize(Roles = "Admins")]
         public async Task<IActionResult> ManageLetMeKnow()
         {
-            return View("ManageLetMeKnow","");
+            return View("ManageLetMeKnow", "");
         }
 
         [Authorize(Roles = "Admins")]
@@ -114,7 +115,7 @@ namespace MvcMain.Controllers
         {
             //TODO Run This Method as an independent Never-Ending-TASK
             string errorCode = "ManagerController/EmailAndSmsRegisterdLetMeKnowRecords";
-            List<LetMeKnow> letMeKnowList= _adDbContext.LetMeKnows.Include(know => know.User).ToList();
+            List<LetMeKnow> letMeKnowList = _adDbContext.LetMeKnows.Include(know => know.User).ToList();
             List<ApprovedAd> approvedAdList = _adDbContext.ApprovedAds.Include(ad => ad.Ad).Where(ad => ad.ManagedByAdmin == false).ToList();
             try
             {
@@ -122,34 +123,48 @@ namespace MvcMain.Controllers
                 {
                     foreach (LetMeKnow letMeKnow in letMeKnowList)
                     {
-                        
-                            if (approvedAdMatchsLetMeKnow(approvedAd, letMeKnow))
-                            {
-                                await putLetMeKnowEmailAndSms(approvedAd, letMeKnow);
-                            }
-                        
+                        if (approvedAdMatchsLetMeKnow(approvedAd, letMeKnow))
+                        {
+                            await putLetMeKnowEmailAndSms(approvedAd, letMeKnow);
+                        }
+
                     }
-                    approvedAd.ManagedByAdmin = true;
+                    //approvedAd.ManagedByAdmin = true; //remove comment after test
                     await _adDbContext.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
             {
-                return View("ManageLetMeKnow", ex.Message+" ,"+errorCode);
+                return View("ManageLetMeKnow", ex.Message + " ," + errorCode);
             }
-            
-            return View("ManageLetMeKnow","Ok");
+
+            return View("ManageLetMeKnow", "Ok");
         }
 
-        private bool approvedAdMatchsLetMeKnow(ApprovedAd approvedAd,LetMeKnow letMeKnow)
+        private bool approvedAdMatchsLetMeKnow(ApprovedAd approvedAd, LetMeKnow letMeKnow)
         {
             if (approvedAd.ApprovedDateTime < letMeKnow.RequestInsertDateTime)
             {
                 return false;
             }
+            if (!approvedAdCategoryMatchsLetMeKnowCategory(approvedAd, letMeKnow))
+            {
+                return false;
+            }
+            IAdRepository adRepository = MyService.Inst.GetService<RepositoryContainer>().GetAdRepository(approvedAd.Ad.CategoryId);
+            if (!adRepository.CriteriaMatch(approvedAd, letMeKnow))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool approvedAdCategoryMatchsLetMeKnowCategory(ApprovedAd approvedAd, LetMeKnow letMeKnow)
+        {
             if (approvedAd.Ad.CategoryId == letMeKnow.CategoryId)
             {
-                
+                return true;
             }
             return false;
         }
@@ -192,4 +207,6 @@ namespace MvcMain.Controllers
             }
         }
     }
+
+
 }

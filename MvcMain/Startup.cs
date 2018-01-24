@@ -32,7 +32,6 @@ using ILogger = MvcMain.Infrastructure.Services.Logger.ILogger;
 
 namespace MvcMain
 {
-    //Update-Package RepositoryStd -ProjectName MvcMain -reinstall
     //TODO research for singleton dbContext
     public class Startup
     {

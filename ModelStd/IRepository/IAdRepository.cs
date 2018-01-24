@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 
 namespace ModelStd.IRepository
 {
@@ -12,5 +13,6 @@ namespace ModelStd.IRepository
         Task Add(Dictionary<string, string> userInputDictionary, string userId);
         AdvertisementCommon GetAdDetail(Guid adGuid);// each repositor will return a derived object that contains more properties than AdvertisementCommon
         Task AddLetMeKnow(Dictionary<string, string> userInputDictionary, string userId);
+        bool CriteriaMatch(ApprovedAd approvedAd, LetMeKnow letMeKnow);
     }
 }

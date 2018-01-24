@@ -202,6 +202,11 @@ namespace RepositoryStd.Repository.Transportation
             await _adDbContext.SaveChangesAsync();
         }
 
+        public bool CriteriaMatch(ApprovedAd approvedAd, LetMeKnow letMeKnow)
+        {
+            throw new NotImplementedException("RepositoryTrans");
+        }
+
         private LetMeKnowAttributeTransportaion getLetMeKnowAttributeTransportaionFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
             LetMeKnowAttributeTransportaion tempLetMeKnowAttributeTransportaion=new LetMeKnowAttributeTransportaion();

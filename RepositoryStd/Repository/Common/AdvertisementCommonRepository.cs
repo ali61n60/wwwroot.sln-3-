@@ -177,6 +177,32 @@ namespace RepositoryStd.Repository.Common
             throw new Exception("Cannot Add LetMeKnow from advertisementCommonRepository");
         }
 
+        public bool CriteriaMatch(ApprovedAd approvedAd, LetMeKnow letMeKnow)
+        {
+            AdAttributeTransportation approvedadAttributeTransportation = _adDbContext.AdAttributeTransportation.FirstOrDefault(transportation =>
+                transportation.AdId == approvedAd.AdId);
+            LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion = _adDbContext.LetMeKnowAttributeTransportaions.FirstOrDefault(let => let.Id == letMeKnow.Id);
+            if (approvedadAttributeTransportation == null || letMeKnowAttributeTransportaion==null)
+            {
+                return false;
+            }
+            CarModel approvedCarModel = approvedadAttributeTransportation.Model;
+            Brand approvedBrand = approvedCarModel.Brand;
+
+            int letMeKnowBrandId= letMeKnowAttributeTransportaion.BrandId;
+            int letMeKnowCarModelId = letMeKnowAttributeTransportaion.ModelId;
+          //  if(let)
+
+
+            
+
+
+
+
+
+            return false;
+        }
+
         public LetMeKnow GetLetMeKnowFormUserInput(Dictionary<string, string> userInputDictionary, string userId)
         {
             LetMeKnow tempLetMeKnow = new LetMeKnow();

@@ -14,11 +14,11 @@ namespace ModelStd.Db.Ad
 
         [Column("modelId")]
         [Required]
-        public int? ModelId { get; set; }
+        public int ModelId { get; set; }
 
         [Column("brandId")]
         [Required]
-        public int? BrandId { get; set; }
+        public int BrandId { get; set; }
 
         public virtual LetMeKnow LetMeKnow { get; set; }
         public virtual Brand Brand { get; set; }
