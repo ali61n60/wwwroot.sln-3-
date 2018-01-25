@@ -10,9 +10,10 @@ using ModelStd.Advertisements.Price;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180125121428_priceType2")]
+    partial class priceType2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("ad")
@@ -139,6 +140,8 @@ namespace RepositoryStd.Migrations
                     b.Property<int>("DistrictId")
                         .HasColumnName("districtId");
 
+                    b.Property<Guid?>("FixedPriceAdId");
+
                     b.Property<int>("PriceType")
                         .HasColumnName("priceType");
 
@@ -152,6 +155,8 @@ namespace RepositoryStd.Migrations
                     b.HasIndex("CategoryId");
 
                     b.HasIndex("DistrictId");
+
+                    b.HasIndex("FixedPriceAdId");
 
                     b.ToTable("Advertisements","ad");
                 });
@@ -640,7 +645,7 @@ namespace RepositoryStd.Migrations
             modelBuilder.Entity("ModelStd.Advertisements.Price.FixedPrice", b =>
                 {
                     b.HasOne("ModelStd.Db.Ad.Advertisement", "Ad")
-                        .WithOne("FixedPrice")
+                        .WithOne()
                         .HasForeignKey("ModelStd.Advertisements.Price.FixedPrice", "AdId")
                         .HasConstraintName("FK_FixedPrice_Advertisements")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -680,6 +685,10 @@ namespace RepositoryStd.Migrations
                         .WithMany("Advertisements")
                         .HasForeignKey("DistrictId")
                         .HasConstraintName("FK_Advertisements_Districts");
+
+                    b.HasOne("ModelStd.Advertisements.Price.FixedPrice", "FixedPrice")
+                        .WithMany()
+                        .HasForeignKey("FixedPriceAdId");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.ApprovedAd", b =>

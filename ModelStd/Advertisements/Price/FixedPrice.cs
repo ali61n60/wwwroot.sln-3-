@@ -7,7 +7,7 @@ using ModelStd.Db.Ad;
 
 namespace ModelStd.Advertisements.Price
 {
-    [Table("Price", Schema = "ad")]
+    [Table("FixedPrices", Schema = "ad")]
     public class FixedPrice:IPrice
     {
         public PriceType PriceType { get; }
@@ -18,14 +18,13 @@ namespace ModelStd.Advertisements.Price
         [ForeignKey("Advertisements")]
         public Guid AdId { get; set; }
 
-        [Column("price", TypeName = "money")]
+        [Column("priceAmount", TypeName = "money")]
         [DataType(DataType.Currency)]
         public decimal PriceAmount { get; set; }
 
-        public FixedPrice(decimal priceAmount)
+        public FixedPrice()
         {
             PriceType = PriceType.Fixed;
-            PriceAmount = priceAmount;
         }
         public override string ToString()
         {

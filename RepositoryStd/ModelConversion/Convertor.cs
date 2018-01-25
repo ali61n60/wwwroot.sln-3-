@@ -2,6 +2,7 @@
 using ModelStd.Db.Ad;
 using RepositoryStd.Context.Identity;
 using System.Linq;
+using ModelStd.Advertisements.Price;
 
 namespace RepositoryStd.ModelConversion
 {
@@ -25,11 +26,27 @@ namespace RepositoryStd.ModelConversion
             if (ad.District != null && ad.District.City != null) adCommon.CityName = ad.District.City.CityName;
             if (ad.District != null && ad.District.City != null && ad.District.City.Province != null)
                 adCommon.ProvinceName = ad.District.City.Province.ProvinceName;
-            if (ad.FixedPrice != null) adCommon.AdvertisementPrice = ad.FixedPrice;//TODO based on ad.pricetype
 
-            if (adCommon.AdvertisementPrice != null) adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
+            fillAdvertisementPrice( adCommon, ad);
+           
 
             adCommon.AdType = (ad.AdType == AdType.Offer) ? "ارائه" : "درخواستی";
+        }
+
+        private static void fillAdvertisementPrice(AdvertisementCommon adCommon, Advertisement ad)
+        {
+            switch (ad.PriceType)
+            {
+                case PriceType.Fixed:
+                    adCommon.AdvertisementPrice = ad.FixedPrice;
+                    break;
+                    default:
+                        adCommon.AdvertisementPrice = null;
+                    break;
+            }
+            
+
+            if (adCommon.AdvertisementPrice != null) adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
         }
 
         public static string GetAdStatusString(AdStatus adStatus)

@@ -36,11 +36,11 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<EmailMessage> EmailMessages { get; set; }
+        public virtual DbSet<FixedPrice> FixedPrice { get; set; }
         public virtual DbSet<LetMeKnow> LetMeKnows { get; set; }
         public virtual DbSet<LetMeKnowAttributeTransportaion> LetMeKnowAttributeTransportaions { get; set; }
         public virtual DbSet<MarkedAd> MarkedAds { get; set; }
         public virtual DbSet<MobileBrands> MobileBrands { get; set; }
-        public virtual DbSet<FixedPrice> FixedPrice { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
         public virtual DbSet<SmsMessage> SmsMessages { get; set; }
@@ -166,6 +166,14 @@ namespace RepositoryStd.Context.AD
                     .HasForeignKey(emailMessage => emailMessage.UserId);
             });
 
+            modelBuilder.Entity<FixedPrice>(entity =>
+            {
+                entity.HasOne(d => d.Ad)
+                    .WithOne(advertisement => advertisement.FixedPrice)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_FixedPrice_Advertisements");
+            });
+
             modelBuilder.Entity<LetMeKnow>(entity =>
             {
                 entity.HasKey(letMeKnow=>
@@ -244,14 +252,7 @@ namespace RepositoryStd.Context.AD
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<FixedPrice>(entity =>
-            {
-                entity.HasOne(d => d.Ad)
-                     .WithOne()
-                     .OnDelete(DeleteBehavior.Cascade)
-                     .HasConstraintName("FK_FixedPrice_Advertisements");
-            });
-
+           
             modelBuilder.Entity<SimilarAds>(entity =>
              {
                  entity.HasKey(e => new { e.AdId, e.SimilarAdId })
