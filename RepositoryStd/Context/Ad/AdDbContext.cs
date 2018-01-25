@@ -40,7 +40,6 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<MarkedAd> MarkedAds { get; set; }
         public virtual DbSet<MobileBrands> MobileBrands { get; set; }
         public virtual DbSet<Price> Price { get; set; }
-        public virtual DbSet<Privilege> Privilege { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
         public virtual DbSet<SmsMessage> SmsMessages { get; set; }
@@ -76,13 +75,7 @@ namespace RepositoryStd.Context.AD
                     .HasForeignKey(d => d.AdId)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_AdPrivilage_Advertisements");
-
-                entity.HasOne(d => d.Privilege)
-                    .WithMany(p => p.AdPrivilege)
-                    .HasForeignKey(d => d.PrivilegeId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_AdPrivilege_Privilege");
-            });
+                });
 
            
 
@@ -256,20 +249,6 @@ namespace RepositoryStd.Context.AD
                      .WithOne(advertisements => advertisements.Price)
                      .OnDelete(DeleteBehavior.Cascade)
                      .HasConstraintName("FK_Price_Advertisements");
-            });
-
-            modelBuilder.Entity<Privilege>(entity =>
-            {
-                entity.ToTable("Privilege", "ad");
-
-                entity.Property(e => e.PrivilegeId)
-                    .HasColumnName("privilegeId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.PrivilegeName)
-                    .IsRequired()
-                    .HasColumnName("privilegeName")
-                    .HasMaxLength(150);
             });
 
             modelBuilder.Entity<SimilarAds>(entity =>

@@ -83,4 +83,12 @@ namespace ModelStd.Db.Ad
         ReSubmitted = 6,//ثبت دوباره
         Deleted = 7//حذف شده
     }
+
+    public enum Privilege
+    {
+        NoPrivilege=1,
+        Urgent=2,
+        EmailOthers=3,
+        SMSOthers=4
+    }
 }
