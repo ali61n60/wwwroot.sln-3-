@@ -67,7 +67,7 @@ namespace RepositoryStd.Context.AD
 
             modelBuilder.Entity<AdPrivilege>(entity =>
             {
-                entity.HasKey(e => new { e.AdId, e.PrivilegeId, e.InsertionDate })
+                entity.HasKey(e => new { e.AdId, e.Privilege, e.InsertionDate })
                     .HasName("PK_AdPrivilage");
 
                 entity.HasOne(d => d.Ad)
