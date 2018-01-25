@@ -13,8 +13,7 @@ namespace RepositoryStd.ModelConversion
             adCommon.UserId = ad.UserId;
             adCommon.AdvertisementTitle = ad.AdTitle;
             adCommon.AdvertisementTime = ad.AdInsertDateTime;
-            adCommon.AdvertisementStatusId = ad.AdStatusId;
-            if (ad.AdStatus != null) adCommon.AdvertisementStatus = ad.AdStatus.AdStatus1;
+            adCommon.AdvertisementStatus = GetAdStatusString(ad.AdStatus);
             if (ad.Category != null) adCommon.AdvertisementCategory = ad.Category.CategoryName;
             adCommon.AdvertisementCategoryId = ad.CategoryId;
             adCommon.AdvertisementComments = ad.AdComments;
@@ -31,6 +30,21 @@ namespace RepositoryStd.ModelConversion
             if (adCommon.AdvertisementPrice != null) adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
 
             adCommon.AdType = (ad.AdType == AdType.Offer) ? "ارائه" : "درخواستی";
+        }
+
+        public static string GetAdStatusString(AdStatus adStatus)
+        {
+            switch (adStatus)
+            {
+                case AdStatus.Submitted: return "ثبت شده";
+                case AdStatus.UnderReview: return "در حال بررسی";
+                case AdStatus.Approved : return "تایید شده";
+                case AdStatus.Rejected: return "رد شده";
+                case AdStatus.Expired : return "منقضی";
+                case AdStatus.ReSubmitted: return "ثبت دوباره";
+                case AdStatus.Deleted: return "حذف شده";
+            }
+            return "نا مشخص";
         }
     }
 }

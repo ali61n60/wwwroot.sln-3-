@@ -34,8 +34,6 @@ namespace ModelStd.Advertisements
         
         public DateTime AdvertisementTime { get; set; }
         
-        public int AdvertisementStatusId { get; set; }
-        
         public string AdvertisementStatus { get; set; }
         
         public string AdvertisementTitle { get; set; }
@@ -53,7 +51,4 @@ namespace ModelStd.Advertisements
         public string AdType { get; set; }
 
         }
-
-    //TODO use it in AdvertisementCommon Class
-    
 }

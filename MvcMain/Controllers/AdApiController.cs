@@ -18,6 +18,7 @@ using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Infrastructure;
 using MvcMain.Models;
+using RepositoryStd.ModelConversion;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 using RepositoryStd.TepmeratureRepository;
@@ -344,7 +345,6 @@ namespace MvcMain.Controllers
         
         public ResponseBase<AdvertisementCommon> GetAdDetail([FromQuery][FromBody] AdDetailInfo adDetailInfo)
         {
-            //TODO 3- find a way to use Advertisement classes instead of object in ResponseBase<AdvertisementBase>
             string errorCode = "AdApiController.GetAdDetail";
 
             ResponseBase<AdvertisementCommon> response=new ResponseBase<AdvertisementCommon>();
@@ -353,8 +353,8 @@ namespace MvcMain.Controllers
             try
             {
                 adDetail = adRepository.GetAdDetail(adDetailInfo.AdId);
-                
-                if(adDetail.AdvertisementStatusId==3)//Magic number
+               
+                if(adDetail.AdvertisementStatus==Convertor.GetAdStatusString(AdStatus.Approved))
                 adDetail.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();

@@ -129,7 +129,7 @@ namespace RepositoryStd.Repository.Transportation
                 .Include(advertisements => advertisements.AdAttributeTransportation)
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model)
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
-                .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId == adId);//only accepted ads
+                .Where(advertisement => advertisement.AdStatus == AdStatus.Approved && advertisement.AdId == adId);//only accepted ads
             
             Advertisement item = list.FirstOrDefault();
             fillAdTransportation(advertisementTransportation, item);
@@ -170,7 +170,7 @@ namespace RepositoryStd.Repository.Transportation
             Advertisement ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
-            ad.AdStatusId = 1; //submitted TODO use AdvertisementCommon Class to set it from an enum
+            ad.AdStatus = AdStatus.Submitted; //submitted TODO use AdvertisementCommon Class to set it from an enum
             ad.AdId = Guid.Parse(ParameterExtractor.ExtractString(userInputDictionary, "NewAdGuid",
                 new Guid().ToString()));
             ad.AdInsertDateTime = DateTime.Now;

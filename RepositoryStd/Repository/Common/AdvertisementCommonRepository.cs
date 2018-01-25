@@ -113,9 +113,8 @@ namespace RepositoryStd.Repository.Common
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
                 .Include(advertisement => advertisement.AdPrivilege)
-                .Include(advertisement => advertisement.AdStatus)
                 .Include(advertisement => advertisement.Price)
-                .Where(advertisement => advertisement.AdStatusId == 3); //only accepted ads
+                .Where(advertisement => advertisement.AdStatus == AdStatus.Approved); //only accepted ads
 
             list = orderByClause(list, queryParameters); //OrderBy
             list = wherClauseCategoryId(list, queryParameters); //Category
@@ -274,7 +273,7 @@ namespace RepositoryStd.Repository.Common
                 .Include(advertisement => advertisement.AdPrivilege)
                 .Include(advertisement => advertisement.AdStatus)
                 .Include(advertisement => advertisement.Price)
-                .Where(advertisement => advertisement.AdStatusId == 3 && advertisement.AdId == adId);//only accepted ads
+                .Where(advertisement => advertisement.AdStatus == AdStatus.Approved && advertisement.AdId == adId);//only accepted ads
 
             Advertisement item = list.FirstOrDefault();
             AdvertisementCommon adCommon = new AdvertisementCommon();
