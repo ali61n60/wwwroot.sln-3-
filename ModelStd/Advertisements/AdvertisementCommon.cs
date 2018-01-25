@@ -50,11 +50,7 @@ namespace ModelStd.Advertisements
         
         public string[] AdvertisementImages { get; set; }
 
-        public static AdvertisementCommon GetAdvertisementCommonFromAdvertisement(Db.Ad.Advertisement advertisement)
-        {
-            
         }
-    }
 
     //TODO use it in AdvertisementCommon Class
     public enum AdStatus

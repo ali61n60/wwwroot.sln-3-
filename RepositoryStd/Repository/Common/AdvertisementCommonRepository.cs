@@ -13,6 +13,7 @@ using ModelStd.Services;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
+using RepositoryStd.ModelConversion;
 
 
 namespace RepositoryStd.Repository.Common
@@ -81,9 +82,9 @@ namespace RepositoryStd.Repository.Common
             list = EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisement advertisement in list)
             {
-                AdvertisementCommon temp = new AdvertisementCommon();
-                FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
-                searchResultItems.Add(temp);
+                AdvertisementCommon tempAdCommon = new AdvertisementCommon();
+                Convertor.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, _appIdentityDbContext);
+                searchResultItems.Add(tempAdCommon);
             }
             return searchResultItems;
         }
@@ -124,30 +125,7 @@ namespace RepositoryStd.Repository.Common
         }
 
        
-        public void FillAdvertisementCommonFromDatabaseResult(Advertisement advertisement, AdvertisementCommon adCommon)
-        {
-
-            adCommon.AdvertisementId = advertisement.AdId;
-            adCommon.UserId = advertisement.UserId;
-            adCommon.AdvertisementTitle = advertisement.AdTitle;
-            adCommon.AdvertisementTime = advertisement.AdInsertDateTime;
-            adCommon.AdvertisementStatusId = advertisement.AdStatusId;
-            if(advertisement.AdStatus!=null) adCommon.AdvertisementStatus = advertisement.AdStatus.AdStatus1;
-            if(advertisement.Category!=null) adCommon.AdvertisementCategory = advertisement.Category.CategoryName;
-            adCommon.AdvertisementCategoryId = advertisement.CategoryId;
-            adCommon.AdvertisementComments = advertisement.AdComments;
-            adCommon.NumberOfVisit = advertisement.AdNumberOfVisited;
-            adCommon.Email = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).Email;//TODO test for null
-            adCommon.PhoneNumber = _appIdentityDbContext.Users.First(user => user.Id == advertisement.UserId).PhoneNumber;//TODO test for null
-            adCommon.DistrictId = advertisement.DistrictId;
-            if(advertisement.District!=null) adCommon.DistrictName = advertisement.District.DistrictName;
-            if(advertisement.District != null && advertisement.District.City != null) adCommon.CityName = advertisement.District.City.CityName;
-            if (advertisement.District != null && advertisement.District.City != null && advertisement.District.City.Province != null)
-                adCommon.ProvinceName = advertisement.District.City.Province.ProvinceName;
-            if(advertisement.Price!=null) adCommon.AdvertisementPrice = advertisement.Price;
-
-            if(adCommon.AdvertisementPrice!=null) adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
-        }
+       
 
         //TODO maybe it is a method of Advertisements class
         public Advertisement GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
@@ -202,9 +180,9 @@ namespace RepositoryStd.Repository.Common
             List<AdvertisementCommon> userAdvertisementCommons = new List<AdvertisementCommon>();
             foreach (Advertisement advertisement in userAdvertisements)
             {
-                AdvertisementCommon temp = new AdvertisementCommon();
-                FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
-                userAdvertisementCommons.Add(temp);
+                AdvertisementCommon tempAdCommon = new AdvertisementCommon();
+                Convertor.FillAdvertisementCommonFromAdvertisement(tempAdCommon,advertisement, _appIdentityDbContext);
+                userAdvertisementCommons.Add(tempAdCommon);
             }
 
             return userAdvertisementCommons;
@@ -300,7 +278,7 @@ namespace RepositoryStd.Repository.Common
 
             Advertisement item = list.FirstOrDefault();
             AdvertisementCommon adCommon = new AdvertisementCommon();
-            FillAdvertisementCommonFromDatabaseResult(item, adCommon);
+            Convertor.FillAdvertisementCommonFromAdvertisement( adCommon, item,_appIdentityDbContext);
             return adCommon;
         }
 

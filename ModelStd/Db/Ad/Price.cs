@@ -21,7 +21,7 @@ namespace ModelStd.Db.Ad
         [DataType(DataType.Currency)]
         public decimal? price { get; set; }
 
-        public virtual Advertisements Ad { get; set; }
+        public virtual Advertisement Ad { get; set; }
     }
 
 

@@ -50,7 +50,7 @@ namespace ModelStd.Db.Ad
         [MaxLength(50)]
         public string PlateType { get; set; }
 
-        public virtual Advertisements Ad { get; set; }
+        public virtual Advertisement Ad { get; set; }
         public virtual CarModel Model { get; set; }
         
     }

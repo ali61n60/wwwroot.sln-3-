@@ -11,6 +11,7 @@ using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
+using RepositoryStd.ModelConversion;
 
 namespace RepositoryStd.Repository.Transportation
 {
@@ -156,9 +157,9 @@ namespace RepositoryStd.Repository.Transportation
             list = _commonRepository.EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisement advertisement in list)
             {
-                AdvertisementCommon temp = new AdvertisementCommon();
-                _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisement, temp);
-                searchResultItems.Add(temp);
+                AdvertisementCommon tempAdCommon = new AdvertisementCommon();
+                Convertor.FillAdvertisementCommonFromAdvertisement( tempAdCommon, advertisement, _appIdentityDbContext);
+                searchResultItems.Add(tempAdCommon);
             }
 
             return searchResultItems;
@@ -418,7 +419,7 @@ namespace RepositoryStd.Repository.Transportation
         
         private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisement advertisement)
         {
-            _commonRepository.FillAdvertisementCommonFromDatabaseResult(advertisement, adTrans);
+            Convertor.FillAdvertisementCommonFromAdvertisement(adTrans,advertisement, _appIdentityDbContext);
             adTrans.BodyColor = advertisement.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisement.AdAttributeTransportation.InternalColor;
             adTrans.BodyStatus = AdvertisementTransportation.GetBodyStatus(advertisement.AdAttributeTransportation.BodyStatus, BodyStatusDefault);

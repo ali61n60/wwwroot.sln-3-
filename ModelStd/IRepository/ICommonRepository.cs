@@ -13,7 +13,7 @@ namespace ModelStd.IRepository
     {
         IQueryable<Db.Ad.Advertisement> GetCommonQueryableList(Dictionary<string, string> queryParameters);
         IQueryable<Db.Ad.Advertisement> EnforceStartIndexAndCount(Dictionary<string, string> queryParameters,IQueryable<Db.Ad.Advertisement> list);
-        void FillAdvertisementCommonFromDatabaseResult(Db.Ad.Advertisement advertisement, AdvertisementCommon adCommon);
+        
         Db.Ad.Advertisement GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary);
         Task IncrementNumberOfVisit(Guid adGuid);
         Db.Ad.Advertisement GetAdvertisement(AdvertisementCommon advertisementCommon);
