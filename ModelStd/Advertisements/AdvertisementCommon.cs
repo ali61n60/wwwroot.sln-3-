@@ -1,5 +1,5 @@
 ﻿using System;
-using ModelStd.Db.Ad;
+using ModelStd.Advertisements.Price;
 
 namespace ModelStd.Advertisements
 {
@@ -9,7 +9,6 @@ namespace ModelStd.Advertisements
         public AdvertisementCommon(int maxImageNumber)
         {
             AdvertisementImages=new string[maxImageNumber];
-            AdvertisementPrice = new Price();
         }
         
         public Guid AdvertisementId { get; set; }
@@ -42,7 +41,7 @@ namespace ModelStd.Advertisements
         
         public int NumberOfVisit { get; set; }
         
-        public Price AdvertisementPrice { get; set; }
+        public IPrice AdvertisementPrice { get; set; }
         
         public int AdPrivilegeId { get; set; } 
         

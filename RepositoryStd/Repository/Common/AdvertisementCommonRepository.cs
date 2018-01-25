@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ModelStd.Advertisements;
+using ModelStd.Advertisements.Price;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using ModelStd.Services;
@@ -34,7 +35,7 @@ namespace RepositoryStd.Repository.Common
         public static readonly int MaxCount = 20;
 
         public static readonly string PriceTypeKey = "PriceType";
-        public static readonly PriceType PriceTypeDefault = PriceType.All;
+        public static readonly PriceType PriceTypeDefault = PriceType.Fixed;
 
         public static readonly string MinPriceKey = "MinimumPrice";
         public static readonly decimal MinPriceDefault = -1;
@@ -113,7 +114,7 @@ namespace RepositoryStd.Repository.Common
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
                 .Include(advertisement => advertisement.AdPrivilege)
-                .Include(advertisement => advertisement.Price)
+                .Include(advertisement => advertisement.FixedPrice)
                 .Where(advertisement => advertisement.AdStatus == AdStatus.Approved); //only accepted ads
 
             list = orderByClause(list, queryParameters); //OrderBy
@@ -272,7 +273,7 @@ namespace RepositoryStd.Repository.Common
                 .Include(advertisement => advertisement.District.City.Province)
                 .Include(advertisement => advertisement.AdPrivilege)
                 .Include(advertisement => advertisement.AdStatus)
-                .Include(advertisement => advertisement.Price)
+                .Include(advertisement => advertisement.FixedPrice)
                 .Where(advertisement => advertisement.AdStatus == AdStatus.Approved && advertisement.AdId == adId);//only accepted ads
 
             Advertisement item = list.FirstOrDefault();
@@ -306,9 +307,9 @@ namespace RepositoryStd.Repository.Common
             switch (orderByUserInput)
             {
                 case OrderBy.PriceAsc:
-                    return list.OrderBy(advertisement => advertisement.Price.price);
+                    return list.OrderBy(advertisement => advertisement.FixedPrice.PriceAmount);
                 case OrderBy.PriceDesc:
-                    return list.OrderByDescending(advertisements => advertisements.Price.price);
+                    return list.OrderByDescending(advertisements => advertisements.FixedPrice.PriceAmount);
                 case OrderBy.DateAsc:
                     return list.OrderBy(advertisements => advertisements.AdInsertDateTime);
                 case OrderBy.DateDesc:
@@ -347,18 +348,18 @@ namespace RepositoryStd.Repository.Common
             if (minPrice < MinPriceDefault)
                 minPrice = MinPriceDefault;
             if (minPrice != MinPriceDefault)
-                list = list.Where(advertisement => advertisement.Price.price > minPrice);
+                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount > minPrice);
 
             decimal maxPrice = ParameterExtractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
             if (maxPrice > MaxPriceDefault)
                 maxPrice = MaxPriceDefault;
             if (maxPrice != MaxPriceDefault)
-                list = list.Where(advertisement => advertisement.Price.price < maxPrice);
+                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount < maxPrice);
 
 
-            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
-            if (priceType != PriceTypeDefault)
-                list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
+            //PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
+            //if (priceType != PriceTypeDefault)
+            //    list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
             return list;
         }
         private IQueryable<Advertisement> whereClauseDistrictId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)

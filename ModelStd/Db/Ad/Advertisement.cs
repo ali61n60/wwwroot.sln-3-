@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ModelStd.Advertisements.Price;
 
 namespace ModelStd.Db.Ad
 {
@@ -58,10 +59,14 @@ namespace ModelStd.Db.Ad
         [Required]
         public AdType AdType { get; set; }
 
+        [Column("priceType")]
+        [Required]
+        public PriceType PriceType { get; set; }
+
         public virtual AdAttributeTransportation AdAttributeTransportation { get; set; }
         public virtual ICollection<AdPrivilege> AdPrivilege { get; set; }
         public virtual ICollection<MarkedAd> MarkedAds { get; set; }
-        public virtual Price Price { get; set; }
+        public virtual FixedPrice FixedPrice { get; set; }
         public virtual ICollection<SimilarAds> SimilarAds { get; set; }
         public virtual Category Category { get; set; }
         public virtual District District { get; set; }

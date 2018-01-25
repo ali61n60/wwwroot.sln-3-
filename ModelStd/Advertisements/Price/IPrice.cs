@@ -5,9 +5,12 @@ using ModelStd.Db.Ad;
 
 namespace ModelStd.Advertisements.Price
 {
-    public interface IPrice
+    public interface IPrice//:IComparable<IPrice>
     {
         PriceType PriceType { get; }
+        Guid AdId { get; set; }
+
+        Advertisement Ad { get; set; }
     }
 
     public enum PriceType

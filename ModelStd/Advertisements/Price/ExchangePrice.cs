@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ModelStd.Db.Ad;
 
 namespace ModelStd.Advertisements.Price
 {
     public class ExchangePrice:IPrice
     {
         public PriceType PriceType { get; }
+        public Guid AdId { get; set; }
 
         public ExchangePrice()
         {
@@ -16,5 +18,6 @@ namespace ModelStd.Advertisements.Price
         {
             return "قیمت" + " : " + "تعویض";
         }
+        public virtual Advertisement Ad { get; set; }
     }
 }

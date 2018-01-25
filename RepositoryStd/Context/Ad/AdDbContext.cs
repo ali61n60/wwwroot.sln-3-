@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using ModelStd.Db.Ad;
+using ModelStd.Advertisements.Price;
 
 
 namespace RepositoryStd.Context.AD
@@ -39,7 +40,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<LetMeKnowAttributeTransportaion> LetMeKnowAttributeTransportaions { get; set; }
         public virtual DbSet<MarkedAd> MarkedAds { get; set; }
         public virtual DbSet<MobileBrands> MobileBrands { get; set; }
-        public virtual DbSet<Price> Price { get; set; }
+        public virtual DbSet<FixedPrice> FixedPrice { get; set; }
         public virtual DbSet<Province> Provinces { get; set; }
         public virtual DbSet<SimilarAds> SimilarAds { get; set; }
         public virtual DbSet<SmsMessage> SmsMessages { get; set; }
@@ -243,12 +244,12 @@ namespace RepositoryStd.Context.AD
                     .HasMaxLength(150);
             });
 
-            modelBuilder.Entity<Price>(entity =>
+            modelBuilder.Entity<FixedPrice>(entity =>
             {
                 entity.HasOne(d => d.Ad)
-                     .WithOne(advertisements => advertisements.Price)
+                     .WithOne()
                      .OnDelete(DeleteBehavior.Cascade)
-                     .HasConstraintName("FK_Price_Advertisements");
+                     .HasConstraintName("FK_FixedPrice_Advertisements");
             });
 
             modelBuilder.Entity<SimilarAds>(entity =>

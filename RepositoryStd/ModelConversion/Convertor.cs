@@ -25,7 +25,7 @@ namespace RepositoryStd.ModelConversion
             if (ad.District != null && ad.District.City != null) adCommon.CityName = ad.District.City.CityName;
             if (ad.District != null && ad.District.City != null && ad.District.City.Province != null)
                 adCommon.ProvinceName = ad.District.City.Province.ProvinceName;
-            if (ad.Price != null) adCommon.AdvertisementPrice = ad.Price;
+            if (ad.FixedPrice != null) adCommon.AdvertisementPrice = ad.FixedPrice;//TODO based on ad.pricetype
 
             if (adCommon.AdvertisementPrice != null) adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
 

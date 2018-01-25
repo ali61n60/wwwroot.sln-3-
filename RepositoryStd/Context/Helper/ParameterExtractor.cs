@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using ModelStd.Advertisements.Price;
 using ModelStd.Db.Ad;
 
 
@@ -10,7 +12,7 @@ namespace RepositoryStd.Context.Helper
         {
             PriceType temPriceType = defaultPriceType;
             if (inputDictionary.ContainsKey(key))
-                temPriceType = Price.ParsePriceType(inputDictionary[key]);
+                temPriceType =(PriceType) Enum.Parse(typeof(PriceType), inputDictionary[key]);
 
             return temPriceType;
         }

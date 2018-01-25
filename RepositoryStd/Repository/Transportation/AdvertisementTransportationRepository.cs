@@ -125,7 +125,7 @@ namespace RepositoryStd.Repository.Transportation
                 .Include(advertisement => advertisement.District.City.Province)
                 .Include(advertisement => advertisement.AdPrivilege)
                 .Include(advertisement => advertisement.AdStatus)
-                .Include(advertisement => advertisement.Price)
+                .Include(advertisement => advertisement.FixedPrice)
                 .Include(advertisements => advertisements.AdAttributeTransportation)
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model)
                 .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
