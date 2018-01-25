@@ -73,6 +73,7 @@ namespace ModelStd.Db.Ad
         Demand = 2
     }
 
+    
     public enum AdStatus
     {
         Submitted = 1,//ثبت شده
@@ -89,6 +90,6 @@ namespace ModelStd.Db.Ad
         NoPrivilege=1,
         Urgent=2,
         EmailOthers=3,
-        SMSOthers=4
+        SmsOthers=4
     }
 }

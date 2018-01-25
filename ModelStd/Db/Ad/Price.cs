@@ -55,10 +55,5 @@ namespace ModelStd.Db.Ad
     }
 
 
-    public enum PriceType
-    {
-        ForSale,
-        Request,
-        All
-    }
+   
 }
