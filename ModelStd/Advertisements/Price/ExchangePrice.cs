@@ -12,5 +12,9 @@ namespace ModelStd.Advertisements.Price
         {
             PriceType = PriceType.Exchange;
         }
+        public override string ToString()
+        {
+            return "قیمت" + " : " + "تعویض";
+        }
     }
 }

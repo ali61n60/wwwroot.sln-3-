@@ -15,5 +15,10 @@ namespace ModelStd.Advertisements.Price
             PriceType = PriceType.Fixed;
             PriceAmount = priceAmount;
         }
+
+        public override string ToString()
+        {
+            return "قیمت" + " : " + PriceAmount;
+        }
     }
 }

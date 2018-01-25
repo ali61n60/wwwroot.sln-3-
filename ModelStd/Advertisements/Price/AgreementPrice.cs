@@ -12,5 +12,9 @@ namespace ModelStd.Advertisements.Price
         {
             PriceType = PriceType.Agreement;
         }
+        public override string ToString()
+        {
+            return "قیمت" + " : " + "توافقی";
+        }
     }
 }

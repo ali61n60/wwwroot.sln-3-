@@ -15,5 +15,9 @@ namespace ModelStd.Advertisements.Price
         {
             PriceType = PriceType.MortgageAndRent;
         }
+        public override string ToString()
+        {
+            return "قیمت" + " : " + "رهن"+" : "+Mortgage+" , کرایه ماهیانه"+" : "+RentPayMonth;
+        }
     }
 }

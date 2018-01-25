@@ -16,5 +16,9 @@ namespace ModelStd.Advertisements.Price
         {
             PriceType = PriceType.Installment;
         }
+        public override string ToString()
+        {
+            return "قیمت" + " : " + "پیش پرداخت"+ " : "+Prepayment+" , تعداد اقساط"+" : "+NumberOfInstallments;
+        }
     }
 }
