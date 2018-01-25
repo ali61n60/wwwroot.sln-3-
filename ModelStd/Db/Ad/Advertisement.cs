@@ -38,9 +38,8 @@ namespace ModelStd.Db.Ad
         [MaxLength(500)]
         public string AdLink { get; set; }
 
-        [Column("adStatusId")]
-        public int AdStatusId { get; set; }
-
+        [Column("adStatus")]
+        public AdStatus AdStatus { get; set; }
 
         [Column("adTitle")]
         [Required]
@@ -64,7 +63,6 @@ namespace ModelStd.Db.Ad
         public virtual ICollection<MarkedAd> MarkedAds { get; set; }
         public virtual Price Price { get; set; }
         public virtual ICollection<SimilarAds> SimilarAds { get; set; }
-        public virtual AdStatus AdStatus { get; set; }
         public virtual Category Category { get; set; }
         public virtual District District { get; set; }
     }
@@ -73,5 +71,16 @@ namespace ModelStd.Db.Ad
     {
         Offer = 1,
         Demand = 2
+    }
+
+    public enum AdStatus
+    {
+        Submitted = 1,//ثبت شده
+        UnderReview = 2,//در حال بررسی
+        Approved = 3,//تایید شده
+        Rejected = 4,//رد شده
+        Expired = 5,//منقضی
+        ReSubmitted = 6,//ثبت دوباره
+        Deleted = 7//حذف شده
     }
 }

@@ -27,7 +27,6 @@ namespace RepositoryStd.Context.AD
 
         public virtual DbSet<AdAttributeTransportation> AdAttributeTransportation { get; set; }
         public virtual DbSet<AdPrivilege> AdPrivilege { get; set; }
-        public virtual DbSet<AdStatus> AdStatus { get; set; }
         public virtual DbSet<Advertisement> Advertisements { get; set; }
         public virtual DbSet<ApprovedAd> ApprovedAds { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
@@ -85,35 +84,12 @@ namespace RepositoryStd.Context.AD
                     .HasConstraintName("FK_AdPrivilege_Privilege");
             });
 
-            modelBuilder.Entity<AdStatus>(entity =>
-            {
-                entity.ToTable("AdStatus", "ad");
-
-                entity.Property(e => e.AdStatusId)
-                    .HasColumnName("adStatusId")
-                    .ValueGeneratedNever();
-
-                entity.Property(e => e.AdStatus1)
-                    .IsRequired()
-                    .HasColumnName("adStatus")
-                    .HasMaxLength(150);
-
-                entity.Property(e => e.AdStatusEnglish)
-                    .IsRequired()
-                    .HasColumnName("adStatusEnglish")
-                    .HasMaxLength(150);
-            });
+           
 
             modelBuilder.Entity<Advertisement>(entity =>
             {
                 entity.HasKey(e => e.AdId)
                     .HasName("PK_Advertisements_1");
-
-                entity.HasOne(d => d.AdStatus)
-                    .WithMany(p => p.Advertisements)
-                    .HasForeignKey(d => d.AdStatusId)
-                    .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_Advertisements_AdTypes");
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Advertisements)
