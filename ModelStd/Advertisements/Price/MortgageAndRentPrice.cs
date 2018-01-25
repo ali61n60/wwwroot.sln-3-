@@ -9,6 +9,7 @@ namespace ModelStd.Advertisements.Price
     {
         public PriceType PriceType { get; }
         public Guid AdId { get; set; }
+        public string PriceString { get; }
 
         public double Mortgage { get; set; }
         public double RentPayMonth { get; set; }
@@ -21,6 +22,5 @@ namespace ModelStd.Advertisements.Price
         {
             return "قیمت" + " : " + "رهن"+" : "+Mortgage+" , کرایه ماهیانه"+" : "+RentPayMonth;
         }
-        public virtual Advertisement Ad { get; set; }
     }
 }

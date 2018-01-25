@@ -135,7 +135,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
                 AdvertisementCategoryId: advertisementCommons[i].AdvertisementCategoryId,
                 AdvertisementCategory: advertisementCommons[i].AdvertisementCategory,
                 adImage: adImage,
-                adPrice: advertisementCommons[i].AdvertisementPrice, //todo check the price type
+                adPrice: advertisementCommons[i].AdvertisementPrice.PriceString, //todo check the price type
                 AdvertisementTitle: advertisementCommons[i].AdvertisementTitle,
                 AdvertisementStatus: advertisementCommons[i].AdvertisementStatus
                 //adDate: msg.ResponseData[i].AdTime

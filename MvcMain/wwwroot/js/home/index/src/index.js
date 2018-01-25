@@ -92,7 +92,7 @@ var Index = /** @class */ (function () {
                 AdvertisementCategoryId: advertisementCommons[i].AdvertisementCategoryId,
                 AdvertisementCategory: advertisementCommons[i].AdvertisementCategory,
                 adImage: adImage,
-                adPrice: advertisementCommons[i].AdvertisementPrice,
+                adPrice: advertisementCommons[i].AdvertisementPrice.PriceString,
                 AdvertisementTitle: advertisementCommons[i].AdvertisementTitle,
                 AdvertisementStatus: advertisementCommons[i].AdvertisementStatus
                 //adDate: msg.ResponseData[i].AdTime

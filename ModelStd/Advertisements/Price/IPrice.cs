@@ -9,8 +9,8 @@ namespace ModelStd.Advertisements.Price
     {
         PriceType PriceType { get; }
         Guid AdId { get; set; }
-
-        Advertisement Ad { get; set; }
+        string PriceString { get;}
+       
     }
 
     public enum PriceType

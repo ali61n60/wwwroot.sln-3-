@@ -44,9 +44,6 @@ namespace RepositoryStd.ModelConversion
                         adCommon.AdvertisementPrice = null;
                     break;
             }
-            
-
-            if (adCommon.AdvertisementPrice != null) adCommon.AdvertisementPrice.Ad = null;//prevent self referencing
         }
 
         public static string GetAdStatusString(AdStatus adStatus)

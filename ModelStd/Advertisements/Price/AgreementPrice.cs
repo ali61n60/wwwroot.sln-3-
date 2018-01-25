@@ -9,6 +9,7 @@ namespace ModelStd.Advertisements.Price
     {
         public PriceType PriceType { get; }
         public Guid AdId { get; set; }
+        public string PriceString { get; }
 
         public AgreementPrice()
         {
@@ -18,6 +19,5 @@ namespace ModelStd.Advertisements.Price
         {
             return "قیمت" + " : " + "توافقی";
         }
-        public virtual Advertisement Ad { get; set; }
     }
 }

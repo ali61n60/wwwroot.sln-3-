@@ -166,14 +166,7 @@ namespace RepositoryStd.Context.AD
                     .HasForeignKey(emailMessage => emailMessage.UserId);
             });
 
-            modelBuilder.Entity<FixedPrice>(entity =>
-            {
-                entity.HasOne(d => d.Ad)
-                    .WithOne(advertisement => advertisement.FixedPrice)
-                    .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_FixedPrice_Advertisements");
-            });
-
+           
             modelBuilder.Entity<LetMeKnow>(entity =>
             {
                 entity.HasKey(letMeKnow=>

@@ -15,7 +15,7 @@
     public AdvertisementTitle: string;
     public AdvertisementComments: string;
     public NumberOfVisit: number;
-    public AdvertisementPrice: number;//TODO real type is Price in C#
+    public AdvertisementPrice: any;//TODO real type is Price in C#
     public AdPrivilegeId: number;
     public AdvertisementImages: string[];
 }

@@ -26,11 +26,7 @@ namespace ModelStd.Advertisements.Price
         {
             PriceType = PriceType.Fixed;
         }
-        public override string ToString()
-        {
-            return "قیمت" + " : " + PriceAmount;
-        }
 
-        public virtual Advertisement Ad { get; set; }
+        public string PriceString => "قیمت" + " : " + PriceAmount.ToString("N0");
     }
 }

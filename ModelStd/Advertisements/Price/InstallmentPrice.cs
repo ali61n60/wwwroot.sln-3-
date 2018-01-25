@@ -9,6 +9,7 @@ namespace ModelStd.Advertisements.Price
     {
         public PriceType PriceType { get; }
         public Guid AdId { get; set; }
+        public string PriceString { get; }
 
         public double Prepayment { get; set; }
         public int NumberOfInstallments { get; set; }
@@ -22,6 +23,5 @@ namespace ModelStd.Advertisements.Price
         {
             return "قیمت" + " : " + "پیش پرداخت"+ " : "+Prepayment+" , تعداد اقساط"+" : "+NumberOfInstallments;
         }
-        public virtual Advertisement Ad { get; set; }
     }
 }
