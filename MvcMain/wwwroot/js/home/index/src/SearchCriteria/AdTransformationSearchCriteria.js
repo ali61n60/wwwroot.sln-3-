@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var CarModelBrandController_1 = require("../../../../Components/Transformation/CarModelBrandController");
+var DefaultOrderBy_1 = require("../../../../Components/OrderBy/DefaultOrderBy");
+var DefaultPriceType_1 = require("../../../../Components/PriceType/DefaultPriceType");
 var AdTransformationSearchCriteria = /** @class */ (function () {
     function AdTransformationSearchCriteria() {
         this.MakeYearFromKey = "MakeYearFrom";
@@ -28,10 +30,26 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
     }
     AdTransformationSearchCriteria.prototype.initView = function () {
         this._carModelBrandContoller = new CarModelBrandController_1.CarModelBrandController();
+        this._defaultPriceType = new DefaultPriceType_1.DefaultPriceType();
+        this._defaultOrderBy = new DefaultOrderBy_1.DefaultOrderBy();
+    };
+    AdTransformationSearchCriteria.prototype.registerEvents = function () {
+        var _this = this;
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Subscribe(function (sender, args) {
+            _this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
+    };
+    AdTransformationSearchCriteria.prototype.unRegisterEvents = function () {
+        var _this = this;
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Unsubscribe(function (sender, args) {
+            _this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
     };
     //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
     AdTransformationSearchCriteria.prototype.FillCriteria = function (userInput) {
         this._carModelBrandContoller.FillCriteria(userInput);
+        this._defaultOrderBy.FillCriteria(userInput);
+        this._defaultPriceType.FillCriteria(userInput);
         userInput.ParametersDictionary[this.MakeYearFromKey] =
             $("#" + this.MakeYearFromInputId).val(); //makeYearFrom
         userInput.ParametersDictionary[this.MakeYearToKey] =
@@ -57,10 +75,16 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
     };
     AdTransformationSearchCriteria.prototype.BindEvents = function (criteriaChange) {
         this.initView();
+        this.registerEvents();
         this._carModelBrandContoller.BindEvents(criteriaChange);
+        this._defaultOrderBy.BindEvents(criteriaChange);
+        this._defaultPriceType.BindEvents(criteriaChange);
     };
     AdTransformationSearchCriteria.prototype.UnBindEvents = function () {
         this._carModelBrandContoller.UnBindEvents();
+        this._defaultOrderBy.UnBindEvents();
+        this._defaultPriceType.UnBindEvents();
+        this.unRegisterEvents();
     };
     AdTransformationSearchCriteria.prototype.ValidateCriteria = function () { throw new Error("Not implemented"); };
     return AdTransformationSearchCriteria;

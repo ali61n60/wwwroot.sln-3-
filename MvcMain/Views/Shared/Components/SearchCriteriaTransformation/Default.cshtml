@@ -3,7 +3,7 @@
     @await Component.InvokeAsync("BrandsTransformation")    
 </div>
 
-@*TODO add other category specific criterias*@
+
 
 <div class="col-sm-6">
     <input id="fromYear" class="form-control" placeholder="از سال"/>
@@ -170,4 +170,11 @@
         <option value="4">کروک</option>
         <option value="5">کوپه</option>
     </select>
+</div>
+<div class="col-sm-6">
+    @await Component.InvokeAsync("DefaultOrderBy")
+</div>
+
+<div class="col-sm-6">
+    @await Component.InvokeAsync("DefaultPrice")
 </div>

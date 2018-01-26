@@ -30,8 +30,8 @@ var DefaultPriceType = /** @class */ (function () {
             else {
                 $("#" + _this.FixPriceDivId).hide();
             }
-            //hide min and max prices if type is not fix...
             _this.SelectedPriceTypeChangedEvent.Dispatch(_this, selectedPriceType);
+            _this._searchCriteriaChange.CustomCriteriaChanged();
         });
     };
     DefaultPriceType.prototype.getPriceType = function (stringPriceType) {

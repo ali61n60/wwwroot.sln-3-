@@ -2,12 +2,15 @@
 import { ICriteriaChange } from "../../../../Helper/ICriteriaChange";
 import { ICriteria, CriteriaValidator } from "../../../../Helper/ICriteria";
 import { CarModelBrandController } from "../../../../Components/Transformation/CarModelBrandController";
-
+import {DefaultOrderBy} from "../../../../Components/OrderBy/DefaultOrderBy";
+import {DefaultPriceType} from "../../../../Components/PriceType/DefaultPriceType";
 
 
 export class AdTransformationSearchCriteria implements ICriteria {
 
     private _carModelBrandContoller: CarModelBrandController;
+    private _defaultOrderBy: DefaultOrderBy;
+    private _defaultPriceType: DefaultPriceType;
 
     private readonly MakeYearFromKey: string = "MakeYearFrom";
     private readonly MakeYearFromInputId: string = "fromYear";
@@ -44,11 +47,26 @@ export class AdTransformationSearchCriteria implements ICriteria {
 
     private initView(): void {
         this._carModelBrandContoller = new CarModelBrandController();
+        this._defaultPriceType = new DefaultPriceType();
+        this._defaultOrderBy = new DefaultOrderBy();
+    }
+    private registerEvents(): void {
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Subscribe((sender, args) => {
+            this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
+    }
+
+    private unRegisterEvents(): void {
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Unsubscribe((sender, args) => {
+            this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
     }
 
     //TODO in orther to minimize bandwidth usage it is good prctice to not send criterias that have default value
     public FillCriteria(userInput: UserInput): void {
         this._carModelBrandContoller.FillCriteria(userInput);
+        this._defaultOrderBy.FillCriteria(userInput);
+        this._defaultPriceType.FillCriteria(userInput);
 
         userInput.ParametersDictionary[this.MakeYearFromKey] =
             $("#" + this.MakeYearFromInputId).val();//makeYearFrom
@@ -76,11 +94,18 @@ export class AdTransformationSearchCriteria implements ICriteria {
 
     public BindEvents(criteriaChange: ICriteriaChange): void {
         this.initView();
+        this.registerEvents();
+
         this._carModelBrandContoller.BindEvents(criteriaChange);
+        this._defaultOrderBy.BindEvents(criteriaChange);
+        this._defaultPriceType.BindEvents(criteriaChange);
     }
 
     public UnBindEvents(): void {
         this._carModelBrandContoller.UnBindEvents();
+        this._defaultOrderBy.UnBindEvents();
+        this._defaultPriceType.UnBindEvents();
+        this.unRegisterEvents();
     }
 
     ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
