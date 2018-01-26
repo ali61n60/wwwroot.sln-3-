@@ -1,9 +1,14 @@
 ﻿import { ICriteria, CriteriaValidator } from "../../Helper/ICriteria";
 import { UserInput } from "../../Helper/UserInput";
 import { ICriteriaChange } from "../../Helper/ICriteriaChange";
+import {EventDispatcher} from "../../Events/EventDispatcher";
 
 export class DefaultPriceType implements ICriteria {
     //TODO it raises priceTypeChanged Event, OrderBy component update itself based on price type setting
+    public SelectedPriceTypeChangedEvent: EventDispatcher<DefaultPriceType, string> =
+        new EventDispatcher<DefaultPriceType, string>();
+
+
     private readonly MinimumPriceKey = "MinimumPrice";
     private readonly _minPriceInputId = "minPrice";
 
@@ -13,7 +18,7 @@ export class DefaultPriceType implements ICriteria {
     private _searchCriteriaChange: ICriteriaChange;
 
     constructor() {
-        alert("DefaultPriceType");
+        
     }
 
     BindEvents(criteriaChange: ICriteriaChange): void {

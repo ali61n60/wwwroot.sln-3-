@@ -26,7 +26,6 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
         this.PlateTypeKey = "PlateType";
         this.PlateTypeSelectId = "plateType";
     }
-    AdTransformationSearchCriteria.prototype.ValidateCriteria = function () { throw new Error("Not implemented"); };
     AdTransformationSearchCriteria.prototype.initView = function () {
         this._carModelBrandContoller = new CarModelBrandController_1.CarModelBrandController();
     };
@@ -63,6 +62,7 @@ var AdTransformationSearchCriteria = /** @class */ (function () {
     AdTransformationSearchCriteria.prototype.UnBindEvents = function () {
         this._carModelBrandContoller.UnBindEvents();
     };
+    AdTransformationSearchCriteria.prototype.ValidateCriteria = function () { throw new Error("Not implemented"); };
     return AdTransformationSearchCriteria;
 }());
 exports.AdTransformationSearchCriteria = AdTransformationSearchCriteria;

@@ -9,6 +9,11 @@ export class DefaultSearchCriteria implements ICriteria{
     private _defaultOrderBy: DefaultOrderBy;
     private _defaultPriceType:DefaultPriceType;
 
+    private initView(): void {
+        this._defaultPriceType = new DefaultPriceType();
+        this._defaultOrderBy = new DefaultOrderBy();
+    }
+
     public FillCriteria(userInput: UserInput): void {
         this._defaultOrderBy.FillCriteria(userInput);
         this._defaultPriceType.FillCriteria(userInput);
@@ -17,6 +22,7 @@ export class DefaultSearchCriteria implements ICriteria{
     }
 
     BindEvents(criteriaChange: ICriteriaChange): void {
+        this.initView();
         this._defaultOrderBy.BindEvents(criteriaChange);
         this._defaultPriceType.BindEvents(criteriaChange);
     }

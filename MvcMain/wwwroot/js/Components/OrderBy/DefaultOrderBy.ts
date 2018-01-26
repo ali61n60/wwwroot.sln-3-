@@ -10,7 +10,7 @@ export class DefaultOrderBy implements ICriteria  {
     private _searchCriteriaChange: ICriteriaChange;
 
     constructor() {
-        alert("default order by");
+        
     }
 
     BindEvents(criteriaChange: ICriteriaChange): void {
@@ -31,6 +31,10 @@ export class DefaultOrderBy implements ICriteria  {
 
         let orderBy = $("#" + this._orderBySelectIdDiv).val().toString();
         userInput.ParametersDictionary[this.OrderByKey] = orderBy;
+    }
+
+    public PriceTypeChanged(): void {
+        alert("PriceType Changed");
     }
 
    

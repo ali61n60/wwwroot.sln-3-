@@ -69,6 +69,9 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
             this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
         });
 
+        this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(),this);
+
+
        
         $("#" + this.AdTypeParentDivId).on("change",
             (event) => {
@@ -94,8 +97,6 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
 
             this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
             
-            
-
             userInput.ParametersDictionary[this.AdTypeKey] = $("#" + this.AdTypeParentDivId).children(":checked").val();
             
             this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters

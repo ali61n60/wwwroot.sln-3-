@@ -1,10 +1,7 @@
 ﻿import {CarModel} from "../../Models/AdTransportation/CarModel";
 import {UserInput} from "../../Helper/UserInput";
 import {ICriteria,CriteriaValidator} from "../../Helper/ICriteria";
-
 import {ICriteriaChange} from "../../Helper/ICriteriaChange";
-
-
 
 export class CarModelBrandController implements ICriteria {
     ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
@@ -14,13 +11,13 @@ export class CarModelBrandController implements ICriteria {
 
     private readonly CarModelTemplateId: string = "modelTemplate";
     private readonly CarModelDivPlaceHolderId: string = "modelPlaceHolder";
+
     private readonly CarModelIdKey: string = "CarModelId";
     private readonly AllCarModelsInputId: string = "allCarModels";
     private readonly ModelSelectId: string = "model";
     private _allCarModels: CarModel[];
 
     private _searchCriteriaChange:ICriteriaChange;
-
 
     constructor() {
         this.initView();
