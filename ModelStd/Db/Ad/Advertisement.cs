@@ -75,7 +75,8 @@ namespace ModelStd.Db.Ad
     public enum AdType
     {
         Offer = 1,
-        Demand = 2
+        Demand = 2,
+        OfferOrDemand=3
     }
 
     

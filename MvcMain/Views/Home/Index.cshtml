@@ -49,14 +49,25 @@
                         <input id="maxPrice" class="form-control" placeholder="تا قیمت"/>
                     </div>
                 </div>
-                <br/>
-                <select id="orderBy" class="form-control">
-                    <option value="" selected="selected">به ترتیب</option>
-                    <option value="DateAsc">به روزترین آگهی</option>
-                    <option value="DateDesc">قدیمی ترین آگهی</option>
-                    <option value="PriceAsc">ارزانترین</option>
-                    <option value="PriceDesc">گرانترین</option>
-                </select>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <select id="orderBy" class="form-control">
+                            <option value="" selected="selected">به ترتیب</option>
+                            <option value="DateAsc">به روزترین آگهی</option>
+                            <option value="DateDesc">قدیمی ترین آگهی</option>
+                            <option value="PriceAsc">ارزانترین</option>
+                            <option value="PriceDesc">گرانترین</option>
+                        </select>
+                    </div>
+                    <div class="col-sm-6">
+                        <span class="text-right" dir="rtl"></span>
+                        <input type="radio" name="adType" value="Offer" checked="checked"/>کارکرده<br/>
+                        <input type="radio" name="adType" value="Demand"/>حواله<br/>
+                        <input type="radio" name="newUsed" value="New"/>صفر <br/>
+                    </div>
+                </div>
+                
+                
                 <br/>
                 <div id="categorySpecificSearchCriteria"></div>
             </div>
