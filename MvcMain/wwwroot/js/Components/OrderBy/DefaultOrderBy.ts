@@ -6,8 +6,11 @@ import {PriceType} from "../PriceType/DefaultPriceType";
 
 export class DefaultOrderBy implements ICriteria  {
     private readonly OrderByKey = "OrderBy";
-    private readonly _orderBySelectId = "orderBy";
-
+    private readonly OrderBySelectId = "orderBy";
+    private readonly OrderByDivId = "orderByDiv";
+    private readonly OrderByFixedPriceTemplateId = "orderByFixedPriceTemplate";
+    private readonly OrderByOdersTemplateId = "orderByOdersTemplate";
+    
     private _searchCriteriaChange: ICriteriaChange;
 
     constructor() {
@@ -16,26 +19,37 @@ export class DefaultOrderBy implements ICriteria  {
 
     BindEvents(criteriaChange: ICriteriaChange): void {
         this._searchCriteriaChange = criteriaChange;
-        $("#" + this._orderBySelectId).on("change",
+        $("#" + this.OrderBySelectId).on("change",
             (event) => {
                 this._searchCriteriaChange.CustomCriteriaChanged();
             });
     }
 
     UnBindEvents(): void {
-        $("#" + this._orderBySelectId).off("change");
+        $("#" + this.OrderBySelectId).off("change");
     }
 
     ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
 
     FillCriteria(userInput: UserInput): void {
 
-        let orderBy = $("#" + this._orderBySelectId).val().toString();
+        let orderBy = $("#" + this.OrderBySelectId).val().toString();
         userInput.ParametersDictionary[this.OrderByKey] = orderBy;
     }
 
     public PriceTypeChanged(sender:object,args:PriceType): void {
-        alert("PriceType Changed "+args.toString());
+        console.log("PriceType Changed " + args.toString());
+        $("#" + this.OrderByDivId).children().remove();
+        if (args === PriceType.Fixed) {
+            var template = $("#"+this.OrderByFixedPriceTemplateId).html();
+            var html = Mustache.to_html(template, null);
+            $("#" + this.OrderByDivId).append(html);
+        } else {
+
+            var template = $("#" + this.OrderByOdersTemplateId).html();
+            var html = Mustache.to_html(template, null);
+            $("#" + this.OrderByDivId).append(html);
+        }
     }
 
    

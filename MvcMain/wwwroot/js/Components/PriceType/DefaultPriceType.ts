@@ -10,6 +10,7 @@ export class DefaultPriceType implements ICriteria {
 
     private readonly PriceTypeSelectId= "priceType";
 
+    private readonly FixPriceDivId ="fixedPrice";
     private readonly MinimumPriceKey = "MinimumPrice";
     private readonly _minPriceInputId = "minPrice";
 
@@ -33,11 +34,15 @@ export class DefaultPriceType implements ICriteria {
             (event) => {
                 this._searchCriteriaChange.CustomCriteriaChanged();
             });
-        $("#" + this.PriceTypeSelectId).change((event)=> {
-            let selectedVal = $(event.currentTarget).val().toString();
-            //todo send correct data to subscribers
+        $("#" + this.PriceTypeSelectId).on("change", (event)=> {
+            let selectedPriceType = this.getPriceType($(event.currentTarget).val().toString());
+            if (selectedPriceType === PriceType.Fixed) {
+                $("#" + this.FixPriceDivId).show();
+            } else {
+                $("#" + this.FixPriceDivId).hide();
+            }
             //hide min and max prices if type is not fix...
-            this.SelectedPriceTypeChangedEvent.Dispatch(this, this.getPriceType(selectedVal));
+            this.SelectedPriceTypeChangedEvent.Dispatch(this, selectedPriceType);
         });
     }
 

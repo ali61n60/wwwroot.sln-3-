@@ -1,25 +1,42 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var DefaultPriceType_1 = require("../PriceType/DefaultPriceType");
 var DefaultOrderBy = /** @class */ (function () {
     function DefaultOrderBy() {
         this.OrderByKey = "OrderBy";
-        this._orderBySelectIdDiv = "orderBy";
-        alert("default order by");
+        this.OrderBySelectId = "orderBy";
+        this.OrderByDivId = "orderByDiv";
+        this.OrderByFixedPriceTemplateId = "orderByFixedPriceTemplate";
+        this.OrderByOdersTemplateId = "orderByOdersTemplate";
     }
     DefaultOrderBy.prototype.BindEvents = function (criteriaChange) {
         var _this = this;
         this._searchCriteriaChange = criteriaChange;
-        $("#" + this._orderBySelectIdDiv).on("change", function (event) {
+        $("#" + this.OrderBySelectId).on("change", function (event) {
             _this._searchCriteriaChange.CustomCriteriaChanged();
         });
     };
     DefaultOrderBy.prototype.UnBindEvents = function () {
-        $("#" + this._orderBySelectIdDiv).off("change");
+        $("#" + this.OrderBySelectId).off("change");
     };
     DefaultOrderBy.prototype.ValidateCriteria = function () { throw new Error("Not implemented"); };
     DefaultOrderBy.prototype.FillCriteria = function (userInput) {
-        var orderBy = $("#" + this._orderBySelectIdDiv).val().toString();
+        var orderBy = $("#" + this.OrderBySelectId).val().toString();
         userInput.ParametersDictionary[this.OrderByKey] = orderBy;
+    };
+    DefaultOrderBy.prototype.PriceTypeChanged = function (sender, args) {
+        console.log("PriceType Changed " + args.toString());
+        $("#" + this.OrderByDivId).children().remove();
+        if (args === DefaultPriceType_1.PriceType.Fixed) {
+            var template = $("#" + this.OrderByFixedPriceTemplateId).html();
+            var html = Mustache.to_html(template, null);
+            $("#" + this.OrderByDivId).append(html);
+        }
+        else {
+            var template = $("#" + this.OrderByOdersTemplateId).html();
+            var html = Mustache.to_html(template, null);
+            $("#" + this.OrderByDivId).append(html);
+        }
     };
     return DefaultOrderBy;
 }());

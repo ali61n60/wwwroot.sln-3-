@@ -15,11 +15,15 @@ export class DefaultSearchCriteria implements ICriteria{
     }
 
     private registerEvents(): void {
-        this._defaultPriceType.SelectedPriceTypeChangedEvent.Subscribe(this._defaultOrderBy.PriceTypeChanged);
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Subscribe((sender, args) => {
+            this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
     }
 
     private unRegisterEvents(): void {
-        this._defaultPriceType.SelectedPriceTypeChangedEvent.Unsubscribe(this._defaultOrderBy.PriceTypeChanged);
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Unsubscribe((sender, args) => {
+            this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
     }
 
     public FillCriteria(userInput: UserInput): void {

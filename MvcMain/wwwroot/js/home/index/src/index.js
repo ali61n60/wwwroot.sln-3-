@@ -39,6 +39,7 @@ var Index = /** @class */ (function () {
             _this.searchCriteriaChanged();
             _this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
         });
+        this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(), this);
         $("#" + this.AdTypeParentDivId).on("change", function (event) {
             _this.searchCriteriaChanged();
         });
