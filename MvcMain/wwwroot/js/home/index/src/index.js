@@ -56,6 +56,9 @@ var Index = /** @class */ (function () {
         $("#" + this._maxPriceInputId).on("change", function (event) {
             _this.searchCriteriaChanged();
         });
+        $("#" + this.AdTypeParentDivId).on("change", function (event) {
+            _this.searchCriteriaChanged();
+        });
     };
     Index.prototype.CustomCriteriaChanged = function () {
         this.searchCriteriaChanged();

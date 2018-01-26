@@ -11,8 +11,9 @@ namespace ModelStd.Advertisements.Price
         public Guid AdId { get; set; }
         public string PriceString { get; }
 
-        public double Prepayment { get; set; }
+        public decimal Prepayment { get; set; }
         public int NumberOfInstallments { get; set; }
+        public decimal PayPerInstallment { get; set; }
         public InstallmentPaymentPlan Plan { get; set; }
 
         public InstallmentPrice()

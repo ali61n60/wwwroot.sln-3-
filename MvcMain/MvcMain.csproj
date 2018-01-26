@@ -904,6 +904,7 @@
     <TypeScriptCompile Include="node_modules\%40types\mustache\index.d.ts" />
     <TypeScriptCompile Include="node_modules\%40types\canvasJS\index.d.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\Category\CategorySelection.ts" />
+    <TypeScriptCompile Include="wwwroot\js\Components\PriceType\DefaultPriceType.ts" />
     <TypeScriptCompile Include="wwwroot\js\Components\Transformation\CarModelBrandController.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\EventDispatcher.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />

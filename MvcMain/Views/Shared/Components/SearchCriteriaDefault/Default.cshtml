@@ -1,4 +1,5 @@
 ﻿@model object
 
-<p>Default Search Criteria View</p>
+@await Component.InvokeAsync("DefaultOrderBy")
+@await Component.InvokeAsync("DefaultPrice")
 
