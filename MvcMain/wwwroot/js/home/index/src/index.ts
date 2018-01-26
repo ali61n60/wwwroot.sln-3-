@@ -89,6 +89,11 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
             (event) => {
                 this.searchCriteriaChanged();
             });
+
+        $("#" + this.AdTypeParentDivId).on("change",
+            (event) => {
+                this.searchCriteriaChanged();
+            });
     }
 
     public CustomCriteriaChanged():void {
