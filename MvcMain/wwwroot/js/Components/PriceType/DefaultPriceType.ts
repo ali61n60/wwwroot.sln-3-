@@ -4,11 +4,12 @@ import { ICriteriaChange } from "../../Helper/ICriteriaChange";
 import {EventDispatcher} from "../../Events/EventDispatcher";
 
 export class DefaultPriceType implements ICriteria {
-    //TODO it raises priceTypeChanged Event, OrderBy component update itself based on price type setting
+
     public SelectedPriceTypeChangedEvent: EventDispatcher<DefaultPriceType, PriceType> =
         new EventDispatcher<DefaultPriceType, PriceType>();
 
-    private readonly PriceTypeSelectId= "priceType";
+    private readonly PriceTypeKey = "PriceType";
+    private readonly PriceTypeSelectId = "priceType";
 
     private readonly FixPriceDivId ="fixedPrice";
     private readonly MinimumPriceKey = "MinimumPrice";
@@ -16,14 +17,10 @@ export class DefaultPriceType implements ICriteria {
 
     private readonly MaximumPriceKey = "MaximumPrice";
     private readonly _maxPriceInputId = "maxPrice";
-
+    
     private _searchCriteriaChange: ICriteriaChange;
 
-    constructor() {
-        
-    }
-
-    BindEvents(criteriaChange: ICriteriaChange): void {
+    public BindEvents(criteriaChange: ICriteriaChange): void {
         this._searchCriteriaChange = criteriaChange;
         //you can also user "input" instead of "change"
         $("#" + this._minPriceInputId).on("change",
@@ -50,20 +47,23 @@ export class DefaultPriceType implements ICriteria {
         return parseInt(stringPriceType);
     }
 
-    UnBindEvents(): void {
+    public UnBindEvents(): void {
         $("#" + this._minPriceInputId).off("change");
         $("#" + this._maxPriceInputId).off("change");
     }
 
-    ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
+    public ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
 
-    FillCriteria(userInput: UserInput): void {
-        let minPrice = parseInt($("#" + this._minPriceInputId).val().toString());
-        userInput.ParametersDictionary[this.MinimumPriceKey] = minPrice;
+    public FillCriteria(userInput: UserInput): void {
+        userInput.ParametersDictionary[this.PriceTypeKey] = $("#" + this.PriceTypeSelectId).val().toString();
 
-        let maxPrice = parseInt($("#" + this._maxPriceInputId).val().toString());
-        userInput.ParametersDictionary[this.MaximumPriceKey] = maxPrice;
+        if (parseInt($("#" + this.PriceTypeSelectId).val().toString()) === PriceType.Fixed) {
+            let minPrice = parseInt($("#" + this._minPriceInputId).val().toString());
+            userInput.ParametersDictionary[this.MinimumPriceKey] = minPrice;
 
+            let maxPrice = parseInt($("#" + this._maxPriceInputId).val().toString());
+            userInput.ParametersDictionary[this.MaximumPriceKey] = maxPrice;
+        }
     }
 }
 

@@ -3,8 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../Events/EventDispatcher");
 var DefaultPriceType = /** @class */ (function () {
     function DefaultPriceType() {
-        //TODO it raises priceTypeChanged Event, OrderBy component update itself based on price type setting
         this.SelectedPriceTypeChangedEvent = new EventDispatcher_1.EventDispatcher();
+        this.PriceTypeKey = "PriceType";
         this.PriceTypeSelectId = "priceType";
         this.FixPriceDivId = "fixedPrice";
         this.MinimumPriceKey = "MinimumPrice";
@@ -43,10 +43,13 @@ var DefaultPriceType = /** @class */ (function () {
     };
     DefaultPriceType.prototype.ValidateCriteria = function () { throw new Error("Not implemented"); };
     DefaultPriceType.prototype.FillCriteria = function (userInput) {
-        var minPrice = parseInt($("#" + this._minPriceInputId).val().toString());
-        userInput.ParametersDictionary[this.MinimumPriceKey] = minPrice;
-        var maxPrice = parseInt($("#" + this._maxPriceInputId).val().toString());
-        userInput.ParametersDictionary[this.MaximumPriceKey] = maxPrice;
+        userInput.ParametersDictionary[this.PriceTypeKey] = $("#" + this.PriceTypeSelectId).val().toString();
+        if (parseInt($("#" + this.PriceTypeSelectId).val().toString()) === PriceType.Fixed) {
+            var minPrice = parseInt($("#" + this._minPriceInputId).val().toString());
+            userInput.ParametersDictionary[this.MinimumPriceKey] = minPrice;
+            var maxPrice = parseInt($("#" + this._maxPriceInputId).val().toString());
+            userInput.ParametersDictionary[this.MaximumPriceKey] = maxPrice;
+        }
     };
     return DefaultPriceType;
 }());

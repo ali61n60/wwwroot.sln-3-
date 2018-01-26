@@ -38,7 +38,7 @@ export class DefaultOrderBy implements ICriteria  {
     }
 
     public PriceTypeChanged(sender:object,args:PriceType): void {
-        console.log("PriceType Changed " + args.toString());
+        this.UnBindEvents();
         $("#" + this.OrderByDivId).children().remove();
         if (args === PriceType.Fixed) {
             var template = $("#"+this.OrderByFixedPriceTemplateId).html();
@@ -50,6 +50,7 @@ export class DefaultOrderBy implements ICriteria  {
             var html = Mustache.to_html(template, null);
             $("#" + this.OrderByDivId).append(html);
         }
+        this.BindEvents(this._searchCriteriaChange);
     }
 
    

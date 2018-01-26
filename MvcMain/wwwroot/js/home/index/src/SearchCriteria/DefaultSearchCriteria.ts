@@ -29,8 +29,6 @@ export class DefaultSearchCriteria implements ICriteria{
     public FillCriteria(userInput: UserInput): void {
         this._defaultOrderBy.FillCriteria(userInput);
         this._defaultPriceType.FillCriteria(userInput);
-        userInput.ParametersDictionary.defaultParameter = 1234;
-        
     }
 
     BindEvents(criteriaChange: ICriteriaChange): void {

@@ -374,9 +374,9 @@ namespace RepositoryStd.Repository.Common
                 list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount < maxPrice);
 
 
-            //PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
-            //if (priceType != PriceTypeDefault)
-            //    list = list.Where(advertisement => advertisement.Price.priceType == Price.ConverPriceTypeToString(priceType));
+            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
+            if (priceType != PriceTypeDefault)
+                list = list.Where(advertisement => advertisement.PriceType == priceType);
             return list;
         }
         private IQueryable<Advertisement> whereClauseDistrictId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)

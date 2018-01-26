@@ -10,15 +10,20 @@ var DefaultSearchCriteria = /** @class */ (function () {
         this._defaultOrderBy = new DefaultOrderBy_1.DefaultOrderBy();
     };
     DefaultSearchCriteria.prototype.registerEvents = function () {
-        this._defaultPriceType.SelectedPriceTypeChangedEvent.Subscribe(this._defaultOrderBy.PriceTypeChanged);
+        var _this = this;
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Subscribe(function (sender, args) {
+            _this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
     };
     DefaultSearchCriteria.prototype.unRegisterEvents = function () {
-        this._defaultPriceType.SelectedPriceTypeChangedEvent.Unsubscribe(this._defaultOrderBy.PriceTypeChanged);
+        var _this = this;
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Unsubscribe(function (sender, args) {
+            _this._defaultOrderBy.PriceTypeChanged(sender, args);
+        });
     };
     DefaultSearchCriteria.prototype.FillCriteria = function (userInput) {
         this._defaultOrderBy.FillCriteria(userInput);
         this._defaultPriceType.FillCriteria(userInput);
-        userInput.ParametersDictionary.defaultParameter = 1234;
     };
     DefaultSearchCriteria.prototype.BindEvents = function (criteriaChange) {
         this.initView();

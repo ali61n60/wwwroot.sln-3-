@@ -25,7 +25,7 @@ var DefaultOrderBy = /** @class */ (function () {
         userInput.ParametersDictionary[this.OrderByKey] = orderBy;
     };
     DefaultOrderBy.prototype.PriceTypeChanged = function (sender, args) {
-        console.log("PriceType Changed " + args.toString());
+        this.UnBindEvents();
         $("#" + this.OrderByDivId).children().remove();
         if (args === DefaultPriceType_1.PriceType.Fixed) {
             var template = $("#" + this.OrderByFixedPriceTemplateId).html();
@@ -37,6 +37,7 @@ var DefaultOrderBy = /** @class */ (function () {
             var html = Mustache.to_html(template, null);
             $("#" + this.OrderByDivId).append(html);
         }
+        this.BindEvents(this._searchCriteriaChange);
     };
     return DefaultOrderBy;
 }());
