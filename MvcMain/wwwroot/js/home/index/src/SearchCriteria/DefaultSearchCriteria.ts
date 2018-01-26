@@ -14,6 +14,14 @@ export class DefaultSearchCriteria implements ICriteria{
         this._defaultOrderBy = new DefaultOrderBy();
     }
 
+    private registerEvents(): void {
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Subscribe(this._defaultOrderBy.PriceTypeChanged);
+    }
+
+    private unRegisterEvents(): void {
+        this._defaultPriceType.SelectedPriceTypeChangedEvent.Unsubscribe(this._defaultOrderBy.PriceTypeChanged);
+    }
+
     public FillCriteria(userInput: UserInput): void {
         this._defaultOrderBy.FillCriteria(userInput);
         this._defaultPriceType.FillCriteria(userInput);
@@ -23,6 +31,7 @@ export class DefaultSearchCriteria implements ICriteria{
 
     BindEvents(criteriaChange: ICriteriaChange): void {
         this.initView();
+        this.registerEvents();
         this._defaultOrderBy.BindEvents(criteriaChange);
         this._defaultPriceType.BindEvents(criteriaChange);
     }
@@ -30,6 +39,7 @@ export class DefaultSearchCriteria implements ICriteria{
     UnBindEvents(): void {
         this._defaultOrderBy.UnBindEvents();
         this._defaultPriceType.UnBindEvents();
+        this.unRegisterEvents();
     }
 
     ValidateCriteria(): CriteriaValidator {

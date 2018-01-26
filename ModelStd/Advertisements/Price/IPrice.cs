@@ -17,8 +17,8 @@ namespace ModelStd.Advertisements.Price
     {
         Fixed = 1,
         Agreement = 2,
-        Installment = 3,
-        Exchange = 4,
+        Exchange = 3,
+        Installment = 4,
         MortgageAndRent = 5
     }
 
