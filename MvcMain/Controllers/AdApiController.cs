@@ -27,7 +27,7 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
-    //TODO 1- work on Ad Price order by price is category specific  
+
     //TODO 1- Create LetMeKnow Controller and View for users to register their need
     // gold user pays 3x, silver user pay 2x and get notifyed sooner -golden user in first 20 minutes,silver 20-40, normal user after 40 minutes
     // manage user credits (reduce and add credits and log credit activity
@@ -40,31 +40,26 @@ namespace MvcMain.Controllers
     //TODO 1- Create Change My Password for users, create a seperate table to store users extra info such as first name and last name
     //TODO 1- Whan Ajax call is made infrom user by gif image and when error ocurrs show error to user for every Ajax Call 
     //design main ts files and server callers to cooperate with each other 
+    //TODO 1- work on District,City,Province component
 
     //TODO 1- Create and Run SMS sending improve Android Send Sms App, Ask user Time for sms, send  a SMS of Important Error to admin(email sending errors)
     //TODO 1- Create Verify Ad Controller and View For Admin
     //TODO 1- work on view Ad Detail, use similar ads,...
-    //TODO 1- add mangeMyAd page for users myAds, MarkedAds
+    //TODO 1- add mangeMyAd page for users myAds, MarkedAds  work on MarkAd , share ad
     //TODO 1- work on users credits and money pay and ...
     //TODO 1- work on Edit AD by Ad owner
-    //TODO 1- complete Create New User Account. Remove Name because it must be unique
-    //TODO 1- How to send a message to user's Telegram 
-    //TODO 1- Remove AdStatus Table from database and add an enum in code
 
     //TODO 2- study MVC book
-    //TODO 2- work on ad status enum 
-    //TODO 2- work on MarkAd , share ad
     //TODO 2- study of multi-language website approach in MVC
+    //TODO 2- study Task-Wait and async-await
 
     //TODO 3- work on the max number of images per Ad. for example decide it based on user
     //TODO 3- Make Response.Error an array and put all errors in it
-    //TODO 3- work on District,City,Province component
     //TODO 3- study about rules to operate a web site and connect to bank  and register a company
-    //TODO 2- study Task-Wait and async-await
     //TODO 3- improve database tables datatypse and 
     //TODO 3- use Decorator pattern to log
-    //TODO 3- work on Telegram
-
+    
+    //TODO 4- How to send a message to user's Telegram 
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
     {
