@@ -32,7 +32,7 @@ namespace RepositoryStd.Repository.Common
         public static readonly int MaxCount = 20;
 
         public static readonly string PriceTypeKey = "PriceType";
-        public static readonly PriceType PriceTypeDefault = PriceType.Fixed;
+        public static readonly PriceType PriceTypeDefault = PriceType.All;
 
         public static readonly string MinPriceKey = "MinimumPrice";
         public static readonly decimal MinPriceDefault = -1;

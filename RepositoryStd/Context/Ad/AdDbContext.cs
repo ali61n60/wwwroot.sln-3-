@@ -36,7 +36,11 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<EmailMessage> EmailMessages { get; set; }
-        public virtual DbSet<FixedPrice> FixedPrice { get; set; }
+        public virtual DbSet<FixedPrice> FixedPrices { get; set; }
+        public virtual DbSet<AgreementPrice> AgreementPrices { get; set; }
+        public virtual DbSet<ExchangePrice> ExchangePrices { get; set; }
+        public virtual DbSet<InstallmentPrice> InstallmentPrices { get; set; }
+        public virtual DbSet<MortgageAndRentPrice> MortgageAndRentPrices { get; set; }
         public virtual DbSet<LetMeKnow> LetMeKnows { get; set; }
         public virtual DbSet<LetMeKnowAttributeTransportaion> LetMeKnowAttributeTransportaions { get; set; }
         public virtual DbSet<MarkedAd> MarkedAds { get; set; }
@@ -47,8 +51,6 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<Temperature> Temperatures { get; set; }
         
         
-
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasDefaultSchema("ad");
@@ -131,11 +133,6 @@ namespace RepositoryStd.Context.AD
             {
                 entity.HasKey(e => e.CategoryId)
                     .HasName("PK_Categories");
-
-
-                //TODO make its type int
-                entity.Property(e => e.CategoryParentId)
-                     .HasColumnType("nchar(10)");
             });
 
             modelBuilder.Entity<City>(entity =>

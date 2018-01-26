@@ -10,8 +10,6 @@ namespace ModelStd.Advertisements.Price
     [Table("FixedPrices", Schema = "ad")]
     public class FixedPrice:IPrice
     {
-        public PriceType PriceType { get; }
-
         [Key]
         [Column("adId")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -21,6 +19,8 @@ namespace ModelStd.Advertisements.Price
         [Column("priceAmount", TypeName = "money")]
         [DataType(DataType.Currency)]
         public decimal PriceAmount { get; set; }
+
+        public PriceType PriceType { get; }
 
         public FixedPrice()
         {
