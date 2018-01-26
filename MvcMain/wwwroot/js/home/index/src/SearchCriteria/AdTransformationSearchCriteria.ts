@@ -6,7 +6,6 @@ import { CarModelBrandController } from "../../../../Components/Transformation/C
 
 
 export class AdTransformationSearchCriteria implements ICriteria {
-    ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
 
     private _carModelBrandContoller: CarModelBrandController;
 
@@ -83,6 +82,8 @@ export class AdTransformationSearchCriteria implements ICriteria {
     public UnBindEvents(): void {
         this._carModelBrandContoller.UnBindEvents();
     }
+
+    ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
 }
 
 

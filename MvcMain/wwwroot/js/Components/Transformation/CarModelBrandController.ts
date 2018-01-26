@@ -62,7 +62,6 @@ export class CarModelBrandController implements ICriteria {
         this.createCarModelElement(carModels);
     }
 
-
     public FillCriteria(userInput:UserInput):void {
         userInput.ParametersDictionary[this.CarBrandIdKey] =
             $("#" + this.BrandSelectId).find("option:selected").val();//brandId

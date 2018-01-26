@@ -17,14 +17,8 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
 
     private readonly AdTypeKey: string = "AdType";
     private readonly AdTypeParentDivId ="adType";
-    private readonly OrderByKey ="OrderBy";
-    private readonly _orderBySelectIdDiv = "orderBy";
-
-    private readonly MinimumPriceKey ="MinimumPrice";
-    private readonly _minPriceInputId = "minPrice";
-
-    private readonly MaximumPriceKey ="MaximumPrice";
-    private readonly _maxPriceInputId = "maxPrice";
+    
+    
 
     private readonly _adPlaceHolderDivId: string = "adPlaceHolder";
 
@@ -62,7 +56,6 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
     }//initPage
 
     private initCategorySelectionControl(): void {
-        //Add first level categories
         let allCategoriesString = $("#" + this._allCategoriesId).val().toString();
         let allCategories = $.parseJSON(allCategoriesString) as Category[];
         this._categorySelection = new CategorySelection(this._categorySelectorParentDivId, allCategories);
@@ -76,20 +69,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
             this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
         });
 
-        $("#" + this._orderBySelectIdDiv).on("change",
-            (event) => {
-                this.searchCriteriaChanged();
-            });
-        //you can also user "input" instead of "change"
-        $("#" + this._minPriceInputId).on("input",
-            (event) => {
-                this.searchCriteriaChanged();
-            });
-        $("#" + this._maxPriceInputId).on("change",
-            (event) => {
-                this.searchCriteriaChanged();
-            });
-
+       
         $("#" + this.AdTypeParentDivId).on("change",
             (event) => {
                 this.searchCriteriaChanged();
@@ -114,14 +94,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
 
             this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
             
-            let minPrice = parseInt($("#"+this._minPriceInputId).val().toString());
-            userInput.ParametersDictionary[this.MinimumPriceKey] = minPrice;
-
-            let maxPrice = parseInt($("#"+this._maxPriceInputId).val().toString());
-            userInput.ParametersDictionary[this.MaximumPriceKey] = maxPrice;
-
-            let orderBy = $("#"+this._orderBySelectIdDiv).val().toString();
-            userInput.ParametersDictionary[this.OrderByKey] = orderBy;
+            
 
             userInput.ParametersDictionary[this.AdTypeKey] = $("#" + this.AdTypeParentDivId).children(":checked").val();
             
