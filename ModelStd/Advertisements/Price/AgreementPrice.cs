@@ -18,15 +18,11 @@ namespace ModelStd.Advertisements.Price
 
         public PriceType PriceType { get; }
         
-        public string PriceString { get; }
+        public string PriceString => "قیمت" + " : " + "توافقی";
 
         public AgreementPrice()
         {
             PriceType = PriceType.Agreement;
-        }
-        public override string ToString()
-        {
-            return "قیمت" + " : " + "توافقی";
         }
     }
 }

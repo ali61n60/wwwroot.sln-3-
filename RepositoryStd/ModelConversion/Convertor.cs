@@ -40,8 +40,20 @@ namespace RepositoryStd.ModelConversion
                 case PriceType.Fixed:
                     adCommon.AdvertisementPrice = ad.FixedPrice;
                     break;
+                case PriceType.Agreement:
+                    adCommon.AdvertisementPrice = ad.AgreementPrice;
+                    break;
+                case PriceType.Exchange:
+                    adCommon.AdvertisementPrice = ad.ExchangePrice;
+                    break;
+                case PriceType.Installment:
+                    adCommon.AdvertisementPrice = ad.InsatllmentPrice;
+                    break;
+                case PriceType.MortgageAndRent:
+                    adCommon.AdvertisementPrice = ad.MortgageAndRentPrice;
+                    break;
                     default:
-                        adCommon.AdvertisementPrice = null;
+                        adCommon.AdvertisementPrice = new AgreementPrice();
                     break;
             }
         }

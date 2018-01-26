@@ -131,6 +131,21 @@ namespace RepositoryStd.Repository.Common
             {
                 case PriceType.Fixed:
                     list = list.Include(advertisement => advertisement.FixedPrice);
+
+                    //MinPrice and MAxPrice
+                    decimal minPrice = ParameterExtractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
+                    if (minPrice < MinPriceDefault)
+                        minPrice = MinPriceDefault;
+                    if (minPrice != MinPriceDefault)
+                        list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount > minPrice);
+
+                    decimal maxPrice = ParameterExtractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
+                    if (maxPrice > MaxPriceDefault)
+                        maxPrice = MaxPriceDefault;
+                    if (maxPrice != MaxPriceDefault)
+                        list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount < maxPrice);
+
+
                     break;
                 case PriceType.Agreement:
                     list = list.Include(advertisement => advertisement.AgreementPrice);
@@ -153,19 +168,7 @@ namespace RepositoryStd.Repository.Common
                     break;
             }
 
-            //MinPrice and MAxPrice
-            decimal minPrice = ParameterExtractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
-            if (minPrice < MinPriceDefault)
-                minPrice = MinPriceDefault;
-            if (minPrice != MinPriceDefault)
-                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount > minPrice);
-
-            decimal maxPrice = ParameterExtractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
-            if (maxPrice > MaxPriceDefault)
-                maxPrice = MaxPriceDefault;
-            if (maxPrice != MaxPriceDefault)
-                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount < maxPrice);
-
+           
             
             return list;
         }

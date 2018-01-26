@@ -12,11 +12,7 @@ export class DefaultOrderBy implements ICriteria  {
     private readonly OrderByOdersTemplateId = "orderByOdersTemplate";
     
     private _searchCriteriaChange: ICriteriaChange;
-
-    constructor() {
-        
-    }
-
+    
     BindEvents(criteriaChange: ICriteriaChange): void {
         this._searchCriteriaChange = criteriaChange;
         $("#" + this.OrderBySelectId).on("change",

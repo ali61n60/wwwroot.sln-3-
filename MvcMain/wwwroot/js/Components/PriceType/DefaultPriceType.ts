@@ -38,8 +38,8 @@ export class DefaultPriceType implements ICriteria {
             } else {
                 $("#" + this.FixPriceDivId).hide();
             }
-            //hide min and max prices if type is not fix...
             this.SelectedPriceTypeChangedEvent.Dispatch(this, selectedPriceType);
+            this._searchCriteriaChange.CustomCriteriaChanged();
         });
     }
 

@@ -19,7 +19,7 @@ namespace ModelStd.Advertisements.Price
 
         public PriceType PriceType { get; }
 
-        public string PriceString { get; }
+        public string PriceString=>  "قیمت" + " : " + "پیش پرداخت"+ " : "+Prepayment+" , تعداد اقساط"+" : "+NumberOfInstallments;
 
         [Column("prepayment", TypeName = "money")]
         [DataType(DataType.Currency)]
@@ -36,10 +36,6 @@ namespace ModelStd.Advertisements.Price
         public InstallmentPrice()
         {
             PriceType = PriceType.Installment;
-        }
-        public override string ToString()
-        {
-            return "قیمت" + " : " + "پیش پرداخت"+ " : "+Prepayment+" , تعداد اقساط"+" : "+NumberOfInstallments;
         }
     }
 }

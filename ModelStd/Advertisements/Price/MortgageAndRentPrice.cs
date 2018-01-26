@@ -19,7 +19,7 @@ namespace ModelStd.Advertisements.Price
 
         public PriceType PriceType { get; }
 
-        public string PriceString { get; }
+        public string PriceString => "قیمت" + " : " + "رهن" + " : " + Mortgage + " , کرایه ماهیانه" + " : " + RentPayMonth;
 
         [Column("mortgage", TypeName = "money")]
         [DataType(DataType.Currency)]
@@ -32,10 +32,6 @@ namespace ModelStd.Advertisements.Price
         public MortgageAndRentPrice()
         {
             PriceType = PriceType.MortgageAndRent;
-        }
-        public override string ToString()
-        {
-            return "قیمت" + " : " + "رهن"+" : "+Mortgage+" , کرایه ماهیانه"+" : "+RentPayMonth;
         }
     }
 }
