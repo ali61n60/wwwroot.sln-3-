@@ -23,9 +23,6 @@ namespace RepositoryStd.Repository.Common
     {
         //Common Properties
 
-        public static readonly string CategoryIdKey = "CategoryId";
-        public static readonly int CategoryIdDefault = 0;
-
         public static readonly string StartIndexKey = "StartIndex";
         public static readonly int StartIndexDefault = 1;
 
@@ -118,20 +115,40 @@ namespace RepositoryStd.Repository.Common
                 .Where(advertisement => advertisement.AdStatus == AdStatus.Approved); //only accepted ads
 
             list = orderByClause(list, queryParameters); //OrderBy
+            list = whereClauseAdType(list, queryParameters);//AdType
             list = wherClauseCategoryId(list, queryParameters); //Category
             list = WhereClausePrice(list, queryParameters); //MinPrice and MAxPrice
             list = whereClauseDistrictId(list, queryParameters); //DistrictId
             return list;
         }
 
-       
-       
+        private IQueryable<Advertisement> whereClauseAdType(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        {
+
+            AdType userSelectedAdType;
+            try
+            {
+                userSelectedAdType= (AdType)Enum.Parse(typeof(AdType),ParameterExtractor.ExtractInt
+                    (queryParameters, Advertisement.AdTypeKey, Advertisement.AdTypeDefauly).ToString());
+            }
+            catch (Exception ex)
+            {
+                userSelectedAdType = AdType.OfferOrDemand;
+            }
+            
+            if (userSelectedAdType != AdType.OfferOrDemand)
+            {
+                list = list.Where(advertisement => advertisement.AdType == userSelectedAdType);
+            }
+            return list;
+        }
+
 
         //TODO maybe it is a method of Advertisements class
         public Advertisement GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
             Advertisement ad = new Advertisement();
-            ad.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, CategoryIdKey, CategoryIdDefault);
+            ad.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary,Category.CategoryIdKey, Category.CategoryIdDefault);
             ad.DistrictId = ParameterExtractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
             ad.AdTitle = ParameterExtractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
             ad.AdComments = ParameterExtractor.ExtractString(userInputDictionary, AdCommentKey, AdCommentDefault);
@@ -164,7 +181,7 @@ namespace RepositoryStd.Repository.Common
         {
             LetMeKnow tempLetMeKnow = new LetMeKnow();
             tempLetMeKnow.UserId = userId;
-            tempLetMeKnow.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, CategoryIdKey, CategoryIdDefault);
+            tempLetMeKnow.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, Category.CategoryIdKey, Category.CategoryIdDefault);
             tempLetMeKnow.EmailOrSms = (EmailOrSms)Enum.Parse(typeof(EmailOrSms), ParameterExtractor.ExtractInt(userInputDictionary, EmailOrSmsKey, EmailOrSmsDefault).ToString());// EmailOrSms.Email;//TODO get it from user
             tempLetMeKnow.RequetsPrivilege = RequetsPrivilege.Normal;//TODO get it from user
             tempLetMeKnow.RequestInsertDateTime = DateTime.Now;
@@ -320,7 +337,7 @@ namespace RepositoryStd.Repository.Common
         }
         private IQueryable<Advertisement> wherClauseCategoryId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            int firstLevelCategoryId = ParameterExtractor.ExtractInt(queryParameters, CategoryIdKey, CategoryIdDefault);
+            int firstLevelCategoryId = ParameterExtractor.ExtractInt(queryParameters, Category.CategoryIdKey, Category.CategoryIdDefault);
             if (firstLevelCategoryId == 0)//root is selected so do not include anything in where clause
             {
                 return list;

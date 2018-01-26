@@ -15,6 +15,8 @@ import {AdvertisementCommon} from "../../../Models/AdvertisementCommon";
 //durng inProgress end enable it after completed
 export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommon[]> {
 
+    private readonly AdTypeKey: string = "AdType";
+    private readonly AdTypeParentDivId ="adType";
     private readonly OrderByKey ="OrderBy";
     private readonly _orderBySelectIdDiv = "orderBy";
 
@@ -115,6 +117,8 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
 
             let orderBy = $("#"+this._orderBySelectIdDiv).val().toString();
             userInput.ParametersDictionary[this.OrderByKey] = orderBy;
+
+            userInput.ParametersDictionary[this.AdTypeKey] = $("#" + this.AdTypeParentDivId).children(":checked").val();
             
             this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters
             

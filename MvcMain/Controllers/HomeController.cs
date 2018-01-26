@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 using MvcMain.Infrastructure.IOC;
 using MvcMain.Models;
@@ -44,7 +45,7 @@ namespace MvcMain.Controllers
         public IActionResult GetSearchCriteriaView([FromQuery] Dictionary<string, string> userInput)
         {
             //TODO 3- put view's name in a container
-            int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
+            int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
             return ViewComponent(AdViewContainer.GetSearchAdPartialViewName(categoryId));
         }
     }

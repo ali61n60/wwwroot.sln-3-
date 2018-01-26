@@ -7,7 +7,7 @@ using ModelStd.Advertisements.Price;
 namespace ModelStd.Db.Ad
 {
     [Table("Advertisements", Schema = "ad")]
-    public class Advertisement
+    public partial class Advertisement
     {
         public Advertisement()
         {
@@ -70,6 +70,12 @@ namespace ModelStd.Db.Ad
         public virtual ICollection<SimilarAds> SimilarAds { get; set; }
         public virtual Category Category { get; set; }
         public virtual District District { get; set; }
+    }
+
+    public partial class Advertisement
+    {
+        public static readonly string AdTypeKey = "AdType";
+        public static readonly int AdTypeDefauly = 2;
     }
 
     public enum AdType

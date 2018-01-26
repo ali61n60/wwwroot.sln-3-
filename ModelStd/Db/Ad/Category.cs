@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace ModelStd.Db.Ad
 {
     [Table("Categories", Schema = "ad")]
-    public class Category
+    public partial class Category
     {
         public Category()
         {
@@ -31,5 +31,11 @@ namespace ModelStd.Db.Ad
         public string CategoryNameEnglish { get; set; }
 
         public virtual ICollection<Advertisement> Advertisements { get; set; }
+    }
+
+    public partial class Category
+    {
+        public static readonly string CategoryIdKey = "CategoryId";
+        public static readonly int CategoryIdDefault = 0;
     }
 }

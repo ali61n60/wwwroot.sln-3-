@@ -11,6 +11,7 @@ using RepositoryStd.Context.Helper;
 using RepositoryStd.Repository;
 using RepositoryStd.Repository.Common;
 using Microsoft.Extensions.DependencyInjection;
+using ModelStd.Db.Ad;
 
 namespace MvcMain.Controllers
 {
@@ -41,7 +42,7 @@ namespace MvcMain.Controllers
                     return response;
                 }
 
-                int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
+                int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
                 IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
                 await adRepository.AddLetMeKnow(userInput, user.Id);
                 response.SetSuccessResponse();

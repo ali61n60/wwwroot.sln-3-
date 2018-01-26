@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ModelStd.Db.Ad;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Repository.Common;
 
@@ -25,7 +26,7 @@ namespace MvcMain.Controllers
         [HttpGet]
         public IActionResult GetLetMeKnowPartialView([FromQuery] Dictionary<string, string> userInput)
         {
-            int categoryId = ParameterExtractor.ExtractInt(userInput, AdvertisementCommonRepository.CategoryIdKey, AdvertisementCommonRepository.CategoryIdDefault);
+            int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
             switch (categoryId)
             {
                 case 100:

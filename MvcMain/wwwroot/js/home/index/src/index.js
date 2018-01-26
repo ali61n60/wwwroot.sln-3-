@@ -10,6 +10,8 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //durng inProgress end enable it after completed
 var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
+        this.AdTypeKey = "AdType";
+        this.AdTypeParentDivId = "adType";
         this.OrderByKey = "OrderBy";
         this._orderBySelectIdDiv = "orderBy";
         this.MinimumPriceKey = "MinimumPrice";
@@ -75,6 +77,7 @@ var Index = /** @class */ (function () {
             userInput.ParametersDictionary[_this.MaximumPriceKey] = maxPrice;
             var orderBy = $("#" + _this._orderBySelectIdDiv).val().toString();
             userInput.ParametersDictionary[_this.OrderByKey] = orderBy;
+            userInput.ParametersDictionary[_this.AdTypeKey] = $("#" + _this.AdTypeParentDivId).children(":checked").val();
             _this._searchCriteria.FillCategorySpecificSearchCriteria(_this._categorySelection.GetSelectedCategoryId(), userInput); //fill category specific search parameters
             _this._serverCaller.GetAdItemsFromServer(userInput, _this);
         }); //click
