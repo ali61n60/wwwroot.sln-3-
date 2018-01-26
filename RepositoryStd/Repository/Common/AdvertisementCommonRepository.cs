@@ -110,33 +110,80 @@ namespace RepositoryStd.Repository.Common
                 .Include(advertisement => advertisement.District)
                 .Include(advertisement => advertisement.District.City)
                 .Include(advertisement => advertisement.District.City.Province)
-                .Include(advertisement => advertisement.AdPrivilege)
-                .Include(advertisement => advertisement.FixedPrice)
-                .Where(advertisement => advertisement.AdStatus == AdStatus.Approved); //only accepted ads
+                .Include(advertisement => advertisement.AdPrivilege);
+            list = includePrice(list, queryParameters);
+
+            list = list.Where(advertisement => advertisement.AdStatus == AdStatus.Approved); //only accepted ads
 
             list = orderByClause(list, queryParameters); //OrderBy
             list = whereClauseAdType(list, queryParameters);//AdType
             list = wherClauseCategoryId(list, queryParameters); //Category
-            list = WhereClausePrice(list, queryParameters); //MinPrice and MAxPrice
             list = whereClauseDistrictId(list, queryParameters); //DistrictId
+            return list;
+        }
+
+        private IQueryable<Advertisement> includePrice(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        {
+            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
+            if (priceType != PriceTypeDefault)
+                list = list.Where(advertisement => advertisement.PriceType == priceType);
+            switch (priceType)
+            {
+                case PriceType.Fixed:
+                    list = list.Include(advertisement => advertisement.FixedPrice);
+                    break;
+                case PriceType.Agreement:
+                    list = list.Include(advertisement => advertisement.AgreementPrice);
+                    break;
+                case PriceType.Exchange:
+                    list = list.Include(advertisement => advertisement.ExchangePrice);
+                    break;
+                case PriceType.Installment:
+                    list = list.Include(advertisement => advertisement.InsatllmentPrice);
+                    break;
+                case PriceType.MortgageAndRent:
+                    list = list.Include(advertisement => advertisement.MortgageAndRentPrice);
+                    break;
+                case PriceType.All:
+                    list = list.Include(advertisement => advertisement.FixedPrice)
+                        .Include(advertisement => advertisement.AgreementPrice)
+                        .Include(advertisement => advertisement.ExchangePrice)
+                        .Include(advertisement => advertisement.InsatllmentPrice)
+                        .Include(advertisement => advertisement.MortgageAndRentPrice);
+                    break;
+            }
+
+            //MinPrice and MAxPrice
+            decimal minPrice = ParameterExtractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
+            if (minPrice < MinPriceDefault)
+                minPrice = MinPriceDefault;
+            if (minPrice != MinPriceDefault)
+                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount > minPrice);
+
+            decimal maxPrice = ParameterExtractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
+            if (maxPrice > MaxPriceDefault)
+                maxPrice = MaxPriceDefault;
+            if (maxPrice != MaxPriceDefault)
+                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount < maxPrice);
+
+            
             return list;
         }
 
         private IQueryable<Advertisement> whereClauseAdType(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-
             AdType userSelectedAdType;
             try
             {
-                userSelectedAdType= (AdType)Enum.Parse(typeof(AdType),ParameterExtractor.ExtractInt
+                userSelectedAdType = (AdType)Enum.Parse(typeof(AdType), ParameterExtractor.ExtractInt
                     (queryParameters, Advertisement.AdTypeKey, Advertisement.AdTypeDefauly).ToString());
             }
             catch (Exception ex)
             {
-                userSelectedAdType = AdType.OfferOrDemand;
+                userSelectedAdType = AdType.All;
             }
-            
-            if (userSelectedAdType != AdType.OfferOrDemand)
+
+            if (userSelectedAdType != AdType.All)
             {
                 list = list.Where(advertisement => advertisement.AdType == userSelectedAdType);
             }
@@ -148,7 +195,7 @@ namespace RepositoryStd.Repository.Common
         public Advertisement GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
             Advertisement ad = new Advertisement();
-            ad.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary,Category.CategoryIdKey, Category.CategoryIdDefault);
+            ad.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, Category.CategoryIdKey, Category.CategoryIdDefault);
             ad.DistrictId = ParameterExtractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
             ad.AdTitle = ParameterExtractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
             ad.AdComments = ParameterExtractor.ExtractString(userInputDictionary, AdCommentKey, AdCommentDefault);
@@ -161,7 +208,7 @@ namespace RepositoryStd.Repository.Common
         {
             throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
         }
-        
+
         public AdvertisementCommon GetAdDetail(Guid adGuid)
         {
             return FindBy(adGuid);
@@ -185,7 +232,7 @@ namespace RepositoryStd.Repository.Common
             tempLetMeKnow.EmailOrSms = (EmailOrSms)Enum.Parse(typeof(EmailOrSms), ParameterExtractor.ExtractInt(userInputDictionary, EmailOrSmsKey, EmailOrSmsDefault).ToString());// EmailOrSms.Email;//TODO get it from user
             tempLetMeKnow.RequetsPrivilege = RequetsPrivilege.Normal;//TODO get it from user
             tempLetMeKnow.RequestInsertDateTime = DateTime.Now;
-            
+
             return tempLetMeKnow;
         }
 
@@ -198,7 +245,7 @@ namespace RepositoryStd.Repository.Common
             foreach (Advertisement advertisement in userAdvertisements)
             {
                 AdvertisementCommon tempAdCommon = new AdvertisementCommon();
-                Convertor.FillAdvertisementCommonFromAdvertisement(tempAdCommon,advertisement, _appIdentityDbContext);
+                Convertor.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, _appIdentityDbContext);
                 userAdvertisementCommons.Add(tempAdCommon);
             }
 
@@ -207,12 +254,12 @@ namespace RepositoryStd.Repository.Common
 
         public async Task UpdateAd(Guid adGuid, string userId)
         {
-            Advertisement updatingAD= _adDbContext.Advertisements.FirstOrDefault(advertisements =>
-                advertisements.AdId == adGuid && advertisements.UserId == userId);
-            if(updatingAD!=null)
-                updatingAD.AdInsertDateTime=DateTime.Now;
+            Advertisement updatingAD = _adDbContext.Advertisements.FirstOrDefault(advertisements =>
+                 advertisements.AdId == adGuid && advertisements.UserId == userId);
+            if (updatingAD != null)
+                updatingAD.AdInsertDateTime = DateTime.Now;
             await _adDbContext.SaveChangesAsync();
-            
+
             return;
         }
 
@@ -230,8 +277,8 @@ namespace RepositoryStd.Repository.Common
         {
             MarkedAd adToBeMarked = new MarkedAd()
             {
-               AdId = adGuid,
-               UserId = userId
+                AdId = adGuid,
+                UserId = userId
             };
             _adDbContext.MarkedAds.Add(adToBeMarked);
             await _adDbContext.SaveChangesAsync();
@@ -246,7 +293,7 @@ namespace RepositoryStd.Repository.Common
         public async Task DeleteLetMeKnow(int letMeKnowId, string userId)
         {
             LetMeKnow deletingLetMeKnow = _adDbContext.LetMeKnows.FirstOrDefault(letMeKnow =>
-                letMeKnow.Id==letMeKnowId && letMeKnow.UserId == userId);
+                letMeKnow.Id == letMeKnowId && letMeKnow.UserId == userId);
             if (deletingLetMeKnow != null)
             {
                 _adDbContext.Remove(deletingLetMeKnow);
@@ -269,7 +316,7 @@ namespace RepositoryStd.Repository.Common
                     while (sqlDataReader.Read())
                     {
                         AdvertisementCommon tempAdvertisementCommon = new AdvertisementCommon();
-                        ResponseBase repositoryResponse=new ResponseBase();// = fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
+                        ResponseBase repositoryResponse = new ResponseBase();// = fillAdvertisementCommonFromDataReader(tempAdvertisementCommon, sqlDataReader);
                         if (!repositoryResponse.Success)
                         {
                             throw new Exception(repositoryResponse.Message);
@@ -295,7 +342,7 @@ namespace RepositoryStd.Repository.Common
 
             Advertisement item = list.FirstOrDefault();
             AdvertisementCommon adCommon = new AdvertisementCommon();
-            Convertor.FillAdvertisementCommonFromAdvertisement( adCommon, item,_appIdentityDbContext);
+            Convertor.FillAdvertisementCommonFromAdvertisement(adCommon, item, _appIdentityDbContext);
             return adCommon;
         }
 
@@ -359,26 +406,7 @@ namespace RepositoryStd.Repository.Common
             list = list.Where(advertisement => fullCategoryIdList.Contains(advertisement.CategoryId));
             return list;
         }
-        private IQueryable<Advertisement> WhereClausePrice(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
-        {
-            decimal minPrice = ParameterExtractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
-            if (minPrice < MinPriceDefault)
-                minPrice = MinPriceDefault;
-            if (minPrice != MinPriceDefault)
-                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount > minPrice);
-
-            decimal maxPrice = ParameterExtractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
-            if (maxPrice > MaxPriceDefault)
-                maxPrice = MaxPriceDefault;
-            if (maxPrice != MaxPriceDefault)
-                list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount < maxPrice);
-
-
-            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
-            if (priceType != PriceTypeDefault)
-                list = list.Where(advertisement => advertisement.PriceType == priceType);
-            return list;
-        }
+        
         private IQueryable<Advertisement> whereClauseDistrictId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
             List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters, DistrictIdKey, ListDistrctIdDefault);

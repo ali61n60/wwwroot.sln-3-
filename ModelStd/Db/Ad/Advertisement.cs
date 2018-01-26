@@ -67,6 +67,10 @@ namespace ModelStd.Db.Ad
         public virtual ICollection<AdPrivilege> AdPrivilege { get; set; }
         public virtual ICollection<MarkedAd> MarkedAds { get; set; }
         public virtual FixedPrice FixedPrice { get; set; }
+        public virtual AgreementPrice AgreementPrice { get; set; }
+        public virtual ExchangePrice ExchangePrice { get; set; }
+        public virtual InstallmentPrice InsatllmentPrice { get; set; }
+        public virtual MortgageAndRentPrice MortgageAndRentPrice { get; set; }
         public virtual ICollection<SimilarAds> SimilarAds { get; set; }
         public virtual Category Category { get; set; }
         public virtual District District { get; set; }
@@ -82,7 +86,7 @@ namespace ModelStd.Db.Ad
     {
         Offer = 1,
         Demand = 2,
-        OfferOrDemand=3
+        All=3
     }
 
     

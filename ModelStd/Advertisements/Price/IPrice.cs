@@ -19,7 +19,8 @@ namespace ModelStd.Advertisements.Price
         Agreement = 2,
         Exchange = 3,
         Installment = 4,
-        MortgageAndRent = 5
+        MortgageAndRent = 5,
+        All=6
     }
 
     public enum InstallmentPaymentPlan
