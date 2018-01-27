@@ -35,6 +35,7 @@
         <div class="row">
             @await Component.InvokeAsync("CategorySelection")
         </div>
+        <br/>
         <div class="row">
             @await Component.InvokeAsync("Location")
         </div>
@@ -60,11 +61,11 @@
                     @await Component.InvokeAsync("SearchCriteriaDefault")
                 </div>
             </div>
-            <div class="col-sm-6">
-                <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
-                <br /><br/>
-                <img id="serverCalledImage" src="~/Resources/Images/loader.gif" hidden="hidden" />
-            </div>
+        </div>
+        <div class="row">
+            <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
+            <br /><br/>
+            <img id="serverCalledImage" src="~/Resources/Images/loader.gif" hidden="hidden" />
         </div>
     </div>
     <div id="adPlaceHolder" class="row">

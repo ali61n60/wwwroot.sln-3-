@@ -22,7 +22,7 @@ export class ServerCaller {
     private readonly CallImageId: string ="serverCalledImage";
     private _isServerCalled: boolean = false;
     private _numberOfStartServerCallNotification: number = 0;
-    private readonly _url: string = "api/AdApi/GetAdvertisementCommon";
+    private readonly _url: string = "/api/AdApi/GetAdvertisementCommon";
 
     private _resultHandler: IResultHandler<AdvertisementCommon[]>;
     

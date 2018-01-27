@@ -16,7 +16,7 @@ var ServerCaller = (function () {
         this.CallImageId = "serverCalledImage";
         this._isServerCalled = false;
         this._numberOfStartServerCallNotification = 0;
-        this._url = "api/AdApi/GetAdvertisementCommon";
+        this._url = "/api/AdApi/GetAdvertisementCommon";
     }
     ServerCaller.prototype.GetAdItemsFromServer = function (userInput, resultHandler) {
         var _this = this;

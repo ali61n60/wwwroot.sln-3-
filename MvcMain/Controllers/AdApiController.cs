@@ -48,6 +48,7 @@ namespace MvcMain.Controllers
     //TODO 1- add mangeMyAd page for users myAds, MarkedAds  work on MarkAd , share ad
     //TODO 1- work on users credits and money pay and ...
     //TODO 1- work on Edit AD by Ad owner
+    //TODO 1- work on verifying users email and phone number
 
     //TODO 2- study MVC book
     //TODO 2- study of multi-language website approach in MVC
