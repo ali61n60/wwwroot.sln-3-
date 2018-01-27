@@ -26,53 +26,47 @@
     @Html.Partial("SideNav")
 }
 @section Body
-{
+    {
     @* add Only With Pictures textbox
         add Province,City,District selection
         add priceType نقد اقساط
-        *@
+    *@
     <div class="well">
         <div class="row">
             @await Component.InvokeAsync("CategorySelection")
         </div>
-        <br/>
+        <br />
         <div class="row">
             @await Component.InvokeAsync("Location")
         </div>
         <br />
         <div class="row">
-            <div class="col-sm-6">
-                
-                <div class="row">
-                    <div class="col-sm-6">
-                    </div>
-                    <div class="col-sm-6 text-right" id="adType">
-                        <span>نوع آگهی</span><br/>
-                        <label>فرقی ندارد</label>&nbsp;<input type="radio" name="adType" value="3" checked="checked" /><br />
-                        <label>ارائه</label>&nbsp;<input type="radio" name="adType" value="1"/><br/>
-                        <label>درخواست</label>&nbsp;<input type="radio" name="adType" value="2"/><br/>
-                        
-                    </div>
-                </div>
-                
-                
-                <br/>
-                <div id="categorySpecificSearchCriteria">
-                    @await Component.InvokeAsync("SearchCriteriaDefault")
-                </div>
+            <div class="col-sm-3 text-right" id="adType">
+                <span>نوع آگهی</span><br />
+                <label>فرقی ندارد</label>&nbsp;<input type="radio" name="adType" value="3" checked="checked" /><br />
+                <label>ارائه</label>&nbsp;<input type="radio" name="adType" value="1" /><br />
+                <label>درخواست</label>&nbsp;<input type="radio" name="adType" value="2" /><br />
+
+            </div>
+            <div class="col-sm-9">
             </div>
         </div>
+        <div id="categorySpecificSearchCriteria" class="row">
+            @await Component.InvokeAsync("SearchCriteriaDefault")
+        </div>
+        <br/>
         <div class="row">
-            <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
-            <br /><br/>
-            <img id="serverCalledImage" src="~/Resources/Images/loader.gif" hidden="hidden" />
+            <div class="col-sm-9">
+                <button id="getAdFromServer" type="submit" class="btn btn-success btn-block btn-lg">جستجو</button>
+            </div>
+            <div class="col-sm-3">
+                <img id="serverCalledImage" src="~/Resources/Images/loader.gif" hidden="hidden" />
+            </div>
         </div>
     </div>
     <div id="adPlaceHolder" class="row">
 
     </div>
-
-   
 }
 
 @section Footer

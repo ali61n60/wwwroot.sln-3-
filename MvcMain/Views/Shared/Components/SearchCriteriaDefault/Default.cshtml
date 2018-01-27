@@ -1,5 +1,10 @@
 ﻿@model object
+<div class="col-sm-4">
+    @await Component.InvokeAsync("DefaultOrderBy")    
+</div>
+<div class="col-sm-8">
+    @await Component.InvokeAsync("DefaultPrice")
+</div>
 
-@await Component.InvokeAsync("DefaultOrderBy")
-@await Component.InvokeAsync("DefaultPrice")
+
 

@@ -2,23 +2,24 @@
 @using MvcMain.Components.AdTransformation
 @model AllVihecles
 
-
-<div id="carModel">
-    <input id="allCarModels" type="hidden" value='@Json.Serialize(Model.AllCarModels)' />
-</div>
-
 <div>
-    <select id="brand" class="form-control" dir="rtl">
+    <div id="carModel">
+        <input id="allCarModels" type="hidden" value='@Json.Serialize(Model.AllCarModels)' />
+    </div>
+    <div class="col-sm-6"><select id="brand" class="form-control" dir="rtl">
         @foreach (Brand brand in Model.AllBrands)
         {
-            @:<option dir="ltr" value="@brand.BrandId">@brand.BrandName</option>
+            @:
+            <option dir="ltr" value="@brand.BrandId">@brand.BrandName</option>
         }
     </select>
-    <br/>
-    <div id="modelPlaceHolder">
-        <select id="model" class="form-control" dir="rtl">
-            <option value="0">مدل</option>
-        </select>
+    </div>
+    <div class="col-sm-6">
+        <div id="modelPlaceHolder">
+            <select id="model" class="form-control" dir="rtl">
+                <option value="0">مدل</option>
+            </select>
+        </div>
     </div>
 </div>
 
