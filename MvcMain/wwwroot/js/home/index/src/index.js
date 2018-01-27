@@ -8,7 +8,7 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //TODO when category change before search criteia is loaded a search call is sent to server
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
-var Index = /** @class */ (function () {
+var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this.AdTypeKey = "AdType";
         this.AdTypeParentDivId = "adType";
