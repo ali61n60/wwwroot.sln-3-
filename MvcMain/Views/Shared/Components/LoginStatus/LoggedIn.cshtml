@@ -2,8 +2,8 @@
 
 <li>
     <div>
-        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">
-            سلام @Model.Email!
+        <a asp-area="" asp-controller="Account" asp-action="AccountManagement" class="btn btn-primary">
+            <span class="text-right" dir="rtl">سلام @Model.FirstNameEx @Model.LastNameEx</span>
         </a>
         <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-primary">
             Log Out

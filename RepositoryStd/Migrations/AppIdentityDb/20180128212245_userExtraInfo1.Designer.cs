@@ -8,9 +8,10 @@ using RepositoryStd.Context.Identity;
 namespace RepositoryStd.Migrations.AppIdentityDb
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180128212245_userExtraInfo1")]
+    partial class userExtraInfo1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("identity")
@@ -137,19 +138,13 @@ namespace RepositoryStd.Migrations.AppIdentityDb
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
-                    b.Property<string>("EmailAddressVerifyCodeEx")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("EmailAddressVerifyCodeEx");
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstNameEx")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("FirstNameEx");
 
-                    b.Property<string>("LastNameEx")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("LastNameEx");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -167,9 +162,7 @@ namespace RepositoryStd.Migrations.AppIdentityDb
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("PhoneNumberVerifyCodeEx")
-                        .IsRequired()
-                        .HasMaxLength(200);
+                    b.Property<string>("PhoneNumberVerifyCodeEx");
 
                     b.Property<string>("SecurityStamp");
 

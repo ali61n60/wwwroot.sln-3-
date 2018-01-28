@@ -1,0 +1,42 @@
+﻿@model ModelStd.Db.Identity.AppUser
+
+@{
+    ViewData["Title"] = "مدیریت حساب";
+    ViewData["PageTitle"] = "مدیریت حساب";
+    Layout = "_Layout";
+}
+
+@section TopTop
+    {
+    @Html.Partial("TopTop")
+}
+@section NavBar
+    {
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+    {
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+    {
+
+}
+@section SideNav
+    {
+    @Html.Partial("SideNav")
+}
+@section Body
+    {
+    <p>@Model.FirstNameEx</p>
+        <a asp-controller="Account" asp-action="EditProfile" class="btn btn-block btn-primary">ویرایش مشخصات</a>
+}
+
+@section Footer
+    {
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}

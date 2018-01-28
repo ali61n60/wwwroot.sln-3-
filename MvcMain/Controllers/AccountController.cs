@@ -30,6 +30,14 @@ namespace MvcMain.Controllers
             _messageApiController = messageApiController;
         }
 
+
+        [Authorize]
+        public async Task<IActionResult> AccountManagement(string returnUrl)
+        {
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            return View();
+        }
+
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
         {

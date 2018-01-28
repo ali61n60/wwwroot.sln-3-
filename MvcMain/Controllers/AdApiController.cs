@@ -37,6 +37,8 @@ namespace MvcMain.Controllers
     //Ask user time for recieving Sms ok
     //only send let me know messages to verifyed emails and smses
 
+    //TODO 1- build AppIdentityDbContext ModelBuiler yourself instead of relying on inheritance
+
 
     //TODO 1- Create Change My Password for users,
     //create a seperate table to store users extra info such as first name and last name
@@ -62,7 +64,9 @@ namespace MvcMain.Controllers
     //TODO 3- study about rules to operate a web site and connect to bank  and register a company
     //TODO 3- improve database tables datatypse and 
     //TODO 3- use Decorator pattern to log
-    
+
+
+    //TODO 4- Add user Image and tooltip like yahoo site for LoginStatusViewComponent
     //TODO 4- How to send a message to user's Telegram 
     [Route("api/[controller]/[action]")]
     public class AdApiController : Controller, IAdvertisementCommonService
@@ -119,7 +123,7 @@ namespace MvcMain.Controllers
             }
             catch (Exception ex)
             {
-                return Json("Error " + ex.Message+" , "+errorCode);
+                return Json("Error " + ex.Message + " , " + errorCode);
             }
             return Json("OK");
         }
@@ -153,119 +157,119 @@ namespace MvcMain.Controllers
             }
 
             return response;
-            }
+        }
 
-            //Called from android and home controller
-            public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
+        //Called from android and home controller
+        public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
+        {
+            string errorCode = "AdApiController.GetAdvertisementCommon";
+            ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
+            int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
+            IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
+            try
             {
-                string errorCode = "AdApiController.GetAdvertisementCommon";
-                ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
-                int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
-                IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
-                try
-                {
-                    response.ResponseData = adRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
-                    FillFirstImage(response.ResponseData);//get Images
-                                                          //TODO create a column (has pictures) in advertisement table and check this filter at database 
-                    checkAndCorrectOnlyWithPicturesFilter(response, userInput);
-                    Dictionary<string, string> customDictionary = new Dictionary<string, string>
+                response.ResponseData = adRepository.FindAdvertisementCommons(userInput).ToList();//get attributes 
+                FillFirstImage(response.ResponseData);//get Images
+                                                      //TODO create a column (has pictures) in advertisement table and check this filter at database 
+                checkAndCorrectOnlyWithPicturesFilter(response, userInput);
+                Dictionary<string, string> customDictionary = new Dictionary<string, string>
                 {
                     { numberOfItemsKey, response.ResponseData.Count.ToString() }
                 };
 
-                    response.SetSuccessResponse("OK");
-                    response.CustomDictionary = customDictionary;
-                }
-                catch (Exception ex)
+                response.SetSuccessResponse("OK");
+                response.CustomDictionary = customDictionary;
+            }
+            catch (Exception ex)
+            {
+                response.ResponseData = null;
+                response.SetFailureResponse(ex.Message, errorCode);
+            }
+            setRequestIndex(userInput, response);
+            return response;
+        }
+        public void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons)
+        {
+            foreach (AdvertisementCommon advertisementCommon in advertisementCommons)
+            {
+                advertisementCommon.AdvertisementImages[0] =
+                    _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
+
+            }
+        }
+
+        public void FillAllImages(AdvertisementCommon[] advertisementCommons)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void FillAllImages(AdvertisementCommon advertisementCommon)
+        {
+            advertisementCommon.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdvertisementId);
+        }
+
+        private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<IList<AdvertisementCommon>> response, Dictionary<string, string> userInput)
+        {
+            if (userInput.ContainsKey(onlyWithPicturesKey) && userInput[onlyWithPicturesKey] == "True") // OnlyWithPictures filter set
+            {
+                foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
                 {
-                    response.ResponseData = null;
-                    response.SetFailureResponse(ex.Message, errorCode);
+                    if (advertisementCommon.AdvertisementImages[0] == null)
+                        response.ResponseData.Remove(advertisementCommon);
                 }
-                setRequestIndex(userInput, response);
-                return response;
             }
-            public void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons)
+        }
+
+
+
+        public ResponseBase RemoveAdvertisement(AdvertisementCommon advertisementCommon)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ResponseBase ExtendAdvertisement(AdvertisementCommon advertisement)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid)
+        {
+            string errorCode = "AdApiController.IncrementNumberOfVisit";
+            ResponseBase response = new ResponseBase();
+            try
             {
-                foreach (AdvertisementCommon advertisementCommon in advertisementCommons)
+                await _commonRepository.IncrementNumberOfVisit(adGuid);
+                response.SetSuccessResponse();
+            }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message, errorCode);
+            }
+            return response;
+        }
+
+        public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
+        {
+            string errorCode = "AdApiController.SaveAdImages";
+            ResponseBase responseBase = new ResponseBase();
+            try
+            {
+                if (advertisementCommon.AdvertisementImages != null)
                 {
-                    advertisementCommon.AdvertisementImages[0] =
-                        _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
-
+                    _imageRepository.SaveImages(advertisementCommon.AdvertisementId, advertisementCommon.AdvertisementImages);
+                    responseBase.SetSuccessResponse("Advertisement images saved in repository");
                 }
-            }
-
-            public void FillAllImages(AdvertisementCommon[] advertisementCommons)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void FillAllImages(AdvertisementCommon advertisementCommon)
-            {
-                advertisementCommon.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdvertisementId);
-            }
-
-            private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<IList<AdvertisementCommon>> response, Dictionary<string, string> userInput)
-            {
-                if (userInput.ContainsKey(onlyWithPicturesKey) && userInput[onlyWithPicturesKey] == "True") // OnlyWithPictures filter set
+                else
                 {
-                    foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
-                    {
-                        if (advertisementCommon.AdvertisementImages[0] == null)
-                            response.ResponseData.Remove(advertisementCommon);
-                    }
+                    responseBase.SetSuccessResponse("advertisementCommon.AdvertisementImages is Null");
                 }
             }
-
-           
-
-            public ResponseBase RemoveAdvertisement(AdvertisementCommon advertisementCommon)
+            catch (Exception ex)
             {
-                throw new NotImplementedException();
+                responseBase.SetFailureResponse(ex.Message, errorCode);
             }
-
-            public ResponseBase ExtendAdvertisement(AdvertisementCommon advertisement)
-            {
-                throw new NotImplementedException();
-            }
-
-            public async Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid)
-            {
-                string errorCode = "AdApiController.IncrementNumberOfVisit";
-                ResponseBase response = new ResponseBase();
-                try
-                {
-                    await _commonRepository.IncrementNumberOfVisit(adGuid);
-                    response.SetSuccessResponse();
-                }
-                catch (Exception ex)
-                {
-                    response.SetFailureResponse(ex.Message, errorCode);
-                }
-                return response;
-            }
-
-            public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
-            {
-                string errorCode = "AdApiController.SaveAdImages";
-                ResponseBase responseBase = new ResponseBase();
-                try
-                {
-                    if (advertisementCommon.AdvertisementImages != null)
-                    {
-                        _imageRepository.SaveImages(advertisementCommon.AdvertisementId, advertisementCommon.AdvertisementImages);
-                        responseBase.SetSuccessResponse("Advertisement images saved in repository");
-                    }
-                    else
-                    {
-                        responseBase.SetSuccessResponse("advertisementCommon.AdvertisementImages is Null");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    responseBase.SetFailureResponse(ex.Message, errorCode);
-                }
-                return responseBase;
-            }
+            return responseBase;
+        }
 
         [Authorize]
         public async Task<ResponseBase<UploadedImage>> AddTempImage()
@@ -333,35 +337,35 @@ namespace MvcMain.Controllers
 
             return response;
         }
-        
 
-            //TODO Remove this
+
+        //TODO Remove this
         public ResponseBase<AdvertisementTransportation> GetTransportationAdDetail([FromBody] Guid adId)
         {
             IAdvertisementTransportationService transportationService = MyService.Inst.GetService<IAdvertisementTransportationService>();
             return transportationService.GetAdDetail(adId);
         }
 
-        
+
         public ResponseBase<AdvertisementCommon> GetAdDetail([FromQuery][FromBody] AdDetailInfo adDetailInfo)
         {
             string errorCode = "AdApiController.GetAdDetail";
 
-            ResponseBase<AdvertisementCommon> response=new ResponseBase<AdvertisementCommon>();
+            ResponseBase<AdvertisementCommon> response = new ResponseBase<AdvertisementCommon>();
             IAdRepository adRepository = _repositoryContainer.GetAdRepository(adDetailInfo.CategoryId);
             AdvertisementCommon adDetail;
             try
             {
                 adDetail = adRepository.GetAdDetail(adDetailInfo.AdId);
-               
-                if(adDetail.AdvertisementStatus==Convertor.GetAdStatusString(AdStatus.Approved))
-                adDetail.AdvertisementImages= _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
+
+                if (adDetail.AdvertisementStatus == Convertor.GetAdStatusString(AdStatus.Approved))
+                    adDetail.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse(ex.Message,errorCode);
+                response.SetFailureResponse(ex.Message, errorCode);
             }
             return response;
         }
@@ -382,7 +386,7 @@ namespace MvcMain.Controllers
         public async Task<ResponseBase> MarkAd(Guid adGuid)
         {
             string errorCode = "AdApiController.MarkAd";
-            ResponseBase response=new ResponseBase();
+            ResponseBase response = new ResponseBase();
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
@@ -391,7 +395,7 @@ namespace MvcMain.Controllers
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse(ex.Message,errorCode);
+                response.SetFailureResponse(ex.Message, errorCode);
             }
 
             return response;

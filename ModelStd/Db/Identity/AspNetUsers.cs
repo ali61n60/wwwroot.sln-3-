@@ -10,6 +10,7 @@ namespace ModelStd.Db.Identity
     {
         public AspNetUsers()
         {
+            
             AspNetUserClaims = new HashSet<AspNetUserClaims>();
             AspNetUserLogins = new HashSet<AspNetUserLogins>();
             AspNetUserRoles = new HashSet<AspNetUserRoles>();
