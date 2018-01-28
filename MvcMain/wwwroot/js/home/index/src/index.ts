@@ -17,8 +17,9 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
 
     private readonly AdTypeKey: string = "AdType";
     private readonly AdTypeParentDivId ="adType";
-    
-    
+
+    private readonly SearchTextKey="SearchText";
+    private readonly SearchTextInputId ="searchText";
 
     private readonly _adPlaceHolderDivId: string = "adPlaceHolder";
 
@@ -77,6 +78,10 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
             (event) => {
                 this.searchCriteriaChanged();
             });
+
+        $("#" + this.SearchTextInputId).on("input", () => {
+            this.searchCriteriaChanged();
+        });
     }
 
     public CustomCriteriaChanged():void {
@@ -98,6 +103,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
             this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
             
             userInput.ParametersDictionary[this.AdTypeKey] = $("#" + this.AdTypeParentDivId).children(":checked").val();
+            userInput.ParametersDictionary[this.SearchTextKey] = $("#" + this.SearchTextInputId).val();
             
             this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters
             

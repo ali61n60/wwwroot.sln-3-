@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.Expressions;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.Price;
 using ModelStd.Db.Ad;
@@ -33,6 +34,9 @@ namespace RepositoryStd.Repository.Common
 
         public static readonly string PriceTypeKey = "PriceType";
         public static readonly PriceType PriceTypeDefault = PriceType.All;
+
+        public static readonly string SearchTextKey = "SearchText";
+        public static readonly string SearchTextDefault = "";
 
         public static readonly string MinPriceKey = "MinimumPrice";
         public static readonly decimal MinPriceDefault = -1;
@@ -119,6 +123,20 @@ namespace RepositoryStd.Repository.Common
             list = whereClauseAdType(list, queryParameters);//AdType
             list = wherClauseCategoryId(list, queryParameters); //Category
             list = whereClauseDistrictId(list, queryParameters); //DistrictId
+            list = whereClauseInputText(list, queryParameters);
+            return list;
+        }
+
+        private IQueryable<Advertisement> whereClauseInputText(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
+        {
+            string userInputSearchText=ParameterExtractor.ExtractString(queryParameters,SearchTextKey,SearchTextDefault);
+            if (userInputSearchText != SearchTextDefault)
+            {
+                list = list.Where(advertisement =>
+
+                    advertisement.AdTitle.Contains(userInputSearchText) ||
+                    advertisement.AdComments.Contains(userInputSearchText));
+            }
             return list;
         }
 

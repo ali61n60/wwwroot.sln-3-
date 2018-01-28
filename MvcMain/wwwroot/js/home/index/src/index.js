@@ -12,6 +12,8 @@ var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
         this.AdTypeKey = "AdType";
         this.AdTypeParentDivId = "adType";
+        this.SearchTextKey = "SearchText";
+        this.SearchTextInputId = "searchText";
         this._adPlaceHolderDivId = "adPlaceHolder";
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
@@ -59,6 +61,7 @@ var Index = /** @class */ (function () {
             var userInput = new UserInput_1.UserInput();
             _this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
             userInput.ParametersDictionary[_this.AdTypeKey] = $("#" + _this.AdTypeParentDivId).children(":checked").val();
+            userInput.ParametersDictionary[_this.SearchTextKey] = $("#" + _this.SearchTextInputId).val();
             _this._searchCriteria.FillCategorySpecificSearchCriteria(_this._categorySelection.GetSelectedCategoryId(), userInput); //fill category specific search parameters
             _this._serverCaller.GetAdItemsFromServer(userInput, _this);
         }); //click
