@@ -56,4 +56,13 @@ namespace MvcMain.Models
         public string[] IdsToAdd { get; set; }
         public string[] IdsToDelete { get; set; }
     }
+
+    public class EditProfileModel
+    {
+        [Required(ErrorMessage = "فیلد نام خالی است")]
+        public string FirstName { get; set; }
+
+        [Required(ErrorMessage = "فیلد نام خانوادگی خالی است")]
+        public string LastName { get; set; }
+    }
 }

@@ -3,11 +3,13 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ModelStd;
 using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.Services;
 using MvcMain.Models;
+using RepositoryStd.Context.Identity;
 
 
 namespace MvcMain.Controllers
@@ -20,23 +22,56 @@ namespace MvcMain.Controllers
         private readonly MessageApiController _messageApiController;
         private readonly IPasswordHasher<AppUser> _passwordHasher;
 
+        private readonly AppIdentityDbContext _appIdentityDbContext;
+
 
         public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr
-            , IPasswordHasher<AppUser> passwordHasher, MessageApiController messageApiController)
+            , IPasswordHasher<AppUser> passwordHasher, MessageApiController messageApiController
+            , AppIdentityDbContext appIdentityDbContext)
         {
             _userManager = userMgr;
             _signInManager = signinMgr;
             _passwordHasher = passwordHasher;
             _messageApiController = messageApiController;
+            _appIdentityDbContext = appIdentityDbContext;
         }
 
 
         [Authorize]
-        public async Task<IActionResult> AccountManagement(string returnUrl)
+        public async Task<IActionResult> AccountManagement()
         {
             AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            return View(user);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> EditProfile()
+        {
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            EditProfileModel editProfileModel=new EditProfileModel();
+            editProfileModel.FirstName = user.FirstNameEx;
+            editProfileModel.LastName = user.LastNameEx;
+            return View(editProfileModel);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditProfile(EditProfileModel editProfileModel)
+        {
+            if (ModelState.IsValid)
+            {
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                user.FirstNameEx = editProfileModel.FirstName;
+                user.LastNameEx = editProfileModel.LastName;
+                _appIdentityDbContext.Entry(user).State = EntityState.Modified;
+                await _appIdentityDbContext.SaveChangesAsync();
+                return RedirectToAction("AccountManagement");
+            }
+
             return View();
         }
+
 
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
@@ -162,15 +197,12 @@ namespace MvcMain.Controllers
             return View(detail);
         }
 
-
-
         [AllowAnonymous]
         public ViewResult Create(string returnUrl)
         {
             ViewBag.returnUrl = returnUrl;
             return View();
         }
-
 
         [HttpPost]
         [AllowAnonymous]
@@ -209,18 +241,9 @@ namespace MvcMain.Controllers
                         }
                     }
                 }
-                
+
             }
             return View(model);
-        }
-
-
-
-
-        [AllowAnonymous]
-        public IActionResult AccessDenied()
-        {
-            return View();
         }
 
         private string createRandomPassword()
@@ -236,5 +259,10 @@ namespace MvcMain.Controllers
             return password;
         }
 
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

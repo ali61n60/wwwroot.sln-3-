@@ -1,0 +1,60 @@
+﻿@model EditProfileModel
+
+@{
+    ViewData["Title"] = "ویرایش مشخصات";
+    ViewData["PageTitle"] = "ویراش مشخصات";
+    Layout = "_Layout";
+}
+
+@section TopTop
+    {
+    @Html.Partial("TopTop")
+}
+@section NavBar
+    {
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+    {
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+    {
+
+}
+@section SideNav
+    {
+    @Html.Partial("SideNav")
+}
+@section Body
+    {
+    <div class="text-danger text-right" dir="rtl" asp-validation-summary="All"></div>
+    <form asp-action="EditProfile" method="post">
+        <div class="row form-group">
+            <div class="col-sm-6 col-sm-push-6 text-right">
+                <input asp-for="FirstName" class="form-control text-right" placeholder="نام" value="@Model.FirstName" />
+            </div>
+            <div class="col-sm-6 col-sm-pull-6 col-sm-push-0">
+                <input asp-for="LastName" class="form-control text-right" placeholder="نام خانوادگی" value="@Model.LastName" />
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-sm-6">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">ویرایش</button>
+            </div>
+            <div class="col-sm-6">
+                <a asp-action="AccountManagement" class="btn btn-info btn-lg btn-block">انصراف</a>
+            </div>
+        </div>
+    </form>
+}
+
+@section Footer
+    {
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}
