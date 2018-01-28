@@ -37,3 +37,9 @@ sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/Se
 sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:25 PM
 sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:26 PM
 sening email fails The SMTP server has unexpectedly disconnected. EmailGoogle/SendEmailAsync 1/24/2018 3:05:29 PM
+Getting unsent emails from database fails The entity type 'AspNetUserLogins' requires a primary key to be defined. MessageApiController/GetUnSentEmailMesseges 1/29/2018 12:39:03 AM
+Getting unsent emails from database fails The entity type 'AspNetUserLogins' requires a primary key to be defined. MessageApiController/GetUnSentEmailMesseges 1/29/2018 12:39:03 AM
+Getting unsent emails from database fails The entity type 'AspNetUserLogins' requires a primary key to be defined. MessageApiController/GetUnSentEmailMesseges 1/29/2018 12:39:04 AM
+Getting unsent emails from database fails The entity type 'AspNetUserLogins' requires a primary key to be defined. MessageApiController/GetUnSentEmailMesseges 1/29/2018 12:39:04 AM
+Getting unsent emails from database fails The entity type 'AspNetUserLogins' requires a primary key to be defined. MessageApiController/GetUnSentEmailMesseges 1/29/2018 12:39:04 AM
+Getting unsent emails from database fails The entity type 'AspNetUserLogins' requires a primary key to be defined. MessageApiController/GetUnSentEmailMesseges 1/29/2018 12:39:04 AM
