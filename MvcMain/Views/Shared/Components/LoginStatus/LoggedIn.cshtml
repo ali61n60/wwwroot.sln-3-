@@ -1,12 +1,14 @@
 ﻿@model ModelStd.Db.Identity.AppUser
 
-<form asp-area="" asp-controller="Account" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
-    <ul class="nav navbar-nav navbar-right">
-        <li>
-            <a asp-area="" asp-controller="Home" asp-action="Index" title="Manage">سلام @Model.Email!</a>
-        </li>
-        <li>
-            <button type="submit" class="btn btn-link navbar-btn navbar-link">Log Out</button>
-        </li>
-    </ul>
-</form>  
+<li>
+    <div>
+        <a asp-area="" asp-controller="Home" asp-action="Index" class="btn btn-primary">
+            سلام @Model.Email!
+        </a>
+        <a asp-area="" asp-controller="Account" asp-action="Logout" class="btn btn-primary">
+            Log Out
+        </a>
+    </div>
+</li>
+
+

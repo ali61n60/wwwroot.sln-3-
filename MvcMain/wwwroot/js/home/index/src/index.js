@@ -9,15 +9,15 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
 var Index = /** @class */ (function () {
-    function Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId) {
+    function Index(categorySelectorParentDivId, allCategoriesId) {
         this.AdTypeKey = "AdType";
         this.AdTypeParentDivId = "adType";
         this.SearchTextKey = "SearchText";
         this.SearchTextInputId = "searchText";
         this._adPlaceHolderDivId = "adPlaceHolder";
+        this._getAdFromServerId = "getAdFromServer";
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
-        this._getAdFromServerId = getAdFromServerId;
         this._serverCaller = new ServerCaller_1.ServerCaller();
         this._searchCriteria = new SearchCriteria_1.SearchCriteria();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
@@ -44,6 +44,14 @@ var Index = /** @class */ (function () {
         this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(), this);
         $("#" + this.AdTypeParentDivId).on("change", function (event) {
             _this.searchCriteriaChanged();
+        });
+        $("#" + this.SearchTextInputId).on("input", function () {
+            _this.searchCriteriaChanged();
+        });
+        $(document).keypress(function (e) {
+            if (e.which == 13) {
+                $("#" + _this._getAdFromServerId).click();
+            }
         });
     };
     Index.prototype.CustomCriteriaChanged = function () {
@@ -102,11 +110,10 @@ var Index = /** @class */ (function () {
 }());
 exports.Index = Index;
 var categorySelectorParentDivId = "categorySelector";
-var getAdFromServerId = "getAdFromServer";
 var allCategoriesId = "allCategories";
 var index;
 $(document).ready(function () {
-    index = new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
+    index = new Index(categorySelectorParentDivId, allCategoriesId);
     index.CustomCriteriaChanged(); //to initiate a server call on page load for first time
     window.AliIndex = index;
 }); //ready

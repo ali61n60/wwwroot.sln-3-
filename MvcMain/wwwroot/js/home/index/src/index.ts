@@ -29,17 +29,15 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
     private _searchCriteriaViewLoader:SearchCriteriaViewLoader;
 
     private _categorySelectorParentDivId: string;
-    private _getAdFromServerId: string;
+    private _getAdFromServerId ="getAdFromServer";
     private _allCategoriesId: string;
 
     constructor(categorySelectorParentDivId: string,
-        allCategoriesId: string,
-        getAdFromServerId: string)
+        allCategoriesId: string)
     {
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
-        this._getAdFromServerId = getAdFromServerId;
-
+        
         this._serverCaller = new ServerCaller();
         this._searchCriteria = new SearchCriteria();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
@@ -82,6 +80,13 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
         $("#" + this.SearchTextInputId).on("input", () => {
             this.searchCriteriaChanged();
         });
+        $(document).keypress((e) =>
+        {
+            if (e.which == 13) {
+                $("#"+this._getAdFromServerId).click();
+            }
+        });
+
     }
 
     public CustomCriteriaChanged():void {
@@ -148,7 +153,6 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
 }
 
 let categorySelectorParentDivId: string = "categorySelector";
-let getAdFromServerId = "getAdFromServer";
 let allCategoriesId = "allCategories";
 
 declare let window: any;
@@ -156,13 +160,7 @@ var index:Index;
 
 
 $(document).ready(() => {
-    index= new Index(categorySelectorParentDivId, allCategoriesId, getAdFromServerId);
+    index= new Index(categorySelectorParentDivId, allCategoriesId);
     index.CustomCriteriaChanged();//to initiate a server call on page load for first time
     window.AliIndex = index;
 });//ready
-
-
-
-
-
-
