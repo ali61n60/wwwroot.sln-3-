@@ -13,10 +13,12 @@ namespace ModelStd.Db.Ad
         public int Id { get; set; }
 
         [Column("modelId")]
+        [ForeignKey("CarModels")]
         [Required]
         public int ModelId { get; set; }
 
         [Column("brandId")]
+        [ForeignKey("Brands")]
         [Required]
         public int BrandId { get; set; }
 

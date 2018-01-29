@@ -120,9 +120,9 @@ namespace RepositoryStd.Context.AD
                 entity.HasKey(e => e.ModelId)
                     .HasName("PK_CarModel");
 
-                entity.HasOne(d => d.Brand)
-                    .WithMany(p => p.CarModels)
-                    .HasForeignKey(d => d.BrandId)
+                entity.HasOne(carModel => carModel.Brand)
+                    .WithMany(brand => brand.CarModels)
+                    .HasForeignKey(carModel => carModel.BrandId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_CarModel_CarBrand");
             });

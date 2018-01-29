@@ -1,1 +1,0 @@
-UserAdApiController/GetUserAds, user=ali62n62@yahoo.com, time= 1/29/2018 11:16:47 PM 1/29/2018 11:16:48 PM

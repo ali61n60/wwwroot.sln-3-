@@ -23,6 +23,8 @@ namespace ModelStd.Db.Ad
         public string ModelName { get; set; }
 
         [Column("brandId")]
+        [Required]
+        [ForeignKey("Brands")]
         public int BrandId { get; set; }
 
         public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
