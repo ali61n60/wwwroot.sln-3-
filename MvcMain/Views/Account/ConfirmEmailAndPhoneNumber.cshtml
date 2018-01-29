@@ -31,47 +31,56 @@
     <div class="text-danger text-right" dir="rtl" asp-validation-summary="All"></div>
     <form asp-action="ConfirmEmailAndPhoneNumber" method="post">
         <div class="row form-group">
-            <div class="col-sm-2">ایمیل</div>
-            <div class="col-sm-3">@Model.EmailAddress</div>
-            <div class="col-sm-7"> @if (Model.EmailConfirmed)
-                           {
-                               @:<span>تایید شده</span>
-                           }
-                           else
-                           {
-                               @:<span>تایید نشده</span>
-                                   <br/>
-                                   
-                               <a asp-action="SendEmailConfirm" class="btn btn-group-lg btn-info" target="_blank">درخواست ارسال کد تایید</a>
-                               <input asp-for="EmailConfirmationCode" class="form-control" type="text" placeholder="وارد کردن کد ایمیل" />
-                           }
+            <div class="col-sm-2">
+                ایمیل
             </div>
-            
+            <div class="col-sm-3">
+                <label name="EmailAddress" asp-for="EmailAddress">@Model.EmailAddress</label>
+            </div>
+            <div class="col-sm-7">
+                @if (Model.EmailConfirmed)
+                {
+                    @:<span>تایید شده</span>
+                      }
+                else
+                {
+                    @:<span>تایید نشده</span>
+                        <br />
+
+                        <a asp-action="SendEmailConfirm" class="btn btn-group-lg btn-info" target="_blank">درخواست ارسال کد تایید</a>
+                        <input asp-for="EmailConfirmationCode" class="form-control" type="text" placeholder="وارد کردن کد ایمیل" />
+                }
+            </div>
+
         </div>
         <div class="row form-group">
             <div class="col-sm-2"><span>شماره تلفن</span></div>
             <div class="col-sm-3"><span>@Model.PhoneNumber</span></div>
-            <div class="col-sm-7">@if (Model.PhoneNumberConfirmed)
-                          {
-                              @:<span>تایید شده</span>
+            <div class="col-sm-7">
+                @if (Model.PhoneNumberConfirmed)
+            {
+                @:<span>تایید شده</span>
                           }
-                          else
-                          {
-                              @:<span>تایید نشده</span><br/>
-                              <a asp-action="SendSmsConfirm" class="btn btn-group-lg btn-info" target="_blank">درخواست ارسال کد تایید</a>
-                              <a asp-action="EditProfile" class="btn btn-group-lg btn-warning"> شماره تلفن وارد شده اشتباه است. درخواست تغییر شماره تلفن</a>
-                              <input asp-for="PhoneNumberConfirmationCode" class="form-control" type="text" placeholder="وارد کردن کد تلفن همراه" />
+            else
+            {
+                @:<span>تایید نشده</span><br />
+                            <a asp-action="SendSmsConfirm" class="btn btn-group-lg btn-info" target="_blank">درخواست ارسال کد تایید</a>
+                            <a asp-action="EditProfile" class="btn btn-group-lg btn-warning"> شماره تلفن وارد شده اشتباه است. درخواست تغییر شماره تلفن</a>
+                            <input asp-for="PhoneNumberConfirmationCode" class="form-control" type="text" placeholder="وارد کردن کد تلفن همراه" />
             }
-            </div>
-         </div>  
-            
-           
-        <div class="row">
-            <div class="col-sm-6">
-                <a asp-action="AccountManagement" class="btn btn-info btn-lg btn-block">بازگشت</a>
-            </div>
         </div>
-    </form>
+    </div>
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">ویرایش</button>
+        </div>
+        <div class="col-sm-6">
+            <a asp-action="AccountManagement" class="btn btn-info btn-lg btn-block">بازگشت</a>
+        </div>
+    </div>
+</form>
 }
 
 @section Footer

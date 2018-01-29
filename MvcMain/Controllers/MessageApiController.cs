@@ -93,7 +93,7 @@ namespace MvcMain.Controllers
             string errorCode = "MessageApiController/InsertEmailMessageInDataBase";
             ResponseBase response = new ResponseBase();
             EmailMessage emailMessage = new EmailMessage();
-            if (userId != "")
+            if (userId == "")
             {
                 AppUser user = await _userManager.FindByEmailAsync(emailMessageSingle.EmailAddress);
                 if (user == null)

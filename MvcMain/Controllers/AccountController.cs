@@ -112,14 +112,31 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> ConfirmEmailAndPhoneNumber(ConfirmEmailAndPhoneNumberModel confirmEmailAndPhoneNumber)
         {
-            if (ModelState.IsValid)
+            string message = "";
+            try
             {
-                //set emailConfirm and sms confirm for user based on user input and records in database
-                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                if (!string.IsNullOrEmpty(confirmEmailAndPhoneNumber.EmailConfirmationCode))
+                {
+                    //set emailConfirm and sms confirm for user based on user input and records in database
+                    AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                    if (confirmEmailAndPhoneNumber.EmailConfirmationCode == user.EmailAddressConfirmCodeEx)
+                    {
+                        user.EmailConfirmed = true;
+                        _appIdentityDbContext.Entry(user).State = EntityState.Modified;
+                        await _appIdentityDbContext.SaveChangesAsync();
+                        message = "ایمیل تایید شد";
+                    }
+                }
             }
-            
-            return View(confirmEmailAndPhoneNumber);
+            catch (Exception ex)
+            {
+                message = ex.Message;
+            }
+
+            return RedirectToAction("AccountManagement",new {message=message});
         }
+
+
 
         [HttpGet]
         [Authorize]
@@ -147,8 +164,8 @@ namespace MvcMain.Controllers
             }
             else
             {
-                return RedirectToAction("AccountManagement",
-                    new {message = response.Message + " ," + response.ErrorCode});
+                string error = response.Message + " ," + response.ErrorCode;
+                return RedirectToAction("AccountManagement",new {message = error});
             }
         }
     
