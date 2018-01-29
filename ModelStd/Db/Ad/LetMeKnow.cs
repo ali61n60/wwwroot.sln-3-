@@ -35,6 +35,7 @@ namespace ModelStd.Db.Ad
 
         public virtual AspNetUsers User { get; set; }
         public virtual Category Category { get; set; }
+        public virtual LetMeKnowAttributeTransportaion LetMeKnowAttributeTransportaion { get; set; }
     }
 
     public enum EmailOrSms

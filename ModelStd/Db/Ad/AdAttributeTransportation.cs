@@ -10,7 +10,7 @@ namespace ModelStd.Db.Ad
         [Column("adId")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [ForeignKey("Advertisements")]
+        [ForeignKey("Advertisement")]
         public Guid AdId { get; set; }
 
         [Column("modelId")]

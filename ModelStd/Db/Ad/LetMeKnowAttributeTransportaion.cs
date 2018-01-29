@@ -8,6 +8,7 @@ namespace ModelStd.Db.Ad
     {
         [Column("id")]
         [Key]
+        [ForeignKey("LetMeKnow")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 

@@ -164,9 +164,8 @@ namespace RepositoryStd.Context.AD
            
             modelBuilder.Entity<LetMeKnow>(entity =>
             {
-                entity.HasKey(letMeKnow=>
-                    new { letMeKnow.Id }
-                ).HasName("PK_Id");
+                entity.HasKey(letMeKnow=>letMeKnow.Id)
+                .HasName("PK_Id");
 
                 entity.HasOne(letMeKnow => letMeKnow.Category)
                     .WithMany()
@@ -184,11 +183,11 @@ namespace RepositoryStd.Context.AD
 
             modelBuilder.Entity<LetMeKnowAttributeTransportaion>(entity =>
             {
-                entity.HasKey(transportaion => new {transportaion.Id})
+                entity.HasKey(transportaion => transportaion.Id)
                 .HasName("PK_LetMeKnowAttributeTransportaion");
 
                 entity.HasOne(transportation => transportation.LetMeKnow)
-                    .WithOne()
+                    .WithOne(letMeKnow => letMeKnow.LetMeKnowAttributeTransportaion)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_LetMeKnowAttributeTransportaion_LetMeKnow");
 

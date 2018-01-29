@@ -24,7 +24,7 @@ namespace ModelStd.Db.Ad
 
         [Column("brandId")]
         [Required]
-        [ForeignKey("Brands")]
+        [ForeignKey("Brand")]
         public int BrandId { get; set; }
 
         public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
