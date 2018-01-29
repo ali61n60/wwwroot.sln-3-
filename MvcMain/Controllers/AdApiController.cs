@@ -20,7 +20,6 @@ using MvcMain.Infrastructure;
 using MvcMain.Models;
 using RepositoryStd.ModelConversion;
 using RepositoryStd.Repository;
-using RepositoryStd.Repository.Common;
 using RepositoryStd.TepmeratureRepository;
 
 //TODO use Test to test repositories "Image Repository" and Transformation Repository 
@@ -39,10 +38,8 @@ namespace MvcMain.Controllers
 
     //TODO 1- build AppIdentityDbContext ModelBuiler yourself instead of relying on inheritance
 
-
-    //TODO 1- Create Change My Password for users,
-    //create a seperate table to store users extra info such as first name and last name
-    //verify user email and phone number
+    //TODO 1- Create Change user phone number ,verify user email and phone number, set phone number verifyed to false when user changes his phone number
+    
     //TODO 1- Whan Ajax call is made infrom user by gif image and when error ocurrs show error to user for every Ajax Call 
     //design main ts files and server callers to cooperate with each other 
     //TODO 1- work on District,City,Province component

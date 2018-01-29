@@ -64,5 +64,17 @@ namespace MvcMain.Models
 
         [Required(ErrorMessage = "فیلد نام خانوادگی خالی است")]
         public string LastName { get; set; }
+
+        [Required(ErrorMessage = "فیلد تلفن همراه خالی است")]
+        public string PhoneNumber { get; set; }
+    }
+
+    public class ChangePasswordModel
+    {
+        [Required(ErrorMessage = "فیلد رمز ورود خالی است")]
+        public string Password { get; set; }
+
+        [Required(ErrorMessage = "فیلد تکرار رمز ورود خالی است")]
+        public string RepeatPassword { get; set; }
     }
 }

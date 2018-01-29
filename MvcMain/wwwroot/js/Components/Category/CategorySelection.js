@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../Events/EventDispatcher");
-var CategorySelection = /** @class */ (function () {
+var CategorySelection = (function () {
     function CategorySelection(parentDivId, allCategories) {
         this.SelectedCategoryChangedEvent = new EventDispatcher_1.EventDispatcher();
         this.CategoryIdKey = "CategoryId";
@@ -192,7 +192,7 @@ var CategorySelection = /** @class */ (function () {
     return CategorySelection;
 }());
 exports.CategorySelection = CategorySelection;
-var CategoryCahngedEventArg = /** @class */ (function () {
+var CategoryCahngedEventArg = (function () {
     function CategoryCahngedEventArg() {
     }
     return CategoryCahngedEventArg;

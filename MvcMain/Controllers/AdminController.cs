@@ -78,8 +78,6 @@ namespace MvcMain.Controllers
             return View("Index", userManager.Users);
         }
 
-
-
         public async Task<IActionResult> Edit(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);

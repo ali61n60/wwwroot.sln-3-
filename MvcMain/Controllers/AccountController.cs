@@ -20,6 +20,7 @@ namespace MvcMain.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _signInManager;
         private readonly MessageApiController _messageApiController;
+        private readonly IPasswordValidator<AppUser> _passwordValidator;
         private readonly IPasswordHasher<AppUser> _passwordHasher;
 
         private readonly AppIdentityDbContext _appIdentityDbContext;
@@ -27,20 +28,22 @@ namespace MvcMain.Controllers
 
         public AccountController(UserManager<AppUser> userMgr, SignInManager<AppUser> signinMgr
             , IPasswordHasher<AppUser> passwordHasher, MessageApiController messageApiController
-            , AppIdentityDbContext appIdentityDbContext)
+            , AppIdentityDbContext appIdentityDbContext, IPasswordValidator<AppUser> passwordValidator)
         {
             _userManager = userMgr;
             _signInManager = signinMgr;
             _passwordHasher = passwordHasher;
+            _passwordValidator = passwordValidator;
             _messageApiController = messageApiController;
             _appIdentityDbContext = appIdentityDbContext;
         }
 
 
         [Authorize]
-        public async Task<IActionResult> AccountManagement()
+        public async Task<IActionResult> AccountManagement(string message)
         {
             AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            ViewData["Message"] = message;
             return View(user);
         }
 
@@ -49,7 +52,7 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> EditProfile()
         {
             AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-            EditProfileModel editProfileModel=new EditProfileModel();
+            EditProfileModel editProfileModel = new EditProfileModel();
             editProfileModel.FirstName = user.FirstNameEx;
             editProfileModel.LastName = user.LastNameEx;
             return View(editProfileModel);
@@ -59,19 +62,83 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<IActionResult> EditProfile(EditProfileModel editProfileModel)
         {
+            string errorCode = "AccountController/EditProfile";
             if (ModelState.IsValid)
             {
-                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                user.FirstNameEx = editProfileModel.FirstName;
-                user.LastNameEx = editProfileModel.LastName;
-                _appIdentityDbContext.Entry(user).State = EntityState.Modified;
-                await _appIdentityDbContext.SaveChangesAsync();
-                return RedirectToAction("AccountManagement");
+                try
+                {
+                    AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                    user.FirstNameEx = editProfileModel.FirstName;
+                    user.LastNameEx = editProfileModel.LastName;
+                    _appIdentityDbContext.Entry(user).State = EntityState.Modified;
+                    await _appIdentityDbContext.SaveChangesAsync();
+                    return RedirectToAction("AccountManagement");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("Exception", ex.Message + " ," + errorCode);
+                }
             }
 
+            return View(editProfileModel);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword()
+        {
             return View();
         }
 
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ChangePassword(ChangePasswordModel changePasswordModel)
+        {
+            string errorCode = "AccountController/ChangePassword";
+            if (ModelState.IsValid)
+            {
+                if (changePasswordModel.Password != changePasswordModel.RepeatPassword)
+                {
+                    ModelState.AddModelError("PasswordRepeat", "فیلد رمز ورود و فیلد تکرار رمز ورود باید برابر باشد");
+                }
+                else
+                {
+                    try
+                    {
+                        AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+                        if (user != null)
+                        {
+                            if (!string.IsNullOrEmpty(changePasswordModel.Password))
+                            {
+                                IdentityResult validPass = await _passwordValidator.ValidateAsync(_userManager,user, changePasswordModel.Password);
+                                if (validPass.Succeeded)
+                                {
+                                    user.PasswordHash = _passwordHasher.HashPassword(user, changePasswordModel.Password);
+                                    IdentityResult result = await _userManager.UpdateAsync(user);
+                                    if (result.Succeeded)
+                                    {
+                                        return RedirectToAction("AccountManagement", new { message = "رمز ورود با موفقیت تغییر کرد" });
+                                    }
+                                    else
+                                    {
+                                        AddErrorsFromResult(result);
+                                    }
+                                }
+                                else
+                                {
+                                    AddErrorsFromResult(validPass);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("Exception", ex.Message + " ," + errorCode);
+                    }
+                }
+            }
+            return View(changePasswordModel);
+        }
 
         [AllowAnonymous]
         public IActionResult Login(string returnUrl)
@@ -152,6 +219,7 @@ namespace MvcMain.Controllers
                         IdentityResult changePassResult = await _userManager.UpdateAsync(user);
                         if (changePassResult.Succeeded)
                         {
+                            //TODO extract a method for email creation
                             EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
                             emailMessageSingle.EmailAddress = detail.Email;
                             string messageText = $"<p dir=\"rtl\">";
@@ -263,6 +331,14 @@ namespace MvcMain.Controllers
         public IActionResult AccessDenied()
         {
             return View();
+        }
+
+        private void AddErrorsFromResult(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
         }
     }
 }
