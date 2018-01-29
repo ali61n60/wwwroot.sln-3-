@@ -260,8 +260,7 @@ namespace RepositoryStd.Repository.Common
         public async Task<IEnumerable<AdvertisementCommon>> GetUserAdvertisements(string userId)
         {
             List<Advertisement> userAdvertisements = await _adDbContext.Advertisements
-                .Include(advertisements => advertisements.AdStatus)
-                .Where(advertisements => advertisements.UserId == userId).ToListAsync(CancellationToken.None);
+                .Where(advertisements => advertisements.UserId == userId).ToListAsync();
             List<AdvertisementCommon> userAdvertisementCommons = new List<AdvertisementCommon>();
             foreach (Advertisement advertisement in userAdvertisements)
             {

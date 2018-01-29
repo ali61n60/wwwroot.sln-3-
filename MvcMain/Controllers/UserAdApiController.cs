@@ -30,13 +30,12 @@ namespace MvcMain.Controllers
         [Authorize]
         public async Task<ResponseBase<IEnumerable<AdvertisementCommon>>> GetUserAds()
         {
-            //TODO use Decorator pattern to log
+           
             string errorCode = "UserAdApiController/GetUserAds";
             ResponseBase<IEnumerable<AdvertisementCommon>> response=new ResponseBase<IEnumerable<AdvertisementCommon>>();
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-                _logger.LogError($"{errorCode}, user={user.Email}, time= {DateTime.Now}");
                 response.ResponseData= await _commonRepository.GetUserAdvertisements(user.Id);
                 response.SetSuccessResponse();
             }

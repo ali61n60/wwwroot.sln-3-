@@ -65,7 +65,7 @@ namespace RepositoryStd.Context.AD
                 entity.HasOne(d => d.Model)
                     .WithMany(p => p.AdAttributeTransportation)
                     .HasForeignKey(d => d.ModelId)
-                    .HasConstraintName("FK_AdAttributeTransportation_CarBrands");
+                    .HasConstraintName("FK_AdAttributeTransportation_CarModel");
             });
 
             modelBuilder.Entity<AdPrivilege>(entity =>
@@ -79,8 +79,6 @@ namespace RepositoryStd.Context.AD
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_AdPrivilage_Advertisements");
                 });
-
-           
 
             modelBuilder.Entity<Advertisement>(entity =>
             {
@@ -114,19 +112,19 @@ namespace RepositoryStd.Context.AD
             modelBuilder.Entity<Brand>(entity =>
              {
                  entity.HasKey(e => e.BrandId)
-                     .HasName("PK_CarMakers");
+                     .HasName("PK_CarBrand");
              });
 
             modelBuilder.Entity<CarModel>(entity =>
             {
                 entity.HasKey(e => e.ModelId)
-                    .HasName("PK_CarBrand");
+                    .HasName("PK_CarModel");
 
                 entity.HasOne(d => d.Brand)
                     .WithMany(p => p.CarModel)
                     .HasForeignKey(d => d.BrandId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_CarBrands_Makers");
+                    .HasConstraintName("FK_CarModel_CarBrand");
             });
 
             modelBuilder.Entity<Category>(entity =>
@@ -186,7 +184,8 @@ namespace RepositoryStd.Context.AD
 
             modelBuilder.Entity<LetMeKnowAttributeTransportaion>(entity =>
             {
-                entity.HasKey(transportaion => new {transportaion.Id}).HasName("PK_LetMeKnowAttributeTransportaion");
+                entity.HasKey(transportaion => new {transportaion.Id})
+                .HasName("PK_LetMeKnowAttributeTransportaion");
 
                 entity.HasOne(transportation => transportation.LetMeKnow)
                     .WithOne()
@@ -196,12 +195,12 @@ namespace RepositoryStd.Context.AD
                 entity.HasOne(transportation => transportation.Brand)
                     .WithOne()
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_Brand");
+                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_Brand1");
 
                 entity.HasOne(transportation => transportation.CarModel)
                     .WithOne()
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_CarModel");
+                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_CarModel1");
             });
 
             modelBuilder.Entity<MarkedAd>(entity =>

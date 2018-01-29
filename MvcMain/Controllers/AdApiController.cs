@@ -26,7 +26,7 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
-    //TODO 1- Create Change user phone number ,verify user email and phone number, set phone number verifyed to false when user changes his phone number
+    //TODO 1- verify user phone number, set phone number verifyed to false when user changes his phone number
 
     //TODO 1- Create LetMeKnow Controller and View for users to register their need
     // gold user pays 3x, silver user pay 2x and get notifyed sooner -golden user in first 20 minutes,silver 20-40, normal user after 40 minutes
@@ -51,6 +51,7 @@ namespace MvcMain.Controllers
     //TODO 1- work on Edit AD by Ad owner
     //TODO 1- work on verifying users email and phone number
 
+    //TODO 2- use Decorator pattern to log
     //TODO 2- study MVC book
     //TODO 2- study of multi-language website approach in MVC
     //TODO 2- study Task-Wait and async-await
