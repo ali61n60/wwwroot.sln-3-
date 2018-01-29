@@ -84,5 +84,7 @@ namespace MvcMain.Models
         public bool PhoneNumberConfirmed { get; set; }
         public string EmailAddress { get; set; }
         public string PhoneNumber { get; set; }
+        public string EmailConfirmationCode { get; set; }
+        public string PhoneNumberConfirmationCode { get; set; }
     }
 }

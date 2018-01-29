@@ -108,7 +108,38 @@ namespace MvcMain.Controllers
             return View(confirmEmailAndPhoneNumber);
         }
 
-        
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> ConfirmEmailAndPhoneNumber(ConfirmEmailAndPhoneNumberModel confirmEmailAndPhoneNumber)
+        {
+            if (ModelState.IsValid)
+            {
+                //set emailConfirm and sms confirm for user based on user input and records in database
+                AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            }
+            
+            
+
+            return View(confirmEmailAndPhoneNumber);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> SendEmailConfirm()
+        {
+            //TODO send an email to the user and push the user EmailConfirmCode
+            return View();
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> SendSmsConfirm()
+        {
+            //TODO send an sms to the user and push the user PhoneNumberConfirmCode
+            return View();
+        }
+
+
 
         [HttpGet]
         [Authorize]

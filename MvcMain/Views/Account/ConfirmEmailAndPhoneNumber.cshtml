@@ -31,45 +31,39 @@
     <div class="text-danger text-right" dir="rtl" asp-validation-summary="All"></div>
     <form asp-action="ConfirmEmailAndPhoneNumber" method="post">
         <div class="row form-group">
-            <div col-sm-3><label>ایمیل</label></div>
-            <div col-sm-4><label>@Model.EmailAddress</label></div>
-            <div col-sm-5> @if (Model.EmailConfirmed)
+            <div class="col-sm-2"><span>ایمیل</span></div>
+            <div class="col-sm-3"><span>@Model.EmailAddress</span></div>
+            <div class="col-sm-7"> @if (Model.EmailConfirmed)
                            {
-                               @:<label>تایید شده</label>
+                               @:<span>تایید شده</span>
                            }
                            else
                            {
-                               @:<label>تایید نشده</label>
-                               <label>درخواست ارسال ایمیل تایید</label>
-                               <label> ایمیل وارد شده اشتباه است. درخواست تغییر ایمیل</label>
+                               @:<span>تایید نشده</span>
+                                   @* use ajax *@
+                               <a asp-action="SendEmailConfirm" target="_blank">درخواست ارسال کد تایید به ایمیل</a>
+                               <input asp-for="EmailConfirmationCode" type="text" placeholder="وارد کردن کد" />
                            }
             </div>
             
         </div>
         <div class="row form-group">
-            <div col-sm-3><label>شماره تلفن</label></div>
-            <div col-sm-4><label>@Model.EmailAddress</label></div>
-            <div col-sm-5>@if (Model.EmailConfirmed)
+            <div class="col-sm-2"><span>شماره تلفن</span></div>
+            <div class="col-sm-3"><span>@Model.PhoneNumber</span></div>
+            <div class="col-sm-7">@if (Model.PhoneNumberConfirmed)
                           {
-                              @:<label>تایید شده</label>
+                              @:<span>تایید شده</span>
                           }
                           else
                           {
-                              @:<label>تایید نشده</label>
-                              <label>درخواست ارسال اس ام اس تایید</label>
-                              <label> شماره تلفن وارد شده اشتباه است. درخواست تغییر شماره تلفن</label>
+                              @:<span>تایید نشده</span>
+                              <span>درخواست ارسال اس ام اس تایید</span>
+                              <span> شماره تلفن وارد شده اشتباه است. درخواست تغییر شماره تلفن</span>
                           }
             </div>
          </div>  
             
-            
-            
-            
-            @*<div class="col-sm-2"><label asp-for="Password">رمز ورود</label></div>
-            <div class="col-sm-10"><input asp-for="Password" class="form-control" placeholder="رمز ورود" /></div>*@
-        
-        
-
+           
         <div class="row">
             <div class="col-sm-6">
                 <a asp-action="AccountManagement" class="btn btn-info btn-lg btn-block">بازگشت</a>
