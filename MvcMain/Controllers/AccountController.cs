@@ -118,8 +118,6 @@ namespace MvcMain.Controllers
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
             }
             
-            
-
             return View(confirmEmailAndPhoneNumber);
         }
 
@@ -128,8 +126,32 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> SendEmailConfirm()
         {
             //TODO send an email to the user and push the user EmailConfirmCode
-            return View();
+            EmailMessageSingle emailMessageSingle = new EmailMessageSingle();
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            emailMessageSingle.EmailAddress = user.Email;
+            emailMessageSingle.Subject = "فعال سازی ایمیل";
+            emailMessageSingle.Title = "کد فعال سازی";
+            emailMessageSingle.TextMessage = "کاربر گرامی";
+            emailMessageSingle.TextMessage += "<br/>";
+            emailMessageSingle.TextMessage += "با سلام و احترام";
+            emailMessageSingle.TextMessage += "<br/>";
+            emailMessageSingle.TextMessage += "کد فعال سازی ایمیل شما عبارت زیر میباشد";
+            emailMessageSingle.TextMessage += "<br/>";
+            emailMessageSingle.TextMessage += $"<span style=\"color:red\">{user.EmailAddressConfirmCodeEx}</span>"; ;
+            emailMessageSingle.TextMessage += "<br/>";
+            
+            ResponseBase response = await _messageApiController.InsertEmailMessageInDataBase(emailMessageSingle);
+            if (response.Success)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("AccountManagement",
+                    new {message = response.Message + " ," + response.ErrorCode});
+            }
         }
+    
 
         [HttpGet]
         [Authorize]

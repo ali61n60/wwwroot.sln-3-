@@ -31,8 +31,8 @@
     <div class="text-danger text-right" dir="rtl" asp-validation-summary="All"></div>
     <form asp-action="ConfirmEmailAndPhoneNumber" method="post">
         <div class="row form-group">
-            <div class="col-sm-2"><span>ایمیل</span></div>
-            <div class="col-sm-3"><span>@Model.EmailAddress</span></div>
+            <div class="col-sm-2">ایمیل</div>
+            <div class="col-sm-3">@Model.EmailAddress</div>
             <div class="col-sm-7"> @if (Model.EmailConfirmed)
                            {
                                @:<span>تایید شده</span>
@@ -40,9 +40,10 @@
                            else
                            {
                                @:<span>تایید نشده</span>
-                                   @* use ajax *@
-                               <a asp-action="SendEmailConfirm" target="_blank">درخواست ارسال کد تایید به ایمیل</a>
-                               <input asp-for="EmailConfirmationCode" type="text" placeholder="وارد کردن کد" />
+                                   <br/>
+                                   
+                               <a asp-action="SendEmailConfirm" class="btn btn-group-lg btn-info" target="_blank">درخواست ارسال کد تایید</a>
+                               <input asp-for="EmailConfirmationCode" class="form-control" type="text" placeholder="وارد کردن کد ایمیل" />
                            }
             </div>
             
@@ -56,10 +57,11 @@
                           }
                           else
                           {
-                              @:<span>تایید نشده</span>
-                              <span>درخواست ارسال اس ام اس تایید</span>
-                              <span> شماره تلفن وارد شده اشتباه است. درخواست تغییر شماره تلفن</span>
-                          }
+                              @:<span>تایید نشده</span><br/>
+                              <a asp-action="SendSmsConfirm" class="btn btn-group-lg btn-info" target="_blank">درخواست ارسال کد تایید</a>
+                              <a asp-action="EditProfile" class="btn btn-group-lg btn-warning"> شماره تلفن وارد شده اشتباه است. درخواست تغییر شماره تلفن</a>
+                              <input asp-for="PhoneNumberConfirmationCode" class="form-control" type="text" placeholder="وارد کردن کد تلفن همراه" />
+            }
             </div>
          </div>  
             
