@@ -9,7 +9,7 @@ namespace ModelStd.Db.Ad
     {
         public Brand()
         {
-            CarModel = new HashSet<CarModel>();
+            CarModels = new HashSet<CarModel>();
         }
 
         [Key]
@@ -22,6 +22,6 @@ namespace ModelStd.Db.Ad
         [MaxLength(150)]
         public string BrandName { get; set; }
 
-        public virtual ICollection<CarModel> CarModel { get; set; }
+        public virtual ICollection<CarModel> CarModels { get; set; }
     }
 }

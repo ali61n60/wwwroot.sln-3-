@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("LetMeKnowAttributeTransportaion", Schema = "ad")]
+    [Table("LetMeKnowAttributeTransportaions", Schema = "ad")]
     public class LetMeKnowAttributeTransportaion
     {
         [Column("id")]

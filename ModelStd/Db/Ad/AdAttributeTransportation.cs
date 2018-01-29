@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("AdAttributeTransportation",Schema = "ad")]
+    [Table("AdAttributeTransportations",Schema = "ad")]
     public class AdAttributeTransportation
     {
         [Column("adId")]

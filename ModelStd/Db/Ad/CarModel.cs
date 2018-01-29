@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("CarModel", Schema = "ad")]
+    [Table("CarModels", Schema = "ad")]
     public class CarModel
     {
         public CarModel()
         {
-            AdAttributeTransportation = new HashSet<AdAttributeTransportation>();
+            AdAttributeTransportations = new HashSet<AdAttributeTransportation>();
         }
 
         [Key]
@@ -25,7 +25,7 @@ namespace ModelStd.Db.Ad
         [Column("brandId")]
         public int BrandId { get; set; }
 
-        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportation { get; set; }
+        public virtual ICollection<AdAttributeTransportation> AdAttributeTransportations { get; set; }
         public virtual Brand Brand { get; set; }
     }
 }

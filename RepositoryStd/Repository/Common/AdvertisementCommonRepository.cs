@@ -247,13 +247,17 @@ namespace RepositoryStd.Repository.Common
 
         public LetMeKnow GetLetMeKnowFormUserInput(Dictionary<string, string> userInputDictionary, string userId)
         {
-            LetMeKnow tempLetMeKnow = new LetMeKnow();
-            tempLetMeKnow.UserId = userId;
-            tempLetMeKnow.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, Category.CategoryIdKey, Category.CategoryIdDefault);
-            tempLetMeKnow.EmailOrSms = (EmailOrSms)Enum.Parse(typeof(EmailOrSms), ParameterExtractor.ExtractInt(userInputDictionary, EmailOrSmsKey, EmailOrSmsDefault).ToString());// EmailOrSms.Email;//TODO get it from user
-            tempLetMeKnow.RequetsPrivilege = RequetsPrivilege.Normal;//TODO get it from user
-            tempLetMeKnow.RequestInsertDateTime = DateTime.Now;
-
+            LetMeKnow tempLetMeKnow = new LetMeKnow
+            {
+                UserId = userId,
+                CategoryId =
+                    ParameterExtractor.ExtractInt(userInputDictionary, Category.CategoryIdKey,Category.CategoryIdDefault),
+                EmailOrSms = (EmailOrSms) Enum.Parse(typeof(EmailOrSms),
+                    ParameterExtractor.ExtractInt(userInputDictionary, EmailOrSmsKey, EmailOrSmsDefault).ToString()),
+                RequetsPrivilege = RequetsPrivilege.Normal,
+                RequestInsertDateTime = DateTime.Now
+            };
+            
             return tempLetMeKnow;
         }
 

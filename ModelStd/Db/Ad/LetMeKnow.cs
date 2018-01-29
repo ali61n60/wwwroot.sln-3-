@@ -5,7 +5,7 @@ using ModelStd.Db.Identity;
 
 namespace ModelStd.Db.Ad
 {
-    [Table("LetMeKnow",Schema = "ad")]
+    [Table("LetMeKnows",Schema = "ad")]
     public class LetMeKnow
     {
         [Key]

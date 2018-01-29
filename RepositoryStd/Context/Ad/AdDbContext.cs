@@ -31,7 +31,7 @@ namespace RepositoryStd.Context.AD
         public virtual DbSet<Advertisement> Advertisements { get; set; }
         public virtual DbSet<ApprovedAd> ApprovedAds { get; set; }
         public virtual DbSet<Brand> Brands { get; set; }
-        public virtual DbSet<CarModel> CarModel { get; set; }
+        public virtual DbSet<CarModel> CarModels { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<City> Cities { get; set; }
         public virtual DbSet<District> Districts { get; set; }
@@ -60,12 +60,12 @@ namespace RepositoryStd.Context.AD
                 entity.HasOne(d => d.Ad)
                     .WithOne(advertisements => advertisements.AdAttributeTransportation)
                     .OnDelete(DeleteBehavior.Cascade)
-                    .HasConstraintName("FK_AdAttributeTransportation_Advertisements");
+                    .HasConstraintName("FK_AdAttributeTransportations_Advertisements");
 
                 entity.HasOne(d => d.Model)
-                    .WithMany(p => p.AdAttributeTransportation)
+                    .WithMany(p => p.AdAttributeTransportations)
                     .HasForeignKey(d => d.ModelId)
-                    .HasConstraintName("FK_AdAttributeTransportation_CarModel");
+                    .HasConstraintName("FK_AdAttributeTransportations_CarModels");
             });
 
             modelBuilder.Entity<AdPrivilege>(entity =>
@@ -121,7 +121,7 @@ namespace RepositoryStd.Context.AD
                     .HasName("PK_CarModel");
 
                 entity.HasOne(d => d.Brand)
-                    .WithMany(p => p.CarModel)
+                    .WithMany(p => p.CarModels)
                     .HasForeignKey(d => d.BrandId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_CarModel_CarBrand");
