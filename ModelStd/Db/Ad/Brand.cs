@@ -10,7 +10,8 @@ namespace ModelStd.Db.Ad
         public Brand()
         {
             CarModels = new HashSet<CarModel>();
-        }
+            LetMeKnowAttributeTransportaion=new HashSet<LetMeKnowAttributeTransportaion>();
+    }
 
         [Key]
         [Column("brandId")]
@@ -23,5 +24,6 @@ namespace ModelStd.Db.Ad
         public string BrandName { get; set; }
 
         public virtual ICollection<CarModel> CarModels { get; set; }
+        public virtual ICollection<LetMeKnowAttributeTransportaion> LetMeKnowAttributeTransportaion { get; set; }
     }
 }

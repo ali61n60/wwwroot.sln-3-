@@ -10,9 +10,10 @@ using ModelStd.Db.Ad;
 namespace RepositoryStd.Migrations
 {
     [DbContext(typeof(AdDbContext))]
-    partial class AdDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180129230630_letMe10")]
+    partial class letMe10
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("ad")
@@ -833,7 +834,7 @@ namespace RepositoryStd.Migrations
                     b.HasOne("ModelStd.Db.Ad.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
-                        .HasConstraintName("FK_LetMeKnowAttributeTransportaion_Brand");
+                        .HasConstraintName("FK_LetMeKnowAttributeTransportaion_Brand1");
 
                     b.HasOne("ModelStd.Db.Ad.LetMeKnow", "LetMeKnow")
                         .WithOne("LetMeKnowAttributeTransportaion")
@@ -844,7 +845,7 @@ namespace RepositoryStd.Migrations
                     b.HasOne("ModelStd.Db.Ad.CarModel", "CarModel")
                         .WithMany()
                         .HasForeignKey("ModelId")
-                        .HasConstraintName("FK_LetMeKnowAttributeTransportaion_CarModel");
+                        .HasConstraintName("FK_LetMeKnowAttributeTransportaion_CarModel1");
                 });
 
             modelBuilder.Entity("ModelStd.Db.Ad.MarkedAd", b =>

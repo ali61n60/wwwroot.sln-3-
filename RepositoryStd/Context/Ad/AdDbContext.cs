@@ -123,7 +123,7 @@ namespace RepositoryStd.Context.AD
                 entity.HasOne(carModel => carModel.Brand)
                     .WithMany(brand => brand.CarModels)
                     .HasForeignKey(carModel => carModel.BrandId)
-                    .OnDelete(DeleteBehavior.Restrict)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_CarModel_CarBrand");
             });
 
@@ -186,20 +186,24 @@ namespace RepositoryStd.Context.AD
                 entity.HasKey(transportaion => transportaion.Id)
                 .HasName("PK_LetMeKnowAttributeTransportaion");
 
+                
+
                 entity.HasOne(transportation => transportation.LetMeKnow)
                     .WithOne(letMeKnow => letMeKnow.LetMeKnowAttributeTransportaion)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_LetMeKnowAttributeTransportaion_LetMeKnow");
 
                 entity.HasOne(transportation => transportation.Brand)
-                    .WithOne()
+                    .WithMany(brand => brand.LetMeKnowAttributeTransportaion)
+                    .HasForeignKey(letMeKnowAttributeTransportaions => letMeKnowAttributeTransportaions.BrandId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_Brand1");
+                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_Brand");
 
                 entity.HasOne(transportation => transportation.CarModel)
-                    .WithOne()
+                    .WithMany(model => model.LetMeKnowAttributeTransportaion)
+                    .HasForeignKey(letMeKnowAttributeTransportaions => letMeKnowAttributeTransportaions.ModelId)
                     .OnDelete(DeleteBehavior.Restrict)
-                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_CarModel1");
+                    .HasConstraintName("FK_LetMeKnowAttributeTransportaion_CarModel");
             });
 
             modelBuilder.Entity<MarkedAd>(entity =>
