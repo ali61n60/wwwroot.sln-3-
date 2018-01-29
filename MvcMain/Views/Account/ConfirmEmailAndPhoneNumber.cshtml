@@ -1,0 +1,88 @@
+﻿@model ConfirmEmailAndPhoneNumberModel
+
+@{
+    ViewData["Title"] = "تایید ایمیل و شماره تلفن همراه";
+    ViewData["PageTitle"] = "تایید ایمیل و شماره تلفن همراه";
+    Layout = "_Layout";
+}
+
+@section TopTop
+    {
+    @Html.Partial("TopTop")
+}
+@section NavBar
+    {
+    @Html.Partial("NavBar")
+}
+@section PageTitle
+    {
+    @Html.Partial("PageTitle")
+}
+@section TopHeader
+    {
+
+}
+@section SideNav
+    {
+    @Html.Partial("SideNav")
+}
+@section Body
+    {
+    <div class="text-danger text-right" dir="rtl" asp-validation-summary="All"></div>
+    <form asp-action="ConfirmEmailAndPhoneNumber" method="post">
+        <div class="row form-group">
+            <div col-sm-3><label>ایمیل</label></div>
+            <div col-sm-4><label>@Model.EmailAddress</label></div>
+            <div col-sm-5> @if (Model.EmailConfirmed)
+                           {
+                               @:<label>تایید شده</label>
+                           }
+                           else
+                           {
+                               @:<label>تایید نشده</label>
+                               <label>درخواست ارسال ایمیل تایید</label>
+                               <label> ایمیل وارد شده اشتباه است. درخواست تغییر ایمیل</label>
+                           }
+            </div>
+            
+        </div>
+        <div class="row form-group">
+            <div col-sm-3><label>شماره تلفن</label></div>
+            <div col-sm-4><label>@Model.EmailAddress</label></div>
+            <div col-sm-5>@if (Model.EmailConfirmed)
+                          {
+                              @:<label>تایید شده</label>
+                          }
+                          else
+                          {
+                              @:<label>تایید نشده</label>
+                              <label>درخواست ارسال اس ام اس تایید</label>
+                              <label> شماره تلفن وارد شده اشتباه است. درخواست تغییر شماره تلفن</label>
+                          }
+            </div>
+         </div>  
+            
+            
+            
+            
+            @*<div class="col-sm-2"><label asp-for="Password">رمز ورود</label></div>
+            <div class="col-sm-10"><input asp-for="Password" class="form-control" placeholder="رمز ورود" /></div>*@
+        
+        
+
+        <div class="row">
+            <div class="col-sm-6">
+                <a asp-action="AccountManagement" class="btn btn-info btn-lg btn-block">بازگشت</a>
+            </div>
+        </div>
+    </form>
+}
+
+@section Footer
+    {
+    @Html.Partial("Footer")
+}
+
+@section scripts{
+
+}

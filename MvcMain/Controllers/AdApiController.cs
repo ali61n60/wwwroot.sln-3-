@@ -26,6 +26,7 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO 1- Create Change user phone number ,verify user email and phone number, set phone number verifyed to false when user changes his phone number
 
     //TODO 1- Create LetMeKnow Controller and View for users to register their need
     // gold user pays 3x, silver user pay 2x and get notifyed sooner -golden user in first 20 minutes,silver 20-40, normal user after 40 minutes
@@ -38,8 +39,6 @@ namespace MvcMain.Controllers
 
     //TODO 1- build AppIdentityDbContext ModelBuiler yourself instead of relying on inheritance
 
-    //TODO 1- Create Change user phone number ,verify user email and phone number, set phone number verifyed to false when user changes his phone number
-    
     //TODO 1- Whan Ajax call is made infrom user by gif image and when error ocurrs show error to user for every Ajax Call 
     //design main ts files and server callers to cooperate with each other 
     //TODO 1- work on District,City,Province component

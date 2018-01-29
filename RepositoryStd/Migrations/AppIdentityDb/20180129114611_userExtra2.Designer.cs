@@ -8,9 +8,10 @@ using RepositoryStd.Context.Identity;
 namespace RepositoryStd.Migrations.AppIdentityDb
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    partial class AppIdentityDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180129114611_userExtra2")]
+    partial class userExtra2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasDefaultSchema("identity")

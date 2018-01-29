@@ -52,9 +52,12 @@ namespace MvcMain.Controllers
         public async Task<IActionResult> EditProfile()
         {
             AppUser user = await _userManager.GetUserAsync(HttpContext.User);
-            EditProfileModel editProfileModel = new EditProfileModel();
-            editProfileModel.FirstName = user.FirstNameEx;
-            editProfileModel.LastName = user.LastNameEx;
+            EditProfileModel editProfileModel = new EditProfileModel
+            {
+                FirstName = user.FirstNameEx,
+                LastName = user.LastNameEx,
+                PhoneNumber = user.PhoneNumber
+            };
             return View(editProfileModel);
         }
 
@@ -70,6 +73,13 @@ namespace MvcMain.Controllers
                     AppUser user = await _userManager.GetUserAsync(HttpContext.User);
                     user.FirstNameEx = editProfileModel.FirstName;
                     user.LastNameEx = editProfileModel.LastName;
+                    string oldUserPhoneNumber = user.PhoneNumber;
+                    if (oldUserPhoneNumber != editProfileModel.PhoneNumber)
+                    {
+                        user.PhoneNumber = editProfileModel.PhoneNumber;
+                        user.PhoneNumberConfirmed = false;
+                    }
+                    
                     _appIdentityDbContext.Entry(user).State = EntityState.Modified;
                     await _appIdentityDbContext.SaveChangesAsync();
                     return RedirectToAction("AccountManagement");
@@ -82,6 +92,23 @@ namespace MvcMain.Controllers
 
             return View(editProfileModel);
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<IActionResult> ConfirmEmailAndPhoneNumber()
+        {
+            AppUser user = await _userManager.GetUserAsync(HttpContext.User);
+            ConfirmEmailAndPhoneNumberModel confirmEmailAndPhoneNumber = new ConfirmEmailAndPhoneNumberModel
+            {
+                EmailAddress = user.Email,
+                EmailConfirmed = user.EmailConfirmed,
+                PhoneNumber = user.PhoneNumber,
+                PhoneNumberConfirmed = user.PhoneNumberConfirmed
+            };
+            return View(confirmEmailAndPhoneNumber);
+        }
+
+        
 
         [HttpGet]
         [Authorize]

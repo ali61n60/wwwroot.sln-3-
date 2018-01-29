@@ -77,4 +77,12 @@ namespace MvcMain.Models
         [Required(ErrorMessage = "فیلد تکرار رمز ورود خالی است")]
         public string RepeatPassword { get; set; }
     }
+
+    public class ConfirmEmailAndPhoneNumberModel
+    {
+        public bool EmailConfirmed { get; set; }
+        public bool PhoneNumberConfirmed { get; set; }
+        public string EmailAddress { get; set; }
+        public string PhoneNumber { get; set; }
+    }
 }

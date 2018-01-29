@@ -16,10 +16,10 @@ namespace ModelStd.Db.Identity
 
         [Required]
         [MaxLength(200)]
-        public string EmailAddressVerifyCodeEx { get; set; }
+        public string EmailAddressConfirmCodeEx { get; set; }
 
         [Required]
         [MaxLength(200)]
-        public string PhoneNumberVerifyCodeEx { get; set; }
+        public string PhoneNumberConfirmCodeEx { get; set; }
     }
 }
