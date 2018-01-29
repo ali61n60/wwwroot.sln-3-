@@ -4,8 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using RepositoryStd.Context.AD;
-using ModelStd.Advertisements.Price;
-using ModelStd.Db.Ad;
 
 namespace RepositoryStd.Migrations
 {

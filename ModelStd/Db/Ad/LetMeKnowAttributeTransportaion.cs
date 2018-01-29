@@ -8,17 +8,14 @@ namespace ModelStd.Db.Ad
     {
         [Column("id")]
         [Key]
-        [ForeignKey("LetMeKnow")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int Id { get; set; }
 
         [Column("modelId")]
-        [ForeignKey("CarModels")]
         [Required]
         public int ModelId { get; set; }
 
         [Column("brandId")]
-        [ForeignKey("Brands")]
         [Required]
         public int BrandId { get; set; }
 
