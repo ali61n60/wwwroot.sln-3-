@@ -10,15 +10,17 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //durng inProgress end enable it after completed
 var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId) {
+        this.CallImageId = "serverCalledImage";
         this.AdTypeKey = "AdType";
         this.AdTypeParentDivId = "adType";
         this.SearchTextKey = "SearchText";
         this.SearchTextInputId = "searchText";
         this._adPlaceHolderDivId = "adPlaceHolder";
         this._getAdFromServerId = "getAdFromServer";
+        this._messageDivId = "message";
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
-        this._serverCaller = new ServerCaller_1.ServerCaller();
+        this._serverCaller = new ServerCaller_1.ServerCaller(this);
         this._searchCriteria = new SearchCriteria_1.SearchCriteria();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
         this.initPage();
@@ -71,7 +73,7 @@ var Index = (function () {
             userInput.ParametersDictionary[_this.AdTypeKey] = $("#" + _this.AdTypeParentDivId).children(":checked").val();
             userInput.ParametersDictionary[_this.SearchTextKey] = $("#" + _this.SearchTextInputId).val();
             _this._searchCriteria.FillCategorySpecificSearchCriteria(_this._categorySelection.GetSelectedCategoryId(), userInput); //fill category specific search parameters
-            _this._serverCaller.GetAdItemsFromServer(userInput, _this);
+            _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }; //initGetAdFromServer
     Index.prototype.OnResultOk = function (advertisementCommons) {
@@ -97,7 +99,13 @@ var Index = (function () {
         } //end for
     };
     Index.prototype.OnResultError = function (message) {
-        alert(message);
+        $("#" + this._messageDivId).append("<p>" + message + "</p>");
+    };
+    Index.prototype.AjaxCallStarted = function () {
+        $("#" + this.CallImageId).show();
+    };
+    Index.prototype.AjaxCallFinished = function () {
+        $("#" + this.CallImageId).hide();
     };
     Index.prototype.initSingleAdItemStyle = function () {
         //show detail of singleAdItem when mouse over

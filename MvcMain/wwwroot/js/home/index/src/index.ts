@@ -14,6 +14,8 @@ import {AdvertisementCommon} from "../../../Models/AdvertisementCommon";
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
 export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommon[]> {
+    
+    private readonly CallImageId: string = "serverCalledImage";
 
     private readonly AdTypeKey: string = "AdType";
     private readonly AdTypeParentDivId ="adType";
@@ -29,8 +31,10 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
     private _searchCriteriaViewLoader:SearchCriteriaViewLoader;
 
     private _categorySelectorParentDivId: string;
-    private _getAdFromServerId ="getAdFromServer";
     private _allCategoriesId: string;
+
+    private _getAdFromServerId = "getAdFromServer";
+    private _messageDivId ="message";
 
     constructor(categorySelectorParentDivId: string,
         allCategoriesId: string)
@@ -38,7 +42,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
         
-        this._serverCaller = new ServerCaller();
+        this._serverCaller = new ServerCaller(this);
         this._searchCriteria = new SearchCriteria();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
 
@@ -111,8 +115,8 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
             userInput.ParametersDictionary[this.SearchTextKey] = $("#" + this.SearchTextInputId).val();
             
             this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters
-            
-            this._serverCaller.GetAdItemsFromServer(userInput,this);
+            this.removeErrorMessage();
+            this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }//initGetAdFromServer
 
@@ -140,8 +144,25 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
         } //end for
     }
     public OnResultError(message: string): void {
-        alert(message);
+        this.showErrorMessage(message);
     }
+
+    AjaxCallStarted(): void {
+        $("#" + this.CallImageId).show();
+    }
+    
+    AjaxCallFinished(): void {
+        $("#" + this.CallImageId).hide();
+    }
+
+    private showErrorMessage(message: string) {
+        $("#" + this._messageDivId).append(`<p>${message}</p>`);
+    }
+
+    private removeErrorMessage() {
+        $("#" + this._messageDivId).children().remove();
+    }
+
     
     private initSingleAdItemStyle(): void {
         //show detail of singleAdItem when mouse over
