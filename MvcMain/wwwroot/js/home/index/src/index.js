@@ -73,6 +73,7 @@ var Index = (function () {
             userInput.ParametersDictionary[_this.AdTypeKey] = $("#" + _this.AdTypeParentDivId).children(":checked").val();
             userInput.ParametersDictionary[_this.SearchTextKey] = $("#" + _this.SearchTextInputId).val();
             _this._searchCriteria.FillCategorySpecificSearchCriteria(_this._categorySelection.GetSelectedCategoryId(), userInput); //fill category specific search parameters
+            _this.removeErrorMessage();
             _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }; //initGetAdFromServer
@@ -99,13 +100,20 @@ var Index = (function () {
         } //end for
     };
     Index.prototype.OnResultError = function (message) {
-        $("#" + this._messageDivId).append("<p>" + message + "</p>");
+        this.showErrorMessage(message);
     };
     Index.prototype.AjaxCallStarted = function () {
         $("#" + this.CallImageId).show();
     };
     Index.prototype.AjaxCallFinished = function () {
         $("#" + this.CallImageId).hide();
+    };
+    Index.prototype.showErrorMessage = function (message) {
+        this.removeErrorMessage();
+        $("#" + this._messageDivId).append("<p>" + message + "</p>");
+    };
+    Index.prototype.removeErrorMessage = function () {
+        $("#" + this._messageDivId).children().remove();
     };
     Index.prototype.initSingleAdItemStyle = function () {
         //show detail of singleAdItem when mouse over

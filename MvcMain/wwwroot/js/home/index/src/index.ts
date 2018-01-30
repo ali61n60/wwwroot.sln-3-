@@ -120,7 +120,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
         }); //click
     }//initGetAdFromServer
 
-    public OnResultOk(advertisementCommons: AdvertisementCommon[]): void {
+    public OnResult(advertisementCommons: AdvertisementCommon[]): void {
         var template = $('#singleAdItem').html();
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
@@ -143,7 +143,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
             $("#" + this._adPlaceHolderDivId).append(html);
         } //end for
     }
-    public OnResultError(message: string): void {
+    public OnError(message: string): void {
         this.showErrorMessage(message);
     }
 
@@ -156,6 +156,7 @@ export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommo
     }
 
     private showErrorMessage(message: string) {
+        this.removeErrorMessage();
         $("#" + this._messageDivId).append(`<p>${message}</p>`);
     }
 
