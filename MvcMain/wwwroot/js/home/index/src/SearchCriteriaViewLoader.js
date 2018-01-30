@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader_1 = require("../../newAd/src/NewAdPartialViewLoader");
 var SearchCriteriaViewLoader = /** @class */ (function () {
     function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange, searchCriteria) {
+        this.RequestIndexKey = "RequestIndex";
+        this._currentRequestIndex = 0;
         this._url = "/Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
@@ -10,6 +12,18 @@ var SearchCriteriaViewLoader = /** @class */ (function () {
         this._searchCriteriaChange = searchCriteriaChange;
         this._searchCriteria = searchCriteria;
     }
+    SearchCriteriaViewLoader.prototype.OnResult = function (param) {
+        throw new Error("Method not implemented.");
+    };
+    SearchCriteriaViewLoader.prototype.OnError = function (message) {
+        throw new Error("Method not implemented.");
+    };
+    SearchCriteriaViewLoader.prototype.AjaxCallFinished = function () {
+        throw new Error("Method not implemented.");
+    };
+    SearchCriteriaViewLoader.prototype.AjaxCallStarted = function () {
+        throw new Error("Method not implemented.");
+    };
     SearchCriteriaViewLoader.prototype.GetSearchCriteriaViewFromServer = function (categoryId) {
         var _this = this;
         this._currentCategoryId = categoryId;

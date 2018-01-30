@@ -5,11 +5,13 @@ export class AjaxCaller {
 
     private _numberOfPureServerCalls: number = 0;
     private readonly _url: string;
-    private _resultHandler: IResultHandler;
+    private readonly  _resultHandler: IResultHandler;
+    private readonly _requestCode:number;
 
-    constructor(url: string, resultHandler: IResultHandler) {
+    constructor(url: string, resultHandler: IResultHandler,requestCode:number) {
         this._url = url;
         this._resultHandler = resultHandler;
+        this._requestCode = requestCode;
     }
 
     public Call(userInput: UserInput): void {
@@ -23,24 +25,24 @@ export class AjaxCaller {
         }); //.ajax
 
         this._numberOfPureServerCalls++;
-        this._resultHandler.AjaxCallStarted();
+        this._resultHandler.AjaxCallStarted(this._requestCode);
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
 
         this._numberOfPureServerCalls--;
         if (this._numberOfPureServerCalls === 0) {
-            this._resultHandler.AjaxCallFinished();
+            this._resultHandler.AjaxCallFinished(this._requestCode);
         }
-        this._resultHandler.OnResult(msg);
+        this._resultHandler.OnResult(msg, this._requestCode);
     }
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
         this._numberOfPureServerCalls--;
         if (this._numberOfPureServerCalls === 0) {
-            this._resultHandler.AjaxCallFinished();
+            this._resultHandler.AjaxCallFinished(this._requestCode);
         }
 
-        this._resultHandler.OnError(textStatus + " , " + errorThrown);
+        this._resultHandler.OnError(textStatus + " , " + errorThrown, this._requestCode);
     }
 }

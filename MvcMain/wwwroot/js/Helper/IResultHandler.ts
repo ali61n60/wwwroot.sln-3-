@@ -1,7 +1,7 @@
 ﻿export interface IResultHandler {
-    OnResult(param:any): void;
-    OnError(message: string): void;
-    AjaxCallFinished(): void;
-    AjaxCallStarted():void;
+    OnResult(param:any,requestCode:number): void;
+    OnError(message: string, requestCode: number): void;
+    AjaxCallFinished(requestCode: number): void;
+    AjaxCallStarted(requestCode: number):void;
 }
 

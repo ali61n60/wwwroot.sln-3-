@@ -1,12 +1,12 @@
 ﻿import { Category } from "../../../Models/Category";
 import { CategorySelection } from "../../../Components/Category/CategorySelection";
 import { ServerCaller } from "./ServerCaller";
-import { SearchCriteriaViewLoader} from "./SearchCriteriaViewLoader";
-import {SearchCriteria} from "./SearchCriteria";
-import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
-import {UserInput} from "../../../Helper/UserInput";
-import {IResultHandler} from "../../../Helper/IResultHandler";
-import {AdvertisementCommon} from "../../../Models/AdvertisementCommon";
+import { SearchCriteriaViewLoader } from "./SearchCriteriaViewLoader";
+import { SearchCriteria } from "./SearchCriteria";
+import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
+import { UserInput } from "../../../Helper/UserInput";
+import { IResultHandler } from "../../../Helper/IResultHandler";
+import { AdvertisementCommon } from "../../../Models/AdvertisementCommon";
 
 
 
@@ -14,35 +14,37 @@ import {AdvertisementCommon} from "../../../Models/AdvertisementCommon";
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
 export class Index implements ICriteriaChange, IResultHandler {
-    
+
     private readonly CallImageId: string = "serverCalledImage";
 
     private readonly AdTypeKey: string = "AdType";
-    private readonly AdTypeParentDivId ="adType";
+    private readonly AdTypeParentDivId = "adType";
 
-    private readonly SearchTextKey="SearchText";
-    private readonly SearchTextInputId ="searchText";
+    private readonly SearchTextKey = "SearchText";
+    private readonly SearchTextInputId = "searchText";
 
     private readonly _adPlaceHolderDivId: string = "adPlaceHolder";
 
-    private _serverCaller:ServerCaller;
+    private _serverCaller: ServerCaller;
     private _categorySelection: CategorySelection;
-    private _searchCriteria:SearchCriteria;
-    private _searchCriteriaViewLoader:SearchCriteriaViewLoader;
+    private _searchCriteria: SearchCriteria;
+    private _searchCriteriaViewLoader: SearchCriteriaViewLoader;
 
     private _categorySelectorParentDivId: string;
     private _allCategoriesId: string;
 
     private _getAdFromServerButtonId = "getAdFromServer";
-    private _messageDivId ="message";
+    private _messageDivId = "message";
+
+    private readonly GetAdFromServerRequestCode = 1;
+    private readonly LoadSearchPartialViewRequestCode = 2;
 
     constructor(categorySelectorParentDivId: string,
-        allCategoriesId: string)
-    {
+        allCategoriesId: string) {
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
-        
-        this._serverCaller = new ServerCaller(this);
+
+        this._serverCaller = new ServerCaller(this, this.GetAdFromServerRequestCode);
         this._searchCriteria = new SearchCriteria();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
 
@@ -72,10 +74,10 @@ export class Index implements ICriteriaChange, IResultHandler {
             this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
         });
 
-        this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(),this);
+        this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(), this);
 
 
-       
+
         $("#" + this.AdTypeParentDivId).on("change",
             (event) => {
                 this.searchCriteriaChanged();
@@ -84,23 +86,22 @@ export class Index implements ICriteriaChange, IResultHandler {
         $("#" + this.SearchTextInputId).on("input", () => {
             this.searchCriteriaChanged();
         });
-        $(document).keypress((e) =>
-        {
+        $(document).keypress((e) => {
             if (e.which == 13) {
-                $("#"+this._getAdFromServerButtonId).click();
+                $("#" + this._getAdFromServerButtonId).click();
             }
         });
 
     }
 
-    public CustomCriteriaChanged():void {
+    public CustomCriteriaChanged(): void {
         this.searchCriteriaChanged();
     }
 
     private searchCriteriaChanged(): void {
         $("#adPlaceHolder").children().remove();
         this._serverCaller.ResetSearchParameters();
-       // $("#" + this._getAdFromServerId).trigger("click");
+        // $("#" + this._getAdFromServerId).trigger("click");
 
     }
 
@@ -110,17 +111,56 @@ export class Index implements ICriteriaChange, IResultHandler {
             let userInput = new UserInput();
 
             this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
-            
+
             userInput.ParametersDictionary[this.AdTypeKey] = $("#" + this.AdTypeParentDivId).children(":checked").val();
             userInput.ParametersDictionary[this.SearchTextKey] = $("#" + this.SearchTextInputId).val();
-            
+
             this._searchCriteria.FillCategorySpecificSearchCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);//fill category specific search parameters
             this.removeErrorMessage();
             this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }//initGetAdFromServer
 
-    public OnResult(advertisementCommons: AdvertisementCommon[]): void {
+
+    public OnResult(msg: any, requestCode: number): void {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.onResultGetAdFromServer(msg);
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.onResultLoadSearchPartialView(msg);
+        }
+
+    }
+
+    public OnError(message: string, requestCode: number): void {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.onErrorGetAdFromServer(message);
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.onErrorLoadSearchPartialView(message);
+        }
+    }
+
+
+    AjaxCallFinished(requestCode: number): void {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.ajaxCallFinishedGetAdFromServer();
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.ajaxCallFinishedLoadSearchPartialView();
+        }
+    }
+
+    AjaxCallStarted(requestCode: number): void {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.ajaxCallStartedGetAdFromServer();
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.ajaxCallStartedLoadSearchPartialView();
+        }
+    }
+
+    private onResultGetAdFromServer(advertisementCommons: AdvertisementCommon[]): void {
         var template = $('#singleAdItem').html();
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
@@ -144,18 +184,38 @@ export class Index implements ICriteriaChange, IResultHandler {
         } //end for
     }
 
-    public OnError(message: string): void {
+    private onResultLoadSearchPartialView(msg: any) {
+        this._searchCriteria.UnBind(this._previousCategoryId);
+        $("#" + this._parentDivId).children().remove();
+        $("#" + this._parentDivId).html(param);
+        this._searchCriteria.Bind(this._currentCategoryId, this._searchCriteriaChange);
+        this._previousCategoryId = this._currentCategoryId;
+    }
+
+
+    private onErrorGetAdFromServer(message: string) {
         this.showErrorMessage(message);
     }
 
-    AjaxCallStarted(): void {
+    private onErrorLoadSearchPartialView(message: string) {
+        alert(message);
+    }
+
+    private ajaxCallStartedGetAdFromServer() {
         $("#" + this.CallImageId).show();
         $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     }
-    
-    AjaxCallFinished(): void {
+
+    private ajaxCallStartedLoadSearchPartialView() {
+
+    }
+
+    private ajaxCallFinishedGetAdFromServer() {
         $("#" + this.CallImageId).hide();
         $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
+    }
+    private ajaxCallFinishedLoadSearchPartialView() {
+
     }
 
     private showErrorMessage(message: string) {
@@ -166,7 +226,7 @@ export class Index implements ICriteriaChange, IResultHandler {
     private removeErrorMessage() {
         $("#" + this._messageDivId).children().remove();
     }
-    
+
     private initSingleAdItemStyle(): void {
         //show detail of singleAdItem when mouse over
         $(document).on("mouseenter mouseleave", ".blockDisplay", (event: JQuery.Event<HTMLElement, null>) => {
@@ -180,11 +240,11 @@ let categorySelectorParentDivId: string = "categorySelector";
 let allCategoriesId = "allCategories";
 
 declare let window: any;
-var index:Index;
+var index: Index;
 
 
 $(document).ready(() => {
-    index= new Index(categorySelectorParentDivId, allCategoriesId);
+    index = new Index(categorySelectorParentDivId, allCategoriesId);
     index.CustomCriteriaChanged();//to initiate a server call on page load for first time
     window.AliIndex = index;
 });//ready

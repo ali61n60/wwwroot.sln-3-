@@ -2,61 +2,52 @@
 import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
 import { SearchCriteria } from "./SearchCriteria";
 import { IResultHandler } from "../../../Helper/IResultHandler";
+import { AjaxCaller } from "../../../Helper/AjaxCaller";
+import { UserInput } from "../../../Helper/UserInput";
 
 export class SearchCriteriaViewLoader implements IResultHandler {
+    //private readonly RequestIndexKey: string = "RequestIndex";
+    //private _currentRequestIndex: number = 0;
 
-    public OnResult(param: any): void {
-        throw new Error("Method not implemented.");
-    }
-    public OnError(message: string): void {
-        throw new Error("Method not implemented.");
-    }
-    public AjaxCallFinished(): void {
-        throw new Error("Method not implemented.");
-    }
-    public AjaxCallStarted(): void {
-        throw new Error("Method not implemented.");
-    }
+    private readonly _url: string = "/Home/GetSearchCriteriaView";
+
+    private _resultHandler: IResultHandler;
+    private _ajaxCaller: AjaxCaller;
+
+
+
     private _parentDivId: string;
     private _searchCriteriaChange: ICriteriaChange;
-    private _url: string = "/Home/GetSearchCriteriaView";
+
     private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
     private _searchCriteria: SearchCriteria;
 
-    constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange, searchCriteria: SearchCriteria) {
+    //constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange, searchCriteria: SearchCriteria) {
+    constructor(resultHandler: IResultHandler, requestCode: number) {
+        this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
         this._parentDivId = parentDivId;
         this._searchCriteriaChange = searchCriteriaChange;
         this._searchCriteria = searchCriteria;
     }
 
     public GetSearchCriteriaViewFromServer(categoryId: number) {
+        let userInput = new UserInput();
+        userInput.ParametersDictionary["CategoryId"] = categoryId;
         this._currentCategoryId = categoryId;
-        let callParams = new PartialViewServerCallParameters();
-        callParams.CategoryId = categoryId;
-        $.ajax({
-            type: "GET", //GET or POST or PUT or DELETE verb
-            url: this._url,
-            data: callParams, //Data sent to server
-            //contentType: 'application/json', // content type sent to server
-            success: (msg, textStatus, jqXHR) => this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR),//On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown)// When Service call fails
-        });//.ajax
+        this._ajaxCaller.Call(userInput);//GET
     }
 
-
-    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        this._searchCriteria.UnBind(this._previousCategoryId);
-        $("#" + this._parentDivId).children().remove();
-        $("#" + this._parentDivId).html(msg);
-        this._searchCriteria.Bind(this._currentCategoryId, this._searchCriteriaChange);
-        this._previousCategoryId = this._currentCategoryId;
-    }//onSuccessGetTimeFromServer
-
-    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        alert(errorThrown);
-    }//onErrorGetTimeFromServer
-
-
-
+    public OnResult(param: any, requestCode: number): void {
+        this._resultHandler.OnResult(param,requestCode);
+    }
+    public OnError(message: string, requestCode: number): void {
+        this._resultHandler.OnError(message,requestCode);
+    }
+    public AjaxCallFinished(requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
+    public AjaxCallStarted(requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
 }

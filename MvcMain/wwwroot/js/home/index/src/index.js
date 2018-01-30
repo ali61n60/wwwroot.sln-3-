@@ -18,9 +18,11 @@ var Index = /** @class */ (function () {
         this._adPlaceHolderDivId = "adPlaceHolder";
         this._getAdFromServerButtonId = "getAdFromServer";
         this._messageDivId = "message";
+        this.GetAdFromServerRequestCode = 1;
+        this.LoadSearchPartialViewRequestCode = 2;
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
-        this._serverCaller = new ServerCaller_1.ServerCaller(this);
+        this._serverCaller = new ServerCaller_1.ServerCaller(this, this.GetAdFromServerRequestCode);
         this._searchCriteria = new SearchCriteria_1.SearchCriteria();
         this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
         this.initPage();
@@ -77,7 +79,7 @@ var Index = /** @class */ (function () {
             _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }; //initGetAdFromServer
-    Index.prototype.OnResult = function (advertisementCommons) {
+    Index.prototype.onResultGetAdFromServer = function (advertisementCommons) {
         var template = $('#singleAdItem').html();
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
@@ -99,16 +101,36 @@ var Index = /** @class */ (function () {
             $("#" + this._adPlaceHolderDivId).append(html);
         } //end for
     };
-    Index.prototype.OnError = function (message) {
+    Index.prototype.OnResult = function (msg, requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.onResultGetAdFromServer(msg);
+        }
+    };
+    Index.prototype.onErrorGetAdFromServer = function (message) {
         this.showErrorMessage(message);
     };
-    Index.prototype.AjaxCallStarted = function () {
+    Index.prototype.OnError = function (message, requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.onErrorGetAdFromServer(message);
+        }
+    };
+    Index.prototype.ajaxCallStartedGetAdFromServer = function () {
         $("#" + this.CallImageId).show();
         $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     };
-    Index.prototype.AjaxCallFinished = function () {
+    Index.prototype.AjaxCallStarted = function (requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.ajaxCallStartedGetAdFromServer();
+        }
+    };
+    Index.prototype.ajaxCallFinishedGetAdFromServer = function () {
         $("#" + this.CallImageId).hide();
         $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
+    };
+    Index.prototype.AjaxCallFinished = function (requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.ajaxCallFinishedGetAdFromServer();
+        }
     };
     Index.prototype.showErrorMessage = function (message) {
         this.removeErrorMessage();
