@@ -1,16 +1,30 @@
 ﻿import { PartialViewServerCallParameters } from "../../newAd/src/NewAdPartialViewLoader";
-import {ICriteriaChange } from "../../../Helper/ICriteriaChange";
-import {SearchCriteria} from "./SearchCriteria";
+import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
+import { SearchCriteria } from "./SearchCriteria";
+import { IResultHandler } from "../../../Helper/IResultHandler";
 
-export class SearchCriteriaViewLoader {
+export class SearchCriteriaViewLoader implements IResultHandler {
+
+    public OnResult(param: any): void {
+        throw new Error("Method not implemented.");
+    }
+    public OnError(message: string): void {
+        throw new Error("Method not implemented.");
+    }
+    public AjaxCallFinished(): void {
+        throw new Error("Method not implemented.");
+    }
+    public AjaxCallStarted(): void {
+        throw new Error("Method not implemented.");
+    }
     private _parentDivId: string;
     private _searchCriteriaChange: ICriteriaChange;
     private _url: string = "/Home/GetSearchCriteriaView";
-    private _previousCategoryId:number = 0;
+    private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
-    private _searchCriteria:SearchCriteria;
+    private _searchCriteria: SearchCriteria;
 
-    constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange,searchCriteria:SearchCriteria) {
+    constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange, searchCriteria: SearchCriteria) {
         this._parentDivId = parentDivId;
         this._searchCriteriaChange = searchCriteriaChange;
         this._searchCriteria = searchCriteria;
@@ -30,7 +44,7 @@ export class SearchCriteriaViewLoader {
         });//.ajax
     }
 
-    
+
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
         this._searchCriteria.UnBind(this._previousCategoryId);
         $("#" + this._parentDivId).children().remove();
@@ -43,6 +57,6 @@ export class SearchCriteriaViewLoader {
         alert(errorThrown);
     }//onErrorGetTimeFromServer
 
-    
-    
+
+
 }

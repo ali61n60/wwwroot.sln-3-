@@ -8,7 +8,7 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //TODO when category change before search criteia is loaded a search call is sent to server
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
-var Index = (function () {
+var Index = /** @class */ (function () {
     function Index(categorySelectorParentDivId, allCategoriesId) {
         this.CallImageId = "serverCalledImage";
         this.AdTypeKey = "AdType";
@@ -16,7 +16,7 @@ var Index = (function () {
         this.SearchTextKey = "SearchText";
         this.SearchTextInputId = "searchText";
         this._adPlaceHolderDivId = "adPlaceHolder";
-        this._getAdFromServerId = "getAdFromServer";
+        this._getAdFromServerButtonId = "getAdFromServer";
         this._messageDivId = "message";
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
@@ -52,7 +52,7 @@ var Index = (function () {
         });
         $(document).keypress(function (e) {
             if (e.which == 13) {
-                $("#" + _this._getAdFromServerId).click();
+                $("#" + _this._getAdFromServerButtonId).click();
             }
         });
     };
@@ -66,7 +66,7 @@ var Index = (function () {
     };
     Index.prototype.initGetAdFromServer = function () {
         var _this = this;
-        $("#" + this._getAdFromServerId).on("click", function (event) {
+        $("#" + this._getAdFromServerButtonId).on("click", function (event) {
             event.preventDefault();
             var userInput = new UserInput_1.UserInput();
             _this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
@@ -104,9 +104,11 @@ var Index = (function () {
     };
     Index.prototype.AjaxCallStarted = function () {
         $("#" + this.CallImageId).show();
+        $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     };
     Index.prototype.AjaxCallFinished = function () {
         $("#" + this.CallImageId).hide();
+        $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
     };
     Index.prototype.showErrorMessage = function (message) {
         this.removeErrorMessage();

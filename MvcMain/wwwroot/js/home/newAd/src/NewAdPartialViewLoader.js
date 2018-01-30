@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NewAdPartialViewLoader = (function () {
+var NewAdPartialViewLoader = /** @class */ (function () {
     function NewAdPartialViewLoader(partialViewDivId, newAdCriteriaChange, newAdCriteria) {
         this._url = "/NewAd/GetNewAdPartialView";
         this._previousCategoryId = 0;
@@ -37,7 +37,7 @@ var NewAdPartialViewLoader = (function () {
 }());
 exports.NewAdPartialViewLoader = NewAdPartialViewLoader;
 //TODO refactor this
-var PartialViewServerCallParameters = (function () {
+var PartialViewServerCallParameters = /** @class */ (function () {
     function PartialViewServerCallParameters() {
     }
     return PartialViewServerCallParameters;

@@ -33,7 +33,7 @@ export class Index implements ICriteriaChange, IResultHandler {
     private _categorySelectorParentDivId: string;
     private _allCategoriesId: string;
 
-    private _getAdFromServerId = "getAdFromServer";
+    private _getAdFromServerButtonId = "getAdFromServer";
     private _messageDivId ="message";
 
     constructor(categorySelectorParentDivId: string,
@@ -87,7 +87,7 @@ export class Index implements ICriteriaChange, IResultHandler {
         $(document).keypress((e) =>
         {
             if (e.which == 13) {
-                $("#"+this._getAdFromServerId).click();
+                $("#"+this._getAdFromServerButtonId).click();
             }
         });
 
@@ -105,7 +105,7 @@ export class Index implements ICriteriaChange, IResultHandler {
     }
 
     private initGetAdFromServer(): void {
-        $("#" + this._getAdFromServerId).on("click", (event) => {
+        $("#" + this._getAdFromServerButtonId).on("click", (event) => {
             event.preventDefault();
             let userInput = new UserInput();
 
@@ -143,16 +143,19 @@ export class Index implements ICriteriaChange, IResultHandler {
             $("#" + this._adPlaceHolderDivId).append(html);
         } //end for
     }
+
     public OnError(message: string): void {
         this.showErrorMessage(message);
     }
 
     AjaxCallStarted(): void {
         $("#" + this.CallImageId).show();
+        $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     }
     
     AjaxCallFinished(): void {
         $("#" + this.CallImageId).hide();
+        $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
     }
 
     private showErrorMessage(message: string) {
@@ -163,7 +166,6 @@ export class Index implements ICriteriaChange, IResultHandler {
     private removeErrorMessage() {
         $("#" + this._messageDivId).children().remove();
     }
-
     
     private initSingleAdItemStyle(): void {
         //show detail of singleAdItem when mouse over

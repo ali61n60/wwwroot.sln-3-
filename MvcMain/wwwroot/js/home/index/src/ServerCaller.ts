@@ -1,29 +1,27 @@
 ﻿import { UserInput } from "../../../Helper/UserInput";
 import { IResultHandler } from "../../../Helper/IResultHandler";
-import { AdvertisementCommon } from "../../../Models/AdvertisementCommon";
 import {AjaxCaller} from "../../../Helper/AjaxCaller";
 
 //TODO make count optional to user
-//TODO instead of adding new ads to the page here call a method on index class to add it by defining an interface in the index class 
 export class ServerCaller implements IResultHandler {
-    
+
+    private readonly RequestIndexKey: string = "RequestIndex";
+    private _currentRequestIndex: number = 0;
+
+    private readonly _url: string = "/api/AdApi/GetAdvertisementCommon";
+
+    private _resultHandler: IResultHandler;
+    private _ajaxCaller: AjaxCaller;
+
     private readonly StartIndexKey: string = "StartIndex";
     private readonly _initialStart: number = 1;
     private _start: number = 1;
 
     private readonly CountKey: string = "Count";
     private _count: number = 5;
-
-    private readonly RequestIndexKey: string = "RequestIndex";
-    private _currentRequestIndex: number = 0;
     
     private readonly NumberOfItemsKey: string = "numberOfItems";
-
-    private readonly _url: string = "/api/AdApi/GetAdvertisementCommon";
-
-    private _resultHandler: IResultHandler;
-    private _ajaxCaller:AjaxCaller;
-
+    
     constructor(resultHandler: IResultHandler) {
         this._resultHandler = resultHandler;
         this._ajaxCaller = new AjaxCaller(this._url, this);
