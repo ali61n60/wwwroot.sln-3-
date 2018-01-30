@@ -42,7 +42,7 @@ namespace MvcMain.Controllers
         }
         
         [HttpGet]
-        public IActionResult GetSearchCriteriaView([FromQuery] Dictionary<string, string> userInput)
+        public IActionResult GetSearchCriteriaView([FromBody] Dictionary<string, string> userInput)
         {
             //TODO 3- put view's name in a container
             int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);

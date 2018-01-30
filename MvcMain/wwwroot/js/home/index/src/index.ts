@@ -35,6 +35,7 @@ export class Index implements ICriteriaChange, IResultHandler {
 
     private _getAdFromServerButtonId = "getAdFromServer";
     private _messageDivId = "message";
+    private _categorySpecificSearchCriteriaParentDivId= "categorySpecificSearchCriteria";
 
     private readonly GetAdFromServerRequestCode = 1;
     private readonly LoadSearchPartialViewRequestCode = 2;
@@ -46,7 +47,8 @@ export class Index implements ICriteriaChange, IResultHandler {
 
         this._serverCaller = new ServerCaller(this, this.GetAdFromServerRequestCode);
         this._searchCriteria = new SearchCriteria();
-        this._searchCriteriaViewLoader = new SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
+        this._searchCriteriaViewLoader = new SearchCriteriaViewLoader
+            (this, this, this._searchCriteria, this.LoadSearchPartialViewRequestCode);
 
         this.initPage();
         this.initEventHandlers();
@@ -71,13 +73,13 @@ export class Index implements ICriteriaChange, IResultHandler {
     private initEventHandlers(): void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             this.searchCriteriaChanged();
-            this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
+            let userInput = new UserInput();
+            this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+            this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(userInput, args.SelectedCategoryId);
         });
 
         this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(), this);
-
-
-
+        
         $("#" + this.AdTypeParentDivId).on("change",
             (event) => {
                 this.searchCriteriaChanged();
@@ -185,11 +187,8 @@ export class Index implements ICriteriaChange, IResultHandler {
     }
 
     private onResultLoadSearchPartialView(msg: any) {
-        this._searchCriteria.UnBind(this._previousCategoryId);
-        $("#" + this._parentDivId).children().remove();
-        $("#" + this._parentDivId).html(param);
-        this._searchCriteria.Bind(this._currentCategoryId, this._searchCriteriaChange);
-        this._previousCategoryId = this._currentCategoryId;
+        $("#" + this._categorySpecificSearchCriteriaParentDivId).children().remove();
+        $("#" + this._categorySpecificSearchCriteriaParentDivId).html(msg);
     }
 
 

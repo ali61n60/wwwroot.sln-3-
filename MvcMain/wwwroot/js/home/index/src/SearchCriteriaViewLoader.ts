@@ -15,31 +15,32 @@ export class SearchCriteriaViewLoader implements IResultHandler {
     private _ajaxCaller: AjaxCaller;
 
 
-
-    private _parentDivId: string;
     private _searchCriteriaChange: ICriteriaChange;
-
     private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
     private _searchCriteria: SearchCriteria;
 
-    //constructor(parentDivId: string, searchCriteriaChange: ICriteriaChange, searchCriteria: SearchCriteria) {
-    constructor(resultHandler: IResultHandler, requestCode: number) {
+    // searchCriteriaChange: ICriteriaChange, searchCriteria: SearchCriteria) {
+    constructor(resultHandler: IResultHandler,
+        searchCriteriaChange: ICriteriaChange,
+        searchCriteria: SearchCriteria,
+        requestCode: number) {
         this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
-        this._parentDivId = parentDivId;
         this._searchCriteriaChange = searchCriteriaChange;
         this._searchCriteria = searchCriteria;
     }
 
-    public GetSearchCriteriaViewFromServer(categoryId: number) {
-        let userInput = new UserInput();
-        userInput.ParametersDictionary["CategoryId"] = categoryId;
+    public GetSearchCriteriaViewFromServer(userInput:UserInput,categoryId: number) {
+        
         this._currentCategoryId = categoryId;
         this._ajaxCaller.Call(userInput);//GET
     }
 
     public OnResult(param: any, requestCode: number): void {
-        this._resultHandler.OnResult(param,requestCode);
+        this._searchCriteria.UnBind(this._previousCategoryId);
+        this._resultHandler.OnResult(param, requestCode);
+        this._searchCriteria.Bind(this._currentCategoryId, this._searchCriteriaChange);
+        this._previousCategoryId = this._currentCategoryId;
     }
     public OnError(message: string, requestCode: number): void {
         this._resultHandler.OnError(message,requestCode);
