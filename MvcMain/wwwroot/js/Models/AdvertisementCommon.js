@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AdvertisementCommon = /** @class */ (function () {
+var AdvertisementCommon = (function () {
     function AdvertisementCommon() {
     }
     return AdvertisementCommon;

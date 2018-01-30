@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader_1 = require("../../../home/newAd/src/NewAdPartialViewLoader");
-var LetMeKnowPartialViewLoader = /** @class */ (function () {
+var LetMeKnowPartialViewLoader = (function () {
     function LetMeKnowPartialViewLoader(partialViewDivId, criteriaChange, letMeKnowCriteria) {
         this._url = "/LetMeKnow/GetLetMeKnowPartialView";
         this._previousCategoryId = 0;
