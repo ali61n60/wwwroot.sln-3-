@@ -1,5 +1,5 @@
-﻿export interface IResultHandler<T> {
-    OnResult(t:T): void;
+﻿export interface IResultHandler {
+    OnResult(param:any): void;
     OnError(message: string): void;
     AjaxCallFinished(): void;
     AjaxCallStarted():void;

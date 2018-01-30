@@ -13,7 +13,7 @@ import {AdvertisementCommon} from "../../../Models/AdvertisementCommon";
 //TODO when category change before search criteia is loaded a search call is sent to server
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
-export class Index implements ICriteriaChange, IResultHandler<AdvertisementCommon[]> {
+export class Index implements ICriteriaChange, IResultHandler {
     
     private readonly CallImageId: string = "serverCalledImage";
 

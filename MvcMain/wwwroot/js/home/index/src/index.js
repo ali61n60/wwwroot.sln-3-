@@ -77,7 +77,7 @@ var Index = (function () {
             _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }; //initGetAdFromServer
-    Index.prototype.OnResultOk = function (advertisementCommons) {
+    Index.prototype.OnResult = function (advertisementCommons) {
         var template = $('#singleAdItem').html();
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
@@ -99,7 +99,7 @@ var Index = (function () {
             $("#" + this._adPlaceHolderDivId).append(html);
         } //end for
     };
-    Index.prototype.OnResultError = function (message) {
+    Index.prototype.OnError = function (message) {
         this.showErrorMessage(message);
     };
     Index.prototype.AjaxCallStarted = function () {

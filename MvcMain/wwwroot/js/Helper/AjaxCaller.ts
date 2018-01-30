@@ -1,13 +1,13 @@
 ﻿import {UserInput} from "./UserInput";
 import {IResultHandler} from "./IResultHandler";
 
-export class AjaxCaller<T> {
+export class AjaxCaller {
 
     private _numberOfPureServerCalls: number = 0;
     private readonly _url: string;
-    private _resultHandler: IResultHandler<T>;
+    private _resultHandler: IResultHandler;
 
-    constructor(url: string, resultHandler: IResultHandler<T>) {
+    constructor(url: string, resultHandler: IResultHandler) {
         this._url = url;
         this._resultHandler = resultHandler;
     }
@@ -27,22 +27,12 @@ export class AjaxCaller<T> {
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        
+
         this._numberOfPureServerCalls--;
         if (this._numberOfPureServerCalls === 0) {
             this._resultHandler.AjaxCallFinished();
         }
-
-        if (msg.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
-            if (msg.Success == true) {
-                this._start += parseInt(msg.CustomDictionary[this.NumberOfItemsKey]);
-                //TODO create AdvertisementCommon[] object from msg.responseData
-                this._resultHandler.OnResult(msg.ResponseData);
-            } //if (msg.success == true)
-            else {
-                this._resultHandler.OnError(msg.Message + " , " + msg.ErrorCode);
-            }
-        }
+        this._resultHandler.OnResult(msg);
     }
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
@@ -53,6 +43,4 @@ export class AjaxCaller<T> {
 
         this._resultHandler.OnError(textStatus + " , " + errorThrown);
     }
-
-
 }

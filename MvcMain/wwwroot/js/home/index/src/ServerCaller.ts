@@ -1,11 +1,12 @@
 ﻿import { UserInput } from "../../../Helper/UserInput";
 import { IResultHandler } from "../../../Helper/IResultHandler";
 import { AdvertisementCommon } from "../../../Models/AdvertisementCommon";
-
+import {AjaxCaller} from "../../../Helper/AjaxCaller";
 
 //TODO make count optional to user
 //TODO instead of adding new ads to the page here call a method on index class to add it by defining an interface in the index class 
-export class ServerCaller {
+export class ServerCaller implements IResultHandler {
+    
     private readonly StartIndexKey: string = "StartIndex";
     private readonly _initialStart: number = 1;
     private _start: number = 1;
@@ -15,17 +16,17 @@ export class ServerCaller {
 
     private readonly RequestIndexKey: string = "RequestIndex";
     private _currentRequestIndex: number = 0;
-    private _numberOfPureServerCalls: number = 0;
-
-
+    
     private readonly NumberOfItemsKey: string = "numberOfItems";
 
     private readonly _url: string = "/api/AdApi/GetAdvertisementCommon";
 
-    private _resultHandler: IResultHandler<AdvertisementCommon[]>;
+    private _resultHandler: IResultHandler;
+    private _ajaxCaller:AjaxCaller;
 
-    constructor(resultHandler: IResultHandler<AdvertisementCommon[]>) {
+    constructor(resultHandler: IResultHandler) {
         this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller(this._url, this);
     }
 
     public GetAdItemsFromServer(userInput: UserInput): void {
@@ -35,44 +36,13 @@ export class ServerCaller {
         userInput.ParametersDictionary[this.CountKey] = this._count;
         userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
 
-        $.ajax({
-            type: "POST",
-            url: this._url,
-            data: JSON.stringify(userInput.ParametersDictionary), //Data sent to server
-            contentType: 'application/json', // content type sent to server
-            success: (msg, textStatus, jqXHR) => this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR), //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
-        }); //.ajax
-
-        this._numberOfPureServerCalls++;
-        this._resultHandler.AjaxCallStarted();
+        this._ajaxCaller.Call(userInput);
     } //GetAdItemsFromServer
 
-    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
-        this._numberOfPureServerCalls--;
-        if (this._numberOfPureServerCalls === 0) {
-            this._resultHandler.AjaxCallFinished();
-        }
-
-        if (msg.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
-            if (msg.Success == true) {
-                this._start += parseInt(msg.CustomDictionary[this.NumberOfItemsKey]);
-                //TODO create AdvertisementCommon[] object from msg.responseData
-                this._resultHandler.OnResult(msg.ResponseData);
-            } //if (msg.success == true)
-            else {
-                this._resultHandler.OnError(msg.Message + " , " + msg.ErrorCode);
-            }
-        }
-    }
+    
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        this._numberOfPureServerCalls--;
-        if (this._numberOfPureServerCalls === 0) {
-            this._resultHandler.AjaxCallFinished();
-        }
-
+       
         this._resultHandler.OnError(textStatus + " , " + errorThrown);
     }
 
@@ -80,12 +50,32 @@ export class ServerCaller {
         this._start = this._initialStart;
     }
 
-    //private notifyUserAjaxCallStarted() {
-    //    $("#" + this.CallImageId).show();
-    //}
+    public OnResult(param): void {
+        //TODO check for undefined or null in msg and msg.customDictionary["RequestIndex"]
 
-    //notifyUserAjaxCallFinished() {
-    //    $("#" + this.CallImageId).hide();
-    //}
+
+        if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
+            if (param.Success == true) {
+                this._start += parseInt(param.CustomDictionary[this.NumberOfItemsKey]);
+                //TODO create AdvertisementCommon[] object from msg.responseData
+                this._resultHandler.OnResult(param.ResponseData);
+            } //if (msg.success == true)
+            else {
+                this._resultHandler.OnError(param.Message + " , " + param.ErrorCode);
+            }
+        }
+    }
+
+    public OnError(message: string): void {
+        this._resultHandler.OnError(message);
+    }
+
+    public AjaxCallFinished(): void {
+        this._resultHandler.AjaxCallFinished();
+    }
+
+    public AjaxCallStarted(): void {
+        this._resultHandler.AjaxCallStarted();
+    }
 }
 
