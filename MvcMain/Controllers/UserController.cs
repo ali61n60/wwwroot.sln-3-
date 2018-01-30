@@ -92,12 +92,13 @@ namespace MvcMain.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> UserLetMeKnows()
+        public async Task<IActionResult> UserLetMeKnows(string message)
         {
             _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase<List<ModelStd.Db.Ad.LetMeKnow>> response= await _userAdApiController.GetUserLetMeKnows();
             if (response.Success)
             {
+                ViewData["Message"] = message;
                 return View(response.ResponseData);
             }
             else
@@ -113,17 +114,17 @@ namespace MvcMain.Controllers
         {
             _userAdApiController.ControllerContext.HttpContext = HttpContext;
             ResponseBase response = await _userAdApiController.DeleteLetMeKnow(id);
+            string message;
             if (response.Success)
             {
-                ViewData["Message"] = "به من اطلاع بده حذف شد";
-                return View("UserLetMeKnows");
+                 message = "به من اطلاع بده حذف شد";
             }
             else
             {
                 //TODO log error
-                ViewData["Message"] = $"{response.Message} , {response.ErrorCode}";
-                return View("UserLetMeKnows");
+                message = $"{response.Message} , {response.ErrorCode}";
             }
+            return RedirectToAction("UserLetMeKnows", new { message = message });
         }
     }
 }

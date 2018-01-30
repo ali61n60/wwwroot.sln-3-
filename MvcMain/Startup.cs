@@ -133,8 +133,13 @@ namespace MvcMain
                 }
                 ).AddEntityFrameworkStores<AppIdentityDbContext>();
 
-            services.AddMvc().AddJsonOptions(options => options.SerializerSettings.ContractResolver
-                = new Newtonsoft.Json.Serialization.DefaultContractResolver());
+            services.AddMvc().AddJsonOptions(options =>
+                {
+                    options.SerializerSettings.ContractResolver
+                        = new Newtonsoft.Json.Serialization.DefaultContractResolver();
+
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                });
         }
 
         private void addRepositoryContainer(IServiceCollection services,

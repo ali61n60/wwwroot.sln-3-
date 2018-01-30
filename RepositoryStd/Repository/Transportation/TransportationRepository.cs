@@ -17,20 +17,14 @@ namespace RepositoryStd.Repository.Transportation
 
         public IEnumerable<Brand> GetAllBrands()
         {
-            List<Brand> allBrands= _adDbContext.Brands.ToList();
-            allBrands.ForEach(brand => brand.CarModels=null);
+            List<Brand> allBrands = _adDbContext.Brands.ToList();
             return allBrands;
         }
 
         //TODO use EF
         public IEnumerable<CarModel> GetAllModels()
         {
-            List<CarModel> allCarModels= _adDbContext.CarModels.ToList();
-            allCarModels.ForEach(model =>
-            {
-                model.Brand = null;
-                model.AdAttributeTransportations = null;
-            });
+            List<CarModel> allCarModels = _adDbContext.CarModels.ToList();
             return allCarModels;
         }
     }

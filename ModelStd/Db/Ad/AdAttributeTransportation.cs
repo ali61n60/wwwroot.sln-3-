@@ -10,7 +10,6 @@ namespace ModelStd.Db.Ad
         [Column("adId")]
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [ForeignKey("Advertisement")]
         public Guid AdId { get; set; }
 
         [Column("modelId")]
@@ -51,7 +50,7 @@ namespace ModelStd.Db.Ad
         public string PlateType { get; set; }
 
         public virtual Advertisement Ad { get; set; }
-        public virtual CarModel Model { get; set; }
+        public virtual CarModel CarModel { get; set; }
         
     }
 }

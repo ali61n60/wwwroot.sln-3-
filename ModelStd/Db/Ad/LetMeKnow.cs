@@ -19,7 +19,7 @@ namespace ModelStd.Db.Ad
         public string UserId { get; set; }
 
         [Column("categoryId")]
-        public int CategoryId { get; set; }
+        public int? CategoryId { get; set; }
 
         [Column("emailOrSms", TypeName = "int")]
         [Required]

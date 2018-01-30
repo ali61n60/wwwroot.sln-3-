@@ -26,6 +26,8 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO 1- Write unit test for everything
+    //TODO 1 Design of typeScript ServerCaller must be better. make a generic servercaller class
     //TODO 1- verify user phone number, set phone number verifyed to false when user changes his phone number
 
     //TODO 1- Create LetMeKnow Controller and View for users to register their need

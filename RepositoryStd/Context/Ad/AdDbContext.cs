@@ -60,10 +60,11 @@ namespace RepositoryStd.Context.AD
                 entity.HasOne(d => d.Ad)
                     .WithOne(advertisements => advertisements.AdAttributeTransportation)
                     .OnDelete(DeleteBehavior.Cascade)
+                    .HasForeignKey<Advertisement>(advertisement => advertisement.AdId)
                     .HasConstraintName("FK_AdAttributeTransportations_Advertisements");
 
-                entity.HasOne(d => d.Model)
-                    .WithMany(p => p.AdAttributeTransportations)
+                entity.HasOne(d => d.CarModel)
+                    .WithMany(carModel => carModel.AdAttributeTransportations)
                     .HasForeignKey(d => d.ModelId)
                     .HasConstraintName("FK_AdAttributeTransportations_CarModels");
             });

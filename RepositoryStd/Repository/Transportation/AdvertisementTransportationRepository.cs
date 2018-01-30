@@ -126,8 +126,8 @@ namespace RepositoryStd.Repository.Transportation
                 .Include(advertisement => advertisement.AdPrivilege)
                 .Include(advertisement => advertisement.FixedPrice)
                 .Include(advertisements => advertisements.AdAttributeTransportation)
-                .Include(advertisements => advertisements.AdAttributeTransportation.Model)
-                .Include(advertisements => advertisements.AdAttributeTransportation.Model.Brand)
+                .Include(advertisements => advertisements.AdAttributeTransportation.CarModel)
+                .Include(advertisements => advertisements.AdAttributeTransportation.CarModel.Brand)
                 .Where(advertisement => advertisement.AdStatus == AdStatus.Approved && advertisement.AdId == adId);//only accepted ads
             
             Advertisement item = list.FirstOrDefault();
@@ -205,8 +205,8 @@ namespace RepositoryStd.Repository.Transportation
         public bool CriteriaMatch(ApprovedAd approvedAd, LetMeKnow letMeKnow)
         {
             AdAttributeTransportation approvedadAttributeTransportation = _adDbContext.AdAttributeTransportation
-                .Include(tr=>tr.Model)
-                .Include(tr=>tr.Model.Brand)
+                .Include(tr=>tr.CarModel)
+                .Include(tr=>tr.CarModel.Brand)
                 .FirstOrDefault(transportation =>
                 transportation.AdId == approvedAd.AdId);
             LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion = _adDbContext.LetMeKnowAttributeTransportaions.FirstOrDefault(let => let.Id == letMeKnow.Id);
@@ -214,11 +214,11 @@ namespace RepositoryStd.Repository.Transportation
             {
                 return false;
             }
-            CarModel approvedCarModel = approvedadAttributeTransportation.Model;
+            CarModel approvedCarModel = approvedadAttributeTransportation.CarModel;
             Brand approvedBrand = approvedCarModel.Brand;
 
-            int letMeKnowBrandId = letMeKnowAttributeTransportaion.BrandId;
-            int letMeKnowCarModelId = letMeKnowAttributeTransportaion.ModelId;
+            int? letMeKnowBrandId = letMeKnowAttributeTransportaion.BrandId;
+            int? letMeKnowCarModelId = letMeKnowAttributeTransportaion.ModelId;
             if ((letMeKnowBrandId==CarBrandIdDefault) ||
                 (letMeKnowBrandId == approvedBrand.BrandId && letMeKnowCarModelId == CarModelIdDefault ) ||
                 (letMeKnowCarModelId == approvedCarModel.ModelId))
@@ -405,11 +405,11 @@ namespace RepositoryStd.Repository.Transportation
 
             if (carModelId != CarModelIdDefault)//when carModel is selected certainly brand is selected
             {
-                list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.ModelId == carModelId);
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.CarModel.ModelId == carModelId);
             }
             else if (brandId != CarBrandIdDefault && carModelId == CarModelIdDefault)//just brand is selected
             {
-                list = list.Where(advertisement => advertisement.AdAttributeTransportation.Model.BrandId == brandId);//apply brandId filter
+                list = list.Where(advertisement => advertisement.AdAttributeTransportation.CarModel.BrandId == brandId);//apply brandId filter
             }
             //not brand nor model selected do nothing on the list
             return list;
@@ -422,9 +422,9 @@ namespace RepositoryStd.Repository.Transportation
             adTrans.BodyColor = advertisement.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisement.AdAttributeTransportation.InternalColor;
             adTrans.BodyStatus = AdvertisementTransportation.GetBodyStatus(advertisement.AdAttributeTransportation.BodyStatus, BodyStatusDefault);
-            adTrans.BrandId = advertisement.AdAttributeTransportation.Model.BrandId;
-            adTrans.BrandName = advertisement.AdAttributeTransportation.Model.Brand.BrandName;
-            adTrans.ModelName = advertisement.AdAttributeTransportation.Model.ModelName;
+            adTrans.BrandId = advertisement.AdAttributeTransportation.CarModel.BrandId;
+            adTrans.BrandName = advertisement.AdAttributeTransportation.CarModel.Brand.BrandName;
+            adTrans.ModelName = advertisement.AdAttributeTransportation.CarModel.ModelName;
             adTrans.Gearbox = advertisement.AdAttributeTransportation.Gearbox;
 
             if (advertisement.AdAttributeTransportation.Mileage != null)

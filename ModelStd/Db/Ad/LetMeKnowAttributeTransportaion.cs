@@ -13,10 +13,10 @@ namespace ModelStd.Db.Ad
         public int Id { get; set; }
 
         [Column("modelId")]
-        public int ModelId { get; set; }
+        public int? ModelId { get; set; }
 
         [Column("brandId")]
-        public int BrandId { get; set; }
+        public int? BrandId { get; set; }
 
         public virtual LetMeKnow LetMeKnow { get; set; }
         public virtual Brand Brand { get; set; }
