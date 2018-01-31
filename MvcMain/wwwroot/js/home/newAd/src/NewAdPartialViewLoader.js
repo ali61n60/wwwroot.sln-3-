@@ -2,8 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
 var NewAdPartialViewLoader = /** @class */ (function () {
-    // partialViewDivId: string, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria)
-    //this._partialViewDivId = partialViewDivId;
     function NewAdPartialViewLoader(resultHandler, newAdCriteriaChange, newAdCriteria, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;
@@ -11,18 +9,16 @@ var NewAdPartialViewLoader = /** @class */ (function () {
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
         this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller_1.AjaxCaller(this._url, this, requestCode);
         this._newAdCriteriaChange = newAdCriteriaChange;
         this._newAdCriteria = newAdCriteria;
-        this._ajaxCaller = new AjaxCaller_1.AjaxCaller(this._url, this, requestCode);
     }
     NewAdPartialViewLoader.prototype.GetPartialViewFromServer = function (userInput, categoryId) {
         this._currentCategoryId = categoryId;
+        this._currentRequestIndex++;
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
         this._ajaxCaller.Call(userInput);
     };
-    NewAdPartialViewLoader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
-    }; //onSuccessGetTimeFromServer
-    NewAdPartialViewLoader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
-    }; //onErrorGetTimeFromServer
     NewAdPartialViewLoader.prototype.OnResult = function (param, requestCode) {
         if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
             if (param.Success == true) {
@@ -48,11 +44,4 @@ var NewAdPartialViewLoader = /** @class */ (function () {
     return NewAdPartialViewLoader;
 }());
 exports.NewAdPartialViewLoader = NewAdPartialViewLoader;
-//TODO refactor this
-var PartialViewServerCallParameters = /** @class */ (function () {
-    function PartialViewServerCallParameters() {
-    }
-    return PartialViewServerCallParameters;
-}());
-exports.PartialViewServerCallParameters = PartialViewServerCallParameters;
 //# sourceMappingURL=NewAdPartialViewLoader.js.map

@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NewAdPartialViewLoader_1 = require("../../../home/newAd/src/NewAdPartialViewLoader");
 var LetMeKnowPartialViewLoader = /** @class */ (function () {
     function LetMeKnowPartialViewLoader(partialViewDivId, criteriaChange, letMeKnowCriteria) {
         this._url = "/LetMeKnow/GetLetMeKnowPartialView";
@@ -13,7 +12,7 @@ var LetMeKnowPartialViewLoader = /** @class */ (function () {
     LetMeKnowPartialViewLoader.prototype.GetPartialViewFromServer = function (categoryId) {
         var _this = this;
         this._currentCategoryId = categoryId;
-        var callParams = new NewAdPartialViewLoader_1.PartialViewServerCallParameters();
+        var callParams; // = new PartialViewServerCallParameters();
         callParams.CategoryId = categoryId;
         $.ajax({
             type: "GET",

@@ -914,7 +914,6 @@
     <TypeScriptCompile Include="wwwroot\js\Events\Examples\PulseGenerator.ts" />
     <TypeScriptCompile Include="wwwroot\js\Events\IEvent.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\AjaxCaller.ts" />
-    <TypeScriptCompile Include="wwwroot\js\Helper\ResponseOrderAwareServerCaller.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\CriteriaNumericDictionary.ts" />
     <TypeScriptCompile Include="wwwroot\js\Helper\IResultHandler.ts" />
     <TypeScriptCompile Include="wwwroot\js\home\adDetail\src\adDetail.ts" />

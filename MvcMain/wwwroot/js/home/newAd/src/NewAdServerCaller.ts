@@ -1,31 +1,49 @@
 ﻿import {UserInput}  from "../../../Helper/UserInput";
+import {IResultHandler} from "../../../Helper/IResultHandler";
+import {AjaxCaller}  from "../../../Helper/AjaxCaller";
 
 
-export class NewAdServerCaller {
-
+export class NewAdServerCaller implements IResultHandler {
+    
+    private readonly RequestIndexKey: string = "RequestIndex";
+    private _currentRequestIndex: number = 0;
     
     private readonly _url: string = "/api/AdApi/AddAdvertisement";
 
+    private _resultHandler: IResultHandler;
+    private _ajaxCaller: AjaxCaller;
+
+    constructor(resultHandler: IResultHandler, requestCode: number) {
+        this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
+    }
+
     public SaveAd(userInput: UserInput): void {
-        $.ajax({
-            type: "POST", //GET or POST or PUT or DELETE verb
-            url: this._url,
-            data: JSON.stringify(userInput.ParametersDictionary), //Data sent to server
-            contentType: 'application/json', // content type sent to server
-            success: (msg, textStatus, jqXHR) => this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR), //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
-        }); //.ajax
+        this._currentRequestIndex++;
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
+
+        this._ajaxCaller.Call(userInput);
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        //TODO redirect user to a new page
-        if (msg.Success == true) {
-            document.location.replace("/NewAd/Confirm");
+        
+    } 
+    
+    OnResult(param: any, requestCode: number): void {
+        if (param.Success == true) {
+            this._resultHandler.OnResult(param, requestCode);
+        } else {
+            this._resultHandler.OnError(param.Message + " , " + param.ErrorCode, requestCode);
         }
-    } 
-
-
-    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        //TODO inform error to user
-    } 
+        
+    }
+    OnError(message: string, requestCode: number): void {
+        this._resultHandler.OnError(message, requestCode);
+    }
+    AjaxCallFinished(requestCode: number): void {
+        this._resultHandler.AjaxCallFinished(requestCode);
+    }
+    AjaxCallStarted(requestCode: number): void {
+        this._resultHandler.AjaxCallStarted(requestCode);
+    }
 }

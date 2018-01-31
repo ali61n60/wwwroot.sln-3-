@@ -22,7 +22,7 @@ var NewAd = /** @class */ (function () {
         this._newAdCriteria = new NewAdCriteria_1.NewAdCriteria();
         this.initPage();
         this._imageUploader = new ImageUploader_1.ImageUploader(this._currentNewAdGuid);
-        this._newAdServerCaller = new NewAdServerCaller_1.NewAdServerCaller();
+        this._newAdServerCaller = new NewAdServerCaller_1.NewAdServerCaller(this, this.AddAdvertisementRequestCode);
         this.initEventHandlers();
     }
     NewAd.prototype.CustomCriteriaChanged = function () {
@@ -68,6 +68,7 @@ var NewAd = /** @class */ (function () {
             $("#" + this._categorySpecificPartialViewId).html(param);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
+            document.location.replace("/NewAd/Confirm");
         }
     };
     NewAd.prototype.OnError = function (message, requestCode) {
@@ -75,6 +76,7 @@ var NewAd = /** @class */ (function () {
             alert(message);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
+            alert(message);
         }
     };
     NewAd.prototype.AjaxCallFinished = function (requestCode) {

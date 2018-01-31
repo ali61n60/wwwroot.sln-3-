@@ -3,8 +3,6 @@ import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
 import { IResultHandler } from "../../../Helper/IResultHandler";
 import { AjaxCaller } from "../../../Helper/AjaxCaller";
 import { UserInput } from "../../../Helper/UserInput";
-import { ResponseOrderAwareServerCaller } from "../../../Helper/ResponseOrderAwareServerCaller";
-
 
 export class NewAdPartialViewLoader implements IResultHandler {
     private readonly RequestIndexKey: string = "RequestIndex";
@@ -61,8 +59,3 @@ export class NewAdPartialViewLoader implements IResultHandler {
         this._resultHandler.AjaxCallStarted(requestCode);
     }
 }
-
-////TODO refactor this
-//export class PartialViewServerCallParameters {
-//    public CategoryId: number;
-//}

@@ -41,7 +41,7 @@ class NewAd implements ICriteriaChange, IResultHandler{
         this._newAdCriteria = new NewAdCriteria();
         this.initPage();
         this._imageUploader = new ImageUploader(this._currentNewAdGuid);
-        this._newAdServerCaller = new NewAdServerCaller();
+        this._newAdServerCaller = new NewAdServerCaller(this, this.AddAdvertisementRequestCode);
         this.initEventHandlers();
     }
 
@@ -96,7 +96,7 @@ class NewAd implements ICriteriaChange, IResultHandler{
             $("#" + this._categorySpecificPartialViewId).html(param);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
-            
+            document.location.replace("/NewAd/Confirm");
         }
     }
     OnError(message: string, requestCode: number): void {
@@ -104,7 +104,7 @@ class NewAd implements ICriteriaChange, IResultHandler{
             alert(message);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
-
+            alert(message);
         }
     }
     AjaxCallFinished(requestCode: number): void {
