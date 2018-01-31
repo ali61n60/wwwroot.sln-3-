@@ -18,13 +18,14 @@ var Index = /** @class */ (function () {
         this._adPlaceHolderDivId = "adPlaceHolder";
         this._getAdFromServerButtonId = "getAdFromServer";
         this._messageDivId = "message";
+        this._categorySpecificSearchCriteriaParentDivId = "categorySpecificSearchCriteria";
         this.GetAdFromServerRequestCode = 1;
         this.LoadSearchPartialViewRequestCode = 2;
         this._categorySelectorParentDivId = categorySelectorParentDivId;
         this._allCategoriesId = allCategoriesId;
         this._serverCaller = new ServerCaller_1.ServerCaller(this, this.GetAdFromServerRequestCode);
         this._searchCriteria = new SearchCriteria_1.SearchCriteria();
-        this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader("categorySpecificSearchCriteria", this, this._searchCriteria);
+        this._searchCriteriaViewLoader = new SearchCriteriaViewLoader_1.SearchCriteriaViewLoader(this, this, this._searchCriteria, this.LoadSearchPartialViewRequestCode);
         this.initPage();
         this.initEventHandlers();
     }
@@ -43,7 +44,9 @@ var Index = /** @class */ (function () {
         var _this = this;
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
             _this.searchCriteriaChanged();
-            _this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(args.SelectedCategoryId);
+            var userInput = new UserInput_1.UserInput();
+            _this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+            _this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(userInput, args.SelectedCategoryId);
         });
         this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(), this);
         $("#" + this.AdTypeParentDivId).on("change", function (event) {
@@ -79,6 +82,38 @@ var Index = /** @class */ (function () {
             _this._serverCaller.GetAdItemsFromServer(userInput);
         }); //click
     }; //initGetAdFromServer
+    Index.prototype.OnResult = function (msg, requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.onResultGetAdFromServer(msg);
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.onResultLoadSearchPartialView(msg);
+        }
+    };
+    Index.prototype.OnError = function (message, requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.onErrorGetAdFromServer(message);
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.onErrorLoadSearchPartialView(message);
+        }
+    };
+    Index.prototype.AjaxCallFinished = function (requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.ajaxCallFinishedGetAdFromServer();
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.ajaxCallFinishedLoadSearchPartialView();
+        }
+    };
+    Index.prototype.AjaxCallStarted = function (requestCode) {
+        if (requestCode === this.GetAdFromServerRequestCode) {
+            this.ajaxCallStartedGetAdFromServer();
+        }
+        else if (requestCode === this.LoadSearchPartialViewRequestCode) {
+            this.ajaxCallStartedLoadSearchPartialView();
+        }
+    };
     Index.prototype.onResultGetAdFromServer = function (advertisementCommons) {
         var template = $('#singleAdItem').html();
         var data;
@@ -101,36 +136,27 @@ var Index = /** @class */ (function () {
             $("#" + this._adPlaceHolderDivId).append(html);
         } //end for
     };
-    Index.prototype.OnResult = function (msg, requestCode) {
-        if (requestCode === this.GetAdFromServerRequestCode) {
-            this.onResultGetAdFromServer(msg);
-        }
+    Index.prototype.onResultLoadSearchPartialView = function (msg) {
+        $("#" + this._categorySpecificSearchCriteriaParentDivId).children().remove();
+        $("#" + this._categorySpecificSearchCriteriaParentDivId).html(msg);
     };
     Index.prototype.onErrorGetAdFromServer = function (message) {
         this.showErrorMessage(message);
     };
-    Index.prototype.OnError = function (message, requestCode) {
-        if (requestCode === this.GetAdFromServerRequestCode) {
-            this.onErrorGetAdFromServer(message);
-        }
+    Index.prototype.onErrorLoadSearchPartialView = function (message) {
+        alert(message);
     };
     Index.prototype.ajaxCallStartedGetAdFromServer = function () {
         $("#" + this.CallImageId).show();
         $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     };
-    Index.prototype.AjaxCallStarted = function (requestCode) {
-        if (requestCode === this.GetAdFromServerRequestCode) {
-            this.ajaxCallStartedGetAdFromServer();
-        }
+    Index.prototype.ajaxCallStartedLoadSearchPartialView = function () {
     };
     Index.prototype.ajaxCallFinishedGetAdFromServer = function () {
         $("#" + this.CallImageId).hide();
         $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
     };
-    Index.prototype.AjaxCallFinished = function (requestCode) {
-        if (requestCode === this.GetAdFromServerRequestCode) {
-            this.ajaxCallFinishedGetAdFromServer();
-        }
+    Index.prototype.ajaxCallFinishedLoadSearchPartialView = function () {
     };
     Index.prototype.showErrorMessage = function (message) {
         this.removeErrorMessage();

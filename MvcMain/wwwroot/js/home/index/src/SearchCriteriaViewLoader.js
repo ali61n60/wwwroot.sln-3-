@@ -1,53 +1,46 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var NewAdPartialViewLoader_1 = require("../../newAd/src/NewAdPartialViewLoader");
+var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
 var SearchCriteriaViewLoader = /** @class */ (function () {
-    function SearchCriteriaViewLoader(parentDivId, searchCriteriaChange, searchCriteria) {
+    function SearchCriteriaViewLoader(resultHandler, searchCriteriaChange, searchCriteria, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;
         this._url = "/Home/GetSearchCriteriaView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
-        this._parentDivId = parentDivId;
+        this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller_1.AjaxCaller(this._url, this, requestCode);
         this._searchCriteriaChange = searchCriteriaChange;
         this._searchCriteria = searchCriteria;
     }
-    SearchCriteriaViewLoader.prototype.OnResult = function (param) {
-        throw new Error("Method not implemented.");
-    };
-    SearchCriteriaViewLoader.prototype.OnError = function (message) {
-        throw new Error("Method not implemented.");
-    };
-    SearchCriteriaViewLoader.prototype.AjaxCallFinished = function () {
-        throw new Error("Method not implemented.");
-    };
-    SearchCriteriaViewLoader.prototype.AjaxCallStarted = function () {
-        throw new Error("Method not implemented.");
-    };
-    SearchCriteriaViewLoader.prototype.GetSearchCriteriaViewFromServer = function (categoryId) {
-        var _this = this;
+    SearchCriteriaViewLoader.prototype.GetSearchCriteriaViewFromServer = function (userInput, categoryId) {
+        this._currentRequestIndex++;
         this._currentCategoryId = categoryId;
-        var callParams = new NewAdPartialViewLoader_1.PartialViewServerCallParameters();
-        callParams.CategoryId = categoryId;
-        $.ajax({
-            type: "GET",
-            url: this._url,
-            data: callParams,
-            //contentType: 'application/json', // content type sent to server
-            success: function (msg, textStatus, jqXHR) { return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
-            error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails
-        }); //.ajax
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
+        this._ajaxCaller.Call(userInput); //GET
     };
-    SearchCriteriaViewLoader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
-        this._searchCriteria.UnBind(this._previousCategoryId);
-        $("#" + this._parentDivId).children().remove();
-        $("#" + this._parentDivId).html(msg);
-        this._searchCriteria.Bind(this._currentCategoryId, this._searchCriteriaChange);
-        this._previousCategoryId = this._currentCategoryId;
-    }; //onSuccessGetTimeFromServer
-    SearchCriteriaViewLoader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
-        alert(errorThrown);
-    }; //onErrorGetTimeFromServer
+    SearchCriteriaViewLoader.prototype.OnResult = function (param, requestCode) {
+        if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
+            if (param.Success == true) {
+                this._searchCriteria.UnBind(this._previousCategoryId);
+                this._resultHandler.OnResult(param.ResponseData, requestCode);
+                this._searchCriteria.Bind(this._currentCategoryId, this._searchCriteriaChange);
+                this._previousCategoryId = this._currentCategoryId;
+            }
+            else {
+                this._resultHandler.OnError(param.Message + " , " + param.ErrorCode, requestCode);
+            }
+        }
+    };
+    SearchCriteriaViewLoader.prototype.OnError = function (message, requestCode) {
+        this._resultHandler.OnError(message, requestCode);
+    };
+    SearchCriteriaViewLoader.prototype.AjaxCallStarted = function (requestCode) {
+        this._resultHandler.AjaxCallStarted(requestCode);
+    };
+    SearchCriteriaViewLoader.prototype.AjaxCallFinished = function (requestCode) {
+        this._resultHandler.AjaxCallFinished(requestCode);
+    };
     return SearchCriteriaViewLoader;
 }());
 exports.SearchCriteriaViewLoader = SearchCriteriaViewLoader;

@@ -28,7 +28,6 @@ var ServerCaller = /** @class */ (function () {
         if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
             if (param.Success == true) {
                 this._start += parseInt(param.CustomDictionary[this.NumberOfItemsKey]);
-                //TODO create AdvertisementCommon[] object from msg.responseData
                 this._resultHandler.OnResult(param.ResponseData, requestCode);
             } //if (msg.success == true)
             else {

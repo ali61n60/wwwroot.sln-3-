@@ -42,7 +42,6 @@ export class ServerCaller implements IResultHandler {
         if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
             if (param.Success == true) {
                 this._start += parseInt(param.CustomDictionary[this.NumberOfItemsKey]);
-                //TODO create AdvertisementCommon[] object from msg.responseData
                 this._resultHandler.OnResult(param.ResponseData, requestCode);
             } //if (msg.success == true)
             else {

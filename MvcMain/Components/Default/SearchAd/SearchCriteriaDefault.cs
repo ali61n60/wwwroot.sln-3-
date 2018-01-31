@@ -4,9 +4,11 @@ namespace MvcMain.Components.Default.SearchAd
 {
     public class SearchCriteriaDefault : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public string Invoke()
         {
-            return View();
+            // View("Default", "Hllo World");
+
+            return "hello";
         }
     }
 }
