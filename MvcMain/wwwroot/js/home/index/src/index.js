@@ -10,7 +10,8 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //durng inProgress end enable it after completed
 var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId) {
-        this.CallImageId = "serverCalledImage";
+        this.LoadAdImageId = "loadAds";
+        this.LoadViewImageId = "loadView";
         this.AdTypeKey = "AdType";
         this.AdTypeParentDivId = "adType";
         this.SearchTextKey = "SearchText";
@@ -151,18 +152,18 @@ var Index = (function () {
         this.showErrorMessage(message);
     };
     Index.prototype.ajaxCallStartedGetAdFromServer = function () {
-        $("#" + this.CallImageId).show();
+        $("#" + this.LoadAdImageId).show();
         $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     };
     Index.prototype.ajaxCallStartedLoadSearchPartialView = function () {
-        $("#" + this.CallImageId).show(); //TODO show another image may conflict with ad
+        $("#" + this.LoadViewImageId).show();
     };
     Index.prototype.ajaxCallFinishedGetAdFromServer = function () {
-        $("#" + this.CallImageId).hide();
+        $("#" + this.LoadAdImageId).hide();
         $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
     };
     Index.prototype.ajaxCallFinishedLoadSearchPartialView = function () {
-        $("#" + this.CallImageId).hide(); //TODO show another image may conflict with ad
+        $("#" + this.LoadViewImageId).hide();
     };
     Index.prototype.showErrorMessage = function (message) {
         this.removeErrorMessage();

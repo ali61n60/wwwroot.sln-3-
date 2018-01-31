@@ -15,7 +15,8 @@ import { AdvertisementCommon } from "../../../Models/AdvertisementCommon";
 //durng inProgress end enable it after completed
 export class Index implements ICriteriaChange, IResultHandler {
 
-    private readonly CallImageId: string = "serverCalledImage";
+    private readonly LoadAdImageId: string = "loadAds";
+    private readonly LoadViewImageId: string = "loadView";
 
     private readonly AdTypeKey: string = "AdType";
     private readonly AdTypeParentDivId = "adType";
@@ -207,20 +208,20 @@ export class Index implements ICriteriaChange, IResultHandler {
     }
 
     private ajaxCallStartedGetAdFromServer() {
-        $("#" + this.CallImageId).show();
+        $("#" + this.LoadAdImageId).show();
         $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     }
 
     private ajaxCallStartedLoadSearchPartialView() {
-        $("#" + this.CallImageId).show();//TODO show another image may conflict with ad
+        $("#" + this.LoadViewImageId).show();
     }
 
     private ajaxCallFinishedGetAdFromServer() {
-        $("#" + this.CallImageId).hide();
+        $("#" + this.LoadAdImageId).hide();
         $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
     }
     private ajaxCallFinishedLoadSearchPartialView() {
-        $("#" + this.CallImageId).hide();//TODO show another image may conflict with ad
+        $("#" + this.LoadViewImageId).hide();
     }
 
     private showErrorMessage(message: string) {

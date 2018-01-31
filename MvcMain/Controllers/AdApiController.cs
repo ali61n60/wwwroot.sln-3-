@@ -162,6 +162,7 @@ namespace MvcMain.Controllers
         //Called from android and home controller
         public ResponseBase<IList<AdvertisementCommon>> GetAdvertisementCommon([FromBody] Dictionary<string, string> userInput)
         {
+            Thread.Sleep(5000);
             string errorCode = "AdApiController.GetAdvertisementCommon";
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
             int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
