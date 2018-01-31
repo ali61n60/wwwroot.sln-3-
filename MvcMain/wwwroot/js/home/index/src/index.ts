@@ -70,14 +70,20 @@ export class Index implements ICriteriaChange, IResultHandler {
 
     }//initCategorySelectionControl
 
+    private getSearchCriteriaPartialView(categoryId: number) {
+        let userInput = new UserInput();
+        this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+        this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(userInput,categoryId);
+    }
     private initEventHandlers(): void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             this.searchCriteriaChanged();
-            let userInput = new UserInput();
-            this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
-            this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(userInput, args.SelectedCategoryId);
+            this.getSearchCriteriaPartialView(args.SelectedCategoryId);
         });
 
+        this.getSearchCriteriaPartialView(this._categorySelection.GetSelectedCategoryId());
+
+        
         this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(), this);
         
         $("#" + this.AdTypeParentDivId).on("change",
@@ -197,7 +203,7 @@ export class Index implements ICriteriaChange, IResultHandler {
     }
 
     private onErrorLoadSearchPartialView(message: string) {
-        alert(message);
+        this.showErrorMessage(message);
     }
 
     private ajaxCallStartedGetAdFromServer() {
@@ -206,7 +212,7 @@ export class Index implements ICriteriaChange, IResultHandler {
     }
 
     private ajaxCallStartedLoadSearchPartialView() {
-
+        $("#" + this.CallImageId).show();//TODO show another image may conflict with ad
     }
 
     private ajaxCallFinishedGetAdFromServer() {
@@ -214,7 +220,7 @@ export class Index implements ICriteriaChange, IResultHandler {
         $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
     }
     private ajaxCallFinishedLoadSearchPartialView() {
-
+        $("#" + this.CallImageId).hide();//TODO show another image may conflict with ad
     }
 
     private showErrorMessage(message: string) {

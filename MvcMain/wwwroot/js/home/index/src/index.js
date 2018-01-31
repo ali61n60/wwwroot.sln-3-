@@ -40,14 +40,18 @@ var Index = /** @class */ (function () {
         this._categorySelection = new CategorySelection_1.CategorySelection(this._categorySelectorParentDivId, allCategories);
         this._categorySelection.CreateFirstLevel();
     }; //initCategorySelectionControl
+    Index.prototype.getSearchCriteriaPartialView = function (categoryId) {
+        var userInput = new UserInput_1.UserInput();
+        this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+        this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(userInput, categoryId);
+    };
     Index.prototype.initEventHandlers = function () {
         var _this = this;
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
             _this.searchCriteriaChanged();
-            var userInput = new UserInput_1.UserInput();
-            _this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
-            _this._searchCriteriaViewLoader.GetSearchCriteriaViewFromServer(userInput, args.SelectedCategoryId);
+            _this.getSearchCriteriaPartialView(args.SelectedCategoryId);
         });
+        this.getSearchCriteriaPartialView(this._categorySelection.GetSelectedCategoryId());
         this._searchCriteria.Bind(this._categorySelection.GetSelectedCategoryId(), this);
         $("#" + this.AdTypeParentDivId).on("change", function (event) {
             _this.searchCriteriaChanged();
