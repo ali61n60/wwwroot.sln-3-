@@ -4,6 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Db.Ad;
+using ModelStd.Services;
+using MvcMain.Infrastructure.IOC;
+using MvcMain.Utilities;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Repository.Common;
 
@@ -11,6 +14,12 @@ namespace MvcMain.Controllers
 {
     public class NewAdController : Controller
     {
+        private readonly IViewRenderService _viewRenderService;
+        public NewAdController(IViewRenderService viewRenderService)
+        {
+            _viewRenderService = viewRenderService;
+        }
+
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -34,19 +43,23 @@ namespace MvcMain.Controllers
             return View("NewAdTransformation");
         }
 
-        
-
-        [HttpGet]
-        public IActionResult GetNewAdPartialView([FromQuery] Dictionary<string, string> userInput)
+        public async Task<ResponseBase<string>> GetNewAdPartialView([FromBody] Dictionary<string, string> userInput)
         {
+            string errorCode = "NewAdController/GetNewAdPartialView";
+            ResponseBase<string> response = new ResponseBase<string>();
             int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
-            switch (categoryId)
+            string viewName = AdViewContainer.GetNewAdPartialViewName(categoryId);
+            try
             {
-                case 100:
-                    return ViewComponent("NewAdTransformation");
-                default:
-                    return ViewComponent("NewAdDefault");
+                response.ResponseData = await _viewRenderService.RenderToStringAsync(viewName, null);
+                response.SetSuccessResponse("OK");
             }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message, errorCode);
+            }
+            
+            return response;
         }
 
 

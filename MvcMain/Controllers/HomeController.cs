@@ -15,6 +15,7 @@ using ModelStd.Db.Ad;
 using ModelStd.Services;
 using MvcMain.Infrastructure.IOC;
 using MvcMain.Models;
+using MvcMain.Utilities;
 using RepositoryStd.Context.Helper;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -25,21 +26,12 @@ namespace MvcMain.Controllers
     public class HomeController : Controller
     {
         private AdApiController _adApiController;
-        private readonly IRazorViewEngine _razorViewEngine;
-        private readonly ITempDataProvider _tempDataProvider;
-        private readonly IServiceProvider _serviceProvider;
-
-       
-
-        public HomeController(AdApiController adApiController,
-            IRazorViewEngine razorViewEngine,
-            ITempDataProvider tempDataProvider,
-            IServiceProvider serviceProvider)
+        private readonly IViewRenderService _viewRenderService;
+        
+        public HomeController(AdApiController adApiController, IViewRenderService viewRenderService)
         {
             _adApiController = adApiController;
-            _razorViewEngine = razorViewEngine;
-            _tempDataProvider = tempDataProvider;
-            _serviceProvider = serviceProvider;
+            _viewRenderService = viewRenderService;
         }
         public async Task<IActionResult> Index()
         {
@@ -74,56 +66,22 @@ namespace MvcMain.Controllers
 
         public async Task<ResponseBase<string>> GetSearchCriteriaView([FromBody] Dictionary<string, string> userInput)
         {
-            //TODO 3- put view's name in a container But it is hard to follow
-            string errorCode = "HomeController/GetSearchCriteriaView";
+           string errorCode = "HomeController/GetSearchCriteriaView";
             ResponseBase <string> response=new ResponseBase<string>();
             int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
             
-            
             string viewName =AdViewContainer.GetSearchAdPartialViewName(categoryId);
-
-
-            //TODO Create a service for rendering a view into a string
+            
             try
             {
-                var httpContext = new DefaultHttpContext {RequestServices = _serviceProvider};
-                var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
-
-                using (var sw = new StringWriter())
-                {
-                    var viewResult = _razorViewEngine.FindView(actionContext, viewName, false);
-
-                    if (viewResult.View == null)
-                    {
-                        throw new ArgumentNullException($"{viewName} does not match any available view");
-                    }
-
-                    var viewDictionary = new ViewDataDictionary(
-                        new EmptyModelMetadataProvider(),
-                        new ModelStateDictionary())
-                    {
-                        //Model = model
-                    };
-
-                    ViewContext viewContext = new ViewContext(
-                        actionContext,
-                        viewResult.View,
-                        viewDictionary,
-                        new TempDataDictionary(actionContext.HttpContext, _tempDataProvider),
-                        sw,
-                        new HtmlHelperOptions()
-                    );
-
-                    await viewResult.View.RenderAsync(viewContext);
-                    response.ResponseData= sw.ToString();
-                    response.SetSuccessResponse("OK");
-                }
+                response.ResponseData =await  _viewRenderService.RenderToStringAsync(viewName, null);
+                response.SetSuccessResponse("OK");
             }
             catch (Exception ex)
             {
                 response.SetFailureResponse(ex.Message, errorCode);
             }
-            
+            //TODO make it a function of response class
             setRequestIndex(userInput, response);
             return response;
         }

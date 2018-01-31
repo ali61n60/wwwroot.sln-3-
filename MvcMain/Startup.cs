@@ -19,6 +19,7 @@ using MvcMain.Controllers;
 using MvcMain.Infrastructure.Services;
 using MvcMain.Infrastructure.Services.Email;
 using MvcMain.Infrastructure.Services.Logger;
+using MvcMain.Utilities;
 using Newtonsoft.Json;
 using RepositoryStd;
 using RepositoryStd.Context.AD;
@@ -92,6 +93,7 @@ namespace MvcMain
             services.AddTransient<AdApiController>();
             services.AddTransient<UserAdApiController>();
             services.AddTransient<MessageApiController>();
+            services.AddScoped<IViewRenderService, ViewRenderService>();
 
             services.AddSingleton<ILogger>(provider =>new Logger(_env.ContentRootPath + "/LogData/"));
             if (_configuration["Data:Email"] == "EmailServer")
