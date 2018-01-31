@@ -2,15 +2,15 @@
 import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
 import { IResultHandler } from "../../../Helper/IResultHandler";
 import { AjaxCaller } from "../../../Helper/AjaxCaller";
-import {UserInput} from "../../../Helper/UserInput";
+import { UserInput } from "../../../Helper/UserInput";
+import { ResponseOrderAwareServerCaller } from "../../../Helper/ResponseOrderAwareServerCaller";
 
 
 export class NewAdPartialViewLoader implements IResultHandler {
-
     private readonly RequestIndexKey: string = "RequestIndex";
     private _currentRequestIndex: number = 0;
 
-     private  _url: string = "/NewAd/GetNewAdPartialView";
+    private _url: string = "/NewAd/GetNewAdPartialView";
 
     private _resultHandler: IResultHandler;
     private _ajaxCaller: AjaxCaller;
@@ -22,9 +22,10 @@ export class NewAdPartialViewLoader implements IResultHandler {
 
     constructor(resultHandler: IResultHandler, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria, requestCode: number) {
         this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
         this._newAdCriteriaChange = newAdCriteriaChange;
         this._newAdCriteria = newAdCriteria;
-        this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
+
     }
 
     public GetPartialViewFromServer(userInput: UserInput, categoryId: number) {
@@ -35,13 +36,7 @@ export class NewAdPartialViewLoader implements IResultHandler {
         this._ajaxCaller.Call(userInput);
     }
 
-    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        
-    }//onSuccessGetTimeFromServer
 
-    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-       
-    }//onErrorGetTimeFromServer
 
     OnResult(param: any, requestCode: number): void {
         if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
@@ -54,9 +49,10 @@ export class NewAdPartialViewLoader implements IResultHandler {
                 this._resultHandler.OnError(param.Message + " , " + param.ErrorCode, requestCode);
             }
         }
+
     }
     OnError(message: string, requestCode: number): void {
-        this._resultHandler.OnError(message,requestCode);
+        this._resultHandler.OnError(message, requestCode);
     }
     AjaxCallFinished(requestCode: number): void {
         this._resultHandler.AjaxCallFinished(requestCode);
