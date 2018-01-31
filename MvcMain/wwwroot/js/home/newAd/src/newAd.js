@@ -29,7 +29,7 @@ var NewAd = (function () {
     };
     NewAd.prototype.initPage = function () {
         this.initNewAdCategory();
-        this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
+        this._partialViewLoader = new NewAdPartialViewLoader_1.NewAdPartialViewLoader(this, this, this._newAdCriteria, this.LoadNewAdPartialViewRequestCode);
         this._currentNewAdGuid = $("#" + this.CurrentNewAdGuidInputId).val().toString();
     };
     NewAd.prototype.initNewAdCategory = function () {
@@ -42,7 +42,9 @@ var NewAd = (function () {
         var _this = this;
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
             if (!args.SelectedCategoryHasChild) {
-                _this._partialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
+                var userInput = new UserInput_1.UserInput();
+                _this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+                _this._partialViewLoader.GetPartialViewFromServer(userInput, args.SelectedCategoryId);
             }
         });
         $("#" + this._submitAdInputId).on("click", function (event) {
@@ -62,12 +64,15 @@ var NewAd = (function () {
     };
     NewAd.prototype.OnResult = function (param, requestCode) {
         if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+            $("#" + this._categorySpecificPartialViewId).children().remove();
+            $("#" + this._categorySpecificPartialViewId).html(param);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
         }
     };
     NewAd.prototype.OnError = function (message, requestCode) {
         if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+            alert(message);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
         }

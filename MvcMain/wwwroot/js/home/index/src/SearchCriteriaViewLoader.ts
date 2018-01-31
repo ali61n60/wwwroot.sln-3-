@@ -19,10 +19,7 @@ export class SearchCriteriaViewLoader implements IResultHandler {
     private _currentCategoryId: number = 0;
     private _searchCriteria: SearchCriteria;
 
-    constructor(resultHandler: IResultHandler,
-        searchCriteriaChange: ICriteriaChange,
-        searchCriteria: SearchCriteria,
-        requestCode: number) {
+    constructor(resultHandler: IResultHandler,searchCriteriaChange: ICriteriaChange,searchCriteria: SearchCriteria,requestCode: number) {
         this._resultHandler = resultHandler;
         this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
         this._searchCriteriaChange = searchCriteriaChange;

@@ -51,7 +51,7 @@ class NewAd implements ICriteriaChange, IResultHandler{
 
     private initPage(): void {
         this.initNewAdCategory();
-        this._partialViewLoader = new NewAdPartialViewLoader(this._categorySpecificPartialViewId, this, this._newAdCriteria);
+        this._partialViewLoader = new NewAdPartialViewLoader(this,this, this._newAdCriteria,this.LoadNewAdPartialViewRequestCode);
         this._currentNewAdGuid = $("#" + this.CurrentNewAdGuidInputId).val().toString();
 
 
@@ -67,7 +67,9 @@ class NewAd implements ICriteriaChange, IResultHandler{
     private initEventHandlers(): void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
             if (!args.SelectedCategoryHasChild) {
-                this._partialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
+                let userInput = new UserInput();
+                this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+                this._partialViewLoader.GetPartialViewFromServer(userInput,args.SelectedCategoryId);
             }
         });
         $("#" + this._submitAdInputId).on("click", (event) => {
@@ -90,7 +92,8 @@ class NewAd implements ICriteriaChange, IResultHandler{
 
     OnResult(param: any, requestCode: number): void {
         if (requestCode === this.LoadNewAdPartialViewRequestCode) {
-            
+            $("#" + this._categorySpecificPartialViewId).children().remove();
+            $("#" + this._categorySpecificPartialViewId).html(param);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
             
@@ -98,7 +101,7 @@ class NewAd implements ICriteriaChange, IResultHandler{
     }
     OnError(message: string, requestCode: number): void {
         if (requestCode === this.LoadNewAdPartialViewRequestCode) {
-
+            alert(message);
         }
         else if (requestCode === this.AddAdvertisementRequestCode) {
 

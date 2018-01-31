@@ -1,51 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
 var NewAdPartialViewLoader = (function () {
-    function NewAdPartialViewLoader(partialViewDivId, newAdCriteriaChange, newAdCriteria) {
+    // partialViewDivId: string, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria)
+    //this._partialViewDivId = partialViewDivId;
+    function NewAdPartialViewLoader(resultHandler, newAdCriteriaChange, newAdCriteria, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;
         this._url = "/NewAd/GetNewAdPartialView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
-        this._partialViewDivId = partialViewDivId;
+        this._resultHandler = resultHandler;
         this._newAdCriteriaChange = newAdCriteriaChange;
         this._newAdCriteria = newAdCriteria;
+        this._ajaxCaller = new AjaxCaller_1.AjaxCaller(this._url, this, requestCode);
     }
-    NewAdPartialViewLoader.prototype.GetPartialViewFromServer = function (categoryId) {
-        var _this = this;
+    NewAdPartialViewLoader.prototype.GetPartialViewFromServer = function (userInput, categoryId) {
         this._currentCategoryId = categoryId;
-        var callParams = new PartialViewServerCallParameters();
-        callParams.CategoryId = categoryId;
-        $.ajax({
-            type: "GET",
-            url: this._url,
-            data: callParams,
-            //contentType: 'application/json', // content type sent to server
-            success: function (msg, textStatus, jqXHR) { return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
-            error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails
-        }); //.ajax
+        this._ajaxCaller.Call(userInput);
     };
     NewAdPartialViewLoader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
-        this._newAdCriteria.UnBind(this._previousCategoryId);
-        $("#" + this._partialViewDivId).children().remove();
-        $("#" + this._partialViewDivId).html(msg);
-        this._newAdCriteria.Bind(this._currentCategoryId, this._newAdCriteriaChange);
-        this._previousCategoryId = this._currentCategoryId;
     }; //onSuccessGetTimeFromServer
     NewAdPartialViewLoader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
-        alert(errorThrown);
     }; //onErrorGetTimeFromServer
     NewAdPartialViewLoader.prototype.OnResult = function (param, requestCode) {
-        throw new Error("Method not implemented.");
+        if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
+            if (param.Success == true) {
+                this._newAdCriteria.UnBind(this._previousCategoryId);
+                this._resultHandler.OnResult(param.ResponseData, requestCode);
+                this._newAdCriteria.Bind(this._currentCategoryId, this._newAdCriteriaChange);
+                this._previousCategoryId = this._currentCategoryId;
+            }
+            else {
+                this._resultHandler.OnError(param.Message + " , " + param.ErrorCode, requestCode);
+            }
+        }
     };
     NewAdPartialViewLoader.prototype.OnError = function (message, requestCode) {
-        throw new Error("Method not implemented.");
+        this._resultHandler.OnError(message, requestCode);
     };
     NewAdPartialViewLoader.prototype.AjaxCallFinished = function (requestCode) {
-        throw new Error("Method not implemented.");
+        this._resultHandler.AjaxCallFinished(requestCode);
     };
     NewAdPartialViewLoader.prototype.AjaxCallStarted = function (requestCode) {
-        throw new Error("Method not implemented.");
+        this._resultHandler.AjaxCallStarted(requestCode);
     };
     return NewAdPartialViewLoader;
 }());

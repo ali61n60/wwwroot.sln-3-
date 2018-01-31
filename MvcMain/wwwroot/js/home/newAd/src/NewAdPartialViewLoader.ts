@@ -1,67 +1,75 @@
-﻿import {NewAdCriteria} from "./NewAdCriteria";
+﻿import { NewAdCriteria } from "./NewAdCriteria";
 import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
 import { IResultHandler } from "../../../Helper/IResultHandler";
 import { AjaxCaller } from "../../../Helper/AjaxCaller";
+import {UserInput} from "../../../Helper/UserInput";
+
 
 export class NewAdPartialViewLoader implements IResultHandler {
+
     private readonly RequestIndexKey: string = "RequestIndex";
     private _currentRequestIndex: number = 0;
+
     private _url: string = "/NewAd/GetNewAdPartialView";
 
-    private _partialViewDivId: string;
-    
+    private _resultHandler: IResultHandler;
+    private _ajaxCaller: AjaxCaller;
+
+    private _newAdCriteriaChange: ICriteriaChange;
     private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
-    private _newAdCriteriaChange: ICriteriaChange;
     private _newAdCriteria: NewAdCriteria;
 
-    constructor(partialViewDivId: string, newAdCriteriaChange: ICriteriaChange, newAdCriteria:NewAdCriteria) {
-        this._partialViewDivId = partialViewDivId;
+
+
+    private _partialViewDivId: string;
+    // partialViewDivId: string, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria)
+    //this._partialViewDivId = partialViewDivId;
+    constructor(resultHandler: IResultHandler, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria, requestCode: number) {
+        this._resultHandler = resultHandler;
         this._newAdCriteriaChange = newAdCriteriaChange;
         this._newAdCriteria = newAdCriteria;
+        this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
     }
 
-    public GetPartialViewFromServer(categoryId: number) {
+    public GetPartialViewFromServer(userInput: UserInput, categoryId: number) {
         this._currentCategoryId = categoryId;
-        let callParams = new PartialViewServerCallParameters();
-        callParams.CategoryId = categoryId;
-        $.ajax({
-            type: "GET", //GET or POST or PUT or DELETE verb
-            url: this._url,
-            data: callParams, //Data sent to server
-            //contentType: 'application/json', // content type sent to server
-            success: (msg, textStatus, jqXHR) => this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR),//On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown)// When Service call fails
-        });//.ajax
+        this._ajaxCaller.Call(userInput);
+        
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        this._newAdCriteria.UnBind(this._previousCategoryId);
-        $("#" + this._partialViewDivId).children().remove();
-        $("#" + this._partialViewDivId).html(msg);
-        this._newAdCriteria.Bind(this._currentCategoryId, this._newAdCriteriaChange);
-        this._previousCategoryId = this._currentCategoryId;
+        
     }//onSuccessGetTimeFromServer
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        alert(errorThrown);
+       
     }//onErrorGetTimeFromServer
 
     OnResult(param: any, requestCode: number): void {
-        throw new Error("Method not implemented.");
+        if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
+            if (param.Success == true) {
+                this._newAdCriteria.UnBind(this._previousCategoryId);
+                this._resultHandler.OnResult(param.ResponseData, requestCode);
+                this._newAdCriteria.Bind(this._currentCategoryId, this._newAdCriteriaChange);
+                this._previousCategoryId = this._currentCategoryId;
+            } else {
+                this._resultHandler.OnError(param.Message + " , " + param.ErrorCode, requestCode);
+            }
+        }
     }
     OnError(message: string, requestCode: number): void {
-        throw new Error("Method not implemented.");
+        this._resultHandler.OnError(message,requestCode);
     }
     AjaxCallFinished(requestCode: number): void {
-        throw new Error("Method not implemented.");
+        this._resultHandler.AjaxCallFinished(requestCode);
     }
     AjaxCallStarted(requestCode: number): void {
-        throw new Error("Method not implemented.");
+        this._resultHandler.AjaxCallStarted(requestCode);
     }
 }
 
 //TODO refactor this
 export class PartialViewServerCallParameters {
-    public CategoryId:number;
+    public CategoryId: number;
 }
