@@ -11,12 +11,20 @@ namespace MvcMain.Infrastructure.IOC
     {
         private static readonly Dictionary<int, string> _adDetailViewContainer=new Dictionary<int, string>();
         private static readonly Dictionary<int, string> _searchAdPartialViewContainer = new Dictionary<int, string>();
-       
+        private static readonly Dictionary<int, string> _newAdAdPartialViewContainer = new Dictionary<int, string>();
+
         private static int defaultCategoryId = 0;
         static AdViewContainer()
         {
             RegisterAdDetailViews();
             RegisterSearchAdPartialViewContainer();
+            RegisterNewAdPartialViewContainer();
+        }
+
+        private static void RegisterNewAdPartialViewContainer()
+        {
+            _newAdAdPartialViewContainer[100] = "NewAd/NewAdTransformation";
+            _newAdAdPartialViewContainer[defaultCategoryId] = "NewAd/NewAdDefault";
         }
 
         private static void RegisterSearchAdPartialViewContainer()
@@ -48,6 +56,15 @@ namespace MvcMain.Infrastructure.IOC
                 return _searchAdPartialViewContainer[categoryId];
             }
             return _searchAdPartialViewContainer[defaultCategoryId];
+        }
+
+        public static string GetNewAdPartialViewName(int categoryId)
+        {
+            if (_newAdAdPartialViewContainer.ContainsKey(categoryId))
+            {
+                return _newAdAdPartialViewContainer[categoryId];
+            }
+            return _newAdAdPartialViewContainer[defaultCategoryId];
         }
     }
 }

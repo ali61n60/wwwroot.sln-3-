@@ -8,9 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Components\Default\SearchAd\**" />
     <Compile Remove="wwwroot\**" />
+    <Content Remove="Components\Default\SearchAd\**" />
     <Content Remove="wwwroot\**" />
+    <EmbeddedResource Remove="Components\Default\SearchAd\**" />
     <EmbeddedResource Remove="wwwroot\**" />
+    <None Remove="Components\Default\SearchAd\**" />
     <None Remove="wwwroot\**" />
   </ItemGroup>
 
@@ -173,7 +177,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\Default\SearchAd\" />
     <Folder Include="Connected Services\" />
     <Folder Include="Documents\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />

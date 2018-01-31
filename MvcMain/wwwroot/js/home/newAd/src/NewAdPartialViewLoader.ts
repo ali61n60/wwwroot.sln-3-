@@ -1,9 +1,15 @@
 ﻿import {NewAdCriteria} from "./NewAdCriteria";
-import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
+import { ICriteriaChange } from "../../../Helper/ICriteriaChange";
+import { IResultHandler } from "../../../Helper/IResultHandler";
+import { AjaxCaller } from "../../../Helper/AjaxCaller";
 
-export class NewAdPartialViewLoader {
-    private _partialViewDivId: string;
+export class NewAdPartialViewLoader implements IResultHandler {
+    private readonly RequestIndexKey: string = "RequestIndex";
+    private _currentRequestIndex: number = 0;
     private _url: string = "/NewAd/GetNewAdPartialView";
+
+    private _partialViewDivId: string;
+    
     private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
     private _newAdCriteriaChange: ICriteriaChange;
@@ -40,6 +46,19 @@ export class NewAdPartialViewLoader {
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
         alert(errorThrown);
     }//onErrorGetTimeFromServer
+
+    OnResult(param: any, requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
+    OnError(message: string, requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
+    AjaxCallFinished(requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
+    AjaxCallStarted(requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
 }
 
 //TODO refactor this

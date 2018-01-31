@@ -14,6 +14,8 @@ var NewAd = (function () {
         this.AdCommentInputId = "adComment";
         this._submitAdInputId = "submitNewAd";
         this.CurrentNewAdGuidInputId = "currentNewAdGuid";
+        this.AddAdvertisementRequestCode = 1;
+        this.LoadNewAdPartialViewRequestCode = 2;
         this._allCategoriesDivId = allCategoriesDiv;
         this._allCategoriesInputId = allCategoriesInputId;
         this._categorySpecificPartialViewId = categorySpecificPartialViewId;
@@ -57,6 +59,30 @@ var NewAd = (function () {
         userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();
         this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);
         this._newAdServerCaller.SaveAd(userInput);
+    };
+    NewAd.prototype.OnResult = function (param, requestCode) {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+        }
+    };
+    NewAd.prototype.OnError = function (message, requestCode) {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+        }
+    };
+    NewAd.prototype.AjaxCallFinished = function (requestCode) {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+        }
+    };
+    NewAd.prototype.AjaxCallStarted = function (requestCode) {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+        }
     };
     return NewAd;
 }());

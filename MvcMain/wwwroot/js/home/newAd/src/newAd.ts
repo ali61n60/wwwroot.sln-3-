@@ -6,9 +6,10 @@ import { NewAdCriteria } from "./NewAdCriteria";
 import { ImageUploader } from "./ImageUploader";
 import { UserInput } from "../../../Helper/UserInput";
 import { NewAdServerCaller } from "./NewAdServerCaller";
+import {IResultHandler} from "../../../Helper/IResultHandler";
 
-
-class NewAd implements ICriteriaChange {
+class NewAd implements ICriteriaChange, IResultHandler{
+    
     private readonly AdTitleKey = "AdTitle";
     private readonly AdTitleInputId: string = "adTitle";
 
@@ -23,6 +24,9 @@ class NewAd implements ICriteriaChange {
 
     private _currentNewAdGuid: string;
     private readonly CurrentNewAdGuidInputId: string = "currentNewAdGuid";
+
+    private readonly AddAdvertisementRequestCode = 1;
+    private readonly LoadNewAdPartialViewRequestCode = 2;
 
     private _categorySelection: CategorySelection;
     private _partialViewLoader: NewAdPartialViewLoader;
@@ -82,6 +86,39 @@ class NewAd implements ICriteriaChange {
         userInput.ParametersDictionary[this.AdCommentKey] = $("#" + this.AdCommentInputId).val();
         this._newAdCriteria.FillCategorySpecificNewAdCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);
         this._newAdServerCaller.SaveAd(userInput);
+    }
+
+    OnResult(param: any, requestCode: number): void {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+            
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+            
+        }
+    }
+    OnError(message: string, requestCode: number): void {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+
+        }
+    }
+    AjaxCallFinished(requestCode: number): void {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+
+        }
+    }
+    AjaxCallStarted(requestCode: number): void {
+        if (requestCode === this.LoadNewAdPartialViewRequestCode) {
+
+        }
+        else if (requestCode === this.AddAdvertisementRequestCode) {
+
+        }
     }
 }
 

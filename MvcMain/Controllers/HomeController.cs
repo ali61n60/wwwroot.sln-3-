@@ -83,6 +83,7 @@ namespace MvcMain.Controllers
             string viewName =AdViewContainer.GetSearchAdPartialViewName(categoryId);
 
 
+            //TODO Create a service for rendering a view into a string
             try
             {
                 var httpContext = new DefaultHttpContext {RequestServices = _serviceProvider};

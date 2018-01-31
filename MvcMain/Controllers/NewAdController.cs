@@ -24,6 +24,18 @@ namespace MvcMain.Controllers
             return View();
         }
 
+        public IActionResult NewAdDefault()
+        {
+            return View("NewAdDefault");
+        }
+
+        public IActionResult NewAdTransformation()
+        {
+            return View("NewAdTransformation");
+        }
+
+        
+
         [HttpGet]
         public IActionResult GetNewAdPartialView([FromQuery] Dictionary<string, string> userInput)
         {

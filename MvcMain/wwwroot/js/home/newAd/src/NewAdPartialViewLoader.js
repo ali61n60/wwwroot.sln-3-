@@ -2,6 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var NewAdPartialViewLoader = (function () {
     function NewAdPartialViewLoader(partialViewDivId, newAdCriteriaChange, newAdCriteria) {
+        this.RequestIndexKey = "RequestIndex";
+        this._currentRequestIndex = 0;
         this._url = "/NewAd/GetNewAdPartialView";
         this._previousCategoryId = 0;
         this._currentCategoryId = 0;
@@ -33,6 +35,18 @@ var NewAdPartialViewLoader = (function () {
     NewAdPartialViewLoader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
         alert(errorThrown);
     }; //onErrorGetTimeFromServer
+    NewAdPartialViewLoader.prototype.OnResult = function (param, requestCode) {
+        throw new Error("Method not implemented.");
+    };
+    NewAdPartialViewLoader.prototype.OnError = function (message, requestCode) {
+        throw new Error("Method not implemented.");
+    };
+    NewAdPartialViewLoader.prototype.AjaxCallFinished = function (requestCode) {
+        throw new Error("Method not implemented.");
+    };
+    NewAdPartialViewLoader.prototype.AjaxCallStarted = function (requestCode) {
+        throw new Error("Method not implemented.");
+    };
     return NewAdPartialViewLoader;
 }());
 exports.NewAdPartialViewLoader = NewAdPartialViewLoader;
