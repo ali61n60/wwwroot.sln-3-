@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var DefaultLetMeKnowCriteria = /** @class */ (function () {
+var DefaultLetMeKnowCriteria = (function () {
     function DefaultLetMeKnowCriteria() {
     }
     DefaultLetMeKnowCriteria.prototype.FillCriteria = function (searchAdUserInput) {

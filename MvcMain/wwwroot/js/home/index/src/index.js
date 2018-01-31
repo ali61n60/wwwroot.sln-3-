@@ -8,7 +8,7 @@ var UserInput_1 = require("../../../Helper/UserInput");
 //TODO when category change before search criteia is loaded a search call is sent to server
 //add an event like viewLoadStarted, viewLoadInProgress,viewLoadCompleted and disable search
 //durng inProgress end enable it after completed
-var Index = /** @class */ (function () {
+var Index = (function () {
     function Index(categorySelectorParentDivId, allCategoriesId) {
         this.CallImageId = "serverCalledImage";
         this.AdTypeKey = "AdType";
@@ -148,19 +148,21 @@ var Index = /** @class */ (function () {
         this.showErrorMessage(message);
     };
     Index.prototype.onErrorLoadSearchPartialView = function (message) {
-        alert(message);
+        this.showErrorMessage(message);
     };
     Index.prototype.ajaxCallStartedGetAdFromServer = function () {
         $("#" + this.CallImageId).show();
         $("#" + this._getAdFromServerButtonId).attr("disabled", "disabled");
     };
     Index.prototype.ajaxCallStartedLoadSearchPartialView = function () {
+        $("#" + this.CallImageId).show(); //TODO show another image may conflict with ad
     };
     Index.prototype.ajaxCallFinishedGetAdFromServer = function () {
         $("#" + this.CallImageId).hide();
         $("#" + this._getAdFromServerButtonId).removeAttr("disabled");
     };
     Index.prototype.ajaxCallFinishedLoadSearchPartialView = function () {
+        $("#" + this.CallImageId).hide(); //TODO show another image may conflict with ad
     };
     Index.prototype.showErrorMessage = function (message) {
         this.removeErrorMessage();

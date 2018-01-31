@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CarModel = /** @class */ (function () {
+var CarModel = (function () {
     function CarModel() {
     }
     return CarModel;
