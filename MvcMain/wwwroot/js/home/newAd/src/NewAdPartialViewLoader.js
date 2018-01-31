@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
-var NewAdPartialViewLoader = (function () {
+var NewAdPartialViewLoader = /** @class */ (function () {
     // partialViewDivId: string, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria)
     //this._partialViewDivId = partialViewDivId;
     function NewAdPartialViewLoader(resultHandler, newAdCriteriaChange, newAdCriteria, requestCode) {
@@ -49,7 +49,7 @@ var NewAdPartialViewLoader = (function () {
 }());
 exports.NewAdPartialViewLoader = NewAdPartialViewLoader;
 //TODO refactor this
-var PartialViewServerCallParameters = (function () {
+var PartialViewServerCallParameters = /** @class */ (function () {
     function PartialViewServerCallParameters() {
     }
     return PartialViewServerCallParameters;

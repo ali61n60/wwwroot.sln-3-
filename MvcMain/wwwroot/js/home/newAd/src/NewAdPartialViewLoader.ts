@@ -10,7 +10,7 @@ export class NewAdPartialViewLoader implements IResultHandler {
     private readonly RequestIndexKey: string = "RequestIndex";
     private _currentRequestIndex: number = 0;
 
-    private _url: string = "/NewAd/GetNewAdPartialView";
+     private  _url: string = "/NewAd/GetNewAdPartialView";
 
     private _resultHandler: IResultHandler;
     private _ajaxCaller: AjaxCaller;
@@ -20,11 +20,6 @@ export class NewAdPartialViewLoader implements IResultHandler {
     private _currentCategoryId: number = 0;
     private _newAdCriteria: NewAdCriteria;
 
-
-
-    private _partialViewDivId: string;
-    // partialViewDivId: string, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria)
-    //this._partialViewDivId = partialViewDivId;
     constructor(resultHandler: IResultHandler, newAdCriteriaChange: ICriteriaChange, newAdCriteria: NewAdCriteria, requestCode: number) {
         this._resultHandler = resultHandler;
         this._newAdCriteriaChange = newAdCriteriaChange;
@@ -34,8 +29,10 @@ export class NewAdPartialViewLoader implements IResultHandler {
 
     public GetPartialViewFromServer(userInput: UserInput, categoryId: number) {
         this._currentCategoryId = categoryId;
+        this._currentRequestIndex++;
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
+
         this._ajaxCaller.Call(userInput);
-        
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
@@ -69,7 +66,7 @@ export class NewAdPartialViewLoader implements IResultHandler {
     }
 }
 
-//TODO refactor this
-export class PartialViewServerCallParameters {
-    public CategoryId: number;
-}
+////TODO refactor this
+//export class PartialViewServerCallParameters {
+//    public CategoryId: number;
+//}

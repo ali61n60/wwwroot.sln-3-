@@ -52,13 +52,13 @@ namespace MvcMain.Controllers
             try
             {
                 response.ResponseData = await _viewRenderService.RenderToStringAsync(viewName, null);
-                response.SetSuccessResponse("OK");
+                response.SetSuccessResponse("OK",userInput);
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse(ex.Message, errorCode);
+                response.SetFailureResponse(ex.Message, errorCode, userInput);
             }
-            //TODO insert RequsetIndex in response
+            
             return response;
         }
     }

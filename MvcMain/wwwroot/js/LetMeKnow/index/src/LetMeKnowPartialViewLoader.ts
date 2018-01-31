@@ -1,6 +1,6 @@
 ﻿import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {NewAdCriteria} from "../../../home/newAd/src/NewAdCriteria";
-import {PartialViewServerCallParameters} from "../../../home/newAd/src/NewAdPartialViewLoader";
+
 import {LetMeKnowCriteria} from "./LetMeKnowCriteria";
 
 
@@ -20,7 +20,7 @@ export class LetMeKnowPartialViewLoader {
 
     public GetPartialViewFromServer(categoryId: number) {
         this._currentCategoryId = categoryId;
-        let callParams = new PartialViewServerCallParameters();
+        let callParams: any;// = new PartialViewServerCallParameters();
         callParams.CategoryId = categoryId;
         $.ajax({
             type: "GET", //GET or POST or PUT or DELETE verb

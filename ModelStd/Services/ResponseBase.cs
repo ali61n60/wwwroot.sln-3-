@@ -4,6 +4,7 @@ namespace ModelStd.Services
 {
     public class ResponseBase<T>
     {
+        private readonly string RequestIndexKey = "RequestIndex";
         public T ResponseData;
 
         public bool Success { get; set; }
@@ -25,6 +26,13 @@ namespace ModelStd.Services
             Message = message;
         }
 
+        public void SetSuccessResponse(string message, Dictionary<string,string> userInput)
+        {
+            Success = true;
+            Message = message;
+            setRequestIndex(userInput);
+        }
+        
         public void SetFailureResponse(string message)
         {
             Success = false;
@@ -37,6 +45,13 @@ namespace ModelStd.Services
             Message = message;
             ErrorCode = errorCode;
         }
+        public void SetFailureResponse(string message, string errorCode, Dictionary<string, string> userInput)
+        {
+            Success = false;
+            Message = message;
+            ErrorCode = errorCode;
+            setRequestIndex(userInput);
+        }
 
         public ResponseBase GetSimpleResponseBase()
         {
@@ -45,6 +60,17 @@ namespace ModelStd.Services
             responseBase.Message = Message;
             responseBase.ErrorCode = ErrorCode;
             return responseBase;
+        }
+
+        private void setRequestIndex(Dictionary<string, string> userInput)
+        {
+            if (userInput.ContainsKey(RequestIndexKey))
+            {
+                if (CustomDictionary != null)
+                    CustomDictionary[RequestIndexKey] = userInput[RequestIndexKey];
+                else
+                    CustomDictionary = new Dictionary<string, string> { { RequestIndexKey, userInput[RequestIndexKey] } };
+            }
         }
     }
 

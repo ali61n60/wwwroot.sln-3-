@@ -75,27 +75,14 @@ namespace MvcMain.Controllers
             try
             {
                 response.ResponseData =await  _viewRenderService.RenderToStringAsync(viewName, null);
-                response.SetSuccessResponse("OK");
+                response.SetSuccessResponse("OK",userInput);
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse(ex.Message, errorCode);
+                response.SetFailureResponse(ex.Message, errorCode, userInput);
             }
-            //TODO make it a function of response class
-            setRequestIndex(userInput, response);
+            
             return response;
-        }
-
-        private readonly string requestIndexKey = "RequestIndex";
-        private void setRequestIndex(Dictionary<string, string> userInput, ResponseBase<string> response)
-        {
-            if (userInput.ContainsKey(requestIndexKey))
-            {
-                if (response.CustomDictionary != null)
-                    response.CustomDictionary[requestIndexKey] = userInput[requestIndexKey];
-                else
-                    response.CustomDictionary = new Dictionary<string, string> { { requestIndexKey, userInput[requestIndexKey] } };
-            }
         }
     }
 }
