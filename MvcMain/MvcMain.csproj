@@ -173,6 +173,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Components\Default\SearchAd\" />
     <Folder Include="Connected Services\" />
     <Folder Include="Documents\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
@@ -188,7 +189,6 @@
     <None Include="node_modules\%40types\mustache\README.md" />
     <None Include="node_modules\%40types\canvasJS\README.md" />
     <None Include="Views\NewAd\Index.cshtml" />
-    <None Include="Views\Shared\Components\SearchCriteriaTransformation\Default.cshtml" />
     <None Include="wwwroot\cmd.exe" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.svg" />
     <None Include="wwwroot\css\fonts\glyphicons-halflings-regular.woff2" />

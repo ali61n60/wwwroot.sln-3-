@@ -21,8 +21,8 @@ namespace MvcMain.Infrastructure.IOC
 
         private static void RegisterSearchAdPartialViewContainer()
         {
-            _searchAdPartialViewContainer[100] = "SearchCriteriaTransformation";
-            _searchAdPartialViewContainer[defaultCategoryId] = "SearchCriteriaDefault";
+            _searchAdPartialViewContainer[100] = "Home/SearchCriteriaTransformation";
+            _searchAdPartialViewContainer[defaultCategoryId] = "Home/SearchCriteriaDefault";
         }
 
 
