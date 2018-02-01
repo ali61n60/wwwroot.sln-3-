@@ -2,15 +2,20 @@
 
 <div class="well">
     <div class="row">
-        <div class="col-sm-4">
+        <div class="col-sm-4 table-bordered"">
             @await Component.InvokeAsync("BrandsTransformation")
         </div>
-        <div class="col-sm-4 ">
-            <div class="col-sm-6">
-                <input id="fromYear" class="form-control" placeholder="از سال" />
+        <div class="col-sm-4 table-bordered">
+            <div class="row">
+                <label>سال تولید</label>
             </div>
-            <div class="col-sm-6">
-                <input id="toYear" class="form-control" placeholder="تا سال" />
+            <div class="row">
+                <div class="col-sm-6">
+                    <input id="fromYear" class="form-control" placeholder="از سال" />
+                </div>
+                <div class="col-sm-6">
+                    <input id="toYear" class="form-control" placeholder="تا سال" />
+                </div>
             </div>
         </div>
         <div class="col-sm-4">
