@@ -18,11 +18,11 @@ namespace ModelStd.Db.Ad
         [Column("brandId")]
         public int? BrandId { get; set; }
 
-        [Column("fromYear")]
-        public int? FromYear { get; set; }
+        [Column("makeYearFrom")]
+        public int? MakeYearFrom { get; set; }
 
-        [Column("toYear")]
-        public int? ToYear { get; set; }
+        [Column("makeYearto")]
+        public int? MakeYearTo { get; set; }
 
         public virtual LetMeKnow LetMeKnow { get; set; }
         public virtual Brand Brand { get; set; }

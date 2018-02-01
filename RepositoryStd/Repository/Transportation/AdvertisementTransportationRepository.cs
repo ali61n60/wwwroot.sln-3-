@@ -214,19 +214,44 @@ namespace RepositoryStd.Repository.Transportation
             {
                 return false;
             }
+
+            if (letMeKnowCarBrandAndModelMatch( approvedadAttributeTransportation, letMeKnowAttributeTransportaion)
+                && letMeKnowMakeYearMatch(approvedadAttributeTransportation, letMeKnowAttributeTransportaion))
+            {
+                return true;
+            }
+            
+            return false;
+            
+        }
+
+        private bool letMeKnowCarBrandAndModelMatch(AdAttributeTransportation approvedadAttributeTransportation, LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion)
+        {
             CarModel approvedCarModel = approvedadAttributeTransportation.CarModel;
             Brand approvedBrand = approvedCarModel.Brand;
 
             int? letMeKnowBrandId = letMeKnowAttributeTransportaion.BrandId;
             int? letMeKnowCarModelId = letMeKnowAttributeTransportaion.ModelId;
-            if ((letMeKnowBrandId==CarBrandIdDefault) ||
-                (letMeKnowBrandId == approvedBrand.BrandId && letMeKnowCarModelId == CarModelIdDefault ) ||
+            if ((letMeKnowBrandId == CarBrandIdDefault) ||
+                (letMeKnowBrandId == approvedBrand.BrandId && letMeKnowCarModelId == CarModelIdDefault) ||
                 (letMeKnowCarModelId == approvedCarModel.ModelId))
             {
                 return true;
             }
             return false;
-            
+        }
+
+        private bool letMeKnowMakeYearMatch(AdAttributeTransportation approvedadAttributeTransportation, LetMeKnowAttributeTransportaion letMeKnowAttributeTransportaion)
+        {
+            int? approvedMakeYear = approvedadAttributeTransportation.MakeYear;
+            int? letMeMakeYearFrom = letMeKnowAttributeTransportaion.MakeYearFrom;
+            int? letMeMakeYearTo = letMeKnowAttributeTransportaion.MakeYearTo;
+
+            if (approvedMakeYear >= letMeMakeYearFrom && approvedMakeYear <= letMeMakeYearTo)
+            {
+                return true;
+            }
+            return false;
         }
 
         private LetMeKnowAttributeTransportaion getLetMeKnowAttributeTransportaionFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
@@ -235,10 +260,10 @@ namespace RepositoryStd.Repository.Transportation
             tempLetMeKnowAttributeTransportaion.BrandId =ParameterExtractor.ExtractInt(userInputDictionary, CarBrandIdKey, CarBrandIdDefault);
             tempLetMeKnowAttributeTransportaion.ModelId =ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
 
-            tempLetMeKnowAttributeTransportaion.FromYear =
+            tempLetMeKnowAttributeTransportaion.MakeYearFrom =
                 ParameterExtractor.ExtractInt(userInputDictionary, MakeYearFromKey, MakeYearFromDefault);
 
-            tempLetMeKnowAttributeTransportaion.ToYear =
+            tempLetMeKnowAttributeTransportaion.MakeYearTo =
                 ParameterExtractor.ExtractInt(userInputDictionary, MakeYearToKey, MakeYearToDefault);
 
             return tempLetMeKnowAttributeTransportaion;
