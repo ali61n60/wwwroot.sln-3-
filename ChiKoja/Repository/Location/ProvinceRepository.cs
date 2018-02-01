@@ -6,7 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.Preferences;
 using ChiKoja.Services.Server;
-using ModelStd.Advertisements.Location;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
 
@@ -161,9 +161,10 @@ namespace ChiKoja.Repository.Location
                         var r = sqliteCommand.ExecuteReader();
                         while (r.Read())
                         {
-                            tempProvince = new Province((int) r["provinceId"],
-                                r["provinceName"].ToString(),
-                                r["provinceCenter"].ToString());
+                            tempProvince = new Province();
+                            tempProvince.ProvinceId = (int) r["provinceId"];
+                            tempProvince.ProvinceName= r["provinceName"].ToString();
+                               tempProvince.ProvinceCenter= r["provinceCenter"].ToString();
                             selectedProvinces.Add(tempProvince);
                         }
                     }

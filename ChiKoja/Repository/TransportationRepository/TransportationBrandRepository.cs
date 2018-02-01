@@ -6,7 +6,6 @@ using Mono.Data.Sqlite;
 using System.Data;
 using System.Threading.Tasks;
 using ChiKoja.Services.Server;
-using ModelStd.Advertisements.Transportation;
 using ModelStd.Services;
 
 namespace ChiKoja.Repository.TransportationRepository

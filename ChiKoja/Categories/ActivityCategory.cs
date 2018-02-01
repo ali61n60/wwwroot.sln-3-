@@ -9,6 +9,7 @@ using Android.Widget;
 using ChiKoja.CustomViews.CategoryView;
 using ChiKoja.Repository;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 
 namespace ChiKoja.Categories
 {
@@ -69,7 +70,7 @@ namespace ChiKoja.Categories
         private void addFirstLevelCategories(Category[] allCategories, int rootCategoryId)
         {
             IEnumerable<Category> firstLevelCategories = from category in allCategories
-                                                                         where category.ParentCategoryId == rootCategoryId
+                                                                         where category.CategoryParentId == rootCategoryId
                                                                          select category;
             LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);

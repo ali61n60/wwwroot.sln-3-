@@ -10,6 +10,7 @@ using ModelStd.Services;
 using Mono.Data.Sqlite;
 using ServiceLayer;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 
 namespace ChiKoja.Repository
 {
@@ -110,10 +111,11 @@ namespace ChiKoja.Repository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempCategory = new Category((int) r["categoryId"],
-                            (int)r["categoryParentId"],
-                            r["categoryName"].ToString(),
-                            r["categoryNameEnglish"].ToString());
+                        tempCategory = new Category();
+                        tempCategory.CategoryId = (int) r["categoryId"];
+                        tempCategory.CategoryParentId= (int) r["categoryParentId"];
+                        tempCategory.CategoryName= r["categoryName"].ToString();
+                        tempCategory.CategoryNameEnglish = r["categoryNameEnglish"].ToString();
                         allCategories.Add(tempCategory);
                     }
                 }
@@ -141,8 +143,8 @@ namespace ChiKoja.Repository
                             c.CommandText = commandText;
                             c.Parameters.Add("categoryId", DbType.Int32).Value = category.CategoryId;
                             c.Parameters.Add("categoryName", DbType.String).Value = category.CategoryName;
-                            c.Parameters.Add("categoryParentId", DbType.Int32).Value = category.ParentCategoryId;
-                            c.Parameters.Add("categoryNameEnglish", DbType.String).Value = category.EnglishCategoryName;
+                            c.Parameters.Add("categoryParentId", DbType.Int32).Value = category.CategoryParentId;
+                            c.Parameters.Add("categoryNameEnglish", DbType.String).Value = category.CategoryNameEnglish;
                             var rowcount = c.ExecuteNonQuery();
                         }
                     }

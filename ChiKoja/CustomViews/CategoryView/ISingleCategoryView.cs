@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Android.Widget;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 
 namespace ChiKoja.CustomViews.CategoryView
 {

@@ -5,7 +5,7 @@ using Android.App;
 using Android.Content;
 using Android.Preferences;
 using ChiKoja.Services.Server;
-using ModelStd.Advertisements.Location;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
 
@@ -80,10 +80,11 @@ namespace ChiKoja.Repository.Location
                     var r = contents.ExecuteReader();
                     while (r.Read())
                     {
-                        tempDistrict = new District((int)r["districtId"],
-                            r["DistrictName"].ToString(),
-                            (int)r["cityId"],
-                            (int)r["municipalId"]);
+                        tempDistrict = new District();
+                        tempDistrict.DistrictId = (int) r["districtId"];
+                        tempDistrict.DistrictName= r["DistrictName"].ToString();
+                        tempDistrict.CityId= (int) r["cityId"];
+                            tempDistrict.MunicipalId= (int)r["municipalId"];
                         allDistricts.Add(tempDistrict);
                     }
                 }
@@ -161,10 +162,11 @@ namespace ChiKoja.Repository.Location
                     var r = contents.ExecuteReader();
                     while (r.Read())
                     {
-                        tempDistrict = new District((int)r["districtId"],
-                            r["DistrictName"].ToString(),
-                            (int)r["cityId"],
-                            (int)r["municipalId"]);
+                        tempDistrict = new District();
+                        tempDistrict.DistrictId = (int) r["districtId"];
+                        tempDistrict.DistrictName = r["DistrictName"].ToString();
+                        tempDistrict.CityId = (int) r["cityId"];
+                        tempDistrict.MunicipalId = (int)r["municipalId"];
                         selectedDistricts.Add(tempDistrict);
                     }
                 }

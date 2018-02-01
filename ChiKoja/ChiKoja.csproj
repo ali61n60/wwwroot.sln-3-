@@ -130,9 +130,6 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=1.1.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Extensions.Primitives.1.1.0\lib\netstandard1.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="ModelStd, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\ModelStd.1.0.18\lib\netstandard1.4\ModelStd.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Data.Sqlite" />
     <Reference Include="mscorlib" />
@@ -429,6 +426,10 @@
     <AndroidResource Include="Resources\values\vals.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ModelStd\ModelStd.csproj">
+      <Project>{a6b55618-2c5c-4b70-ae9e-1c5247ea11df}</Project>
+      <Name>ModelStd</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
       <Project>{a7fe567b-d17e-4b5e-86c5-7224c753c1de}</Project>
       <Name>ServiceLayer</Name>

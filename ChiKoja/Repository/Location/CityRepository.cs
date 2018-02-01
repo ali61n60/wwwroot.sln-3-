@@ -6,7 +6,7 @@ using Android.App;
 using Android.Content;
 using Android.Preferences;
 using ChiKoja.Services.Server;
-using ModelStd.Advertisements.Location;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
 
@@ -86,9 +86,10 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempCity = new City((int) r["cityId"],
-                            r["cityName"].ToString(),
-                            (int) r["provinceId"]);
+                        tempCity = new City();
+                        tempCity.CityId = (int) r["cityId"];
+                        tempCity.CityName = r["cityName"].ToString();
+                            tempCity.ProvinceId= (int) r["provinceId"];
                         allCities.Add(tempCity);
                     }
                 }

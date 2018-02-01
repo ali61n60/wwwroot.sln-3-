@@ -5,6 +5,7 @@ using Android.Graphics;
 using Android.Views;
 using Android.Widget;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 
 
 namespace ChiKoja.CustomViews.CategoryView

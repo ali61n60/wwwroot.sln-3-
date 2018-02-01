@@ -8,7 +8,8 @@ using Android.Views;
 using Android.Widget;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Location;
-using ModelStd.Advertisements.Location;
+using ModelStd.Db.Ad;
+
 
 namespace ChiKoja.LocationSelection
 {

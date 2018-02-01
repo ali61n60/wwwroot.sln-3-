@@ -161,7 +161,7 @@ namespace ChiKoja.SearchAd
             return new ViewGroupSingleAd(this)
             {
                 AdTitle = advertisementCommon.AdvertisementTitle + ", " + advertisementCommon.CityName,
-                AdPrice = advertisementCommon.AdvertisementPrice.price.ToString(),
+                AdPrice = advertisementCommon.AdvertisementPrice.PriceString,
                 AdImage = advertisementCommon.AdvertisementImages[0],
                 AdCategoryId = advertisementCommon.AdvertisementCategoryId,
                 AdGuid = advertisementCommon.AdvertisementId,
