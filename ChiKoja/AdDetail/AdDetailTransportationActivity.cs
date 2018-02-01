@@ -9,7 +9,6 @@ using Android.Util;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Notification;
 using ChiKoja.Repository.UserMarkedAds;
-using ChiKoja.Services;
 using ChiKoja.Services.Server;
 using ModelStd.Advertisements;
 using ModelStd.Services;
@@ -96,17 +95,17 @@ namespace ChiKoja.AdDetail
             Button buttonCall = contactInfoDialog.FindViewById<Button>(Resource.Id.buttonCall);
             buttonCall.Click += (s, ev) =>
             {
-                Intent dialIntent = new Intent(Intent.ActionDial, Uri.Parse("tel:" + advertisementTransportation.AdvertisementCommon.PhoneNumber));
+                Intent dialIntent = new Intent(Intent.ActionDial, Uri.Parse("tel:" + advertisementTransportation.PhoneNumber));
                 StartActivity(dialIntent);
             };
             Button buttonSendSms = contactInfoDialog.FindViewById<Button>(Resource.Id.buttonSendSMS);
             buttonSendSms.Click += (s, ev) =>
             {
-                Intent dialIntent = new Intent(Intent.ActionSendto, Uri.Parse("smsto:" + advertisementTransportation.AdvertisementCommon.PhoneNumber));
+                Intent dialIntent = new Intent(Intent.ActionSendto, Uri.Parse("smsto:" + advertisementTransportation.PhoneNumber));
                 StartActivity(dialIntent);
             };
             TextView textViewPhoneNumber = contactInfoDialog.FindViewById<TextView>(Resource.Id.textViewPhoneNumber);
-            textViewPhoneNumber.Text = advertisementTransportation.AdvertisementCommon.PhoneNumber;
+            textViewPhoneNumber.Text = advertisementTransportation.PhoneNumber;
 
             contactInfoDialog.Show();
         }
@@ -136,12 +135,12 @@ namespace ChiKoja.AdDetail
         }
         private void fillImageSection()
         {
-            if (advertisementTransportation == null || advertisementTransportation.AdvertisementCommon == null || advertisementTransportation.AdvertisementCommon.AdvertisementImages == null)
+            if (advertisementTransportation == null || advertisementTransportation.AdvertisementImages == null)
                 return;
-            for (int i = 1; i < advertisementTransportation.AdvertisementCommon.AdvertisementImages.Length; i += 2)// just show big images
+            for (int i = 1; i < advertisementTransportation.AdvertisementImages.Length; i += 2)// just show big images
             {
                 var imageView = new ImageView(this);
-                setBitmapImage(imageView, advertisementTransportation.AdvertisementCommon.AdvertisementImages[i]);
+                setBitmapImage(imageView, advertisementTransportation.AdvertisementImages[i]);
                 LinearLayout.LayoutParams layoutParams =
                     new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
 
@@ -160,7 +159,7 @@ namespace ChiKoja.AdDetail
         private void fillAdTitle()
         {
             TextView textViewAdTitle = FindViewById<TextView>(Resource.Id.textViewAdTitle);
-            textViewAdTitle.Text = advertisementTransportation.AdvertisementCommon.AdvertisementTitle;
+            textViewAdTitle.Text = advertisementTransportation.AdvertisementTitle;
         }
 
         private void fillBrand()

@@ -6,6 +6,7 @@ using Mono.Data.Sqlite;
 using System.Data;
 using System.Threading.Tasks;
 using ChiKoja.Services.Server;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 
 namespace ChiKoja.Repository.TransportationRepository
@@ -79,14 +80,14 @@ namespace ChiKoja.Repository.TransportationRepository
                                    ([brandId], [brandName])
                                    VALUES (@brandId, @brandName)";
             AdTransportationApi adTransportationApi=new AdTransportationApi();
-            ResponseBase<TransportationBrand[]> response =await adTransportationApi.GetAllTransportationBrands();
+            ResponseBase<Brand[]> response =await adTransportationApi.GetAllTransportationBrands();
 
             if (response.Success)
             {
                 lock (locker)
                 {
                     connection.Open();
-                    foreach (TransportationBrand transportationBrand in response.ResponseData)
+                    foreach (Brand transportationBrand in response.ResponseData)
                     {
                         using (SqliteCommand c = connection.CreateCommand())
                         {
@@ -117,10 +118,10 @@ namespace ChiKoja.Repository.TransportationRepository
             }
         }
 
-        public TransportationBrand[] GetAll(object locker)
+        public Brand[] GetAll(object locker)
         {
-            List<TransportationBrand> allBrands = new List<TransportationBrand>();
-            TransportationBrand tempBrand;
+            List<Brand> allBrands = new List<Brand>();
+            Brand tempBrand;
             lock (locker)
             {
                 connection.Open();
@@ -131,8 +132,9 @@ namespace ChiKoja.Repository.TransportationRepository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempBrand = new TransportationBrand((int)r["brandId"],
-                            r["brandName"].ToString());
+                        tempBrand = new Brand();
+                        tempBrand.BrandId = (int) r["brandId"];
+                           tempBrand.BrandName= r["brandName"].ToString();
                         allBrands.Add(tempBrand);
                     }
                 }

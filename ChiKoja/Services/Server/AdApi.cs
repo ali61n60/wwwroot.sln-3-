@@ -42,66 +42,6 @@ namespace ChiKoja.Services.Server
         public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon(Dictionary<string, string> userInput)
         {
             return  await ServicesCommon.CallService<AdvertisementCommon[]>("api/AdApi/GetAdvertisementCommon", userInput);
-            
-
-
-            //try
-            //{
-            //    string url = ServicesCommon.ServerUrl + "/api/AdApi/GetAdvertisementCommon";
-            //    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-            //    request.ContentType = "application/json";
-            //    request.Method = "POST";
-            //    using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-            //    {
-            //        string jsonData = JsonConvert.SerializeObject(userInput);
-            //        streamWriter.Write(jsonData);
-            //        streamWriter.Flush();
-            //        streamWriter.Close();
-            //    }
-
-            //    // Send the request to the server and wait for the response:
-            //    using (WebResponse webResponse = await request.GetResponseAsync())
-            //    {
-            //        using (Stream stream = webResponse.GetResponseStream())
-            //        {
-            //            JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-            //            response = JsonConvert.DeserializeObject<ResponseBase<AdvertisementCommon[]>>(jsonDoc.ToString());
-
-            //            if (response.Success)
-            //            {
-            //                Dictionary<string, string> resultCustomDictionary = response.CustomDictionary;
-            //                if (!localRequestIndexMatchsServerResponse(resultCustomDictionary))
-            //                {
-            //                    //more request has been send to server so dismiss current server response
-            //                    response.Success = false;
-            //                    response.Message = "more request has been send to server";
-            //                    return response;
-            //                }
-            //                foreach (var keyValueOfstringstring in resultCustomDictionary)
-            //                {
-            //                    if (keyValueOfstringstring.Key == NumberOfItemsKey)
-            //                    {
-            //                        int numberOfItems = Parser.ParseInt(keyValueOfstringstring.Value, 0);
-            //                        _start += numberOfItems;
-            //                        break;
-            //                    }
-            //                }
-            //                return response;
-            //            }
-            //            else
-            //                throw new Exception(response.Message + " ErrorCode=" + response.ErrorCode);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    response = new ResponseBase<AdvertisementCommon[]>
-            //    {
-            //        Success = false,
-            //        Message = ex.Message
-            //    };
-            //    return response;
-            //}
         }
 
        
@@ -120,9 +60,6 @@ namespace ChiKoja.Services.Server
             
             ResponseBase<AdvertisementCommon[]> response=await GetAdvertisementCommon(userInputDictionary);
             return response;
-
-            
-
         }
 
         private bool localRequestIndexMatchsServerResponse(Dictionary<string, string> resultCustomDictionary)

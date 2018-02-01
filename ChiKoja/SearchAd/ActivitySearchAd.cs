@@ -1,5 +1,4 @@
 using System;
-using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -9,9 +8,7 @@ using Android.Widget;
 using ChiKoja.Categories;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.CustomViews.SingleAdView;
-using ChiKoja.Services;
 using ChiKoja.Services.Server;
-using Java.Util.Logging;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 

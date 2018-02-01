@@ -12,6 +12,7 @@ using Android.Widget;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 
 namespace ChiKoja.Services.Server
@@ -23,14 +24,14 @@ namespace ChiKoja.Services.Server
             return await ServicesCommon.CallService<int>("api/AdTransportationApi/GetServerDataVersion");
         }
 
-        public async Task<ResponseBase<TransportationModel[]>> GetAllTransportationModels()
+        public async Task<ResponseBase<CarModel[]>> GetAllTransportationModels()
         {
-            return await ServicesCommon.CallService<TransportationModel[]>("api/AdTransportationApi/GetAllTransportationModels");
+            return await ServicesCommon.CallService<CarModel[]>("api/AdTransportationApi/GetAllTransportationModels");
         }
 
-        public async Task<ResponseBase<TransportationBrand[]>> GetAllTransportationBrands()
+        public async Task<ResponseBase<Brand[]>> GetAllTransportationBrands()
         {
-            return await ServicesCommon.CallService<TransportationBrand[]>("api/AdTransportationApi/GetAllTransportationBrands");
+            return await ServicesCommon.CallService<Brand[]>("api/AdTransportationApi/GetAllTransportationBrands");
         }
 
         public ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation adTransportation, string encryptWithServerKey, string s)

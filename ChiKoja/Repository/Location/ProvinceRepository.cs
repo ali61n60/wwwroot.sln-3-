@@ -90,9 +90,10 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempProvince = new Province((int) r["provinceId"],
-                            r["provinceName"].ToString(),
-                            r["provinceCenter"].ToString());
+                        tempProvince = new Province();
+                        tempProvince.ProvinceId=(int) r["provinceId"];
+                        tempProvince.ProvinceName=r["provinceName"].ToString();
+                        tempProvince.ProvinceCenter=r["provinceCenter"].ToString();
                         allProvinces.Add(tempProvince);
                     }
                 }

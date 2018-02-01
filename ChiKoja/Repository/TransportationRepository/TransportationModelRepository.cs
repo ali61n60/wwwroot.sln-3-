@@ -6,6 +6,7 @@ using Android.Content;
 using Android.Preferences;
 using ChiKoja.Services.Server;
 using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
 
@@ -80,7 +81,7 @@ namespace ChiKoja.Repository.TransportationRepository
                                    ([modelId],[modelName],[brandId])
                                    VALUES (@modelId,@modelName,@brandId)";
             AdTransportationApi adTransportationApi = new AdTransportationApi();
-            ResponseBase<TransportationModel[]> response =await
+            ResponseBase<CarModel[]> response =await
                 adTransportationApi.GetAllTransportationModels();
 
             if (response.Success)
@@ -88,7 +89,7 @@ namespace ChiKoja.Repository.TransportationRepository
                 lock (locker)
                 {
                     connection.Open();
-                    foreach (TransportationModel transportationModel in response.ResponseData)
+                    foreach (CarModel transportationModel in response.ResponseData)
                     {
                         using (SqliteCommand c = connection.CreateCommand())
                         {
@@ -120,10 +121,10 @@ namespace ChiKoja.Repository.TransportationRepository
             }
         }
 
-        public TransportationModel[] GetAll(object locker)
+        public CarModel[] GetAll(object locker)
         {
-            List<TransportationModel> allModels = new List<TransportationModel>();
-            TransportationModel tempModel;
+            List<CarModel> allModels = new List<CarModel>();
+            CarModel tempModel;
             lock (locker)
             {
                 connection.Open();
@@ -134,9 +135,10 @@ namespace ChiKoja.Repository.TransportationRepository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempModel = new TransportationModel((int)r["modelId"],
-                            r["modelName"].ToString(),
-                            (int)r["brandId"]);
+                        tempModel = new CarModel();
+                        tempModel.ModelId = (int) r["modelId"];
+                       tempModel.ModelName= r["modelName"].ToString();
+                            tempModel.BrandId= (int)r["brandId"];
                         allModels.Add(tempModel);
                     }
                 }
@@ -146,10 +148,10 @@ namespace ChiKoja.Repository.TransportationRepository
         }
         
 
-        public TransportationModel[] GetAllModelsInBrand(object locker,int brandId)
+        public CarModel[] GetAllModelsInBrand(object locker,int brandId)
         {
-            List<TransportationModel> allModels = new List<TransportationModel>();
-            TransportationModel tempModel;
+            List<CarModel> allModels = new List<CarModel>();
+            CarModel tempModel;
             lock (locker)
             {
                 connection.Open();
@@ -161,9 +163,10 @@ namespace ChiKoja.Repository.TransportationRepository
                     var r = sqliteCommand.ExecuteReader();
                     while (r.Read())
                     {
-                        tempModel = new TransportationModel((int)r["modelId"],
-                            r["modelName"].ToString(),
-                            (int)r["brandId"]);
+                        tempModel = new CarModel();
+                        tempModel.ModelId=(int)r["modelId"];
+                        tempModel.ModelName= r["modelName"].ToString();
+                           tempModel.BrandId= (int)r["brandId"];
                         allModels.Add(tempModel);
                     }
                 }

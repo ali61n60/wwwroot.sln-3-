@@ -1,6 +1,5 @@
 using System.Threading.Tasks;
 using ChiKoja.Services.Server.Interfaces;
-using ModelStd.Advertisements.Location;
 using ModelStd.Db.Ad;
 using ModelStd.Services;
 

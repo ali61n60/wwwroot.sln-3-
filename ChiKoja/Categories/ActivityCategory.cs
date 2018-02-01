@@ -96,7 +96,7 @@ namespace ChiKoja.Categories
             layoutParams.SetMargins(20, 0, 20, 10);
             foreach (SingleCategoryView firstLevelCategoryView in _firstLevelCategoryViews)
             {
-                var childCategories = allCategories.Where(cat => cat.ParentCategoryId == firstLevelCategoryView.GetCategory().CategoryId);
+                var childCategories = allCategories.Where(cat => cat.CategoryParentId == firstLevelCategoryView.GetCategory().CategoryId);
                 foreach (Category childCategory in childCategories)
                 {
                     SingleCategoryView singleCategoryView =
@@ -114,7 +114,7 @@ namespace ChiKoja.Categories
             layoutParams.SetMargins(30, 0, 30, 10);
             foreach (SingleCategoryView secondLevelCategoryView in _secondLevelCategoryViews)
             {
-                var childCategories = allCategories.Where(cat => cat.ParentCategoryId == secondLevelCategoryView.GetCategory().CategoryId);
+                var childCategories = allCategories.Where(cat => cat.CategoryParentId== secondLevelCategoryView.GetCategory().CategoryId);
                 foreach (Category childCategory in childCategories)
                 {
                     SingleCategoryView singleCategoryView =

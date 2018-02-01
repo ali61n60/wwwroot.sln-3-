@@ -1,16 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using ModelStd.Advertisements;
-using ModelStd.Advertisements.Transportation;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 
 namespace ChiKoja.Services.Server.Interfaces
@@ -18,8 +8,8 @@ namespace ChiKoja.Services.Server.Interfaces
     public interface IAdTransportationApi
     {
         Task<ResponseBase<int>> GetServerDataVersion();
-        Task<ResponseBase<TransportationModel[]>> GetAllTransportationModels();
-        Task<ResponseBase<TransportationBrand[]>> GetAllTransportationBrands();
+        Task<ResponseBase<CarModel[]>> GetAllTransportationModels();
+        Task<ResponseBase<Brand[]>> GetAllTransportationBrands();
 
         ResponseBase AddNewAdvertisementTransportation(AdvertisementTransportation adTransportation,
             string encryptWithServerKey, string s);
