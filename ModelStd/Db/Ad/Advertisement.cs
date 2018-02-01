@@ -79,7 +79,7 @@ namespace ModelStd.Db.Ad
     public partial class Advertisement
     {
         public static readonly string AdTypeKey = "AdType";
-        public static readonly int AdTypeDefauly = 2;
+        public static readonly int AdTypeDefauly = 3;
     }
 
     public enum AdType
