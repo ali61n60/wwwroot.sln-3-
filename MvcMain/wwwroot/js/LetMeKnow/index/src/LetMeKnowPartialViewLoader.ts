@@ -2,45 +2,81 @@
 import {NewAdCriteria} from "../../../home/newAd/src/NewAdCriteria";
 
 import {LetMeKnowCriteria} from "./LetMeKnowCriteria";
+import {IResultHandler} from "../../../Helper/IResultHandler";
+import {AjaxCaller} from "../../../Helper/AjaxCaller";
+import {UserInput} from "../../../Helper/UserInput";
 
 
-export class LetMeKnowPartialViewLoader {
-    private _partialViewDivId: string;
+export class LetMeKnowPartialViewLoader  implements IResultHandler {
+    private readonly RequestIndexKey: string = "RequestIndex";
+    private _currentRequestIndex: number = 0;
     private _url: string = "/LetMeKnow/GetLetMeKnowPartialView";
+
+    private _resultHandler: IResultHandler;
+    private _ajaxCaller: AjaxCaller;
+
+    private _partialViewDivId: string;
+    
     private _previousCategoryId: number = 0;
     private _currentCategoryId: number = 0;
     private _criteriaChange: ICriteriaChange;
     private _letMeKnowCriteria: LetMeKnowCriteria;
 
-    constructor(partialViewDivId: string, criteriaChange: ICriteriaChange, letMeKnowCriteria: LetMeKnowCriteria) {
-        this._partialViewDivId = partialViewDivId;
+    constructor(resultHandler: IResultHandler, criteriaChange: ICriteriaChange, letMeKnowCriteria: LetMeKnowCriteria, requestCode: number) {
+        this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
         this._criteriaChange = criteriaChange;
         this._letMeKnowCriteria = letMeKnowCriteria;
+
     }
 
-    public GetPartialViewFromServer(categoryId: number) {
+    public GetPartialViewFromServer(userInput: UserInput, categoryId: number) {
         this._currentCategoryId = categoryId;
-        let callParams: any;// = new PartialViewServerCallParameters();
-        callParams.CategoryId = categoryId;
-        $.ajax({
-            type: "GET", //GET or POST or PUT or DELETE verb
-            url: this._url,
-            data: callParams, //Data sent to server
-            success: (msg, textStatus, jqXHR) => this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR),//On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown)// When Service call fails
-        });//.ajax
+
+        this._currentRequestIndex++;
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
+
+        this._ajaxCaller.Call(userInput);
+        
     }
 
     private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        this._letMeKnowCriteria.UnBind(this._previousCategoryId);
-        $("#" + this._partialViewDivId).children().remove();
-        $("#" + this._partialViewDivId).html(msg);
-        this._letMeKnowCriteria.Bind(this._currentCategoryId, this._criteriaChange);
-        this._previousCategoryId = this._currentCategoryId;
+       
     }//onSuccessGetTimeFromServer
 
     private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        alert(errorThrown);
+       
     }//onErrorGetTimeFromServer
 
+    OnResult(param, requestCode: number): void {
+        if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
+            if (param.Success == true) {
+                this._letMeKnowCriteria.UnBind(this._previousCategoryId);
+                this._resultHandler.OnResult(param.ResponseData, requestCode);
+                this._letMeKnowCriteria.Bind(this._currentCategoryId, this._criteriaChange);
+                this._previousCategoryId = this._currentCategoryId;
+            } else {
+                this._resultHandler.OnError(param.Message + " , " + param.ErrorCode, requestCode);
+            }
+        }
+
+
+        
+        
+        
+        
+    }
+
+    
+    OnError(message: string, requestCode: number): void {
+        this._resultHandler.OnError(message, requestCode);
+    }
+    AjaxCallFinished(requestCode: number): void {
+        this._resultHandler.AjaxCallFinished(requestCode);
+    }
+    AjaxCallStarted(requestCode: number): void {
+        this._resultHandler.AjaxCallStarted(requestCode);
+    }
+
+    
 }

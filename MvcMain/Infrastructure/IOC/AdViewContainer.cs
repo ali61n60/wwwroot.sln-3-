@@ -12,6 +12,8 @@ namespace MvcMain.Infrastructure.IOC
         private static readonly Dictionary<int, string> _adDetailViewContainer=new Dictionary<int, string>();
         private static readonly Dictionary<int, string> _searchAdPartialViewContainer = new Dictionary<int, string>();
         private static readonly Dictionary<int, string> _newAdAdPartialViewContainer = new Dictionary<int, string>();
+        private static readonly Dictionary<int, string> _letMeKnowPartialViewContainer = new Dictionary<int, string>();
+
 
         private static int defaultCategoryId = 0;
         static AdViewContainer()
@@ -19,6 +21,13 @@ namespace MvcMain.Infrastructure.IOC
             RegisterAdDetailViews();
             RegisterSearchAdPartialViewContainer();
             RegisterNewAdPartialViewContainer();
+            RegisterLetMeKnowPartialViewContainer();
+        }
+
+        private static void RegisterLetMeKnowPartialViewContainer()
+        {
+            _letMeKnowPartialViewContainer[100] = "LetMeKnow/LetMeKnowTransformation";
+            _letMeKnowPartialViewContainer[defaultCategoryId] = "LetMeKnow/LetMeKnowDefault";
         }
 
         private static void RegisterNewAdPartialViewContainer()
@@ -65,6 +74,15 @@ namespace MvcMain.Infrastructure.IOC
                 return _newAdAdPartialViewContainer[categoryId];
             }
             return _newAdAdPartialViewContainer[defaultCategoryId];
+        }
+
+        public static string GetLetMeKnowPartialViewName(int categoryId)
+        {
+            if (_letMeKnowPartialViewContainer.ContainsKey(categoryId))
+            {
+                return _letMeKnowPartialViewContainer[categoryId];
+            }
+            return _letMeKnowPartialViewContainer[defaultCategoryId];
         }
     }
 }

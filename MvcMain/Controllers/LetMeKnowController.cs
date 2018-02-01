@@ -1,16 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Db.Ad;
+using ModelStd.Services;
+using MvcMain.Infrastructure.IOC;
 using RepositoryStd.Context.Helper;
-using RepositoryStd.Repository.Common;
+using MvcMain.Utilities;
 
 namespace MvcMain.Controllers
 {
-    //TODO enable users to register for items to be informed when a new ad meets user requirements
     public class LetMeKnowController:Controller
     {
+        private readonly IViewRenderService _viewRenderService;
+
+        public LetMeKnowController(IViewRenderService viewRenderService)
+        {
+            _viewRenderService = viewRenderService;
+        }
+
         [Authorize]
         public async Task<IActionResult> Index()
         {
@@ -23,17 +32,33 @@ namespace MvcMain.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult GetLetMeKnowPartialView([FromQuery] Dictionary<string, string> userInput)
+        public async Task<IActionResult> LetMeKnowTransformation()
         {
+            return View("LetMeKnowTransformation");
+        }
+
+        public async Task<IActionResult> LetMeKnowDefault()
+        {
+            return View("LetMeKnowDefault");
+        }
+        
+        public async Task<ResponseBase<string>> GetLetMeKnowPartialView([FromBody] Dictionary<string, string> userInput)
+        {
+            string errorCode = "LetMeKnowController/GetLetMeKnowPartialView";
+            ResponseBase<string> response = new ResponseBase<string>();
             int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
-            switch (categoryId)
+            string viewName = AdViewContainer.GetLetMeKnowPartialViewName(categoryId);
+            try
             {
-                case 100:
-                    return ViewComponent("LetMeKnowTransformation");
-                default:
-                    return ViewComponent("LetMeKnowDefault");
+                response.ResponseData = await _viewRenderService.RenderToStringAsync(viewName, null);
+                response.SetSuccessResponse("OK", userInput);
             }
+            catch (Exception ex)
+            {
+                response.SetFailureResponse(ex.Message, errorCode, userInput);
+            }
+
+            return response;
         }
     }
 }

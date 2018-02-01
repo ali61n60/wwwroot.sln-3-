@@ -1,4 +1,18 @@
-﻿export class ImageUploader {
+﻿import {IResultHandler} from "../../../Helper/IResultHandler";
+
+export class ImageUploader implements IResultHandler {
+    OnResult(param: any, requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
+    OnError(message: string, requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
+    AjaxCallFinished(requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
+    AjaxCallStarted(requestCode: number): void {
+        throw new Error("Method not implemented.");
+    }
         
     private readonly NewAdGuidKey = "NewAdGuid";
     private readonly RequestIndexKey ="RequestIndex";

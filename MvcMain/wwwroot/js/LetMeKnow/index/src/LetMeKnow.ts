@@ -5,27 +5,32 @@ import {LetMeKnowServerCaller} from "./LetMeKnowServerCaller";
 import {LetMeKnowPartialViewLoader} from "./LetMeKnowPartialViewLoader";
 import {ICriteriaChange} from "../../../Helper/ICriteriaChange";
 import {LetMeKnowCriteria}  from "./LetMeKnowCriteria";
+import {IResultHandler} from "../../../Helper/IResultHandler";
 
 
-export class LetMeKnow implements ICriteriaChange {
-
-    private readonly EmailOrSmsKey: string = "EmailOrSms";
+export class LetMeKnow implements ICriteriaChange,IResultHandler {
+       private readonly EmailOrSmsKey: string = "EmailOrSms";
     public readonly  EmailOrSmsParentDivId: string = "emailOrSms";
     
     private readonly _registerLetMeKnowInputId: string = "registerLetMeKnow";
     private readonly _categorySpecificCriteriaDivId: string ="CategorySpecificCriteria";
 
+    private readonly _partialViewDivId: string ="CategorySpecificCriteria";
+
     private _categorySelection: CategorySelection;
     private _letMeKnowCriteria:LetMeKnowCriteria;
     private _letMeKnowServerCaller: LetMeKnowServerCaller;
-    private _letMeKnowPartialViewLoader:LetMeKnowPartialViewLoader;
+    private _letMeKnowPartialViewLoader: LetMeKnowPartialViewLoader;
+
+    private readonly AddAdvertisementRequestCode = 1;//
+    private readonly LoadLetMeKnowPartialViewRequestCode = 2;
 
     constructor(categorySelectorParentDivId: string, allCategoriesId: string) {
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
         this._letMeKnowServerCaller = new LetMeKnowServerCaller();
         this._letMeKnowCriteria = new LetMeKnowCriteria();
         this._letMeKnowPartialViewLoader =
-            new LetMeKnowPartialViewLoader(this._categorySpecificCriteriaDivId, this, this._letMeKnowCriteria);
+            new LetMeKnowPartialViewLoader( this, this, this._letMeKnowCriteria,this.LoadLetMeKnowPartialViewRequestCode);
         this.initEventHandlers();
     }
 
@@ -42,7 +47,9 @@ export class LetMeKnow implements ICriteriaChange {
 
     private initEventHandlers():void {
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe((sender, args) => {
-            this._letMeKnowPartialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
+            let userInput = new UserInput();
+            this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+            this._letMeKnowPartialViewLoader.GetPartialViewFromServer(userInput, args.SelectedCategoryId);
         });
 
         $("#" + this._registerLetMeKnowInputId).on("click", (event) => {
@@ -61,6 +68,25 @@ export class LetMeKnow implements ICriteriaChange {
 
         this._letMeKnowServerCaller.SaveAd(userInput);
     }
+
+    OnResult(param: any, requestCode: number): void {
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this._partialViewDivId).children().remove();
+            $("#" + this._partialViewDivId).html(param);
+        }
+        
+    }
+    OnError(message: string, requestCode: number): void {
+        alert(message);
+    }
+    AjaxCallFinished(requestCode: number): void {
+
+    }
+    AjaxCallStarted(requestCode: number): void {
+
+    }
+
+
 }
 
 let categorySelectorParentDivId: string = "categorySelector";
