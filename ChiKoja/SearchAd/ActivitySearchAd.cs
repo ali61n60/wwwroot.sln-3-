@@ -8,6 +8,7 @@ using Android.Widget;
 using ChiKoja.Categories;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.CustomViews.SingleAdView;
+using ChiKoja.Notification;
 using ChiKoja.Services.Server;
 using ModelStd.Advertisements;
 using ModelStd.Services;
@@ -62,7 +63,7 @@ namespace ChiKoja.SearchAd
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonSearchAd.Click +=async (sender, args) =>
             {
-                // MessageShower.GetMessageShower(this).ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
                 ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdFromServer();
                 if(response.Success)
                     OnSerachAdCompleted(response);

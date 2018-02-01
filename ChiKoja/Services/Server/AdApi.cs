@@ -9,7 +9,7 @@ using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 using ServiceLayer;
-using AdvertisementCommon = ModelStd.Advertisements.AdvertisementCommon;
+
 
 namespace ChiKoja.Services.Server
 {
