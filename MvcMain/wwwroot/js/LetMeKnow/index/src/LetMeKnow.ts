@@ -20,18 +20,19 @@ export class LetMeKnow implements ICriteriaChange,IResultHandler {
     private readonly _categorySpecificCriteriaDivId: string ="CategorySpecificCriteria";
 
     private readonly _partialViewDivId: string ="CategorySpecificCriteria";
+    private readonly MessageDivId: string = "message";
 
     private _categorySelection: CategorySelection;
     private _letMeKnowCriteria:LetMeKnowCriteria;
     private _letMeKnowServerCaller: LetMeKnowServerCaller;
     private _letMeKnowPartialViewLoader: LetMeKnowPartialViewLoader;
 
-    private readonly AddAdvertisementRequestCode = 1;//
+    private readonly AddLetMeKnowRequestCode = 1;//
     private readonly LoadLetMeKnowPartialViewRequestCode = 2;
 
     constructor(categorySelectorParentDivId: string, allCategoriesId: string) {
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
-        this._letMeKnowServerCaller = new LetMeKnowServerCaller();
+        this._letMeKnowServerCaller = new LetMeKnowServerCaller(this,this.AddLetMeKnowRequestCode);
         this._letMeKnowCriteria = new LetMeKnowCriteria();
         this._letMeKnowPartialViewLoader =
             new LetMeKnowPartialViewLoader( this, this, this._letMeKnowCriteria,this.LoadLetMeKnowPartialViewRequestCode);
@@ -78,19 +79,38 @@ export class LetMeKnow implements ICriteriaChange,IResultHandler {
             $("#" + this._partialViewDivId).children().remove();
             $("#" + this._partialViewDivId).html(param);
         }
-        
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            document.location.replace("/LetMeKnow/Confirm");
+        }
+
     }
     OnError(message: string, requestCode: number): void {
-        alert(message);
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this.MessageDivId).children().remove();
+            $("#" + this.MessageDivId).html("<p>" + message + "</p>");
+        }
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            $("#" + this.MessageDivId).children().remove();
+            $("#" + this.MessageDivId).html("<p>" + message + "</p>");
+        }
     }
     AjaxCallFinished(requestCode: number): void {
         if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
             $("#" + this.LoadViewImageId).hide();
         }
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            $("#" + this.InsertLetMeKnowImageId).hide();
+            $("#" + this._registerLetMeKnowInputId).removeAttr("disabled");
+        }
     }
+
     AjaxCallStarted(requestCode: number): void {
         if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
             $("#" + this.LoadViewImageId).show();
+        }
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            $("#" + this.InsertLetMeKnowImageId).show();
+            $("#" + this._registerLetMeKnowInputId).attr("disabled", "disabled");
         }
     }
 }

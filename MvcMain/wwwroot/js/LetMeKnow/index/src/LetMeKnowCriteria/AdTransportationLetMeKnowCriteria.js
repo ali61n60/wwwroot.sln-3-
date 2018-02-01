@@ -3,8 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CarModelBrandController_1 = require("../../../../Components/Transformation/CarModelBrandController");
 var AdTransportationLetMeKnowCriteria = /** @class */ (function () {
     function AdTransportationLetMeKnowCriteria() {
-        this.MakeYearKey = "MakeYear";
-        this.MakeYearInputId = "makeYear";
+        this.MakeYearFromKey = "MakeYearFrom";
+        this.MakeYearFromInputId = "fromYear";
+        this.MakeYearToKey = "MakeYearTo";
+        this.MakeYearToInputId = "toYear";
         this.FuelKey = "Fuel";
         this.FuelSelectId = "fuel";
         this.GearboxKey = "Gearbox";
@@ -29,7 +31,8 @@ var AdTransportationLetMeKnowCriteria = /** @class */ (function () {
     AdTransportationLetMeKnowCriteria.prototype.FillCriteria = function (userInput) {
         //TODO validate user input then proceed
         this._carModelBrandContoller.FillCriteria(userInput);
-        //userInput.ParametersDictionary[this.MakeYearKey] = $("#" + this.MakeYearInputId).val();//MakeYear
+        userInput.ParametersDictionary[this.MakeYearFromKey] = $("#" + this.MakeYearFromInputId).val(); //MakeYearFrom
+        userInput.ParametersDictionary[this.MakeYearToKey] = $("#" + this.MakeYearToInputId).val(); //MakeYearTo
         //userInput.ParametersDictionary[this.FuelKey] = $("#" + this.FuelSelectId).find("option:selected").val();//Fuel
         //userInput.ParametersDictionary[this.MileageKey] = $("#" + this.MileageInputId).val();//Mileage
         //userInput.ParametersDictionary[this.GearboxKey] = $("#" + this.GearboxTypeParentDivId).children(":checked").val();

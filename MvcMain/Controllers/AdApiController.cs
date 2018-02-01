@@ -41,9 +41,7 @@ namespace MvcMain.Controllers
     //only send let me know messages to verifyed emails and smses
 
     //TODO 1- build AppIdentityDbContext ModelBuiler yourself instead of relying on inheritance
-
-    //TODO 1- Whan Ajax call is made infrom user by gif image and when error ocurrs show error to user for every Ajax Call 
-    //design main ts files and server callers to cooperate with each other 
+    
     //TODO 1- work on District,City,Province component
 
     //TODO 1- Create and Run SMS sending improve Android Send Sms App, Ask user Time for sms, send  a SMS of Important Error to admin(email sending errors)

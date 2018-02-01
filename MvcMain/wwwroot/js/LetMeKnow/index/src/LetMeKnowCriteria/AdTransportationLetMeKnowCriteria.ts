@@ -8,9 +8,12 @@ export class AdTransportationLetMeKnowCriteria implements ICriteria {
 
     public ValidateCriteria(): CriteriaValidator { throw new Error("Not implemented"); }
 
-    private readonly MakeYearKey: string = "MakeYear";
-    private readonly MakeYearInputId: string = "makeYear";
+    private readonly MakeYearFromKey: string = "MakeYearFrom";
+    private readonly MakeYearFromInputId: string = "fromYear";
 
+    private readonly MakeYearToKey: string = "MakeYearTo";
+    private readonly MakeYearToInputId: string = "toYear";
+    
     private readonly FuelKey = "Fuel";
     private readonly FuelSelectId: string = "fuel";
 
@@ -43,7 +46,9 @@ export class AdTransportationLetMeKnowCriteria implements ICriteria {
     public FillCriteria(userInput: UserInput): void {
         //TODO validate user input then proceed
         this._carModelBrandContoller.FillCriteria(userInput);
-        //userInput.ParametersDictionary[this.MakeYearKey] = $("#" + this.MakeYearInputId).val();//MakeYear
+        userInput.ParametersDictionary[this.MakeYearFromKey] = $("#" + this.MakeYearFromInputId).val();//MakeYearFrom
+        userInput.ParametersDictionary[this.MakeYearToKey] = $("#" + this.MakeYearToInputId).val();//MakeYearTo
+
         //userInput.ParametersDictionary[this.FuelKey] = $("#" + this.FuelSelectId).find("option:selected").val();//Fuel
         //userInput.ParametersDictionary[this.MileageKey] = $("#" + this.MileageInputId).val();//Mileage
         //userInput.ParametersDictionary[this.GearboxKey] = $("#" + this.GearboxTypeParentDivId).children(":checked").val();

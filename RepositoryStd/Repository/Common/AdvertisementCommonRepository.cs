@@ -227,7 +227,7 @@ namespace RepositoryStd.Repository.Common
 
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
-            throw new Exception("Cannot Insert a new ad from AdvertisementCommonRepository");
+            throw new Exception("خطا. امکان ایجاد آگهی جدید بدوه گروه وجود ندارد");
         }
 
         public AdvertisementCommon GetAdDetail(Guid adGuid)
@@ -237,7 +237,7 @@ namespace RepositoryStd.Repository.Common
 
         public async Task AddLetMeKnow(Dictionary<string, string> userInputDictionary, string userId)
         {
-            throw new Exception("Cannot Add LetMeKnow from advertisementCommonRepository");
+            throw new Exception("خطا. امکان ایجاد به من اطلاع بده بدون گروه وجود ندارد");
         }
 
         public bool CriteriaMatch(ApprovedAd approvedAd, LetMeKnow letMeKnow)

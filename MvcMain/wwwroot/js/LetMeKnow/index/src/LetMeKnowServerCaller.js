@@ -1,35 +1,37 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
 var LetMeKnowServerCaller = /** @class */ (function () {
-    function LetMeKnowServerCaller() {
-        //TODO call server and send userinput fro new ad
-        //get result and show to user
+    function LetMeKnowServerCaller(resultHandler, requestCode) {
+        this.RequestIndexKey = "RequestIndex";
+        this._currentRequestIndex = 0;
         this._url = "/api/LetMeKnowApi/AddNewLetMeKnowRecord";
-        this.MessageDivId = "message";
+        this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller_1.AjaxCaller(this._url, this, requestCode);
     }
     LetMeKnowServerCaller.prototype.SaveAd = function (userInput) {
-        var _this = this;
-        $.ajax({
-            type: "POST",
-            url: this._url,
-            data: JSON.stringify(userInput.ParametersDictionary),
-            contentType: 'application/json',
-            success: function (msg, textStatus, jqXHR) { return _this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR); },
-            error: function (jqXHR, textStatus, errorThrown) { return _this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown); } // When Service call fails
-        }); //.ajax
+        this._currentRequestIndex++;
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
+        this._ajaxCaller.Call(userInput);
     };
-    LetMeKnowServerCaller.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
-        //TODO redirect user to a new page
-        if (msg.Success == true) {
-            document.location.replace("/LetMeKnow/Confirm");
-        }
-        else {
-            //$("#" + this.MessageDivId).children().remove();
-            $("#" + this.MessageDivId).html("<p>" + msg.Message + " ," + msg.ErrorCode + "</p>");
+    LetMeKnowServerCaller.prototype.OnResult = function (param, requestCode) {
+        if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
+            if (param.Success == true) {
+                this._resultHandler.OnResult(param.ResponseData, requestCode);
+            }
+            else {
+                this._resultHandler.OnError(param.Message, requestCode);
+            }
         }
     };
-    LetMeKnowServerCaller.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
-        $("#" + this.MessageDivId).html("<p>خطا در ارسال</p>");
+    LetMeKnowServerCaller.prototype.OnError = function (message, requestCode) {
+        this._resultHandler.OnError(message, requestCode);
+    };
+    LetMeKnowServerCaller.prototype.AjaxCallFinished = function (requestCode) {
+        this._resultHandler.AjaxCallFinished(requestCode);
+    };
+    LetMeKnowServerCaller.prototype.AjaxCallStarted = function (requestCode) {
+        this._resultHandler.AjaxCallStarted(requestCode);
     };
     return LetMeKnowServerCaller;
 }());

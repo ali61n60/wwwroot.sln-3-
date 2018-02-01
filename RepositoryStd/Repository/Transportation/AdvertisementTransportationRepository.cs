@@ -235,6 +235,12 @@ namespace RepositoryStd.Repository.Transportation
             tempLetMeKnowAttributeTransportaion.BrandId =ParameterExtractor.ExtractInt(userInputDictionary, CarBrandIdKey, CarBrandIdDefault);
             tempLetMeKnowAttributeTransportaion.ModelId =ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
 
+            tempLetMeKnowAttributeTransportaion.FromYear =
+                ParameterExtractor.ExtractInt(userInputDictionary, MakeYearFromKey, MakeYearFromDefault);
+
+            tempLetMeKnowAttributeTransportaion.ToYear =
+                ParameterExtractor.ExtractInt(userInputDictionary, MakeYearToKey, MakeYearToDefault);
+
             return tempLetMeKnowAttributeTransportaion;
         }
 

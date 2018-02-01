@@ -52,13 +52,12 @@
             <input type="radio" name="plate" value="3" />هر دو 
         </div>
     </div>
-    <p>based on selected category partial view is loaded by ajax</p>
     <div id="CategorySpecificCriteria" class="row"></div>
-    <p>user fills form data and submit it to a web api method(common  with android)</p>
+    <div class="row">
+        @Html.PartialAsync("LetMeKnowTransformation").Result
+    </div>
     <br /><br />
     <button type="button" id="registerLetMeKnow" class="btn btn-primary btn-block">ثبت</button>
-    <p>whan a new ad in inserted by someone A Server Task checks new ad with LetMeKnow Tables and sends emails and sms when matches found</p>
-
 }
 
 @section Footer

@@ -28,10 +28,10 @@ namespace MvcMain.Controllers
         }
 
         [Authorize]
-        public async Task<ResponseBase> AddNewLetMeKnowRecord([FromBody] Dictionary<string, string> userInput)
+        public async Task<ResponseBase<int>> AddNewLetMeKnowRecord([FromBody] Dictionary<string, string> userInput)
         {
             string errorCode = "LetMeKnowApi/AddNewLetMeKnowRecord";
-            ResponseBase response=new ResponseBase();
+            ResponseBase<int> response=new ResponseBase<int>();
             try
             {
                 AppUser user = await _userManager.GetUserAsync(HttpContext.User);
@@ -44,11 +44,11 @@ namespace MvcMain.Controllers
                 int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
                 IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
                 await adRepository.AddLetMeKnow(userInput, user.Id);
-                response.SetSuccessResponse();
+                response.SetSuccessResponse("Ok",userInput);
             }
             catch (Exception ex)
             {
-                response.SetFailureResponse(ex.Message, errorCode);
+                response.SetFailureResponse(ex.Message, errorCode,userInput);
             }
 
             return response;

@@ -1,35 +1,52 @@
 ﻿import {UserInput} from "../../../Helper/UserInput";
+import {IResultHandler } from "../../../Helper/IResultHandler";
+import {AjaxCaller} from "../../../Helper/AjaxCaller";
 
-export class LetMeKnowServerCaller {
-    //TODO call server and send userinput fro new ad
-    //get result and show to user
+export class LetMeKnowServerCaller implements IResultHandler{
+
+    private readonly RequestIndexKey: string = "RequestIndex";
+    private _currentRequestIndex: number = 0;
     private readonly _url: string = "/api/LetMeKnowApi/AddNewLetMeKnowRecord";
-    private readonly MessageDivId: string ="message";
+
+    private _resultHandler: IResultHandler;
+    private _ajaxCaller: AjaxCaller;
+
+    constructor(resultHandler:IResultHandler, requestCode:number) {
+        this._resultHandler = resultHandler;
+        this._ajaxCaller = new AjaxCaller(this._url, this, requestCode);
+    }
+
+
+   
 
 
     public SaveAd(userInput: UserInput): void {
-        $.ajax({
-            type: "POST", //GET or POST or PUT or DELETE verb
-            url: this._url,
-            data: JSON.stringify(userInput.ParametersDictionary), //Data sent to server
-            contentType: 'application/json', // content type sent to server
-            success: (msg, textStatus, jqXHR) => this.onSuccessGetItemsFromServer(msg, textStatus, jqXHR), //On Successfull service call
-            error: (jqXHR, textStatus, errorThrown) => this.onErrorGetItemsFromServer(jqXHR, textStatus, errorThrown) // When Service call fails
-        }); //.ajax
+        this._currentRequestIndex++;
+        userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
+
+        this._ajaxCaller.Call(userInput);
+        
     }
 
-    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-        //TODO redirect user to a new page
-        if (msg.Success == true) {
-            document.location.replace("/LetMeKnow/Confirm");
-        } else {
-            //$("#" + this.MessageDivId).children().remove();
-            $("#" + this.MessageDivId).html("<p>"+msg.Message+ " ,"+msg.ErrorCode+"</p>");
+   
+    OnResult(param: any, requestCode: number): void {
+        if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
+            if (param.Success == true) {
+                this._resultHandler.OnResult(param.ResponseData,requestCode);
+            } else {
+                this._resultHandler.OnError(param.Message,requestCode);
+            }
         }
     }
 
 
-    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-        $("#" + this.MessageDivId).html("<p>خطا در ارسال</p>");
-    } 
+    OnError(message: string, requestCode: number): void {
+        this._resultHandler.OnError(message,requestCode);
+    }
+    AjaxCallFinished(requestCode: number): void {
+        this._resultHandler.AjaxCallFinished(requestCode);
+    }
+    AjaxCallStarted(requestCode: number): void {
+        this._resultHandler.AjaxCallStarted(requestCode);
+    }
 }

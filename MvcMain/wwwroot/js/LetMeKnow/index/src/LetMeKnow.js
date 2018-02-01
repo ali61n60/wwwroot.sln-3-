@@ -14,10 +14,11 @@ var LetMeKnow = /** @class */ (function () {
         this._registerLetMeKnowInputId = "registerLetMeKnow";
         this._categorySpecificCriteriaDivId = "CategorySpecificCriteria";
         this._partialViewDivId = "CategorySpecificCriteria";
-        this.AddAdvertisementRequestCode = 1; //
+        this.MessageDivId = "message";
+        this.AddLetMeKnowRequestCode = 1; //
         this.LoadLetMeKnowPartialViewRequestCode = 2;
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
-        this._letMeKnowServerCaller = new LetMeKnowServerCaller_1.LetMeKnowServerCaller();
+        this._letMeKnowServerCaller = new LetMeKnowServerCaller_1.LetMeKnowServerCaller(this, this.AddLetMeKnowRequestCode);
         this._letMeKnowCriteria = new LetMeKnowCriteria_1.LetMeKnowCriteria();
         this._letMeKnowPartialViewLoader =
             new LetMeKnowPartialViewLoader_1.LetMeKnowPartialViewLoader(this, this, this._letMeKnowCriteria, this.LoadLetMeKnowPartialViewRequestCode);
@@ -57,18 +58,36 @@ var LetMeKnow = /** @class */ (function () {
             $("#" + this._partialViewDivId).children().remove();
             $("#" + this._partialViewDivId).html(param);
         }
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            document.location.replace("/LetMeKnow/Confirm");
+        }
     };
     LetMeKnow.prototype.OnError = function (message, requestCode) {
-        alert(message);
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this.MessageDivId).children().remove();
+            $("#" + this.MessageDivId).html("<p>" + message + "</p>");
+        }
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            $("#" + this.MessageDivId).children().remove();
+            $("#" + this.MessageDivId).html("<p>" + message + "</p>");
+        }
     };
     LetMeKnow.prototype.AjaxCallFinished = function (requestCode) {
         if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
             $("#" + this.LoadViewImageId).hide();
         }
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            $("#" + this.InsertLetMeKnowImageId).hide();
+            $("#" + this._registerLetMeKnowInputId).removeAttr("disabled");
+        }
     };
     LetMeKnow.prototype.AjaxCallStarted = function (requestCode) {
         if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
             $("#" + this.LoadViewImageId).show();
+        }
+        if (requestCode === this.AddLetMeKnowRequestCode) {
+            $("#" + this.InsertLetMeKnowImageId).show();
+            $("#" + this._registerLetMeKnowInputId).attr("disabled", "disabled");
         }
     };
     return LetMeKnow;
