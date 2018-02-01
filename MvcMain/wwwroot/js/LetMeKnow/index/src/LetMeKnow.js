@@ -7,6 +7,8 @@ var LetMeKnowPartialViewLoader_1 = require("./LetMeKnowPartialViewLoader");
 var LetMeKnowCriteria_1 = require("./LetMeKnowCriteria");
 var LetMeKnow = /** @class */ (function () {
     function LetMeKnow(categorySelectorParentDivId, allCategoriesId) {
+        this.InsertLetMeKnowImageId = "insertLetMeKnow";
+        this.LoadViewImageId = "loadView";
         this.EmailOrSmsKey = "EmailOrSms";
         this.EmailOrSmsParentDivId = "emailOrSms";
         this._registerLetMeKnowInputId = "registerLetMeKnow";
@@ -60,8 +62,14 @@ var LetMeKnow = /** @class */ (function () {
         alert(message);
     };
     LetMeKnow.prototype.AjaxCallFinished = function (requestCode) {
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this.LoadViewImageId).hide();
+        }
     };
     LetMeKnow.prototype.AjaxCallStarted = function (requestCode) {
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this.LoadViewImageId).show();
+        }
     };
     return LetMeKnow;
 }());

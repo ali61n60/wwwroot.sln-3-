@@ -19,10 +19,6 @@ var LetMeKnowPartialViewLoader = /** @class */ (function () {
         userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
         this._ajaxCaller.Call(userInput);
     };
-    LetMeKnowPartialViewLoader.prototype.onSuccessGetItemsFromServer = function (msg, textStatus, jqXHR) {
-    }; //onSuccessGetTimeFromServer
-    LetMeKnowPartialViewLoader.prototype.onErrorGetItemsFromServer = function (jqXHR, textStatus, errorThrown) {
-    }; //onErrorGetTimeFromServer
     LetMeKnowPartialViewLoader.prototype.OnResult = function (param, requestCode) {
         if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) {
             if (param.Success == true) {
