@@ -39,15 +39,7 @@ export class LetMeKnowPartialViewLoader  implements IResultHandler {
         this._ajaxCaller.Call(userInput);
         
     }
-
-    private onSuccessGetItemsFromServer(msg: any, textStatus: string, jqXHR: JQueryXHR) {
-       
-    }//onSuccessGetTimeFromServer
-
-    private onErrorGetItemsFromServer(jqXHR: JQueryXHR, textStatus: string, errorThrown: string) {
-       
-    }//onErrorGetTimeFromServer
-
+    
     OnResult(param, requestCode: number): void {
         if (param.CustomDictionary[this.RequestIndexKey] == this._currentRequestIndex) { //last call response
             if (param.Success == true) {
@@ -59,14 +51,7 @@ export class LetMeKnowPartialViewLoader  implements IResultHandler {
                 this._resultHandler.OnError(param.Message + " , " + param.ErrorCode, requestCode);
             }
         }
-
-
-        
-        
-        
-        
     }
-
     
     OnError(message: string, requestCode: number): void {
         this._resultHandler.OnError(message, requestCode);
@@ -77,6 +62,4 @@ export class LetMeKnowPartialViewLoader  implements IResultHandler {
     AjaxCallStarted(requestCode: number): void {
         this._resultHandler.AjaxCallStarted(requestCode);
     }
-
-    
 }

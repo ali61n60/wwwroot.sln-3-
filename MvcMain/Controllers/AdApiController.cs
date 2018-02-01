@@ -55,6 +55,7 @@ namespace MvcMain.Controllers
     //TODO 1- work on verifying users email and phone number
 
         //TODO 2- when import a class into another in typescript VS uses require. Make it ti use from
+        //TODO 2- study about android app change when server changes
     //TODO 2- use Decorator pattern to log
     //TODO 2- study MVC book
     //TODO 2- study of multi-language website approach in MVC

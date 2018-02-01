@@ -15,6 +15,18 @@ var ImageUploader = /** @class */ (function () {
         this._currentNewAdGuid = currentNewAdGuid;
         this.initView();
     }
+    ImageUploader.prototype.OnResult = function (param, requestCode) {
+        throw new Error("Method not implemented.");
+    };
+    ImageUploader.prototype.OnError = function (message, requestCode) {
+        throw new Error("Method not implemented.");
+    };
+    ImageUploader.prototype.AjaxCallFinished = function (requestCode) {
+        throw new Error("Method not implemented.");
+    };
+    ImageUploader.prototype.AjaxCallStarted = function (requestCode) {
+        throw new Error("Method not implemented.");
+    };
     ImageUploader.prototype.initView = function () {
         var _this = this;
         $("#" + this.ImageUploadInputId).change(function (event) {

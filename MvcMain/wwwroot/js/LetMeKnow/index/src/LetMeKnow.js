@@ -11,11 +11,14 @@ var LetMeKnow = /** @class */ (function () {
         this.EmailOrSmsParentDivId = "emailOrSms";
         this._registerLetMeKnowInputId = "registerLetMeKnow";
         this._categorySpecificCriteriaDivId = "CategorySpecificCriteria";
+        this._partialViewDivId = "CategorySpecificCriteria";
+        this.AddAdvertisementRequestCode = 1; //
+        this.LoadLetMeKnowPartialViewRequestCode = 2;
         this.initCategorySelect(categorySelectorParentDivId, allCategoriesId);
         this._letMeKnowServerCaller = new LetMeKnowServerCaller_1.LetMeKnowServerCaller();
         this._letMeKnowCriteria = new LetMeKnowCriteria_1.LetMeKnowCriteria();
         this._letMeKnowPartialViewLoader =
-            new LetMeKnowPartialViewLoader_1.LetMeKnowPartialViewLoader(this._categorySpecificCriteriaDivId, this, this._letMeKnowCriteria);
+            new LetMeKnowPartialViewLoader_1.LetMeKnowPartialViewLoader(this, this, this._letMeKnowCriteria, this.LoadLetMeKnowPartialViewRequestCode);
         this.initEventHandlers();
     }
     LetMeKnow.prototype.CustomCriteriaChanged = function () {
@@ -29,7 +32,9 @@ var LetMeKnow = /** @class */ (function () {
     LetMeKnow.prototype.initEventHandlers = function () {
         var _this = this;
         this._categorySelection.SelectedCategoryChangedEvent.Subscribe(function (sender, args) {
-            _this._letMeKnowPartialViewLoader.GetPartialViewFromServer(args.SelectedCategoryId);
+            var userInput = new UserInput_1.UserInput();
+            _this._categorySelection.InsertCategoryIdInUserInputDictionary(userInput);
+            _this._letMeKnowPartialViewLoader.GetPartialViewFromServer(userInput, args.SelectedCategoryId);
         });
         $("#" + this._registerLetMeKnowInputId).on("click", function (event) {
             event.preventDefault();
@@ -44,6 +49,19 @@ var LetMeKnow = /** @class */ (function () {
         ; //TODO make a ui view (radio button)
         this._letMeKnowCriteria.FillCategorySpecificLetMeKnowCriteria(this._categorySelection.GetSelectedCategoryId(), userInput);
         this._letMeKnowServerCaller.SaveAd(userInput);
+    };
+    LetMeKnow.prototype.OnResult = function (param, requestCode) {
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this._partialViewDivId).children().remove();
+            $("#" + this._partialViewDivId).html(param);
+        }
+    };
+    LetMeKnow.prototype.OnError = function (message, requestCode) {
+        alert(message);
+    };
+    LetMeKnow.prototype.AjaxCallFinished = function (requestCode) {
+    };
+    LetMeKnow.prototype.AjaxCallStarted = function (requestCode) {
     };
     return LetMeKnow;
 }());

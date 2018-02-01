@@ -9,7 +9,11 @@ import {IResultHandler} from "../../../Helper/IResultHandler";
 
 
 export class LetMeKnow implements ICriteriaChange,IResultHandler {
-       private readonly EmailOrSmsKey: string = "EmailOrSms";
+
+    private readonly InsertLetMeKnowImageId = "insertLetMeKnow";
+    private readonly LoadViewImageId = "loadView";
+
+    private readonly EmailOrSmsKey: string = "EmailOrSms";
     public readonly  EmailOrSmsParentDivId: string = "emailOrSms";
     
     private readonly _registerLetMeKnowInputId: string = "registerLetMeKnow";
@@ -80,13 +84,15 @@ export class LetMeKnow implements ICriteriaChange,IResultHandler {
         alert(message);
     }
     AjaxCallFinished(requestCode: number): void {
-
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this.LoadViewImageId).hide();
+        }
     }
     AjaxCallStarted(requestCode: number): void {
-
+        if (requestCode === this.LoadLetMeKnowPartialViewRequestCode) {
+            $("#" + this.LoadViewImageId).show();
+        }
     }
-
-
 }
 
 let categorySelectorParentDivId: string = "categorySelector";

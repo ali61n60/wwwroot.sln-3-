@@ -33,9 +33,17 @@
         
     </div>
         <div class="well">
-        <div class="row">
-            @await Component.InvokeAsync("CategorySelection")
-        </div>
+            <div class="row">
+                @await Component.InvokeAsync("CategorySelection")
+            </div>
+            <div class="row">
+                <div class="col-sm-3">
+                    <img id="insertLetMeKnow" src="~/Resources/Images/loader.gif" hidden="hidden"/>
+                </div>
+                <div class="col-sm-3">
+                    <img id="loadView" src="~/Resources/Images/loader.gif" hidden="hidden" />
+                </div>
+            </div>
     </div>
     <div class="row">
         <div id="emailOrSms" class="col-sm-4">
