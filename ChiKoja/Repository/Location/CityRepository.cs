@@ -261,9 +261,10 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempCity = new City((int) r["cityId"],
-                            r["cityName"].ToString(),
-                            (int) r["provinceId"]);
+                        tempCity = new City();
+                        tempCity.CityId = (int) r["cityId"];
+                        tempCity.CityName= r["cityName"].ToString();
+                            tempCity.ProvinceId= (int) r["provinceId"];
                         allProvinceCities.Add(tempCity);
                     }
                 }

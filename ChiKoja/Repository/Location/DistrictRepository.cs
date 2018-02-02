@@ -257,10 +257,11 @@ namespace ChiKoja.Repository.Location
 
                     while (r.Read())
                     {
-                        tempDistrict = new District((int) r["districtId"],
-                            r["DistrictName"].ToString(),
-                            (int) r["cityId"],
-                            (int) r["municipalId"]);
+                        tempDistrict = new District();
+                        tempDistrict.DistrictId = (int) r["districtId"];
+                        tempDistrict.DistrictName = r["DistrictName"].ToString();
+                        tempDistrict.CityId = (int) r["cityId"];
+                        tempDistrict.MunicipalId = (int) r["municipalId"];
                         allCityDistricts.Add(tempDistrict);
                         
                     }
