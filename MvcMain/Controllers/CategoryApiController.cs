@@ -16,7 +16,6 @@ namespace MvcMain.Controllers
         {
             _categoryRepository = categoryRepository;
         }
-
         
         public ResponseBase<int> GetServerDataVersion()
         {

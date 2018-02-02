@@ -39,13 +39,7 @@ namespace ChiKoja.Services.Server
            // searchFilterRepository = new SearchFilterRepository();
             
         }
-        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon(Dictionary<string, string> userInput)
-        {
-            return  await ServicesCommon.CallService<AdvertisementCommon[]>("api/AdApi/GetAdvertisementCommon", userInput);
-        }
-
-       
-        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdFromServer()
+        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon()
         {
             Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
             _currentRequestIndex++;
@@ -53,14 +47,17 @@ namespace ChiKoja.Services.Server
             //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
             //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
             //userInputDictionary.Add(districtPair.Key, districtPair.Value);
-            //KeyValuePair<string, string> categoryIdPair = categoryRepository.GetCategoryIdDictionary();
-            //userInputDictionary.Add(categoryIdPair.Key, categoryIdPair.Value);
+            KeyValuePair<string, string> categoryIdPair = categoryRepository.GetCategoryIdDictionary();
+            userInputDictionary.Add(categoryIdPair.Key, categoryIdPair.Value);
+
             userInputDictionary[StartIndexKey] = _start.ToString();
             userInputDictionary[CountKey] = _count.ToString();
-            
-            ResponseBase<AdvertisementCommon[]> response=await GetAdvertisementCommon(userInputDictionary);
+            ResponseBase<AdvertisementCommon[]> response=  await ServicesCommon.CallService<AdvertisementCommon[]>("api/AdApi/GetAdvertisementCommon", userInputDictionary);
             return response;
         }
+
+       
+        
 
         private bool localRequestIndexMatchsServerResponse(Dictionary<string, string> resultCustomDictionary)
         {

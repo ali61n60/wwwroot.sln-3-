@@ -8,8 +8,10 @@ using Android.Widget;
 using ChiKoja.Categories;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.CustomViews.SingleAdView;
+using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Notification;
 using ChiKoja.Services.Server;
+using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
@@ -20,8 +22,11 @@ namespace ChiKoja.SearchAd
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class ActivitySearchAd : NavActivity
     {
+        private readonly string AdTypeKey = "AdType";
+        private readonly string SearchTextKey = "SearchText";
+        
         protected const int CategorySelectionRequestCode = 2;
-        AdApi _adApi;
+        IAdApi _adApi;
 
         View rootView;
         Button buttonFilter;
@@ -51,20 +56,19 @@ namespace ChiKoja.SearchAd
         private void inflateView()
         {
             FrameLayout contentFrameLayout =
-                FindViewById<FrameLayout>(Resource.Id
-                    .content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+                FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
             rootView = LayoutInflater.Inflate(Resource.Layout.SearchAd, contentFrameLayout);
         }
 
         private void initializeFields()
         {
-            _adApi = new AdApi();
+            _adApi = Bootstrapper.container.GetInstance<IAdApi>();
 
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonSearchAd.Click +=async (sender, args) =>
             {
                 GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-                ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdFromServer();
+                ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
                 if(response.Success)
                     OnSerachAdCompleted(response);
                 else

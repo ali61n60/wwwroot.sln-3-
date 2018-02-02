@@ -9,13 +9,15 @@ using ChiKoja.Services.Server;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
 using ServiceLayer;
-using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.Repository
 {
     public class CategoryRepository:ILocalTable
     {
+        string CategoryIdKey = "CategoryId";//used in server
+        string defaultCategoryId = "0";
+
         private readonly ISharedPreferences prefs;
         private readonly SqliteConnection connection;
         public int OperationOrder { get; private set; }
@@ -32,9 +34,7 @@ namespace ChiKoja.Repository
                 editor.Commit();
             }
         }
-
-        string CategoryIdKey = "CategoryId";//used in server
-        string defaultCategoryId = "0";
+        
         public IEnumerable<int> CategoryId
         {
             get
@@ -169,7 +169,6 @@ namespace ChiKoja.Repository
             }
         }
 
-        //called for putting selected category ids to be send to server
         public KeyValuePair<string,string> GetCategoryIdDictionary()
         {
             return new KeyValuePair<string, string>(CategoryIdKey, prefs.GetString(CategoryIdKey, defaultCategoryId));
