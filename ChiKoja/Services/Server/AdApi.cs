@@ -35,7 +35,7 @@ namespace ChiKoja.Services.Server
         public AdApi()
         {
            // districtRepository = new DistrictRepository(Repository.Repository.DataBasePath);
-           // categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
+           categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
            // searchFilterRepository = new SearchFilterRepository();
             
         }

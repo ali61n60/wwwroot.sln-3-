@@ -140,7 +140,9 @@ namespace MvcMain
                     options.SerializerSettings.ContractResolver
                         = new Newtonsoft.Json.Serialization.DefaultContractResolver();
 
-                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+
+                    options.SerializerSettings.TypeNameHandling = TypeNameHandling.Auto;
                 });
         }
 
