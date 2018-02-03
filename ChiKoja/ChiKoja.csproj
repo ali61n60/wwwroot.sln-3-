@@ -52,8 +52,21 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
+    <Reference Include="Xamarin.Android.Support.Design">
+      <HintPath>..\Components\New folder\xamandroidsupportdesign-23.2.1\lib\android\Xamarin.Android.Support.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v4">
+      <HintPath>..\Components\xamandroidsupportv7recyclerview-23.2.1\lib\android\Xamarin.Android.Support.v4.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.AppCompat">
+      <HintPath>..\Components\xamandroidsupportv7appcompat-23.2.1\lib\android\Xamarin.Android.Support.v7.AppCompat.dll</HintPath>
+    </Reference>
+    <Reference Include="Xamarin.Android.Support.v7.RecyclerView">
+      <HintPath>..\Components\xamandroidsupportv7recyclerview-23.2.1\lib\android\Xamarin.Android.Support.v7.RecyclerView.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activity1.cs" />
     <Compile Include="AdDetail\AdDetail.cs" />
     <Compile Include="AdDetail\AdDetailTransportationActivity.cs" />
     <Compile Include="AdDetail\IAdDetailCallBack.cs" />
@@ -72,7 +85,6 @@
     <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
     <Compile Include="Login\ActivityLogin.cs" />
     <Compile Include="Login\ActivitySignIn.cs" />
-    <Compile Include="MainActivity.cs" />
     <Compile Include="NavigationDrawer\NavActivity.cs" />
     <Compile Include="Network\Network.cs" />
     <Compile Include="NewAd\ActivityNewAd.cs" />
@@ -123,20 +135,102 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
+    <AndroidResource Include="Resources\layout\layoutBatteryBroadCast.axml" />
+    <AndroidResource Include="Resources\layout\layoutBroadcastReceiverSms.axml" />
+    <AndroidResource Include="Resources\layout\layoutDynamicUI.axml" />
+    <AndroidResource Include="Resources\layout\layoutNotification.axml" />
+    <AndroidResource Include="Resources\layout\layoutRelativeTest.axml" />
+    <AndroidResource Include="Resources\layout\LocationSelection.axml" />
+    <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\NewAd.axml" />
+    <AndroidResource Include="Resources\layout\NewAdTransportation.axml" />
+    <AndroidResource Include="Resources\layout\SearchAd.axml" />
+    <AndroidResource Include="Resources\layout\ServiceExample.axml" />
+    <AndroidResource Include="Resources\layout\SingleAdView.axml" />
+    <AndroidResource Include="Resources\layout\SingleCategory.axml" />
+    <AndroidResource Include="Resources\layout\SingleUserAd.axml" />
+    <AndroidResource Include="Resources\layout\SortBy.axml" />
+    <AndroidResource Include="Resources\layout\UserAds.axml" />
+    <AndroidResource Include="Resources\layout\AdTransportationDetail.axml" />
+    <AndroidResource Include="Resources\layout\AlertDialogLayout.axml" />
+    <AndroidResource Include="Resources\layout\Animation.axml" />
+    <AndroidResource Include="Resources\layout\BrandTransportation.axml" />
+    <AndroidResource Include="Resources\layout\Category.axml" />
+    <AndroidResource Include="Resources\layout\ContactInfoLayout.axml" />
+    <AndroidResource Include="Resources\layout\Filter.axml" />
+    <AndroidResource Include="Resources\layout\layout1.axml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\Main.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\values\Strings.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />
     <Folder Include="Resources\mipmap-xhdpi\" />
     <Folder Include="Resources\mipmap-xxhdpi\" />
     <Folder Include="Resources\mipmap-xxxhdpi\" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowUp2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\hamburger.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\Icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowDown1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowDown2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowLeft2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\arrowRight2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\menu\menu.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\colors.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\dimens.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\integers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values\vals.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\Xml\Preferences.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-fa-rir\Strings.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\values-v11\styles.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ModelStd\ModelStd.csproj">
+      <Project>{a6b55618-2c5c-4b70-ae9e-1c5247ea11df}</Project>
+      <Name>ModelStd</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ServiceLayer\ServiceLayer.csproj">
+      <Project>{a7fe567b-d17e-4b5e-86c5-7224c753c1de}</Project>
+      <Name>ServiceLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
