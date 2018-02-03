@@ -287,28 +287,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activity1.cs" />
-    <Compile Include="AdDetail\AdDetail.cs" />
-    <Compile Include="AdDetail\AdDetailTransportationActivity.cs" />
-    <Compile Include="AdDetail\IAdDetailCallBack.cs" />
-    <Compile Include="AnimationTest\ActivityAnimation.cs" />
-    <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
-    <Compile Include="BroadcastReceiver\ActivityBroadcastReceiverSms.cs" />
-    <Compile Include="Categories\ActivityCategory.cs" />
-    <Compile Include="CustomViews\CategoryView\ISingleCategoryView.cs" />
-    <Compile Include="CustomViews\CategoryView\SingleCategoryView.cs" />
-    <Compile Include="CustomViews\CategoryView\CheckBoxTriStates.cs" />
-    <Compile Include="CustomViews\SingleAdView\ViewGroupUserAd.cs" />
-    <Compile Include="Infrastructure\IOC\Bootstrapper.cs" />
-    <Compile Include="Login\ActivityLogin.cs" />
-    <Compile Include="Login\ActivitySignIn.cs" />
     <Compile Include="Network\Network.cs" />
     <Compile Include="NewAd\ActivityNewAd.cs" />
     <Compile Include="NewAd\ActivityNewAdTransportation.cs" />
     <Compile Include="Notification\MessageShower.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
-    <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
-    <Compile Include="Dialog\AlertDialog\AlertDialogActivity.cs" />
-    <Compile Include="GlobalApplication\GlobalApplication.cs" />
     <Compile Include="NavigationDrawer\NavActivity.cs" />
     <Compile Include="Notification\ActivityNotification.cs" />
     <Compile Include="Repository\CryptoGraphy\CryptoGraphy.cs" />
@@ -346,7 +329,6 @@
     <Compile Include="Services\Server\ServicesCommon.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
-    <Compile Include="CustomViews\SingleAdView\ViewGroupSingleAd.cs" />
     <Compile Include="ViewServer\ActivityViewServerTest.cs" />
     <Compile Include="ViewServer\ViewServer.cs" />
   </ItemGroup>
@@ -356,82 +338,6 @@
     <None Include="packages.config" />
     <None Include="Resources\AboutResources.txt" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\layout1.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutRelativeTest.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutNotification.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutBroadcastReceiverSms.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SearchAd.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\LocationSelection.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SingleAdView.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutDynamicUI.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutBatteryBroadCast.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\AdTransportationDetail.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\AlertDialogLayout.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ContactInfoLayout.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Main.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Category.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\NewAd.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Login.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Filter.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SortBy.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\UserAds.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SingleUserAd.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Animation.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SingleCategory.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\NewAdTransportation.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\BrandTransportation.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ServiceExample.axml" />
-    <AndroidResource Include="Resources\layout\test.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\Strings.xml">
@@ -521,6 +427,7 @@
     <Folder Include="Resources\drawable-nodpi\" />
     <Folder Include="Resources\drawable-tvdpi\" />
     <Folder Include="Resources\drawable-xhdpi\" />
+    <Folder Include="Resources\layout\" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\arrowDown1.png" />
