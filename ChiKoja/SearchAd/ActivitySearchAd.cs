@@ -16,8 +16,6 @@ using ModelStd.Advertisements;
 using ModelStd.Services;
 
 
-
-
 namespace ChiKoja.SearchAd
 {
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
