@@ -1,4 +1,5 @@
-﻿@import 'helpers/variables';
+﻿/*sass --watch site.scss:./site.css*/
+@import 'helpers/variables';
 @import 'helpers/mixins';
 @import 'base/reset';
 @import 'base/_normalize.scss';
