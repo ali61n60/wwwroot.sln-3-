@@ -2948,7 +2948,10 @@ namespace ChiKoja
 			public const int support_simple_spinner_dropdown_item = 2130903112;
 			
 			// aapt resource value: 0x7f030049
-			public const int UserAds = 2130903113;
+			public const int test = 2130903113;
+			
+			// aapt resource value: 0x7f03004a
+			public const int UserAds = 2130903114;
 			
 			static Layout()
 			{
