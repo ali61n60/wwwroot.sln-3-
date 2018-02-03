@@ -1,9 +1,9 @@
-﻿/*sass --watch site.scss:./site.css*/
+﻿/*sass --watch site.scss:../site.css*/
 @import 'helpers/variables';
 @import 'helpers/mixins';
 @import 'base/reset';
 @import 'base/_normalize.scss';
-@import 'currentProject/SingleAdItem.scss';
+@import "currentProject/SingleAdItem.scss";
 @import 'currentProject/_oldStyle.scss';
 @import "currentProject/style.scss";
 @import "currentProject/lightSlider.scss";

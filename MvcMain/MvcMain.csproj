@@ -166,7 +166,13 @@
     <Content Include="wwwroot\lib\mustache.js\spec\_files\bom_as_whitespace.txt" />
     <Content Include="wwwroot\lib\requirejs\.bower.json" />
     <Content Include="wwwroot\lib\requirejs\bower.json" />
+    <Content Include="wwwroot\Resources\Images\gifFiles\favicon-194x194.png" />
+    <Content Include="wwwroot\Resources\Images\gifFiles\gif-loader-image.gif" />
+    <Content Include="wwwroot\Resources\Images\gifFiles\loader.gif" />
+    <Content Include="wwwroot\Resources\Images\gifFiles\loading-spinner.gif" />
+    <Content Include="wwwroot\Resources\Images\gifFiles\signup-loader.gif" />
     <Content Include="wwwroot\Resources\Images\loader.gif" />
+    <Content Include="wwwroot\Resources\Images\Logo\0.jpeg" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast128.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast16.png" />
     <Content Include="wwwroot\Resources\Images\Logo\howcast24.png" />
