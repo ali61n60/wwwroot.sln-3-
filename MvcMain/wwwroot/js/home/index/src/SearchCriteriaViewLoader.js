@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
-var SearchCriteriaViewLoader = /** @class */ (function () {
+var SearchCriteriaViewLoader = (function () {
     function SearchCriteriaViewLoader(resultHandler, searchCriteriaChange, searchCriteria, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;
