@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../EventDispatcher");
-var PulseGenerator = (function () {
+var PulseGenerator = /** @class */ (function () {
     function PulseGenerator(frequencyInHz) {
         //create private event dispatcher
         this._onPulsate = new EventDispatcher_1.EventDispatcher();
