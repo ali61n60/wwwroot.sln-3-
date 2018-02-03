@@ -25,6 +25,7 @@ export class Index implements ICriteriaChange, IResultHandler {
     private readonly SearchTextInputId = "searchText";
 
     private readonly _adPlaceHolderDivId: string = "adPlaceHolder";
+    private readonly _defaultImageInputId: string ="defaultImage";
 
     private _serverCaller: ServerCaller;
     private _categorySelection: CategorySelection;
@@ -173,10 +174,13 @@ export class Index implements ICriteriaChange, IResultHandler {
         var template = $('#singleAdItem').html();
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
-            var adImage = null;
+            var adImage;
             if (advertisementCommons[i].AdvertisementImages[0] != null) {
                 adImage = "data:image/jpg;base64," + advertisementCommons[i].AdvertisementImages[0];
             } //end if
+            else {
+                adImage = "data:image/jpg;base64," + $("#" + this._defaultImageInputId).val();
+            }
             data = {
                 AdvertisementId: advertisementCommons[i].AdvertisementId,
                 AdvertisementCategoryId: advertisementCommons[i].AdvertisementCategoryId,

@@ -17,6 +17,7 @@ var Index = (function () {
         this.SearchTextKey = "SearchText";
         this.SearchTextInputId = "searchText";
         this._adPlaceHolderDivId = "adPlaceHolder";
+        this._defaultImageInputId = "defaultImage";
         this._getAdFromServerButtonId = "getAdFromServer";
         this._messageDivId = "message";
         this._categorySpecificSearchCriteriaParentDivId = "categorySpecificSearchCriteria";
@@ -123,10 +124,13 @@ var Index = (function () {
         var template = $('#singleAdItem').html();
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
-            var adImage = null;
+            var adImage;
             if (advertisementCommons[i].AdvertisementImages[0] != null) {
                 adImage = "data:image/jpg;base64," + advertisementCommons[i].AdvertisementImages[0];
             } //end if
+            else {
+                adImage = "data:image/jpg;base64," + $("#" + this._defaultImageInputId).val();
+            }
             data = {
                 AdvertisementId: advertisementCommons[i].AdvertisementId,
                 AdvertisementCategoryId: advertisementCommons[i].AdvertisementCategoryId,
