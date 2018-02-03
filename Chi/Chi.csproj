@@ -54,25 +54,6 @@
     <Reference Include="Mono.Android" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdDetail\AdDetail.cs" />
-    <Compile Include="AdDetail\AdDetailTransportationActivity.cs" />
-    <Compile Include="AdDetail\IAdDetailCallBack.cs" />
-    <Compile Include="AnimationTest\ActivityAnimation.cs" />
-    <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
-    <Compile Include="BroadcastReceiver\ActivityBroadcastReceiverSms.cs" />
-    <Compile Include="Categories\ActivityCategory.cs" />
-    <Compile Include="CustomViews\CategoryView\CheckBoxTriStates.cs" />
-    <Compile Include="CustomViews\CategoryView\ISingleCategoryView.cs" />
-    <Compile Include="CustomViews\CategoryView\SingleCategoryView.cs" />
-    <Compile Include="CustomViews\SingleAdView\ViewGroupSingleAd.cs" />
-    <Compile Include="CustomViews\SingleAdView\ViewGroupUserAd.cs" />
-    <Compile Include="Dialog\AlertDialog\AlertDialogActivity.cs" />
-    <Compile Include="GlobalApplication\GlobalApplication.cs" />
-    <Compile Include="Infrastructure\IOC\Bootstrapper.cs" />
-    <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
-    <Compile Include="Login\ActivityLogin.cs" />
-    <Compile Include="Login\ActivitySignIn.cs" />
-    <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,79 +64,6 @@
     <None Include="Assets\AboutAssets.txt" />
     <AndroidResource Include="Resources\layout\test.axml">
       <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\AdTransportationDetail.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\AlertDialogLayout.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Animation.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\BrandTransportation.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Category.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ContactInfoLayout.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Filter.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layout1.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutBatteryBroadCast.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutBroadcastReceiverSms.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutDynamicUI.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutNotification.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\layoutRelativeTest.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\LocationSelection.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Login.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\Main.axml">
-      <SubType>Designer</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\NewAd.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\NewAdTransportation.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SearchAd.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\ServiceExample.axml" />
-    <AndroidResource Include="Resources\layout\SingleAdView.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SingleCategory.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SingleUserAd.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\SortBy.axml">
-      <SubType>AndroidResource</SubType>
-    </AndroidResource>
-    <AndroidResource Include="Resources\layout\UserAds.axml">
-      <SubType>AndroidResource</SubType>
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
