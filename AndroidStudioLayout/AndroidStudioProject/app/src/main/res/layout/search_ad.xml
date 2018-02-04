@@ -13,6 +13,25 @@
         android:id="@+id/buttonSearch"
         style="@style/ButtonStyleDanger" />
 
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutSearchAdScrollView1"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:orientation="vertical"
+            android:minWidth="25px"
+            android:minHeight="25px"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/layoutSearchAdLinearLayout"
+            android:paddingBottom="@dimen/activity_horizontal_margin" />
+    </ScrollView>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
@@ -20,7 +39,9 @@
         android:minHeight="?attr/actionBarSize"
         android:background="@color/colorDefault"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        android:layout_alignParentBottom="true">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
         <LinearLayout
             android:orientation="horizontal"
             android:minWidth="25dp"
@@ -40,28 +61,9 @@
                 android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/buttonCategory"
-                android:text="This is a test"
+                android:text="@string/Category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
     </android.support.v7.widget.Toolbar>
-
-    <ScrollView
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/layoutSearchAdScrollView1"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
-        <LinearLayout
-            android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/layoutSearchAdLinearLayout"
-            android:paddingBottom="@dimen/activity_horizontal_margin" />
-    </ScrollView>
 </RelativeLayout>
