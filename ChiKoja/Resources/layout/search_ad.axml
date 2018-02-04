@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content" />
             <Button
                 android:id="@+id/buttonCategory"
-                android:text="@string/Category"
+                android:text="This is a test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>

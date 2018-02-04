@@ -2924,7 +2924,7 @@ namespace ChiKoja
 			public const int notification_template_part_time = 2130903102;
 			
 			// aapt resource value: 0x7f03003f
-			public const int SearchAd = 2130903103;
+			public const int search_ad = 2130903103;
 			
 			// aapt resource value: 0x7f030040
 			public const int select_dialog_item_material = 2130903104;
