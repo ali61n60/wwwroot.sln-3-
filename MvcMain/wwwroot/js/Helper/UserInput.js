@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var UserInput = /** @class */ (function () {
+var UserInput = (function () {
     function UserInput() {
         this.ParametersDictionary = {};
     }

@@ -9,6 +9,7 @@ using ChiKoja.Categories;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.CustomViews.SingleAdView;
 using ChiKoja.Infrastructure.IOC;
+using ChiKoja.Models;
 using ChiKoja.Notification;
 using ChiKoja.Services.Server;
 using ChiKoja.Services.Server.Interfaces;
@@ -23,7 +24,9 @@ namespace ChiKoja.SearchAd
     {
         private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
-        
+
+        private CategorySelection _categorySelection;
+        private TextView textView;
         protected const int CategorySelectionRequestCode = 2;
         IAdApi _adApi;
 
@@ -44,6 +47,7 @@ namespace ChiKoja.SearchAd
             chechIntentMessage(); //exit command ...
             inflateView();
             initializeFields();
+            initializeEvents();
         }
 
         private void chechIntentMessage()
@@ -56,7 +60,7 @@ namespace ChiKoja.SearchAd
         {
             FrameLayout contentFrameLayout =
                 FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-            rootView = LayoutInflater.Inflate(Resource.Layout.SearchAd, contentFrameLayout);
+            rootView = LayoutInflater.Inflate(Resource.Layout.search_ad, contentFrameLayout);
         }
 
         private void initializeFields()
@@ -66,12 +70,13 @@ namespace ChiKoja.SearchAd
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonSearchAd.Click +=async (sender, args) =>
             {
-                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-                ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
-                if(response.Success)
-                    OnSerachAdCompleted(response);
-                else
-                    OnSearchAdError(new Exception(response.Message+", ErrorCode:"+response.ErrorCode));
+                _categorySelection.SelectedCategoryId++;
+                //GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+                //ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
+                //if(response.Success)
+                //    OnSerachAdCompleted(response);
+                //else
+                //    OnSearchAdError(new Exception(response.Message+", ErrorCode:"+response.ErrorCode));
             };
 
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
@@ -83,11 +88,27 @@ namespace ChiKoja.SearchAd
             buttonCategory = FindViewById<Button>(Resource.Id.buttonCategory);
             buttonCategory.Click += buttonCategory_Click;
             searchResultPlaceHolder = rootView.FindViewById<LinearLayout>(Resource.Id.layoutSearchAdLinearLayout);
+
+            textView = FindViewById<TextView>(Resource.Id.textView);
+            _categorySelection=new CategorySelection();
+        }
+
+        
+
+        private void initializeEvents()
+        {
+            _categorySelection.SelectedCategoryCahnged += (sender, args) =>
+            {
+                textView.Text = args.SelectedCategoryId.ToString();
+            };
         }
 
         void buttonCategory_Click(object sender, EventArgs e)
         {
+           
             Intent categorySelectionIntent = new Intent(this, typeof(ActivityCategory));
+            
+            categorySelectionIntent.PutExtra("CategorySelection", _categorySelection);
             StartActivityForResult(categorySelectionIntent, CategorySelectionRequestCode);
         }
 

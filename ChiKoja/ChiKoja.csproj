@@ -260,6 +260,8 @@
     <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
     <Compile Include="Login\ActivityLogin.cs" />
     <Compile Include="Login\ActivitySignIn.cs" />
+    <Compile Include="Models\CategorySelection.cs" />
+    <Compile Include="Models\ICriteria.cs" />
     <Compile Include="NavigationDrawer\NavActivity.cs" />
     <Compile Include="Network\Network.cs" />
     <Compile Include="NewAd\ActivityNewAd.cs" />
@@ -321,7 +323,6 @@
     <AndroidResource Include="Resources\layout\Main.axml" />
     <AndroidResource Include="Resources\layout\NewAd.axml" />
     <AndroidResource Include="Resources\layout\NewAdTransportation.axml" />
-    <AndroidResource Include="Resources\layout\SearchAd.axml" />
     <AndroidResource Include="Resources\layout\ServiceExample.axml" />
     <AndroidResource Include="Resources\layout\SingleAdView.axml" />
     <AndroidResource Include="Resources\layout\SingleCategory.axml" />
@@ -407,6 +408,9 @@
       <Project>{a7fe567b-d17e-4b5e-86c5-7224c753c1de}</Project>
       <Name>ServiceLayer</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\search_ad.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Mono.Data.Sqlite.Portable.1.0.3.5\tools\Mono.Data.Sqlite.Portable.targets" Condition="Exists('..\packages\Mono.Data.Sqlite.Portable.1.0.3.5\tools\Mono.Data.Sqlite.Portable.targets')" />

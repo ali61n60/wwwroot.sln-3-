@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var AjaxCaller = /** @class */ (function () {
+var AjaxCaller = (function () {
     function AjaxCaller(url, resultHandler, requestCode) {
         this._numberOfPureServerCalls = 0;
         this._url = url;

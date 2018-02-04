@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CriteriaNumericDictionary_1 = require("../../../Helper/CriteriaNumericDictionary");
 var DefaultLetMeKnowCriteria_1 = require("./LetMeKnowCriteria/DefaultLetMeKnowCriteria");
 var AdTransportationLetMeKnowCriteria_1 = require("./LetMeKnowCriteria/AdTransportationLetMeKnowCriteria");
-var LetMeKnowCriteria = /** @class */ (function () {
+var LetMeKnowCriteria = (function () {
     function LetMeKnowCriteria() {
         this._letMeKnowCriteriaIocContainer = new CriteriaNumericDictionary_1.CriteriaNumericDictionary();
         this.initLetMeKnowCriteriaIocContainer();
