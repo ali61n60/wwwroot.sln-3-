@@ -53,12 +53,12 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
         <LinearLayout
-            android:orientation="horizontal"
             android:minWidth="25dp"
             android:minHeight="25dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/linearLayoutToolbar2">
+            android:id="@+id/linearLayoutToolbar2"
+            android:baselineAligned="false">
             <Button
                 android:id="@+id/buttonFilter"
                 android:text="@string/Filter"
