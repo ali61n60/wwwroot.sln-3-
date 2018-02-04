@@ -29,6 +29,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RepositoryStd", "Repository
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChiKoja", "ChiKoja\ChiKoja.csproj", "{A7993366-2B09-4F37-86EB-A8B2BC112A53}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6-AndroidStudio", "6-AndroidStudio", "{93D1A52C-CBEF-443F-938A-D130CA7BA6A5}"
+	ProjectSection(SolutionItems) = preProject
+		AndroidStudio\ChiKojaAndroid\.gitignore = AndroidStudio\ChiKojaAndroid\.gitignore
+		AndroidStudio\ChiKojaAndroid\build.gradle = AndroidStudio\ChiKojaAndroid\build.gradle
+		AndroidStudio\ChiKojaAndroid\ChiKojaAndroid.iml = AndroidStudio\ChiKojaAndroid\ChiKojaAndroid.iml
+		AndroidStudio\ChiKojaAndroid\gradle.properties = AndroidStudio\ChiKojaAndroid\gradle.properties
+		AndroidStudio\ChiKojaAndroid\gradlew = AndroidStudio\ChiKojaAndroid\gradlew
+		AndroidStudio\ChiKojaAndroid\gradlew.bat = AndroidStudio\ChiKojaAndroid\gradlew.bat
+		AndroidStudio\ChiKojaAndroid\local.properties = AndroidStudio\ChiKojaAndroid\local.properties
+		AndroidStudio\ChiKojaAndroid\settings.gradle = AndroidStudio\ChiKojaAndroid\settings.gradle
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,7 +96,7 @@ Global
 		{A7993366-2B09-4F37-86EB-A8B2BC112A53} = {BDEAB301-1106-4537-B46A-D25201BCEBCE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {6866D85D-0351-402A-9737-2B5016D41ED4}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {6866D85D-0351-402A-9737-2B5016D41ED4}
 	EndGlobalSection
 EndGlobal
