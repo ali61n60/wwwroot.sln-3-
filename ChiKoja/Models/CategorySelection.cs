@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Java.IO;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.Models
 {
-    public class CategorySelection:ICriteria
+    public class CategorySelection:ICriteria,ISerializable
     {
         private int _selectedCategoryId=0;//TODO set it from user pref or set it to default 
         public int SelectedCategoryId
@@ -37,6 +38,13 @@ namespace ChiKoja.Models
         {
              userInput.Add(Category.CategoryIdKey,_selectedCategoryId.ToString());
         }
+
+        public void Dispose()
+        {
+            
+        }
+
+        public IntPtr Handle { get; }
     }
 
 

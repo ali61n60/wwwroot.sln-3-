@@ -2024,8 +2024,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f07007a
 			public const int buttonCancel = 2131165306;
 			
-			// aapt resource value: 0x7f0700d9
-			public const int buttonCategory = 2131165401;
+			// aapt resource value: 0x7f0700da
+			public const int buttonCategory = 2131165402;
 			
 			// aapt resource value: 0x7f07007c
 			public const int buttonClearAll = 2131165308;
@@ -2039,8 +2039,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700e7
 			public const int buttonEdit = 2131165415;
 			
-			// aapt resource value: 0x7f0700d7
-			public const int buttonFilter = 2131165399;
+			// aapt resource value: 0x7f0700d8
+			public const int buttonFilter = 2131165400;
 			
 			// aapt resource value: 0x7f0700b5
 			public const int buttonLogout = 2131165365;
@@ -2078,8 +2078,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700b6
 			public const int buttonSignIn = 2131165366;
 			
-			// aapt resource value: 0x7f0700d8
-			public const int buttonSort = 2131165400;
+			// aapt resource value: 0x7f0700d9
+			public const int buttonSort = 2131165401;
 			
 			// aapt resource value: 0x7f0700aa
 			public const int buttonStopWorkerThread = 2131165354;
@@ -2101,9 +2101,6 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f07002d
 			public const int center_vertical = 2131165229;
-			
-			// aapt resource value: 0x7f0700da
-			public const int checkBox = 2131165402;
 			
 			// aapt resource value: 0x7f070094
 			public const int checkBoxOnlyWithPictures = 2131165332;
@@ -2267,11 +2264,11 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700a0
 			public const int layoutDynamicUIbuttonCreateElement = 2131165344;
 			
-			// aapt resource value: 0x7f0700d4
-			public const int layoutSearchAdLinearLayout = 2131165396;
+			// aapt resource value: 0x7f0700d6
+			public const int layoutSearchAdLinearLayout = 2131165398;
 			
-			// aapt resource value: 0x7f0700d3
-			public const int layoutSearchAdScrollView1 = 2131165395;
+			// aapt resource value: 0x7f0700d4
+			public const int layoutSearchAdScrollView1 = 2131165396;
 			
 			// aapt resource value: 0x7f0700dc
 			public const int layoutSingleAd = 2131165404;
@@ -2321,8 +2318,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700b0
 			public const int linearLayoutProvinceHolder = 2131165360;
 			
-			// aapt resource value: 0x7f0700d6
-			public const int linearLayoutToolbar2 = 2131165398;
+			// aapt resource value: 0x7f0700d7
+			public const int linearLayoutToolbar2 = 2131165399;
 			
 			// aapt resource value: 0x7f07000b
 			public const int listMode = 2131165195;
@@ -2569,6 +2566,9 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f07004d
 			public const int textSpacerNoButtons = 2131165261;
+			
+			// aapt resource value: 0x7f0700d3
+			public const int textView = 2131165395;
 			
 			// aapt resource value: 0x7f07009b
 			public const int textView1 = 2131165339;

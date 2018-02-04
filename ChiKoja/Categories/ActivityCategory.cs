@@ -7,8 +7,8 @@ using Android.OS;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.CustomViews.CategoryView;
+using ChiKoja.Models;
 using ChiKoja.Repository;
-using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.Categories
@@ -35,10 +35,13 @@ namespace ChiKoja.Categories
         Button _buttonSelectAll;
         Button _buttonClearAll;
 
+        private CategorySelection _categorySelection;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.Category);
+             _categorySelection= (CategorySelection) savedInstanceState.GetSerializable("CategorySelection");
+            _categorySelection.SelectedCategoryId += 10;
             initializeFields();
             setSavedSelectedCategories();
             setOldSelectedCateoryIds();
