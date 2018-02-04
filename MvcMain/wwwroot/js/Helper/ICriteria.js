@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var CriteriaValidator = /** @class */ (function () {
+var CriteriaValidator = (function () {
     function CriteriaValidator() {
     }
     return CriteriaValidator;
