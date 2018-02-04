@@ -260,6 +260,8 @@
     <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
     <Compile Include="Login\ActivityLogin.cs" />
     <Compile Include="Login\ActivitySignIn.cs" />
+    <Compile Include="Models\CategorySelection.cs" />
+    <Compile Include="Models\ICriteria.cs" />
     <Compile Include="NavigationDrawer\NavActivity.cs" />
     <Compile Include="Network\Network.cs" />
     <Compile Include="NewAd\ActivityNewAd.cs" />
