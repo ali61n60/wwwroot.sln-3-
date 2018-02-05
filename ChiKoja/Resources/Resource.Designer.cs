@@ -2225,6 +2225,9 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700e0
 			public const int frameLayoutImageSecion = 2131165408;
 			
+			// aapt resource value: 0x7f0700d3
+			public const int frame_layout = 2131165395;
+			
 			// aapt resource value: 0x7f07009d
 			public const int handle = 2131165341;
 			
@@ -2482,9 +2485,6 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f0700d2
 			public const int search_fragment = 2131165394;
-			
-			// aapt resource value: 0x7f0700d3
-			public const int search_fragment2 = 2131165395;
 			
 			// aapt resource value: 0x7f070066
 			public const int search_go_btn = 2131165286;

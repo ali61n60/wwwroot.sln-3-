@@ -15,11 +15,12 @@
     android:layout_height="match_parent"
     tools:layout="@layout/search_fragment" />
 
-  <fragment
-    android:id="@+id/search_fragment2"
-    android:name="ChiKoja.SearchAd.SearchFragment"
+  <FrameLayout
+    android:id="@+id/frame_layout"
     android:layout_width="0dp"
     android:layout_weight="1"
     android:layout_height="match_parent"
-    tools:layout="@layout/search_fragment" />
+    />
+  
+    
 </LinearLayout>

@@ -15,8 +15,10 @@ using ChiKoja.Categories;
 using ChiKoja.CustomViews.SingleAdView;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Models;
+using ChiKoja.Notification;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
+using ModelStd.Services;
 
 namespace ChiKoja.SearchAd
 {
@@ -71,13 +73,12 @@ namespace ChiKoja.SearchAd
         {
             buttonSearchAd.Click += async (sender, args) =>
             {
-                _categorySelection.SelectedCategoryId++;
-                //GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-                //ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
-                //if(response.Success)
-                //    OnSerachAdCompleted(response);
-                //else
-                //    OnSearchAdError(new Exception(response.Message+", ErrorCode:"+response.ErrorCode));
+                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+                ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
+                if (response.Success)
+                    OnSerachAdCompleted(response);
+                else
+                    OnSearchAdError(new Exception(response.Message + ", ErrorCode:" + response.ErrorCode));
             };
 
             buttonFilter.Click += buttonFilter_Click;
@@ -136,6 +137,26 @@ namespace ChiKoja.SearchAd
                 AdGuid = advertisementCommon.AdvertisementId,
                 AdNumberOfVisit = advertisementCommon.NumberOfVisit
             };
+        }
+
+        public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
+        {
+            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            LinearLayout.LayoutParams layoutParams =
+                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
+            layoutParams.SetMargins(0, 20, 0, 20);
+
+            if (response.Success)
+                foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
+                   addAdvertisementOnPage(advertisementCommon, layoutParams);
+            else
+                Toast.MakeText(_context, response.Message, ToastLength.Long).Show();
+        }
+
+        public void OnSearchAdError(Exception ex)
+        {
+            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            Toast.MakeText(_context, ex.Message, ToastLength.Short).Show();
         }
     }
 }

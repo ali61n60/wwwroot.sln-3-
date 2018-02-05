@@ -2,17 +2,9 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
-using ChiKoja.Categories;
 using ChiKoja.NavigationDrawer;
-using ChiKoja.CustomViews.SingleAdView;
-using ChiKoja.Infrastructure.IOC;
-using ChiKoja.Models;
-using ChiKoja.Notification;
-using ChiKoja.Services.Server;
-using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
@@ -51,10 +43,8 @@ namespace ChiKoja.SearchAd
 
         private void addFragments()
         {
-            searchFragment = new SearchFragment();
-            SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.myContainer, searchFragment)
-                .Commit();
+            searchFragment = (SearchFragment) SupportFragmentManager
+                .FindFragmentById(Resource.Id.search_fragment);
         }
 
         
@@ -87,27 +77,6 @@ namespace ChiKoja.SearchAd
                 if (data.GetBooleanExtra("OrderByChanged", false))
                     searchFragment.resetSearchCondition();
             }
-        }
-        
-
-        public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
-        {
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
-            LinearLayout.LayoutParams layoutParams =
-                new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
-            layoutParams.SetMargins(0, 20, 0, 20);
-
-            if (response.Success)
-                foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
-                    searchFragment.addAdvertisementOnPage(advertisementCommon, layoutParams);
-            else
-                Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
-        }
-       
-        public void OnSearchAdError(Exception ex)
-        {
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
-            Toast.MakeText(ApplicationContext, ex.Message, ToastLength.Short).Show();
         }
     }
 }
