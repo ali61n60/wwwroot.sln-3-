@@ -305,6 +305,7 @@
     <Compile Include="Services\Server\ServicesCommon.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
+    <Compile Include="Utility\ScreenUtility .cs" />
     <Compile Include="ViewServer\ActivityViewServerTest.cs" />
     <Compile Include="ViewServer\ViewServer.cs" />
   </ItemGroup>
