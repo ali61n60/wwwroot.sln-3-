@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <item name="search_ad" type="layout">
+    @layout/search_ad_large
+  </item>
+</resources>
