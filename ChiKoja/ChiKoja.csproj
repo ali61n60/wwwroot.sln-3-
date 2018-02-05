@@ -421,7 +421,7 @@
     <AndroidResource Include="Resources\layout\serarch_fragment.axml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values-sw600dp\layout.xml" />
+    <AndroidResource Include="Resources\values-sw300dp\layout.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-large\layout.xml" />
