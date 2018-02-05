@@ -102,7 +102,7 @@ namespace ChiKoja.CustomViews.CategoryView
         private void initialzeImageView()
         {
             imageViewHasChildrenSign = mainView.FindViewById<ImageView>(Resource.Id.imageViewHasChildrenSign);
-            imageViewHasChildrenSign.SetImageResource(Resource.Drawable.arrowLeft2);
+            imageViewHasChildrenSign.SetImageResource(Resource.Drawable.arrow_left2);
         }
         private void initializeChildContainer()
         {
@@ -145,7 +145,7 @@ namespace ChiKoja.CustomViews.CategoryView
         private void updateHasChildrenSign()
         {
             if (HasChildren())
-                imageViewHasChildrenSign.SetImageResource(Resource.Drawable.arrowDown2);
+                imageViewHasChildrenSign.SetImageResource(Resource.Drawable.arrow_down2);
         }
         public Category GetCategory()
         {

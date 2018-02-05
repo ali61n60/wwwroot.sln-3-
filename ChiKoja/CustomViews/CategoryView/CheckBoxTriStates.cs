@@ -75,17 +75,17 @@ namespace ChiKoja.CustomViews.CategoryView
 
         private void updateBtn()
         {
-            int btnDrawable = Resource.Drawable.arrowLeft2;//ic_checkbox_indeterminate_black;
+            int btnDrawable = Resource.Drawable.arrow_left2;//ic_checkbox_indeterminate_black;
             switch (_state)
             {
                 case UNKNOW:
-                    btnDrawable = Resource.Drawable.arrowLeft2;
+                    btnDrawable = Resource.Drawable.arrow_left2;
                     break;
                 case UNCHECKED:
-                    btnDrawable = Resource.Drawable.arrowDown1;//ic_checkbox_unchecked_black;
+                    btnDrawable = Resource.Drawable.arrow_down1;//ic_checkbox_unchecked_black;
                     break;
                 case CHECKED:
-                    btnDrawable = Resource.Drawable.arrowDown2;//ic_checkbox_checked_black;
+                    btnDrawable = Resource.Drawable.arrow_down2;//ic_checkbox_checked_black;
                     break;
             }
             SetButtonDrawable(btnDrawable);

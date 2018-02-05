@@ -1892,19 +1892,19 @@ namespace ChiKoja
 			public const int abc_textfield_search_material = 2130837578;
 			
 			// aapt resource value: 0x7f02004b
-			public const int arrowDown1 = 2130837579;
+			public const int arrow_down1 = 2130837579;
 			
 			// aapt resource value: 0x7f02004c
-			public const int arrowDown2 = 2130837580;
+			public const int arrow_down2 = 2130837580;
 			
 			// aapt resource value: 0x7f02004d
-			public const int arrowLeft2 = 2130837581;
+			public const int arrow_left2 = 2130837581;
 			
 			// aapt resource value: 0x7f02004e
-			public const int arrowRight2 = 2130837582;
+			public const int arrow_right2 = 2130837582;
 			
 			// aapt resource value: 0x7f02004f
-			public const int arrowUp2 = 2130837583;
+			public const int arrow_up2 = 2130837583;
 			
 			// aapt resource value: 0x7f020050
 			public const int design_fab_background = 2130837584;
@@ -1916,7 +1916,7 @@ namespace ChiKoja
 			public const int hamburger = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int Icon = 2130837587;
+			public const int icon = 2130837587;
 			
 			// aapt resource value: 0x7f020055
 			public const int notification_template_icon_bg = 2130837589;

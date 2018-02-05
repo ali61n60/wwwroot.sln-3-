@@ -56,7 +56,7 @@ namespace ChiKoja.Services.Example
             PendingIntent pendingIntent = PendingIntent.GetActivity(this, 0, new Intent(this, typeof(ServiceExampleActivity)), 0);
             // set intent so it does not start a new activity
             Android.App.Notification notification = nBuilder.SetContentIntent(pendingIntent)
-                .SetSmallIcon(Resource.Drawable.Icon).SetWhen(System.DateTime.Now.Ticks)
+                .SetSmallIcon(Resource.Drawable.icon).SetWhen(System.DateTime.Now.Ticks)
                 .SetContentTitle("Demo Service Notification")
                 .SetContentText("Message from demo service").Build();
             notification.Flags |= NotificationFlags.AutoCancel;

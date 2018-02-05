@@ -51,7 +51,7 @@ namespace ChiKoja.NavigationDrawer
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetDisplayShowTitleEnabled(false);
             SupportActionBar.SetHomeButtonEnabled(true);
-            SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.Icon);
+            SupportActionBar.SetHomeAsUpIndicator(Resource.Drawable.icon);
             drawerLayout = FindViewById<DrawerLayout>(Resource.Id.drawer_layout);
         }
 

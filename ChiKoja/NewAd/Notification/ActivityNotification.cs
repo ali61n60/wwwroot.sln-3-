@@ -67,7 +67,7 @@ namespace ChiKoja.Notification
                 .SetContentIntent(pendingIntent)
                 .SetContentTitle("Sample Notification")
                 .SetContentText("Hello World! This is my first notification!")
-                .SetSmallIcon(Resource.Drawable.Icon)
+                .SetSmallIcon(Resource.Drawable.icon)
                 .SetDefaults(NotificationDefaults.Lights);
 
             notification = builder.Build();
