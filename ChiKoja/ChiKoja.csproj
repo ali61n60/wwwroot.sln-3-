@@ -341,6 +341,7 @@
     <AndroidResource Include="Resources\layout\ContactInfoLayout.axml" />
     <AndroidResource Include="Resources\layout\Filter.axml" />
     <AndroidResource Include="Resources\layout\layout1.axml" />
+    <AndroidResource Include="Resources\layout\search_ad_large.axml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />

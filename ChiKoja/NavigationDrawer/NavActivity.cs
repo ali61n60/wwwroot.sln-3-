@@ -12,6 +12,8 @@ using ChiKoja.Login;
 using ChiKoja.NewAd;
 using ChiKoja.SearchAd;
 using ChiKoja.SearchAd.UserAd;
+using ChiKoja.Utility;
+using AlertDialog = Android.Support.V7.App.AlertDialog;
 using V7Toolbar = Android.Support.V7.Widget.Toolbar;
 
 
@@ -122,12 +124,26 @@ namespace ChiKoja.NavigationDrawer
                 case Resource.Id.nav_myAds:
                     navMyAdsClicked();
                     break;
+                case Resource.Id.ScreenDimension:
+                    showDimensionDialog();
+                    break;
                 case Resource.Id.nav_exitApp:
                     navExitAppClicked();
                     break;
             }
         }
 
+        private void showDimensionDialog()
+        {
+            ScreenUtility screenUtility=new ScreenUtility(this);
+            string output = "Width:" + screenUtility.GetWidth() + " , Height:" + screenUtility.GetHeight();
+            AlertDialog.Builder builder=new AlertDialog.Builder(this);
+            builder.SetTitle("Dimension")
+                .SetMessage(output)
+                .Create()
+                .Show();
+
+        }
         private void navSynchDatabaseClicked()
         {
             

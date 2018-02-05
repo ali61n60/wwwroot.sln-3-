@@ -26,6 +26,9 @@
    <item
       android:id="@+id/nav_aboutUs"
       android:title="@string/AboutUs" />
+    <item 
+      android:id="@+id/ScreenDimension"
+      android:title="Screen Dimension" />
     <item
       android:id="@+id/nav_exitApp"
       android:title="@string/ExitApplication"/>
