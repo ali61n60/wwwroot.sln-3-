@@ -286,6 +286,7 @@
     <Compile Include="SearchAd\ActivitySearchAd.cs" />
     <Compile Include="SearchAd\ActivitySearchFilter.cs" />
     <Compile Include="SearchAd\ActivitySortBy.cs" />
+    <Compile Include="SearchAd\SearchFragment.cs" />
     <Compile Include="SearchAd\UserAd\ActivityUserAds.cs" />
     <Compile Include="Services\Example\MyService.cs" />
     <Compile Include="Services\Example\ServiceExampleActivity.cs" />
@@ -320,7 +321,9 @@
     <AndroidResource Include="Resources\layout\layoutRelativeTest.axml" />
     <AndroidResource Include="Resources\layout\LocationSelection.axml" />
     <AndroidResource Include="Resources\layout\Login.axml" />
-    <AndroidResource Include="Resources\layout\Main.axml" />
+    <AndroidResource Include="Resources\layout\Main.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\NewAd.axml" />
     <AndroidResource Include="Resources\layout\NewAdTransportation.axml" />
     <AndroidResource Include="Resources\layout\ServiceExample.axml" />
@@ -411,6 +414,9 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\search_ad.axml" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\layout\serarch_fragment.axml" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\packages\Mono.Data.Sqlite.Portable.1.0.3.5\tools\Mono.Data.Sqlite.Portable.targets" Condition="Exists('..\packages\Mono.Data.Sqlite.Portable.1.0.3.5\tools\Mono.Data.Sqlite.Portable.targets')" />

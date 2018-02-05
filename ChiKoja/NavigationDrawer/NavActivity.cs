@@ -20,9 +20,9 @@ namespace ChiKoja.NavigationDrawer
     [Activity(Label = "Leftdrawerlayout", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class NavActivity : AppCompatActivity
     {
-        protected const int LocationSelectionRequestCode = 1;
-        protected const int SearchFilterRequestCode = 3;
-        protected const int OrderByRequestCode=4;
+        public const int LocationSelectionRequestCode = 1;
+        public const int SearchFilterRequestCode = 3;
+        public const int OrderByRequestCode=4;
 
         DrawerLayout drawerLayout;
         private const int navigationGravity = Android.Support.V4.View.GravityCompat.End;

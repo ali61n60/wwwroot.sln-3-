@@ -29,7 +29,8 @@ namespace ChiKoja.GlobalApplication
 
 
         //Create Advertisement in app service ***
-        
+        //TODO -2 Use Array Adaptor to ViewGroupSingleAD
+        //TODO -2 Make a manner to user input server ip address
         //TODO use Gateway pattern for web service classes
         //TODO Add setting section and update localdatabase option in it
         //TODO when updating database reprot the user how much the process has progressed

@@ -22,32 +22,18 @@ namespace ChiKoja.SearchAd
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class ActivitySearchAd : NavActivity
     {
+        private SearchFragment searchFragment;
         private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
-
-        private CategorySelection _categorySelection;
-        private TextView textView;
-        protected const int CategorySelectionRequestCode = 2;
-        IAdApi _adApi;
-
-        View rootView;
-        Button buttonFilter;
-
-        Button buttonSort;
-
-        //Button buttonSearchAd;
-        AppCompatButton buttonSearchAd;
-
-        Button buttonCategory;
-        LinearLayout searchResultPlaceHolder;
-
+        
+        public const int CategorySelectionRequestCode = 2;
+       
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             chechIntentMessage(); //exit command ...
             inflateView();
-            initializeFields();
-            initializeEvents();
+            addFragments();
         }
 
         private void chechIntentMessage()
@@ -60,71 +46,19 @@ namespace ChiKoja.SearchAd
         {
             FrameLayout contentFrameLayout =
                 FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-            rootView = LayoutInflater.Inflate(Resource.Layout.search_ad, contentFrameLayout);
+            LayoutInflater.Inflate(Resource.Layout.search_ad, contentFrameLayout);
         }
 
-        private void initializeFields()
+        private void addFragments()
         {
-            _adApi = Bootstrapper.container.GetInstance<IAdApi>();
-
-            buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
-            buttonSearchAd.Click +=async (sender, args) =>
-            {
-                _categorySelection.SelectedCategoryId++;
-                //GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-                //ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
-                //if(response.Success)
-                //    OnSerachAdCompleted(response);
-                //else
-                //    OnSearchAdError(new Exception(response.Message+", ErrorCode:"+response.ErrorCode));
-            };
-
-            buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
-            buttonFilter.Click += buttonFilter_Click;
-
-            buttonSort = rootView.FindViewById<Button>(Resource.Id.buttonSort);
-            buttonSort.Click += buttonSortBy_Click;
-
-            buttonCategory = FindViewById<Button>(Resource.Id.buttonCategory);
-            buttonCategory.Click += buttonCategory_Click;
-            searchResultPlaceHolder = rootView.FindViewById<LinearLayout>(Resource.Id.layoutSearchAdLinearLayout);
-
-            textView = FindViewById<TextView>(Resource.Id.textView);
-            _categorySelection=new CategorySelection();
+            searchFragment = new SearchFragment();
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.myContainer, searchFragment)
+                .Commit();
         }
 
         
 
-        private void initializeEvents()
-        {
-            _categorySelection.SelectedCategoryCahnged += (sender, args) =>
-            {
-                textView.Text = args.SelectedCategoryId.ToString();
-            };
-        }
-
-        void buttonCategory_Click(object sender, EventArgs e)
-        {
-           
-            Intent categorySelectionIntent = new Intent(this, typeof(ActivityCategory));
-            
-            categorySelectionIntent.PutExtra("CategorySelection", _categorySelection);
-            StartActivityForResult(categorySelectionIntent, CategorySelectionRequestCode);
-        }
-
-        private void buttonSortBy_Click(object sender, EventArgs eventArgs)
-        {
-            Intent OrderByIntent = new Intent(this, typeof(ActivitySortBy));
-            StartActivityForResult(OrderByIntent, OrderByRequestCode);
-        }
-
-        void buttonFilter_Click(object sender, EventArgs e)
-        {
-            Intent searchFilterIntent = new Intent(this, typeof(ActivitySearchFilter));
-            StartActivityForResult(searchFilterIntent, SearchFilterRequestCode);
-        }
-
-       
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {
             base.OnActivityResult(requestCode, resultCode, data);
@@ -133,32 +67,28 @@ namespace ChiKoja.SearchAd
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("locationSelectionChanged", false))
-                    resetSearchCondition();
+                    searchFragment.resetSearchCondition();
             }
             if (requestCode == CategorySelectionRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("categorySelectionChanged", false))
-                    resetSearchCondition();
+                    searchFragment.resetSearchCondition();
             }
             if (requestCode == SearchFilterRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("SearchFilterChanged", false))
-                    resetSearchCondition();
+                    searchFragment.resetSearchCondition();
             }
             if (requestCode == OrderByRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("OrderByChanged", false))
-                    resetSearchCondition();
+                    searchFragment.resetSearchCondition();
             }
         }
-        private void resetSearchCondition()
-        {
-            searchResultPlaceHolder.RemoveAllViews();
-            _adApi.ResetSearchCondition();
-        }
+        
 
         public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
         {
@@ -169,30 +99,11 @@ namespace ChiKoja.SearchAd
 
             if (response.Success)
                 foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
-                    addAdvertisementOnPage(advertisementCommon, layoutParams);
+                    searchFragment.addAdvertisementOnPage(advertisementCommon, layoutParams);
             else
                 Toast.MakeText(ApplicationContext, response.Message, ToastLength.Long).Show();
         }
-        private void addAdvertisementOnPage(AdvertisementCommon advertisementCommon, LinearLayout.LayoutParams layoutParams)
-        {
-            ViewGroupSingleAd viewGroupSingleAd = cretateNewViewSingleAd(advertisementCommon);
-            searchResultPlaceHolder.AddView(viewGroupSingleAd, layoutParams);
-        }
-        private ViewGroupSingleAd cretateNewViewSingleAd(AdvertisementCommon advertisementCommon)
-        {
-            return new ViewGroupSingleAd(this)
-            {
-                AdTitle = advertisementCommon.AdvertisementTitle + ", " + advertisementCommon.CityName,
-                AdPrice = advertisementCommon.AdvertisementPrice.PriceString,
-                AdImage = advertisementCommon.AdvertisementImages[0],
-                AdCategoryId = advertisementCommon.AdvertisementCategoryId,
-                AdGuid = advertisementCommon.AdvertisementId,
-                AdNumberOfVisit = advertisementCommon.NumberOfVisit
-            };
-        }
-
        
-
         public void OnSearchAdError(Exception ex)
         {
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
