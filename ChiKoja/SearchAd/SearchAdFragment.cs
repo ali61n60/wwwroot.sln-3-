@@ -22,7 +22,7 @@ using ModelStd.Services;
 
 namespace ChiKoja.SearchAd
 {
-    public class SearchFragment:Fragment
+    public class SearchAdFragment:Fragment
     {
         private Context _context;
         View rootView;
@@ -40,7 +40,7 @@ namespace ChiKoja.SearchAd
         private CategorySelection _categorySelection;
         IAdApi _adApi;
 
-        public SearchFragment() { }
+        public SearchAdFragment() { }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
@@ -100,7 +100,7 @@ namespace ChiKoja.SearchAd
             Intent categorySelectionIntent = new Intent(_context, typeof(ActivityCategory));
 
             categorySelectionIntent.PutExtra("CategorySelection", _categorySelection);
-            StartActivityForResult(categorySelectionIntent, ActivitySearchAd.CategorySelectionRequestCode);
+            StartActivityForResult(categorySelectionIntent, SearchAdActivity.CategorySelectionRequestCode);
         }
 
         private void buttonSortBy_Click(object sender, EventArgs eventArgs)

@@ -29,9 +29,7 @@
       android:id="@+id/layoutSearchAdScrollView1"
       android:layout_below="@id/buttonSearch"
       android:layout_above="@+id/toolbar2">
-    <ListView>
-      
-    </ListView>
+
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"

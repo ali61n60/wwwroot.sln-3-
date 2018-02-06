@@ -48,7 +48,7 @@ namespace ChiKoja.SplashActivity
             });
             startupWork.ContinueWith(t =>
             {
-                StartActivity(new Intent(Application.Context, typeof(ActivitySearchAd)));
+                StartActivity(new Intent(Application.Context, typeof(SearchAdActivity)));
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             startupWork.Start();

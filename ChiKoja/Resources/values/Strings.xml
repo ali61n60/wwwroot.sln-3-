@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="app_name">ChiKoja</string>
   <string name="ApplicationName">ChiKoja</string>
   <string name="Search">Search</string>
   <string name="Return">Return</string>

@@ -151,7 +151,7 @@ namespace ChiKoja.NavigationDrawer
 
         private void navHomeClicked()
         {
-            Intent homeIntent = new Intent(this, typeof(ActivitySearchAd));
+            Intent homeIntent = new Intent(this, typeof(SearchAdActivity));
             homeIntent.SetFlags(ActivityFlags.ClearTop);
             StartActivity(homeIntent);
         }
@@ -178,7 +178,7 @@ namespace ChiKoja.NavigationDrawer
         }
         private void navExitAppClicked()
         {
-            Intent intent = new Intent(ApplicationContext, typeof(ActivitySearchAd));
+            Intent intent = new Intent(ApplicationContext, typeof(SearchAdActivity));
             intent.SetFlags(ActivityFlags.ClearTop);
             intent.PutExtra("EXIT", true);
             StartActivity(intent);
