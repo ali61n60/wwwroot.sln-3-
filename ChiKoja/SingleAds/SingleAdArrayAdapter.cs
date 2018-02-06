@@ -15,16 +15,15 @@ using ModelStd.Advertisements;
 
 namespace ChiKoja.SingleAds
 {
-    class SingleAdArrayAdapter:ArrayAdapter<AdvertisementCommon>
+    public class SingleAdArrayAdapter:ArrayAdapter<AdvertisementCommon>
     {
         private Context _context;
         private IList<AdvertisementCommon> _advertisementCommonList;
-        
 
         public SingleAdArrayAdapter(Context context, int textViewResourceId, IList<AdvertisementCommon> objects) : base(context, textViewResourceId, objects)
         {
             _context = context;
-            _advertisementCommonList = objects; 
+            _advertisementCommonList = objects;
         }
 
         public void AddItemsToList(IList<AdvertisementCommon> newItems)
@@ -35,11 +34,13 @@ namespace ChiKoja.SingleAds
             }
         }
 
+        public override int Count { get { return _advertisementCommonList.Count; } }
+
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             AdvertisementCommon adCommon = _advertisementCommonList[position];
-            LayoutInflater inflater = (LayoutInflater) _context.GetSystemService(Activity.LayoutInflaterService);
-            View view = inflater.Inflate(Resource.Layout.SingleAdView, parent);
+            LayoutInflater inflater = (LayoutInflater) _context.GetSystemService(Context.LayoutInflaterService);
+            View view = inflater.Inflate(Resource.Layout.SingleAdView, null);
             //TODO set views prop
             TextView textViewAdTitle;
             TextView textViewAdPrice;

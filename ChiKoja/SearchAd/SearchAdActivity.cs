@@ -26,6 +26,7 @@ namespace ChiKoja.SearchAd
             chechIntentMessage(); //exit command ...
             inflateView();
             addFragments();
+            
         }
 
         private void chechIntentMessage()

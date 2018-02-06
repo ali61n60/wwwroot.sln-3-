@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Views;
@@ -62,21 +57,24 @@ namespace ChiKoja.SearchAd
 
         private void initializeFields()
         {
-            _singleAdArrayAdapter=new SingleAdArrayAdapter(_context,Android.Resource.Layout.SimpleListItem1,new List<AdvertisementCommon>());
-            _singleAdArrayAdapter.AddItemsToList(new List<AdvertisementCommon>()
-            {
-                new AdvertisementCommon()
+            _singleAdArrayAdapter=new SingleAdArrayAdapter(_context,
+                Android.Resource.Layout.SimpleListItem1,
+                new List<AdvertisementCommon>()
                 {
-                    AdvertisementTitle = "hello",
-                    NumberOfVisit = 10,
-                    AdvertisementPrice = new AgreementPrice(),
-                    AdvertisementImages = new string[10]
-                }
-            });
+                    new AdvertisementCommon()
+                    {
+                        AdvertisementTitle = "hello",
+                        NumberOfVisit = 10,
+                        AdvertisementPrice = new AgreementPrice(),
+                        AdvertisementImages = new string[10]
+                    }
+                });
+            
             listViewAdCommon = rootView.FindViewById<ListView>(Resource.Id.listViewAdCommon);
-            listViewAdCommon.Adapter = _singleAdArrayAdapter;
-
-            _adApi = Bootstrapper.container.GetInstance<IAdApi>();
+         listViewAdCommon.Adapter = _singleAdArrayAdapter;
+           
+                
+                _adApi = Bootstrapper.container.GetInstance<IAdApi>();
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
             buttonSort = rootView.FindViewById<Button>(Resource.Id.buttonSort);
@@ -170,8 +168,8 @@ namespace ChiKoja.SearchAd
             if (response.Success)
             {
                 _singleAdArrayAdapter.AddItemsToList(response.ResponseData);
-                _singleAdArrayAdapter.NotifyDataSetChanged();
-                
+                ((SingleAdArrayAdapter)listViewAdCommon.Adapter).NotifyDataSetChanged();
+                // listViewAdCommon.InvalidateViews();
                
                 //foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
                 //  addAdvertisementOnPage(advertisementCommon, layoutParams);
