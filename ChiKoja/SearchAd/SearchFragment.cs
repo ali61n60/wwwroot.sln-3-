@@ -45,6 +45,7 @@ namespace ChiKoja.SearchAd
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             rootView= inflater.Inflate(Resource.Layout.serarch_fragment, container, false);
+            
             initializeFields();
             initializeEvents();
 
