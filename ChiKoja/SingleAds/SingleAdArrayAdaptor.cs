@@ -5,8 +5,10 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
 using ModelStd.Advertisements;
@@ -15,16 +17,45 @@ namespace ChiKoja.SingleAds
 {
     class SingleAdArrayAdaptor:ArrayAdapter<AdvertisementCommon>
     {
-        public SingleAdArrayAdaptor(Context context, int textViewResourceId) : base(context, textViewResourceId)
-        {
-        }
+        private Context _context;
+        private IList<AdvertisementCommon> _advertisementCommonList;
+        
 
         public SingleAdArrayAdaptor(Context context, int textViewResourceId, IList<AdvertisementCommon> objects) : base(context, textViewResourceId, objects)
         {
+            _context = context;
+            _advertisementCommonList = objects; 
         }
 
-        public SingleAdArrayAdaptor(Context context, int resource, int textViewResourceId, IList<AdvertisementCommon> objects) : base(context, resource, textViewResourceId, objects)
+        public override View GetView(int position, View convertView, ViewGroup parent)
         {
+            AdvertisementCommon adCommon = _advertisementCommonList[position];
+            LayoutInflater inflater = (LayoutInflater) _context.GetSystemService(Activity.LayoutInflaterService);
+            View view = inflater.Inflate(Resource.Layout.SingleAdView, null);
+            //TODO set views prop
+            TextView textViewAdTitle;
+            TextView textViewAdPrice;
+            TextView textViewNumberOfVisit;
+            ImageView imageViewFirstImage;
+            
+            textViewAdTitle = view.FindViewById<TextView>(Resource.Id.textViewAdTitle);
+            textViewAdTitle.Text = adCommon.AdvertisementTitle;
+
+            textViewAdPrice = view.FindViewById<TextView>(Resource.Id.textViewAdPrice);
+            textViewAdPrice.Text = adCommon.AdvertisementPrice.PriceString;
+
+            textViewNumberOfVisit = view.FindViewById<TextView>(Resource.Id.textViewNumberOfVisit);
+            textViewNumberOfVisit.Text = adCommon.NumberOfVisit.ToString();
+
+            imageViewFirstImage = view.FindViewById<ImageView>(Resource.Id.imageViewFirstImage);
+            if (adCommon.AdvertisementImages[0] != null)
+            {
+                byte[] decodedString = Base64.Decode(adCommon.AdvertisementImages[0], Base64Flags.Default);
+                Bitmap decodedByte = BitmapFactory.DecodeByteArray(decodedString, 0, decodedString.Length);
+                imageViewFirstImage.SetImageBitmap(decodedByte);
+            }
+            
+            return view;
         }
     }
 }

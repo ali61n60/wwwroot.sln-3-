@@ -35,7 +35,8 @@ namespace ChiKoja.SearchAd
         AppCompatButton buttonSearchAd;
 
         Button buttonCategory;
-        LinearLayout searchResultPlaceHolder;
+        //LinearLayout searchResultPlaceHolder;
+        private ListView listViewAdCommon;
 
         private CategorySelection _categorySelection;
         IAdApi _adApi;
@@ -65,7 +66,8 @@ namespace ChiKoja.SearchAd
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
             buttonSort = rootView.FindViewById<Button>(Resource.Id.buttonSort);
             buttonCategory = rootView.FindViewById<Button>(Resource.Id.buttonCategory);
-            searchResultPlaceHolder = rootView.FindViewById<LinearLayout>(Resource.Id.layoutSearchAdLinearLayout);
+            listViewAdCommon = rootView.FindViewById<ListView>(Resource.Id.listViewAdCommon);
+            //searchResultPlaceHolder = rootView.FindViewById<LinearLayout>(Resource.Id.layoutSearchAdLinearLayout);
             textView = rootView.FindViewById<TextView>(Resource.Id.textView);
             _categorySelection = new CategorySelection();
         }
@@ -118,13 +120,15 @@ namespace ChiKoja.SearchAd
 
         public void resetSearchCondition()
         {
-            searchResultPlaceHolder.RemoveAllViews();
+            //searchResultPlaceHolder.RemoveAllViews();
+           listViewAdCommon.RemoveAllViews();
             _adApi.ResetSearchCondition();
         }
         public void addAdvertisementOnPage(AdvertisementCommon advertisementCommon, LinearLayout.LayoutParams layoutParams)
         {
             ViewGroupSingleAd viewGroupSingleAd = cretateNewViewSingleAd(advertisementCommon);
-            searchResultPlaceHolder.AddView(viewGroupSingleAd, layoutParams);
+            //searchResultPlaceHolder.AddView(viewGroupSingleAd, layoutParams);
+           
         }
 
         private ViewGroupSingleAd cretateNewViewSingleAd(AdvertisementCommon advertisementCommon)
@@ -146,7 +150,7 @@ namespace ChiKoja.SearchAd
             LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             layoutParams.SetMargins(0, 20, 0, 20);
-
+            //TODO use list instead 
             if (response.Success)
                 foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
                    addAdvertisementOnPage(advertisementCommon, layoutParams);
