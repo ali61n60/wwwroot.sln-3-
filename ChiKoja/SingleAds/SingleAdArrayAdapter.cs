@@ -15,16 +15,24 @@ using ModelStd.Advertisements;
 
 namespace ChiKoja.SingleAds
 {
-    class SingleAdArrayAdaptor:ArrayAdapter<AdvertisementCommon>
+    class SingleAdArrayAdapter:ArrayAdapter<AdvertisementCommon>
     {
         private Context _context;
         private IList<AdvertisementCommon> _advertisementCommonList;
         
 
-        public SingleAdArrayAdaptor(Context context, int textViewResourceId, IList<AdvertisementCommon> objects) : base(context, textViewResourceId, objects)
+        public SingleAdArrayAdapter(Context context, int textViewResourceId, IList<AdvertisementCommon> objects) : base(context, textViewResourceId, objects)
         {
             _context = context;
             _advertisementCommonList = objects; 
+        }
+
+        public void AddItemsToList(IList<AdvertisementCommon> newItems)
+        {
+            foreach (AdvertisementCommon adCommon in newItems)
+            {
+                _advertisementCommonList.Add(adCommon);
+            }
         }
 
         public override View GetView(int position, View convertView, ViewGroup parent)

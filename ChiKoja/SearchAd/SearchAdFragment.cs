@@ -17,6 +17,7 @@ using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Models;
 using ChiKoja.Notification;
 using ChiKoja.Services.Server.Interfaces;
+using ChiKoja.SingleAds;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
@@ -24,6 +25,7 @@ namespace ChiKoja.SearchAd
 {
     public class SearchAdFragment:Fragment
     {
+        private SingleAdArrayAdapter _singleAdArrayAdapter;
         private Context _context;
         View rootView;
         private TextView textView;
@@ -61,6 +63,7 @@ namespace ChiKoja.SearchAd
 
         private void initializeFields()
         {
+            _singleAdArrayAdapter=new SingleAdArrayAdapter(_context,0,new List<AdvertisementCommon>());
             _adApi = Bootstrapper.container.GetInstance<IAdApi>();
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
@@ -147,13 +150,19 @@ namespace ChiKoja.SearchAd
         public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
         {
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            
+
             LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             layoutParams.SetMargins(0, 20, 0, 20);
             //TODO use list instead 
             if (response.Success)
-                foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
-                   addAdvertisementOnPage(advertisementCommon, layoutParams);
+            {
+                _singleAdArrayAdapter.AddItemsToList(response.ResponseData);
+                listViewAdCommon.Adapter = _singleAdArrayAdapter;
+                //foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
+                //  addAdvertisementOnPage(advertisementCommon, layoutParams);
+            }
             else
                 Toast.MakeText(_context, response.Message, ToastLength.Long).Show();
         }

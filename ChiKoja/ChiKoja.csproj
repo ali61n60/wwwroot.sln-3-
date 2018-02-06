@@ -315,7 +315,7 @@
     <Compile Include="Services\Server\RegistrationApi.cs" />
     <Compile Include="Services\Server\RepositoryApi.cs" />
     <Compile Include="Services\Server\ServicesCommon.cs" />
-    <Compile Include="SingleAds\SingleAdArrayAdaptor.cs" />
+    <Compile Include="SingleAds\SingleAdArrayAdapter.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
     <Compile Include="Utility\ScreenUtility .cs" />
