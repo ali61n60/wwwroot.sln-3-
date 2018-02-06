@@ -39,12 +39,10 @@ namespace ChiKoja.SearchAd
             FrameLayout contentFrameLayout =
                 FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
             LayoutInflater.Inflate(Resource.Layout.search_ad, contentFrameLayout);
-           
         }
 
         private void addFragments()
         {
-            FrameLayout leftFrameLayout = FindViewById<FrameLayout>(Resource.Id.frame_layout_left);
             searchAdFragment=new SearchAdFragment();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.frame_layout_left, searchAdFragment)

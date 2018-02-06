@@ -341,7 +341,9 @@
     <AndroidResource Include="Resources\layout\NewAd.axml" />
     <AndroidResource Include="Resources\layout\NewAdTransportation.axml" />
     <AndroidResource Include="Resources\layout\ServiceExample.axml" />
-    <AndroidResource Include="Resources\layout\SingleAdView.axml" />
+    <AndroidResource Include="Resources\layout\SingleAdView.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\SingleCategory.axml" />
     <AndroidResource Include="Resources\layout\SingleUserAd.axml" />
     <AndroidResource Include="Resources\layout\SortBy.axml" />
@@ -436,7 +438,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values-sw300dp\layout.xml" />
+    <AndroidResource Include="Resources\values-sw600dp\layout.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-large\layout.xml" />

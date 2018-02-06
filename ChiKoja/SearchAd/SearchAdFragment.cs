@@ -19,6 +19,7 @@ using ChiKoja.Notification;
 using ChiKoja.Services.Server.Interfaces;
 using ChiKoja.SingleAds;
 using ModelStd.Advertisements;
+using ModelStd.Advertisements.Price;
 using ModelStd.Services;
 
 namespace ChiKoja.SearchAd
@@ -28,12 +29,10 @@ namespace ChiKoja.SearchAd
         private SingleAdArrayAdapter _singleAdArrayAdapter;
         private Context _context;
         View rootView;
-        private TextView textView;
+        
         Button buttonFilter;
 
         Button buttonSort;
-
-        //Button buttonSearchAd;
         AppCompatButton buttonSearchAd;
 
         Button buttonCategory;
@@ -63,15 +62,27 @@ namespace ChiKoja.SearchAd
 
         private void initializeFields()
         {
-            _singleAdArrayAdapter=new SingleAdArrayAdapter(_context,0,new List<AdvertisementCommon>());
+            _singleAdArrayAdapter=new SingleAdArrayAdapter(_context,Android.Resource.Layout.SimpleListItem1,new List<AdvertisementCommon>());
+            _singleAdArrayAdapter.AddItemsToList(new List<AdvertisementCommon>()
+            {
+                new AdvertisementCommon()
+                {
+                    AdvertisementTitle = "hello",
+                    NumberOfVisit = 10,
+                    AdvertisementPrice = new AgreementPrice(),
+                    AdvertisementImages = new string[10]
+                }
+            });
+            listViewAdCommon = rootView.FindViewById<ListView>(Resource.Id.listViewAdCommon);
+            listViewAdCommon.Adapter = _singleAdArrayAdapter;
+
             _adApi = Bootstrapper.container.GetInstance<IAdApi>();
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
             buttonSort = rootView.FindViewById<Button>(Resource.Id.buttonSort);
             buttonCategory = rootView.FindViewById<Button>(Resource.Id.buttonCategory);
-            listViewAdCommon = rootView.FindViewById<ListView>(Resource.Id.listViewAdCommon);
             //searchResultPlaceHolder = rootView.FindViewById<LinearLayout>(Resource.Id.layoutSearchAdLinearLayout);
-            textView = rootView.FindViewById<TextView>(Resource.Id.textView);
+            
             _categorySelection = new CategorySelection();
         }
 
@@ -95,7 +106,7 @@ namespace ChiKoja.SearchAd
 
             _categorySelection.SelectedCategoryCahnged += (sender, args) =>
             {
-                textView.Text = args.SelectedCategoryId.ToString();
+             
             };
         }
 
@@ -159,7 +170,9 @@ namespace ChiKoja.SearchAd
             if (response.Success)
             {
                 _singleAdArrayAdapter.AddItemsToList(response.ResponseData);
-                listViewAdCommon.Adapter = _singleAdArrayAdapter;
+                _singleAdArrayAdapter.NotifyDataSetChanged();
+                
+               
                 //foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
                 //  addAdvertisementOnPage(advertisementCommon, layoutParams);
             }
