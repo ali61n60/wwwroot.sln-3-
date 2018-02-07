@@ -255,6 +255,7 @@
   <ItemGroup>
     <Compile Include="Activity1.cs" />
     <Compile Include="AdDetail\AdDetail.cs" />
+    <Compile Include="AdDetail\AdDetailActivity.cs" />
     <Compile Include="AdDetail\AdDetailTransportationActivity.cs" />
     <Compile Include="AdDetail\IAdDetailCallBack.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
@@ -357,6 +358,9 @@
     <AndroidResource Include="Resources\layout\Filter.axml" />
     <AndroidResource Include="Resources\layout\layout1.axml" />
     <AndroidResource Include="Resources\layout\search_ad_large.axml" />
+    <AndroidResource Include="Resources\layout\ad_detail.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\mipmap-hdpi\" />

@@ -2,6 +2,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
+using ChiKoja.AdDetail;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Services.Server.Interfaces;
 using ChiKoja.SingleAds;
@@ -84,7 +85,10 @@ namespace ChiKoja.SearchAd
         {
             //TODO show ad detail to user
             
-            AdDetail.AdDetail.ShowAdDetail(adCommon.AdvertisementId,adCommon.AdvertisementCategoryId,this);
+            Intent adDetailIntent = new Intent(this, typeof(AdDetailActivity));
+            adDetailIntent.PutExtra(AdDetailActivity.AdGuidKey, adCommon.AdvertisementId.ToString());
+            adDetailIntent.PutExtra(AdDetailActivity.CategoryIdKey, adCommon.AdvertisementCategoryId);
+            this.StartActivity(adDetailIntent);
             
             Toast.MakeText(this,adCommon.AdvertisementId.ToString(),ToastLength.Long).Show();
         }
