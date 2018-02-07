@@ -339,15 +339,6 @@ namespace MvcMain.Controllers
             return response;
         }
 
-
-        //TODO Remove this
-        public ResponseBase<AdvertisementTransportation> GetTransportationAdDetail([FromBody] Guid adId)
-        {
-            IAdvertisementTransportationService transportationService = MyService.Inst.GetService<IAdvertisementTransportationService>();
-            return transportationService.GetAdDetail(adId);
-        }
-
-
         public ResponseBase<AdvertisementCommon> GetAdDetail([FromQuery][FromBody] AdDetailInfo adDetailInfo)
         {
             string errorCode = "AdApiController.GetAdDetail";

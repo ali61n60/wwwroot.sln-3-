@@ -1,25 +1,25 @@
-using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Views;
 using Android.Widget;
 using ChiKoja.NavigationDrawer;
+using ChiKoja.Services.Server.Interfaces;
+using ChiKoja.SingleAds;
 using ModelStd.Advertisements;
-using ModelStd.Services;
 
-
+//Activity to fragment  bundle and fragment.setArguments
 namespace ChiKoja.SearchAd
 {
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class SearchAdActivity : NavActivity
+    public class SearchAdActivity : NavActivity, SingleAdEvents
     {
         private SearchAdFragment searchAdFragment;
         private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
         
         public const int CategorySelectionRequestCode = 2;
-       
+        
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -78,6 +78,15 @@ namespace ChiKoja.SearchAd
                 if (data.GetBooleanExtra("OrderByChanged", false))
                     searchAdFragment.resetSearchCondition();
             }
+        }
+
+        public void OnSingleAdSelected(AdvertisementCommon adCommon)
+        {
+            //TODO show ad detail to user
+            
+            AdDetail.AdDetail.ShowAdDetail(adCommon.AdvertisementId,adCommon.AdvertisementCategoryId,this);
+            
+            Toast.MakeText(this,adCommon.AdvertisementId.ToString(),ToastLength.Long).Show();
         }
     }
 }

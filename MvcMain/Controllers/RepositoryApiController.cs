@@ -10,7 +10,7 @@ namespace MvcMain.Controllers
         {
             ResponseBase<int> response = new ResponseBase<int>
             {
-                ResponseData = 4 //TODO create an xml-base file and read this value from xml file
+                ResponseData = 5 //TODO create an xml-base file and read this value from xml file
             };
             response.SetSuccessResponse();
             return response;

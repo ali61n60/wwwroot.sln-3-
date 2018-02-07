@@ -13,6 +13,6 @@ namespace MvcMain.Infrastructure.Services
         ResponseBase<int> GetServerDataVersion();
         ResponseBase<IEnumerable<Brand>> GetAllTransportationBrands();
         ResponseBase<IEnumerable<CarModel>> GetAllTransportationModels();
-        ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId);
+        
     }
 }

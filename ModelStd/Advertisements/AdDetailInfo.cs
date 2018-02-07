@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MvcMain.Models
+namespace ModelStd.Advertisements
 {
     public class AdDetailInfo
     {

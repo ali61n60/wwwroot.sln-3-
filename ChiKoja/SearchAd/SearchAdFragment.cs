@@ -23,6 +23,7 @@ namespace ChiKoja.SearchAd
     public class SearchAdFragment : Fragment
     {
         private SingleAdArrayAdapter _singleAdArrayAdapter;
+        private SingleAdEvents _singleAdEvents;
         private Context _context;
         View rootView;
         Button buttonFilter;
@@ -33,6 +34,7 @@ namespace ChiKoja.SearchAd
         private CategorySelection _categorySelection;
         IAdApi _adApi;
 
+        // ReSharper disable once EmptyConstructor
         public SearchAdFragment() { }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -49,6 +51,14 @@ namespace ChiKoja.SearchAd
         {
             base.OnAttach(context);
             _context = context;
+            if (context is SingleAdEvents)
+            {
+                _singleAdEvents = context as SingleAdEvents;
+            }
+            else
+            {
+                throw new Exception("context must implement SingleAdEvents Interface");
+            }
         }
 
         private void initializeFields()
@@ -88,6 +98,12 @@ namespace ChiKoja.SearchAd
 
             buttonCategory.Click += buttonCategory_Click;
 
+            listViewAdCommon.ItemClick += (sender, args) =>
+            {
+                AdvertisementCommon clickedAdCommon = _singleAdArrayAdapter.GetItem(args.Position);
+                _singleAdEvents.OnSingleAdSelected(clickedAdCommon);// inform activity
+            };
+
             _categorySelection.SelectedCategoryCahnged += (sender, args) =>
             {
 
@@ -104,8 +120,8 @@ namespace ChiKoja.SearchAd
 
         private void buttonSortBy_Click(object sender, EventArgs eventArgs)
         {
-            Intent OrderByIntent = new Intent(_context, typeof(ActivitySortBy));
-            StartActivityForResult(OrderByIntent, NavigationDrawer.NavActivity.OrderByRequestCode);
+            Intent orderByIntent = new Intent(_context, typeof(ActivitySortBy));
+            StartActivityForResult(orderByIntent, NavigationDrawer.NavActivity.OrderByRequestCode);
         }
 
         void buttonFilter_Click(object sender, EventArgs e)

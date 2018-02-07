@@ -5,6 +5,7 @@ using System.Text;
 
 using Android.App;
 using Android.Content;
+using Android.Content.Res;
 using Android.Graphics;
 using Android.OS;
 using Android.Runtime;
@@ -34,6 +35,11 @@ namespace ChiKoja.SingleAds
             }
         }
 
+        public AdvertisementCommon GetItem(int position)
+        {
+            return _advertisementCommonList[position];
+        }
+
         public override int Count { get { return _advertisementCommonList.Count; } }
 
         public override View GetView(int position, View convertView, ViewGroup parent)
@@ -54,7 +60,7 @@ namespace ChiKoja.SingleAds
             textViewAdPrice.Text = adCommon.AdvertisementPrice.PriceString;
 
             textViewNumberOfVisit = view.FindViewById<TextView>(Resource.Id.textViewNumberOfVisit);
-            textViewNumberOfVisit.Text = adCommon.NumberOfVisit.ToString();
+            textViewNumberOfVisit.Text =_context.Resources.GetString(Resource.String.Visit) + " " + adCommon.NumberOfVisit;
 
             imageViewFirstImage = view.FindViewById<ImageView>(Resource.Id.imageViewFirstImage);
             if (adCommon.AdvertisementImages[0] != null)

@@ -23,32 +23,7 @@ namespace MvcMain.Controllers
             _advertisementTransportationRepository = MyService.Inst.GetService<IRepository<AdvertisementTransportation>>();
             _advertisementCommonService = MyService.Inst.GetService<IAdvertisementCommonService>();
         }
-
-
-        public ResponseBase<AdvertisementTransportation> GetAdDetail(Guid adId)
-        {
-            string errorCode = "AdTransportationApiController.GetAdDetail";
-            ResponseBase<AdvertisementTransportation> responseBase = new ResponseBase<AdvertisementTransportation>();
-            try
-            {
-                responseBase.ResponseData = _advertisementTransportationRepository.FindBy(adId);
-                if (responseBase.ResponseData != null)
-                {
-                    _advertisementCommonService.IncrementNumberOfVisit(adId);
-                    _advertisementCommonService.FillAllImages(responseBase.ResponseData);
-                    responseBase.SetSuccessResponse();
-                }
-                else
-                    responseBase.SetFailureResponse("repository returned NULL", errorCode);
-            }
-            catch (Exception ex)
-            {
-                responseBase.SetFailureResponse(ex.Message, errorCode);
-            }
-            return responseBase;
-        }
-
-
+        
 
         //public ResponseBase RemoveAd(AdvertisementCommon advertisementCommon)
         //{

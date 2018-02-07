@@ -264,7 +264,6 @@
     <Compile Include="CustomViews\CategoryView\CheckBoxTriStates.cs" />
     <Compile Include="CustomViews\CategoryView\ISingleCategoryView.cs" />
     <Compile Include="CustomViews\CategoryView\SingleCategoryView.cs" />
-    <Compile Include="CustomViews\SingleAdView\ViewGroupSingleAd.cs" />
     <Compile Include="CustomViews\SingleAdView\ViewGroupUserAd.cs" />
     <Compile Include="Dialog\AlertDialog\AlertDialogActivity.cs" />
     <Compile Include="GlobalApplication\GlobalApplication.cs" />
@@ -316,6 +315,7 @@
     <Compile Include="Services\Server\RepositoryApi.cs" />
     <Compile Include="Services\Server\ServicesCommon.cs" />
     <Compile Include="SingleAds\SingleAdArrayAdapter.cs" />
+    <Compile Include="SingleAds\SingleAdEvents.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
     <Compile Include="Utility\ScreenUtility .cs" />
