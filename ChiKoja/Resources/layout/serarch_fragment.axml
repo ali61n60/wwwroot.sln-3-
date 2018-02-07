@@ -12,23 +12,7 @@
       android:layout_height="wrap_content"
       android:id="@+id/buttonSearch"
       style="@style/ButtonStyleDanger" />
-  <!-- <ScrollView
-      android:minWidth="25px"
-      android:minHeight="25px"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      android:id="@+id/layoutSearchAdScrollView1"
-      android:layout_below="@id/buttonSearch"
-      android:layout_above="@+id/toolbar2">
-   <LinearLayout
-            android:orientation="vertical"
-            android:minWidth="25px"
-            android:minHeight="25px"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/layoutSearchAdLinearLayout"
-            android:paddingBottom="@dimen/activity_horizontal_margin">-->
-      <ListView
+  <ListView
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
