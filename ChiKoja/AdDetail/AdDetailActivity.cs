@@ -10,6 +10,7 @@ namespace ChiKoja.AdDetail
     [Activity(Label = "AdDetailActivity", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class AdDetailActivity:NavActivity
     {
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -38,15 +39,27 @@ namespace ChiKoja.AdDetail
 
         private void addFragments()
         {
+            addTopTop();
+            addMain();
+            
+            
+        }
+
+        private void addTopTop()
+        {
+            //TODO create toptop
+        }
+
+        private void addMain()
+        {
             int categoryId = Intent.GetIntExtra(Category.CategoryIdKey, Category.CategoryIdDefault);
             Android.Support.V4.App.Fragment categorySpecificFragment = AdViewContainer.GetAdDetailViewFragment(categoryId);
             Bundle args = new Bundle();
             args.PutString(Advertisement.AdGuidKey, Intent.GetStringExtra(Advertisement.AdGuidKey));
-            categorySpecificFragment.Arguments=args;
+            categorySpecificFragment.Arguments = args;
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.frame_layout_left, categorySpecificFragment)
+                .Add(Resource.Id.main, categorySpecificFragment)
                 .Commit();
-            
         }
         
        
