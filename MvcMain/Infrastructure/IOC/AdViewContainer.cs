@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 
 namespace MvcMain.Infrastructure.IOC
 {
@@ -15,10 +16,10 @@ namespace MvcMain.Infrastructure.IOC
         private static readonly Dictionary<int, string> _letMeKnowPartialViewContainer = new Dictionary<int, string>();
 
 
-        private static int defaultCategoryId = 0;
+        
         static AdViewContainer()
         {
-            RegisterAdDetailViews();
+            RegisterAdDetailViewContainer();
             RegisterSearchAdPartialViewContainer();
             RegisterNewAdPartialViewContainer();
             RegisterLetMeKnowPartialViewContainer();
@@ -27,26 +28,26 @@ namespace MvcMain.Infrastructure.IOC
         private static void RegisterLetMeKnowPartialViewContainer()
         {
             _letMeKnowPartialViewContainer[100] = "LetMeKnow/LetMeKnowTransformation";
-            _letMeKnowPartialViewContainer[defaultCategoryId] = "LetMeKnow/LetMeKnowDefault";
+            _letMeKnowPartialViewContainer[Category.CategoryIdDefault] = "LetMeKnow/LetMeKnowDefault";
         }
 
         private static void RegisterNewAdPartialViewContainer()
         {
             _newAdAdPartialViewContainer[100] = "NewAd/NewAdTransformation";
-            _newAdAdPartialViewContainer[defaultCategoryId] = "NewAd/NewAdDefault";
+            _newAdAdPartialViewContainer[Category.CategoryIdDefault] = "NewAd/NewAdDefault";
         }
 
         private static void RegisterSearchAdPartialViewContainer()
         {
             _searchAdPartialViewContainer[100] = "Home/SearchCriteriaTransformation";
-            _searchAdPartialViewContainer[defaultCategoryId] = "Home/SearchCriteriaDefault";
+            _searchAdPartialViewContainer[Category.CategoryIdDefault] = "Home/SearchCriteriaDefault";
         }
 
 
-        private static void RegisterAdDetailViews()
+        private static void RegisterAdDetailViewContainer()
         {
             _adDetailViewContainer[100] = "AdDetail/AdDetailTransportation";
-            _adDetailViewContainer[defaultCategoryId] = "AdDetail/AdDetailDefault";
+            _adDetailViewContainer[Category.CategoryIdDefault] = "AdDetail/AdDetailDefault";
         }
 
         public static string GetAdDetailViewName(int categoryId)
@@ -55,7 +56,7 @@ namespace MvcMain.Infrastructure.IOC
             {
                 return _adDetailViewContainer[categoryId];
             }
-            return _adDetailViewContainer[defaultCategoryId];
+            return _adDetailViewContainer[Category.CategoryIdDefault];
         }
 
         public static string GetSearchAdPartialViewName(int categoryId)
@@ -64,7 +65,7 @@ namespace MvcMain.Infrastructure.IOC
             {
                 return _searchAdPartialViewContainer[categoryId];
             }
-            return _searchAdPartialViewContainer[defaultCategoryId];
+            return _searchAdPartialViewContainer[Category.CategoryIdDefault];
         }
 
         public static string GetNewAdPartialViewName(int categoryId)
@@ -73,7 +74,7 @@ namespace MvcMain.Infrastructure.IOC
             {
                 return _newAdAdPartialViewContainer[categoryId];
             }
-            return _newAdAdPartialViewContainer[defaultCategoryId];
+            return _newAdAdPartialViewContainer[Category.CategoryIdDefault];
         }
 
         public static string GetLetMeKnowPartialViewName(int categoryId)
@@ -82,7 +83,7 @@ namespace MvcMain.Infrastructure.IOC
             {
                 return _letMeKnowPartialViewContainer[categoryId];
             }
-            return _letMeKnowPartialViewContainer[defaultCategoryId];
+            return _letMeKnowPartialViewContainer[Category.CategoryIdDefault];
         }
     }
 }

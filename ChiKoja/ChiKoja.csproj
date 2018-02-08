@@ -255,6 +255,7 @@
   <ItemGroup>
     <Compile Include="Activity1.cs" />
     <Compile Include="AdDetail\AdDetailActivity.cs" />
+    <Compile Include="AdDetail\AdDetailDefaultFragment.cs" />
     <Compile Include="AdDetail\AdDetailTransportationFragment.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
@@ -266,6 +267,7 @@
     <Compile Include="CustomViews\SingleAdView\ViewGroupUserAd.cs" />
     <Compile Include="Dialog\AlertDialog\AlertDialogActivity.cs" />
     <Compile Include="GlobalApplication\GlobalApplication.cs" />
+    <Compile Include="Infrastructure\IOC\AdViewContainer.cs" />
     <Compile Include="Infrastructure\IOC\Bootstrapper.cs" />
     <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
     <Compile Include="Login\ActivityLogin.cs" />

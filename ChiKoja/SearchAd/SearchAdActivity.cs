@@ -87,7 +87,7 @@ namespace ChiKoja.SearchAd
             //TODO show ad detail to user
             
             Intent adDetailIntent = new Intent(this, typeof(AdDetailActivity));
-            adDetailIntent.PutExtra(AdDetailActivity.AdGuidKey, adCommon.AdvertisementId.ToString());
+            adDetailIntent.PutExtra(Advertisement.AdGuidKey, adCommon.AdvertisementId.ToString());
             adDetailIntent.PutExtra(Category.CategoryIdKey, adCommon.AdvertisementCategoryId);
             StartActivity(adDetailIntent);
             

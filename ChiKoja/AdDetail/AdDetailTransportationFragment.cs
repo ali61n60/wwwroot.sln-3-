@@ -12,6 +12,7 @@ using ChiKoja.Notification;
 using ChiKoja.Repository.UserMarkedAds;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 
 
@@ -45,13 +46,13 @@ namespace ChiKoja.AdDetail
         {
             base.OnCreate(savedInstanceState);
             
-            if (!Arguments.ContainsKey(AdDetailActivity.AdGuidKey))
+            if (!Arguments.ContainsKey(Advertisement.AdGuidKey))
             {
                 //TODO make error handling better
                 Toast.MakeText(this.Activity, "IntentmustContain AdGuidKey and Value", ToastLength.Long).Show();
                 return;
             }
-            adGuid=Guid.Parse(Arguments.GetString(AdDetailActivity.AdGuidKey));
+            adGuid=Guid.Parse(Arguments.GetString(Advertisement.AdGuidKey));
             
         }
 

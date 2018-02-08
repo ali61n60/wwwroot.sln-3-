@@ -80,6 +80,8 @@ namespace ModelStd.Db.Ad
     {
         public static readonly string AdTypeKey = "AdType";
         public static readonly int AdTypeDefauly = 3;
+
+        public static readonly string AdGuidKey = "AdGuid";
     }
 
     public enum AdType

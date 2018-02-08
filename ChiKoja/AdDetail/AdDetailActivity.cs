@@ -1,6 +1,7 @@
 ﻿using Android.App;
 using Android.OS;
 using Android.Widget;
+using ChiKoja.Infrastructure.IOC;
 using ChiKoja.NavigationDrawer;
 using ModelStd.Db.Ad;
 
@@ -9,8 +10,6 @@ namespace ChiKoja.AdDetail
     [Activity(Label = "AdDetailActivity", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class AdDetailActivity:NavActivity
     {
-        public static readonly string AdGuidKey = "AdGuid";
-        
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -21,7 +20,7 @@ namespace ChiKoja.AdDetail
         private void inflateView()
         {
             //TODO make error handling better
-            if (!Intent.HasExtra(AdGuidKey))
+            if (!Intent.HasExtra(Advertisement.AdGuidKey))
             {
                 Toast.MakeText(this, "Intent must conatin AdGuidKey and Value", ToastLength.Long).Show();
                 return;
@@ -40,9 +39,9 @@ namespace ChiKoja.AdDetail
         private void addFragments()
         {
             int categoryId = Intent.GetIntExtra(Category.CategoryIdKey, Category.CategoryIdDefault);
-            Android.Support.V4.App.Fragment categorySpecificFragment = getCategorySpecificFragment(categoryId);
+            Android.Support.V4.App.Fragment categorySpecificFragment = AdViewContainer.GetAdDetailViewFragment(categoryId);
             Bundle args = new Bundle();
-            args.PutString(AdGuidKey, Intent.GetStringExtra(AdGuidKey));
+            args.PutString(Advertisement.AdGuidKey, Intent.GetStringExtra(Advertisement.AdGuidKey));
             categorySpecificFragment.Arguments=args;
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.frame_layout_left, categorySpecificFragment)
@@ -50,9 +49,6 @@ namespace ChiKoja.AdDetail
             
         }
         
-        private Android.Support.V4.App.Fragment getCategorySpecificFragment(int categoryId)
-        {
-            return new AdDetailTransportationFragment();
-        }
+       
     }
 }
