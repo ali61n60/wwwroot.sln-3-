@@ -7,6 +7,7 @@ using ChiKoja.NavigationDrawer;
 using ChiKoja.Services.Server.Interfaces;
 using ChiKoja.SingleAds;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 
 //Activity to fragment  bundle and fragment.setArguments
 namespace ChiKoja.SearchAd
@@ -87,7 +88,7 @@ namespace ChiKoja.SearchAd
             
             Intent adDetailIntent = new Intent(this, typeof(AdDetailActivity));
             adDetailIntent.PutExtra(AdDetailActivity.AdGuidKey, adCommon.AdvertisementId.ToString());
-            adDetailIntent.PutExtra(AdDetailActivity.CategoryIdKey, adCommon.AdvertisementCategoryId);
+            adDetailIntent.PutExtra(Category.CategoryIdKey, adCommon.AdvertisementCategoryId);
             this.StartActivity(adDetailIntent);
             
             Toast.MakeText(this,adCommon.AdvertisementId.ToString(),ToastLength.Long).Show();

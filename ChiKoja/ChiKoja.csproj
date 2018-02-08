@@ -349,7 +349,7 @@
     <AndroidResource Include="Resources\layout\SingleUserAd.axml" />
     <AndroidResource Include="Resources\layout\SortBy.axml" />
     <AndroidResource Include="Resources\layout\UserAds.axml" />
-    <AndroidResource Include="Resources\layout\AdTransportationDetail.axml" />
+    <AndroidResource Include="Resources\layout\ad_detail_transportation_fragment.axml" />
     <AndroidResource Include="Resources\layout\AlertDialogLayout.axml" />
     <AndroidResource Include="Resources\layout\Animation.axml" />
     <AndroidResource Include="Resources\layout\BrandTransportation.axml" />
