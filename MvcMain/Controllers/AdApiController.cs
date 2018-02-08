@@ -339,7 +339,7 @@ namespace MvcMain.Controllers
             return response;
         }
 
-        public ResponseBase<AdvertisementCommon> GetAdDetail([FromQuery][FromBody] AdDetailInfo adDetailInfo)
+        public ResponseBase<AdvertisementCommon> GetAdDetail([FromBody] AdDetailInfo adDetailInfo)
         {
             string errorCode = "AdApiController.GetAdDetail";
 

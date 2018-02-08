@@ -2,7 +2,6 @@
 
 namespace ModelStd.Advertisements
 {
-   [Serializable]
     public class AdDetailInfo
     {
         public string AdGuid { get;  set; }
