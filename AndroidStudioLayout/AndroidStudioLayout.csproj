@@ -4,4 +4,29 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="MyApplication\.idea\gradle.xml" />
+    <Content Include="MyApplication\.idea\misc.xml" />
+    <Content Include="MyApplication\.idea\modules.xml" />
+    <Content Include="MyApplication\.idea\runConfigurations.xml" />
+    <Content Include="MyApplication\.idea\workspace.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="MyApplication\.gradle\4.1\fileChanges\last-build.bin" />
+    <None Include="MyApplication\.gradle\4.1\fileHashes\fileHashes.bin" />
+    <None Include="MyApplication\.gradle\4.1\fileHashes\fileHashes.lock" />
+    <None Include="MyApplication\.gradle\4.1\fileHashes\resourceHashesCache.bin" />
+    <None Include="MyApplication\.gradle\4.1\taskHistory\fileSnapshots.bin" />
+    <None Include="MyApplication\.gradle\4.1\taskHistory\taskHistory.bin" />
+    <None Include="MyApplication\.gradle\4.1\taskHistory\taskHistory.lock" />
+    <None Include="MyApplication\.gradle\buildOutputCleanup\built.bin" />
+    <None Include="MyApplication\.gradle\buildOutputCleanup\cache.properties" />
+    <None Include="MyApplication\.gradle\buildOutputCleanup\cache.properties.lock" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="MyApplication\app\libs\" />
+  </ItemGroup>
+
 </Project>
