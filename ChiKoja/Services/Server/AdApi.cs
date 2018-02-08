@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ChiKoja.AdDetail;
 using ChiKoja.Repository;
 using ChiKoja.Repository.Filter;
 using ChiKoja.Repository.Location;
@@ -56,8 +55,13 @@ namespace ChiKoja.Services.Server
             return response;
         }
 
-       
-        
+        public async Task<ResponseBase<AdvertisementCommon>> GetAdDetail(AdDetailInfo adDetailInfo)
+        {
+            ResponseBase<AdvertisementCommon> response =await ServicesCommon.CallService<AdvertisementCommon>("api/AdApi/GetAdDetail", adDetailInfo);
+
+            return response;
+        }
+
 
         private bool localRequestIndexMatchsServerResponse(Dictionary<string, string> resultCustomDictionary)
         {
@@ -104,20 +108,7 @@ namespace ChiKoja.Services.Server
             //}).Start();
         }
 
-        public async Task GetAdTransportationDetailFromServer(Guid adId,IAdDetailCallBack<ResponseBase<AdvertisementTransportation>> adDetailCallBack)
-        {
-            //TODO research what heppen if adDetailCallBack is destroyed or stopped when calling it
-            //TODO get ad detail from server and show data to user
-            //TODO use a call back method when completed
-            //TODO do not block the calling thread
-            
-            ResponseBase<AdvertisementTransportation> response =
-                await ServicesCommon.CallService<AdvertisementTransportation>("api/AdApi/GetTransportationAdDetail",adId);
-            
-            adDetailCallBack.DataFromServer(response);
-            
-        }
-
+       
         public void ResetSearchCondition()
         {
             _start = _initalStart;

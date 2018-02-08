@@ -28,7 +28,7 @@ namespace ChiKoja.CustomViews.SingleAdView
             
             imageViewFirstImage = mainView.FindViewById<ImageView>(Resource.Id.imageViewFirstImage);
             buttonViewDetail = mainView.FindViewById<Button>(Resource.Id.buttonViewDetail);
-            buttonViewDetail.Click += (IntentSender, e) => { AdDetail.AdDetail.ShowAdDetail(AdGuid, AdCategoryId, Context); };
+           // buttonViewDetail.Click += (IntentSender, e) => { AdDetail.AdDetail.ShowAdDetail(AdGuid, AdCategoryId, Context); };
             buttonEdit = mainView.FindViewById<Button>(Resource.Id.buttonEdit);
             buttonDelete = mainView.FindViewById<Button>(Resource.Id.buttonDelete);
         }

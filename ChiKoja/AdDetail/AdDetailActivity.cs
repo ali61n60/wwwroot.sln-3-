@@ -41,7 +41,9 @@ namespace ChiKoja.AdDetail
         {
             int categoryId = Intent.GetIntExtra(Category.CategoryIdKey, Category.CategoryIdDefault);
             Android.Support.V4.App.Fragment categorySpecificFragment = getCategorySpecificFragment(categoryId);
-            categorySpecificFragment.Arguments.PutString(AdGuidKey,Intent.GetStringExtra(AdGuidKey));
+            Bundle args = new Bundle();
+            args.PutString(AdGuidKey, Intent.GetStringExtra(AdGuidKey));
+            categorySpecificFragment.Arguments=args;
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.frame_layout_left, categorySpecificFragment)
                 .Commit();
