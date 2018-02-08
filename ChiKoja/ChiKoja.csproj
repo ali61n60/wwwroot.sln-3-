@@ -256,6 +256,7 @@
     <Compile Include="Activity1.cs" />
     <Compile Include="AdDetail\AdDetailActivity.cs" />
     <Compile Include="AdDetail\AdDetailDefaultFragment.cs" />
+    <Compile Include="AdDetail\AdDetailTopTopFragment.cs" />
     <Compile Include="AdDetail\AdDetailTransportationFragment.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
