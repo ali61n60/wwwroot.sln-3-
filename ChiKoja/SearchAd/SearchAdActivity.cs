@@ -89,7 +89,7 @@ namespace ChiKoja.SearchAd
             Intent adDetailIntent = new Intent(this, typeof(AdDetailActivity));
             adDetailIntent.PutExtra(AdDetailActivity.AdGuidKey, adCommon.AdvertisementId.ToString());
             adDetailIntent.PutExtra(Category.CategoryIdKey, adCommon.AdvertisementCategoryId);
-            this.StartActivity(adDetailIntent);
+            StartActivity(adDetailIntent);
             
             Toast.MakeText(this,adCommon.AdvertisementId.ToString(),ToastLength.Long).Show();
         }

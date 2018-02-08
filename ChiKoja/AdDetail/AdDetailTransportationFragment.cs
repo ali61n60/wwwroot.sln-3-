@@ -1,25 +1,24 @@
 using System;
-using Android.App;
 using Android.Content;
+using Android.Graphics;
 using Android.OS;
+using Android.Support.V4.App;
+using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Android.Graphics;
-using Android.Util;
-using ChiKoja.NavigationDrawer;
 using ChiKoja.Notification;
 using ChiKoja.Repository.UserMarkedAds;
 using ChiKoja.Services.Server;
 using ModelStd.Advertisements;
 using ModelStd.Services;
-using Uri = Android.Net.Uri;
+
 
 namespace ChiKoja.AdDetail
 {
 
     //TODO show similar ads
-    [Activity(Label = "AdTransportationActivity", Theme = "@style/Theme.Main")]
-    public class AdDetailTransportationActivity : NavActivity,IAdDetailCallBack<ResponseBase<AdvertisementTransportation>>
+    
+    public class AdDetailTransportationFragment : Fragment//,IAdDetailCallBack<ResponseBase<AdvertisementTransportation>>
     {
         //TODO Design UI for this activity
 
@@ -35,23 +34,41 @@ namespace ChiKoja.AdDetail
         Button buttonMarkAd;
         UserMarkedAds userMarkedAds;
         Guid adGuid;
-        protected override void OnCreate(Bundle savedInstanceState)
+
+        public AdDetailTransportationFragment() { }
+
+
+        public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+        {
+            rootView = inflater.Inflate(Resource.Layout.ad_detail_transportation_fragment, container, false);
+
+            initializeFields();
+            initializeEvents();
+
+            return rootView;
+        }
+
+        public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            if (!Intent.HasExtra(AdDetail.AdGuidKey))
+
+            if (!Arguments.ContainsKey(AdDetailActivity.AdGuidKey))
             {
-                //TODO error in input intent data. Inform user
-                Finish();
+                //TODO make error handling better
+                Toast.MakeText(this.Activity, "IntentmustContain AdGuidKey and Value", ToastLength.Long).Show();
+                return;
             }
-            adGuid = Guid.Parse(Intent.GetStringExtra(AdDetail.AdGuidKey));
+            adGuid=Guid.Parse(Arguments.GetString(AdDetailActivity.AdGuidKey));
+            
+            
             AdApi adApi = new AdApi();
-            adApi.GetAdTransportationDetailFromServer(adGuid,this);
+            //adApi.GetAdTransportationDetailFromServer(adGuid,this);
 
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall),ShowMessageType.Permanent);
             userMarkedAds=new UserMarkedAds(Repository.Repository.DataBasePath);
 
             FrameLayout contentFrameLayout = FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-            rootView = LayoutInflater.Inflate(Resource.Layout.AdTransportationDetail, contentFrameLayout);
+           // rootView = LayoutInflater.Inflate(Resource.Layout.AdTransportationDetail, contentFrameLayout);
             InitializeViews();
         }
 
