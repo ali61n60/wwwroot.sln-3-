@@ -345,13 +345,14 @@ namespace MvcMain.Controllers
 
             ResponseBase<AdvertisementCommon> response = new ResponseBase<AdvertisementCommon>();
             IAdRepository adRepository = _repositoryContainer.GetAdRepository(adDetailInfo.CategoryId);
+            Guid adGuid=Guid.Parse(adDetailInfo.AdGuid);
             AdvertisementCommon adDetail;
             try
             {
-                adDetail = adRepository.GetAdDetail(adDetailInfo.AdId);
+                adDetail = adRepository.GetAdDetail(adGuid);
 
                 if (adDetail.AdvertisementStatus == Convertor.GetAdStatusString(AdStatus.Approved))
-                    adDetail.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(adDetailInfo.AdId);
+                    adDetail.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(adGuid);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();
             }

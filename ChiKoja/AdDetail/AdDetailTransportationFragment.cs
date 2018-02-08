@@ -58,24 +58,28 @@ namespace ChiKoja.AdDetail
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             rootView = inflater.Inflate(Resource.Layout.ad_detail_transportation_fragment, container, false);
-            advertisementTransportation = getAdDetailFromServer();
-            initializeFields();
-            initializeEvents();
-
             return rootView;
         }
 
-        private AdvertisementTransportation getAdDetailFromServer()
+        public override async void OnResume()
+        {
+            base.OnResume();
+
+            advertisementTransportation =await getAdDetailFromServer();
+            initializeFields();
+            initializeEvents();
+        }
+
+        private async Task<AdvertisementTransportation> getAdDetailFromServer()
         {
             AdvertisementTransportation advertisementTransportation = null;
             IAdApi adApi = Bootstrapper.container.GetInstance<IAdApi>();
             GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-            Task<ResponseBase<AdvertisementCommon>> responseTask = adApi.GetAdDetail(new AdDetailInfo()
+            ResponseBase<AdvertisementCommon> response =await adApi.GetAdDetail(new AdDetailInfo()
             {
-                AdId = adGuid,
+                AdGuid = adGuid.ToString(),
                 CategoryId = categoryId
             });
-            ResponseBase<AdvertisementCommon> response = responseTask.Result;
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
             if (response.Success)
             {
