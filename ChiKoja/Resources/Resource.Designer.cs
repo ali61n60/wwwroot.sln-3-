@@ -3021,14 +3021,17 @@ namespace ChiKoja
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f080044
-			public const int AboutUs = 2131230788;
+			// aapt resource value: 0x7f080046
+			public const int AboutUs = 2131230790;
 			
-			// aapt resource value: 0x7f080026
-			public const int AlreadySignInMessage = 2131230758;
+			// aapt resource value: 0x7f080024
+			public const int AlreadySignInMessage = 2131230756;
 			
 			// aapt resource value: 0x7f080018
 			public const int ApplicationName = 2131230744;
+			
+			// aapt resource value: 0x7f08002f
+			public const int Back = 2131230767;
 			
 			// aapt resource value: 0x7f080020
 			public const int Brand = 2131230752;
@@ -3039,86 +3042,86 @@ namespace ChiKoja
 			// aapt resource value: 0x7f08001b
 			public const int Cancel = 2131230747;
 			
+			// aapt resource value: 0x7f08003e
+			public const int Category = 2131230782;
+			
 			// aapt resource value: 0x7f08003c
-			public const int Category = 2131230780;
+			public const int CheckingDatabase = 2131230780;
 			
 			// aapt resource value: 0x7f08003a
-			public const int CheckingDatabase = 2131230778;
-			
-			// aapt resource value: 0x7f080038
-			public const int ClearAll = 2131230776;
+			public const int ClearAll = 2131230778;
 			
 			// aapt resource value: 0x7f08001d
 			public const int ContactInfo = 2131230749;
 			
-			// aapt resource value: 0x7f08003b
-			public const int DatabeseUpdated = 2131230779;
-			
-			// aapt resource value: 0x7f08002f
-			public const int DateAsc = 2131230767;
-			
-			// aapt resource value: 0x7f080030
-			public const int DateDesc = 2131230768;
-			
-			// aapt resource value: 0x7f080027
-			public const int DefaultToolbarMessage = 2131230759;
-			
-			// aapt resource value: 0x7f080045
-			public const int ExitApplication = 2131230789;
-			
-			// aapt resource value: 0x7f080043
-			public const int Filter = 2131230787;
-			
-			// aapt resource value: 0x7f08002a
-			public const int From = 2131230762;
-			
-			// aapt resource value: 0x7f080036
-			public const int GoToLoginPage = 2131230774;
-			
-			// aapt resource value: 0x7f08003e
-			public const int Home = 2131230782;
-			
-			// aapt resource value: 0x7f080041
-			public const int LocationSelection = 2131230785;
-			
-			// aapt resource value: 0x7f08003f
-			public const int LoginLogout = 2131230783;
-			
-			// aapt resource value: 0x7f080024
-			public const int Logout = 2131230756;
-			
-			// aapt resource value: 0x7f080021
-			public const int MarkAd = 2131230753;
-			
 			// aapt resource value: 0x7f08003d
-			public const int Menu = 2131230781;
+			public const int DatabeseUpdated = 2131230781;
 			
-			// aapt resource value: 0x7f080028
-			public const int MinimumPrice = 2131230760;
+			// aapt resource value: 0x7f080031
+			public const int DateAsc = 2131230769;
+			
+			// aapt resource value: 0x7f080032
+			public const int DateDesc = 2131230770;
 			
 			// aapt resource value: 0x7f080025
-			public const int MyAds = 2131230757;
+			public const int DefaultToolbarMessage = 2131230757;
+			
+			// aapt resource value: 0x7f080047
+			public const int ExitApplication = 2131230791;
+			
+			// aapt resource value: 0x7f080045
+			public const int Filter = 2131230789;
+			
+			// aapt resource value: 0x7f080028
+			public const int From = 2131230760;
+			
+			// aapt resource value: 0x7f080038
+			public const int GoToLoginPage = 2131230776;
 			
 			// aapt resource value: 0x7f080040
-			public const int NewAd = 2131230784;
+			public const int Home = 2131230784;
+			
+			// aapt resource value: 0x7f080043
+			public const int LocationSelection = 2131230787;
+			
+			// aapt resource value: 0x7f080041
+			public const int LoginLogout = 2131230785;
+			
+			// aapt resource value: 0x7f080022
+			public const int Logout = 2131230754;
+			
+			// aapt resource value: 0x7f08002c
+			public const int MarkAd = 2131230764;
+			
+			// aapt resource value: 0x7f08003f
+			public const int Menu = 2131230783;
+			
+			// aapt resource value: 0x7f080026
+			public const int MinimumPrice = 2131230758;
+			
+			// aapt resource value: 0x7f080023
+			public const int MyAds = 2131230755;
+			
+			// aapt resource value: 0x7f080042
+			public const int NewAd = 2131230786;
 			
 			// aapt resource value: 0x7f08001c
 			public const int Ok = 2131230748;
 			
-			// aapt resource value: 0x7f08002c
-			public const int OnlyWithPictures = 2131230764;
+			// aapt resource value: 0x7f08002a
+			public const int OnlyWithPictures = 2131230762;
 			
-			// aapt resource value: 0x7f080035
-			public const int PleaseLogIn = 2131230773;
+			// aapt resource value: 0x7f080037
+			public const int PleaseLogIn = 2131230775;
 			
-			// aapt resource value: 0x7f080029
-			public const int Price = 2131230761;
+			// aapt resource value: 0x7f080027
+			public const int Price = 2131230759;
 			
-			// aapt resource value: 0x7f080031
-			public const int PriceAsc = 2131230769;
+			// aapt resource value: 0x7f080033
+			public const int PriceAsc = 2131230771;
 			
-			// aapt resource value: 0x7f080032
-			public const int PriceDesc = 2131230770;
+			// aapt resource value: 0x7f080034
+			public const int PriceDesc = 2131230772;
 			
 			// aapt resource value: 0x7f08001a
 			public const int Return = 2131230746;
@@ -3126,38 +3129,41 @@ namespace ChiKoja
 			// aapt resource value: 0x7f080019
 			public const int Search = 2131230745;
 			
-			// aapt resource value: 0x7f080037
-			public const int SelectAll = 2131230775;
+			// aapt resource value: 0x7f080039
+			public const int SelectAll = 2131230777;
 			
 			// aapt resource value: 0x7f08001f
 			public const int SendSms = 2131230751;
 			
-			// aapt resource value: 0x7f080034
-			public const int ServerCall = 2131230772;
-			
-			// aapt resource value: 0x7f080023
-			public const int SignIn = 2131230755;
+			// aapt resource value: 0x7f080036
+			public const int ServerCall = 2131230774;
 			
 			// aapt resource value: 0x7f08002e
-			public const int Sort = 2131230766;
+			public const int Share = 2131230766;
 			
-			// aapt resource value: 0x7f080042
-			public const int SycnhDatabase = 2131230786;
+			// aapt resource value: 0x7f080021
+			public const int SignIn = 2131230753;
 			
-			// aapt resource value: 0x7f080033
-			public const int Title = 2131230771;
+			// aapt resource value: 0x7f080030
+			public const int Sort = 2131230768;
 			
-			// aapt resource value: 0x7f08002b
-			public const int To = 2131230763;
+			// aapt resource value: 0x7f080044
+			public const int SycnhDatabase = 2131230788;
 			
-			// aapt resource value: 0x7f080022
-			public const int UnMarkAd = 2131230754;
+			// aapt resource value: 0x7f080035
+			public const int Title = 2131230773;
+			
+			// aapt resource value: 0x7f080029
+			public const int To = 2131230761;
 			
 			// aapt resource value: 0x7f08002d
-			public const int UrgentAdsOnly = 2131230765;
+			public const int UnMarkAd = 2131230765;
 			
-			// aapt resource value: 0x7f080039
-			public const int Visit = 2131230777;
+			// aapt resource value: 0x7f08002b
+			public const int UrgentAdsOnly = 2131230763;
+			
+			// aapt resource value: 0x7f08003b
+			public const int Visit = 2131230779;
 			
 			// aapt resource value: 0x7f080000
 			public const int abc_action_bar_home_description = 2131230720;
@@ -3228,8 +3234,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f080016
 			public const int character_counter_pattern = 2131230742;
 			
-			// aapt resource value: 0x7f080046
-			public const int planet_prompt = 2131230790;
+			// aapt resource value: 0x7f080048
+			public const int planet_prompt = 2131230792;
 			
 			// aapt resource value: 0x7f080013
 			public const int status_bar_notification_info_overflow = 2131230739;

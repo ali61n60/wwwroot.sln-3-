@@ -10,8 +10,8 @@
   <string name="Call">Call</string>
   <string name="SendSms">Send SMS</string>
   <string name="Brand">Brand</string>
-  <string name="MarkAd">Mark Ad</string>
-  <string name="UnMarkAd">Unmark Ad</string>
+  
+  
   <string name="SignIn">Sign In</string>
   <string name="Logout">Logout</string>
   <string name="MyAds">My Ads</string>
@@ -24,6 +24,11 @@
   <string name="OnlyWithPictures">Only With Picture(s)</string>
   <string name="UrgentAdsOnly">Only Urgent Ad(s)</string>
 
+  <string name="MarkAd">Mark Ad</string>
+  <string name="UnMarkAd">Unmark Ad</string>
+  <string name="Share">Share</string>
+  <string name="Back">Back</string>
+  
   <string name="Sort">Sort</string>
   <string name="DateAsc">Date Ascending</string>
   <string name="DateDesc">Date Descending</string>

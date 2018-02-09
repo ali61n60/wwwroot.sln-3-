@@ -8,7 +8,7 @@
     android:id="@+id/buttonMarkAd"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="MarkAd"            />
+    android:text="@string/MarkAd"/>
 
   <Button
     android:id="@+id/buttonShare"
@@ -19,7 +19,7 @@
     android:layout_marginStart="18dp"
     android:layout_toEndOf="@+id/buttonMarkAd"
     android:layout_toRightOf="@+id/buttonMarkAd"
-    android:text="Share"
+    android:text="@string/Share"
     tools:layout_editor_absoluteX="121dp"
     tools:layout_editor_absoluteY="120dp" />
 
@@ -30,5 +30,5 @@
     android:layout_alignParentEnd="true"
     android:layout_alignParentRight="true"
     android:layout_alignParentTop="true"
-    android:text="Back" />
+    android:text="@string/Back" />
 </RelativeLayout>

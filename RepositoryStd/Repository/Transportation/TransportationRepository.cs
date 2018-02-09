@@ -18,6 +18,11 @@ namespace RepositoryStd.Repository.Transportation
         public IEnumerable<Brand> GetAllBrands()
         {
             List<Brand> allBrands = _adDbContext.Brands.ToList();
+            foreach (Brand brand in allBrands)
+            {
+                brand.LetMeKnowAttributeTransportaion = null;
+                brand.CarModels = null;
+            }
             return allBrands;
         }
 
@@ -25,6 +30,12 @@ namespace RepositoryStd.Repository.Transportation
         public IEnumerable<CarModel> GetAllModels()
         {
             List<CarModel> allCarModels = _adDbContext.CarModels.ToList();
+            foreach (CarModel carModel in allCarModels)
+            {
+                carModel.AdAttributeTransportations = null;
+                carModel.Brand = null;
+                carModel.LetMeKnowAttributeTransportaion = null;
+            }
             return allCarModels;
         }
     }

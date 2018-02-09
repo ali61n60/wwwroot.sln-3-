@@ -9,8 +9,7 @@
   <string name="Call">تماس</string>
   <string name="SendSms">ارسال اس ام اس</string>
   <string name="Brand">برند</string>
-  <string name="MarkAd">نشان کن</string>
-  <string name="UnMarkAd">از نشان شده ها حذف کن</string>
+  
   <string name="SignIn">ثبت نام</string>
   <string name="Logout">خروج</string>
   <string name="AlreadySignInMessage">قبلا وارد شده اید</string>
@@ -27,6 +26,11 @@
   <string name="PriceAsc">قیمت صعودی</string>
   <string name="PriceDesc">قیمت نزولی</string>
 
+  <string name="MarkAd">نشان کن</string>
+  <string name="UnMarkAd">از نشان شده ها حذف کن</string>
+  <string name="Share">اشترک گذاری</string>
+  <string name="Back">بازگشت</string>
+  
    <string name="Menu">منو</string>
   <string name="Home">خانه</string>
   <string name="LoginLogout">ورود/خروج</string>

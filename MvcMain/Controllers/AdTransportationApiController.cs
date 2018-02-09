@@ -24,59 +24,11 @@ namespace MvcMain.Controllers
             _advertisementCommonService = MyService.Inst.GetService<IAdvertisementCommonService>();
         }
         
-
-        //public ResponseBase RemoveAd(AdvertisementCommon advertisementCommon)
-        //{
-        //    string errorCode = "AdvertisementTransportationService.RemoveAd";
-        //    AdvertisementTransportation advertisementTransportation = new AdvertisementTransportation
-        //    {
-        //        AdvertisementCommon = advertisementCommon
-        //    };
-
-        //    ResponseBase response = new ResponseBase();
-        //    try
-        //    {
-        //        _advertisementTransportationRepository.Remove(advertisementTransportation);
-        //        response.SetSuccessResponse();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.SetFailureResponse(ex.Message, errorCode);
-        //    }
-
-        //    return response;
-        //}
-
-        ////get custom and common attributes
-        ////Refactor this method
-
-
-
-
-
-
-        //public ResponseBase EditAdvertisementTransportation(AdvertisementTransportation advertisementTransportation)
-        //{
-        //    string errorCode = "AdvertisementTransportationService.EditAdvertisementTransportation";
-        //    ResponseBase response = new ResponseBase();
-        //    try
-        //    {
-        //        _advertisementTransportationRepository.Save(advertisementTransportation);
-        //        response.SetSuccessResponse();
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        response.SetFailureResponse(ex.Message, errorCode);
-        //    }
-        //    return response;
-        //}
-
-
         public ResponseBase<int> GetServerDataVersion()
         {
             ResponseBase<int> response = new ResponseBase<int>
             {
-                ResponseData = 2 //TODO create an xml-base file and read this value from xml file
+                ResponseData = 1 //TODO create an xml-base file and read this value from xml file
             };
             response.SetSuccessResponse();
             return response;
