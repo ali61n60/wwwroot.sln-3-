@@ -15,17 +15,37 @@ namespace RepositoryStd.Repository
         }
         public IEnumerable<Province> GetAllProvinces()
         {
-            return _adDbContext.Provinces.ToList();
+            List<Province> allProvinces= _adDbContext.Provinces.ToList();
+            foreach (Province province in allProvinces)
+            {
+                province.Cities = null;
+            }
+
+            return allProvinces;
         }
 
         public IEnumerable<City> GetAllCities()
         {
-            return _adDbContext.Cities.ToList();
+            List<City> allCities= _adDbContext.Cities.ToList();
+            foreach (City city in  allCities)
+            {
+                city.Province = null;
+                city.Districts = null;
+            }
+
+            return allCities;
         }
 
         public IEnumerable<District> GetAllDistricts()
         {
-            return _adDbContext.Districts.ToList();
+            List<District> allDistricts= _adDbContext.Districts.ToList();
+            foreach (District district in allDistricts)
+            {
+                district.City = null;
+                district.Advertisements = null;
+            }
+
+            return allDistricts;
         }
     }
 }
