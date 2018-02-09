@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Json;
-using System.Net;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
@@ -14,7 +12,6 @@ using ChiKoja.Repository.TransportationRepository;
 using ChiKoja.Services.Server;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
-using Newtonsoft.Json;
 using ServiceLayer;
 using Environment = System.Environment;
 
