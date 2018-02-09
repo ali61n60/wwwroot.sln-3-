@@ -255,6 +255,7 @@
   <ItemGroup>
     <Compile Include="Activity1.cs" />
     <Compile Include="AdDetail\AdDetailActivity.cs" />
+    <Compile Include="AdDetail\AdDetailContactOwner.cs" />
     <Compile Include="AdDetail\AdDetailDefaultFragment.cs" />
     <Compile Include="AdDetail\AdDetailTopTopFragment.cs" />
     <Compile Include="AdDetail\AdDetailTransportationFragment.cs" />
@@ -364,6 +365,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ad_detail_toptop.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ad_detail_contact_owner.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

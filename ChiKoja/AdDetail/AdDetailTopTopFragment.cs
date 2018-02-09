@@ -42,7 +42,6 @@ namespace ChiKoja.AdDetail
         {
             base.OnResume();
 
-            
             initializeFields();
             initializeEvents();
         }

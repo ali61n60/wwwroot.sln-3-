@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
@@ -15,10 +16,11 @@ namespace RepositoryStd.Repository
         }
         public IEnumerable<Province> GetAllProvinces()
         {
-            List<Province> allProvinces= _adDbContext.Provinces.ToList();
-            foreach (Province province in allProvinces)
+            List<Province> allProvinces=new List<Province>();
+            var provinces=_adDbContext.Provinces.ToList();
+            foreach (Province province in provinces)
             {
-                province.Cities = null;
+                allProvinces.Add(province);
             }
 
             return allProvinces;
@@ -26,11 +28,11 @@ namespace RepositoryStd.Repository
 
         public IEnumerable<City> GetAllCities()
         {
-            List<City> allCities= _adDbContext.Cities.ToList();
-            foreach (City city in  allCities)
+            List<City> allCities=new List<City>();
+            var cities=_adDbContext.Cities.ToList();
+            foreach (City city in  cities)
             {
-                city.Province = null;
-                city.Districts = null;
+                allCities.Add(city);
             }
 
             return allCities;
@@ -38,11 +40,12 @@ namespace RepositoryStd.Repository
 
         public IEnumerable<District> GetAllDistricts()
         {
-            List<District> allDistricts= _adDbContext.Districts.ToList();
-            foreach (District district in allDistricts)
+
+            List<District> allDistricts=new List<District>();
+            IEnumerable<District> districts= _adDbContext.Districts;
+            foreach (District district in districts)
             {
-                district.City = null;
-                district.Advertisements = null;
+                allDistricts.Add(district);
             }
 
             return allDistricts;

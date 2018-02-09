@@ -41,10 +41,10 @@ namespace ChiKoja.AdDetail
         {
             addTopTop();
             addMain();
-            
-            
+            addContactOwner();
         }
 
+        
         private void addTopTop()
         {
             AdDetailTopTopFragment adDetailTopTopFragment = new AdDetailTopTopFragment();
@@ -67,7 +67,17 @@ namespace ChiKoja.AdDetail
                 .Add(Resource.Id.main, categorySpecificFragment)
                 .Commit();
         }
-        
-       
+        private void addContactOwner()
+        {
+            //TODO give data neede for this fragment
+            
+            AdDetailContactOwner adDetailContactOwner = new AdDetailContactOwner();
+            Bundle args = new Bundle();
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.contact_owner, adDetailContactOwner)
+                .Commit();
+        }
+
+
     }
 }

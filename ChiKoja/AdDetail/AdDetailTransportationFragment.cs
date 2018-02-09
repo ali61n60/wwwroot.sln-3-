@@ -27,7 +27,7 @@ namespace ChiKoja.AdDetail
         LinearLayout linearLayoutImageContainer;
 
         View rootView;
-        Button buttonContactInfo;
+        
         
         private TextView textViewAdTitle;
         private TextView textViewBrand;
@@ -67,6 +67,8 @@ namespace ChiKoja.AdDetail
             initializeEvents();
         }
 
+        
+
         private async Task<AdvertisementTransportation> getAdDetailFromServer()
         {
             AdvertisementTransportation advertisementTransportation = null;
@@ -103,10 +105,6 @@ namespace ChiKoja.AdDetail
         {
             
             linearLayoutImageContainer = rootView.FindViewById<LinearLayout>(Resource.Id.linearLayoutImageContainer);
-            buttonContactInfo = rootView.FindViewById<Button>(Resource.Id.buttonContactInfo);
-            
-           
-
             textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
             textViewAdTitle.Text = advertisementTransportation.AdvertisementTitle;
 
@@ -118,37 +116,9 @@ namespace ChiKoja.AdDetail
 
         private void initializeEvents()
         {
-            buttonContactInfo.Click += buttonContactInfo_Click;
-        }
-        
 
-        
-
-        void buttonContactInfo_Click(object sender, EventArgs e)
-        {
-            Android.App.Dialog contactInfoDialog = new Android.App.Dialog(Activity);
-            contactInfoDialog.SetContentView(Resource.Layout.ContactInfoLayout);
-            Button buttonCall = contactInfoDialog.FindViewById<Button>(Resource.Id.buttonCall);
-            buttonCall.Click += (s, ev) =>
-            {
-                Intent dialIntent = new Intent(Intent.ActionDial, Android.Net.Uri.Parse("tel:" + advertisementTransportation.PhoneNumber));
-                StartActivity(dialIntent);
-            };
-            Button buttonSendSms = contactInfoDialog.FindViewById<Button>(Resource.Id.buttonSendSMS);
-            buttonSendSms.Click += (s, ev) =>
-            {
-                Intent dialIntent = new Intent(Intent.ActionSendto, Android.Net.Uri.Parse("smsto:" + advertisementTransportation.PhoneNumber));
-                StartActivity(dialIntent);
-            };
-            TextView textViewPhoneNumber = contactInfoDialog.FindViewById<TextView>(Resource.Id.textViewPhoneNumber);
-            textViewPhoneNumber.Text = advertisementTransportation.PhoneNumber;
-
-            contactInfoDialog.Show();
         }
 
-       
-        
-        
         private void fillImageSection()
         {
             if (advertisementTransportation == null || advertisementTransportation.AdvertisementImages == null)
