@@ -45,7 +45,7 @@ namespace ChiKoja.AdDetail
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            createTopTopFragment();
+            
             if (!Arguments.ContainsKey(Advertisement.AdGuidKey))
             {
                 //TODO make error handling better
@@ -56,14 +56,7 @@ namespace ChiKoja.AdDetail
             
         }
 
-        private void createTopTopFragment()
-        {
-            //TODO create toptop
-            AdDetailTopTopFragment adDetailTopTopFragment = new AdDetailTopTopFragment();
-            Activity.SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.top_top, adDetailTopTopFragment)
-                .Commit();
-        }
+       
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {

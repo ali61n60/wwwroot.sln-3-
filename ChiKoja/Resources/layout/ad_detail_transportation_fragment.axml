@@ -51,15 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/buttonMarkAd" />
-              <LinearLayout
-                android:orientation="vertical"
-                android:minWidth="25px"
-                android:minHeight="25px"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/toptop">
-              </LinearLayout>
-                <TableLayout
+            <TableLayout
                     android:minWidth="25px"
                     android:minHeight="25px"
                     android:layout_width="match_parent"

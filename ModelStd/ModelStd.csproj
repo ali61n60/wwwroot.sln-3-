@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard1.4</TargetFramework>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Copyright>No</Copyright>
     <PackageLicenseUrl>No</PackageLicenseUrl>
     <PackageProjectUrl>No</PackageProjectUrl>

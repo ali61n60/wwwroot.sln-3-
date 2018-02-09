@@ -47,7 +47,11 @@ namespace ChiKoja.AdDetail
 
         private void addTopTop()
         {
-            
+            //TODO create toptop
+            AdDetailTopTopFragment adDetailTopTopFragment = new AdDetailTopTopFragment();
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.top_top, adDetailTopTopFragment)
+                .Commit();
         }
 
         private void addMain()
