@@ -339,7 +339,7 @@
     <AndroidResource Include="Resources\layout\layoutRelativeTest.axml" />
     <AndroidResource Include="Resources\layout\LocationSelection.axml" />
     <AndroidResource Include="Resources\layout\Login.axml" />
-    <AndroidResource Include="Resources\layout\Main.axml">
+    <AndroidResource Include="Resources\layout\main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\NewAd.axml" />

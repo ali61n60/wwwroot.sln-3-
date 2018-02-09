@@ -2930,7 +2930,7 @@ namespace ChiKoja
 			public const int Login = 2130903094;
 			
 			// aapt resource value: 0x7f030037
-			public const int Main = 2130903095;
+			public const int main = 2130903095;
 			
 			// aapt resource value: 0x7f030038
 			public const int NewAd = 2130903096;
