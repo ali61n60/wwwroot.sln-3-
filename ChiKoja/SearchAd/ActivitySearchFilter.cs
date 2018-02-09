@@ -1,21 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.V7.App;
 using Android.Text;
-using Android.Util;
-using Android.Views;
 using Android.Widget;
-using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
-using Java.Text;
 
 
 namespace ChiKoja.SearchAd

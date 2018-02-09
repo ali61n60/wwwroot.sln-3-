@@ -18,9 +18,6 @@ using ModelStd.Services;
 
 namespace ChiKoja.AdDetail
 {
-
-   
-    
     public class AdDetailTransportationFragment : Fragment
     {
         //TODO Design UI for this fragment
