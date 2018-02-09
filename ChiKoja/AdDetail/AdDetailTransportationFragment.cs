@@ -19,7 +19,7 @@ using ModelStd.Services;
 namespace ChiKoja.AdDetail
 {
 
-    //TODO show similar ads
+   
     
     public class AdDetailTransportationFragment : Fragment
     {
@@ -28,15 +28,14 @@ namespace ChiKoja.AdDetail
         AdvertisementTransportation advertisementTransportation;
 
         LinearLayout linearLayoutImageContainer;
-        LinearLayout linearLayoutDataContainer;
 
         View rootView;
         Button buttonContactInfo;
-        Button buttonMarkAd;
+        
         private TextView textViewAdTitle;
         private TextView textViewBrand;
 
-        UserMarkedAds userMarkedAds;
+        
         Guid adGuid;
         private readonly int categoryId = 100;
 
@@ -55,9 +54,7 @@ namespace ChiKoja.AdDetail
             adGuid=Guid.Parse(Arguments.GetString(Advertisement.AdGuidKey));
             
         }
-
-       
-
+        
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             rootView = inflater.Inflate(Resource.Layout.ad_detail_transportation_fragment, container, false);
@@ -107,12 +104,11 @@ namespace ChiKoja.AdDetail
 
         private void initializeFields()
         {
-            userMarkedAds = new UserMarkedAds(Repository.Repository.DataBasePath);
+            
             linearLayoutImageContainer = rootView.FindViewById<LinearLayout>(Resource.Id.linearLayoutImageContainer);
-            linearLayoutDataContainer = rootView.FindViewById<LinearLayout>(Resource.Id.linearLayoutDataContainer);
             buttonContactInfo = rootView.FindViewById<Button>(Resource.Id.buttonContactInfo);
-            buttonMarkAd = rootView.FindViewById<Button>(Resource.Id.buttonMarkAd);
-            manageButtonMarkAdText();
+            
+           
 
             textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
             textViewAdTitle.Text = advertisementTransportation.AdvertisementTitle;
@@ -126,17 +122,10 @@ namespace ChiKoja.AdDetail
         private void initializeEvents()
         {
             buttonContactInfo.Click += buttonContactInfo_Click;
-            buttonMarkAd.Click += buttonMarkAd_Click;
         }
         
 
-        private void manageButtonMarkAdText()
-        {
-            if (userMarkedAds.IsAdMarked(Repository.Repository.Locker, adGuid))
-                buttonMarkAd.Text = Resources.GetString(Resource.String.UnMarkAd);
-            else
-                buttonMarkAd.Text = Resources.GetString(Resource.String.MarkAd);
-        }
+        
 
         void buttonContactInfo_Click(object sender, EventArgs e)
         {
@@ -160,14 +149,7 @@ namespace ChiKoja.AdDetail
             contactInfoDialog.Show();
         }
 
-        void buttonMarkAd_Click(object sender, EventArgs e)
-        {
-            if (userMarkedAds.IsAdMarked(Repository.Repository.Locker, adGuid))
-                userMarkedAds.UnmarAd(Repository.Repository.Locker, adGuid);
-            else
-                userMarkedAds.MarkAd(Repository.Repository.Locker, adGuid);
-            manageButtonMarkAdText();
-        }
+       
         
         
         private void fillImageSection()

@@ -14,7 +14,7 @@ using Android.Views;
 using Android.Widget;
 using ModelStd.Advertisements;
 
-namespace ChiKoja.SingleAds
+namespace ChiKoja.ArrayAdapters.SingleAd
 {
     public class SingleAdArrayAdapter:ArrayAdapter<AdvertisementCommon>
     {

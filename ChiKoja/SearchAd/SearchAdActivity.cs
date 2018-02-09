@@ -3,9 +3,8 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using ChiKoja.AdDetail;
+using ChiKoja.Interfaces.SingleAd;
 using ChiKoja.NavigationDrawer;
-using ChiKoja.Services.Server.Interfaces;
-using ChiKoja.SingleAds;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 
@@ -13,7 +12,7 @@ using ModelStd.Db.Ad;
 namespace ChiKoja.SearchAd
 {
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class SearchAdActivity : NavActivity, SingleAdEvents
+    public class SearchAdActivity : NavActivity, ISingleAdEvents
     {
         private SearchAdFragment searchAdFragment;
         private readonly string AdTypeKey = "AdType";

@@ -270,6 +270,7 @@
     <Compile Include="GlobalApplication\GlobalApplication.cs" />
     <Compile Include="Infrastructure\IOC\AdViewContainer.cs" />
     <Compile Include="Infrastructure\IOC\Bootstrapper.cs" />
+    <Compile Include="Interfaces\IMarkAd.cs" />
     <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
     <Compile Include="Login\ActivityLogin.cs" />
     <Compile Include="Login\ActivitySignIn.cs" />
@@ -316,8 +317,8 @@
     <Compile Include="Services\Server\RegistrationApi.cs" />
     <Compile Include="Services\Server\RepositoryApi.cs" />
     <Compile Include="Services\Server\ServicesCommon.cs" />
-    <Compile Include="SingleAds\SingleAdArrayAdapter.cs" />
-    <Compile Include="SingleAds\SingleAdEvents.cs" />
+    <Compile Include="ArrayAdapters\SingleAd\SingleAdArrayAdapter.cs" />
+    <Compile Include="Interfaces\SingleAd\ISingleAdEvents.cs" />
     <Compile Include="SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
     <Compile Include="Utility\ScreenUtility .cs" />

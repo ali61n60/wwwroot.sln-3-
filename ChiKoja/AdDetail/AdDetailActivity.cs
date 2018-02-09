@@ -10,7 +10,7 @@ namespace ChiKoja.AdDetail
     [Activity(Label = "AdDetailActivity", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class AdDetailActivity:NavActivity
     {
-
+        //TODO show similar ads
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -47,8 +47,10 @@ namespace ChiKoja.AdDetail
 
         private void addTopTop()
         {
-            //TODO create toptop
             AdDetailTopTopFragment adDetailTopTopFragment = new AdDetailTopTopFragment();
+            Bundle args=new Bundle();
+            args.PutString(Advertisement.AdGuidKey, Intent.GetStringExtra(Advertisement.AdGuidKey));
+            adDetailTopTopFragment.Arguments = args;
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.top_top, adDetailTopTopFragment)
                 .Commit();

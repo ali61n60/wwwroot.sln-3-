@@ -6,12 +6,13 @@ using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using ChiKoja.ArrayAdapters.SingleAd;
 using ChiKoja.Categories;
 using ChiKoja.Infrastructure.IOC;
+using ChiKoja.Interfaces.SingleAd;
 using ChiKoja.Models;
 using ChiKoja.Notification;
 using ChiKoja.Services.Server.Interfaces;
-using ChiKoja.SingleAds;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
@@ -23,7 +24,7 @@ namespace ChiKoja.SearchAd
     public class SearchAdFragment : Fragment
     {
         private SingleAdArrayAdapter _singleAdArrayAdapter;
-        private SingleAdEvents _singleAdEvents;
+        private ISingleAdEvents _singleAdEvents;
         private Context _context;
         View rootView;
         Button buttonFilter;
@@ -51,9 +52,9 @@ namespace ChiKoja.SearchAd
         {
             base.OnAttach(context);
             _context = context;
-            if (context is SingleAdEvents)
+            if (context is ISingleAdEvents)
             {
-                _singleAdEvents = context as SingleAdEvents;
+                _singleAdEvents = context as ISingleAdEvents;
             }
             else
             {

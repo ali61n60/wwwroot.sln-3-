@@ -9,12 +9,11 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using ModelStd.Advertisements;
 
-namespace ChiKoja.SingleAds
+namespace ChiKoja.Interfaces
 {
-    public interface SingleAdEvents
+    public interface IMarkAd
     {
-        void OnSingleAdSelected(AdvertisementCommon adCommon);
+        void MarkAd();
     }
 }
