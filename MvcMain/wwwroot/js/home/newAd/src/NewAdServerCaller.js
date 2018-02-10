@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
-var NewAdServerCaller = /** @class */ (function () {
+var NewAdServerCaller = (function () {
     function NewAdServerCaller(resultHandler, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;

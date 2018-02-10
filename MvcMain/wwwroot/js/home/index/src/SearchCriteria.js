@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var AdTransformationSearchCriteria_1 = require("./SearchCriteria/AdTransformationSearchCriteria");
 var DefaultSearchCriteria_1 = require("./SearchCriteria/DefaultSearchCriteria");
 var CriteriaNumericDictionary_1 = require("../../../Helper/CriteriaNumericDictionary");
-var SearchCriteria = /** @class */ (function () {
+var SearchCriteria = (function () {
     function SearchCriteria() {
         this._searchCriteriaIocContainer = new CriteriaNumericDictionary_1.CriteriaNumericDictionary();
         this.initSearchCriteriaIocContainer();
