@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ScrollView
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/scrollView1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/buttonReturn"
+                android:text="@string/Return"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RelativeLayout
+                android:id="@+id/relativeLayoutPrice"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorInfo"
+                android:layout_marginBottom="@dimen/default_margin">
+                <TextView
+                    android:id="@+id/textViewPrice"
+                    android:text="@string/Price"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true" />
+                <TextView
+                    android:id="@+id/textViewMinimumPrice"
+                    android:text="@string/From"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/default_margin"
+                    android:layout_below="@id/textViewPrice"
+                    android:layout_marginBottom="@dimen/default_margin" />
+                <EditText
+                    android:id="@+id/editTextMinimumPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numeric="integer"
+                    android:layout_alignBaseline="@id/textViewMinimumPrice"
+                    android:layout_toRightOf="@id/textViewMinimumPrice" />
+                <TextView
+                    android:id="@+id/textViewMaximumPrice"
+                    android:text="@string/To"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textViewMinimumPrice" />
+                <EditText
+                    android:id="@+id/editTextMaximumPrice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:numeric="integer"
+                    android:layout_below="@id/textViewMinimumPrice"
+                    android:layout_toRightOf="@id/textViewMaximumPrice"
+                    android:layout_alignBaseline="@id/textViewMaximumPrice"
+                    android:layout_alignLeft="@id/editTextMinimumPrice" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/relativeLayoutOnlyWithPicture"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorInfoDark">
+                <CheckBox
+                    android:id="@+id/checkBoxOnlyWithPictures"
+                    android:text="@string/OnlyWithPictures"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/relativeLayoutUrgentAdsOnly"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorInfo">
+                <CheckBox
+                    android:id="@+id/checkBoxUrgentAdsOnly"
+                    android:text="@string/UrgentAdsOnly"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

@@ -30,7 +30,7 @@ namespace ChiKoja.Infrastructure.IOC
             _adDetailFragmentContainer[Category.CategoryIdDefault] = new AdDetailDefaultFragment();
         }
 
-        public static CategorySpecificBaseFragment GetAdDetailViewFragment(int categoryId)
+        public static CategorySpecificBaseFragment GetCategorySpecificAdDetailViewFragment(int categoryId)
         {
             if (_adDetailFragmentContainer.ContainsKey(categoryId))
             {

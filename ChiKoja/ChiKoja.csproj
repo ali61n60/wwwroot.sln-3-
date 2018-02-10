@@ -256,11 +256,14 @@
   <ItemGroup>
     <Compile Include="Activity1.cs" />
     <Compile Include="AdDetail\AdDetailActivity.cs" />
+    <Compile Include="AdDetail\AdDetailCommonPartFragment.cs" />
     <Compile Include="AdDetail\AdDetailContactOwner.cs" />
     <Compile Include="AdDetail\AdDetailDefaultFragment.cs" />
     <Compile Include="AdDetail\AdDetailImageFragment.cs" />
+    <Compile Include="AdDetail\AdDetailSimilarAds.cs" />
     <Compile Include="AdDetail\AdDetailTopTopFragment.cs" />
     <Compile Include="AdDetail\AdDetailTransportationFragment.cs" />
+    <Compile Include="AdDetail\AdDetailWarning.cs" />
     <Compile Include="AdDetail\CategorySpecificBaseFragment.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
@@ -376,6 +379,15 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\ad_detail_image.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ad_detail_common_part.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ad_detail_warning.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ad_detail_similar_ads.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

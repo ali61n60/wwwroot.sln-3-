@@ -11,39 +11,34 @@ using ChiKoja.Utility;
 
 namespace ChiKoja.AdDetail
 {
-    class AdDetailImageFragment : Fragment
+    public class AdDetailImageFragment : Fragment
     {
         private View rootView;
         private LinearLayout linearLayoutImageContainer;
         private List<string> _images;
-        
+
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             rootView = inflater.Inflate(Resource.Layout.ad_detail_image, container, false);
             return rootView;
         }
 
-        public override async void OnResume()
-        {
-            base.OnResume();
-
-            initializeFields();
-            initializeEvents();
-        }
-
+      
         public void SetImages(IEnumerable<string> images)
         {
-            _images=images.ToList();
+            initializeFields();
+            initializeEvents();
+            _images = images.ToList();
             ScreenUtility screenUtility = new ScreenUtility(Activity);
             int imageWidth = (int)(150 * screenUtility.GetDensity());
             int imageHeight = (int)(150 * screenUtility.GetDensity());
-            //TODO add images to view
-            for (int i = 1; i < _images.Count; i +=2)// just show big images
+
+            for (int i = 1; i < _images.Count; i += 2)// just show big images
             {
                 var imageView = new ImageView(Activity);
                 setBitmapImage(imageView, _images[i]);
-                
-                LinearLayout.LayoutParams layoutParams =new LinearLayout.LayoutParams(imageWidth, imageHeight);
+
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(imageWidth, imageHeight);
                 layoutParams.SetMargins(10, 10, 10, 10);
 
                 linearLayoutImageContainer.AddView(imageView, layoutParams);

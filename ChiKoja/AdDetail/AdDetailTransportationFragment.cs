@@ -24,7 +24,7 @@ namespace ChiKoja.AdDetail
 
         View rootView;
         AdvertisementTransportation advertisementTransportation;
-        private TextView textViewAdTitle;
+        
         private TextView textViewBrand;
 
         
@@ -33,11 +33,6 @@ namespace ChiKoja.AdDetail
 
         public AdDetailTransportationFragment() { }
 
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-        }
-        
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             rootView = inflater.Inflate(Resource.Layout.ad_detail_transportation_fragment, container, false);
@@ -54,15 +49,13 @@ namespace ChiKoja.AdDetail
             }
             else
             {
+                //TODO show error to user
                 throw new Exception("input parameter must be of type AdvertisementTransportation");
             }
         }
         
         private void initializeFields()
         {
-            textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
-            textViewAdTitle.Text = advertisementTransportation.AdvertisementTitle;
-
             textViewBrand = rootView.FindViewById<TextView>(Resource.Id.textViewBrand);
             textViewBrand.Text = advertisementTransportation.BrandName;
         }
@@ -71,9 +64,5 @@ namespace ChiKoja.AdDetail
         {
 
         }
-
-        
-
-        
     }
 }

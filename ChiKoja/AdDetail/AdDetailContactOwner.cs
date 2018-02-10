@@ -19,17 +19,12 @@ namespace ChiKoja.AdDetail
             rootView = inflater.Inflate(Resource.Layout.ad_detail_contact_owner, container, false);
             return rootView;
         }
-        public override async void OnResume()
-        {
-            base.OnResume();
-
-            initializeFields();
-            initializeEvents();
-        }
-
+        
         public void SetPhoneNumber(string phoneNumber)
         {
             _phoneNumber = phoneNumber;
+            initializeFields();
+            initializeEvents();
         }
         
         private void initializeFields()

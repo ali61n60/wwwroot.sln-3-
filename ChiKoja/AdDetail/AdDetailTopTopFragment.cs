@@ -10,8 +10,6 @@ namespace ChiKoja.AdDetail
 {
     public class AdDetailTopTopFragment:Fragment
     {
-        //TODO make the view nicer and add functionallity
-
         private Button buttonMarkAd;
         UserMarkedAds userMarkedAds;
         Guid adGuid;
