@@ -1004,32 +1004,32 @@ namespace ChiKoja
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c0059
-			public const int abc_background_cache_hint_selector_material_dark = 2131492953;
-			
 			// aapt resource value: 0x7f0c005a
-			public const int abc_background_cache_hint_selector_material_light = 2131492954;
+			public const int abc_background_cache_hint_selector_material_dark = 2131492954;
 			
 			// aapt resource value: 0x7f0c005b
-			public const int abc_color_highlight_material = 2131492955;
+			public const int abc_background_cache_hint_selector_material_light = 2131492955;
+			
+			// aapt resource value: 0x7f0c005c
+			public const int abc_color_highlight_material = 2131492956;
 			
 			// aapt resource value: 0x7f0c0000
 			public const int abc_input_method_navigation_guard = 2131492864;
 			
-			// aapt resource value: 0x7f0c005c
-			public const int abc_primary_text_disable_only_material_dark = 2131492956;
-			
 			// aapt resource value: 0x7f0c005d
-			public const int abc_primary_text_disable_only_material_light = 2131492957;
+			public const int abc_primary_text_disable_only_material_dark = 2131492957;
 			
 			// aapt resource value: 0x7f0c005e
-			public const int abc_primary_text_material_dark = 2131492958;
+			public const int abc_primary_text_disable_only_material_light = 2131492958;
 			
 			// aapt resource value: 0x7f0c005f
-			public const int abc_primary_text_material_light = 2131492959;
+			public const int abc_primary_text_material_dark = 2131492959;
 			
 			// aapt resource value: 0x7f0c0060
-			public const int abc_search_url_text = 2131492960;
+			public const int abc_primary_text_material_light = 2131492960;
+			
+			// aapt resource value: 0x7f0c0061
+			public const int abc_search_url_text = 2131492961;
 			
 			// aapt resource value: 0x7f0c0001
 			public const int abc_search_url_text_normal = 2131492865;
@@ -1040,11 +1040,11 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0c0003
 			public const int abc_search_url_text_selected = 2131492867;
 			
-			// aapt resource value: 0x7f0c0061
-			public const int abc_secondary_text_material_dark = 2131492961;
-			
 			// aapt resource value: 0x7f0c0062
-			public const int abc_secondary_text_material_light = 2131492962;
+			public const int abc_secondary_text_material_dark = 2131492962;
+			
+			// aapt resource value: 0x7f0c0063
+			public const int abc_secondary_text_material_light = 2131492963;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int accent_material_dark = 2131492868;
@@ -1099,6 +1099,9 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f0c0011
 			public const int button_material_light = 2131492881;
+			
+			// aapt resource value: 0x7f0c0059
+			public const int colorAccent = 2131492953;
 			
 			// aapt resource value: 0x7f0c0056
 			public const int colorBright = 2131492950;
@@ -1292,11 +1295,11 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0c0037
 			public const int switch_thumb_disabled_material_light = 2131492919;
 			
-			// aapt resource value: 0x7f0c0063
-			public const int switch_thumb_material_dark = 2131492963;
-			
 			// aapt resource value: 0x7f0c0064
-			public const int switch_thumb_material_light = 2131492964;
+			public const int switch_thumb_material_dark = 2131492964;
+			
+			// aapt resource value: 0x7f0c0065
+			public const int switch_thumb_material_light = 2131492965;
 			
 			// aapt resource value: 0x7f0c0038
 			public const int switch_thumb_normal_material_dark = 2131492920;

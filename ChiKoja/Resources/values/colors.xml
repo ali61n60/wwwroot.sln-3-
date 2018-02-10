@@ -23,5 +23,7 @@
   <color name="colorBright">@color/white</color>
   <color name="colorDark">@color/black</color>
   <color name="colorDanger">@color/redDark</color>
+  <color name="colorAccent">@color/redDark</color>
   
+
 </resources>
