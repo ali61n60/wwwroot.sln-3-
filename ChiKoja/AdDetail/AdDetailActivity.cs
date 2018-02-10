@@ -1,9 +1,15 @@
-﻿using Android.App;
+﻿using System;
+using System.Threading.Tasks;
+using Android.App;
 using Android.OS;
 using Android.Widget;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.NavigationDrawer;
+using ChiKoja.Notification;
+using ChiKoja.Services.Server.Interfaces;
+using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
+using ModelStd.Services;
 
 namespace ChiKoja.AdDetail
 {
@@ -11,11 +17,59 @@ namespace ChiKoja.AdDetail
     public class AdDetailActivity:NavActivity
     {
         //TODO show similar ads
+        AdvertisementCommon advertisementCommon;
+        string adGuid;
+        private int categoryId;
+
+        private AdDetailTopTopFragment adDetailTopTopFragment;
+        private AdDetailContactOwner adDetailContactOwner;
+        private CategorySpecificBaseFragment categorySpecificFragment;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             inflateView();
             addFragments();
+        }
+
+        protected override async void OnResume()
+        {
+            base.OnResume();
+            advertisementCommon = await getAdDetailFromServer();
+            //give info from server to fragments to use
+            adDetailContactOwner.SetPhoneNumber(advertisementCommon.PhoneNumber);
+            categorySpecificFragment.SetAdDetailData(advertisementCommon);
+        }
+        private async Task<AdvertisementTransportation> getAdDetailFromServer()
+        {
+            AdvertisementTransportation advertisementTransportation = null;
+            IAdApi adApi = Bootstrapper.container.GetInstance<IAdApi>();
+            GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+            ResponseBase<AdvertisementCommon> response = await adApi.GetAdDetail(new AdDetailInfo()
+            {
+                AdGuid = adGuid.ToString(),
+                CategoryId = categoryId
+            });
+            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            if (response.Success)
+            {
+                try
+                {
+                    advertisementTransportation = (AdvertisementTransportation)response.ResponseData;
+                }
+                catch (Exception ex)
+                {
+                    //TODO show error to user
+                    Toast.MakeText(this, ex.Message, ToastLength.Long).Show();
+                }
+            }
+
+            else
+            {
+                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(response.Message, ShowMessageType.Permanent);
+            }
+
+            return advertisementTransportation;
         }
 
         private void inflateView()
@@ -31,6 +85,9 @@ namespace ChiKoja.AdDetail
                 Toast.MakeText(this, "IntentmustContain CategoryIdKey and Value", ToastLength.Long).Show();
                 return;
             }
+            adGuid = Intent.GetStringExtra(Advertisement.AdGuidKey);
+            categoryId = Category.CategoryIdDefault;
+
             FrameLayout contentFrameLayout =
                 FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
             LayoutInflater.Inflate(Resource.Layout.ad_detail, contentFrameLayout);
@@ -47,9 +104,9 @@ namespace ChiKoja.AdDetail
         
         private void addTopTop()
         {
-            AdDetailTopTopFragment adDetailTopTopFragment = new AdDetailTopTopFragment();
+            adDetailTopTopFragment = new AdDetailTopTopFragment();
             Bundle args=new Bundle();
-            args.PutString(Advertisement.AdGuidKey, Intent.GetStringExtra(Advertisement.AdGuidKey));
+            args.PutString(Advertisement.AdGuidKey,adGuid);
             adDetailTopTopFragment.Arguments = args;
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.top_top, adDetailTopTopFragment)
@@ -58,21 +115,14 @@ namespace ChiKoja.AdDetail
 
         private void addMain()
         {
-            int categoryId = Intent.GetIntExtra(Category.CategoryIdKey, Category.CategoryIdDefault);
-            Android.Support.V4.App.Fragment categorySpecificFragment = AdViewContainer.GetAdDetailViewFragment(categoryId);
-            Bundle args = new Bundle();
-            args.PutString(Advertisement.AdGuidKey, Intent.GetStringExtra(Advertisement.AdGuidKey));
-            categorySpecificFragment.Arguments = args;
+            categorySpecificFragment = AdViewContainer.GetAdDetailViewFragment(categoryId);
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.main, categorySpecificFragment)
                 .Commit();
         }
         private void addContactOwner()
         {
-            //TODO give data neede for this fragment
-            
-            AdDetailContactOwner adDetailContactOwner = new AdDetailContactOwner();
-            Bundle args = new Bundle();
+            adDetailContactOwner = new AdDetailContactOwner();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.contact_owner, adDetailContactOwner)
                 .Commit();

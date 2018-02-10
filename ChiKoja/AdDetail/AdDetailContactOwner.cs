@@ -12,7 +12,7 @@ namespace ChiKoja.AdDetail
         private Button buttonCall;
         private Button buttonSendSms;
         //TODO get it from argument
-        private string phoneNumber = "123456";
+        private string _phoneNumber = "123456";
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -33,6 +33,11 @@ namespace ChiKoja.AdDetail
             initializeFields();
             initializeEvents();
         }
+
+        public void SetPhoneNumber(string phoneNumber)
+        {
+            _phoneNumber = phoneNumber;
+        }
         
         private void initializeFields()
         {
@@ -49,13 +54,13 @@ namespace ChiKoja.AdDetail
         private void ButtonCall_Click(object sender, System.EventArgs e)
         {
 
-            Intent dialIntent = new Intent(Intent.ActionDial, Android.Net.Uri.Parse("tel:" + phoneNumber));
+            Intent dialIntent = new Intent(Intent.ActionDial, Android.Net.Uri.Parse("tel:" + _phoneNumber));
             StartActivity(dialIntent);
         }
 
         private void ButtonSendSms_Click(object sender, System.EventArgs e)
         {
-            Intent dialIntent = new Intent(Intent.ActionSendto, Android.Net.Uri.Parse("smsto:" + phoneNumber));
+            Intent dialIntent = new Intent(Intent.ActionSendto, Android.Net.Uri.Parse("smsto:" + _phoneNumber));
             StartActivity(dialIntent);
         }
     }

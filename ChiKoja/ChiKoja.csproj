@@ -259,6 +259,7 @@
     <Compile Include="AdDetail\AdDetailDefaultFragment.cs" />
     <Compile Include="AdDetail\AdDetailTopTopFragment.cs" />
     <Compile Include="AdDetail\AdDetailTransportationFragment.cs" />
+    <Compile Include="AdDetail\CategorySpecificBaseFragment.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
     <Compile Include="BroadcastReceiver\ActivityBroadcastReceiverSms.cs" />

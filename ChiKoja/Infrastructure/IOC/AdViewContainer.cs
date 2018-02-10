@@ -16,7 +16,7 @@ namespace ChiKoja.Infrastructure.IOC
 {
     public class AdViewContainer
     {
-        private static readonly Dictionary<int, Android.Support.V4.App.Fragment> _adDetailFragmentContainer = new Dictionary<int, Android.Support.V4.App.Fragment>();
+        private static readonly Dictionary<int, CategorySpecificBaseFragment> _adDetailFragmentContainer = new Dictionary<int, CategorySpecificBaseFragment>();
 
         static AdViewContainer()
         {
@@ -30,7 +30,7 @@ namespace ChiKoja.Infrastructure.IOC
             _adDetailFragmentContainer[Category.CategoryIdDefault] = new AdDetailDefaultFragment();
         }
 
-        public static Android.Support.V4.App.Fragment GetAdDetailViewFragment(int categoryId)
+        public static CategorySpecificBaseFragment GetAdDetailViewFragment(int categoryId)
         {
             if (_adDetailFragmentContainer.ContainsKey(categoryId))
             {

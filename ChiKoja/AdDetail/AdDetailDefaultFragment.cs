@@ -1,10 +1,11 @@
 ﻿using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
+using ModelStd.Advertisements;
 
 namespace ChiKoja.AdDetail
 {
-    public class AdDetailDefaultFragment : Fragment
+    public class AdDetailDefaultFragment : CategorySpecificBaseFragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {
@@ -19,6 +20,11 @@ namespace ChiKoja.AdDetail
             // return inflater.Inflate(Resource.Layout.YourFragment, container, false);
 
             return base.OnCreateView(inflater, container, savedInstanceState);
+        }
+
+        public override void SetAdDetailData(AdvertisementCommon adDetail)
+        {
+            
         }
     }
 }

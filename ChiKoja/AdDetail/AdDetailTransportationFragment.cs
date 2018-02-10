@@ -18,17 +18,14 @@ using ModelStd.Services;
 
 namespace ChiKoja.AdDetail
 {
-    public class AdDetailTransportationFragment : Fragment
+    public class AdDetailTransportationFragment : CategorySpecificBaseFragment
     {
         //TODO Design UI for this fragment
         
-        AdvertisementTransportation advertisementTransportation;
-
         LinearLayout linearLayoutImageContainer;
 
         View rootView;
-        
-        
+        AdvertisementTransportation advertisementTransportation;
         private TextView textViewAdTitle;
         private TextView textViewBrand;
 
@@ -41,15 +38,6 @@ namespace ChiKoja.AdDetail
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            
-            if (!Arguments.ContainsKey(Advertisement.AdGuidKey))
-            {
-                //TODO make error handling better
-                Toast.MakeText(this.Activity, "IntentmustContain AdGuidKey and Value", ToastLength.Long).Show();
-                return;
-            }
-            adGuid=Guid.Parse(Arguments.GetString(Advertisement.AdGuidKey));
-            
         }
         
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -58,49 +46,20 @@ namespace ChiKoja.AdDetail
             return rootView;
         }
 
-        public override async void OnResume()
+        public override void SetAdDetailData(AdvertisementCommon adDetail)
         {
-            base.OnResume();
-
-            advertisementTransportation =await getAdDetailFromServer();
-            initializeFields();
-            initializeEvents();
-        }
-
-        
-
-        private async Task<AdvertisementTransportation> getAdDetailFromServer()
-        {
-            AdvertisementTransportation advertisementTransportation = null;
-            IAdApi adApi = Bootstrapper.container.GetInstance<IAdApi>();
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-            ResponseBase<AdvertisementCommon> response =await adApi.GetAdDetail(new AdDetailInfo()
+            if (adDetail is AdvertisementTransportation)
             {
-                AdGuid = adGuid.ToString(),
-                CategoryId = categoryId
-            });
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
-            if (response.Success)
-            {
-                try
-                {
-                    advertisementTransportation = (AdvertisementTransportation)response.ResponseData;
-                }
-                catch (Exception ex)
-                {
-                    //TODO show error to user
-                    Toast.MakeText(Activity, ex.Message, ToastLength.Long).Show();
-                }
+                advertisementTransportation=adDetail as AdvertisementTransportation;
+                initializeFields();
+                initializeEvents();
             }
-
             else
             {
-               GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(response.Message, ShowMessageType.Permanent);
+                throw new Exception("input parameter must be of type AdvertisementTransportation");
             }
-
-            return advertisementTransportation;
         }
-
+        
         private void initializeFields()
         {
             
