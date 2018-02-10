@@ -1,13 +1,18 @@
-﻿using Android.OS;
+﻿using Android.Content;
+using Android.OS;
 using Android.Views;
 using Android.Support.V4.App;
+using Android.Widget;
 
 namespace ChiKoja.AdDetail
 {
     class AdDetailContactOwner:Fragment
     {
         View rootView;
-
+        private Button buttonCall;
+        private Button buttonSendSms;
+        //TODO get it from argument
+        private string phoneNumber = "123456";
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -31,36 +36,27 @@ namespace ChiKoja.AdDetail
         
         private void initializeFields()
         {
-            
+            buttonCall = rootView.FindViewById<Button>(Resource.Id.buttonCall);
+            buttonSendSms = rootView.FindViewById<Button>(Resource.Id.buttonSendSms);
         }
 
         private void initializeEvents()
         {
-
+            buttonCall.Click += ButtonCall_Click;
+            buttonSendSms.Click += ButtonSendSms_Click;
         }
 
-        //void buttonContactInfo_Click(object sender, EventArgs e)
-        //{
-        //    Android.App.Dialog contactInfoDialog = new Android.App.Dialog(Activity);
-        //    contactInfoDialog.SetContentView(Resource.Layout.ContactInfoLayout);
-        //    Button buttonCall = contactInfoDialog.FindViewById<Button>(Resource.Id.buttonCall);
-        //    buttonCall.Click += (s, ev) =>
-        //    {
-        //        Intent dialIntent = new Intent(Intent.ActionDial, Android.Net.Uri.Parse("tel:" + advertisementTransportation.PhoneNumber));
-        //        StartActivity(dialIntent);
-        //    };
-        //    Button buttonSendSms = contactInfoDialog.FindViewById<Button>(Resource.Id.buttonSendSMS);
-        //    buttonSendSms.Click += (s, ev) =>
-        //    {
-        //        Intent dialIntent = new Intent(Intent.ActionSendto, Android.Net.Uri.Parse("smsto:" + advertisementTransportation.PhoneNumber));
-        //        StartActivity(dialIntent);
-        //    };
-        //    TextView textViewPhoneNumber = contactInfoDialog.FindViewById<TextView>(Resource.Id.textViewPhoneNumber);
-        //    textViewPhoneNumber.Text = advertisementTransportation.PhoneNumber;
+        private void ButtonCall_Click(object sender, System.EventArgs e)
+        {
 
-        //    contactInfoDialog.Show();
-        //}
+            Intent dialIntent = new Intent(Intent.ActionDial, Android.Net.Uri.Parse("tel:" + phoneNumber));
+            StartActivity(dialIntent);
+        }
 
-
+        private void ButtonSendSms_Click(object sender, System.EventArgs e)
+        {
+            Intent dialIntent = new Intent(Intent.ActionSendto, Android.Net.Uri.Parse("smsto:" + phoneNumber));
+            StartActivity(dialIntent);
+        }
     }
 }
