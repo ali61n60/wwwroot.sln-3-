@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var DefaultOrderBy_1 = require("../../../../Components/OrderBy/DefaultOrderBy");
 var DefaultPriceType_1 = require("../../../../Components/PriceType/DefaultPriceType");
-var DefaultSearchCriteria = (function () {
+var DefaultSearchCriteria = /** @class */ (function () {
     function DefaultSearchCriteria() {
     }
     DefaultSearchCriteria.prototype.initView = function () {

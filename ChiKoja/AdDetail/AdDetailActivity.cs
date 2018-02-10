@@ -97,7 +97,11 @@ namespace ChiKoja.AdDetail
         private void addFragments()
         {
             addTopTop();
-            addMain();
+            addImage();
+            addCommonPart();
+            addCategorySpecificPart();
+            addWarning();
+            addSimilarAds();
             addContactOwner();
         }
 

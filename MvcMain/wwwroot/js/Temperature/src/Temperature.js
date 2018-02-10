@@ -4,17 +4,17 @@
 //    export =CanvasJS;
 //}
 Object.defineProperty(exports, "__esModule", { value: true });
-var SingleTemperature = (function () {
+var SingleTemperature = /** @class */ (function () {
     function SingleTemperature() {
     }
     return SingleTemperature;
 }());
-var SinglePoint = (function () {
+var SinglePoint = /** @class */ (function () {
     function SinglePoint() {
     }
     return SinglePoint;
 }());
-var Temerature = (function () {
+var Temerature = /** @class */ (function () {
     function Temerature() {
         this.dataInputId = "inputTemperature";
         this._degreePoints = [];

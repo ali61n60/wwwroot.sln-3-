@@ -26,7 +26,6 @@ using RepositoryStd.TepmeratureRepository;
 namespace MvcMain.Controllers
 {
     //TODO 1- Create a page to have links to all api methods for test
-    //TODO 1- add default image for ads with no Image
     //TODO 1- Write unit test for everything
     //TODO 1 Design of typeScript ServerCaller must be better. make a generic servercaller class
     //TODO 1- verify user phone number
