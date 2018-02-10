@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Android.App;
 using Android.OS;
@@ -22,8 +23,10 @@ namespace ChiKoja.AdDetail
         private int categoryId;
 
         private AdDetailTopTopFragment adDetailTopTopFragment;
-        private AdDetailContactOwner adDetailContactOwner;
+        private AdDetailImageFragment adDetailImageFragment;
+
         private CategorySpecificBaseFragment categorySpecificFragment;
+        private AdDetailContactOwner adDetailContactOwner;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -37,8 +40,9 @@ namespace ChiKoja.AdDetail
             base.OnResume();
             advertisementCommon = await getAdDetailFromServer();
             //give info from server to fragments to use
+            adDetailImageFragment.SetImages(advertisementCommon.AdvertisementImages.ToList());
+           // categorySpecificFragment.SetAdDetailData(advertisementCommon);
             adDetailContactOwner.SetPhoneNumber(advertisementCommon.PhoneNumber);
-            categorySpecificFragment.SetAdDetailData(advertisementCommon);
         }
         private async Task<AdvertisementTransportation> getAdDetailFromServer()
         {
@@ -98,10 +102,10 @@ namespace ChiKoja.AdDetail
         {
             addTopTop();
             addImage();
-            addCommonPart();
-            addCategorySpecificPart();
-            addWarning();
-            addSimilarAds();
+            //addCommonPart();
+            //addCategorySpecificPart();
+            //addWarning();
+            //addSimilarAds();
             addContactOwner();
         }
 
@@ -117,12 +121,20 @@ namespace ChiKoja.AdDetail
                 .Commit();
         }
 
+        private void addImage()
+        {
+            adDetailImageFragment=new AdDetailImageFragment();
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.image, adDetailImageFragment)
+                .Commit();
+        }
+
         private void addMain()
         {
             categorySpecificFragment = AdViewContainer.GetAdDetailViewFragment(categoryId);
-            SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.main, categorySpecificFragment)
-                .Commit();
+            //SupportFragmentManager.BeginTransaction()
+            //    .Add(Resource.Id.main, categorySpecificFragment)
+            //    .Commit();
         }
         private void addContactOwner()
         {

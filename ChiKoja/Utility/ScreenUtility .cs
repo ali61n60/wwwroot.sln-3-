@@ -15,19 +15,17 @@ namespace ChiKoja.Utility
 {
     public class ScreenUtility
     {
-        private Activity activity;
-        private float dpWidth;
-        private float dpHeight;
+        private readonly float dpWidth;
+        private readonly float dpHeight;
+        private readonly float density;
 
         public ScreenUtility(Activity activity)
         {
-            this.activity = activity;
-
             Display display = activity.WindowManager.DefaultDisplay;
             DisplayMetrics outMetrics = new DisplayMetrics();
             display.GetMetrics(outMetrics);
 
-            float density = activity.Resources.DisplayMetrics.Density;
+            density = activity.Resources.DisplayMetrics.Density;
             dpHeight = outMetrics.HeightPixels / density;
             dpWidth = outMetrics.WidthPixels / density;
         }
@@ -40,6 +38,11 @@ namespace ChiKoja.Utility
         public float GetHeight()
         {
             return dpHeight;
+        }
+
+        public float GetDensity()
+        {
+            return density;
         }
     }
 }

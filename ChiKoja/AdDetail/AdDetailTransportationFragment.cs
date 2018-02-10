@@ -20,9 +20,7 @@ namespace ChiKoja.AdDetail
 {
     public class AdDetailTransportationFragment : CategorySpecificBaseFragment
     {
-        //TODO Design UI for this fragment
         
-        LinearLayout linearLayoutImageContainer;
 
         View rootView;
         AdvertisementTransportation advertisementTransportation;
@@ -62,15 +60,11 @@ namespace ChiKoja.AdDetail
         
         private void initializeFields()
         {
-            
-            linearLayoutImageContainer = rootView.FindViewById<LinearLayout>(Resource.Id.linearLayoutImageContainer);
             textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
             textViewAdTitle.Text = advertisementTransportation.AdvertisementTitle;
 
             textViewBrand = rootView.FindViewById<TextView>(Resource.Id.textViewBrand);
             textViewBrand.Text = advertisementTransportation.BrandName;
-
-            fillImageSection();
         }
 
         private void initializeEvents()
@@ -78,30 +72,8 @@ namespace ChiKoja.AdDetail
 
         }
 
-        private void fillImageSection()
-        {
-            if (advertisementTransportation == null || advertisementTransportation.AdvertisementImages == null)
-                return;
-            for (int i = 1; i < advertisementTransportation.AdvertisementImages.Length; i += 2)// just show big images
-            {
-                var imageView = new ImageView(Activity);
-                setBitmapImage(imageView, advertisementTransportation.AdvertisementImages[i]);
-                LinearLayout.LayoutParams layoutParams =
-                    new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WrapContent, ViewGroup.LayoutParams.WrapContent);
-                
-                layoutParams.SetMargins(10, 10, 10, 10);
-                linearLayoutImageContainer.AddView(imageView, layoutParams);
-            }
-        }
+        
 
-        private void setBitmapImage(ImageView imageView, string base64String)
-        {
-            if (base64String != null)
-            {
-                byte[] decodedString = Base64.Decode(base64String, Base64Flags.Default);
-                Bitmap decodedByte = BitmapFactory.DecodeByteArray(decodedString, 0, decodedString.Length);
-                imageView.SetImageBitmap(decodedByte);
-            }
-        }
+        
     }
 }

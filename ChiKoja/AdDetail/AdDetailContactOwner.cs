@@ -13,14 +13,7 @@ namespace ChiKoja.AdDetail
         private Button buttonSendSms;
         //TODO get it from argument
         private string _phoneNumber = "123456";
-        public override void OnCreate(Bundle savedInstanceState)
-        {
-            base.OnCreate(savedInstanceState);
-
-            
-
-        }
-
+        
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             rootView = inflater.Inflate(Resource.Layout.ad_detail_contact_owner, container, false);
