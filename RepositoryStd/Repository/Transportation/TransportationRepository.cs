@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
 using RepositoryStd.Context.AD;
@@ -18,7 +19,7 @@ namespace RepositoryStd.Repository.Transportation
         public IEnumerable<Brand> GetAllBrands()
         {
             List<Brand> allBrands =new List<Brand>();
-            var brands=_adDbContext.Brands.ToList();
+            IEnumerable<Brand> brands=_adDbContext.Brands;
             foreach (Brand brand in brands)
             {
                 allBrands.Add(brand);
@@ -31,7 +32,7 @@ namespace RepositoryStd.Repository.Transportation
         public IEnumerable<CarModel> GetAllModels()
         {
             List<CarModel> allCarModels =new List<CarModel>();
-            var carModels=_adDbContext.CarModels.ToList();
+            IEnumerable<CarModel> carModels=_adDbContext.CarModels;
             foreach (CarModel carModel in carModels)
             {
                 allCarModels.Add(carModel);

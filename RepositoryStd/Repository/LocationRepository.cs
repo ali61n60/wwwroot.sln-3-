@@ -17,7 +17,7 @@ namespace RepositoryStd.Repository
         public IEnumerable<Province> GetAllProvinces()
         {
             List<Province> allProvinces=new List<Province>();
-            var provinces=_adDbContext.Provinces.ToList();
+            IEnumerable<Province> provinces=_adDbContext.Provinces;
             foreach (Province province in provinces)
             {
                 allProvinces.Add(province);
@@ -29,7 +29,7 @@ namespace RepositoryStd.Repository
         public IEnumerable<City> GetAllCities()
         {
             List<City> allCities=new List<City>();
-            var cities=_adDbContext.Cities.ToList();
+            IEnumerable<City> cities=_adDbContext.Cities;
             foreach (City city in  cities)
             {
                 allCities.Add(city);
