@@ -9,10 +9,10 @@
   <color name="gray">#999999</color>
   <color name="grayDark">#777777</color>
   <color name="redDark">#e51727</color>
-  
+
   <color name="white">#cccccc</color>
   <color name="black">#111111</color>
-  
+
   <color name="colorPrimary">@color/blue</color>
   <color name="colorPrimaryDark">@color/blueDark</color>
   <color name="colorDefault">@color/green</color>
@@ -24,6 +24,10 @@
   <color name="colorDark">@color/black</color>
   <color name="colorDanger">@color/redDark</color>
   <color name="colorAccent">@color/redDark</color>
-  
+  <color name="primary_material_light">#e2766e</color>
+  <color name="primary_dark_material_light">#c2836f</color>
+  <color name="accent_material_light">#ba580e</color>
+  <color name="background_material_light">#a5c47f</color>
+  <color name="foreground_material_light">#262222</color>
 
 </resources>
