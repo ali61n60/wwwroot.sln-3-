@@ -16,11 +16,11 @@ namespace RepositoryStd.Repository
         }
         public IEnumerable<Province> GetAllProvinces()
         {
-            List<Province> allProvinces=new List<Province>();
-            IEnumerable<Province> provinces=_adDbContext.Provinces;
-            foreach (Province province in provinces)
+            List<Province> allProvinces= _adDbContext.Provinces.ToList();
+            
+            foreach (Province province in allProvinces)
             {
-                allProvinces.Add(province);
+                province.Cities = null;
             }
 
             return allProvinces;
@@ -28,11 +28,12 @@ namespace RepositoryStd.Repository
 
         public IEnumerable<City> GetAllCities()
         {
-            List<City> allCities=new List<City>();
-            IEnumerable<City> cities=_adDbContext.Cities;
-            foreach (City city in  cities)
+            List<City> allCities = _adDbContext.Cities.ToList();
+            
+            foreach (City city in  allCities)
             {
-                allCities.Add(city);
+                city.Districts = null;
+                city.Province = null;
             }
 
             return allCities;
@@ -41,11 +42,11 @@ namespace RepositoryStd.Repository
         public IEnumerable<District> GetAllDistricts()
         {
 
-            List<District> allDistricts=new List<District>();
-            IEnumerable<District> districts= _adDbContext.Districts;
-            foreach (District district in districts)
+            List<District> allDistricts = _adDbContext.Districts.ToList();
+            foreach (District district in allDistricts)
             {
-                allDistricts.Add(district);
+                district.Advertisements = null;
+                district.City = null;
             }
 
             return allDistricts;
