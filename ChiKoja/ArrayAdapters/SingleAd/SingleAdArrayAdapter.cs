@@ -46,7 +46,7 @@ namespace ChiKoja.ArrayAdapters.SingleAd
         {
             AdvertisementCommon adCommon = _advertisementCommonList[position];
             LayoutInflater inflater = (LayoutInflater) _context.GetSystemService(Context.LayoutInflaterService);
-            View view = inflater.Inflate(Resource.Layout.SingleAdView, null);
+            View view = inflater.Inflate(Resource.Layout.single_ad_view, null);
             //TODO set views prop
             TextView textViewAdTitle;
             TextView textViewAdPrice;

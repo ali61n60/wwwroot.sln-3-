@@ -35,7 +35,7 @@ namespace ChiKoja.SearchAd
         }
         private void inflateView()
         {
-            SetContentView(Resource.Layout.Filter);
+            SetContentView(Resource.Layout.filter);
         }
         private void initializeFields()
         {

@@ -22,7 +22,7 @@ namespace ChiKoja.CustomViews.SingleAdView
         private void initializeViews()
         {
             var layoutInflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
-            View mainView = layoutInflater.Inflate(Resource.Layout.SingleUserAd, this, true);
+            View mainView = layoutInflater.Inflate(Resource.Layout.single_user_ad, this, true);
             textViewAdTitle = mainView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
             textViewAdPrice = mainView.FindViewById<TextView>(Resource.Id.textViewAdPrice);
             

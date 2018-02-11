@@ -27,7 +27,7 @@ namespace ChiKoja.SearchAd
         }
         private void inflateView()
         {
-            SetContentView(Resource.Layout.SortBy);
+            SetContentView(Resource.Layout.sort_by);
         }
 
         private void initializeFields()
