@@ -1,72 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">My Application</string>
-           <string name="ApplicationName">ChiKoja</string>
-        <string name="Search">Search</string>
-        <string name="Return">Return</string>
-        <string name="Cancel">Cancel</string>
-        <string name="Ok">Ok</string>
-        <string name="ContactInfo">Contact Information</string>
-        <string name="Call">Call</string>
-        <string name="SendSms">Send SMS</string>
-        <string name="Brand">Brand</string>
-        <string name="MarkAd">Mark Ad</string>
-        <string name="UnMarkAd">Unmark Ad</string>
-        <string name="SignIn">Sign In</string>
-        <string name="Logout">Logout</string>
-        <string name="MyAds">My Ads</string>
-        <string name="AlreadySignInMessage">You already are sign in</string>
-        <string name="DefaultToolbarMessage">Chikoja</string>
-        <string name="MinimumPrice">Minimum Price</string>
-        <string name="Price">Price</string>
-        <string name="From">From</string>
-        <string name="To">To</string>
-        <string name="OnlyWithPictures">Only With Picture(s)</string>
-        <string name="UrgentAdsOnly">Only Urgent Ad(s)</string>
-
-        <string name="Sort">Sort</string>
-        <string name="DateAsc">Date Ascending</string>
-        <string name="DateDesc">Date Descending</string>
-        <string name="PriceAsc">Price Ascending</string>
-        <string name="PriceDesc">Price Descending</string>
-
-        <string name="Title">Title</string>
-        <string name="ServerCall">Server call</string>
-        <string name="PleaseLogIn">You are not logged in.Please log in</string>
-        <string name="GoToLoginPage">Go To Login Page</string>
-
-        <string name="SelectAll">Select All</string>
-        <string name="ClearAll">Clear All</string>
-        <string name="Visit">Visit</string>
-        <string name="CheckingDatabase">Checking Database</string>
-        <string name="DatabeseUpdated">Databese Updated</string>
-        <string name="Category">Category</string>
+    <string name="app_name">ChiKoja</string>
+    <string name="ApplicationName">ChiKoja</string>
+    <string name="Search">Search</string>
+    <string name="Return">Return</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Ok">Ok</string>
+    <string name="ContactInfo">Contact Information</string>
+    <string name="Call">Call</string>
+    <string name="SendSms">Send SMS</string>
+    <string name="Brand">Brand</string>
 
 
+    <string name="SignIn">Sign In</string>
+    <string name="Logout">Logout</string>
+    <string name="MyAds">My Ads</string>
+    <string name="AlreadySignInMessage">You already are sign in</string>
+    <string name="DefaultToolbarMessage">Chikoja</string>
+    <string name="MinimumPrice">Minimum Price</string>
+    <string name="Price">Price</string>
+    <string name="From">From</string>
+    <string name="To">To</string>
+    <string name="OnlyWithPictures">Only With Picture(s)</string>
+    <string name="UrgentAdsOnly">Only Urgent Ad(s)</string>
 
-        <string name="Menu">Menu</string>
-        <string name="Home">Home</string>
-        <string name="LoginLogout">Login/Logout</string>
-        <string name="NewAd">New Ad</string>
-        <string name="LocationSelection">Select Location</string>
-        <string name="SycnhDatabase">Synch Database</string>
-        <string name="Filter">Filter</string>
-        <string name="AboutUs">About Us</string>
-        <string name="ExitApplication">Exit Application</string>
+    <string name="MarkAd">Mark Ad</string>
+    <string name="UnMarkAd">Unmark Ad</string>
+    <string name="Share">Share</string>
+    <string name="Back">Back</string>
+
+    <string name="Sort">Sort</string>
+    <string name="DateAsc">Date Ascending</string>
+    <string name="DateDesc">Date Descending</string>
+    <string name="PriceAsc">Price Ascending</string>
+    <string name="PriceDesc">Price Descending</string>
+
+    <string name="Title">Title</string>
+    <string name="ServerCall">Server call</string>
+    <string name="PleaseLogIn">You are not logged in.Please log in</string>
+    <string name="GoToLoginPage">Go To Login Page</string>
+
+    <string name="SelectAll">Select All</string>
+    <string name="ClearAll">Clear All</string>
+    <string name="Visit">Visit</string>
+    <string name="CheckingDatabase">Checking Database</string>
+    <string name="DatabeseUpdated">Databese Updated</string>
+    <string name="Category">Category</string>
 
 
-        <string name="planet_prompt">Choose a planet</string>
-        <string-array name="planets_array">
-            <item>Mercury</item>
-            <item>Venus</item>
-            <item>Earth</item>
-            <item>Mars</item>
-            <item>Jupiter</item>
-            <item>Saturn</item>
-            <item>Uranus</item>
-            <item>Neptune</item>
-        </string-array>
+
+    <string name="Menu">Menu</string>
+    <string name="Home">Home</string>
+    <string name="LoginLogout">Login/Logout</string>
+    <string name="NewAd">New Ad</string>
+    <string name="LocationSelection">Select Location</string>
+    <string name="SycnhDatabase">Synch Database</string>
+    <string name="Filter">Filter</string>
+    <string name="AboutUs">About Us</string>
+    <string name="ExitApplication">Exit Application</string>
 
 
-    </resources>
+    <string name="planet_prompt">Choose a planet</string>
+    <string-array name="planets_array">
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 
 
+</resources>
