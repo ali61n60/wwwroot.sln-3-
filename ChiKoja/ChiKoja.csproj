@@ -338,35 +338,35 @@
     <None Include="Resources\AboutResources.txt" />
     <None Include="Properties\AndroidManifest.xml" />
     <None Include="Assets\AboutAssets.txt" />
-    <AndroidResource Include="Resources\layout\layoutBatteryBroadCast.axml" />
-    <AndroidResource Include="Resources\layout\layoutBroadcastReceiverSms.axml" />
-    <AndroidResource Include="Resources\layout\layoutDynamicUI.axml" />
-    <AndroidResource Include="Resources\layout\layoutNotification.axml" />
-    <AndroidResource Include="Resources\layout\layoutRelativeTest.axml" />
-    <AndroidResource Include="Resources\layout\LocationSelection.axml" />
-    <AndroidResource Include="Resources\layout\Login.axml" />
+    <AndroidResource Include="Resources\layout\layout_battery_broadcast.axml" />
+    <AndroidResource Include="Resources\layout\layout_broadcast_receiver_sms.axml" />
+    <AndroidResource Include="Resources\layout\layout_dynamic_ui.axml" />
+    <AndroidResource Include="Resources\layout\layout_notification.axml" />
+    <AndroidResource Include="Resources\layout\layout_relative_test.axml" />
+    <AndroidResource Include="Resources\layout\location_selection.axml" />
+    <AndroidResource Include="Resources\layout\login.axml" />
     <AndroidResource Include="Resources\layout\main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\NewAd.axml" />
-    <AndroidResource Include="Resources\layout\NewAdTransportation.axml" />
-    <AndroidResource Include="Resources\layout\ServiceExample.axml" />
-    <AndroidResource Include="Resources\layout\SingleAdView.axml">
+    <AndroidResource Include="Resources\layout\new_ad.axml" />
+    <AndroidResource Include="Resources\layout\new_ad_transportation.axml" />
+    <AndroidResource Include="Resources\layout\service_example.axml" />
+    <AndroidResource Include="Resources\layout\single_ad_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\SingleCategory.axml" />
-    <AndroidResource Include="Resources\layout\SingleUserAd.axml" />
-    <AndroidResource Include="Resources\layout\SortBy.axml" />
-    <AndroidResource Include="Resources\layout\UserAds.axml" />
+    <AndroidResource Include="Resources\layout\single_category.axml" />
+    <AndroidResource Include="Resources\layout\single_user_ad.axml" />
+    <AndroidResource Include="Resources\layout\sort_by.axml" />
+    <AndroidResource Include="Resources\layout\user_ads.axml" />
     <AndroidResource Include="Resources\layout\ad_detail_transportation_fragment.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\AlertDialogLayout.axml" />
-    <AndroidResource Include="Resources\layout\Animation.axml" />
-    <AndroidResource Include="Resources\layout\BrandTransportation.axml" />
-    <AndroidResource Include="Resources\layout\Category.axml" />
-    <AndroidResource Include="Resources\layout\ContactInfoLayout.axml" />
-    <AndroidResource Include="Resources\layout\Filter.axml" />
+    <AndroidResource Include="Resources\layout\alert_dialog.axml" />
+    <AndroidResource Include="Resources\layout\animation.axml" />
+    <AndroidResource Include="Resources\layout\brand_transportation.axml" />
+    <AndroidResource Include="Resources\layout\category.axml" />
+    <AndroidResource Include="Resources\layout\contact_info.axml" />
+    <AndroidResource Include="Resources\layout\filter.axml" />
     <AndroidResource Include="Resources\layout\layout1.axml" />
     <AndroidResource Include="Resources\layout\search_ad_large.axml" />
     <AndroidResource Include="Resources\layout\ad_detail.axml">
