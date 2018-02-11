@@ -23,7 +23,7 @@ namespace ChiKoja.Login
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Login);
+            SetContentView(Resource.Layout.login);
             registration = new Registration();
             initialViews();
             checkLoginStatusAndPoulateEditTextsIfNedded();

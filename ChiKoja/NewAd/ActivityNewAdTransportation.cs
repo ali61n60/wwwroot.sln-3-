@@ -49,7 +49,7 @@ namespace ChiKoja.NewAd
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.NewAdTransportation);
+            SetContentView(Resource.Layout.new_ad_transportation);
             initializeFields();
         }
 

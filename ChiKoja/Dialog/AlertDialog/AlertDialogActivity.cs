@@ -19,7 +19,7 @@ namespace ChiKoja.Dialog.AlertDialog
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.AlertDialogLayout);
+            SetContentView(Resource.Layout.alert_dialog);
             buttonShowAlertDialog = FindViewById<Button>(Resource.Id.buttonShowAlertDialog);
             buttonShowAlertDialog.Click += buttonShowAlertDialog_Click;
         }

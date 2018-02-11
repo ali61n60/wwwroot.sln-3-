@@ -25,7 +25,7 @@ namespace ChiKoja.BroadcastReceiver
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.layoutBatteryBroadCast);
+            SetContentView(Resource.Layout.layout_battery_broadcast);
             callButton = FindViewById<Button>(Resource.Id.buttonCall);
             callButton.Click += callButton_Click;
             // Create your application here

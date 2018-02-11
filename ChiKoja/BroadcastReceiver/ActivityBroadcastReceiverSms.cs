@@ -26,7 +26,7 @@ namespace ChiKoja.BroadcastReceiver
             ActionBar.Hide();
 
             // Set our view from the "main" layout resource
-            SetContentView(Resource.Layout.layoutBroadcastReceiverSms);
+            SetContentView(Resource.Layout.layout_broadcast_receiver_sms);
 
             // Get our button from the layout resource,
             // and attach an event to it

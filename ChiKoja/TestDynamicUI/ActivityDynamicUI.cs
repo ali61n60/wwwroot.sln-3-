@@ -23,7 +23,7 @@ namespace ChiKoja.TestDynamicUI
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.layoutDynamicUI);
+            SetContentView(Resource.Layout.layout_dynamic_ui);
 
             buttonCreateUI = FindViewById<Button>(Resource.Id.layoutDynamicUIbuttonCreateElement);
             buttonCreateUI.Click += buttonCreateUI_Click;

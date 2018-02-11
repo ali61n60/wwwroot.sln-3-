@@ -22,7 +22,7 @@ namespace ChiKoja.NewAd
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.NewAd);
+            SetContentView(Resource.Layout.new_ad);
 
             buttonSelectSpecificCategory = FindViewById<Button>(Resource.Id.buttonSelectSpecificCategory);
             buttonSelectSpecificCategory.Click += buttonSelectSpecificCategory_Click;

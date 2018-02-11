@@ -31,7 +31,7 @@ namespace ChiKoja.LocationSelection
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.LocationSelection);
+            SetContentView(Resource.Layout.location_selection);
             cityRepository=new CityRepository(Repository.Repository.DataBasePath);
             provinceRepository = new ProvinceRepository(Repository.Repository.DataBasePath);
 

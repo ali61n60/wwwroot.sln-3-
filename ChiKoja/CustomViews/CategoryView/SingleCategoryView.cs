@@ -47,7 +47,7 @@ namespace ChiKoja.CustomViews.CategoryView
         private void initializeMainView()
         {
             var layoutInflater = (LayoutInflater)Context.GetSystemService(Context.LayoutInflaterService);
-            mainView = layoutInflater.Inflate(Resource.Layout.SingleCategory, this, true);
+            mainView = layoutInflater.Inflate(Resource.Layout.single_category, this, true);
             relativeLayoutMain = mainView.FindViewById<RelativeLayout>(Resource.Id.relativeLayout1);
         }
         private void initializeTextView()

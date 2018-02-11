@@ -39,7 +39,7 @@ namespace ChiKoja.Categories
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.Category);
+            SetContentView(Resource.Layout.category);
              _categorySelection= (CategorySelection) savedInstanceState.GetSerializable("CategorySelection");
             _categorySelection.SelectedCategoryId += 10;
             initializeFields();

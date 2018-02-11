@@ -36,7 +36,7 @@ namespace ChiKoja.SearchAd.UserAd
         private void inflateView()
         {
             FrameLayout contentFrameLayout = FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
-            rootView = LayoutInflater.Inflate(Resource.Layout.UserAds, contentFrameLayout);
+            rootView = LayoutInflater.Inflate(Resource.Layout.user_ads, contentFrameLayout);
         }
         private void initializeFields()
         {

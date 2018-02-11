@@ -30,7 +30,7 @@ namespace ChiKoja.Notification
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.layoutNotification);
+            SetContentView(Resource.Layout.layout_notification);
 
             initNotification();
             

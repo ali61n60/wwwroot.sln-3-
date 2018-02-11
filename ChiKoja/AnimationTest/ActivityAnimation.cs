@@ -23,7 +23,7 @@ namespace ChiKoja.AnimationTest
         {
             base.OnCreate(savedInstanceState);
 
-            SetContentView(Resource.Layout.Animation);
+            SetContentView(Resource.Layout.animation);
             buttonAnimate = FindViewById<Button>(Resource.Id.buttonAnimate);
             buttonAnimate.Click += buttonAnimate_Click;
             button2 = FindViewById<Button>(Resource.Id.button2);
