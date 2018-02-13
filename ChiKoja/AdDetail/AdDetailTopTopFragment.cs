@@ -11,6 +11,8 @@ namespace ChiKoja.AdDetail
     public class AdDetailTopTopFragment:Fragment
     {
         private Button buttonMarkAd;
+        private Button buttonShare;
+        private Button buttonBack;
         UserMarkedAds userMarkedAds;
         Guid adGuid;
 
@@ -49,12 +51,20 @@ namespace ChiKoja.AdDetail
             //TODO inject it
             userMarkedAds = new UserMarkedAds(Repository.Repository.DataBasePath);
             buttonMarkAd = rootView.FindViewById<Button>(Resource.Id.buttonMarkAd);
+            buttonShare = rootView.FindViewById<Button>(Resource.Id.buttonShare);
+            buttonBack = rootView.FindViewById<Button>(Resource.Id.buttonBack);
             manageButtonMarkAdText();
         }
 
         private void initializeEvents()
         {
             buttonMarkAd.Click += buttonMarkAd_Click;
+            buttonBack.Click += ButtonBack_Click;
+        }
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            Activity.Finish();
         }
 
         void buttonMarkAd_Click(object sender, EventArgs e)
