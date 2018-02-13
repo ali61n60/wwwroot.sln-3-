@@ -21,6 +21,7 @@ namespace ChiKoja.AdDetail
         AdvertisementCommon advertisementCommon;
         string adGuid;
         private int categoryId;
+        private bool serverAlreadyCalled = false;
 
         private AdDetailTopTopFragment adDetailTopTopFragment;
         private AdDetailImageFragment adDetailImageFragment;
@@ -40,8 +41,12 @@ namespace ChiKoja.AdDetail
         protected override async void OnResume()
         {
             base.OnResume();
-            advertisementCommon = await getAdDetailFromServer();
-
+            if (!serverAlreadyCalled)
+            {
+                advertisementCommon = await getAdDetailFromServer();
+                serverAlreadyCalled = true;
+            }
+            
             adDetailImageFragment.SetImages(advertisementCommon.AdvertisementImages.ToList());
             adDetailCommonPartFragment.SetAdvertisementCommon(advertisementCommon);
             categorySpecificFragment.SetAdDetailData(advertisementCommon);
@@ -49,6 +54,7 @@ namespace ChiKoja.AdDetail
             //similar ad data
 
             adDetailContactOwner.SetPhoneNumber(advertisementCommon.PhoneNumber);
+
         }
         private async Task<AdvertisementTransportation> getAdDetailFromServer()
         {
