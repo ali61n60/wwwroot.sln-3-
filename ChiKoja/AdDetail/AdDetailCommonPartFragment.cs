@@ -18,6 +18,7 @@ namespace ChiKoja.AdDetail
     {
         private View rootView;
         private TextView textViewAdTitle;
+        private TextView textViewPrice;
         AdvertisementCommon _advertisementCommon;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -39,6 +40,9 @@ namespace ChiKoja.AdDetail
         {
             textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
             textViewAdTitle.Text = _advertisementCommon.AdvertisementTitle;
+
+            textViewPrice = rootView.FindViewById<TextView>(Resource.Id.textViewPrice);
+            textViewPrice.Text = _advertisementCommon.AdvertisementPrice.PriceString;
         }
 
         private void initializeEvents()

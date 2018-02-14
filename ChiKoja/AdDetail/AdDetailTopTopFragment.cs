@@ -71,9 +71,16 @@ namespace ChiKoja.AdDetail
         void markAdView_Click(object sender, EventArgs e)
         {
             if (userMarkedAds.IsAdMarked(Repository.Repository.Locker, adGuid))
+            {
                 userMarkedAds.UnmarAd(Repository.Repository.Locker, adGuid);
+                Toast.MakeText(Activity,"Ad Unmarked",ToastLength.Long).Show();
+            }
             else
+            {
                 userMarkedAds.MarkAd(Repository.Repository.Locker, adGuid);
+                Toast.MakeText(Activity, "Ad Marked", ToastLength.Long).Show();
+            }
+                
             manageButtonMarkAdText();
         }
 
