@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 using ModelStd.IRepository;
@@ -131,7 +132,7 @@ namespace RepositoryStd.Repository.Transportation
                 .Where(advertisement => advertisement.AdStatus == AdStatus.Approved && advertisement.AdId == adId);//only accepted ads
             
             Advertisement item = list.FirstOrDefault();
-            fillAdTransportation(advertisementTransportation, item);
+            Convertor.FillAdTransportationFromAdvertisement(advertisementTransportation, item,_appIdentityDbContext);
 
             return advertisementTransportation;
         }
@@ -166,18 +167,28 @@ namespace RepositoryStd.Repository.Transportation
        
         public async Task Add(Dictionary<string, string> userInputDictionary, string userId)
         {
+            //TODO check if context is not tracking the ad
+            Guid userSentGuid =
+                Guid.Parse(ParameterExtractor.ExtractString(userInputDictionary, "NewAdGuid", new Guid().ToString()));
+            IEnumerable<EntityEntry<Advertisement>> trackingAds= _adDbContext.ChangeTracker.Entries<Advertisement>().Where(entry => entry.Entity.AdId == userSentGuid);
+            if (trackingAds.Count() != 0)
+            {
+                foreach (var entity in trackingAds)
+                {
+                    _adDbContext.Entry(entity.Entity).State = EntityState.Detached;
+                }
+            }
             Advertisement ad = _commonRepository.GetAdvertisementsFromUserInputDictionary(userInputDictionary);
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
             ad.AdStatus = AdStatus.Submitted; //submitted TODO use AdvertisementCommon Class to set it from an enum
-            ad.AdId = Guid.Parse(ParameterExtractor.ExtractString(userInputDictionary, "NewAdGuid",
-                new Guid().ToString()));
+            ad.AdId = Guid.Parse(ParameterExtractor.ExtractString(userInputDictionary, "NewAdGuid",new Guid().ToString()));
             ad.AdInsertDateTime = DateTime.Now;
             ad.UserId = userId;
             ad.AdNumberOfVisited = 0;//just being added
 
             adAttribute.AdId = ad.AdId;
-
+            
             _adDbContext.Advertisements.Add(ad);
             await _adDbContext.SaveChangesAsync();
 
@@ -437,27 +448,7 @@ namespace RepositoryStd.Repository.Transportation
 
         }
         
-        private void fillAdTransportation(AdvertisementTransportation adTrans, Advertisement advertisement)
-        {
-            Convertor.FillAdvertisementCommonFromAdvertisement(adTrans,advertisement, _appIdentityDbContext);
-            adTrans.BodyColor = advertisement.AdAttributeTransportation.BodyColor;
-            adTrans.InternalColor = advertisement.AdAttributeTransportation.InternalColor;
-            adTrans.BodyStatus = Convertor.GetBodyStatusString(advertisement.AdAttributeTransportation.BodyStatus);
-            adTrans.BrandId = advertisement.AdAttributeTransportation.CarModel.BrandId;
-            adTrans.BrandName = advertisement.AdAttributeTransportation.CarModel.Brand.BrandName;
-            adTrans.ModelName = advertisement.AdAttributeTransportation.CarModel.ModelName;
-            adTrans.Gearbox = Convertor.GetGearboxTypeString(advertisement.AdAttributeTransportation.GearboxType);
-
-            if (advertisement.AdAttributeTransportation.Mileage != null)
-                adTrans.Mileage = advertisement.AdAttributeTransportation.Mileage.Value;
-            else
-                adTrans.Mileage = -1;
-
-            if (advertisement.AdAttributeTransportation.MakeYear != null)
-                adTrans.MakeYear = advertisement.AdAttributeTransportation.MakeYear.Value;
-            else
-                adTrans.MakeYear = -1;
-        }
+        
         
     }
 }

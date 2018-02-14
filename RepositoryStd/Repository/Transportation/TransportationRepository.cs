@@ -18,7 +18,7 @@ namespace RepositoryStd.Repository.Transportation
 
         public IEnumerable<Brand> GetAllBrands()
         {
-            List<Brand> allBrands = _adDbContext.Brands.ToList();
+            List<Brand> allBrands = _adDbContext.Brands.AsNoTracking().ToList();
             foreach (Brand brand in allBrands)
             {
                 brand.CarModels = null;
@@ -31,7 +31,7 @@ namespace RepositoryStd.Repository.Transportation
       
         public IEnumerable<CarModel> GetAllModels()
         {
-            List<CarModel> allCarModels = _adDbContext.CarModels.ToList();
+            List<CarModel> allCarModels = _adDbContext.CarModels.AsNoTracking().ToList();
             foreach (CarModel carModel in allCarModels)
             {
                 carModel.LetMeKnowAttributeTransportaion = null;

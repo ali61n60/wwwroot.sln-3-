@@ -23,8 +23,8 @@ namespace RepositoryStd.ModelConversion
             adCommon.PhoneNumber = _appIdentityDbContext.Users.First(user => user.Id == ad.UserId).PhoneNumber;//TODO test for null
             adCommon.DistrictId = ad.DistrictId;
             if (ad.District != null) adCommon.DistrictName = ad.District.DistrictName;
-            if (ad.District != null && ad.District.City != null) adCommon.CityName = ad.District.City.CityName;
-            if (ad.District != null && ad.District.City != null && ad.District.City.Province != null)
+            if (ad.District?.City != null) adCommon.CityName = ad.District.City.CityName;
+            if (ad.District?.City?.Province != null)
                 adCommon.ProvinceName = ad.District.City.Province.ProvinceName;
 
             fillAdvertisementPrice( adCommon, ad);
@@ -33,11 +33,33 @@ namespace RepositoryStd.ModelConversion
             adCommon.AdType = (ad.AdType == AdType.Offer) ? "ارائه" : "درخواستی";
         }
 
-        public static void FillAdvertisementTransportaionFromAdAttributeTransportation(
-            AdvertisementTransportation adTransportation, AdAttributeTransportation adAttribute)
+
+        public static void FillAdTransportationFromAdvertisement(AdvertisementTransportation adTrans,
+            Advertisement advertisement, AppIdentityDbContext _appIdentityDbContext)
         {
-            adTransportation.BodyColor = adAttribute.BodyColor;
-          
+            Convertor.FillAdvertisementCommonFromAdvertisement(adTrans, advertisement, _appIdentityDbContext);
+            adTrans.BodyColor = advertisement.AdAttributeTransportation.BodyColor;
+            adTrans.BodyStatus = Convertor.GetBodyStatusString(advertisement.AdAttributeTransportation.BodyStatus);
+            adTrans.BrandId = advertisement.AdAttributeTransportation.CarModel.BrandId;
+            adTrans.BrandName = advertisement.AdAttributeTransportation.CarModel.Brand.BrandName;
+            adTrans.CarStatus = Convertor.GetCarStatusString(advertisement.AdAttributeTransportation.CarStatus);
+            adTrans.Fuel = Convertor.GetFuelTypeString(advertisement.AdAttributeTransportation.FuelType);
+            adTrans.Gearbox = Convertor.GetGearboxTypeString(advertisement.AdAttributeTransportation.GearboxType);
+            adTrans.InternalColor = advertisement.AdAttributeTransportation.InternalColor;
+
+            if (advertisement.AdAttributeTransportation.MakeYear != null)
+                adTrans.MakeYear = advertisement.AdAttributeTransportation.MakeYear.Value;
+            else
+                adTrans.MakeYear = -1;
+
+            if (advertisement.AdAttributeTransportation.Mileage != null)
+                adTrans.Mileage = advertisement.AdAttributeTransportation.Mileage.Value;
+            else
+                adTrans.Mileage = -1;
+
+            adTrans.ModelId = advertisement.AdAttributeTransportation.CarModel.ModelId;
+            adTrans.ModelName = advertisement.AdAttributeTransportation.CarModel.ModelName;
+            adTrans.PlateType = Convertor.GetPlateTypeString(advertisement.AdAttributeTransportation.PlateType);
         }
 
         private static void fillAdvertisementPrice(AdvertisementCommon adCommon, Advertisement ad)

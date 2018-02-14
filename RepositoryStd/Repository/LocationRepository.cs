@@ -16,7 +16,7 @@ namespace RepositoryStd.Repository
         }
         public IEnumerable<Province> GetAllProvinces()
         {
-            List<Province> allProvinces= _adDbContext.Provinces.ToList();
+            List<Province> allProvinces= _adDbContext.Provinces.AsNoTracking().ToList();
             
             foreach (Province province in allProvinces)
             {
@@ -28,7 +28,7 @@ namespace RepositoryStd.Repository
 
         public IEnumerable<City> GetAllCities()
         {
-            List<City> allCities = _adDbContext.Cities.ToList();
+            List<City> allCities = _adDbContext.Cities.AsNoTracking().ToList();
             
             foreach (City city in  allCities)
             {
@@ -42,7 +42,7 @@ namespace RepositoryStd.Repository
         public IEnumerable<District> GetAllDistricts()
         {
 
-            List<District> allDistricts = _adDbContext.Districts.ToList();
+            List<District> allDistricts = _adDbContext.Districts.AsNoTracking().ToList();
             foreach (District district in allDistricts)
             {
                 district.Advertisements = null;
