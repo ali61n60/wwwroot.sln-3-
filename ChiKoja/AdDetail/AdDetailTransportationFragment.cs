@@ -1,19 +1,8 @@
 using System;
-using System.Threading.Tasks;
-using Android.Content;
-using Android.Graphics;
 using Android.OS;
-using Android.Support.V4.App;
-using Android.Util;
 using Android.Views;
 using Android.Widget;
-using ChiKoja.Infrastructure.IOC;
-using ChiKoja.Notification;
-using ChiKoja.Repository.UserMarkedAds;
-using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
-using ModelStd.Db.Ad;
-using ModelStd.Services;
 
 
 namespace ChiKoja.AdDetail
@@ -66,7 +55,7 @@ namespace ChiKoja.AdDetail
             textViewCarModel.Text = advertisementTransportation.ModelName;
 
             textViewFuel = rootView.FindViewById<TextView>(Resource.Id.textViewFuel);
-            textViewFuel.Text = AdvertisementTransportation.GetFuelTypeString(advertisementTransportation.Fuel);
+            textViewFuel.Text = advertisementTransportation.Fuel;
 
             textViewGearbox = rootView.FindViewById<TextView>(Resource.Id.textViewGearbox);
             textViewGearbox.Text = advertisementTransportation.Gearbox;

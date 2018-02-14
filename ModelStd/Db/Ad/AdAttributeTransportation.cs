@@ -19,14 +19,12 @@ namespace ModelStd.Db.Ad
         public int? MakeYear { get; set; }
 
         [Column("fuelType")]
-        [MaxLength(50)]
         public FuelType FuelType { get; set; }
 
         [Column("mileage")]
         public int? Mileage { get; set; }
 
         [Column("gearboxType")]
-        [MaxLength(50)]
         public GearboxType GearboxType { get; set; }
 
         [Column("bodyColor")]
@@ -38,15 +36,12 @@ namespace ModelStd.Db.Ad
         public string InternalColor { get; set; }
 
         [Column("bodyStatus")]
-        [MaxLength(50)]
         public BodyStatus BodyStatus { get; set; }
 
         [Column("carStatus")]
-        [MaxLength(50)]
         public CarStatus CarStatus { get; set; }
 
         [Column("plateType")]
-        [MaxLength(50)]
         public PlateType PlateType { get; set; }
 
         public virtual Advertisement Ad { get; set; }
