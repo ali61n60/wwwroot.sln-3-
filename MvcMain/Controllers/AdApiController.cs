@@ -25,6 +25,8 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO 1- Database tables must store int number for properties
+    // convert int number to enums and string at class level
     //TODO 1- Create a page to have links to all api methods for test
     //TODO 1- Write unit test for everything
     //TODO 1 Design of typeScript ServerCaller must be better. make a generic servercaller class
