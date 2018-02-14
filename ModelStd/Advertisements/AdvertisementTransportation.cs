@@ -1,4 +1,6 @@
-﻿namespace ModelStd.Advertisements
+﻿using ModelStd.Db.Ad;
+
+namespace ModelStd.Advertisements
 {
     public class AdvertisementTransportation : AdvertisementCommon
     {
@@ -172,56 +174,5 @@
     }
 
 
-    public enum FuelType
-    {
-        Petrol,
-        Disel,
-        Gas,
-        Electric,
-        GasPetrol,
-        Hybrid,
-        UnSpecified
-    }
-
-    public enum GearboxType
-    {
-        Manual,
-        Automatic,
-        UnSpecified
-    }
-
-
-
-    public enum BodyStatus
-    {
-        NoColor,
-        OnePieceColored,
-        TwoPiecesColored,
-        MultiPieceColored,
-        BumperColored,
-        BumperChanged,
-        HoodColored,
-        RoundColored,
-        FullyColored,
-        Accident,
-        Scrap,
-        BodyChanged,
-        UnSpecified
-    }
-
-    public enum CarStatus
-    {
-        New,
-        Used,
-        Draft,
-        UnSpecified
-    }
-
-    public enum PlateType
-    {
-        National,
-        FreeRegion,
-        Temporary,
-        UnSpecified
-    }
+    
 }
