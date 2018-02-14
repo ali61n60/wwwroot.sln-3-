@@ -1,55 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:id="@+id/layoutSingleAd"
+    android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:background="@color/colorPrimary"
     android:padding="0dp">
+
     <FrameLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="wrap_content"
+        android:id="@+id/frameLayoutImageSecion"
+        android:layout_width="0dp"
+        android:layout_weight="1"
         android:layout_height="match_parent"
-        android:id="@+id/frameLayoutImageSecion">
+        android:layout_alignParentTop="true"
+        android:minHeight="25px"
+        android:minWidth="25px">
+
         <ImageView
             android:id="@+id/imageViewFirstImage"
-            android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="@dimen/singleAdImageDimen"
-            android:layout_height="@dimen/singleAdImageDimen" />
+            android:layout_height="@dimen/singleAdImageDimen"
+            android:src="@android:drawable/ic_menu_gallery" />
+
         <CustomViews.MarkAd.MarkAdView
+            android:id="@+id/markAdView"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_alignParentLeft="true"
-            android:id="@+id/markAdView"/>
+            android:layout_alignParentLeft="true" />
     </FrameLayout>
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:orientation="vertical"
-        android:minWidth="25px"
-        android:minHeight="25px"
+
+    <RelativeLayout
+        android:id="@+id/relativeLayoutDataSection"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:minHeight="25px"
+        android:minWidth="25px">
+
         <TextView
             android:id="@+id/textViewAdTitle"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/textViewAdPrice"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:id="@+id/textViewNumberOfVisit"
-            android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right" />
-    </LinearLayout>
+            android:gravity="center_horizontal"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textViewAdPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/textViewAdTitle"
+            android:layout_marginTop="15dp"
+            android:gravity="center_horizontal"
+            android:text="Medium Text"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <TextView
+            android:id="@+id/textViewNumberOfVisit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:text="Num"
+            android:textAppearance="?android:attr/textAppearanceSmall"/>
+
+        <TextView
+            android:id="@+id/textViewLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textViewNumberOfVisit"
+            android:layout_alignBottom="@+id/textViewNumberOfVisit"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:text="Loc"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+    </RelativeLayout>
 </LinearLayout>

@@ -436,7 +436,7 @@
     <AndroidResource Include="Resources\values\integers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values\Strings.xml" />
+    <AndroidResource Include="Resources\values\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values\styles.xml" />
@@ -448,7 +448,7 @@
     <AndroidResource Include="Resources\Xml\Preferences.xml" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\values-fa-rir\Strings.xml" />
+    <AndroidResource Include="Resources\values-fa-rir\strings.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\values-v11\styles.xml" />

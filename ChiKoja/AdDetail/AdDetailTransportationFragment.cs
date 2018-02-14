@@ -26,8 +26,11 @@ namespace ChiKoja.AdDetail
         AdvertisementTransportation advertisementTransportation;
         
         private TextView textViewBrand;
+        private TextView textViewCarModel;
+        private TextView textViewFuel;
+        private TextView textViewGearbox;
 
-        
+
         Guid adGuid;
         private readonly int categoryId = 100;
 
@@ -58,6 +61,15 @@ namespace ChiKoja.AdDetail
         {
             textViewBrand = rootView.FindViewById<TextView>(Resource.Id.textViewBrand);
             textViewBrand.Text = advertisementTransportation.BrandName;
+
+            textViewCarModel = rootView.FindViewById<TextView>(Resource.Id.textViewCarModel);
+            textViewCarModel.Text = advertisementTransportation.ModelName;
+
+            textViewFuel = rootView.FindViewById<TextView>(Resource.Id.textViewFuel);
+            textViewFuel.Text = AdvertisementTransportation.GetFuelTypeString(advertisementTransportation.Fuel);
+
+            textViewGearbox = rootView.FindViewById<TextView>(Resource.Id.textViewGearbox);
+            textViewGearbox.Text = advertisementTransportation.Gearbox;
         }
 
         private void initializeEvents()

@@ -8,7 +8,13 @@
   <string name="ContactInfo">اطلاعات تماس</string>
   <string name="Call">تماس</string>
   <string name="SendSms">ارسال اس ام اس</string>
+  
+  
   <string name="Brand">برند</string>
+  <string name="CarModel">مدل</string>
+  <string name="Fuel">سوخت</string>
+  <string name="Gearbox">گیربکس</string>
+  
   
   <string name="SignIn">ثبت نام</string>
   <string name="Logout">خروج</string>

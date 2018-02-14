@@ -7,11 +7,11 @@
     android:minHeight="25px"
     android:id="@+id/linearLayoutDataContainer">
   <TableLayout
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tableLayoutAdDetail">
+      android:minWidth="25px"
+      android:minHeight="25px"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:id="@+id/tableLayoutAdDetail">
 
     <TableRow
         android:id="@+id/tableRowBrand">
@@ -23,6 +23,48 @@
           android:layout_marginRight="@dimen/default_margin" />
       <TextView
           android:id="@+id/textViewBrand"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRowModel">
+      <TextView
+          android:id="@+id/textViewCarModelLabel"
+          android:text="@string/CarModel"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewCarModel"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRowFuel">
+      <TextView
+          android:id="@+id/textViewFuelLabel"
+          android:text="@string/Fuel"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewFuel"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRowGearbox">
+      <TextView
+          android:id="@+id/textViewGearboxLabel"
+          android:text="@string/Gearbox"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewGearbox"
           android:text="Text"
           android:layout_weight="1"
           android:gravity="left" />

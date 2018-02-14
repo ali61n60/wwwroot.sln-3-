@@ -6,4 +6,5 @@
   <dimen name="default_margin">10dp</dimen>
   <dimen name="singleAdImageDimen">150dp</dimen>
   <dimen name="mediumTextSize">25dp</dimen>
+  <dimen name="smallTextSize">16dp</dimen>
 </resources>

@@ -9,8 +9,12 @@
   <string name="ContactInfo">Contact Information</string>
   <string name="Call">Call</string>
   <string name="SendSms">Send SMS</string>
-  <string name="Brand">Brand</string>
+ 
   
+  <string name="Brand">Brand</string>
+  <string name="CarModel">Car Model</string>
+  <string name="Fuel">Fuel</string>
+  <string name="Gearbox">Gearbox</string>
   
   <string name="SignIn">Sign In</string>
   <string name="Logout">Logout</string>

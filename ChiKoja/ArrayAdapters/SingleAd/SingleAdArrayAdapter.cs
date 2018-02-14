@@ -47,24 +47,28 @@ namespace ChiKoja.ArrayAdapters.SingleAd
         {
             AdvertisementCommon adCommon = _advertisementCommonList[position];
             LayoutInflater inflater = (LayoutInflater) _context.GetSystemService(Context.LayoutInflaterService);
-            View view = inflater.Inflate(Resource.Layout.single_ad_view, null);
+            View rootView = inflater.Inflate(Resource.Layout.single_ad_view, null);
             //TODO set views prop
             TextView textViewAdTitle;
             TextView textViewAdPrice;
             TextView textViewNumberOfVisit;
+            TextView textViewLocation;
             ImageView imageViewFirstImage;
             MarkAdView markAdView;
             
-            textViewAdTitle = view.FindViewById<TextView>(Resource.Id.textViewAdTitle);
+            textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
             textViewAdTitle.Text = adCommon.AdvertisementTitle;
 
-            textViewAdPrice = view.FindViewById<TextView>(Resource.Id.textViewAdPrice);
+            textViewAdPrice = rootView.FindViewById<TextView>(Resource.Id.textViewAdPrice);
             textViewAdPrice.Text = adCommon.AdvertisementPrice.PriceString;
 
-            textViewNumberOfVisit = view.FindViewById<TextView>(Resource.Id.textViewNumberOfVisit);
+            textViewNumberOfVisit = rootView.FindViewById<TextView>(Resource.Id.textViewNumberOfVisit);
             textViewNumberOfVisit.Text =_context.Resources.GetString(Resource.String.Visit) + " " + adCommon.NumberOfVisit;
 
-            imageViewFirstImage = view.FindViewById<ImageView>(Resource.Id.imageViewFirstImage);
+            textViewLocation = rootView.FindViewById<TextView>(Resource.Id.textViewLocation);
+            textViewLocation.Text = adCommon.CityName + "," + adCommon.DistrictName;
+
+            imageViewFirstImage = rootView.FindViewById<ImageView>(Resource.Id.imageViewFirstImage);
             if (adCommon.AdvertisementImages[0] != null)
             {
                 byte[] decodedString = Base64.Decode(adCommon.AdvertisementImages[0], Base64Flags.Default);
@@ -72,13 +76,13 @@ namespace ChiKoja.ArrayAdapters.SingleAd
                 imageViewFirstImage.SetImageBitmap(decodedByte);
             }
 
-            markAdView = view.FindViewById<MarkAdView>(Resource.Id.markAdView);
+            markAdView = rootView.FindViewById<MarkAdView>(Resource.Id.markAdView);
             markAdView.Click += (sender, args) =>
             {
                 markAdView.SetMark(!markAdView.GetMark());
             };
             
-            return view;
+            return rootView;
         }
     }
 }

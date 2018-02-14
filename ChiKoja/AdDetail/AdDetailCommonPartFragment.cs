@@ -33,7 +33,6 @@ namespace ChiKoja.AdDetail
             _advertisementCommon = advertisementCommon;
             initializeFields();
             initializeEvents();
-            //TODO pass data to views
         }
 
         private void initializeFields()
