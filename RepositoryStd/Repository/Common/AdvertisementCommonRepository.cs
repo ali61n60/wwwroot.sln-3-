@@ -381,9 +381,9 @@ namespace RepositoryStd.Repository.Common
         public Advertisement GetAdvertisement(AdvertisementCommon advertisementCommon)
         {
             Advertisement ad = new Advertisement();
-            ad.AdComments = advertisementCommon.AdvertisementComments;
-            ad.AdId = advertisementCommon.AdvertisementId;
-            ad.AdInsertDateTime = advertisementCommon.AdvertisementTime;
+            ad.AdComments = advertisementCommon.AdComments;
+            ad.AdId = advertisementCommon.AdId;
+            ad.AdInsertDateTime = advertisementCommon.AdTime;
             ad.AdNumberOfVisited = advertisementCommon.NumberOfVisit;
 
             return ad;

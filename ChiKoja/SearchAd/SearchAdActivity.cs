@@ -86,11 +86,11 @@ namespace ChiKoja.SearchAd
             //TODO show ad detail to user
             
             Intent adDetailIntent = new Intent(this, typeof(AdDetailActivity));
-            adDetailIntent.PutExtra(Advertisement.AdGuidKey, adCommon.AdvertisementId.ToString());
-            adDetailIntent.PutExtra(Category.CategoryIdKey, adCommon.AdvertisementCategoryId);
+            adDetailIntent.PutExtra(Advertisement.AdGuidKey, adCommon.AdId.ToString());
+            adDetailIntent.PutExtra(Category.CategoryIdKey, adCommon.CategoryId);
             StartActivity(adDetailIntent);
             
-            Toast.MakeText(this,adCommon.AdvertisementId.ToString(),ToastLength.Long).Show();
+            Toast.MakeText(this,adCommon.AdId.ToString(),ToastLength.Long).Show();
         }
     }
 }

@@ -10,14 +10,14 @@ namespace RepositoryStd.ModelConversion
     {
         public static void FillAdvertisementCommonFromAdvertisement(AdvertisementCommon adCommon, Advertisement ad,AppIdentityDbContext _appIdentityDbContext)
         {
-            adCommon.AdvertisementId = ad.AdId;
+            adCommon.AdId = ad.AdId;
             adCommon.UserId = ad.UserId;
-            adCommon.AdvertisementTitle = ad.AdTitle;
-            adCommon.AdvertisementTime = ad.AdInsertDateTime;
-            adCommon.AdvertisementStatus = GetAdStatusString(ad.AdStatus);
-            if (ad.Category != null) adCommon.AdvertisementCategory = ad.Category.CategoryName;
-            adCommon.AdvertisementCategoryId = ad.CategoryId;
-            adCommon.AdvertisementComments = ad.AdComments;
+            adCommon.AdTitle = ad.AdTitle;
+            adCommon.AdTime = ad.AdInsertDateTime;
+            adCommon.AdStatus = GetAdStatusString(ad.AdStatus);
+            if (ad.Category != null) adCommon.CategoryName = ad.Category.CategoryName;
+            adCommon.CategoryId = ad.CategoryId;
+            adCommon.AdComments = ad.AdComments;
             adCommon.NumberOfVisit = ad.AdNumberOfVisited;
             adCommon.Email = _appIdentityDbContext.Users.First(user => user.Id == ad.UserId).Email;//TODO test for null
             adCommon.PhoneNumber = _appIdentityDbContext.Users.First(user => user.Id == ad.UserId).PhoneNumber;//TODO test for null
@@ -38,22 +38,22 @@ namespace RepositoryStd.ModelConversion
             switch (ad.PriceType)
             {
                 case PriceType.Fixed:
-                    adCommon.AdvertisementPrice = ad.FixedPrice;
+                    adCommon.AdPrice = ad.FixedPrice;
                     break;
                 case PriceType.Agreement:
-                    adCommon.AdvertisementPrice = ad.AgreementPrice;
+                    adCommon.AdPrice = ad.AgreementPrice;
                     break;
                 case PriceType.Exchange:
-                    adCommon.AdvertisementPrice = ad.ExchangePrice;
+                    adCommon.AdPrice = ad.ExchangePrice;
                     break;
                 case PriceType.Installment:
-                    adCommon.AdvertisementPrice = ad.InsatllmentPrice;
+                    adCommon.AdPrice = ad.InsatllmentPrice;
                     break;
                 case PriceType.MortgageAndRent:
-                    adCommon.AdvertisementPrice = ad.MortgageAndRentPrice;
+                    adCommon.AdPrice = ad.MortgageAndRentPrice;
                     break;
                     default:
-                        adCommon.AdvertisementPrice = new AgreementPrice();
+                        adCommon.AdPrice = new AgreementPrice();
                     break;
             }
         }

@@ -38,10 +38,10 @@ namespace ChiKoja.AdDetail
         private void initializeFields()
         {
             textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
-            textViewAdTitle.Text = _advertisementCommon.AdvertisementTitle;
+            textViewAdTitle.Text = _advertisementCommon.AdTitle;
 
             textViewPrice = rootView.FindViewById<TextView>(Resource.Id.textViewPrice);
-            textViewPrice.Text = _advertisementCommon.AdvertisementPrice.PriceString;
+            textViewPrice.Text = _advertisementCommon.AdPrice.PriceString;
         }
 
         private void initializeEvents()

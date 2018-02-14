@@ -107,12 +107,12 @@ namespace ChiKoja.SearchAd.UserAd
         private ViewGroupUserAd cretateNewViewUserAd(AdvertisementCommon advertisementCommon)
         {
             ViewGroupUserAd viewGroupUserAd=new ViewGroupUserAd(this);
-            viewGroupUserAd.AdTitle = advertisementCommon.AdvertisementTitle + ", " + advertisementCommon.CityName;
-            viewGroupUserAd.AdPrice = advertisementCommon.AdvertisementPrice.PriceString;
+            viewGroupUserAd.AdTitle = advertisementCommon.AdTitle + ", " + advertisementCommon.CityName;
+            viewGroupUserAd.AdPrice = advertisementCommon.AdPrice.PriceString;
             if(advertisementCommon.AdvertisementImages!=null)
                 viewGroupUserAd.AdImage = advertisementCommon.AdvertisementImages[0];
-            viewGroupUserAd.AdCategoryId = advertisementCommon.AdvertisementCategoryId;
-            viewGroupUserAd.AdGuid = advertisementCommon.AdvertisementId;
+            viewGroupUserAd.AdCategoryId = advertisementCommon.CategoryId;
+            viewGroupUserAd.AdGuid = advertisementCommon.AdId;
             return viewGroupUserAd;
         }
 

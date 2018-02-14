@@ -57,10 +57,10 @@ namespace ChiKoja.ArrayAdapters.SingleAd
             MarkAdView markAdView;
             
             textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
-            textViewAdTitle.Text = adCommon.AdvertisementTitle;
+            textViewAdTitle.Text = adCommon.AdTitle;
 
             textViewAdPrice = rootView.FindViewById<TextView>(Resource.Id.textViewAdPrice);
-            textViewAdPrice.Text = adCommon.AdvertisementPrice.PriceString;
+            textViewAdPrice.Text = adCommon.AdPrice.PriceString;
 
             textViewNumberOfVisit = rootView.FindViewById<TextView>(Resource.Id.textViewNumberOfVisit);
             textViewNumberOfVisit.Text =_context.Resources.GetString(Resource.String.Visit) + " " + adCommon.NumberOfVisit;

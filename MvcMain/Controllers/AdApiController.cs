@@ -194,7 +194,7 @@ namespace MvcMain.Controllers
             foreach (AdvertisementCommon advertisementCommon in advertisementCommons)
             {
                 advertisementCommon.AdvertisementImages[0] =
-                    _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdvertisementId);
+                    _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdId);
 
             }
         }
@@ -206,7 +206,7 @@ namespace MvcMain.Controllers
 
         public void FillAllImages(AdvertisementCommon advertisementCommon)
         {
-            advertisementCommon.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdvertisementId);
+            advertisementCommon.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdId);
         }
 
         private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<IList<AdvertisementCommon>> response, Dictionary<string, string> userInput)
@@ -257,7 +257,7 @@ namespace MvcMain.Controllers
             {
                 if (advertisementCommon.AdvertisementImages != null)
                 {
-                    _imageRepository.SaveImages(advertisementCommon.AdvertisementId, advertisementCommon.AdvertisementImages);
+                    _imageRepository.SaveImages(advertisementCommon.AdId, advertisementCommon.AdvertisementImages);
                     responseBase.SetSuccessResponse("Advertisement images saved in repository");
                 }
                 else
@@ -351,7 +351,7 @@ namespace MvcMain.Controllers
             {
                 adDetail = adRepository.GetAdDetail(adGuid);
 
-                if (adDetail.AdvertisementStatus == Convertor.GetAdStatusString(AdStatus.Approved))
+                if (adDetail.AdStatus == Convertor.GetAdStatusString(AdStatus.Approved))
                     adDetail.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(adGuid);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();

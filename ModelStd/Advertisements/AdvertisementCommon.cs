@@ -11,7 +11,7 @@ namespace ModelStd.Advertisements
             AdvertisementImages=new string[maxImageNumber];
         }
         
-        public Guid AdvertisementId { get; set; }
+        public Guid AdId { get; set; }
         
         public string UserId { get; set; }
         
@@ -19,9 +19,9 @@ namespace ModelStd.Advertisements
         
         public string Email { get; set; }
         
-        public int AdvertisementCategoryId { get; set; }
+        public int CategoryId { get; set; }
         
-        public string AdvertisementCategory { get; set; }
+        public string CategoryName { get; set; }
         
         public int DistrictId { get; set; }
         
@@ -31,17 +31,17 @@ namespace ModelStd.Advertisements
         
         public string ProvinceName { get; set; }
         
-        public DateTime AdvertisementTime { get; set; }
+        public DateTime AdTime { get; set; }
         
-        public string AdvertisementStatus { get; set; }
+        public string AdStatus { get; set; }
         
-        public string AdvertisementTitle { get; set; }
+        public string AdTitle { get; set; }
         
-        public string AdvertisementComments { get; set; }
+        public string AdComments { get; set; }
         
         public int NumberOfVisit { get; set; }
         
-        public IPrice AdvertisementPrice { get; set; }
+        public IPrice AdPrice { get; set; }
         
         public int AdPrivilegeId { get; set; } 
         

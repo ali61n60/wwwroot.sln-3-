@@ -296,7 +296,7 @@ namespace RepositoryStd.Repository.Transportation
         private AdAttributeTransportation getAdAtribute(AdvertisementTransportation entity)
         {
             AdAttributeTransportation adAttribute = new AdAttributeTransportation();
-            adAttribute.AdId = entity.AdvertisementId;
+            adAttribute.AdId = entity.AdId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
             adAttribute.Fuel = AdvertisementTransportation.GetFuelTypeString(entity.Fuel);
