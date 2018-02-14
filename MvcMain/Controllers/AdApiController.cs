@@ -193,7 +193,7 @@ namespace MvcMain.Controllers
         {
             foreach (AdvertisementCommon advertisementCommon in advertisementCommons)
             {
-                advertisementCommon.AdvertisementImages[0] =
+                advertisementCommon.AdImages[0] =
                     _imageRepository.GetFirstAdvertisementImage(advertisementCommon.AdId);
 
             }
@@ -206,7 +206,7 @@ namespace MvcMain.Controllers
 
         public void FillAllImages(AdvertisementCommon advertisementCommon)
         {
-            advertisementCommon.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdId);
+            advertisementCommon.AdImages = _imageRepository.GetAllAdvertisementImages(advertisementCommon.AdId);
         }
 
         private void checkAndCorrectOnlyWithPicturesFilter(ResponseBase<IList<AdvertisementCommon>> response, Dictionary<string, string> userInput)
@@ -215,7 +215,7 @@ namespace MvcMain.Controllers
             {
                 foreach (AdvertisementCommon advertisementCommon in response.ResponseData)
                 {
-                    if (advertisementCommon.AdvertisementImages[0] == null)
+                    if (advertisementCommon.AdImages[0] == null)
                         response.ResponseData.Remove(advertisementCommon);
                 }
             }
@@ -255,9 +255,9 @@ namespace MvcMain.Controllers
             ResponseBase responseBase = new ResponseBase();
             try
             {
-                if (advertisementCommon.AdvertisementImages != null)
+                if (advertisementCommon.AdImages != null)
                 {
-                    _imageRepository.SaveImages(advertisementCommon.AdId, advertisementCommon.AdvertisementImages);
+                    _imageRepository.SaveImages(advertisementCommon.AdId, advertisementCommon.AdImages);
                     responseBase.SetSuccessResponse("Advertisement images saved in repository");
                 }
                 else
@@ -352,7 +352,7 @@ namespace MvcMain.Controllers
                 adDetail = adRepository.GetAdDetail(adGuid);
 
                 if (adDetail.AdStatus == Convertor.GetAdStatusString(AdStatus.Approved))
-                    adDetail.AdvertisementImages = _imageRepository.GetAllAdvertisementImages(adGuid);
+                    adDetail.AdImages = _imageRepository.GetAllAdvertisementImages(adGuid);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();
             }

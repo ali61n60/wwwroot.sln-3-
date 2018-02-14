@@ -125,20 +125,20 @@ var Index = /** @class */ (function () {
         var data;
         for (var i = 0; i < advertisementCommons.length; i++) {
             var adImage;
-            if (advertisementCommons[i].AdvertisementImages[0] != null) {
-                adImage = "data:image/jpg;base64," + advertisementCommons[i].AdvertisementImages[0];
+            if (advertisementCommons[i].AdImages[0] != null) {
+                adImage = "data:image/jpg;base64," + advertisementCommons[i].AdImages[0];
             } //end if
             else {
                 adImage = "data:image/jpg;base64," + $("#" + this._defaultImageInputId).val();
             }
             data = {
-                AdvertisementId: advertisementCommons[i].AdvertisementId,
-                AdvertisementCategoryId: advertisementCommons[i].AdvertisementCategoryId,
-                AdvertisementCategory: advertisementCommons[i].AdvertisementCategory,
+                AdvertisementId: advertisementCommons[i].AdId,
+                AdvertisementCategoryId: advertisementCommons[i].CategoryId,
+                AdvertisementCategory: advertisementCommons[i].CategoryName,
                 adImage: adImage,
-                adPrice: advertisementCommons[i].AdvertisementPrice.PriceString,
-                AdvertisementTitle: advertisementCommons[i].AdvertisementTitle,
-                AdvertisementStatus: advertisementCommons[i].AdvertisementStatus
+                adPrice: advertisementCommons[i].AdPrice.PriceString,
+                AdvertisementTitle: advertisementCommons[i].AdTitle,
+                AdvertisementStatus: advertisementCommons[i].AdStatus
                 //adDate: msg.ResponseData[i].AdTime
             }; //end data
             var html = Mustache.to_html(template, data);

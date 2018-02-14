@@ -275,19 +275,14 @@ namespace RepositoryStd.Repository.Transportation
             AdAttributeTransportation adAttribute = new AdAttributeTransportation();
             adAttribute.ModelId = ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
             adAttribute.MakeYear = ParameterExtractor.ExtractInt(userInputDictionary, MakeYearKey, MakeYearDefault);
-            adAttribute.Fuel = ParameterExtractor.ExtractString(userInputDictionary, FuelTypeKey, AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault));
+            adAttribute.FuelType =(FuelType)Enum.ToObject(typeof(FuelType),ParameterExtractor.ExtractInt(userInputDictionary, FuelTypeKey, (int)FuelTypeDefault));
             adAttribute.Mileage = ParameterExtractor.ExtractInt(userInputDictionary, MileageKey, MileageDefault);
-            adAttribute.Gearbox = ParameterExtractor.ExtractString(userInputDictionary, GearboxKey,
-                AdvertisementTransportation.GetGearboxTypeString(GearboxDefault));
-            adAttribute.BodyColor =
-                ParameterExtractor.ExtractString(userInputDictionary, BodyColorKey, BodyColorDefault);
-            adAttribute.InternalColor =
-                ParameterExtractor.ExtractString(userInputDictionary, InternalColorKey, InternalColorDefault);
-            adAttribute.BodyStatus = ParameterExtractor.ExtractString(userInputDictionary, BodyStatusKey,
-                AdvertisementTransportation.GetBodyStatusString(BodyStatusDefault));
-            adAttribute.CarStatus = ParameterExtractor.ExtractString(userInputDictionary, CarStatusKey,
-                AdvertisementTransportation.GetCarStatusString(CarStatusDefault));
-            adAttribute.PlateType = ParameterExtractor.ExtractString(userInputDictionary, PlateTypeKey, AdvertisementTransportation.GetPlateTypeString(PlateTypeDefault));
+            adAttribute.GearboxType =(GearboxType)Enum.ToObject(typeof(GearboxType), ParameterExtractor.ExtractInt(userInputDictionary, GearboxKey,(int)GearboxDefault));
+            adAttribute.BodyColor =ParameterExtractor.ExtractString(userInputDictionary, BodyColorKey, BodyColorDefault);
+            adAttribute.InternalColor =ParameterExtractor.ExtractString(userInputDictionary, InternalColorKey, InternalColorDefault);
+            adAttribute.BodyStatus =(BodyStatus)Enum.ToObject(typeof(BodyStatus), ParameterExtractor.ExtractInt(userInputDictionary, BodyStatusKey,(int)BodyStatusDefault));
+            adAttribute.CarStatus =(CarStatus)Enum.ToObject(typeof(CarStatus), ParameterExtractor.ExtractInt(userInputDictionary, CarStatusKey,(int)CarStatusDefault));
+            adAttribute.PlateType =(PlateType)Enum.ToObject(typeof(PlateType),ParameterExtractor.ExtractInt(userInputDictionary, PlateTypeKey, (int)PlateTypeDefault));
 
             return adAttribute;
         }
@@ -299,12 +294,12 @@ namespace RepositoryStd.Repository.Transportation
             adAttribute.AdId = entity.AdId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
-            adAttribute.Fuel = AdvertisementTransportation.GetFuelTypeString(entity.Fuel);
+            adAttribute.FuelType = Convertor.GetFuelType(entity.Fuel,FuelType.UnSpecified);
             adAttribute.Mileage = entity.Mileage;
-            adAttribute.Gearbox = entity.Gearbox;
+            adAttribute.GearboxType =Convertor.GetGearboxType(entity.Gearbox,GearboxType.UnSpecified);
             adAttribute.BodyColor = entity.BodyColor;
             adAttribute.InternalColor = entity.InternalColor;
-            adAttribute.BodyStatus = entity.BodyStatus.ToString();
+            adAttribute.BodyStatus = Convertor.GetBodyStatus(entity.BodyStatus,BodyStatus.UnSpecified);
 
             return adAttribute;
         }
@@ -312,44 +307,41 @@ namespace RepositoryStd.Repository.Transportation
        
         private IQueryable<Advertisement> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            PlateType plateType = AdvertisementTransportation.GetPlateType(
+            PlateType plateType = Convertor.GetPlateType(
                 ParameterExtractor.ExtractString(queryParameters, PlateTypeKey,
-                    AdvertisementTransportation.GetPlateTypeString(PlateTypeDefault)),
+                    Convertor.GetPlateTypeString(PlateTypeDefault)),
                 PlateTypeDefault);
             if (plateType != PlateTypeDefault)
             {
                 list = list.Where(advertisement =>
-                    advertisement.AdAttributeTransportation.PlateType ==
-                    AdvertisementTransportation.GetPlateTypeString(plateType));
+                    advertisement.AdAttributeTransportation.PlateType ==plateType);
             }
             return list;
         }
         private IQueryable<Advertisement> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            CarStatus carStatus = AdvertisementTransportation.GetCarStatus(
+            CarStatus carStatus = Convertor.GetCarStatus(
                 ParameterExtractor.ExtractString(queryParameters, CarStatusKey,
-                    AdvertisementTransportation.GetCarStatusString(CarStatusDefault)),
+                    Convertor.GetCarStatusString(CarStatusDefault)),
                 CarStatusDefault);
             if (carStatus != CarStatusDefault)
             {
                 list = list.Where(advertisement =>
-                    advertisement.AdAttributeTransportation.CarStatus ==
-                    AdvertisementTransportation.GetCarStatusString(carStatus));
+                    advertisement.AdAttributeTransportation.CarStatus ==carStatus);
             }
 
             return list;
         }
         private IQueryable<Advertisement> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            BodyStatus bodyStatus = AdvertisementTransportation.GetBodyStatus(
+            BodyStatus bodyStatus = Convertor.GetBodyStatus(
                 ParameterExtractor.ExtractString(queryParameters, BodyStatusKey,
-                    AdvertisementTransportation.GetBodyStatusString(BodyStatusDefault)),
+                    Convertor.GetBodyStatusString(BodyStatusDefault)),
                 BodyStatusDefault);
             if (bodyStatus != BodyStatusDefault)
             {
                 list = list.Where(advertisement =>
-                    advertisement.AdAttributeTransportation.BodyStatus ==
-                    AdvertisementTransportation.GetBodyStatusString(bodyStatus));
+                    advertisement.AdAttributeTransportation.BodyStatus ==bodyStatus);
             }
             return list;
         }
@@ -375,15 +367,13 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            GearboxType gearboxType = AdvertisementTransportation.GetGearboxType(
+            GearboxType gearboxType = Convertor.GetGearboxType(
                 ParameterExtractor.ExtractString(queryParameters, GearboxKey,
-                    AdvertisementTransportation.GetGearboxTypeString(GearboxDefault)),
+                    Convertor.GetGearboxTypeString(GearboxDefault)),
                 GearboxDefault);
             if (gearboxType != GearboxDefault)
             {
-                list = list.Where(advertisement =>
-                    advertisement.AdAttributeTransportation.Gearbox ==
-                    AdvertisementTransportation.GetGearboxTypeString(gearboxType));
+                list = list.Where(advertisement =>advertisement.AdAttributeTransportation.GearboxType ==gearboxType);
             }
             return list;
         }
@@ -402,13 +392,13 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            FuelType fuelType = AdvertisementTransportation.GetFuelType(
-                ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault)),
+            FuelType fuelType = Convertor.GetFuelType(
+                ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, Convertor.GetFuelTypeString(FuelTypeDefault)),
                 FuelTypeDefault);
             if (fuelType != FuelTypeDefault)
             {
                 list = list.Where(advertisement =>
-                    advertisement.AdAttributeTransportation.Fuel == AdvertisementTransportation.GetFuelTypeString(fuelType));
+                    advertisement.AdAttributeTransportation.FuelType == fuelType);
             }
 
             return list;
@@ -452,11 +442,11 @@ namespace RepositoryStd.Repository.Transportation
             Convertor.FillAdvertisementCommonFromAdvertisement(adTrans,advertisement, _appIdentityDbContext);
             adTrans.BodyColor = advertisement.AdAttributeTransportation.BodyColor;
             adTrans.InternalColor = advertisement.AdAttributeTransportation.InternalColor;
-            adTrans.BodyStatus = AdvertisementTransportation.GetBodyStatus(advertisement.AdAttributeTransportation.BodyStatus, BodyStatusDefault);
+            adTrans.BodyStatus = Convertor.GetBodyStatusString(advertisement.AdAttributeTransportation.BodyStatus);
             adTrans.BrandId = advertisement.AdAttributeTransportation.CarModel.BrandId;
             adTrans.BrandName = advertisement.AdAttributeTransportation.CarModel.Brand.BrandName;
             adTrans.ModelName = advertisement.AdAttributeTransportation.CarModel.ModelName;
-            adTrans.Gearbox = advertisement.AdAttributeTransportation.Gearbox;
+            adTrans.Gearbox = Convertor.GetGearboxTypeString(advertisement.AdAttributeTransportation.GearboxType);
 
             if (advertisement.AdAttributeTransportation.Mileage != null)
                 adTrans.Mileage = advertisement.AdAttributeTransportation.Mileage.Value;

@@ -18,16 +18,16 @@ namespace ModelStd.Db.Ad
         [Column("makeYear")]
         public int? MakeYear { get; set; }
 
-        [Column("fuel")]
+        [Column("fuelType")]
         [MaxLength(50)]
-        public string Fuel { get; set; }
+        public FuelType FuelType { get; set; }
 
         [Column("mileage")]
         public int? Mileage { get; set; }
 
-        [Column("gearbox")]
+        [Column("gearboxType")]
         [MaxLength(50)]
-        public string Gearbox { get; set; }
+        public GearboxType GearboxType { get; set; }
 
         [Column("bodyColor")]
         [MaxLength(50)]
@@ -39,15 +39,15 @@ namespace ModelStd.Db.Ad
 
         [Column("bodyStatus")]
         [MaxLength(50)]
-        public string BodyStatus { get; set; }
+        public BodyStatus BodyStatus { get; set; }
 
         [Column("carStatus")]
         [MaxLength(50)]
-        public string CarStatus { get; set; }
+        public CarStatus CarStatus { get; set; }
 
         [Column("plateType")]
         [MaxLength(50)]
-        public string PlateType { get; set; }
+        public PlateType PlateType { get; set; }
 
         public virtual Advertisement Ad { get; set; }
         public virtual CarModel CarModel { get; set; }
@@ -56,54 +56,54 @@ namespace ModelStd.Db.Ad
 
     public enum FuelType
     {
-        Petrol,
-        Disel,
-        Gas,
-        Electric,
-        GasPetrol,
-        Hybrid,
-        UnSpecified
+        Petrol=1,
+        Disel=2,
+        Gas=3,
+        Electric=4,
+        GasPetrol=5,
+        Hybrid=6,
+        UnSpecified=7
     }
 
     public enum GearboxType
     {
-        Manual,
-        Automatic,
-        UnSpecified
+        Manual=1,
+        Automatic=2,
+        UnSpecified=3
     }
 
 
 
     public enum BodyStatus
     {
-        NoColor,
-        OnePieceColored,
-        TwoPiecesColored,
-        MultiPieceColored,
-        BumperColored,
-        BumperChanged,
-        HoodColored,
-        RoundColored,
-        FullyColored,
-        Accident,
-        Scrap,
-        BodyChanged,
-        UnSpecified
+        NoColor=1,
+        OnePieceColored=2,
+        TwoPiecesColored=3,
+        MultiPieceColored=4,
+        BumperColored=5,
+        BumperChanged=6,
+        HoodColored=7,
+        RoundColored=8,
+        FullyColored=9,
+        Accident=10,
+        Scrap=11,
+        BodyChanged=12,
+        UnSpecified=13
     }
 
     public enum CarStatus
     {
-        New,
-        Used,
-        Draft,
-        UnSpecified
+        New=1,
+        Used=2,
+        Draft=3,
+        UnSpecified=4
     }
 
     public enum PlateType
     {
-        National,
-        FreeRegion,
-        Temporary,
-        UnSpecified
+        National=1,
+        FreeRegion=2,
+        Temporary=3,
+        UnSpecified=4
     }
 }

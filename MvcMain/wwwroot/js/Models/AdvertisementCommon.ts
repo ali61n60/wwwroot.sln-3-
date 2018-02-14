@@ -1,21 +1,22 @@
 ﻿export class AdvertisementCommon {
-    public AdvertisementId: number;
+    public AdId: number;
     public UserId: string;
     public PhoneNumber: string;
     public Email: string;
-    public AdvertisementCategoryId: number;
-    public AdvertisementCategory: string;
+    public CategoryId: number;
+    public CategoryName: string;
     public DistrictId: number;
     public DistrictName: string;
     public CityName: string;
     public ProvinceName: string;
-    public AdvertisementTime: string; //TODO real type is DateTime in C#
-    public AdvertisementStatusId: number;
-    public AdvertisementStatus: string;
-    public AdvertisementTitle: string;
-    public AdvertisementComments: string;
-    public NumberOfVisit: number;
-    public AdvertisementPrice: any;//TODO real type is Price in C#
+    public AdTime: string; //real type is DateTime in C#
+    public AdStatus: string;
+    public AdTitle: string;
+    public AdComments: string;
+    public NumberOfVisits: number;
+    public AdPrice: any;//TODO real type is Price in C#
     public AdPrivilegeId: number;
-    public AdvertisementImages: string[];
+    public AdImages: string[];
+    public AdType:string;
+
 }

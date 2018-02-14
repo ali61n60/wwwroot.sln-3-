@@ -384,7 +384,7 @@ namespace RepositoryStd.Repository.Common
             ad.AdComments = advertisementCommon.AdComments;
             ad.AdId = advertisementCommon.AdId;
             ad.AdInsertDateTime = advertisementCommon.AdTime;
-            ad.AdNumberOfVisited = advertisementCommon.NumberOfVisit;
+            ad.AdNumberOfVisited = advertisementCommon.NumberOfVisits;
 
             return ad;
         }

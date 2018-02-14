@@ -63,15 +63,15 @@ namespace ChiKoja.ArrayAdapters.SingleAd
             textViewAdPrice.Text = adCommon.AdPrice.PriceString;
 
             textViewNumberOfVisit = rootView.FindViewById<TextView>(Resource.Id.textViewNumberOfVisit);
-            textViewNumberOfVisit.Text =_context.Resources.GetString(Resource.String.Visit) + " " + adCommon.NumberOfVisit;
+            textViewNumberOfVisit.Text =_context.Resources.GetString(Resource.String.Visit) + " " + adCommon.NumberOfVisits;
 
             textViewLocation = rootView.FindViewById<TextView>(Resource.Id.textViewLocation);
             textViewLocation.Text = adCommon.CityName + "," + adCommon.DistrictName;
 
             imageViewFirstImage = rootView.FindViewById<ImageView>(Resource.Id.imageViewFirstImage);
-            if (adCommon.AdvertisementImages[0] != null)
+            if (adCommon.AdImages[0] != null)
             {
-                byte[] decodedString = Base64.Decode(adCommon.AdvertisementImages[0], Base64Flags.Default);
+                byte[] decodedString = Base64.Decode(adCommon.AdImages[0], Base64Flags.Default);
                 Bitmap decodedByte = BitmapFactory.DecodeByteArray(decodedString, 0, decodedString.Length);
                 imageViewFirstImage.SetImageBitmap(decodedByte);
             }

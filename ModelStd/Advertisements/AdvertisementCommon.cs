@@ -8,7 +8,7 @@ namespace ModelStd.Advertisements
         public AdvertisementCommon() : this(10) { }
         public AdvertisementCommon(int maxImageNumber)
         {
-            AdvertisementImages=new string[maxImageNumber];
+            AdImages=new string[maxImageNumber];
         }
         
         public Guid AdId { get; set; }
@@ -39,13 +39,13 @@ namespace ModelStd.Advertisements
         
         public string AdComments { get; set; }
         
-        public int NumberOfVisit { get; set; }
+        public int NumberOfVisits { get; set; }
         
         public IPrice AdPrice { get; set; }
         
         public int AdPrivilegeId { get; set; } 
         
-        public string[] AdvertisementImages { get; set; }
+        public string[] AdImages { get; set; }
 
         public string AdType { get; set; }
 

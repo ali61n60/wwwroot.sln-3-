@@ -47,7 +47,7 @@ namespace ChiKoja.AdDetail
                 serverAlreadyCalled = true;
             }
             
-            adDetailImageFragment.SetImages(advertisementCommon.AdvertisementImages.ToList());
+            adDetailImageFragment.SetImages(advertisementCommon.AdImages.ToList());
             adDetailCommonPartFragment.SetAdvertisementCommon(advertisementCommon);
             categorySpecificFragment.SetAdDetailData(advertisementCommon);
             //warning data
