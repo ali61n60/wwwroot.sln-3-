@@ -76,7 +76,7 @@ namespace ChiKoja.SearchAd
             buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
             buttonSort = rootView.FindViewById<Button>(Resource.Id.buttonSort);
             buttonCategory = rootView.FindViewById<Button>(Resource.Id.buttonCategory);
-            //searchResultPlaceHolder = rootView.FindViewById<LinearLayout>(Resource.Id.layoutSearchAdLinearLayout);
+
 
             _categorySelection = new CategorySelection();
         }

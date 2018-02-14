@@ -12,6 +12,7 @@ using Android.Runtime;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using CustomViews.MarkAd;
 using ModelStd.Advertisements;
 
 namespace ChiKoja.ArrayAdapters.SingleAd
@@ -52,6 +53,7 @@ namespace ChiKoja.ArrayAdapters.SingleAd
             TextView textViewAdPrice;
             TextView textViewNumberOfVisit;
             ImageView imageViewFirstImage;
+            MarkAdView markAdView;
             
             textViewAdTitle = view.FindViewById<TextView>(Resource.Id.textViewAdTitle);
             textViewAdTitle.Text = adCommon.AdvertisementTitle;
@@ -69,6 +71,12 @@ namespace ChiKoja.ArrayAdapters.SingleAd
                 Bitmap decodedByte = BitmapFactory.DecodeByteArray(decodedString, 0, decodedString.Length);
                 imageViewFirstImage.SetImageBitmap(decodedByte);
             }
+
+            markAdView = view.FindViewById<MarkAdView>(Resource.Id.markAdView);
+            markAdView.Click += (sender, args) =>
+            {
+                markAdView.SetMark(!markAdView.GetMark());
+            };
             
             return view;
         }
