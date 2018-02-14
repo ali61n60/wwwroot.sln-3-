@@ -4,21 +4,20 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"  >
-  <Button
-    android:id="@+id/buttonMarkAd"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="@string/MarkAd"/>
-
-  <Button
+  <CustomViews.MarkAd.MarkAdView
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_alignParentLeft="true"
+    android:id="@+id/markAdView"/>
+ <Button
     android:id="@+id/buttonShare"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_alignParentTop="true"
     android:layout_marginLeft="18dp"
     android:layout_marginStart="18dp"
-    android:layout_toEndOf="@+id/buttonMarkAd"
-    android:layout_toRightOf="@+id/buttonMarkAd"
+    android:layout_toEndOf="@+id/markAdView"
+    android:layout_toRightOf="@+id/markAdView"
     android:text="@string/Share"
     tools:layout_editor_absoluteX="121dp"
     tools:layout_editor_absoluteY="120dp" />

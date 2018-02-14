@@ -113,7 +113,7 @@ namespace ChiKoja.Repository.UserMarkedAds
                 connection.Close();
             }
         }
-
+        
         public void UnmarAd(object locker, Guid adGuid)
         {
             string commandText = "delete  from [UserMarkedAds] WHERE adGuid=@adGuid";

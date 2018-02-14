@@ -4,13 +4,14 @@ using Android.Support.V4.App;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.Repository.UserMarkedAds;
+using CustomViews.MarkAd;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.AdDetail
 {
     public class AdDetailTopTopFragment:Fragment
     {
-        private Button buttonMarkAd;
+        private MarkAdView markAdView;
         private Button buttonShare;
         private Button buttonBack;
         UserMarkedAds userMarkedAds;
@@ -50,7 +51,7 @@ namespace ChiKoja.AdDetail
         {
             //TODO inject it
             userMarkedAds = new UserMarkedAds(Repository.Repository.DataBasePath);
-            buttonMarkAd = rootView.FindViewById<Button>(Resource.Id.buttonMarkAd);
+            markAdView = rootView.FindViewById<MarkAdView>(Resource.Id.markAdView);
             buttonShare = rootView.FindViewById<Button>(Resource.Id.buttonShare);
             buttonBack = rootView.FindViewById<Button>(Resource.Id.buttonBack);
             manageButtonMarkAdText();
@@ -58,7 +59,7 @@ namespace ChiKoja.AdDetail
 
         private void initializeEvents()
         {
-            buttonMarkAd.Click += buttonMarkAd_Click;
+            markAdView.Click += markAdView_Click;
             buttonBack.Click += ButtonBack_Click;
         }
 
@@ -67,7 +68,7 @@ namespace ChiKoja.AdDetail
             Activity.Finish();
         }
 
-        void buttonMarkAd_Click(object sender, EventArgs e)
+        void markAdView_Click(object sender, EventArgs e)
         {
             if (userMarkedAds.IsAdMarked(Repository.Repository.Locker, adGuid))
                 userMarkedAds.UnmarAd(Repository.Repository.Locker, adGuid);
@@ -78,10 +79,7 @@ namespace ChiKoja.AdDetail
 
         private void manageButtonMarkAdText()
         {
-            if (userMarkedAds.IsAdMarked(Repository.Repository.Locker, adGuid))
-                buttonMarkAd.Text = Resources.GetString(Resource.String.UnMarkAd);
-            else
-                buttonMarkAd.Text = Resources.GetString(Resource.String.MarkAd);
+                markAdView.SetMark(userMarkedAds.IsAdMarked(Repository.Repository.Locker, adGuid));
         }
 
     }

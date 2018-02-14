@@ -29,6 +29,7 @@ namespace ChiKoja.GlobalApplication
 
 
         //Create Advertisement in app service ***
+        //TODO -2 Make repository method async
         //TODO -2 Use Array Adaptor to ViewGroupSingleAD
         //TODO -2 Make a manner to user input server ip address
         //TODO use Gateway pattern for web service classes

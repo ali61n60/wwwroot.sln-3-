@@ -2054,9 +2054,6 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700bd
 			public const int buttonLogout = 2131165373;
 			
-			// aapt resource value: 0x7f070076
-			public const int buttonMarkAd = 2131165302;
-			
 			// aapt resource value: 0x7f070082
 			public const int buttonOk = 2131165314;
 			
@@ -2356,6 +2353,9 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f070041
 			public const int list_item = 2131165249;
+			
+			// aapt resource value: 0x7f070076
+			public const int markAdView = 2131165302;
 			
 			// aapt resource value: 0x7f0700cf
 			public const int media_actions = 2131165391;

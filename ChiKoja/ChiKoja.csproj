@@ -272,6 +272,7 @@
     <Compile Include="CustomViews\CategoryView\CheckBoxTriStates.cs" />
     <Compile Include="CustomViews\CategoryView\ISingleCategoryView.cs" />
     <Compile Include="CustomViews\CategoryView\SingleCategoryView.cs" />
+    <Compile Include="CustomViews\MarkAd\MarkAdView.cs" />
     <Compile Include="CustomViews\SingleAdView\ViewGroupUserAd.cs" />
     <Compile Include="Dialog\AlertDialog\AlertDialogActivity.cs" />
     <Compile Include="GlobalApplication\GlobalApplication.cs" />
