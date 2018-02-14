@@ -18,6 +18,11 @@
             android:src="@android:drawable/ic_menu_gallery"
             android:layout_width="@dimen/singleAdImageDimen"
             android:layout_height="@dimen/singleAdImageDimen" />
+        <CustomViews.MarkAd.MarkAdView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/markAdView"/>
     </FrameLayout>
     <LinearLayout
         android:id="@+id/linearLayout1"
