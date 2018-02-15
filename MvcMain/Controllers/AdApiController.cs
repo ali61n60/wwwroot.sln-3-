@@ -350,7 +350,7 @@ namespace MvcMain.Controllers
             {
                 adDetail = adRepository.GetAdDetail(adGuid);
 
-                if (adDetail.AdStatus == AdvertisementCommon.GetAdStatusString(AdStatus.Approved))
+                if (adDetail.AdStatus == Advertisement.GetAdStatusString(AdStatus.Approved))
                     adDetail.AdImages = _imageRepository.GetAllAdvertisementImages(adGuid);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();

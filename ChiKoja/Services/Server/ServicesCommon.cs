@@ -79,7 +79,8 @@ namespace ChiKoja.Services.Server
                         response = JsonConvert.DeserializeObject<ResponseBase<T>>(jsonDocString, new Newtonsoft.Json.JsonSerializerSettings
                         {
                             TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
-                            NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,
+                            NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore
+                             
                         });
 
                         if (response.Success)

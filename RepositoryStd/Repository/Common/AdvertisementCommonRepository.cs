@@ -86,7 +86,7 @@ namespace RepositoryStd.Repository.Common
             {
                 AdvertisementCommon tempAdCommon = new AdvertisementCommon();
                 AppUser appUser= _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == advertisement.UserId);
-                AdvertisementCommon.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, appUser);
+                Advertisement.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, appUser);
                 searchResultItems.Add(tempAdCommon);
             }
             return searchResultItems;
@@ -271,7 +271,7 @@ namespace RepositoryStd.Repository.Common
             {
                 AdvertisementCommon tempAdCommon = new AdvertisementCommon();
                 AppUser appUser = _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == advertisement.UserId);
-                AdvertisementCommon.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, appUser);
+                Advertisement.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, appUser);
                 userAdvertisementCommons.Add(tempAdCommon);
             }
 
@@ -369,7 +369,7 @@ namespace RepositoryStd.Repository.Common
             Advertisement item = list.FirstOrDefault();
             AdvertisementCommon adCommon = new AdvertisementCommon();
             AppUser appUser = _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == item.UserId);
-            AdvertisementCommon.FillAdvertisementCommonFromAdvertisement(adCommon, item, appUser);
+            Advertisement.FillAdvertisementCommonFromAdvertisement(adCommon, item, appUser);
             return adCommon;
         }
 

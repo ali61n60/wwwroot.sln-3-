@@ -133,7 +133,7 @@ namespace RepositoryStd.Repository.Transportation
             
             Advertisement item = list.FirstOrDefault();
             AppUser appUser = _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == item.UserId);
-            AdvertisementTransportation.FillAdTransportationFromAdvertisement(advertisementTransportation, item,appUser);
+            AdAttributeTransportation.FillAdTransportationFromAdvertisement(advertisementTransportation, item,appUser);
 
             return advertisementTransportation;
         }
@@ -160,7 +160,7 @@ namespace RepositoryStd.Repository.Transportation
             {
                 AdvertisementCommon tempAdCommon = new AdvertisementCommon();
                 AppUser appUser = _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == advertisement.UserId);
-                AdvertisementTransportation.FillAdvertisementCommonFromAdvertisement( tempAdCommon, advertisement, appUser);
+                Advertisement.FillAdvertisementCommonFromAdvertisement( tempAdCommon, advertisement, appUser);
                 searchResultItems.Add(tempAdCommon);
             }
 
@@ -307,12 +307,12 @@ namespace RepositoryStd.Repository.Transportation
             adAttribute.AdId = entity.AdId;
             adAttribute.ModelId = entity.ModelId;
             adAttribute.MakeYear = entity.MakeYear;
-            adAttribute.FuelType = AdvertisementTransportation.GetFuelType(entity.Fuel,FuelType.UnSpecified);
+            adAttribute.FuelType = AdAttributeTransportation.GetFuelType(entity.Fuel,FuelType.UnSpecified);
             adAttribute.Mileage = entity.Mileage;
-            adAttribute.GearboxType =AdvertisementTransportation.GetGearboxType(entity.Gearbox,GearboxType.UnSpecified);
+            adAttribute.GearboxType = AdAttributeTransportation.GetGearboxType(entity.Gearbox,GearboxType.UnSpecified);
             adAttribute.BodyColor = entity.BodyColor;
             adAttribute.InternalColor = entity.InternalColor;
-            adAttribute.BodyStatus = AdvertisementTransportation.GetBodyStatus(entity.BodyStatus,BodyStatus.UnSpecified);
+            adAttribute.BodyStatus = AdAttributeTransportation.GetBodyStatus(entity.BodyStatus,BodyStatus.UnSpecified);
 
             return adAttribute;
         }
@@ -320,8 +320,8 @@ namespace RepositoryStd.Repository.Transportation
        
         private IQueryable<Advertisement> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            PlateType plateType = AdvertisementTransportation.GetPlateType(ParameterExtractor.ExtractString(queryParameters, PlateTypeKey,
-                    AdvertisementTransportation.GetPlateTypeString(PlateTypeDefault)),
+            PlateType plateType = AdAttributeTransportation.GetPlateType(ParameterExtractor.ExtractString(queryParameters, PlateTypeKey,
+                    AdAttributeTransportation.GetPlateTypeString(PlateTypeDefault)),
                 PlateTypeDefault);
             if (plateType != PlateTypeDefault)
             {
@@ -332,9 +332,9 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            CarStatus carStatus = AdvertisementTransportation.GetCarStatus(
+            CarStatus carStatus = AdAttributeTransportation.GetCarStatus(
                 ParameterExtractor.ExtractString(queryParameters, CarStatusKey,
-                    AdvertisementTransportation.GetCarStatusString(CarStatusDefault)),
+                    AdAttributeTransportation.GetCarStatusString(CarStatusDefault)),
                 CarStatusDefault);
             if (carStatus != CarStatusDefault)
             {
@@ -346,9 +346,9 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            BodyStatus bodyStatus = AdvertisementTransportation.GetBodyStatus(
+            BodyStatus bodyStatus = AdAttributeTransportation.GetBodyStatus(
                 ParameterExtractor.ExtractString(queryParameters, BodyStatusKey,
-                    AdvertisementTransportation.GetBodyStatusString(BodyStatusDefault)),
+                    AdAttributeTransportation.GetBodyStatusString(BodyStatusDefault)),
                 BodyStatusDefault);
             if (bodyStatus != BodyStatusDefault)
             {
@@ -379,9 +379,9 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            GearboxType gearboxType =AdvertisementTransportation.GetGearboxType(
+            GearboxType gearboxType = AdAttributeTransportation.GetGearboxType(
                 ParameterExtractor.ExtractString(queryParameters, GearboxKey,
-                    AdvertisementTransportation.GetGearboxTypeString(GearboxDefault)),
+                    AdAttributeTransportation.GetGearboxTypeString(GearboxDefault)),
                 GearboxDefault);
             if (gearboxType != GearboxDefault)
             {
@@ -404,8 +404,8 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            FuelType fuelType = AdvertisementTransportation.GetFuelType(
-                ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdvertisementTransportation.GetFuelTypeString(FuelTypeDefault)),
+            FuelType fuelType = AdAttributeTransportation.GetFuelType(
+                ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdAttributeTransportation.GetFuelTypeString(FuelTypeDefault)),
                 FuelTypeDefault);
             if (fuelType != FuelTypeDefault)
             {
