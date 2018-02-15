@@ -16,42 +16,9 @@ namespace ChiKoja.Services.Server
 
         public static async Task<ResponseBase<T>> CallService<T>(string controllerActionUrlPart)
         {
-            ResponseBase<T> response;
-            
-            try
-            {
-                string url = ServerUrl + "/" + controllerActionUrlPart;
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(new Uri(url));
-                request.ContentType = "application/json";
-                request.Method = "GET";
-
-                using (WebResponse webResponse = await request.GetResponseAsync())
-                {
-                    using (Stream stream = webResponse.GetResponseStream())
-                    {
-                        JsonValue jsonDoc = await Task.Run(() => JsonObject.Load(stream));
-                        response = JsonConvert.DeserializeObject<ResponseBase<T>>(jsonDoc.ToString());
-
-                        if (response.Success)
-                        {
-                            return response;
-                        }
-                        else
-                            throw new Exception(response.Message + " ErrorCode=" + response.ErrorCode);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                response = new ResponseBase<T>()
-                {
-                    Success = false,
-                    Message = ex.Message
-                };
-                return response;
-            }
+            return await CallService<T>(controllerActionUrlPart, null);
         }
-        //TODO test for calling a method with two or more parameters
+
         public static async Task<ResponseBase<T>> CallService<T>(string controllerActionUrlPart,object userInput)
         {
             ResponseBase<T> response;
@@ -62,14 +29,16 @@ namespace ChiKoja.Services.Server
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(url));
                 request.ContentType = "application/json";
                 request.Method = "POST";
-                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                if (userInput != null)
                 {
-                    string jsonData = JsonConvert.SerializeObject(userInput);
-                    streamWriter.Write(jsonData);
-                    streamWriter.Flush();
-                    streamWriter.Close();
+                    using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                    {
+                        string jsonData = JsonConvert.SerializeObject(userInput);
+                        streamWriter.Write(jsonData);
+                        streamWriter.Flush();
+                        streamWriter.Close();
+                    }
                 }
-
                 using (WebResponse webResponse = await request.GetResponseAsync())
                 {
                     using (Stream stream = webResponse.GetResponseStream())
@@ -83,12 +52,10 @@ namespace ChiKoja.Services.Server
                              
                         });
 
-                        if (response.Success)
+                        if (!response.Success)
                         {
-                            return response;
-                        }
-                        else
                             throw new Exception(response.Message + " ErrorCode=" + response.ErrorCode);
+                        }
                     }
                 }
             }
@@ -99,8 +66,9 @@ namespace ChiKoja.Services.Server
                     Success = false,
                     Message = ex.Message
                 };
-                return response;
+                
             }
+            return response;
         }
     }
 }

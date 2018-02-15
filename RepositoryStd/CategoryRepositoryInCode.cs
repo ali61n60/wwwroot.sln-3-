@@ -31,6 +31,7 @@ namespace RepositoryStd
 
         public IList<Category> GetAllCategories()
         {
+            
             return allCategories;
         }
 
@@ -337,6 +338,11 @@ namespace RepositoryStd
             allCategories.Add(new Category() { CategoryId = 221, CategoryParentId = 77, CategoryName = "صنعتی", CategoryNameEnglish = "" });
             allCategories.Add(new Category() { CategoryId = 222, CategoryParentId = 77, CategoryName = "کافی شاپ و رستوران", CategoryNameEnglish = "" });
             allCategories.Add(new Category() { CategoryId = 223, CategoryParentId = 77, CategoryName = "متفرقه", CategoryNameEnglish = "" });
+
+            foreach (Category category in allCategories)
+            {
+                category.Advertisements = null;
+            }
         }
     }
 }
