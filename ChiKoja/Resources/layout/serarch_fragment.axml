@@ -38,19 +38,19 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/linearLayoutToolbar2">
-      <Button
+      <android.support.v7.widget.AppCompatButton
           android:id="@+id/buttonFilter"
           android:text="@string/Filter"
           android:layout_width="0dp"
           android:layout_weight="1"
           android:layout_height="wrap_content" />
-      <Button
+      <android.support.v7.widget.AppCompatButton
           android:id="@+id/buttonSort"
           android:text="@string/Sort"
           android:layout_width="0dp"
           android:layout_weight="1"
           android:layout_height="wrap_content" />
-      <Button
+      <android.support.v7.widget.AppCompatButton
           android:id="@+id/buttonCategory"
           android:text="@string/Category"
           android:layout_width="0dp"

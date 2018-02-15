@@ -3,28 +3,28 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <TextView
-        android:text="Brand"
+  <android.support.v7.widget.AppCompatTextView
+      android:text="Brand"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewBrand" />
-    <Spinner
-        android:layout_width="match_parent"
+  <android.support.v7.widget.AppCompatSpinner
+      android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerBrand" />
-    <TextView
-        android:text="Model"
+  <android.support.v7.widget.AppCompatTextView
+      android:text="Model"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewModel" />
-    <Spinner
-        android:layout_width="match_parent"
+  <android.support.v7.widget.AppCompatSpinner
+      android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/spinnerModel" />
-    <Button
-        android:text="Send"
+  <android.support.v7.widget.AppCompatButton
+      android:text="Send"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonSendNewAd" />

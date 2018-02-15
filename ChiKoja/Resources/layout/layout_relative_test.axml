@@ -4,7 +4,7 @@
     p1:layout_height="match_parent"
     p1:id="@+id/relativeLayout1"
     p1:background="#369">
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         p1:text="Large Text"
         p1:textAppearance="?android:attr/textAppearanceLarge"
         p1:layout_width="wrap_content"
@@ -13,8 +13,8 @@
         p1:layout_centerInParent="true"
         p1:background="#ff2233"
         p1:padding="20dip" />
-    <TextView
-        p1:text="North"
+  <android.support.v7.widget.AppCompatTextView
+      p1:text="North"
         p1:textAppearance="?android:attr/textAppearanceSmall"
         p1:layout_width="wrap_content"
         p1:layout_height="wrap_content"
@@ -22,8 +22,8 @@
         p1:background="#0f9"
         p1:layout_alignLeft="@id/textView1"
         p1:layout_above="@id/textView1" />
-    <TextView
-        p1:text="West"
+  <android.support.v7.widget.AppCompatTextView
+      p1:text="West"
         p1:textAppearance="?android:attr/textAppearanceSmall"
         p1:layout_width="wrap_content"
         p1:layout_height="wrap_content"
@@ -31,8 +31,8 @@
         p1:background="#196"
         p1:layout_alignTop="@id/textView1"
         p1:layout_toRightOf="@id/textView1" />
-    <TextView
-        p1:text="East"
+  <android.support.v7.widget.AppCompatTextView
+      p1:text="East"
         p1:textAppearance="?android:attr/textAppearanceSmall"
         p1:layout_width="wrap_content"
         p1:layout_height="wrap_content"
@@ -40,8 +40,8 @@
         p1:id="@+id/textView4"
         p1:background="#36f"
         p1:layout_alignBottom="@id/textView1" />
-    <TextView
-        p1:text="South"
+  <android.support.v7.widget.AppCompatTextView
+      p1:text="South"
         p1:textAppearance="?android:attr/textAppearanceSmall"
         p1:layout_width="wrap_content"
         p1:layout_height="wrap_content"
@@ -56,14 +56,14 @@
         p1:layout_alignParentLeft="true"
         p1:layout_alignParentTop="true"
         p1:layout_marginLeft="30dp" />
-    <Button
-        p1:text="Battery killer"
+  <android.support.v7.widget.AppCompatButton
+      p1:text="Battery killer"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:layout_below="@id/textView5"
         p1:id="@+id/buttonBatteryKiller" />
-    <Button
-        p1:text="Stop"
+  <android.support.v7.widget.AppCompatButton
+      p1:text="Stop"
         p1:layout_width="match_parent"
         p1:layout_height="wrap_content"
         p1:layout_below="@id/buttonBatteryKiller"

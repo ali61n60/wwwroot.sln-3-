@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.Repository;
@@ -40,9 +41,9 @@ namespace ChiKoja.NewAd
         //exterior color
         //carType (sedan, Suv, pickUp, station, crook, cope)
         //Get Ad images
-        Button buttonSendNewAd;
-        Spinner spinnerBrand;
-        Spinner spinnerModel;
+        AppCompatButton buttonSendNewAd;
+        AppCompatSpinner spinnerBrand;
+        AppCompatSpinner spinnerModel;
 
 
        // AdvertisementTransportation adTransportation;
@@ -57,7 +58,7 @@ namespace ChiKoja.NewAd
         {
             initSpinnerBrand();
          //   initSpinnerModel();
-            buttonSendNewAd = FindViewById<Button>(Resource.Id.buttonSendNewAd);
+            buttonSendNewAd = FindViewById<AppCompatButton>(Resource.Id.buttonSendNewAd);
             buttonSendNewAd.Click += buttonSendNewAd_Click;
         }
 

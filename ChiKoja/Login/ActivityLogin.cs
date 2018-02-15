@@ -2,7 +2,7 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Widget;
+using Android.Support.V7.Widget;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository;
 
@@ -13,13 +13,13 @@ namespace ChiKoja.Login
     {
         Registration registration;
 
-        Button buttonOk;
-        Button buttonCancel;
-        Button buttonSignIn;
-        Button buttonLogout;
-        EditText editTextUserName;
-        EditText editTextPassword;
-        TextView textViewMessage;
+        AppCompatButton buttonOk;
+        AppCompatButton buttonCancel;
+        AppCompatButton buttonSignIn;
+        AppCompatButton buttonLogout;
+        AppCompatEditText editTextUserName;
+        AppCompatEditText editTextPassword;
+        AppCompatTextView textViewMessage;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -31,17 +31,17 @@ namespace ChiKoja.Login
         
         private void initialViews()
         {
-            buttonOk = FindViewById<Button>(Resource.Id.buttonOk);
+            buttonOk = FindViewById<AppCompatButton>(Resource.Id.buttonOk);
             buttonOk.Click += buttonOk_Click;
-            buttonCancel = FindViewById<Button>(Resource.Id.buttonCancel);
+            buttonCancel = FindViewById<AppCompatButton>(Resource.Id.buttonCancel);
             buttonCancel.Click += buttonCancel_Click;
-            buttonSignIn = FindViewById<Button>(Resource.Id.buttonSignIn);
+            buttonSignIn = FindViewById<AppCompatButton>(Resource.Id.buttonSignIn);
             buttonSignIn.Click += buttonSignIn_Click;
-            buttonLogout = FindViewById<Button>(Resource.Id.buttonLogout);
+            buttonLogout = FindViewById<AppCompatButton>(Resource.Id.buttonLogout);
             buttonLogout.Click += buttonLogout_Click;
-            editTextUserName = FindViewById<EditText>(Resource.Id.editTextUserName);
-            editTextPassword = FindViewById<EditText>(Resource.Id.editTextPassword);
-            textViewMessage = FindViewById<TextView>(Resource.Id.textViewMessage);
+            editTextUserName = FindViewById<AppCompatEditText>(Resource.Id.editTextUserName);
+            editTextPassword = FindViewById<AppCompatEditText>(Resource.Id.editTextPassword);
+            textViewMessage = FindViewById<AppCompatTextView>(Resource.Id.textViewMessage);
         }
         private void checkLoginStatusAndPoulateEditTextsIfNedded()
         {

@@ -5,13 +5,13 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <Button
-        android:text="@string/Return"
+  <android.support.v7.widget.AppCompatButton
+      android:text="@string/Return"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonReturn" />
-    <TextView
-        android:text="Medium Text"
+  <android.support.v7.widget.AppCompatTextView
+      android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,23 +20,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <RadioButton
-            android:text="@string/DateAsc"
+      <android.support.v7.widget.AppCompatRadioButton
+          android:text="@string/DateAsc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/radioButtonDateAsc" />
-        <RadioButton
-            android:text="@string/DateDesc"
+      <android.support.v7.widget.AppCompatRadioButton
+          android:text="@string/DateDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/radioButtonDateDesc" />
-        <RadioButton
-            android:text="@string/PriceAsc"
+      <android.support.v7.widget.AppCompatRadioButton
+          android:text="@string/PriceAsc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/radioButtonPriceAsc" />
-        <RadioButton
-            android:text="@string/PriceDesc"
+      <android.support.v7.widget.AppCompatRadioButton
+          android:text="@string/PriceDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/radioButtonPriceDesc" />

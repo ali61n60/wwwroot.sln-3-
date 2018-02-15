@@ -19,12 +19,12 @@
             p1:layout_width="match_parent"
             p1:layout_height="match_parent"
             p1:id="@+id/linearLayout2">
-            <Spinner
-                p1:layout_width="match_parent"
+          <android.support.v7.widget.AppCompatSpinner
+              p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/spinner1" />
-            <Button
-                p1:text="Button"
+          <android.support.v7.widget.AppCompatButton
+              p1:text="Button"
                 p1:layout_width="match_parent"
                 p1:layout_height="wrap_content"
                 p1:id="@+id/button1" />

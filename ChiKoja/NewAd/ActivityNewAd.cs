@@ -2,13 +2,15 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V7.Widget;
 using Android.Widget;
+using ChiKoja.NavigationDrawer;
 using ServiceLayer;
 
 namespace ChiKoja.NewAd
 {
     [Activity(Label = "ActivityNewAd")]
-    public class ActivityNewAd : Activity
+    public class ActivityNewAd : NavActivity
     {
         //TODO take category
         //based on selected category get specific data from user
@@ -17,17 +19,17 @@ namespace ChiKoja.NewAd
         //TODO based on catgoryId of Ad call service method
         //TODO refactor code and use local service layer
 
-        Button buttonSelectSpecificCategory;
-        EditText editTextSelectedCategoryId;
+        AppCompatButton buttonSelectSpecificCategory;
+        AppCompatEditText editTextSelectedCategoryId;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.new_ad);
 
-            buttonSelectSpecificCategory = FindViewById<Button>(Resource.Id.buttonSelectSpecificCategory);
+            buttonSelectSpecificCategory = FindViewById<AppCompatButton>(Resource.Id.buttonSelectSpecificCategory);
             buttonSelectSpecificCategory.Click += buttonSelectSpecificCategory_Click;
 
-            editTextSelectedCategoryId = FindViewById<EditText>(Resource.Id.editTextCategoryId);
+            editTextSelectedCategoryId = FindViewById<AppCompatEditText>(Resource.Id.editTextCategoryId);
         }
 
        

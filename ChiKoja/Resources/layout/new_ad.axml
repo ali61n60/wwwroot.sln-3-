@@ -5,18 +5,18 @@
     android:layout_height="match_parent"
     android:minWidth="25px"
     android:minHeight="25px">
-    <TextView
-        android:text="Enter CategoryId"
+  <android.support.v7.widget.AppCompatTextView
+      android:text="Enter CategoryId"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/textViewEnterCategoryId" />
-    <EditText
-        android:layout_width="match_parent"
+  <android.support.v7.widget.AppCompatEditText
+      android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editTextCategoryId" />
-    <Button
-        android:text="Select Category"
+  <android.support.v7.widget.AppCompatButton
+      android:text="Select Category"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonSelectSpecificCategory" />

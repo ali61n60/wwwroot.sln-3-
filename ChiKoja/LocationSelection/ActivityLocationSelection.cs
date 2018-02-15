@@ -4,6 +4,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.NavigationDrawer;
@@ -22,9 +23,9 @@ namespace ChiKoja.LocationSelection
         ListView listViewSelectedProvinces;
         ProvinceArrayAdapter arrayAdapterAllProvinces;
         ProvinceArrayAdapter arrayAdapterSelectedProvinces;
-        Button buttonReturn;
-        TextView textViewSelectedProvince; 
-        TextView textViewCurrentLocationVersion;
+        AppCompatButton buttonReturn;
+        AppCompatTextView textViewSelectedProvince;
+        AppCompatTextView textViewCurrentLocationVersion;
         
         CityRepository cityRepository;
         ProvinceRepository provinceRepository;
@@ -45,11 +46,11 @@ namespace ChiKoja.LocationSelection
             listViewSelectedProvinces.Adapter = arrayAdapterSelectedProvinces;
             listViewSelectedProvinces.ItemClick += listViewSelectedProvinces_ItemClick;
             
-            buttonReturn = FindViewById<Button>(Resource.Id.buttonReturn);
+            buttonReturn = FindViewById<AppCompatButton>(Resource.Id.buttonReturn);
             buttonReturn.Click += buttonReturn_Click;
 
-            textViewSelectedProvince = FindViewById<TextView>(Resource.Id.textViewSelectedProvince);
-            textViewCurrentLocationVersion = FindViewById<TextView>(Resource.Id.textViewCurrentLocationVersion);
+            textViewSelectedProvince = FindViewById<AppCompatTextView>(Resource.Id.textViewSelectedProvince);
+            textViewCurrentLocationVersion = FindViewById<AppCompatTextView>(Resource.Id.textViewCurrentLocationVersion);
             setCurrentLocationVersion();
         }
 

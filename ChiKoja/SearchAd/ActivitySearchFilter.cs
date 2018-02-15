@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Widget;
 using ChiKoja.Repository.Filter;
@@ -19,11 +20,11 @@ namespace ChiKoja.SearchAd
             
         CommonFilter commonFilter;
        // View rootView;
-        Button buttonReturn;
-        EditText editTextMinimumPrice;
-        EditText editTextMaximumPrice;
-        CheckBox checkBoxOnlyWithPictures;
-        CheckBox checkBoxUrgentAdsOnly;
+        AppCompatButton buttonReturn;
+        AppCompatEditText editTextMinimumPrice;
+        AppCompatEditText editTextMaximumPrice;
+        AppCompatCheckBox checkBoxOnlyWithPictures;
+        AppCompatCheckBox checkBoxUrgentAdsOnly;
         private bool filterParameterChangedByUser = false;
 
         protected override void OnCreate(Bundle savedInstanceState)
@@ -40,15 +41,15 @@ namespace ChiKoja.SearchAd
         private void initializeFields()
         {
             commonFilter = new CommonFilter();
-            buttonReturn = FindViewById<Button>(Resource.Id.buttonReturn);
+            buttonReturn = FindViewById<AppCompatButton>(Resource.Id.buttonReturn);
             buttonReturn.Click += buttonReturn_Click;
-            editTextMinimumPrice = FindViewById<EditText>(Resource.Id.editTextMinimumPrice);
+            editTextMinimumPrice = FindViewById<AppCompatEditText>(Resource.Id.editTextMinimumPrice);
             editTextMinimumPrice.TextChanged += editTextsPrice_TextChanged;
-            editTextMaximumPrice = FindViewById<EditText>(Resource.Id.editTextMaximumPrice);
+            editTextMaximumPrice = FindViewById<AppCompatEditText>(Resource.Id.editTextMaximumPrice);
             editTextMaximumPrice.TextChanged += editTextsPrice_TextChanged;
-            checkBoxOnlyWithPictures = FindViewById<CheckBox>(Resource.Id.checkBoxOnlyWithPictures);
+            checkBoxOnlyWithPictures = FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxOnlyWithPictures);
             checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
-            checkBoxUrgentAdsOnly = FindViewById<CheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
+            checkBoxUrgentAdsOnly = FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
             checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
         }
 

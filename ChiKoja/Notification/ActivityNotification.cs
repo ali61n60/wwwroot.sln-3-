@@ -1,14 +1,7 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 
 namespace ChiKoja.Notification
@@ -20,7 +13,7 @@ namespace ChiKoja.Notification
     [Activity(Label = "ActivityNotification", Icon = "@drawable/icon")]
     public class ActivityNotification : Activity
     {
-        Android.App.Notification.Builder builder;
+        private Android.App.Notification.Builder builder;
         Android.App.Notification notification;
         NotificationManager notificationManager;
         const int notificationId = 0;
@@ -44,9 +37,7 @@ namespace ChiKoja.Notification
             // Create your application here
             
         }
-
-       
-
+        
         private void initTextViwPhoneNumber()
         {
             string telUri = Intent.DataString;

@@ -24,6 +24,7 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO 1- Buffer not changing database data and manage rare changes
     //TODO 1- Database tables must store int number for properties
     // convert int number to enums and string at class level
     //TODO 1- Create a page to have links to all api methods for test

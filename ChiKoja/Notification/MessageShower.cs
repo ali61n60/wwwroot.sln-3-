@@ -1,16 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Timers;
-using Android.App;
 using Android.Content;
-
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
-using ChiKoja.GlobalApplication;
 using ChiKoja.NavigationDrawer;
 
 namespace ChiKoja.Notification
@@ -19,13 +8,13 @@ namespace ChiKoja.Notification
     {
         private static MessageShower _singleton;
         private Timer _showMessageTimer;
-        int _numberOfShowMessageCall = 0;
-        Context _context;
+        int _numberOfShowMessageCall;
+        readonly Context _context;
         string currentMessage = "";
         private NavActivity _currentNavActivity;
         public NavActivity CurrentNavActivity
         {
-            get { return _currentNavActivity; }
+            get => _currentNavActivity;
             set
             {
                 _currentNavActivity = value;

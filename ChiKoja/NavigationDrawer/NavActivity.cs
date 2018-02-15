@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Support.V4.Widget;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -32,12 +33,13 @@ namespace ChiKoja.NavigationDrawer
         
         V7Toolbar toolbar;
         protected NavigationView NavigationView;
-        TextView textViewMessage;
-
+        AppCompatTextView textViewMessage;
+        ScreenUtility _screenUtility;
         protected override void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.main);
+            _screenUtility = new ScreenUtility(this);
             initializeToolbar();
             initializeNavigationView();
             GlobalApplication.GlobalApplication.GetMessageShower().CurrentNavActivity = this;
@@ -48,7 +50,7 @@ namespace ChiKoja.NavigationDrawer
             toolbar = FindViewById<V7Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
             initializeSandwichIcon();
-            textViewMessage = FindViewById<TextView>(Resource.Id.textViewMessage);
+            textViewMessage = FindViewById<AppCompatTextView>(Resource.Id.textViewMessage);
 
             SupportActionBar.SetDisplayHomeAsUpEnabled(true);
             SupportActionBar.SetDisplayShowTitleEnabled(false);
@@ -59,7 +61,7 @@ namespace ChiKoja.NavigationDrawer
 
         private void initializeSandwichIcon()
         {
-            ImageView imageViewMenu = toolbar.FindViewById<ImageView>(Resource.Id.imageViewMenu);
+            AppCompatImageView imageViewMenu = toolbar.FindViewById<AppCompatImageView>(Resource.Id.imageViewMenu);
             imageViewMenu.Click += imageViewMenu_Click;
         }
 
@@ -72,9 +74,7 @@ namespace ChiKoja.NavigationDrawer
 
         private int setNavigationDrawerWidth()
         {
-            DisplayMetrics displaymetrics = new DisplayMetrics();
-            WindowManager.DefaultDisplay.GetMetrics(displaymetrics);
-            int width = displaymetrics.WidthPixels;
+            float width = _screenUtility.GetWidth() * _screenUtility.GetDensity();
             return (int)(width * Resources.GetInteger(Resource.Integer.NavigationDrawerWidthPercent) * 0.01);
         }
 

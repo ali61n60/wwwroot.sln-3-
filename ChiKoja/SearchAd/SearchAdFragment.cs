@@ -27,11 +27,10 @@ namespace ChiKoja.SearchAd
         private ISingleAdEvents _singleAdEvents;
         private Context _context;
         View rootView;
-        Button buttonFilter;
-        Button buttonSort;
+        AppCompatButton buttonFilter;
+        AppCompatButton buttonSort;
         AppCompatButton buttonSearchAd;
-        
-        Button buttonCategory;
+        AppCompatButton buttonCategory;
         private ListView listViewAdCommon;
         private CategorySelection _categorySelection;
         IAdApi _adApi;
@@ -74,9 +73,9 @@ namespace ChiKoja.SearchAd
 
             _adApi = Bootstrapper.container.GetInstance<IAdApi>();
             buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
-            buttonFilter = rootView.FindViewById<Button>(Resource.Id.buttonFilter);
-            buttonSort = rootView.FindViewById<Button>(Resource.Id.buttonSort);
-            buttonCategory = rootView.FindViewById<Button>(Resource.Id.buttonCategory);
+            buttonFilter = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonFilter);
+            buttonSort = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSort);
+            buttonCategory = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonCategory);
 
 
             _categorySelection = new CategorySelection();

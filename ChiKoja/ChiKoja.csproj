@@ -288,8 +288,8 @@
     <Compile Include="Network\Network.cs" />
     <Compile Include="NewAd\ActivityNewAd.cs" />
     <Compile Include="NewAd\ActivityNewAdTransportation.cs" />
-    <Compile Include="NewAd\Notification\ActivityNotification.cs" />
-    <Compile Include="NewAd\Notification\MessageShower.cs" />
+    <Compile Include="Notification\ActivityNotification.cs" />
+    <Compile Include="Notification\MessageShower.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\CryptoGraphy\CryptoGraphy.cs" />
     <Compile Include="Repository\Filter\CommonFilter.cs" />
@@ -342,14 +342,18 @@
     <AndroidResource Include="Resources\layout\layout_battery_broadcast.axml" />
     <AndroidResource Include="Resources\layout\layout_broadcast_receiver_sms.axml" />
     <AndroidResource Include="Resources\layout\layout_dynamic_ui.axml" />
-    <AndroidResource Include="Resources\layout\layout_notification.axml" />
+    <AndroidResource Include="Resources\layout\layout_notification.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\layout_relative_test.axml" />
     <AndroidResource Include="Resources\layout\location_selection.axml" />
     <AndroidResource Include="Resources\layout\login.axml" />
     <AndroidResource Include="Resources\layout\main.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\new_ad.axml" />
+    <AndroidResource Include="Resources\layout\new_ad.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\new_ad_transportation.axml" />
     <AndroidResource Include="Resources\layout\service_example.axml" />
     <AndroidResource Include="Resources\layout\single_ad_view.axml">

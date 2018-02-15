@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Widget;
 using ChiKoja.Repository.Filter;
 
@@ -12,11 +13,11 @@ namespace ChiKoja.SearchAd
     public class ActivitySortBy : AppCompatActivity
     {
         CommonFilter commonFilter;
-        Button buttonReturn;
-        RadioButton radioButtonDateAsc;
-        RadioButton radioButtonDateDesc;
-        RadioButton radioButtonPriceAsc;
-        RadioButton radioButtonPriceDesc;
+        AppCompatButton buttonReturn;
+        AppCompatRadioButton radioButtonDateAsc;
+        AppCompatRadioButton radioButtonDateDesc;
+        AppCompatRadioButton radioButtonPriceAsc;
+        AppCompatRadioButton radioButtonPriceDesc;
         private bool OrderByParameterChangedByUser = false;
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -33,15 +34,15 @@ namespace ChiKoja.SearchAd
         private void initializeFields()
         {
             commonFilter = new CommonFilter();
-            buttonReturn = FindViewById<Button>(Resource.Id.buttonReturn);
+            buttonReturn = FindViewById<AppCompatButton>(Resource.Id.buttonReturn);
             buttonReturn.Click += buttonReturn_Click;
-            radioButtonDateAsc = FindViewById<RadioButton>(Resource.Id.radioButtonDateAsc);
+            radioButtonDateAsc = FindViewById<AppCompatRadioButton>(Resource.Id.radioButtonDateAsc);
             radioButtonDateAsc.CheckedChange+=radioButtons_CheckedChange;
-            radioButtonDateDesc = FindViewById<RadioButton>(Resource.Id.radioButtonDateDesc);
+            radioButtonDateDesc = FindViewById<AppCompatRadioButton>(Resource.Id.radioButtonDateDesc);
             radioButtonDateDesc.CheckedChange += radioButtons_CheckedChange;
-            radioButtonPriceAsc = FindViewById<RadioButton>(Resource.Id.radioButtonPriceAsc);
+            radioButtonPriceAsc = FindViewById<AppCompatRadioButton>(Resource.Id.radioButtonPriceAsc);
             radioButtonPriceAsc.CheckedChange += radioButtons_CheckedChange;
-            radioButtonPriceDesc = FindViewById<RadioButton>(Resource.Id.radioButtonPriceDesc);
+            radioButtonPriceDesc = FindViewById<AppCompatRadioButton>(Resource.Id.radioButtonPriceDesc);
             radioButtonPriceDesc.CheckedChange += radioButtons_CheckedChange;
         }
 
