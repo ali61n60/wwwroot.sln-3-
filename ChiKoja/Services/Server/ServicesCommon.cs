@@ -75,7 +75,8 @@ namespace ChiKoja.Services.Server
                     using (Stream stream = webResponse.GetResponseStream())
                     {
                         JsonValue jsonDoc = await Task.Run(() => JsonValue.Load(stream));
-                        response = JsonConvert.DeserializeObject<ResponseBase<T>>(jsonDoc.ToString(), new Newtonsoft.Json.JsonSerializerSettings
+                        string jsonDocString = jsonDoc.ToString();
+                        response = JsonConvert.DeserializeObject<ResponseBase<T>>(jsonDocString, new Newtonsoft.Json.JsonSerializerSettings
                         {
                             TypeNameHandling = Newtonsoft.Json.TypeNameHandling.Auto,
                             NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore,

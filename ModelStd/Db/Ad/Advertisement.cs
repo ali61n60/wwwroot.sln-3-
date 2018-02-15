@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using ModelStd.Advertisements;
 using ModelStd.Advertisements.Price;
+using ModelStd.Db.Identity;
 
 namespace ModelStd.Db.Ad
 {
@@ -82,6 +84,73 @@ namespace ModelStd.Db.Ad
         public static readonly int AdTypeDefauly = 3;
 
         public static readonly string AdGuidKey = "AdGuid";
+
+        public static void FillAdvertisementCommonFromAdvertisement(AdvertisementCommon adCommon, Advertisement ad, AppUser appUser)
+        {
+            adCommon.AdId = ad.AdId;
+            adCommon.UserId = ad.UserId;
+            adCommon.AdTitle = ad.AdTitle;
+            adCommon.AdTime = ad.AdInsertDateTime;
+            adCommon.AdStatus = GetAdStatusString(ad.AdStatus);
+            if (ad.Category != null) adCommon.CategoryName = ad.Category.CategoryName;
+            adCommon.CategoryId = ad.CategoryId;
+            adCommon.AdComments = ad.AdComments;
+            adCommon.NumberOfVisits = ad.AdNumberOfVisited;
+
+            adCommon.Email = appUser?.Email;//test for null
+            adCommon.PhoneNumber = appUser?.PhoneNumber;//test for null
+
+            adCommon.DistrictId = ad.DistrictId;
+            if (ad.District != null) adCommon.DistrictName = ad.District.DistrictName;
+            if (ad.District?.City != null) adCommon.CityName = ad.District.City.CityName;
+            if (ad.District?.City?.Province != null)
+                adCommon.ProvinceName = ad.District.City.Province.ProvinceName;
+
+            fillAdvertisementPrice(adCommon, ad);
+
+
+            adCommon.AdType = (ad.AdType == Db.Ad.AdType.Offer) ? "ارائه" : "درخواستی";
+        }
+
+        private static void fillAdvertisementPrice(AdvertisementCommon adCommon, Advertisement ad)
+        {
+            switch (ad.PriceType)
+            {
+                case PriceType.Fixed:
+                    adCommon.AdPrice = ad.FixedPrice;
+                    break;
+                case PriceType.Agreement:
+                    adCommon.AdPrice = ad.AgreementPrice;
+                    break;
+                case PriceType.Exchange:
+                    adCommon.AdPrice = ad.ExchangePrice;
+                    break;
+                case PriceType.Installment:
+                    adCommon.AdPrice = ad.InsatllmentPrice;
+                    break;
+                case PriceType.MortgageAndRent:
+                    adCommon.AdPrice = ad.MortgageAndRentPrice;
+                    break;
+                default:
+                    adCommon.AdPrice = new AgreementPrice();
+                    break;
+            }
+        }
+
+        public static string GetAdStatusString(AdStatus adStatus)
+        {
+            switch (adStatus)
+            {
+                case Db.Ad.AdStatus.Submitted: return "ثبت شده";
+                case Db.Ad.AdStatus.UnderReview: return "در حال بررسی";
+                case Db.Ad.AdStatus.Approved: return "تایید شده";
+                case Db.Ad.AdStatus.Rejected: return "رد شده";
+                case Db.Ad.AdStatus.Expired: return "منقضی";
+                case Db.Ad.AdStatus.ReSubmitted: return "ثبت دوباره";
+                case Db.Ad.AdStatus.Deleted: return "حذف شده";
+            }
+            return "نا مشخص";
+        }
     }
 
     public enum AdType
