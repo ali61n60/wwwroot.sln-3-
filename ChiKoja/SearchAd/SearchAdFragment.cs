@@ -30,6 +30,7 @@ namespace ChiKoja.SearchAd
         Button buttonFilter;
         Button buttonSort;
         AppCompatButton buttonSearchAd;
+        
         Button buttonCategory;
         private ListView listViewAdCommon;
         private CategorySelection _categorySelection;

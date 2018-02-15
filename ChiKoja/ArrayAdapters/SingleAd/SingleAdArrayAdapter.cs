@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
+﻿using System.Collections.Generic;
 using Android.Content;
-using Android.Content.Res;
 using Android.Graphics;
-using Android.OS;
-using Android.Runtime;
+using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -49,26 +42,26 @@ namespace ChiKoja.ArrayAdapters.SingleAd
             LayoutInflater inflater = (LayoutInflater) _context.GetSystemService(Context.LayoutInflaterService);
             View rootView = inflater.Inflate(Resource.Layout.single_ad_view, null);
             //TODO set views prop
-            TextView textViewAdTitle;
-            TextView textViewAdPrice;
-            TextView textViewNumberOfVisit;
-            TextView textViewLocation;
-            ImageView imageViewFirstImage;
+            AppCompatTextView textViewAdTitle;
+            AppCompatTextView textViewAdPrice;
+            AppCompatTextView textViewNumberOfVisit;
+            AppCompatTextView textViewLocation;
+            AppCompatImageView imageViewFirstImage;
             MarkAdView markAdView;
             
-            textViewAdTitle = rootView.FindViewById<TextView>(Resource.Id.textViewAdTitle);
+            textViewAdTitle = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewAdTitle);
             textViewAdTitle.Text = adCommon.AdTitle;
 
-            textViewAdPrice = rootView.FindViewById<TextView>(Resource.Id.textViewAdPrice);
+            textViewAdPrice = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewAdPrice);
             textViewAdPrice.Text = adCommon.AdPrice.PriceString;
 
-            textViewNumberOfVisit = rootView.FindViewById<TextView>(Resource.Id.textViewNumberOfVisit);
+            textViewNumberOfVisit = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewNumberOfVisit);
             textViewNumberOfVisit.Text =_context.Resources.GetString(Resource.String.Visit) + " " + adCommon.NumberOfVisits;
 
-            textViewLocation = rootView.FindViewById<TextView>(Resource.Id.textViewLocation);
+            textViewLocation = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewLocation);
             textViewLocation.Text = adCommon.CityName + "," + adCommon.DistrictName;
 
-            imageViewFirstImage = rootView.FindViewById<ImageView>(Resource.Id.imageViewFirstImage);
+            imageViewFirstImage = rootView.FindViewById<AppCompatImageView>(Resource.Id.imageViewFirstImage);
             if (adCommon.AdImages[0] != null)
             {
                 byte[] decodedString = Base64.Decode(adCommon.AdImages[0], Base64Flags.Default);

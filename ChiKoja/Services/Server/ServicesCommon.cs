@@ -29,8 +29,9 @@ namespace ChiKoja.Services.Server
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(new Uri(url));
                 request.ContentType = "application/json";
                 request.Method = "POST";
-                if (userInput != null)
-                {
+                if (userInput == null)
+                    userInput = true;
+                
                     using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
                     {
                         string jsonData = JsonConvert.SerializeObject(userInput);
@@ -38,7 +39,7 @@ namespace ChiKoja.Services.Server
                         streamWriter.Flush();
                         streamWriter.Close();
                     }
-                }
+                
                 using (WebResponse webResponse = await request.GetResponseAsync())
                 {
                     using (Stream stream = webResponse.GetResponseStream())

@@ -15,8 +15,6 @@ namespace MvcMain.Infrastructure.Services
 
         //Done
         ResponseBase ExtendAdvertisement(AdvertisementCommon advertisement);
-
-        Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid);
         
         void FillFirstImage(IEnumerable<AdvertisementCommon> advertisementCommons);//Done
         void FillAllImages(AdvertisementCommon[] advertisementCommons);//Done

@@ -151,6 +151,7 @@ namespace ChiKoja.AdDetail
 
         private void addCategorySpecificPart()
         {
+            
             categorySpecificFragment = AdViewContainer.GetCategorySpecificAdDetailViewFragment(categoryId);
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.category_specific_part, categorySpecificFragment)

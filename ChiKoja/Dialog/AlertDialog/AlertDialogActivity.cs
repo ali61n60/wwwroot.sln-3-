@@ -1,26 +1,22 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
+using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Widget;
 
 namespace ChiKoja.Dialog.AlertDialog
 {
     [Activity(Label = "AlertDialogActivity", Icon = "@drawable/icon")]
-    public class AlertDialogActivity : Activity
+    public class AlertDialogActivity : AppCompatActivity
     {
-        Button buttonShowAlertDialog;
+        AppCompatButton buttonShowAlertDialog;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.alert_dialog);
-            buttonShowAlertDialog = FindViewById<Button>(Resource.Id.buttonShowAlertDialog);
+            buttonShowAlertDialog = FindViewById<AppCompatButton>(Resource.Id.buttonShowAlertDialog);
             buttonShowAlertDialog.Click += buttonShowAlertDialog_Click;
         }
 

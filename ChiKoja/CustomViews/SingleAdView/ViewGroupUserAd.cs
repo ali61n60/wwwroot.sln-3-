@@ -7,6 +7,7 @@ using Android.Widget;
 
 namespace ChiKoja.CustomViews.SingleAdView
 {
+    //TODO use array adapter
     class ViewGroupUserAd : LinearLayout
     {
         TextView textViewAdTitle;

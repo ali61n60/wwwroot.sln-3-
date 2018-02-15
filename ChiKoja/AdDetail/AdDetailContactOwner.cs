@@ -2,6 +2,7 @@
 using Android.OS;
 using Android.Views;
 using Android.Support.V4.App;
+using Android.Support.V7.Widget;
 using Android.Widget;
 
 namespace ChiKoja.AdDetail
@@ -9,8 +10,8 @@ namespace ChiKoja.AdDetail
     class AdDetailContactOwner:Fragment
     {
         View rootView;
-        private Button buttonCall;
-        private Button buttonSendSms;
+        private AppCompatButton  buttonCall;
+        private AppCompatButton buttonSendSms;
         //TODO get it from argument
         private string _phoneNumber = "123456";
         
@@ -29,8 +30,8 @@ namespace ChiKoja.AdDetail
         
         private void initializeFields()
         {
-            buttonCall = rootView.FindViewById<Button>(Resource.Id.buttonCall);
-            buttonSendSms = rootView.FindViewById<Button>(Resource.Id.buttonSendSms);
+            buttonCall = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonCall);
+            buttonSendSms = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSendSms);
         }
 
         private void initializeEvents()

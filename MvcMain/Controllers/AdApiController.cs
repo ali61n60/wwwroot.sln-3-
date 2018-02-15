@@ -232,22 +232,6 @@ namespace MvcMain.Controllers
             throw new NotImplementedException();
         }
 
-        public async Task<ResponseBase> IncrementNumberOfVisit(Guid adGuid)
-        {
-            string errorCode = "AdApiController.IncrementNumberOfVisit";
-            ResponseBase response = new ResponseBase();
-            try
-            {
-                await _commonRepository.IncrementNumberOfVisit(adGuid);
-                response.SetSuccessResponse();
-            }
-            catch (Exception ex)
-            {
-                response.SetFailureResponse(ex.Message, errorCode);
-            }
-            return response;
-        }
-
         public ResponseBase SaveAdImages(AdvertisementCommon advertisementCommon)
         {
             string errorCode = "AdApiController.SaveAdImages";
@@ -349,6 +333,7 @@ namespace MvcMain.Controllers
             try
             {
                 adDetail = adRepository.GetAdDetail(adGuid);
+                _commonRepository.IncrementNumberOfVisit(adGuid);
 
                 if (adDetail.AdStatus == Advertisement.GetAdStatusString(AdStatus.Approved))
                     adDetail.AdImages = _imageRepository.GetAllAdvertisementImages(adGuid);

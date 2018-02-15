@@ -4,17 +4,19 @@ using System.Linq;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.CustomViews.CategoryView;
 using ChiKoja.Models;
+using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.Categories
 {
     [Activity(Label = "ActivityCategory", Theme = "@style/Theme.Main")]
-    public class ActivityCategory : NavigationDrawer.NavActivity
+    public class ActivityCategory : NavActivity
     {
         //TODO improve code to add second level and third level automatically.Be ready for 4th level if data in category table has 4th level or more
 
@@ -30,10 +32,10 @@ namespace ChiKoja.Categories
         List<SingleCategoryView> _thirdLevelCategoryViews;
 
         LinearLayout _linearLayoutCategoryContainer;
-        Button _buttonOk;
-        Button _buttonCancel;
-        Button _buttonSelectAll;
-        Button _buttonClearAll;
+        AppCompatButton _buttonOk;
+        AppCompatButton _buttonCancel;
+        AppCompatButton _buttonSelectAll;
+        AppCompatButton _buttonClearAll;
 
         private CategorySelection _categorySelection;
         protected override void OnCreate(Bundle savedInstanceState)
@@ -50,13 +52,13 @@ namespace ChiKoja.Categories
         {
             _linearLayoutCategoryContainer = FindViewById<LinearLayout>(Resource.Id.linearLayoutCategoryContainer);
             fillCategoryContainer();
-            _buttonOk = FindViewById<Button>(Resource.Id.buttonOk);
+            _buttonOk = FindViewById<AppCompatButton>(Resource.Id.buttonOk);
             _buttonOk.Click += buttonOk_Click;
-            _buttonCancel = FindViewById<Button>(Resource.Id.buttonCancel);
+            _buttonCancel = FindViewById<AppCompatButton>(Resource.Id.buttonCancel);
             _buttonCancel.Click += buttonCancel_Click;
-            _buttonSelectAll = FindViewById<Button>(Resource.Id.buttonSelectAll);
+            _buttonSelectAll = FindViewById<AppCompatButton>(Resource.Id.buttonSelectAll);
             _buttonSelectAll.Click += buttonSelectAll_Click;
-            _buttonClearAll = FindViewById<Button>(Resource.Id.buttonClearAll);
+            _buttonClearAll = FindViewById<AppCompatButton>(Resource.Id.buttonClearAll);
             _buttonClearAll.Click += buttonClearAll_Click;
         }
         private void fillCategoryContainer()

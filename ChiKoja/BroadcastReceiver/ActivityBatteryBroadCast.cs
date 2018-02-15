@@ -1,23 +1,16 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
+using Android.Support.V7.App;
 using Android.Widget;
-using ChiKoja.Notification;
 using Uri = Android.Net.Uri;
 
 namespace ChiKoja.BroadcastReceiver
 {
 
     [Activity(Label = "ActivityBatteryBroadCast", Icon = "@drawable/icon")]
-    public class ActivityBatteryBroadCast : Activity
+    public class ActivityBatteryBroadCast : AppCompatActivity
     {
         BatteryReceiver batteryReceiver;
         Button callButton;

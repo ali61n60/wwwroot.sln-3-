@@ -1,6 +1,7 @@
 ﻿using System;
 using Android.OS;
 using Android.Support.V4.App;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.Repository.UserMarkedAds;
@@ -12,8 +13,8 @@ namespace ChiKoja.AdDetail
     public class AdDetailTopTopFragment:Fragment
     {
         private MarkAdView markAdView;
-        private Button buttonShare;
-        private Button buttonBack;
+        private AppCompatButton buttonShare;
+        private AppCompatButton buttonBack;
         UserMarkedAds userMarkedAds;
         Guid adGuid;
 
@@ -52,8 +53,8 @@ namespace ChiKoja.AdDetail
             //TODO inject it
             userMarkedAds = new UserMarkedAds(Repository.Repository.DataBasePath);
             markAdView = rootView.FindViewById<MarkAdView>(Resource.Id.markAdView);
-            buttonShare = rootView.FindViewById<Button>(Resource.Id.buttonShare);
-            buttonBack = rootView.FindViewById<Button>(Resource.Id.buttonBack);
+            buttonShare = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonShare);
+            buttonBack = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonBack);
             manageButtonMarkAdText();
         }
 

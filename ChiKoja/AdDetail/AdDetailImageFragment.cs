@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.V4.App;
+using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
@@ -35,7 +36,7 @@ namespace ChiKoja.AdDetail
 
             for (int i = 1; i < _images.Count; i += 2)// just show big images
             {
-                var imageView = new ImageView(Activity);
+                AppCompatImageView imageView = new AppCompatImageView(Activity);
                 setBitmapImage(imageView, _images[i]);
 
                 LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(imageWidth, imageHeight);

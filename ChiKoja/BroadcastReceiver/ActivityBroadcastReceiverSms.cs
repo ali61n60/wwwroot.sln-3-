@@ -1,36 +1,26 @@
-using System.Text;
-
 using Android.App;
 using Android.Content;
-using Android.Media;
 using Android.Net.Wifi;
 using Android.OS;
-using Android.Telephony;
-using Android.Util;
-using Android.Views;
+using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Android.Widget;
-using Java.Lang;
 
 
 namespace ChiKoja.BroadcastReceiver
 {
     [Activity(Label = "ActivityBroadcastReceiverSms", Icon = "@drawable/icon")]
-    public class ActivityBroadcastReceiverSms : Activity
+    public class ActivityBroadcastReceiverSms : AppCompatActivity
     {
         int count;
         AirPlaneMode airplaneMode;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-
-            ActionBar.Hide();
-
-            // Set our view from the "main" layout resource
+            
             SetContentView(Resource.Layout.layout_broadcast_receiver_sms);
-
-            // Get our button from the layout resource,
-            // and attach an event to it
-            Button button = FindViewById<Button>(Resource.Id.buttonBroad);
+            
+            AppCompatButton button = FindViewById<AppCompatButton>(Resource.Id.buttonBroad);
 
             button.Click += delegate
             {
@@ -41,7 +31,7 @@ namespace ChiKoja.BroadcastReceiver
                 LinearLayout contentLayout = slidingDrawer.FindViewById<LinearLayout>(Resource.Id.content);
                 ScrollView scrollView = contentLayout.FindViewById<ScrollView>(Resource.Id.scrollView1);
 
-                Button newButton = new Button(this);
+                AppCompatButton newButton = new AppCompatButton(this);
                 newButton.Text = text;
                 newButton.Id = count;
                 contentLayout.AddView(newButton);

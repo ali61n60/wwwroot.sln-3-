@@ -1,32 +1,25 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 using Android.App;
-using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Views.Animations;
-using Android.Widget;
+using Android.Support.V7.App;
+using Android.Support.V7.Widget;
 using Java.Lang;
 
 namespace ChiKoja.AnimationTest
 {
     [Activity(Label = "ActivityAnimation")]
-    public class ActivityAnimation : Activity
+    public class ActivityAnimation : AppCompatActivity
     {
-        Button buttonAnimate;
-        Button button2;
+        AppCompatButton buttonAnimate;
+        AppCompatButton button2;
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
 
             SetContentView(Resource.Layout.animation);
-            buttonAnimate = FindViewById<Button>(Resource.Id.buttonAnimate);
+            buttonAnimate = FindViewById<AppCompatButton>(Resource.Id.buttonAnimate);
             buttonAnimate.Click += buttonAnimate_Click;
-            button2 = FindViewById<Button>(Resource.Id.button2);
+            button2 = FindViewById<AppCompatButton>(Resource.Id.button2);
         }
 
         void buttonAnimate_Click(object sender, EventArgs e)

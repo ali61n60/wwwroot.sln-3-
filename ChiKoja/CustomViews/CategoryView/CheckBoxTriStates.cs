@@ -1,10 +1,10 @@
 using Android.Content;
-using Android.Widget;
+using Android.Support.V7.Widget;
 using Android.Util;
 
 namespace ChiKoja.CustomViews.CategoryView
 {
-    public class CheckBoxTriStates : CheckBox
+    public class CheckBoxTriStates : AppCompatCheckBox
     {
         //TODO to be completed
         //TODO set size of the drawable base on view size

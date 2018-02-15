@@ -1,5 +1,6 @@
 using System;
 using Android.OS;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ModelStd.Advertisements;
@@ -14,10 +15,10 @@ namespace ChiKoja.AdDetail
         View rootView;
         AdvertisementTransportation advertisementTransportation;
         
-        private TextView textViewBrand;
-        private TextView textViewCarModel;
-        private TextView textViewFuel;
-        private TextView textViewGearbox;
+        private AppCompatTextView textViewBrand;
+        private AppCompatTextView textViewCarModel;
+        private AppCompatTextView textViewFuel;
+        private AppCompatTextView textViewGearbox;
 
 
         Guid adGuid;
@@ -48,16 +49,16 @@ namespace ChiKoja.AdDetail
         
         private void initializeFields()
         {
-            textViewBrand = rootView.FindViewById<TextView>(Resource.Id.textViewBrand);
+            textViewBrand = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewBrand);
             textViewBrand.Text = advertisementTransportation.BrandName;
 
-            textViewCarModel = rootView.FindViewById<TextView>(Resource.Id.textViewCarModel);
+            textViewCarModel = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewCarModel);
             textViewCarModel.Text = advertisementTransportation.ModelName;
 
-            textViewFuel = rootView.FindViewById<TextView>(Resource.Id.textViewFuel);
+            textViewFuel = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewFuel);
             textViewFuel.Text = advertisementTransportation.Fuel;
 
-            textViewGearbox = rootView.FindViewById<TextView>(Resource.Id.textViewGearbox);
+            textViewGearbox = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewGearbox);
             textViewGearbox.Text = advertisementTransportation.Gearbox;
         }
 
