@@ -17,7 +17,6 @@ using ModelStd.Db.Ad;
 using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using MvcMain.Infrastructure;
-using RepositoryStd.ModelConversion;
 using RepositoryStd.Repository;
 using RepositoryStd.TepmeratureRepository;
 
@@ -351,7 +350,7 @@ namespace MvcMain.Controllers
             {
                 adDetail = adRepository.GetAdDetail(adGuid);
 
-                if (adDetail.AdStatus == Convertor.GetAdStatusString(AdStatus.Approved))
+                if (adDetail.AdStatus == AdvertisementCommon.GetAdStatusString(AdStatus.Approved))
                     adDetail.AdImages = _imageRepository.GetAllAdvertisementImages(adGuid);
                 response.ResponseData = adDetail;
                 response.SetSuccessResponse();

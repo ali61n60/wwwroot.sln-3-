@@ -10,13 +10,12 @@ using Microsoft.EntityFrameworkCore.Query.Expressions;
 using ModelStd.Advertisements;
 using ModelStd.Advertisements.Price;
 using ModelStd.Db.Ad;
+using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using RepositoryStd.Context.AD;
 using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
-using RepositoryStd.ModelConversion;
-
 
 namespace RepositoryStd.Repository.Common
 {
@@ -79,13 +78,15 @@ namespace RepositoryStd.Repository.Common
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             IQueryable<Advertisement> list = GetCommonQueryableList(queryParameters);
 
+            
             //uegentOnly
 
             list = EnforceStartIndexAndCount(queryParameters, list);
             foreach (Advertisement advertisement in list)
             {
                 AdvertisementCommon tempAdCommon = new AdvertisementCommon();
-                Convertor.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, _appIdentityDbContext);
+                AppUser appUser= _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == advertisement.UserId);
+                AdvertisementCommon.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, appUser);
                 searchResultItems.Add(tempAdCommon);
             }
             return searchResultItems;
@@ -269,7 +270,8 @@ namespace RepositoryStd.Repository.Common
             foreach (Advertisement advertisement in userAdvertisements)
             {
                 AdvertisementCommon tempAdCommon = new AdvertisementCommon();
-                Convertor.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, _appIdentityDbContext);
+                AppUser appUser = _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == advertisement.UserId);
+                AdvertisementCommon.FillAdvertisementCommonFromAdvertisement(tempAdCommon, advertisement, appUser);
                 userAdvertisementCommons.Add(tempAdCommon);
             }
 
@@ -366,7 +368,8 @@ namespace RepositoryStd.Repository.Common
 
             Advertisement item = list.FirstOrDefault();
             AdvertisementCommon adCommon = new AdvertisementCommon();
-            Convertor.FillAdvertisementCommonFromAdvertisement(adCommon, item, _appIdentityDbContext);
+            AppUser appUser = _appIdentityDbContext.Users.FirstOrDefault(user => user.Id == item.UserId);
+            AdvertisementCommon.FillAdvertisementCommonFromAdvertisement(adCommon, item, appUser);
             return adCommon;
         }
 
@@ -374,7 +377,7 @@ namespace RepositoryStd.Repository.Common
         {
             //TODO error handling use a server log 
             _adDbContext.Advertisements.FirstOrDefault(advertisements => advertisements.AdId == adGuid).AdNumberOfVisited++;
-            _adDbContext.SaveChanges();
+            await _adDbContext.SaveChangesAsync();
         }
 
         //TODO the method implementation is not complete
