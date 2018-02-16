@@ -3730,17 +3730,14 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0a0140
 			public const int Base_Widget_Design_TabLayout = 2131362112;
 			
-			// aapt resource value: 0x7f0a0158
-			public const int ButtonStyleDanger = 2131362136;
-			
-			// aapt resource value: 0x7f0a015b
-			public const int LightThemeSelector = 2131362139;
-			
-			// aapt resource value: 0x7f0a015d
-			public const int MaxValuePriceFilter = 2131362141;
+			// aapt resource value: 0x7f0a015a
+			public const int LightThemeSelector = 2131362138;
 			
 			// aapt resource value: 0x7f0a015c
-			public const int MinValuePriceFilter = 2131362140;
+			public const int MaxValuePriceFilter = 2131362140;
+			
+			// aapt resource value: 0x7f0a015b
+			public const int MinValuePriceFilter = 2131362139;
 			
 			// aapt resource value: 0x7f0a0017
 			public const int Platform_AppCompat = 2131361815;
@@ -4075,11 +4072,11 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0a014d
 			public const int Theme_Design_NoActionBar = 2131362125;
 			
-			// aapt resource value: 0x7f0a0159
-			public const int Theme_Main = 2131362137;
+			// aapt resource value: 0x7f0a0158
+			public const int Theme_Main = 2131362136;
 			
-			// aapt resource value: 0x7f0a015a
-			public const int Theme_Splash = 2131362138;
+			// aapt resource value: 0x7f0a0159
+			public const int Theme_Splash = 2131362137;
 			
 			// aapt resource value: 0x7f0a00f3
 			public const int ThemeOverlay_AppCompat = 2131362035;

@@ -1,34 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:tools="http://schemas.android.com/tools"
-  android:layout_width="match_parent"
-  android:layout_height="wrap_content"  >
-  <Button
-    android:id="@+id/buttonMarkAd"
-    android:layout_width="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:text="@string/MarkAd"/>
+    android:background="@color/primaryDarkColor">
+  <CustomViews.MarkAd.MarkAdView
+      android:layout_width="50dp"
+      android:layout_height="50dp"
+      android:layout_alignParentLeft="true"
+      android:id="@+id/markAdView"
+      android:background="@color/primaryColor"/>
+  <android.support.v7.widget.AppCompatButton
+      android:id="@+id/buttonShare"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:layout_marginLeft="18dp"
+      android:layout_marginStart="18dp"
+      android:layout_toEndOf="@+id/markAdView"
+      android:layout_toRightOf="@+id/markAdView"
+      android:text="@string/Share"
+      tools:layout_editor_absoluteX="121dp"
+      tools:layout_editor_absoluteY="120dp"
+      android:textColor="@color/primaryTextColor"
+      android:background="@color/primaryColor"/>
 
-  <Button
-    android:id="@+id/buttonShare"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentTop="true"
-    android:layout_marginLeft="18dp"
-    android:layout_marginStart="18dp"
-    android:layout_toEndOf="@+id/buttonMarkAd"
-    android:layout_toRightOf="@+id/buttonMarkAd"
-    android:text="@string/Share"
-    tools:layout_editor_absoluteX="121dp"
-    tools:layout_editor_absoluteY="120dp" />
-
-  <Button
-    android:id="@+id/buttonBack"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
-    android:layout_alignParentTop="true"
-    android:text="@string/Back" />
+  <android.support.v7.widget.AppCompatButton
+      android:id="@+id/buttonBack"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      android:layout_alignParentRight="true"
+      android:layout_alignParentTop="true"
+      android:text="@string/Back"
+      android:textColor="@color/primaryTextColor"
+      android:background="@color/primaryColor"/>
 </RelativeLayout>
