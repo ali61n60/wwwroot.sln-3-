@@ -5,7 +5,7 @@
     android:id="@+id/layoutSingleAd"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    android:background="@color/colorSecondaryDark"
+    android:background="@color/secondaryDarkColor"
     android:padding="0dp">
 
     <FrameLayout
@@ -15,7 +15,8 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:minHeight="25px"
-        android:minWidth="25px">
+        android:minWidth="25px"
+        android:background="@color/secondaryColor">
 
         <ImageView
             android:id="@+id/imageViewFirstImage"
@@ -44,7 +45,8 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/secondaryTextColor"/>
 
         <TextView
             android:id="@+id/textViewAdPrice"
@@ -56,7 +58,8 @@
             android:layout_marginTop="15dp"
             android:gravity="center_horizontal"
             android:text="Medium Text"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/secondaryTextColor"/>
 
         <TextView
             android:id="@+id/textViewNumberOfVisit"
@@ -66,7 +69,8 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:text="Num"
-            android:textAppearance="?android:attr/textAppearanceSmall"/>
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondaryTextColor"/>
 
         <TextView
             android:id="@+id/textViewLocation"
@@ -77,6 +81,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:text="Loc"
-            android:textAppearance="?android:attr/textAppearanceSmall" />
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/secondaryTextColor"/>
     </RelativeLayout>
 </LinearLayout>

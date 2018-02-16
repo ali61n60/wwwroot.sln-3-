@@ -472,7 +472,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\layout\search_ad.axml" />
+    <AndroidResource Include="Resources\layout\search_ad.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\serarch_fragment.axml">

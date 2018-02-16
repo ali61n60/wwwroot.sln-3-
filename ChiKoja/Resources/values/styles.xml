@@ -5,10 +5,6 @@
     <item name="colorButtonNormal">@color/primaryDarkColor</item>
   </style>
  
-  <style name="ButtonStyleDanger" parent="Widget.AppCompat.Button">
-    <item name="colorButtonNormal">@color/secondaryDarkColor</item> 
-  </style>
-  
    <style name="Theme.Main" parent="Theme.Base">
      <item name="android:colorBackground">@color/primaryColor</item>
      <item name="android:colorForeground">@color/primaryTextColor</item>
@@ -18,12 +14,5 @@
     <item name="android:windowBackground">@drawable/splash_screen</item>
     <item name="android:windowNoTitle">true</item>
   </style>
-    
-    
-    
-  <style name="LightThemeSelector" parent="android:Theme.Light">
-    
-</style>
-
-
+  
 </resources>
