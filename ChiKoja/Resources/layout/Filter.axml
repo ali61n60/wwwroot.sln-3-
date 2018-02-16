@@ -24,7 +24,7 @@
                 android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorInfo"
+                android:background="@color/primaryColor"
                 android:layout_marginBottom="@dimen/default_margin">
                 <TextView
                     android:id="@+id/textViewPrice"
@@ -72,7 +72,7 @@
                 android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorInfoDark">
+                android:background="@color/secondaryDarkColor">
                 <CheckBox
                     android:id="@+id/checkBoxOnlyWithPictures"
                     android:text="@string/OnlyWithPictures"
@@ -85,7 +85,7 @@
                 android:minHeight="25px"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/colorInfo">
+                android:background="@color/secondaryColor">
                 <CheckBox
                     android:id="@+id/checkBoxUrgentAdsOnly"
                     android:text="@string/UrgentAdsOnly"

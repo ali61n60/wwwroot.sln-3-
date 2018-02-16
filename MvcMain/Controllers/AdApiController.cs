@@ -24,6 +24,8 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO 1- Android Color https://material.io/color/#!/?view.left=0&view.right=1&primary.color=bee1ff&secondary.color=6ebbce
+    //https://material.io/icons/ , https://www.materialpalette.com/icons
     //TODO 1- Buffer not changing database data and manage rare changes
     //TODO 1- Database tables must store int number for properties
     // convert int number to enums and string at class level
@@ -42,7 +44,7 @@ namespace MvcMain.Controllers
     //only send let me know messages to verifyed emails and smses
 
     //TODO 1- build AppIdentityDbContext ModelBuiler yourself instead of relying on inheritance
-    
+
     //TODO 1- work on District,City,Province component
 
     //TODO 1- Create and Run SMS sending improve Android Send Sms App, Ask user Time for sms, send  a SMS of Important Error to admin(email sending errors)
@@ -53,8 +55,8 @@ namespace MvcMain.Controllers
     //TODO 1- work on Edit AD by Ad owner
     //TODO 1- work on verifying users email and phone number
 
-        //TODO 2- when import a class into another in typescript VS uses require. Make it ti use from
-        //TODO 2- study about android app change when server changes
+    //TODO 2- when import a class into another in typescript VS uses require. Make it ti use from
+    //TODO 2- study about android app change when server changes
     //TODO 2- use Decorator pattern to log
     //TODO 2- study MVC book
     //TODO 2- study of multi-language website approach in MVC

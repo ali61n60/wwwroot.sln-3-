@@ -359,8 +359,12 @@
     <AndroidResource Include="Resources\layout\single_ad_view.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
-    <AndroidResource Include="Resources\layout\single_category.axml" />
-    <AndroidResource Include="Resources\layout\single_user_ad.axml" />
+    <AndroidResource Include="Resources\layout\single_category.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\single_user_ad.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\sort_by.axml" />
     <AndroidResource Include="Resources\layout\user_ads.axml" />
     <AndroidResource Include="Resources\layout\ad_detail_transportation_fragment.axml">

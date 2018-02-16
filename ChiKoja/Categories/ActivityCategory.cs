@@ -85,7 +85,7 @@ namespace ChiKoja.Categories
                 SingleCategoryView singleCategoryView =
                     new SingleCategoryView(this, category, null);
                 singleCategoryView.CategorySelectionChanged += singleCategoryView_CategorySelectionChanged;
-                singleCategoryView.SetBackgroundColor(Resources.GetColor(Resource.Color.colorDefaultDark));
+                singleCategoryView.SetBackgroundColor(Resources.GetColor(Resource.Color.primaryDarkColor));
                 _linearLayoutCategoryContainer.AddView(singleCategoryView, layoutParams);
                 _firstLevelCategoryViews.Add(singleCategoryView);
             }
@@ -106,7 +106,7 @@ namespace ChiKoja.Categories
                 {
                     SingleCategoryView singleCategoryView =
                         new SingleCategoryView(this, childCategory, firstLevelCategoryView);
-                    singleCategoryView.SetBackgroundColor(Resources.GetColor(Resource.Color.colorDefault));
+                    singleCategoryView.SetBackgroundColor(Resources.GetColor(Resource.Color.primaryColor));
                     firstLevelCategoryView.AddChild(singleCategoryView, layoutParams);
                     _secondLevelCategoryViews.Add(singleCategoryView);
                 }
@@ -124,7 +124,7 @@ namespace ChiKoja.Categories
                 {
                     SingleCategoryView singleCategoryView =
                         new SingleCategoryView(this, childCategory, secondLevelCategoryView);
-                    singleCategoryView.SetBackgroundColor(Resources.GetColor(Resource.Color.colorDefaultDark));
+                    singleCategoryView.SetBackgroundColor(Resources.GetColor(Resource.Color.secondaryDarkColor));
                     secondLevelCategoryView.AddChild(singleCategoryView, layoutParams);
                     _thirdLevelCategoryViews.Add(singleCategoryView);
                 }

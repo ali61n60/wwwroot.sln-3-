@@ -28,7 +28,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:minHeight="?attr/actionBarSize"
-      android:background="@color/colorDefault"
+      android:background="@color/primaryDarkColor"
       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
       android:layout_alignParentBottom="true">
     <LinearLayout
