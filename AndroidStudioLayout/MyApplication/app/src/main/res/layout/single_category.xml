@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/relativeLayout1"
-    android:background="@color/colorPrimary">
-    <ImageView
+    android:background="@color/primaryColor">
+    <android.support.v7.widget.AppCompatImageView
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:id="@+id/imageViewHasChildrenSign"
         android:layout_alignParentLeft="true" />
-    <CheckBox
+    <android.support.v7.widget.AppCompatCheckBox
         android:text="select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/checkBoxSelectCategoryAndAllChildren"
         android:layout_toRightOf="@+id/imageViewHasChildrenSign" />
-    <TextView
+    <android.support.v7.widget.AppCompatTextView
         android:id="@+id/textViewCategoryName"
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
