@@ -10,8 +10,8 @@ namespace ChiKoja.Services.Server
 {
     public class ServicesCommon
     {
-        //public static string ServerUrl = "http://192.168.42.76";//Work
-        public static string ServerUrl = "http://10.71.34.1";//Internal
+        public static string ServerUrl = "http://192.168.42.76";//Work
+        //public static string ServerUrl = "http://10.71.34.1";//Internal
         //public static string ServerUrl = "http://192.168.43.19";//Home
 
         public static async Task<ResponseBase<T>> CallService<T>(string controllerActionUrlPart)

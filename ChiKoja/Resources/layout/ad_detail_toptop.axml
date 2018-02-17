@@ -4,13 +4,14 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
-  android:background="@color/primaryDarkColor">
+  android:background="@color/secondaryDarkColor">
   <CustomViews.MarkAd.MarkAdView
     android:layout_width="50dp"
     android:layout_height="50dp"
     android:layout_alignParentLeft="true"
     android:id="@+id/markAdView"
-    android:background="@color/primaryColor"/>
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
   <android.support.v7.widget.AppCompatButton
     android:id="@+id/buttonShare"
     android:layout_width="wrap_content"
@@ -23,8 +24,8 @@
     android:text="@string/Share"
     tools:layout_editor_absoluteX="121dp"
     tools:layout_editor_absoluteY="120dp"
-    android:textColor="@color/primaryTextColor"
-    android:background="@color/primaryColor"/>
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
 
   <android.support.v7.widget.AppCompatButton
     android:id="@+id/buttonBack"
@@ -34,6 +35,6 @@
     android:layout_alignParentRight="true"
     android:layout_alignParentTop="true"
     android:text="@string/Back"
-    android:textColor="@color/primaryTextColor"
-    android:background="@color/primaryColor"/>
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
 </RelativeLayout>

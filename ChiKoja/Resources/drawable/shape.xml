@@ -4,7 +4,7 @@
           android:color="@color/secondaryColor"/>
   <gradient
     android:angle="225"
-    android:startColor="@color/primaryLightColor"
+    android:startColor="@color/secondaryLightColor"
     android:endColor="@color/secondaryDarkColor"/>
   <corners
     android:bottomLeftRadius="7dp"

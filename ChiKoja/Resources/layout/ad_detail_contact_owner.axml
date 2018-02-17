@@ -2,20 +2,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
-              android:orientation="horizontal">
+              android:orientation="horizontal"
+              android:background="@color/secondaryDarkColor">
 
   <Button
     android:id="@+id/buttonCall"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:text="@string/Call" />
+    android:text="@string/Call"
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
 
   <Button
     android:id="@+id/buttonSendSms"
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:layout_weight="1"
-    android:text="@string/SendSms" />
+    android:text="@string/SendSms"
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
 </LinearLayout>
 
