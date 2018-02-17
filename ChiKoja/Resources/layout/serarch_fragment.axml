@@ -11,8 +11,9 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:id="@+id/buttonSearch"
+
       android:textColor="@color/primaryTextColor"
-      android:background="@color/primaryDarkColor"
+      android:background="@drawable/shape"
       />
   <ListView
       android:minWidth="25px"
@@ -30,7 +31,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:minHeight="?attr/actionBarSize"
-      android:background="@color/primaryDarkColor"
+      android:background="@color/secondaryDarkColor"
       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
       android:layout_alignParentBottom="true">
     <LinearLayout
@@ -48,7 +49,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="2dp"
           android:textColor="@color/primaryTextColor"
-          android:background="@color/primaryColor"/>
+          android:background="@drawable/shape"/>
       <android.support.v7.widget.AppCompatButton
           android:id="@+id/buttonSort"
           android:text="@string/Sort"
@@ -57,7 +58,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="2dp"
           android:textColor="@color/primaryTextColor"
-          android:background="@color/primaryColor"/>
+          android:background="@drawable/shape"/>
       <android.support.v7.widget.AppCompatButton
           android:id="@+id/buttonCategory"
           android:text="@string/Category"
@@ -66,7 +67,7 @@
           android:layout_height="wrap_content"
           android:layout_margin="2dp"
           android:textColor="@color/primaryTextColor"
-          android:background="@color/primaryColor"/>
+          android:background="@drawable/shape"/>
     </LinearLayout>
   </android.support.v7.widget.Toolbar>
 </RelativeLayout>

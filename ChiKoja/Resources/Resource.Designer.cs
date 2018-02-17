@@ -1885,11 +1885,14 @@ namespace ChiKoja
 			// aapt resource value: 0x7f020053
 			public const int icon = 2130837587;
 			
-			// aapt resource value: 0x7f020055
-			public const int notification_template_icon_bg = 2130837589;
+			// aapt resource value: 0x7f020056
+			public const int notification_template_icon_bg = 2130837590;
 			
 			// aapt resource value: 0x7f020054
-			public const int splash_screen = 2130837588;
+			public const int shape = 2130837588;
+			
+			// aapt resource value: 0x7f020055
+			public const int splash_screen = 2130837589;
 			
 			static Drawable()
 			{
