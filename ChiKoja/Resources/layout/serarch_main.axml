@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:minWidth="25px"
+                android:minHeight="25px"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/relativeLayoutMain">
+  <android.support.v7.widget.AppCompatButton
+    android:text="@string/Search"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/buttonSearch"
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"
+  />
+
+  <ListView
+    android:id="@+id/listViewAdCommon"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_alignParentBottom="true"
+    android:layout_below="@id/buttonSearch"
+    android:background="@color/primaryLightColor"
+    android:minHeight="25px"
+    android:minWidth="25px">
+  </ListView>
+
+
+</RelativeLayout>

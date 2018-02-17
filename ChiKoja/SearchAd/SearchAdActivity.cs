@@ -14,7 +14,7 @@ namespace ChiKoja.SearchAd
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class SearchAdActivity : NavActivity, ISingleAdEvents
     {
-        private SearchAdFragment searchAdFragment;
+        private SearchMain searchAdFragment;
         private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
         
@@ -45,11 +45,23 @@ namespace ChiKoja.SearchAd
 
         private void addFragments()
         {
-            searchAdFragment=new SearchAdFragment();
+            addMain();
+            addFilter();
+        }
+
+        private void addMain()
+        {
+            searchAdFragment = new SearchMain();
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.frame_layout_left, searchAdFragment)
+                .Add(Resource.Id.main, searchAdFragment)
                 .Commit();
         }
+
+        private void addFilter()
+        {
+            
+        }
+        
 
         protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
         {

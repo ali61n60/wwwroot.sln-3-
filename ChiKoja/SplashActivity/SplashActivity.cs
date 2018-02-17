@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
+using Android.Widget;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
@@ -15,7 +16,10 @@ namespace ChiKoja.SplashActivity
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            SetContentView(Resource.Layout.splash_screen);
+           // SetContentView(Resource.Layout.splash_screen);
+           
+            
+
             checkDatabase();
             resetSearchFilter();
         }

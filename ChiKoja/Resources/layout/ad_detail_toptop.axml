@@ -36,9 +36,8 @@
     android:layout_alignParentEnd="true"
     android:layout_alignParentRight="true"
     android:layout_centerVertical="true"
-    android:layout_marginLeft="20dp"
-    android:layout_toEndOf="@+id/buttonShare"
-    android:layout_toRightOf="@+id/buttonShare"
+    android:layout_marginRight="10dp"
+      
     android:background="@drawable/shape"
     app:srcCompat="@drawable/ic_arrow_forward_black_48dp" />
 </RelativeLayout>
