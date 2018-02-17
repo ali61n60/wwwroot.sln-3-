@@ -84,17 +84,18 @@ namespace ModelStd.Db.Ad
         {
             switch (fuelType)
             {
-                case FuelType.Petrol: return "Petrol";
-                case FuelType.Disel: return "Disel";
-                case FuelType.Gas: return "Gas";
-                case FuelType.GasPetrol: return "GasPetrol";
-                case FuelType.Electric: return "Electric";
-                case FuelType.Hybrid: return "Hybrid";
-                case FuelType.UnSpecified: return "UnSpecified";
+                case FuelType.Petrol: return "بنزین";
+                case FuelType.Disel: return "دیزل";
+                case FuelType.Gas: return "گاز";
+                case FuelType.GasPetrol: return "دوگانه بنزین/گاز";
+                case FuelType.Electric: return "برقی";
+                case FuelType.Hybrid: return "هیبرید";
+                case FuelType.UnSpecified: return "نامشخص";
             }
-            return "UnSpecified";
+            return "نامشخص";
         }
 
+        //TODO remove the usage of this method then remove it
         public static FuelType GetFuelType(string fuelTypeString, FuelType defaultValue)
         {
             switch (fuelTypeString)
@@ -113,13 +114,14 @@ namespace ModelStd.Db.Ad
         {
             switch (gearboxType)
             {
-                case GearboxType.Manual: return "Manual";
-                case GearboxType.Automatic: return "Automatic";
-                case GearboxType.UnSpecified: return "UnSpecified";
+                case GearboxType.Manual: return "دستی";
+                case GearboxType.Automatic: return "اتوماتیک";
+                case GearboxType.UnSpecified: return "نامشخص";
             }
-            return "UnSpecified";
+            return "نامشخص";
         }
 
+        //TODO remove the usage of this method then remove it
         public static GearboxType GetGearboxType(string gearboxTypeString, GearboxType dedaultValue)
         {
             switch (gearboxTypeString)
@@ -131,6 +133,7 @@ namespace ModelStd.Db.Ad
             return dedaultValue;
         }
 
+        //TODO remove the usage of this method then remove it
         public static BodyStatus GetBodyStatus(string bodyStatusString, BodyStatus defaultValue)
         {
             switch (bodyStatusString)
@@ -156,23 +159,24 @@ namespace ModelStd.Db.Ad
         {
             switch (bodyStatus)
             {
-                case Db.Ad.BodyStatus.NoColor: return "NoColor";
-                case Db.Ad.BodyStatus.OnePieceColored: return "OnePieceColored";
-                case Db.Ad.BodyStatus.TwoPiecesColored: return "TwoPiecesColored";
-                case Db.Ad.BodyStatus.MultiPieceColored: return "MultiPieceColored";
-                case Db.Ad.BodyStatus.BumperColored: return "BumperColored";
-                case Db.Ad.BodyStatus.BumperChanged: return "BumperChanged";
-                case Db.Ad.BodyStatus.HoodColored: return "HoodColored";
-                case Db.Ad.BodyStatus.RoundColored: return "RoundColored";
-                case Db.Ad.BodyStatus.FullyColored: return "FullyColored";
-                case Db.Ad.BodyStatus.Accident: return "Accident";
-                case Db.Ad.BodyStatus.Scrap: return "Scrap";
-                case Db.Ad.BodyStatus.BodyChanged: return "BodyChanged";
-                case Db.Ad.BodyStatus.UnSpecified: return "UnSpecified";
+                case Db.Ad.BodyStatus.NoColor: return "بدون رنگ";
+                case Db.Ad.BodyStatus.OnePieceColored: return "یک تکه رنگ";
+                case Db.Ad.BodyStatus.TwoPiecesColored: return "دو تکه رنگ";
+                case Db.Ad.BodyStatus.MultiPieceColored: return "چند تکه رنگ";
+                case Db.Ad.BodyStatus.BumperColored: return "کاپوت رنگ";
+                case Db.Ad.BodyStatus.BumperChanged: return "کاپوت تعویض";
+                case Db.Ad.BodyStatus.HoodColored: return "صندوق رنگ";
+                case Db.Ad.BodyStatus.RoundColored: return "دور رنگ";
+                case Db.Ad.BodyStatus.FullyColored: return "کامل رنگ";
+                case Db.Ad.BodyStatus.Accident: return "تصادفی";
+                case Db.Ad.BodyStatus.Scrap: return "اوراقی";
+                case Db.Ad.BodyStatus.BodyChanged: return "بدنه تعویض";
+                case Db.Ad.BodyStatus.UnSpecified: return "نامشخص";
             }
-            return "UnSpecified";
+            return "نامشخص";
         }
 
+        //TODO remove the usage of this method then remove it
         public static CarStatus GetCarStatus(string carStatusString, CarStatus defaultValue)
         {
             switch (carStatusString)
@@ -190,14 +194,15 @@ namespace ModelStd.Db.Ad
         {
             switch (carStatus)
             {
-                case Db.Ad.CarStatus.New: return "New";
-                case Db.Ad.CarStatus.Used: return "Used";
-                case Db.Ad.CarStatus.Draft: return "Draft";
-                case Db.Ad.CarStatus.UnSpecified: return "UnSpecified";
+                case CarStatus.New: return "صفر";
+                case CarStatus.Used: return "کارکرده";
+                case CarStatus.Draft: return "حواله";
+                case CarStatus.UnSpecified: return "نامشخص";
             }
-            return "UnSpecified";
+            return "نامشخص";
         }
 
+        //TODO remove the usage of this method then remove it
         public static PlateType GetPlateType(string plateTypeString, PlateType defaultValue)
         {
             switch (plateTypeString)
@@ -214,12 +219,12 @@ namespace ModelStd.Db.Ad
         {
             switch (plateType)
             {
-                case Db.Ad.PlateType.National: return "National";
-                case Db.Ad.PlateType.FreeRegion: return "FreeRegion";
-                case Db.Ad.PlateType.Temporary: return "Temporary";
-                case Db.Ad.PlateType.UnSpecified: return "UnSpecified";
+                case PlateType.National: return "ملی";
+                case PlateType.FreeRegion: return "منطقه آزاد";
+                case PlateType.Temporary: return "عبور موقت";
+                case PlateType.UnSpecified: return "نامشخص";
             }
-            return "UnSpecified";
+            return "نامشخص";
         }
     }
 
@@ -240,9 +245,7 @@ namespace ModelStd.Db.Ad
         Automatic=2,
         UnSpecified=3
     }
-
-
-
+    
     public enum BodyStatus
     {
         NoColor=1,

@@ -299,25 +299,7 @@ namespace RepositoryStd.Repository.Transportation
 
             return adAttribute;
         }
-
-        //TODO the method implementation is not complete
-        private AdAttributeTransportation getAdAtribute(AdvertisementTransportation entity)
-        {
-            AdAttributeTransportation adAttribute = new AdAttributeTransportation();
-            adAttribute.AdId = entity.AdId;
-            adAttribute.ModelId = entity.ModelId;
-            adAttribute.MakeYear = entity.MakeYear;
-            adAttribute.FuelType = AdAttributeTransportation.GetFuelType(entity.Fuel,FuelType.UnSpecified);
-            adAttribute.Mileage = entity.Mileage;
-            adAttribute.GearboxType = AdAttributeTransportation.GetGearboxType(entity.Gearbox,GearboxType.UnSpecified);
-            adAttribute.BodyColor = entity.BodyColor;
-            adAttribute.InternalColor = entity.InternalColor;
-            adAttribute.BodyStatus = AdAttributeTransportation.GetBodyStatus(entity.BodyStatus,BodyStatus.UnSpecified);
-
-            return adAttribute;
-        }
-
-       
+                      
         private IQueryable<Advertisement> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             PlateType plateType = AdAttributeTransportation.GetPlateType(ParameterExtractor.ExtractString(queryParameters, PlateTypeKey,
@@ -346,6 +328,7 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
+            //TODO get BodyStatus as an integer from user
             BodyStatus bodyStatus = AdAttributeTransportation.GetBodyStatus(
                 ParameterExtractor.ExtractString(queryParameters, BodyStatusKey,
                     AdAttributeTransportation.GetBodyStatusString(BodyStatusDefault)),
@@ -379,6 +362,7 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
+            //TODO get gearboxType as an integer from user
             GearboxType gearboxType = AdAttributeTransportation.GetGearboxType(
                 ParameterExtractor.ExtractString(queryParameters, GearboxKey,
                     AdAttributeTransportation.GetGearboxTypeString(GearboxDefault)),
@@ -404,6 +388,8 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereClauseFuel(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
+
+            //TODO get fuelType as an integer from user
             FuelType fuelType = AdAttributeTransportation.GetFuelType(
                 ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdAttributeTransportation.GetFuelTypeString(FuelTypeDefault)),
                 FuelTypeDefault);
