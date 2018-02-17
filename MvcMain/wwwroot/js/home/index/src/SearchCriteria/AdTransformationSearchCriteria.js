@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var CarModelBrandController_1 = require("../../../../Components/Transformation/CarModelBrandController");
 var DefaultOrderBy_1 = require("../../../../Components/OrderBy/DefaultOrderBy");
 var DefaultPriceType_1 = require("../../../../Components/PriceType/DefaultPriceType");
-var AdTransformationSearchCriteria = /** @class */ (function () {
+var AdTransformationSearchCriteria = (function () {
     function AdTransformationSearchCriteria() {
         this.MakeYearFromKey = "MakeYearFrom";
         this.MakeYearFromInputId = "fromYear";
