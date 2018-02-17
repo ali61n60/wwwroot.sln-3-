@@ -14,7 +14,9 @@ namespace ChiKoja.SearchAd
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class SearchAdActivity : NavActivity, ISingleAdEvents
     {
-        private SearchMain searchAdFragment;
+        private SearchMain searchMain;
+        private SearchFilter searchFilter;
+
         private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
         
@@ -51,15 +53,18 @@ namespace ChiKoja.SearchAd
 
         private void addMain()
         {
-            searchAdFragment = new SearchMain();
+            searchMain = new SearchMain();
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.main, searchAdFragment)
+                .Add(Resource.Id.main, searchMain)
                 .Commit();
         }
 
         private void addFilter()
         {
-            
+            searchFilter=new SearchFilter();
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.filter, searchFilter)
+                .Commit();
         }
         
 
@@ -71,25 +76,25 @@ namespace ChiKoja.SearchAd
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("locationSelectionChanged", false))
-                    searchAdFragment.resetSearchCondition();
+                    searchMain.resetSearchCondition();
             }
             if (requestCode == CategorySelectionRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("categorySelectionChanged", false))
-                    searchAdFragment.resetSearchCondition();
+                    searchMain.resetSearchCondition();
             }
             if (requestCode == SearchFilterRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("SearchFilterChanged", false))
-                    searchAdFragment.resetSearchCondition();
+                    searchMain.resetSearchCondition();
             }
             if (requestCode == OrderByRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("OrderByChanged", false))
-                    searchAdFragment.resetSearchCondition();
+                    searchMain.resetSearchCondition();
             }
         }
 

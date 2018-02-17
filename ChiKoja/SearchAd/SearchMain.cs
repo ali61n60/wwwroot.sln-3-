@@ -18,7 +18,6 @@ using ModelStd.Services;
 
 namespace ChiKoja.SearchAd
 {
-    //TODO remove unused ViewGroupSingleAd
     public class SearchMain : Fragment
     {
         private SingleAdArrayAdapter _singleAdArrayAdapter;
