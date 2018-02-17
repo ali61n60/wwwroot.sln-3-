@@ -1883,16 +1883,16 @@ namespace ChiKoja
 			public const int hamburger = 2130837586;
 			
 			// aapt resource value: 0x7f020053
-			public const int icon = 2130837587;
+			public const int ic_arrow_forward_black_48dp = 2130837587;
+			
+			// aapt resource value: 0x7f020054
+			public const int icon = 2130837588;
 			
 			// aapt resource value: 0x7f020056
 			public const int notification_template_icon_bg = 2130837590;
 			
-			// aapt resource value: 0x7f020054
-			public const int shape = 2130837588;
-			
 			// aapt resource value: 0x7f020055
-			public const int splash_screen = 2130837589;
+			public const int shape = 2130837589;
 			
 			static Drawable()
 			{
@@ -1984,9 +1984,6 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f070089
 			public const int buttonAnimate = 2131165321;
-			
-			// aapt resource value: 0x7f070079
-			public const int buttonBack = 2131165305;
 			
 			// aapt resource value: 0x7f0700ba
 			public const int buttonBatteryKiller = 2131165370;
@@ -2233,6 +2230,9 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f07003f
 			public const int image = 2131165247;
+			
+			// aapt resource value: 0x7f070079
+			public const int imageButtonBack = 2131165305;
 			
 			// aapt resource value: 0x7f07008b
 			public const int imageView1 = 2131165323;
@@ -3014,10 +3014,13 @@ namespace ChiKoja
 			public const int sort_by = 2130903120;
 			
 			// aapt resource value: 0x7f030051
-			public const int support_simple_spinner_dropdown_item = 2130903121;
+			public const int splash_screen = 2130903121;
 			
 			// aapt resource value: 0x7f030052
-			public const int user_ads = 2130903122;
+			public const int support_simple_spinner_dropdown_item = 2130903122;
+			
+			// aapt resource value: 0x7f030053
+			public const int user_ads = 2130903123;
 			
 			static Layout()
 			{

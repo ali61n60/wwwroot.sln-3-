@@ -14,7 +14,7 @@ namespace ChiKoja.AdDetail
     {
         private MarkAdView markAdView;
         private AppCompatButton buttonShare;
-        private AppCompatButton buttonBack;
+        private ImageButton imageButtonBack;
         UserMarkedAds userMarkedAds;
         Guid adGuid;
 
@@ -54,17 +54,17 @@ namespace ChiKoja.AdDetail
             userMarkedAds = new UserMarkedAds(Repository.Repository.DataBasePath);
             markAdView = rootView.FindViewById<MarkAdView>(Resource.Id.markAdView);
             buttonShare = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonShare);
-            buttonBack = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonBack);
+            imageButtonBack = rootView.FindViewById<ImageButton>(Resource.Id.imageButtonBack);
             manageButtonMarkAdText();
         }
 
         private void initializeEvents()
         {
             markAdView.Click += markAdView_Click;
-            buttonBack.Click += ButtonBack_Click;
+            imageButtonBack.Click += imageButtonBack_Click;
         }
 
-        private void ButtonBack_Click(object sender, EventArgs e)
+        private void imageButtonBack_Click(object sender, EventArgs e)
         {
             Activity.Finish();
         }
