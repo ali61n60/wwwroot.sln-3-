@@ -2312,9 +2312,6 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700cd
 			public const int linearLayoutProvinceHolder = 2131165389;
 			
-			// aapt resource value: 0x7f0700f1
-			public const int linearLayoutToolbar2 = 2131165425;
-			
 			// aapt resource value: 0x7f07000b
 			public const int listMode = 2131165195;
 			
@@ -2425,6 +2422,9 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f0700f6
 			public const int relativeLayoutMain = 2131165430;
+			
+			// aapt resource value: 0x7f0700f1
+			public const int relativeLayoutToolbar2 = 2131165425;
 			
 			// aapt resource value: 0x7f070030
 			public const int right = 2131165232;

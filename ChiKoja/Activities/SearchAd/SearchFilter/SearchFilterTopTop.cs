@@ -3,6 +3,7 @@ using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
@@ -10,7 +11,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     {
         private Context _context;
         View rootView;
-        AppCompatButton buttonReturn;
+        ImageButton imageButtonBack;
 
         public SearchFilterTopTop()
         {
@@ -18,19 +19,21 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            //rootView = inflater.Inflate(Resource.Layou, container, false);
+            rootView = inflater.Inflate(Resource.Layout.search_filter_toptop_frag, container, false);
 
             initializeFields();
             initializeEvents();
-           
 
             return rootView;
         }
 
         private void initializeFields()
         {
-            //buttonReturn = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonReturn);
-            //buttonReturn.Click += buttonReturn_Click;
+            imageButtonBack = rootView.FindViewById<ImageButton>(Resource.Id.imageButtonBack);
+            imageButtonBack.Click += (sender, args) =>
+            {
+                Activity.Finish();
+            };
         }
 
         private void initializeEvents()
