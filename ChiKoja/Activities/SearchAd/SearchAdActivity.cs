@@ -2,14 +2,14 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using ChiKoja.AdDetail;
+using ChiKoja.Activities.AdDetail;
 using ChiKoja.Interfaces.SingleAd;
 using ChiKoja.NavigationDrawer;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 
 //Activity to fragment  bundle and fragment.setArguments
-namespace ChiKoja.SearchAd
+namespace ChiKoja.Activities.SearchAd
 {
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class SearchAdActivity : NavActivity, ISingleAdEvents

@@ -1,7 +1,6 @@
 ﻿using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
-using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 
@@ -30,15 +29,14 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private void initializeFields()
         {
             imageButtonBack = rootView.FindViewById<ImageButton>(Resource.Id.imageButtonBack);
-            imageButtonBack.Click += (sender, args) =>
-            {
-                Activity.Finish();
-            };
         }
 
         private void initializeEvents()
         {
-
+            imageButtonBack.Click += (sender, args) =>
+            {
+                Activity.Finish();
+            };
         }
         
     }

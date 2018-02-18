@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Support.V4.App;
@@ -10,7 +9,7 @@ using Android.Views;
 using Android.Widget;
 using ChiKoja.Utility;
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     public class AdDetailImageFragment : Fragment
     {

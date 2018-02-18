@@ -4,7 +4,7 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using ModelStd.Advertisements;
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     public class AdDetailCommonPartFragment:Fragment
     {

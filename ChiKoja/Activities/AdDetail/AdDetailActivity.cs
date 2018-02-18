@@ -12,7 +12,7 @@ using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
 using ModelStd.Services;
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     [Activity(Label = "AdDetailActivity", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class AdDetailActivity : NavActivity

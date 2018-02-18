@@ -6,7 +6,7 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 
-namespace ChiKoja.SearchAd.SearchFilter
+namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
     public class SearchCriteriaDefault : Fragment
     {

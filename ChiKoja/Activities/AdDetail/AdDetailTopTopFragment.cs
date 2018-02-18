@@ -8,7 +8,7 @@ using ChiKoja.Repository.UserMarkedAds;
 using CustomViews.MarkAd;
 using ModelStd.Db.Ad;
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     public class AdDetailTopTopFragment:Fragment
     {

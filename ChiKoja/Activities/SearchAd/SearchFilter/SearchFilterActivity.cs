@@ -2,19 +2,15 @@ using System;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Support.V7.App;
 using Android.Support.V7.Widget;
-using Android.Text;
 using Android.Widget;
-using ChiKoja.Activities.SearchAd.SearchFilter;
-using ChiKoja.AdDetail;
 using ChiKoja.Categories;
 using ChiKoja.Models;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
 
 
-namespace ChiKoja.SearchAd.SearchFilter
+namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
     //this class gets user input filters and stores them in preference storage via commonfilter class and ...
     [Activity(Label = "ActivitySearchFilter", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]

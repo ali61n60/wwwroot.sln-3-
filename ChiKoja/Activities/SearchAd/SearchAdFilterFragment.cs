@@ -4,12 +4,10 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Support.V4.App;
 using Android.Views;
-using ChiKoja.Categories;
+using ChiKoja.Activities.SearchAd.SearchFilter;
 using ChiKoja.Interfaces.SingleAd;
-using ChiKoja.Models;
-using ChiKoja.SearchAd.SearchFilter;
 
-namespace ChiKoja.SearchAd
+namespace ChiKoja.Activities.SearchAd
 {
     class SearchAdFilterFragment : Fragment
     {

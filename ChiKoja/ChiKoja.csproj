@@ -332,7 +332,7 @@
     <Compile Include="Services\Server\ServicesCommon.cs" />
     <Compile Include="ArrayAdapters\SingleAd\SingleAdArrayAdapter.cs" />
     <Compile Include="Interfaces\SingleAd\ISingleAdEvents.cs" />
-    <Compile Include="SplashActivity\SplashActivity.cs" />
+    <Compile Include="Activities\SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
     <Compile Include="Utility\ScreenUtility .cs" />
     <Compile Include="ViewServer\ActivityViewServerTest.cs" />

@@ -5,7 +5,7 @@ using Android.Views;
 using ModelStd.Advertisements;
 
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     public class AdDetailTransportationFragment : CategorySpecificBaseFragment
     {

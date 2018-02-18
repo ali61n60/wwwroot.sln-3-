@@ -2,13 +2,12 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Widget;
+using ChiKoja.Activities.SearchAd;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
-using ChiKoja.SearchAd;
 
-namespace ChiKoja.SplashActivity
+namespace ChiKoja.Activities.SplashActivity
 {
     [Activity(Theme = "@style/Theme.Main", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : NavActivity

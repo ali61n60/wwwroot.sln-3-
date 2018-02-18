@@ -7,7 +7,7 @@ using Android.Support.V7.Widget;
 using Android.Widget;
 using ChiKoja.Repository.Filter;
 
-namespace ChiKoja.SearchAd
+namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
     [Activity(Label = "ActivitySortBy", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class ActivitySortBy : AppCompatActivity

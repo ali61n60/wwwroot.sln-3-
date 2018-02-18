@@ -7,16 +7,14 @@ using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.ArrayAdapters.SingleAd;
-using ChiKoja.Categories;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Interfaces.SingleAd;
-using ChiKoja.Models;
 using ChiKoja.Notification;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 
-namespace ChiKoja.SearchAd
+namespace ChiKoja.Activities.SearchAd
 {
     public class SearchAdMainFragment : Fragment
     {

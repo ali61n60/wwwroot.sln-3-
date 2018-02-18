@@ -5,7 +5,7 @@ using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Widget;
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     class AdDetailContactOwnerFragment:Fragment
     {

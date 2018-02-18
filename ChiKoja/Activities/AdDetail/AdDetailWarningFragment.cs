@@ -2,7 +2,7 @@
 using Android.Support.V4.App;
 using Android.Views;
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     public class AdDetailWarningFragment:Fragment
     {

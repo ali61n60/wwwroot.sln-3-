@@ -1,9 +1,8 @@
 ﻿using Android.OS;
-using Android.Support.V4.App;
 using Android.Views;
 using ModelStd.Advertisements;
 
-namespace ChiKoja.AdDetail
+namespace ChiKoja.Activities.AdDetail
 {
     public class AdDetailDefaultFragment : CategorySpecificBaseFragment
     {
