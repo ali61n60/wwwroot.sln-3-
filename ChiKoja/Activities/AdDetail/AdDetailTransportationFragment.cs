@@ -7,7 +7,7 @@ using ModelStd.Advertisements;
 
 namespace ChiKoja.Activities.AdDetail
 {
-    public class AdDetailTransportationFragment : CategorySpecificBaseFragment
+    public class AdDetailTransportationFragment : AdDetailCategorySpecificBaseFragment
     {
         
 

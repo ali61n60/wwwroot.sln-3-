@@ -4,7 +4,7 @@ using ModelStd.Advertisements;
 
 namespace ChiKoja.Activities.AdDetail
 {
-    public class AdDetailDefaultFragment : CategorySpecificBaseFragment
+    public class AdDetailDefaultFragment : AdDetailCategorySpecificBaseFragment
     {
         public override void OnCreate(Bundle savedInstanceState)
         {

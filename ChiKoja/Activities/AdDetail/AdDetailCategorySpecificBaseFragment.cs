@@ -3,7 +3,7 @@ using ModelStd.Advertisements;
 
 namespace ChiKoja.Activities.AdDetail
 {
-    public abstract class CategorySpecificBaseFragment:Fragment
+    public abstract class AdDetailCategorySpecificBaseFragment:Fragment
     {
         public abstract void SetAdDetailData(AdvertisementCommon adDetail);
     }

@@ -26,7 +26,7 @@ namespace ChiKoja.Activities.AdDetail
         private AdDetailTopTopFragment adDetailTopTopFragment;
         private AdDetailImageFragment adDetailImageFragment;
         private AdDetailCommonPartFragment adDetailCommonPartFragment;
-        private CategorySpecificBaseFragment categorySpecificFragment;
+        private AdDetailCategorySpecificBaseFragment _adDetailCategorySpecificFragment;
         private AdDetailWarningFragment _adDetailWarningFragment;
         private AdDetailSimilarAdsFragment _adDetailSimilarAdsFragment;
         private AdDetailContactOwnerFragment _adDetailContactOwnerFragment;
@@ -49,7 +49,7 @@ namespace ChiKoja.Activities.AdDetail
             
             adDetailImageFragment.SetImages(advertisementCommon.AdImages.ToList());
             adDetailCommonPartFragment.SetAdvertisementCommon(advertisementCommon);
-            categorySpecificFragment.SetAdDetailData(advertisementCommon);
+            _adDetailCategorySpecificFragment.SetAdDetailData(advertisementCommon);
             //warning data
             //similar ad data
 
@@ -152,9 +152,9 @@ namespace ChiKoja.Activities.AdDetail
         private void addCategorySpecificPart()
         {
             
-            categorySpecificFragment = AdViewContainer.GetCategorySpecificAdDetailViewFragment(categoryId);
+            _adDetailCategorySpecificFragment = AdViewContainer.GetCategorySpecificAdDetailViewFragment(categoryId);
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.category_specific_part, categorySpecificFragment)
+                .Add(Resource.Id.category_specific_part, _adDetailCategorySpecificFragment)
                 .Commit();
         }
 

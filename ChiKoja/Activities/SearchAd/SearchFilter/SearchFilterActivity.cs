@@ -5,6 +5,7 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using ChiKoja.Categories;
+using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Models;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
@@ -20,6 +21,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         //TODO format edittext to show numbers 12,123
 
         private SearchFilterTopTopFragment searchFilterTopTop;
+        private SearchFilterCategorySpecificBaseCriteria searchFilterCategorySpecificCriteria;
         private AppCompatButton buttonCategory;
         private AppCompatButton buttonSort;
         
@@ -30,9 +32,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
 
         CommonFilter commonFilter;
-       // View rootView;
-       
-       
+      
         private bool filterParameterChangedByUser = false;
 
         
@@ -44,9 +44,6 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             initializeFields();
             initializeEvents();
             addFragments();
-            
-            
-            
         }
         private void inflateView()
         {
@@ -56,7 +53,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         }
         private void initializeFields()
         {
-            //ommonFilter = new CommonFilter();
+            commonFilter = new CommonFilter();
             buttonCategory = FindViewById<AppCompatButton>(Resource.Id.buttonCategory);
             buttonSort = FindViewById<AppCompatButton>(Resource.Id.buttonSort);
 
@@ -70,7 +67,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private void addFragments()
         {
             addTopTop();
-            // addCategorySpecific(); category_specific_part
+            addCategorySpecific(); 
         }
 
         private void initializeEvents()
@@ -87,6 +84,15 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
                 .Commit();
         }
 
+        private void addCategorySpecific()
+        {
+            //TODO get user selected category from somewhere
+            int categoryId = 0;
+            searchFilterCategorySpecificCriteria= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.category_specific_part, searchFilterCategorySpecificCriteria)
+                .Commit();
+        }
         void buttonReturn_Click(object sender, EventArgs e)
         {
             if (filterParameterChangedByUser)

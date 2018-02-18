@@ -254,6 +254,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCategorySpecificBaseCriteria.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterTopTopFragment.cs" />
     <Compile Include="Activity1.cs" />
     <Compile Include="Activities\AdDetail\AdDetailActivity.cs" />
@@ -265,7 +266,7 @@
     <Compile Include="Activities\AdDetail\AdDetailTopTopFragment.cs" />
     <Compile Include="Activities\AdDetail\AdDetailTransportationFragment.cs" />
     <Compile Include="Activities\AdDetail\AdDetailWarningFragment.cs" />
-    <Compile Include="Activities\AdDetail\CategorySpecificBaseFragment.cs" />
+    <Compile Include="Activities\AdDetail\AdDetailCategorySpecificBaseFragment.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
     <Compile Include="BroadcastReceiver\ActivityBroadcastReceiverSms.cs" />

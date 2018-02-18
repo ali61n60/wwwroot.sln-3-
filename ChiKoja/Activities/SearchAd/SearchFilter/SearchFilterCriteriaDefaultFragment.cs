@@ -1,6 +1,5 @@
 ﻿using Android.Content;
 using Android.OS;
-using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Views;
@@ -8,7 +7,7 @@ using Android.Widget;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
-    public class SearchCriteriaDefault : Fragment
+    public class SearchFilterCriteriaDefaultFragment : SearchFilterCategorySpecificBaseCriteria
     {
         private Context _context;
         View rootView;
@@ -18,7 +17,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         AppCompatCheckBox checkBoxOnlyWithPictures;
         AppCompatCheckBox checkBoxUrgentAdsOnly;
 
-        public SearchCriteriaDefault()
+        public SearchFilterCriteriaDefaultFragment()
         {
         }
 
