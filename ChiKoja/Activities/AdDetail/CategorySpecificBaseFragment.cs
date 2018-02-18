@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
+﻿using Android.Support.V4.App;
 using ModelStd.Advertisements;
 
 namespace ChiKoja.AdDetail
 {
-    public abstract class CategorySpecificBaseFragment:Android.Support.V4.App.Fragment
+    public abstract class CategorySpecificBaseFragment:Fragment
     {
         public abstract void SetAdDetailData(AdvertisementCommon adDetail);
     }

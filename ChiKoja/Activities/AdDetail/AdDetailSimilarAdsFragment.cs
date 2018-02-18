@@ -12,13 +12,13 @@ using Android.Widget;
 
 namespace ChiKoja.AdDetail
 {
-    public class AdDetailWarning:Fragment
+    public class AdDetailSimilarAdsFragment:Fragment
     {
         private View rootView;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.ad_detail_warning_frag, container, false);
+            rootView = inflater.Inflate(Resource.Layout.ad_detail_similar_ads_frag, container, false);
             return rootView;
         }
 

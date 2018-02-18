@@ -27,9 +27,9 @@ namespace ChiKoja.AdDetail
         private AdDetailImageFragment adDetailImageFragment;
         private AdDetailCommonPartFragment adDetailCommonPartFragment;
         private CategorySpecificBaseFragment categorySpecificFragment;
-        private AdDetailWarning adDetailWarning;
-        private AdDetailSimilarAds adDetailSimilarAds;
-        private AdDetailContactOwner adDetailContactOwner;
+        private AdDetailWarningFragment _adDetailWarningFragment;
+        private AdDetailSimilarAdsFragment _adDetailSimilarAdsFragment;
+        private AdDetailContactOwnerFragment _adDetailContactOwnerFragment;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -53,7 +53,7 @@ namespace ChiKoja.AdDetail
             //warning data
             //similar ad data
 
-            adDetailContactOwner.SetPhoneNumber(advertisementCommon.PhoneNumber);
+            _adDetailContactOwnerFragment.SetPhoneNumber(advertisementCommon.PhoneNumber);
 
         }
         private async Task<AdvertisementTransportation> getAdDetailFromServer()
@@ -160,26 +160,26 @@ namespace ChiKoja.AdDetail
 
         private void addWarning()
         {
-            adDetailWarning =new AdDetailWarning();
+            _adDetailWarningFragment =new AdDetailWarningFragment();
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.warning, adDetailWarning)
+                .Add(Resource.Id.warning, _adDetailWarningFragment)
                 .Commit();
         }
 
         private void addSimilarAds()
         {
-            adDetailSimilarAds=new AdDetailSimilarAds();
+            _adDetailSimilarAdsFragment=new AdDetailSimilarAdsFragment();
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.similar_ads, adDetailSimilarAds)
+                .Add(Resource.Id.similar_ads, _adDetailSimilarAdsFragment)
                 .Commit();
         }
 
 
         private void addContactOwner()
         {
-            adDetailContactOwner = new AdDetailContactOwner();
+            _adDetailContactOwnerFragment = new AdDetailContactOwnerFragment();
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.contact_owner, adDetailContactOwner)
+                .Add(Resource.Id.contact_owner, _adDetailContactOwnerFragment)
                 .Commit();
         }
 

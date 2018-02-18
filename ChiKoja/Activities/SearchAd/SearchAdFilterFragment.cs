@@ -11,14 +11,14 @@ using ChiKoja.SearchAd.SearchFilter;
 
 namespace ChiKoja.SearchAd
 {
-    class SearchFilterFragment : Fragment
+    class SearchAdFilterFragment : Fragment
     {
         private ISingleAdEvents _singleAdEvents;
         private Context _context;
         View rootView;
         AppCompatButton buttonFilter;
         
-        public SearchFilterFragment()
+        public SearchAdFilterFragment()
         {
         }
 

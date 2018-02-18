@@ -23,7 +23,7 @@ namespace ChiKoja.SearchAd.SearchFilter
         //TODO store initial values into class variables and check new value against that
         //TODO format edittext to show numbers 12,123
 
-        private SearchFilterTopTop searchFilterTopTop;
+        private SearchFilterTopTopFragment searchFilterTopTop;
         private AppCompatButton buttonCategory;
         private AppCompatButton buttonSort;
         
@@ -85,7 +85,7 @@ namespace ChiKoja.SearchAd.SearchFilter
 
         private void addTopTop()
         {
-            searchFilterTopTop=new SearchFilterTopTop();
+            searchFilterTopTop=new SearchFilterTopTopFragment();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.top_top, searchFilterTopTop)
                 .Commit();

@@ -7,7 +7,7 @@ using Android.Widget;
 
 namespace ChiKoja.AdDetail
 {
-    class AdDetailContactOwner:Fragment
+    class AdDetailContactOwnerFragment:Fragment
     {
         View rootView;
         private AppCompatButton  buttonCall;

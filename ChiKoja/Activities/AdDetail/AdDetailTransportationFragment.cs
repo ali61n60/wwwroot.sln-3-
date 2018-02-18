@@ -2,7 +2,6 @@ using System;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 using ModelStd.Advertisements;
 
 

@@ -7,13 +7,13 @@ using Android.Widget;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
-    public class SearchFilterTopTop:Fragment
+    public class SearchFilterTopTopFragment:Fragment
     {
         private Context _context;
         View rootView;
         ImageButton imageButtonBack;
 
-        public SearchFilterTopTop()
+        public SearchFilterTopTopFragment()
         {
         }
 

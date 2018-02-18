@@ -1,24 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
+﻿using Android.OS;
 using Android.Support.V4.App;
 using Android.Views;
-using Android.Widget;
 
 namespace ChiKoja.AdDetail
 {
-    public class AdDetailSimilarAds:Fragment
+    public class AdDetailWarningFragment:Fragment
     {
         private View rootView;
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.ad_detail_similar_ads_frag, container, false);
+            rootView = inflater.Inflate(Resource.Layout.ad_detail_warning_frag, container, false);
             return rootView;
         }
 

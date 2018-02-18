@@ -254,17 +254,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterTopTop.cs" />
+    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterTopTopFragment.cs" />
     <Compile Include="Activity1.cs" />
     <Compile Include="Activities\AdDetail\AdDetailActivity.cs" />
     <Compile Include="Activities\AdDetail\AdDetailCommonPartFragment.cs" />
-    <Compile Include="Activities\AdDetail\AdDetailContactOwner.cs" />
+    <Compile Include="Activities\AdDetail\AdDetailContactOwnerFragment.cs" />
     <Compile Include="Activities\AdDetail\AdDetailDefaultFragment.cs" />
     <Compile Include="Activities\AdDetail\AdDetailImageFragment.cs" />
-    <Compile Include="Activities\AdDetail\AdDetailSimilarAds.cs" />
+    <Compile Include="Activities\AdDetail\AdDetailSimilarAdsFragment.cs" />
     <Compile Include="Activities\AdDetail\AdDetailTopTopFragment.cs" />
     <Compile Include="Activities\AdDetail\AdDetailTransportationFragment.cs" />
-    <Compile Include="Activities\AdDetail\AdDetailWarning.cs" />
+    <Compile Include="Activities\AdDetail\AdDetailWarningFragment.cs" />
     <Compile Include="Activities\AdDetail\CategorySpecificBaseFragment.cs" />
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
@@ -308,12 +308,12 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Activities\SearchAd\SearchAdActivity.cs" />
-    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCriteriaDefault.cs" />
-    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCriteriaTransportation.cs" />
+    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCriteriaDefaultFragment.cs" />
+    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCriteriaTransportationFragment.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterActivity.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\ActivitySortBy.cs" />
-    <Compile Include="Activities\SearchAd\SearchMainFragment.cs" />
-    <Compile Include="Activities\SearchAd\SearchFilterFragment.cs" />
+    <Compile Include="Activities\SearchAd\SearchAdMainFragment.cs" />
+    <Compile Include="Activities\SearchAd\SearchAdFilterFragment.cs" />
     <Compile Include="Activities\UserAd\ActivityUserAds.cs" />
     <Compile Include="Services\Example\MyService.cs" />
     <Compile Include="Services\Example\ServiceExampleActivity.cs" />
