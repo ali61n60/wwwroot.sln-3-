@@ -18,9 +18,6 @@ namespace ChiKoja.SearchAd
         View rootView;
         AppCompatButton buttonFilter;
         
-
-        private CategorySelection _categorySelection;
-
         public SearchFilterFragment()
         {
         }
@@ -57,21 +54,11 @@ namespace ChiKoja.SearchAd
 
         private void initializeEvents()
         {
-            buttonFilter.Click += buttonFilter_Click;
-
-           
-            _categorySelection.SelectedCategoryCahnged += (sender, args) =>
+            buttonFilter.Click += (sender, args) =>
             {
-
-            };
-        }
-
-      
-
-        void buttonFilter_Click(object sender, EventArgs e)
-        {
-            Intent searchFilterIntent = new Intent(_context, typeof(SearchFilterActivity));
-            StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);
-        }
+                Intent searchFilterIntent = new Intent(_context, typeof(SearchFilterActivity));
+                StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);
+            };   
+        }      
     }
 }

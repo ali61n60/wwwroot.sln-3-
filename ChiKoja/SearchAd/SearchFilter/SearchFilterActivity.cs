@@ -19,7 +19,10 @@ namespace ChiKoja.SearchAd.SearchFilter
     {
         //TODO store initial values into class variables and check new value against that
         //TODO format edittext to show numbers 12,123
-            
+
+        private CategorySelection _categorySelection;
+
+
         CommonFilter commonFilter;
        // View rootView;
         AppCompatButton buttonReturn;
@@ -55,6 +58,11 @@ namespace ChiKoja.SearchAd.SearchFilter
             checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
             checkBoxUrgentAdsOnly = FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
             checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
+
+            _categorySelection.SelectedCategoryCahnged += (sender, args) =>
+            {
+
+            };
         }
 
         void checkBoxUrgentAdsOnly_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)

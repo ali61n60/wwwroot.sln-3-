@@ -310,7 +310,7 @@
     <Compile Include="SearchAd\SearchFilter\SearchCriteriaDefault.cs" />
     <Compile Include="SearchAd\SearchFilter\SearchCriteriaTransportation.cs" />
     <Compile Include="SearchAd\SearchFilter\SearchFilterActivity.cs" />
-    <Compile Include="SearchAd\ActivitySortBy.cs" />
+    <Compile Include="SearchAd\SearchFilter\ActivitySortBy.cs" />
     <Compile Include="SearchAd\SearchMain.cs" />
     <Compile Include="SearchAd\SearchFilter.cs" />
     <Compile Include="SearchAd\UserAd\ActivityUserAds.cs" />
