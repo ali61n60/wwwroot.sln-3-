@@ -16,10 +16,8 @@ namespace ChiKoja.SearchAd
         private Context _context;
         View rootView;
         AppCompatButton buttonFilter;
-        AppCompatButton buttonSort;
-        AppCompatButton buttonCategory;
-
-        private CategorySelection _categorySelection;
+        
+        
 
         public SearchFilter()
         {
@@ -52,44 +50,15 @@ namespace ChiKoja.SearchAd
         private void initializeFields()
         {
             buttonFilter = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonFilter);
-            buttonSort = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSort);
-            buttonCategory = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonCategory);
-
-            _categorySelection = new CategorySelection();
         }
 
         private void initializeEvents()
         {
-            buttonFilter.Click += buttonFilter_Click;
-
-            buttonSort.Click += buttonSortBy_Click;
-
-            buttonCategory.Click += buttonCategory_Click;
-
-            _categorySelection.SelectedCategoryCahnged += (sender, args) =>
+            buttonFilter.Click += (sender, args) =>
             {
-
+                Intent searchFilterIntent = new Intent(_context, typeof(ActivitySearchFilter));
+                StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);
             };
-        }
-
-        void buttonCategory_Click(object sender, EventArgs e)
-        {
-            Intent categorySelectionIntent = new Intent(_context, typeof(ActivityCategory));
-
-            categorySelectionIntent.PutExtra("CategorySelection", _categorySelection);
-            StartActivityForResult(categorySelectionIntent, SearchAdActivity.CategorySelectionRequestCode);
-        }
-
-        private void buttonSortBy_Click(object sender, EventArgs eventArgs)
-        {
-            Intent orderByIntent = new Intent(_context, typeof(ActivitySortBy));
-            StartActivityForResult(orderByIntent, NavigationDrawer.NavActivity.OrderByRequestCode);
-        }
-
-        void buttonFilter_Click(object sender, EventArgs e)
-        {
-            Intent searchFilterIntent = new Intent(_context, typeof(ActivitySearchFilter));
-            StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);
         }
     }
 }

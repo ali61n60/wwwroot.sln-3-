@@ -6,6 +6,8 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Widget;
+using ChiKoja.Categories;
+using ChiKoja.Models;
 using ChiKoja.Repository.Filter;
 
 
@@ -26,6 +28,8 @@ namespace ChiKoja.SearchAd
         AppCompatCheckBox checkBoxOnlyWithPictures;
         AppCompatCheckBox checkBoxUrgentAdsOnly;
         private bool filterParameterChangedByUser = false;
+
+        private CategorySelection _categorySelection;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -100,6 +104,20 @@ namespace ChiKoja.SearchAd
             data.PutExtra("SearchFilterChanged", filterParameterChangedByUser);
             SetResult(Result.Ok, data);
             Finish();
+        }
+
+        void buttonCategory_Click(object sender, EventArgs e)
+        {
+            Intent categorySelectionIntent = new Intent(this, typeof(ActivityCategory));
+
+            categorySelectionIntent.PutExtra("CategorySelection", _categorySelection);
+            StartActivityForResult(categorySelectionIntent, SearchAdActivity.CategorySelectionRequestCode);
+        }
+
+        private void buttonSortBy_Click(object sender, EventArgs eventArgs)
+        {
+            Intent orderByIntent = new Intent(this, typeof(ActivitySortBy));
+            StartActivityForResult(orderByIntent, NavigationDrawer.NavActivity.OrderByRequestCode);
         }
 
     }
