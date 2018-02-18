@@ -18,7 +18,7 @@ using ModelStd.Services;
 
 namespace ChiKoja.SearchAd
 {
-    public class SearchMain : Fragment
+    public class SearchMainFragment : Fragment
     {
         private SingleAdArrayAdapter _singleAdArrayAdapter;
         private ISingleAdEvents _singleAdEvents;
@@ -32,11 +32,11 @@ namespace ChiKoja.SearchAd
         IAdApi _adApi;
 
         // ReSharper disable once EmptyConstructor
-        public SearchMain() { }
+        public SearchMainFragment() { }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.serarch_main, container, false);
+            rootView = inflater.Inflate(Resource.Layout.search_ad_main_frag, container, false);
 
             initializeFields();
             initializeEvents();

@@ -2003,8 +2003,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700a2
 			public const int buttonCancel = 2131165346;
 			
-			// aapt resource value: 0x7f0700fd
-			public const int buttonCategory = 2131165437;
+			// aapt resource value: 0x7f0700f9
+			public const int buttonCategory = 2131165433;
 			
 			// aapt resource value: 0x7f0700a4
 			public const int buttonClearAll = 2131165348;
@@ -2015,8 +2015,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f07010f
 			public const int buttonEdit = 2131165455;
 			
-			// aapt resource value: 0x7f0700fc
-			public const int buttonFilter = 2131165436;
+			// aapt resource value: 0x7f0700f2
+			public const int buttonFilter = 2131165426;
 			
 			// aapt resource value: 0x7f0700d2
 			public const int buttonLogout = 2131165394;
@@ -2030,8 +2030,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700c7
 			public const int buttonReturn = 2131165383;
 			
-			// aapt resource value: 0x7f0700ff
-			public const int buttonSearch = 2131165439;
+			// aapt resource value: 0x7f0700f7
+			public const int buttonSearch = 2131165431;
 			
 			// aapt resource value: 0x7f0700a3
 			public const int buttonSelectAll = 2131165347;
@@ -2057,8 +2057,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700d3
 			public const int buttonSignIn = 2131165395;
 			
-			// aapt resource value: 0x7f0700f3
-			public const int buttonSort = 2131165427;
+			// aapt resource value: 0x7f0700fa
+			public const int buttonSort = 2131165434;
 			
 			// aapt resource value: 0x7f0700c6
 			public const int buttonStopWorkerThread = 2131165382;
@@ -2084,14 +2084,14 @@ namespace ChiKoja
 			// aapt resource value: 0x7f07002d
 			public const int center_vertical = 2131165229;
 			
-			// aapt resource value: 0x7f0700f9
-			public const int checkBoxOnlyWithPictures = 2131165433;
+			// aapt resource value: 0x7f070100
+			public const int checkBoxOnlyWithPictures = 2131165440;
 			
 			// aapt resource value: 0x7f07010a
 			public const int checkBoxSelectCategoryAndAllChildren = 2131165450;
 			
-			// aapt resource value: 0x7f0700f8
-			public const int checkBoxUrgentAdsOnly = 2131165432;
+			// aapt resource value: 0x7f0700ff
+			public const int checkBoxUrgentAdsOnly = 2131165439;
 			
 			// aapt resource value: 0x7f070052
 			public const int checkbox = 2131165266;
@@ -2159,11 +2159,11 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700db
 			public const int editTextCategoryId = 2131165403;
 			
-			// aapt resource value: 0x7f0700f7
-			public const int editTextMaximumPrice = 2131165431;
+			// aapt resource value: 0x7f0700fe
+			public const int editTextMaximumPrice = 2131165438;
 			
-			// aapt resource value: 0x7f0700f5
-			public const int editTextMinimumPrice = 2131165429;
+			// aapt resource value: 0x7f0700fc
+			public const int editTextMinimumPrice = 2131165436;
 			
 			// aapt resource value: 0x7f0700d1
 			public const int editTextPassword = 2131165393;
@@ -2213,11 +2213,11 @@ namespace ChiKoja
 			// aapt resource value: 0x7f070103
 			public const int frameLayoutImageSecion = 2131165443;
 			
-			// aapt resource value: 0x7f0700f1
-			public const int frame_layout_left = 2131165425;
+			// aapt resource value: 0x7f0700f4
+			public const int frame_layout_left = 2131165428;
 			
-			// aapt resource value: 0x7f0700f2
-			public const int frame_layout_right = 2131165426;
+			// aapt resource value: 0x7f0700f5
+			public const int frame_layout_right = 2131165429;
 			
 			// aapt resource value: 0x7f070115
 			public const int gifview = 2131165461;
@@ -2312,14 +2312,14 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700cd
 			public const int linearLayoutProvinceHolder = 2131165389;
 			
-			// aapt resource value: 0x7f0700fb
-			public const int linearLayoutToolbar2 = 2131165435;
+			// aapt resource value: 0x7f0700f1
+			public const int linearLayoutToolbar2 = 2131165425;
 			
 			// aapt resource value: 0x7f07000b
 			public const int listMode = 2131165195;
 			
-			// aapt resource value: 0x7f070100
-			public const int listViewAdCommon = 2131165440;
+			// aapt resource value: 0x7f0700f8
+			public const int listViewAdCommon = 2131165432;
 			
 			// aapt resource value: 0x7f0700ca
 			public const int listViewAllProvinces = 2131165386;
@@ -2423,8 +2423,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f070105
 			public const int relativeLayoutDataSection = 2131165445;
 			
-			// aapt resource value: 0x7f0700fe
-			public const int relativeLayoutMain = 2131165438;
+			// aapt resource value: 0x7f0700f6
+			public const int relativeLayoutMain = 2131165430;
 			
 			// aapt resource value: 0x7f070030
 			public const int right = 2131165232;
@@ -2432,8 +2432,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f070069
 			public const int root = 2131165289;
 			
-			// aapt resource value: 0x7f0700f0
-			public const int root_container = 2131165424;
+			// aapt resource value: 0x7f0700f3
+			public const int root_container = 2131165427;
 			
 			// aapt resource value: 0x7f070017
 			public const int screen = 2131165207;
@@ -2687,8 +2687,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f070098
 			public const int textViewMakeYearLabel = 2131165336;
 			
-			// aapt resource value: 0x7f0700f6
-			public const int textViewMaximumPrice = 2131165430;
+			// aapt resource value: 0x7f0700fd
+			public const int textViewMaximumPrice = 2131165437;
 			
 			// aapt resource value: 0x7f0700d4
 			public const int textViewMessage = 2131165396;
@@ -2699,8 +2699,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f07009b
 			public const int textViewMileageLabel = 2131165339;
 			
-			// aapt resource value: 0x7f0700f4
-			public const int textViewMinimumPrice = 2131165428;
+			// aapt resource value: 0x7f0700fb
+			public const int textViewMinimumPrice = 2131165435;
 			
 			// aapt resource value: 0x7f0700de
 			public const int textViewModel = 2131165406;
@@ -2747,8 +2747,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700d5
 			public const int toolbar = 2131165397;
 			
-			// aapt resource value: 0x7f0700fa
-			public const int toolbar2 = 2131165434;
+			// aapt resource value: 0x7f0700f0
+			public const int toolbar2 = 2131165424;
 			
 			// aapt resource value: 0x7f070032
 			public const int top = 2131165234;
@@ -2915,28 +2915,28 @@ namespace ChiKoja
 			public const int abc_select_dialog_material = 2130903064;
 			
 			// aapt resource value: 0x7f030019
-			public const int ad_detail = 2130903065;
+			public const int ad_detail_act = 2130903065;
 			
 			// aapt resource value: 0x7f03001a
-			public const int ad_detail_common_part = 2130903066;
+			public const int ad_detail_common_part_frag = 2130903066;
 			
 			// aapt resource value: 0x7f03001b
-			public const int ad_detail_contact_owner = 2130903067;
+			public const int ad_detail_contact_owner_frag = 2130903067;
 			
 			// aapt resource value: 0x7f03001c
-			public const int ad_detail_image = 2130903068;
+			public const int ad_detail_image_frag = 2130903068;
 			
 			// aapt resource value: 0x7f03001d
-			public const int ad_detail_similar_ads = 2130903069;
+			public const int ad_detail_similar_ads_frag = 2130903069;
 			
 			// aapt resource value: 0x7f03001e
-			public const int ad_detail_toptop = 2130903070;
+			public const int ad_detail_toptop_frag = 2130903070;
 			
 			// aapt resource value: 0x7f03001f
-			public const int ad_detail_transportation_fragment = 2130903071;
+			public const int ad_detail_transportation_frag = 2130903071;
 			
 			// aapt resource value: 0x7f030020
-			public const int ad_detail_warning = 2130903072;
+			public const int ad_detail_warning_frag = 2130903072;
 			
 			// aapt resource value: 0x7f030021
 			public const int alert_dialog = 2130903073;
@@ -3046,59 +3046,65 @@ namespace ChiKoja
 			// aapt resource value: 0x7f030044
 			public const int notification_template_part_time = 2130903108;
 			
+			// aapt resource value: 0x7f030058
+			public const int search_ad = 2130903128;
+			
 			// aapt resource value: 0x7f030045
-			public const int search_ad = 2130903109;
+			public const int search_ad_act = 2130903109;
 			
 			// aapt resource value: 0x7f030046
-			public const int search_ad_large = 2130903110;
+			public const int search_ad_filter_frag = 2130903110;
 			
 			// aapt resource value: 0x7f030047
-			public const int search_criteria_default = 2130903111;
+			public const int search_ad_large_act = 2130903111;
 			
 			// aapt resource value: 0x7f030048
-			public const int search_criteria_transportation = 2130903112;
+			public const int search_ad_main_frag = 2130903112;
 			
 			// aapt resource value: 0x7f030049
-			public const int search_filter = 2130903113;
+			public const int search_filter_act = 2130903113;
 			
 			// aapt resource value: 0x7f03004a
-			public const int search_filter_activity = 2130903114;
+			public const int search_filter_criteria_default_frag = 2130903114;
 			
 			// aapt resource value: 0x7f03004b
-			public const int select_dialog_item_material = 2130903115;
+			public const int search_filter_criteria_transportation_frag = 2130903115;
 			
 			// aapt resource value: 0x7f03004c
-			public const int select_dialog_multichoice_material = 2130903116;
+			public const int search_filter_toptop_frag = 2130903116;
 			
 			// aapt resource value: 0x7f03004d
-			public const int select_dialog_singlechoice_material = 2130903117;
+			public const int select_dialog_item_material = 2130903117;
 			
 			// aapt resource value: 0x7f03004e
-			public const int serarch_main = 2130903118;
+			public const int select_dialog_multichoice_material = 2130903118;
 			
 			// aapt resource value: 0x7f03004f
-			public const int service_example = 2130903119;
+			public const int select_dialog_singlechoice_material = 2130903119;
 			
 			// aapt resource value: 0x7f030050
-			public const int single_ad_view = 2130903120;
+			public const int service_example = 2130903120;
 			
 			// aapt resource value: 0x7f030051
-			public const int single_category = 2130903121;
+			public const int single_ad_view = 2130903121;
 			
 			// aapt resource value: 0x7f030052
-			public const int single_user_ad = 2130903122;
+			public const int single_category = 2130903122;
 			
 			// aapt resource value: 0x7f030053
-			public const int sort_by = 2130903123;
+			public const int single_user_ad = 2130903123;
 			
 			// aapt resource value: 0x7f030054
-			public const int splash_screen = 2130903124;
+			public const int sort_by = 2130903124;
 			
 			// aapt resource value: 0x7f030055
-			public const int support_simple_spinner_dropdown_item = 2130903125;
+			public const int splash_screen = 2130903125;
 			
 			// aapt resource value: 0x7f030056
-			public const int user_ads = 2130903126;
+			public const int support_simple_spinner_dropdown_item = 2130903126;
+			
+			// aapt resource value: 0x7f030057
+			public const int user_ads = 2130903127;
 			
 			static Layout()
 			{

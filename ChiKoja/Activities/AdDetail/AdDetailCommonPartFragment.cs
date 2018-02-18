@@ -15,7 +15,7 @@ namespace ChiKoja.AdDetail
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.ad_detail_common_part, container, false);
+            rootView = inflater.Inflate(Resource.Layout.ad_detail_common_part_frag, container, false);
             return rootView;
         }
 

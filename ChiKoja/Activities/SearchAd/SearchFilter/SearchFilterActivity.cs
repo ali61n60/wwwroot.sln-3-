@@ -6,8 +6,11 @@ using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Widget;
+using ChiKoja.Activities.SearchAd.SearchFilter;
+using ChiKoja.AdDetail;
 using ChiKoja.Categories;
 using ChiKoja.Models;
+using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
 
 
@@ -15,52 +18,78 @@ namespace ChiKoja.SearchAd.SearchFilter
 {
     //this class gets user input filters and stores them in preference storage via commonfilter class and ...
     [Activity(Label = "ActivitySearchFilter", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class SearchFilterActivity : AppCompatActivity
+    public class SearchFilterActivity : NavActivity
     {
         //TODO store initial values into class variables and check new value against that
         //TODO format edittext to show numbers 12,123
 
+        private SearchFilterTopTop searchFilterTopTop;
+        private AppCompatButton buttonCategory;
+        private AppCompatButton buttonSort;
+        
+
+
+        //category_specific_part
         private CategorySelection _categorySelection;
 
 
         CommonFilter commonFilter;
        // View rootView;
-        AppCompatButton buttonReturn;
+       
        
         private bool filterParameterChangedByUser = false;
 
-        //top_top
-        //buttonCategory
-        //buttonSort
-        //category_specific_part
+        
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             inflateView();
             initializeFields();
+            initializeEvents();
+            addFragments();
+            
+            
             
         }
         private void inflateView()
         {
-            SetContentView(Resource.Layout.filter);
+            FrameLayout contentFrameLayout =
+                FindViewById<FrameLayout>(Resource.Id.content_frame); //Remember this is the FrameLayout area within your activity_main.xml
+            LayoutInflater.Inflate(Resource.Layout.search_filter_act, contentFrameLayout);
         }
         private void initializeFields()
         {
-            commonFilter = new CommonFilter();
-            buttonReturn = FindViewById<AppCompatButton>(Resource.Id.buttonReturn);
-            buttonReturn.Click += buttonReturn_Click;
-            
+            //ommonFilter = new CommonFilter();
+            buttonCategory = FindViewById<AppCompatButton>(Resource.Id.buttonCategory);
+            buttonSort = FindViewById<AppCompatButton>(Resource.Id.buttonSort);
 
-            _categorySelection.SelectedCategoryCahnged += (sender, args) =>
-            {
 
-            };
+            //_categorySelection.SelectedCategoryCahnged += (sender, args) =>
+            //{
+
+            //};
         }
 
-        
+        private void addFragments()
+        {
+            addTopTop();
+            // addCategorySpecific(); category_specific_part
+        }
 
-        
+        private void initializeEvents()
+        {
+            buttonCategory.Click += buttonCategory_Click;
+            buttonSort.Click += buttonSortBy_Click;
+        }
+
+        private void addTopTop()
+        {
+            searchFilterTopTop=new SearchFilterTopTop();
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.top_top, searchFilterTopTop)
+                .Commit();
+        }
 
         void buttonReturn_Click(object sender, EventArgs e)
         {

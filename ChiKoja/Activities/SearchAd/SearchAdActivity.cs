@@ -15,8 +15,8 @@ namespace ChiKoja.SearchAd
     public class SearchAdActivity : NavActivity, ISingleAdEvents
     {
         //Fragments
-        private SearchMain searchMain;
-        private SearchFilter searchFilter;
+        private SearchMainFragment searchMain;
+        private SearchFilterFragment searchFilter;
 
         private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
@@ -54,7 +54,7 @@ namespace ChiKoja.SearchAd
 
         private void addMain()
         {
-            searchMain = new SearchMain();
+            searchMain = new SearchMainFragment();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.main, searchMain)
                 .Commit();
@@ -62,7 +62,7 @@ namespace ChiKoja.SearchAd
 
         private void addFilter()
         {
-            searchFilter=new SearchFilterActivity();
+            searchFilter=new SearchFilterFragment();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.filter, searchFilter)
                 .Commit();

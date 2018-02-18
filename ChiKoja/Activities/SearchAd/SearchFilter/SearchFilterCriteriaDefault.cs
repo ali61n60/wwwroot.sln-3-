@@ -1,5 +1,4 @@
-﻿
-using Android.Content;
+﻿using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V7.Widget;
@@ -9,7 +8,7 @@ using Android.Widget;
 
 namespace ChiKoja.SearchAd.SearchFilter
 {
-    class SearchCriteriaDefault : Fragment
+    public class SearchCriteriaDefault : Fragment
     {
         private Context _context;
         View rootView;
@@ -25,7 +24,7 @@ namespace ChiKoja.SearchAd.SearchFilter
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.search_criteria_default, container, false);
+            rootView = inflater.Inflate(Resource.Layout.search_filter_criteria_default_frag, container, false);
 
             initializeFields();
             initializeEvents();
@@ -67,15 +66,15 @@ namespace ChiKoja.SearchAd.SearchFilter
 
         private void filterParametersChangedByUser()
         {
-            filterParameterChangedByUser = true;
+           // filterParameterChangedByUser = true;
         }
 
         private void updateFieldsFromSavedPreferences()
         {
-            editTextMinimumPrice.Text = commonFilter.MinimumPrice.ToString("N0");
-            editTextMaximumPrice.Text = commonFilter.MaximumPrice.ToString("N0");
-            checkBoxOnlyWithPictures.Checked = commonFilter.OnlyWithPictures;
-            checkBoxUrgentAdsOnly.Checked = commonFilter.UrgentAdsOnly;
+            //editTextMinimumPrice.Text = commonFilter.MinimumPrice.ToString("N0");
+            //editTextMaximumPrice.Text = commonFilter.MaximumPrice.ToString("N0");
+            //checkBoxOnlyWithPictures.Checked = commonFilter.OnlyWithPictures;
+            //checkBoxUrgentAdsOnly.Checked = commonFilter.UrgentAdsOnly;
         }
 
     }
