@@ -95,21 +95,7 @@ namespace ModelStd.Db.Ad
             return "نامشخص";
         }
 
-        //TODO remove the usage of this method then remove it
-        public static FuelType GetFuelType(string fuelTypeString, FuelType defaultValue)
-        {
-            switch (fuelTypeString)
-            {
-                case "Petrol": return FuelType.Petrol;
-                case "Disel": return FuelType.Disel;
-                case "Gas": return FuelType.Gas;
-                case "GasPetrol": return FuelType.GasPetrol;
-                case "Electric": return FuelType.Electric;
-                case "Hybrid": return FuelType.Hybrid;
-            }
-            return defaultValue;
-        }
-
+       
         public static string GetGearboxTypeString(GearboxType gearboxType)
         {
             switch (gearboxType)
@@ -121,75 +107,29 @@ namespace ModelStd.Db.Ad
             return "نامشخص";
         }
 
-        //TODO remove the usage of this method then remove it
-        public static GearboxType GetGearboxType(string gearboxTypeString, GearboxType dedaultValue)
-        {
-            switch (gearboxTypeString)
-            {
-                case "Manual": return GearboxType.Manual;
-                case "Automatic": return GearboxType.Automatic;
-                case "UnSpecified": return GearboxType.UnSpecified;
-            }
-            return dedaultValue;
-        }
-
-        //TODO remove the usage of this method then remove it
-        public static BodyStatus GetBodyStatus(string bodyStatusString, BodyStatus defaultValue)
-        {
-            switch (bodyStatusString)
-            {
-                case "NoColor": return Db.Ad.BodyStatus.NoColor;
-                case "OnePieceColored": return Db.Ad.BodyStatus.OnePieceColored;
-                case "TwoPiecesColored": return Db.Ad.BodyStatus.TwoPiecesColored;
-                case "MultiPieceColored": return Db.Ad.BodyStatus.MultiPieceColored;
-                case "BumperColored": return Db.Ad.BodyStatus.BumperColored;
-                case "BumperChanged": return Db.Ad.BodyStatus.BumperChanged;
-                case "HoodColored": return Db.Ad.BodyStatus.HoodColored;
-                case "RoundColored": return Db.Ad.BodyStatus.RoundColored;
-                case "FullyColored": return Db.Ad.BodyStatus.FullyColored;
-                case "Accident": return Db.Ad.BodyStatus.Accident;
-                case "Scrap": return Db.Ad.BodyStatus.Scrap;
-                case "BodyChanged": return Db.Ad.BodyStatus.BodyChanged;
-                case "UnSpecified": return Db.Ad.BodyStatus.UnSpecified;
-            }
-            return defaultValue;
-        }
-
+       
         public static string GetBodyStatusString(BodyStatus bodyStatus)
         {
             switch (bodyStatus)
             {
-                case Db.Ad.BodyStatus.NoColor: return "بدون رنگ";
-                case Db.Ad.BodyStatus.OnePieceColored: return "یک تکه رنگ";
-                case Db.Ad.BodyStatus.TwoPiecesColored: return "دو تکه رنگ";
-                case Db.Ad.BodyStatus.MultiPieceColored: return "چند تکه رنگ";
-                case Db.Ad.BodyStatus.BumperColored: return "کاپوت رنگ";
-                case Db.Ad.BodyStatus.BumperChanged: return "کاپوت تعویض";
-                case Db.Ad.BodyStatus.HoodColored: return "صندوق رنگ";
-                case Db.Ad.BodyStatus.RoundColored: return "دور رنگ";
-                case Db.Ad.BodyStatus.FullyColored: return "کامل رنگ";
-                case Db.Ad.BodyStatus.Accident: return "تصادفی";
-                case Db.Ad.BodyStatus.Scrap: return "اوراقی";
-                case Db.Ad.BodyStatus.BodyChanged: return "بدنه تعویض";
-                case Db.Ad.BodyStatus.UnSpecified: return "نامشخص";
+                case BodyStatus.NoColor: return "بدون رنگ";
+                case BodyStatus.OnePieceColored: return "یک تکه رنگ";
+                case BodyStatus.TwoPiecesColored: return "دو تکه رنگ";
+                case BodyStatus.MultiPieceColored: return "چند تکه رنگ";
+                case BodyStatus.BumperColored: return "کاپوت رنگ";
+                case BodyStatus.BumperChanged: return "کاپوت تعویض";
+                case BodyStatus.HoodColored: return "صندوق رنگ";
+                case BodyStatus.RoundColored: return "دور رنگ";
+                case BodyStatus.FullyColored: return "کامل رنگ";
+                case BodyStatus.Accident: return "تصادفی";
+                case BodyStatus.Scrap: return "اوراقی";
+                case BodyStatus.BodyChanged: return "بدنه تعویض";
+                case BodyStatus.UnSpecified: return "نامشخص";
             }
             return "نامشخص";
         }
 
-        //TODO remove the usage of this method then remove it
-        public static CarStatus GetCarStatus(string carStatusString, CarStatus defaultValue)
-        {
-            switch (carStatusString)
-            {
-                case "New ": return Db.Ad.CarStatus.New;
-                case "Used": return Db.Ad.CarStatus.Used;
-                case "Draft": return Db.Ad.CarStatus.Draft;
-                case "UnSpecified": return Db.Ad.CarStatus.UnSpecified;
-            }
-
-            return defaultValue;
-        }
-
+        
         public static string GetCarStatusString(CarStatus carStatus)
         {
             switch (carStatus)
@@ -202,18 +142,7 @@ namespace ModelStd.Db.Ad
             return "نامشخص";
         }
 
-        //TODO remove the usage of this method then remove it
-        public static PlateType GetPlateType(string plateTypeString, PlateType defaultValue)
-        {
-            switch (plateTypeString)
-            {
-                case "National": return Db.Ad.PlateType.National;
-                case "FreeRegion": return Db.Ad.PlateType.FreeRegion;
-                case "Temporary": return Db.Ad.PlateType.Temporary;
-                case "UnSpecified": return Db.Ad.PlateType.UnSpecified;
-            }
-            return defaultValue;
-        }
+        
 
         public static string GetPlateTypeString(PlateType plateType)
         {

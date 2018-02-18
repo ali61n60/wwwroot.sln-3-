@@ -96,11 +96,6 @@ namespace RepositoryStd.Repository.Transportation
                         while (dataReader.Read())
                         {
                             AdvertisementTransportation tempAdvertisementTransportation = new AdvertisementTransportation();
-                            //responseBase = fillAdvertisementTransportationFromDataReader(tempAdvertisementTransportation, dataReader);
-                            //if (!responseBase.Success)
-                            //{
-                            //    throw new Exception(responseBase.Message);
-                            //}
                             searchResultItems.Add(tempAdvertisementTransportation);
                         }
                     }
@@ -302,9 +297,7 @@ namespace RepositoryStd.Repository.Transportation
                       
         private IQueryable<Advertisement> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            PlateType plateType = AdAttributeTransportation.GetPlateType(ParameterExtractor.ExtractString(queryParameters, PlateTypeKey,
-                    AdAttributeTransportation.GetPlateTypeString(PlateTypeDefault)),
-                PlateTypeDefault);
+            PlateType plateType =(PlateType)Enum.ToObject( typeof(PlateType),ParameterExtractor.ExtractInt(queryParameters, PlateTypeKey,(int)PlateTypeDefault));
             if (plateType != PlateTypeDefault)
             {
                 list = list.Where(advertisement =>
@@ -314,10 +307,8 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            CarStatus carStatus = AdAttributeTransportation.GetCarStatus(
-                ParameterExtractor.ExtractString(queryParameters, CarStatusKey,
-                    AdAttributeTransportation.GetCarStatusString(CarStatusDefault)),
-                CarStatusDefault);
+            CarStatus carStatus = (CarStatus)Enum.ToObject(typeof(CarStatus), ParameterExtractor.ExtractInt(queryParameters, CarStatusKey, (int)CarStatusDefault));
+            
             if (carStatus != CarStatusDefault)
             {
                 list = list.Where(advertisement =>
@@ -329,10 +320,8 @@ namespace RepositoryStd.Repository.Transportation
         private IQueryable<Advertisement> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             //TODO get BodyStatus as an integer from user
-            BodyStatus bodyStatus = AdAttributeTransportation.GetBodyStatus(
-                ParameterExtractor.ExtractString(queryParameters, BodyStatusKey,
-                    AdAttributeTransportation.GetBodyStatusString(BodyStatusDefault)),
-                BodyStatusDefault);
+            BodyStatus bodyStatus = (BodyStatus)Enum.ToObject(typeof(BodyStatus), ParameterExtractor.ExtractInt(queryParameters, BodyStatusKey, (int)BodyStatusDefault));
+            
             if (bodyStatus != BodyStatusDefault)
             {
                 list = list.Where(advertisement =>
@@ -363,10 +352,8 @@ namespace RepositoryStd.Repository.Transportation
         private IQueryable<Advertisement> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             //TODO get gearboxType as an integer from user
-            GearboxType gearboxType = AdAttributeTransportation.GetGearboxType(
-                ParameterExtractor.ExtractString(queryParameters, GearboxKey,
-                    AdAttributeTransportation.GetGearboxTypeString(GearboxDefault)),
-                GearboxDefault);
+            GearboxType gearboxType = (GearboxType)Enum.ToObject(typeof(GearboxType), ParameterExtractor.ExtractInt(queryParameters, GearboxKey, (int)GearboxDefault));
+            
             if (gearboxType != GearboxDefault)
             {
                 list = list.Where(advertisement =>advertisement.AdAttributeTransportation.GearboxType ==gearboxType);
@@ -390,9 +377,8 @@ namespace RepositoryStd.Repository.Transportation
         {
 
             //TODO get fuelType as an integer from user
-            FuelType fuelType = AdAttributeTransportation.GetFuelType(
-                ParameterExtractor.ExtractString(queryParameters, FuelTypeKey, AdAttributeTransportation.GetFuelTypeString(FuelTypeDefault)),
-                FuelTypeDefault);
+            FuelType fuelType = (FuelType)Enum.ToObject(typeof(FuelType), ParameterExtractor.ExtractInt(queryParameters, FuelTypeKey, (int)FuelTypeDefault));
+            
             if (fuelType != FuelTypeDefault)
             {
                 list = list.Where(advertisement =>
