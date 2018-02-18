@@ -26,20 +26,20 @@ namespace ChiKoja.SearchAd.SearchFilter
         CommonFilter commonFilter;
        // View rootView;
         AppCompatButton buttonReturn;
-        AppCompatEditText editTextMinimumPrice;
-        AppCompatEditText editTextMaximumPrice;
-        AppCompatCheckBox checkBoxOnlyWithPictures;
-        AppCompatCheckBox checkBoxUrgentAdsOnly;
+       
         private bool filterParameterChangedByUser = false;
 
-        private CategorySelection _categorySelection;
+        //top_top
+        //buttonCategory
+        //buttonSort
+        //category_specific_part
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             inflateView();
             initializeFields();
-            updateFieldsFromSavedPreferences();
+            
         }
         private void inflateView()
         {
@@ -50,14 +50,7 @@ namespace ChiKoja.SearchAd.SearchFilter
             commonFilter = new CommonFilter();
             buttonReturn = FindViewById<AppCompatButton>(Resource.Id.buttonReturn);
             buttonReturn.Click += buttonReturn_Click;
-            editTextMinimumPrice = FindViewById<AppCompatEditText>(Resource.Id.editTextMinimumPrice);
-            editTextMinimumPrice.TextChanged += editTextsPrice_TextChanged;
-            editTextMaximumPrice = FindViewById<AppCompatEditText>(Resource.Id.editTextMaximumPrice);
-            editTextMaximumPrice.TextChanged += editTextsPrice_TextChanged;
-            checkBoxOnlyWithPictures = FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxOnlyWithPictures);
-            checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
-            checkBoxUrgentAdsOnly = FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
-            checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
+            
 
             _categorySelection.SelectedCategoryCahnged += (sender, args) =>
             {
@@ -65,32 +58,9 @@ namespace ChiKoja.SearchAd.SearchFilter
             };
         }
 
-        void checkBoxUrgentAdsOnly_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            filterParametersChangedByUser();
-        }
+        
 
-        void checkBoxOnlyWithPictures_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            filterParametersChangedByUser();
-        }
-        private void editTextsPrice_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            filterParametersChangedByUser();
-        }
-
-        private void filterParametersChangedByUser()
-        {
-            filterParameterChangedByUser = true;
-        }
-
-        private void updateFieldsFromSavedPreferences()
-        {
-            editTextMinimumPrice.Text = commonFilter.MinimumPrice.ToString("N0");
-            editTextMaximumPrice.Text = commonFilter.MaximumPrice.ToString("N0");
-            checkBoxOnlyWithPictures.Checked = commonFilter.OnlyWithPictures;
-            checkBoxUrgentAdsOnly.Checked = commonFilter.UrgentAdsOnly;
-        }
+        
 
         void buttonReturn_Click(object sender, EventArgs e)
         {
@@ -98,10 +68,10 @@ namespace ChiKoja.SearchAd.SearchFilter
             {
                 try
                 {
-                    commonFilter.MinimumPrice = float.Parse(editTextMinimumPrice.Text);
-                    commonFilter.MaximumPrice = float.Parse(editTextMaximumPrice.Text);
-                    commonFilter.OnlyWithPictures = checkBoxOnlyWithPictures.Checked;
-                    commonFilter.UrgentAdsOnly = checkBoxUrgentAdsOnly.Checked;
+                    //commonFilter.MinimumPrice = float.Parse(editTextMinimumPrice.Text);
+                    //commonFilter.MaximumPrice = float.Parse(editTextMaximumPrice.Text);
+                    //commonFilter.OnlyWithPictures = checkBoxOnlyWithPictures.Checked;
+                    //commonFilter.UrgentAdsOnly = checkBoxUrgentAdsOnly.Checked;
                 }
                 catch (Exception ex)
                 {
