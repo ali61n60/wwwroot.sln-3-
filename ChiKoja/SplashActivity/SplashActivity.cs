@@ -10,16 +10,14 @@ using ChiKoja.SearchAd;
 
 namespace ChiKoja.SplashActivity
 {
-    [Activity(Theme = "@style/Theme.Splash", MainLauncher = true, NoHistory = true)]
+    [Activity(Theme = "@style/Theme.Main", MainLauncher = true, NoHistory = true)]
     public class SplashActivity : NavActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-           // SetContentView(Resource.Layout.splash_screen);
+            SetContentView(Resource.Layout.splash_screen);
            
-            
-
             checkDatabase();
             resetSearchFilter();
         }

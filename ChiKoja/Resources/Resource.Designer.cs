@@ -2072,8 +2072,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700eb
 			public const int cancel_action = 2131165419;
 			
-			// aapt resource value: 0x7f07006c
-			public const int category_specific_part = 2131165292;
+			// aapt resource value: 0x7f07006d
+			public const int category_specific_part = 2131165293;
 			
 			// aapt resource value: 0x7f07002b
 			public const int center = 2131165227;
@@ -2108,11 +2108,11 @@ namespace ChiKoja
 			// aapt resource value: 0x7f07001f
 			public const int collapseActionView = 2131165215;
 			
-			// aapt resource value: 0x7f07006b
-			public const int common_part = 2131165291;
+			// aapt resource value: 0x7f07006c
+			public const int common_part = 2131165292;
 			
-			// aapt resource value: 0x7f07006f
-			public const int contact_owner = 2131165295;
+			// aapt resource value: 0x7f07006b
+			public const int contact_owner = 2131165291;
 			
 			// aapt resource value: 0x7f0700c5
 			public const int content = 2131165381;
@@ -2219,6 +2219,9 @@ namespace ChiKoja
 			// aapt resource value: 0x7f0700fb
 			public const int frame_layout_right = 2131165435;
 			
+			// aapt resource value: 0x7f070118
+			public const int gifview = 2131165464;
+			
 			// aapt resource value: 0x7f0700c3
 			public const int handle = 2131165379;
 			
@@ -2242,9 +2245,6 @@ namespace ChiKoja
 			
 			// aapt resource value: 0x7f070079
 			public const int imageButtonBack = 2131165305;
-			
-			// aapt resource value: 0x7f070118
-			public const int imageView = 2131165464;
 			
 			// aapt resource value: 0x7f0700a0
 			public const int imageView1 = 2131165344;
@@ -2513,8 +2513,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f070013
 			public const int showTitle = 2131165203;
 			
-			// aapt resource value: 0x7f07006e
-			public const int similar_ads = 2131165294;
+			// aapt resource value: 0x7f07006f
+			public const int similar_ads = 2131165295;
 			
 			// aapt resource value: 0x7f0700c4
 			public const int slidingDrawer1 = 2131165380;
@@ -2780,8 +2780,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f07000a
 			public const int view_offset_helper = 2131165194;
 			
-			// aapt resource value: 0x7f07006d
-			public const int warning = 2131165293;
+			// aapt resource value: 0x7f07006e
+			public const int warning = 2131165294;
 			
 			// aapt resource value: 0x7f070022
 			public const int withText = 2131165218;

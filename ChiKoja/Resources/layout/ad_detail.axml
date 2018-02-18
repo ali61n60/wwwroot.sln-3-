@@ -16,51 +16,59 @@
         android:layout_alignParentTop="true"
         android:background="@color/primaryColor"
         android:minHeight="20dp"/>
-    <FrameLayout
-        android:id="@+id/image"
+
+
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/top_top"
-        android:minHeight="20dp"/>
-    <FrameLayout
-        android:id="@+id/common_part"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/image"
-        android:background="@color/primaryColor"
-        android:minHeight="20dp"/>
-    <FrameLayout
-        android:id="@+id/category_specific_part"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/common_part"
-        android:minHeight="20dp"/>
-    <FrameLayout
-        android:id="@+id/warning"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/category_specific_part"
-        android:background="@color/primaryColor"
-        android:minHeight="20dp"/>
-    <FrameLayout
-        android:id="@+id/similar_ads"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/warning"
-        android:minHeight="20dp"/>
+        android:layout_above="@+id/contact_owner"
+        android:background="@color/primaryLightColor"
+        android:minHeight="20dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <FrameLayout
+                android:id="@+id/image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryDarkColor"
+                android:minHeight="20dp"/>
+            <FrameLayout
+                android:id="@+id/common_part"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryColor"
+                android:minHeight="20dp" />
+
+            <FrameLayout
+                android:id="@+id/category_specific_part"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp" />
+
+            <FrameLayout
+                android:id="@+id/warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/primaryColor"
+                android:minHeight="20dp" />
+
+            <FrameLayout
+                android:id="@+id/similar_ads"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <FrameLayout
-
         android:id="@+id/contact_owner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
