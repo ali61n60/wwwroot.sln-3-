@@ -14,6 +14,13 @@
   <string name="CarModel">مدل</string>
   <string name="Fuel">سوخت</string>
   <string name="Gearbox">گیربکس</string>
+  <string name="Plate">نوع پلاک</string>
+  <string name="BodyColor">رنگ بدنه</string>
+  <string name="InternalColor">رنگ داخلی</string>
+  <string name="BodyStatus">وضعیت بدنه</string>
+  <string name="CarStatus">وضعیت ماشین</string>
+  <string name="MakeYear">سال تولید</string>
+  <string name="Mileage">کیلومتر</string>
   
   
   <string name="SignIn">ثبت نام</string>

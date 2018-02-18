@@ -16,7 +16,15 @@
     <string name="Fuel">Fuel</string>
     <string name="Gearbox">Gearbox</string>
 
-        <string name="SignIn">Sign In</string>
+    <string name="Plate">Plate</string>
+    <string name="BodyColor">Body Color</string>
+    <string name="InternalColor">Internal Color</string>
+    <string name="BodyStatus">Body Status</string>
+    <string name="CarStatus">Car Status</string>
+    <string name="MakeYear">Make Year</string>
+    <string name="Mileage">Mileage</string>
+
+    <string name="SignIn">Sign In</string>
     <string name="Logout">Logout</string>
     <string name="MyAds">My Ads</string>
     <string name="AlreadySignInMessage">You already are sign in</string>

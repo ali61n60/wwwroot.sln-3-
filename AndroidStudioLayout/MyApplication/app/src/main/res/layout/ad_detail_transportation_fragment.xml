@@ -69,6 +69,111 @@
           android:layout_weight="1"
           android:gravity="left" />
     </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRowPlateType">
+      <TextView
+          android:id="@+id/textViewPlateTypeLabel"
+          android:text="@string/Plate"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewPlateType"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRowBodyColor">
+      <TextView
+          android:id="@+id/textViewBodyColorLabel"
+          android:text="@string/BodyColor"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewBodyColor"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+
+    <TableRow
+        android:id="@+id/tableRowInternalColor">
+      <TextView
+          android:id="@+id/textViewInternalColorLabel"
+          android:text="@string/InternalColor"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewInternalColor"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRowBodyStatus">
+      <TextView
+          android:id="@+id/textViewBodyStatusLabel"
+          android:text="@string/BodyStatus"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewBodyStatus"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+
+
+
+    <TableRow
+        android:id="@+id/tableRowCarStatus">
+      <TextView
+          android:id="@+id/textViewCarStatusLabel"
+          android:text="@string/CarStatus"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewCarStatus"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRowMakeYear">
+      <TextView
+          android:id="@+id/textViewMakeYearLabel"
+          android:text="@string/MakeYear"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewMakeYear"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+    <TableRow
+        android:id="@+id/tableRowMileage">
+      <TextView
+          android:id="@+id/textViewMileageLabel"
+          android:text="@string/Mileage"
+          android:layout_weight="1"
+          android:gravity="right"
+          android:layout_marginRight="@dimen/default_margin" />
+      <TextView
+          android:id="@+id/textViewMileage"
+          android:text="Text"
+          android:layout_weight="1"
+          android:gravity="left" />
+    </TableRow>
+
+
   </TableLayout>
 </LinearLayout>
 

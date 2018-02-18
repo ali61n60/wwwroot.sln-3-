@@ -20,6 +20,14 @@ namespace ChiKoja.AdDetail
         private AppCompatTextView textViewFuel;
         private AppCompatTextView textViewGearbox;
 
+        private AppCompatTextView textViewPlateType;
+        private AppCompatTextView textViewBodyColor;
+        private AppCompatTextView textViewInternalColor;
+        private AppCompatTextView textViewBodyStatus;
+        private AppCompatTextView textViewCarStatus;
+        private AppCompatTextView textViewMakeYear;
+        private AppCompatTextView textViewMileage;
+
 
         Guid adGuid;
         private readonly int categoryId = 100;
@@ -60,6 +68,29 @@ namespace ChiKoja.AdDetail
 
             textViewGearbox = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewGearbox);
             textViewGearbox.Text = advertisementTransportation.Gearbox;
+
+            textViewPlateType = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewPlateType);
+            textViewPlateType.Text = advertisementTransportation.PlateType;
+
+            textViewBodyColor = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewBodyColor);
+            textViewBodyColor.Text = advertisementTransportation.BodyColor;
+
+
+            textViewInternalColor = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewInternalColor);
+            textViewInternalColor.Text = advertisementTransportation.InternalColor;
+
+            textViewBodyStatus = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewBodyStatus);
+            textViewBodyStatus.Text = advertisementTransportation.BodyStatus;
+
+            textViewCarStatus = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewCarStatus);
+            textViewCarStatus.Text = advertisementTransportation.CarStatus;
+
+            textViewMakeYear = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewMakeYear);
+            textViewMakeYear.Text = advertisementTransportation.MakeYear.ToString();
+
+            textViewMileage = rootView.FindViewById<AppCompatTextView>(Resource.Id.textViewMileage);
+            textViewMileage.Text = advertisementTransportation.Mileage.ToString();
+
         }
 
         private void initializeEvents()
