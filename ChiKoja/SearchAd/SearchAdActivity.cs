@@ -14,6 +14,7 @@ namespace ChiKoja.SearchAd
     [Activity(Label = "ActivitySearchAd", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class SearchAdActivity : NavActivity, ISingleAdEvents
     {
+        //Fragments
         private SearchMain searchMain;
         private SearchFilter searchFilter;
 
@@ -61,7 +62,7 @@ namespace ChiKoja.SearchAd
 
         private void addFilter()
         {
-            searchFilter=new SearchFilter();
+            searchFilter=new SearchFilterActivity();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.filter, searchFilter)
                 .Commit();

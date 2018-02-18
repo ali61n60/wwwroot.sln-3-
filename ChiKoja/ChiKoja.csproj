@@ -307,7 +307,9 @@
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchAd\SearchAdActivity.cs" />
-    <Compile Include="SearchAd\ActivitySearchFilter.cs" />
+    <Compile Include="SearchAd\SearchFilter\SearchCriteriaDefault.cs" />
+    <Compile Include="SearchAd\SearchFilter\SearchCriteriaTransportation.cs" />
+    <Compile Include="SearchAd\SearchFilter\SearchFilterActivity.cs" />
     <Compile Include="SearchAd\ActivitySortBy.cs" />
     <Compile Include="SearchAd\SearchMain.cs" />
     <Compile Include="SearchAd\SearchFilter.cs" />
@@ -405,6 +407,12 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\search_filter.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\search_criteria_default.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\search_criteria_transportation.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

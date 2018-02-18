@@ -11,11 +11,11 @@ using ChiKoja.Models;
 using ChiKoja.Repository.Filter;
 
 
-namespace ChiKoja.SearchAd
+namespace ChiKoja.SearchAd.SearchFilter
 {
     //this class gets user input filters and stores them in preference storage via commonfilter class and ...
     [Activity(Label = "ActivitySearchFilter", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class ActivitySearchFilter : AppCompatActivity
+    public class SearchFilterActivity : AppCompatActivity
     {
         //TODO store initial values into class variables and check new value against that
         //TODO format edittext to show numbers 12,123

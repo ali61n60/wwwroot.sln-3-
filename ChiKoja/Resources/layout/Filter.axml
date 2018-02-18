@@ -1,97 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/root"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/root"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+  <FrameLayout
+    android:id="@+id/top_top"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
-    <FrameLayout
-        android:id="@+id/top_top"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:background="@color/primaryColor"
-        android:minHeight="20dp"/>
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/buttonCategory"
-        android:text="@string/Category"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:layout_below="@+id/top_top"
-        android:textColor="@color/secondaryTextColor"
-        android:background="@drawable/shape"/>
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/buttonSort"
-        android:text="@string/Sort"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        android:layout_below="@+id/buttonCategory"
-        android:textColor="@color/secondaryTextColor"
-        android:background="@drawable/shape"/>
-
-    <TextView
-        android:id="@+id/textViewPrice"
-        android:text="@string/Price"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/buttonSort"
-        android:layout_centerHorizontal="true" />
-    <TextView
-        android:id="@+id/textViewMinimumPrice"
-        android:text="@string/From"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/default_margin"
-        android:layout_below="@id/textViewPrice"
-        android:layout_marginBottom="@dimen/default_margin" />
-    <EditText
-        android:id="@+id/editTextMinimumPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:layout_alignBaseline="@id/textViewMinimumPrice"
-        android:layout_toRightOf="@id/textViewMinimumPrice" />
-    <TextView
-        android:id="@+id/textViewMaximumPrice"
-        android:text="@string/To"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/textViewMinimumPrice" />
-    <EditText
-        android:id="@+id/editTextMaximumPrice"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:layout_below="@id/textViewMinimumPrice"
-        android:layout_toRightOf="@id/textViewMaximumPrice"
-        android:layout_alignBaseline="@id/textViewMaximumPrice"
-        android:layout_alignLeft="@id/editTextMinimumPrice" />
-
-
-<CheckBox
-    android:id="@+id/checkBoxUrgentAdsOnly"
-    android:text="@string/UrgentAdsOnly"
-    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_below="@id/editTextMaximumPrice"/>
-
-    <CheckBox
-        android:id="@+id/checkBoxOnlyWithPictures"
-        android:text="@string/OnlyWithPictures"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/checkBoxUrgentAdsOnly"
-        android:layout_below="@id/editTextMaximumPrice"/>
-
-
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentTop="true"
+    android:background="@color/primaryColor"
+    android:minHeight="20dp"/>
+  <android.support.v7.widget.AppCompatButton
+    android:id="@+id/buttonCategory"
+    android:text="@string/Category"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:layout_below="@+id/top_top"
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
+  <android.support.v7.widget.AppCompatButton
+    android:id="@+id/buttonSort"
+    android:text="@string/Sort"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="2dp"
+    android:layout_below="@+id/buttonCategory"
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
+  <FrameLayout
+    android:id="@+id/category_specific_part"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_below="@id/buttonSort"
+    android:background="@color/primaryColor"
+    android:minHeight="20dp"/>
 </RelativeLayout>
 
 

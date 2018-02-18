@@ -7,19 +7,21 @@ using Android.Views;
 using ChiKoja.Categories;
 using ChiKoja.Interfaces.SingleAd;
 using ChiKoja.Models;
+using ChiKoja.SearchAd.SearchFilter;
 
 namespace ChiKoja.SearchAd
 {
-    class SearchFilter : Fragment
+    class SearchFilterFragment : Fragment
     {
         private ISingleAdEvents _singleAdEvents;
         private Context _context;
         View rootView;
         AppCompatButton buttonFilter;
         
-        
 
-        public SearchFilter()
+        private CategorySelection _categorySelection;
+
+        public SearchFilterFragment()
         {
         }
 
@@ -50,15 +52,26 @@ namespace ChiKoja.SearchAd
         private void initializeFields()
         {
             buttonFilter = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonFilter);
+            
         }
 
         private void initializeEvents()
         {
-            buttonFilter.Click += (sender, args) =>
+            buttonFilter.Click += buttonFilter_Click;
+
+           
+            _categorySelection.SelectedCategoryCahnged += (sender, args) =>
             {
-                Intent searchFilterIntent = new Intent(_context, typeof(ActivitySearchFilter));
-                StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);
+
             };
+        }
+
+      
+
+        void buttonFilter_Click(object sender, EventArgs e)
+        {
+            Intent searchFilterIntent = new Intent(_context, typeof(SearchFilterActivity));
+            StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);
         }
     }
 }
