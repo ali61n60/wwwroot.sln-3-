@@ -11,12 +11,12 @@ namespace ModelStd.IRepository
     //Implemented by AdvertisementCommonRepository
     public interface ICommonRepository
     {
-        IQueryable<Db.Ad.Advertisement> GetCommonQueryableList(Dictionary<string, string> queryParameters);
-        IQueryable<Db.Ad.Advertisement> EnforceStartIndexAndCount(Dictionary<string, string> queryParameters,IQueryable<Db.Ad.Advertisement> list);
+        IQueryable<Advertisement> GetCommonQueryableList(Dictionary<string, string> queryParameters);
+        IQueryable<Advertisement> EnforceStartIndexAndCount(Dictionary<string, string> queryParameters,IQueryable<Advertisement> list);
         
-        Db.Ad.Advertisement GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary);
+        Advertisement GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary);
         Task IncrementNumberOfVisit(Guid adGuid);
-        Db.Ad.Advertisement GetAdvertisement(AdvertisementCommon advertisementCommon);
+        Advertisement GetAdvertisement(AdvertisementCommon advertisementCommon);
         Task<IEnumerable<AdvertisementCommon>> GetUserAdvertisements(string userId);//In Progress
 
         Task UpdateAd(Guid adGuid, string userId);

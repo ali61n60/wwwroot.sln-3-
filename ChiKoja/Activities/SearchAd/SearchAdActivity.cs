@@ -18,9 +18,6 @@ namespace ChiKoja.Activities.SearchAd
         private SearchAdMainFragment _searchAdMain;
         private SearchAdFilterFragment _searchAdFilter;
 
-        private readonly string AdTypeKey = "AdType";
-        private readonly string SearchTextKey = "SearchText";
-        
         public const int CategorySelectionRequestCode = 2;
         
 

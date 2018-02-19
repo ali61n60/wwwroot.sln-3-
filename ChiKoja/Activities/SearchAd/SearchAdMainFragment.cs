@@ -26,7 +26,9 @@ namespace ChiKoja.Activities.SearchAd
 
         private string StartIndexKey = "StartIndex";
         private string CountKey = "Count";
-        
+        private readonly string AdTypeKey = "AdType";
+        private readonly string SearchTextKey = "SearchText";
+
         private SingleAdArrayAdapter _singleAdArrayAdapter;
         private ISingleAdEvents _singleAdEvents;
         private Context _context;
@@ -104,9 +106,12 @@ namespace ChiKoja.Activities.SearchAd
             Dictionary<string, string> userInputDictionary=new Dictionary<string, string>();
             userInputDictionary[StartIndexKey] = _start.ToString();
             userInputDictionary[CountKey] = _count.ToString();
+            //TODO Add AdType
+            //TODO Add SearchText
             CategoryRepository categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
             int selectedCategoryId = categoryRepository.GetSelectedCategoryId();
             userInputDictionary[Category.CategoryIdKey] = selectedCategoryId.ToString();
+
            //TODO add common parameters
            //add category specific parameters
             SearchFilterCategorySpecificBaseCriteria categorySpecificSearchFilterFragment= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(selectedCategoryId);

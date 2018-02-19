@@ -24,6 +24,7 @@ namespace ChiKoja.Repository.Filter
         private readonly int EmailOthers = 3;
         private readonly int SMSOthers = 4;
 
+        //TODO make orderby an enum and pass int value to server
         public readonly string OrderByKey = "OrderBy";
         public const string OrderByDateAsc = "DateAsc";
         public const string OrderByDateDesc = "DateDesc";
@@ -38,6 +39,7 @@ namespace ChiKoja.Repository.Filter
         public void ResetCommonFilter()
         {
             ISharedPreferencesEditor editor = prefs.Edit();
+            
             editor.Remove(MinimumPriceKey);
             editor.Remove(MaximumPriceKey);
             editor.Remove(OnlyWithPicturesKey);

@@ -30,8 +30,8 @@ export class ServerCaller implements IResultHandler {
     public GetAdItemsFromServer(userInput: UserInput): void {
         this._currentRequestIndex++;
 
-        userInput.ParametersDictionary[this.StartIndexKey] = this._start;
-        userInput.ParametersDictionary[this.CountKey] = this._count;
+        userInput.ParametersDictionary[this.StartIndexKey] = this._start;//TODO fill it from index.ts maybe it will be a user asked input
+        userInput.ParametersDictionary[this.CountKey] = this._count;////TODO fill it from index.ts
         userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
 
         this._ajaxCaller.Call(userInput);

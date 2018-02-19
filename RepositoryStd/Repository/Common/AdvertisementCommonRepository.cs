@@ -75,8 +75,6 @@ namespace RepositoryStd.Repository.Common
         {
             List<AdvertisementCommon> searchResultItems = new List<AdvertisementCommon>();
             IQueryable<Advertisement> list = GetCommonQueryableList(queryParameters);
-
-            
             //uegentOnly
 
             list = EnforceStartIndexAndCount(queryParameters, list);
@@ -392,7 +390,8 @@ namespace RepositoryStd.Repository.Common
 
         private IQueryable<Advertisement> orderByClause(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            OrderBy orderByUserInput = ParameterExtractor.ExtractOrderBy(queryParameters, OrderByKey, OrderByDefault);
+            //TODO get int number from user and convert it to enum here
+            OrderBy orderByUserInput =(OrderBy) Enum.Parse(typeof(OrderBy), ParameterExtractor.ExtractInt(queryParameters, OrderByKey,(int) OrderByDefault).ToString());
             switch (orderByUserInput)
             {
                 case OrderBy.PriceAsc:

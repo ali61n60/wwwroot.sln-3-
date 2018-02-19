@@ -6,7 +6,8 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     public abstract class SearchFilterCategorySpecificBaseCriteria:Fragment
     {
         public abstract void PersistUserFilter();
-
         public abstract void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary);
+        public abstract void ClearPreferences();
+
     }
 }

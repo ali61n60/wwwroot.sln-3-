@@ -1,4 +1,4 @@
-﻿namespace RepositoryStd.Context.Helper
+﻿namespace ModelStd.Services
 {
     public class OrderByHelper
     {
@@ -22,9 +22,10 @@
 
    public enum OrderBy  
     {
-        DateAsc,
-        DateDesc,
-        PriceAsc,
-        PriceDesc
+        DateAsc=1,
+        DateDesc=2,
+        PriceAsc=3,
+        PriceDesc=4,
+        UnSpecified=5
     }
 }

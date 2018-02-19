@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ModelStd.Advertisements.Price;
-using ModelStd.Db.Ad;
 
 
 namespace RepositoryStd.Context.Helper
@@ -34,19 +33,6 @@ namespace RepositoryStd.Context.Helper
 
             return defaultDistrictId;
         }
-
-        public static OrderBy ExtractOrderBy(Dictionary<string, string> inputDictionary, string key, OrderBy defaultOrderBy)
-        {
-            OrderBy currentOrderBy = defaultOrderBy;
-            if (inputDictionary.ContainsKey(key))
-            {
-                string userInputOrderByValue = inputDictionary[key];
-                currentOrderBy = OrderByHelper.SetOrderByFromString(userInputOrderByValue, defaultOrderBy);
-            }
-            return currentOrderBy;
-        }
-
-
 
         public static decimal ExtractDecimal(Dictionary<string, string> queryParameters, string key, decimal defaultValue)
         {
