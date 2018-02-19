@@ -6,17 +6,27 @@ using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
+using ChiKoja.Activities.SearchAd.SearchFilter;
 using ChiKoja.ArrayAdapters.SingleAd;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Notification;
+using ChiKoja.Repository;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
+using ModelStd.Db.Ad;
 using ModelStd.Services;
 
 namespace ChiKoja.Activities.SearchAd
 {
     public class SearchAdMainFragment : Fragment
     {
+        int _start = 1;
+        int _initalStart = 1;
+        int _count = 15;
+
+        private string StartIndexKey = "StartIndex";
+        private string CountKey = "Count";
+        
         private SingleAdArrayAdapter _singleAdArrayAdapter;
         private ISingleAdEvents _singleAdEvents;
         private Context _context;
@@ -73,7 +83,9 @@ namespace ChiKoja.Activities.SearchAd
             _buttonSearchAd.Click += async (sender, args) =>
             {
                 GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
-                ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
+                Dictionary<string, string> userInputDictionary = createUserInputDictionary();
+                
+                ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon(userInputDictionary);
                 if (response.Success)
                     onSerachAdCompleted(response);
                 else
@@ -86,12 +98,29 @@ namespace ChiKoja.Activities.SearchAd
                 _singleAdEvents.OnSingleAdSelected(clickedAdCommon);// inform activity
             };
         }
-        
+
+        private Dictionary<string, string> createUserInputDictionary()
+        {
+            Dictionary<string, string> userInputDictionary=new Dictionary<string, string>();
+            userInputDictionary[StartIndexKey] = _start.ToString();
+            userInputDictionary[CountKey] = _count.ToString();
+            CategoryRepository categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
+            int selectedCategoryId = categoryRepository.GetSelectedCategoryId();
+            userInputDictionary[Category.CategoryIdKey] = selectedCategoryId.ToString();
+           //TODO add common parameters
+           //add category specific parameters
+            SearchFilterCategorySpecificBaseCriteria categorySpecificSearchFilterFragment= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(selectedCategoryId);
+            categorySpecificSearchFilterFragment.FillCategorySpecificUserInputSearchFilter(userInputDictionary);
+
+            return userInputDictionary;
+        }
+
         public void resetSearchCondition()
         {
             //TODO maybe you should remove items from array adapter
             _listViewAdCommon.RemoveAllViews();
-            _adApi.ResetSearchCondition();
+            _start = _initalStart;
+            
         }
 
         private void onSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
@@ -99,6 +128,7 @@ namespace ChiKoja.Activities.SearchAd
             GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
             if (response.Success)
             {
+                _start += response.ResponseData.Length;
                 _singleAdArrayAdapter.AddItemsToList(response.ResponseData);
                 ((SingleAdArrayAdapter)_listViewAdCommon.Adapter).NotifyDataSetChanged();
             }

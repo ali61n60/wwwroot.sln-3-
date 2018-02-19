@@ -14,18 +14,14 @@ namespace ChiKoja.Services.Server
 {
     public class AdApi:IAdApi
     {
-        CategoryRepository categoryRepository;
+        
         DistrictRepository districtRepository;
         SearchFilterRepository searchFilterRepository;
-        int _start = 1;
-        int _initalStart = 1;
-        int _count = 15;
+        
         int _currentRequestIndex = 0;
         string NumberOfItemsKey = "numberOfItems";
         string RequestIndexKey = "RequestIndex";
-        private string StartIndexKey = "StartIndex";
-        private string CountKey = "Count";
-        private string CategoryIdKey = "CategoryId";
+        
         private string MinimumPriceKey = "MinimumPrice";
         private string MaximumPriceKey = "MaximumPrice";
         private string OrderByKey = "OrderBy";
@@ -34,23 +30,20 @@ namespace ChiKoja.Services.Server
         public AdApi()
         {
            // districtRepository = new DistrictRepository(Repository.Repository.DataBasePath);
-           categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
+           
            // searchFilterRepository = new SearchFilterRepository();
             
         }
-        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon()
+        public async Task<ResponseBase<AdvertisementCommon[]>> GetAdvertisementCommon(Dictionary<string, string> userInputDictionary)
         {
-            Dictionary<string, string> userInputDictionary = new Dictionary<string, string>();
             _currentRequestIndex++;
             userInputDictionary[RequestIndexKey] = _currentRequestIndex.ToString();
             //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
             //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
             //userInputDictionary.Add(districtPair.Key, districtPair.Value);
-            KeyValuePair<string, string> categoryIdPair = categoryRepository.GetCategoryIdDictionary();
-            userInputDictionary.Add(categoryIdPair.Key, categoryIdPair.Value);
+            
 
-            userInputDictionary[StartIndexKey] = _start.ToString();
-            userInputDictionary[CountKey] = _count.ToString();
+           
             ResponseBase<AdvertisementCommon[]> response=  await ServicesCommon.CallService<AdvertisementCommon[]>("api/AdApi/GetAdvertisementCommon", userInputDictionary);
             return response;
         }
@@ -109,9 +102,6 @@ namespace ChiKoja.Services.Server
         }
 
        
-        public void ResetSearchCondition()
-        {
-            _start = _initalStart;
-        }
+       
     }
 }

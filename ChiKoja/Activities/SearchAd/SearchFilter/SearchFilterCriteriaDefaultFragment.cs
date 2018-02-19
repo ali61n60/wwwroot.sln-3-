@@ -100,7 +100,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         public override void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
         {
-            //get data from pref
+            userInputDictionary
         }
     }
 }

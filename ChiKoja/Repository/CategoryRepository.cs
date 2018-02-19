@@ -15,9 +15,6 @@ namespace ChiKoja.Repository
 {
     public class CategoryRepository:ILocalTable
     {
-        string CategoryIdKey = "CategoryId";//used in server
-        string defaultCategoryId = "0";
-
         private readonly ISharedPreferences prefs;
         private readonly SqliteConnection connection;
         public int OperationOrder { get; private set; }
@@ -35,21 +32,17 @@ namespace ChiKoja.Repository
             }
         }
         
-        public IEnumerable<int> CategoryId
+        public int CategoryId
         {
             get
             {
-                string savedCategoryIds = prefs.GetString(CategoryIdKey, defaultCategoryId);
-                string[] savedCategories = savedCategoryIds.Split(',');
-                return savedCategories.Select(savedCategory => Parser.ParseInt(savedCategory, Parser.ParseInt(defaultCategoryId, 0)));
+                return prefs.GetInt(Category.CategoryIdKey,Category.CategoryIdDefault);
             }
             set
             {
-                string stringSelectedCategoryIds = value.Aggregate("", (current, categoryId) => current + (categoryId + ","));
-                if (stringSelectedCategoryIds.Length > 0)
-                    stringSelectedCategoryIds = stringSelectedCategoryIds.Substring(0, stringSelectedCategoryIds.Length - 1);
+                
                 ISharedPreferencesEditor editor = prefs.Edit();
-                editor.PutString(CategoryIdKey, stringSelectedCategoryIds);
+                editor.PutInt(Category.CategoryIdKey, value);
                 editor.Commit();
             }
         }
@@ -169,9 +162,9 @@ namespace ChiKoja.Repository
             }
         }
 
-        public KeyValuePair<string,string> GetCategoryIdDictionary()
+        public int GetSelectedCategoryId()
         {
-            return new KeyValuePair<string, string>(CategoryIdKey, prefs.GetString(CategoryIdKey, defaultCategoryId));
+            return prefs.GetInt(Category.CategoryIdKey,Category.CategoryIdDefault);
         }
     }
 }
