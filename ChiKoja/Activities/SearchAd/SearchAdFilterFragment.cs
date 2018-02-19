@@ -5,16 +5,14 @@ using Android.Support.V7.Widget;
 using Android.Support.V4.App;
 using Android.Views;
 using ChiKoja.Activities.SearchAd.SearchFilter;
-using ChiKoja.Interfaces.SingleAd;
 
 namespace ChiKoja.Activities.SearchAd
 {
     class SearchAdFilterFragment : Fragment
     {
-        private ISingleAdEvents _singleAdEvents;
         private Context _context;
-        View rootView;
-        AppCompatButton buttonFilter;
+        View _rootView;
+        AppCompatButton _buttonFilter;
         
         public SearchAdFilterFragment()
         {
@@ -22,37 +20,29 @@ namespace ChiKoja.Activities.SearchAd
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.search_ad_filter_frag, container, false);
+            _rootView = inflater.Inflate(Resource.Layout.search_ad_filter_frag, container, false);
 
             initializeFields();
             initializeEvents();
 
-            return rootView;
+            return _rootView;
         }
 
         public override void OnAttach(Context context)
         {
             base.OnAttach(context);
             _context = context;
-            if (context is ISingleAdEvents)
-            {
-                _singleAdEvents = context as ISingleAdEvents;
-            }
-            else
-            {
-                throw new Exception("context must implement SingleAdEvents Interface");
-            }
         }
 
         private void initializeFields()
         {
-            buttonFilter = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonFilter);
+            _buttonFilter = _rootView.FindViewById<AppCompatButton>(Resource.Id.buttonFilter);
             
         }
 
         private void initializeEvents()
         {
-            buttonFilter.Click += (sender, args) =>
+            _buttonFilter.Click += (sender, args) =>
             {
                 Intent searchFilterIntent = new Intent(_context, typeof(SearchFilterActivity));
                 StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);

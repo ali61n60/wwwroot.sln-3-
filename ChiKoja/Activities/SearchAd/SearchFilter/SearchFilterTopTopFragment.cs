@@ -1,18 +1,19 @@
-﻿using Android.Content;
+﻿using System;
+using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Views;
-using Android.Widget;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
     public class SearchFilterTopTopFragment:Fragment
     {
         private Context _context;
-        View rootView;
-        AppCompatButton buttonOk;
-        AppCompatButton buttonCancel;
+        View _rootView;
+        AppCompatButton _buttonOk;
+        AppCompatButton _buttonCancel;
+        private ISetSearchFilter _setSearchFilter;
 
         public SearchFilterTopTopFragment()
         {
@@ -20,30 +21,44 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.search_filter_toptop_frag, container, false);
+            _rootView = inflater.Inflate(Resource.Layout.search_filter_toptop_frag, container, false);
 
             initializeFields();
             initializeEvents();
 
-            return rootView;
+            return _rootView;
+        }
+
+        public override void OnAttach(Context context)
+        {
+            base.OnAttach(context);
+            _context = context;
+            if (context is ISetSearchFilter)
+            {
+                _setSearchFilter = context as ISetSearchFilter;
+            }
+            else
+            {
+                throw new Exception("context must implement ISetSearchFilter Interface");
+            }
         }
 
         private void initializeFields()
         {
-            buttonOk = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonOk);
-            buttonCancel = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonCancel);
+            _buttonOk = _rootView.FindViewById<AppCompatButton>(Resource.Id.buttonOk);
+            _buttonCancel = _rootView.FindViewById<AppCompatButton>(Resource.Id.buttonCancel);
         }
 
         private void initializeEvents()
         {
-           buttonCancel.Click += (sender, args) =>
+           _buttonCancel.Click += (sender, args) =>
             {
                 Activity.Finish();
             };
 
-            buttonOk.Click += (sender, args) =>
+            _buttonOk.Click += (sender, args) =>
             {
-                //TODO persist user input 
+               _setSearchFilter.SetSearchFilter();
             };
         }
         

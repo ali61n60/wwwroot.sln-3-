@@ -3,7 +3,6 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using ChiKoja.Activities.AdDetail;
-using ChiKoja.Interfaces.SingleAd;
 using ChiKoja.NavigationDrawer;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;

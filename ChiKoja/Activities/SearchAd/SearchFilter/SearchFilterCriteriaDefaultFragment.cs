@@ -10,12 +10,12 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     public class SearchFilterCriteriaDefaultFragment : SearchFilterCategorySpecificBaseCriteria
     {
         private Context _context;
-        View rootView;
+        View _rootView;
 
-        AppCompatEditText editTextMinimumPrice;
-        AppCompatEditText editTextMaximumPrice;
-        AppCompatCheckBox checkBoxOnlyWithPictures;
-        AppCompatCheckBox checkBoxUrgentAdsOnly;
+        AppCompatEditText _editTextMinimumPrice;
+        AppCompatEditText _editTextMaximumPrice;
+        AppCompatCheckBox _checkBoxOnlyWithPictures;
+        AppCompatCheckBox _checkBoxUrgentAdsOnly;
 
         public SearchFilterCriteriaDefaultFragment()
         {
@@ -23,25 +23,25 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.search_filter_criteria_default_frag, container, false);
+            _rootView = inflater.Inflate(Resource.Layout.search_filter_criteria_default_frag, container, false);
 
             initializeFields();
             initializeEvents();
             updateFieldsFromSavedPreferences();
 
-            return rootView;
+            return _rootView;
         }
 
         private void initializeFields()
         {
-            editTextMinimumPrice = rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMinimumPrice);
-            editTextMinimumPrice.TextChanged += editTextsPrice_TextChanged;
-            editTextMaximumPrice = rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMaximumPrice);
-            editTextMaximumPrice.TextChanged += editTextsPrice_TextChanged;
-            checkBoxOnlyWithPictures = rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxOnlyWithPictures);
-            checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
-            checkBoxUrgentAdsOnly = rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
-            checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
+            _editTextMinimumPrice = _rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMinimumPrice);
+            _editTextMinimumPrice.TextChanged += editTextsPrice_TextChanged;
+            _editTextMaximumPrice = _rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMaximumPrice);
+            _editTextMaximumPrice.TextChanged += editTextsPrice_TextChanged;
+            _checkBoxOnlyWithPictures = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxOnlyWithPictures);
+            _checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
+            _checkBoxUrgentAdsOnly = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
+            _checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
         }
 
         private void initializeEvents()

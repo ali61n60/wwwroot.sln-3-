@@ -1,6 +1,6 @@
 ﻿using ModelStd.Advertisements;
 
-namespace ChiKoja.Interfaces.SingleAd
+namespace ChiKoja.Activities.SearchAd
 {
     public interface ISingleAdEvents
     {

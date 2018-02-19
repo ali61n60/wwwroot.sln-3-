@@ -8,7 +8,6 @@ using Android.Views;
 using Android.Widget;
 using ChiKoja.ArrayAdapters.SingleAd;
 using ChiKoja.Infrastructure.IOC;
-using ChiKoja.Interfaces.SingleAd;
 using ChiKoja.Notification;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
@@ -21,11 +20,11 @@ namespace ChiKoja.Activities.SearchAd
         private SingleAdArrayAdapter _singleAdArrayAdapter;
         private ISingleAdEvents _singleAdEvents;
         private Context _context;
-        View rootView;
+        View _rootView;
         
-        AppCompatButton buttonSearchAd;
+        AppCompatButton _buttonSearchAd;
        
-        private ListView listViewAdCommon;
+        private ListView _listViewAdCommon;
         
         IAdApi _adApi;
 
@@ -34,12 +33,12 @@ namespace ChiKoja.Activities.SearchAd
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
-            rootView = inflater.Inflate(Resource.Layout.search_ad_main_frag, container, false);
+            _rootView = inflater.Inflate(Resource.Layout.search_ad_main_frag, container, false);
 
             initializeFields();
             initializeEvents();
 
-            return rootView;
+            return _rootView;
         }
 
         public override void OnAttach(Context context)
@@ -62,16 +61,16 @@ namespace ChiKoja.Activities.SearchAd
                 Android.Resource.Layout.SimpleListItem1,
                 new List<AdvertisementCommon>());
 
-            listViewAdCommon = rootView.FindViewById<ListView>(Resource.Id.listViewAdCommon);
-            listViewAdCommon.Adapter = _singleAdArrayAdapter;
+            _listViewAdCommon = _rootView.FindViewById<ListView>(Resource.Id.listViewAdCommon);
+            _listViewAdCommon.Adapter = _singleAdArrayAdapter;
 
             _adApi = Bootstrapper.container.GetInstance<IAdApi>();
-            buttonSearchAd = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
+            _buttonSearchAd = _rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
         }
 
         private void initializeEvents()
         {
-            buttonSearchAd.Click += async (sender, args) =>
+            _buttonSearchAd.Click += async (sender, args) =>
             {
                 GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
                 ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon();
@@ -81,7 +80,7 @@ namespace ChiKoja.Activities.SearchAd
                     onSearchAdError(new Exception(response.Message + ", ErrorCode:" + response.ErrorCode));
             };
             
-            listViewAdCommon.ItemClick += (sender, args) =>
+            _listViewAdCommon.ItemClick += (sender, args) =>
             {
                 AdvertisementCommon clickedAdCommon = _singleAdArrayAdapter.GetItem(args.Position);
                 _singleAdEvents.OnSingleAdSelected(clickedAdCommon);// inform activity
@@ -91,7 +90,7 @@ namespace ChiKoja.Activities.SearchAd
         public void resetSearchCondition()
         {
             //TODO maybe you should remove items from array adapter
-            listViewAdCommon.RemoveAllViews();
+            _listViewAdCommon.RemoveAllViews();
             _adApi.ResetSearchCondition();
         }
 
@@ -101,7 +100,7 @@ namespace ChiKoja.Activities.SearchAd
             if (response.Success)
             {
                 _singleAdArrayAdapter.AddItemsToList(response.ResponseData);
-                ((SingleAdArrayAdapter)listViewAdCommon.Adapter).NotifyDataSetChanged();
+                ((SingleAdArrayAdapter)_listViewAdCommon.Adapter).NotifyDataSetChanged();
             }
             else
                 Toast.MakeText(_context, response.Message, ToastLength.Long).Show();

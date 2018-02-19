@@ -15,15 +15,15 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
     //this class gets user input filters and stores them in preference storage via commonfilter class and ...
     [Activity(Label = "ActivitySearchFilter", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
-    public class SearchFilterActivity : NavActivity
+    public class SearchFilterActivity : NavActivity,ISetSearchFilter
     {
         //TODO store initial values into class variables and check new value against that
         //TODO format edittext to show numbers 12,123
 
-        private SearchFilterTopTopFragment searchFilterTopTop;
-        private SearchFilterCategorySpecificBaseCriteria searchFilterCategorySpecificCriteria;
-        private AppCompatButton buttonCategory;
-        private AppCompatButton buttonSort;
+        private SearchFilterTopTopFragment _searchFilterTopTop;
+        private SearchFilterCategorySpecificBaseCriteria _searchFilterCategorySpecificCriteria;
+        private AppCompatButton _buttonCategory;
+        private AppCompatButton _buttonSort;
         
 
 
@@ -54,8 +54,8 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private void initializeFields()
         {
             commonFilter = new CommonFilter();
-            buttonCategory = FindViewById<AppCompatButton>(Resource.Id.buttonCategory);
-            buttonSort = FindViewById<AppCompatButton>(Resource.Id.buttonSort);
+            _buttonCategory = FindViewById<AppCompatButton>(Resource.Id.buttonCategory);
+            _buttonSort = FindViewById<AppCompatButton>(Resource.Id.buttonSort);
 
 
             //_categorySelection.SelectedCategoryCahnged += (sender, args) =>
@@ -72,15 +72,15 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void initializeEvents()
         {
-            buttonCategory.Click += buttonCategory_Click;
-            buttonSort.Click += buttonSortBy_Click;
+            _buttonCategory.Click += buttonCategory_Click;
+            _buttonSort.Click += buttonSortBy_Click;
         }
 
         private void addTopTop()
         {
-            searchFilterTopTop=new SearchFilterTopTopFragment();
+            _searchFilterTopTop=new SearchFilterTopTopFragment();
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.top_top, searchFilterTopTop)
+                .Add(Resource.Id.top_top, _searchFilterTopTop)
                 .Commit();
         }
 
@@ -88,9 +88,9 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
             //TODO get user selected category from somewhere
             int categoryId = 0;
-            searchFilterCategorySpecificCriteria= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
+            _searchFilterCategorySpecificCriteria= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.category_specific_part, searchFilterCategorySpecificCriteria)
+                .Add(Resource.Id.category_specific_part, _searchFilterCategorySpecificCriteria)
                 .Commit();
         }
         void buttonReturn_Click(object sender, EventArgs e)
@@ -129,5 +129,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             StartActivityForResult(orderByIntent, NavigationDrawer.NavActivity.OrderByRequestCode);
         }
 
+        public void SetSearchFilter()
+        {
+            //this method is called from SearchFilterTopTopFragment to tell the activity that user has clicked ok button
+            Toast.MakeText(this,"Ok button Clicked",ToastLength.Long).Show();
+        }
     }
 }
