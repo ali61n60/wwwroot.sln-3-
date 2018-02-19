@@ -1,4 +1,6 @@
-﻿using Android.Content;
+﻿using System;
+using System.Collections.Generic;
+using Android.Content;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Text;
@@ -17,6 +19,8 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         AppCompatCheckBox _checkBoxOnlyWithPictures;
         AppCompatCheckBox _checkBoxUrgentAdsOnly;
 
+        private bool _filterParameterChangedByUser;
+
         public SearchFilterCriteriaDefaultFragment()
         {
         }
@@ -32,21 +36,21 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             return _rootView;
         }
 
+        
         private void initializeFields()
         {
             _editTextMinimumPrice = _rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMinimumPrice);
-            _editTextMinimumPrice.TextChanged += editTextsPrice_TextChanged;
             _editTextMaximumPrice = _rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMaximumPrice);
-            _editTextMaximumPrice.TextChanged += editTextsPrice_TextChanged;
             _checkBoxOnlyWithPictures = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxOnlyWithPictures);
-            _checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
             _checkBoxUrgentAdsOnly = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
-            _checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
         }
 
         private void initializeEvents()
         {
-
+            _editTextMinimumPrice.TextChanged += editTextsPrice_TextChanged;
+            _editTextMaximumPrice.TextChanged += editTextsPrice_TextChanged;
+            _checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
+            _checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
         }
 
         void checkBoxUrgentAdsOnly_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
@@ -65,7 +69,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void filterParametersChangedByUser()
         {
-           // filterParameterChangedByUser = true;
+            _filterParameterChangedByUser = true;
         }
 
         private void updateFieldsFromSavedPreferences()
@@ -76,5 +80,27 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             //checkBoxUrgentAdsOnly.Checked = commonFilter.UrgentAdsOnly;
         }
 
+        public override void PersistUserFilter()
+        {
+            if (_filterParameterChangedByUser)
+            {
+                try
+                {
+                    //commonFilter.MinimumPrice = float.Parse(editTextMinimumPrice.Text);
+                    //commonFilter.MaximumPrice = float.Parse(editTextMaximumPrice.Text);
+                    //commonFilter.OnlyWithPictures = checkBoxOnlyWithPictures.Checked;
+                    //commonFilter.UrgentAdsOnly = checkBoxUrgentAdsOnly.Checked;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
+
+        public override void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
+        {
+            //get data from pref
+        }
     }
 }

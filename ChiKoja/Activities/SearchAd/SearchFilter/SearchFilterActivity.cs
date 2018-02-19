@@ -26,14 +26,9 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private AppCompatButton _buttonCategory;
         private AppCompatButton _buttonSort;
         
-
-
         //category_specific_part
         private CategorySelection _categorySelection;
-
-
-        CommonFilter commonFilter;
-      
+        
         private bool filterParameterChangedByUser = false;
 
         
@@ -54,7 +49,6 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         }
         private void initializeFields()
         {
-            commonFilter = new CommonFilter();
             _buttonCategory = FindViewById<AppCompatButton>(Resource.Id.buttonCategory);
             _buttonSort = FindViewById<AppCompatButton>(Resource.Id.buttonSort);
 
@@ -113,20 +107,8 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         public void SetSearchFilter()
         {
             //this method is called from SearchFilterTopTopFragment to tell the activity that user has clicked ok button
-            if (filterParameterChangedByUser)
-            {
-                try
-                {
-                    //commonFilter.MinimumPrice = float.Parse(editTextMinimumPrice.Text);
-                    //commonFilter.MaximumPrice = float.Parse(editTextMaximumPrice.Text);
-                    //commonFilter.OnlyWithPictures = checkBoxOnlyWithPictures.Checked;
-                    //commonFilter.UrgentAdsOnly = checkBoxUrgentAdsOnly.Checked;
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
+            _searchFilterCategorySpecificCriteria.PersistUserFilter();
+            
             Intent data = new Intent();
             data.PutExtra(SearchFilterChangedKey, filterParameterChangedByUser);
             SetResult(Result.Ok, data);

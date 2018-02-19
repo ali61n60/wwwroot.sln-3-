@@ -2,6 +2,9 @@ using System.Collections.Generic;
 using Android.App;
 using Android.Content;
 using Android.Preferences;
+using ChiKoja.Activities.SearchAd.SearchFilter;
+using ChiKoja.Infrastructure.IOC;
+using ModelStd.Db.Ad;
 
 namespace ChiKoja.Repository.Filter
 {
@@ -136,6 +139,18 @@ namespace ChiKoja.Repository.Filter
          private void insertOrderBy(Dictionary<string, string> userInput)
         {
             userInput[OrderByKey]=OrderBy;
+        }
+
+        public void FillUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
+        {
+            //TODO fill categoryId
+            int categoryId= prefs.GetInt(Category.CategoryIdKey, Category.CategoryIdDefault);
+            userInputDictionary.Add(Category.CategoryIdKey,categoryId.ToString());//check for duplicate
+            userInputDictionary.Add(Category.CategoryIdKey, categoryId.ToString());//check for duplicate
+
+            SearchFilterCategorySpecificBaseCriteria searchFilterCategorySpecific= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
+            searchFilterCategorySpecific.FillCategorySpecificUserInputSearchFilter(userInputDictionary);
+            //based on categoryId fill other parameters
         }
     }
 }
