@@ -8,6 +8,7 @@ using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
+using ChiKoja.Activities.SearchAd;
 using ChiKoja.LocationSelection;
 using ChiKoja.Login;
 using ChiKoja.NewAd;

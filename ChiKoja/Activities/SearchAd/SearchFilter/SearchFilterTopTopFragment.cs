@@ -1,6 +1,7 @@
 ﻿using Android.Content;
 using Android.OS;
 using Android.Support.V4.App;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 
@@ -10,7 +11,8 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     {
         private Context _context;
         View rootView;
-        ImageButton imageButtonBack;
+        AppCompatButton buttonOk;
+        AppCompatButton buttonCancel;
 
         public SearchFilterTopTopFragment()
         {
@@ -28,14 +30,20 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void initializeFields()
         {
-            imageButtonBack = rootView.FindViewById<ImageButton>(Resource.Id.imageButtonBack);
+            buttonOk = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonOk);
+            buttonCancel = rootView.FindViewById<AppCompatButton>(Resource.Id.buttonCancel);
         }
 
         private void initializeEvents()
         {
-            imageButtonBack.Click += (sender, args) =>
+           buttonCancel.Click += (sender, args) =>
             {
                 Activity.Finish();
+            };
+
+            buttonOk.Click += (sender, args) =>
+            {
+                //TODO persist user input 
             };
         }
         

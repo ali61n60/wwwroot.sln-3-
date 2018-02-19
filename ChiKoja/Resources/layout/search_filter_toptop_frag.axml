@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
-  xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
-  android:layout_height="50dp"
+  android:layout_height="wrap_content"
+  android:orientation="horizontal"
   android:background="@color/secondaryDarkColor">
-  <ImageButton
-    android:id="@+id/imageButtonBack"
-    android:layout_width="wrap_content"
-    android:layout_height="45dp"
-    android:layout_alignParentEnd="true"
-    android:layout_alignParentRight="true"
-    android:layout_centerVertical="true"
-    android:layout_marginRight="10dp"
-    android:background="@drawable/shape"
-    app:srcCompat="@drawable/ic_arrow_forward_black_48dp" />
-</RelativeLayout>
+  <android.support.v7.widget.AppCompatButton
+    android:id="@+id/buttonOk"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:text="@string/Ok"
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
+  <android.support.v7.widget.AppCompatButton
+    android:id="@+id/buttonCancel"
+    android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="wrap_content"
+    android:text="@string/Cancel"
+    android:textColor="@color/secondaryTextColor"
+    android:background="@drawable/shape"/>
+
+</LinearLayout>
