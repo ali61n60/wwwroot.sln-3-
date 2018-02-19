@@ -19,6 +19,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     {
         //TODO store initial values into class variables and check new value against that
         //TODO format edittext to show numbers 12,123
+        public static readonly string SearchFilterChangedKey = "SearchFilterChanged";
 
         private SearchFilterTopTopFragment _searchFilterTopTop;
         private SearchFilterCategorySpecificBaseCriteria _searchFilterCategorySpecificCriteria;
@@ -93,27 +94,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
                 .Add(Resource.Id.category_specific_part, _searchFilterCategorySpecificCriteria)
                 .Commit();
         }
-        void buttonReturn_Click(object sender, EventArgs e)
-        {
-            if (filterParameterChangedByUser)
-            {
-                try
-                {
-                    //commonFilter.MinimumPrice = float.Parse(editTextMinimumPrice.Text);
-                    //commonFilter.MaximumPrice = float.Parse(editTextMaximumPrice.Text);
-                    //commonFilter.OnlyWithPictures = checkBoxOnlyWithPictures.Checked;
-                    //commonFilter.UrgentAdsOnly = checkBoxUrgentAdsOnly.Checked;
-                }
-                catch (Exception ex)
-                {
-
-                }
-            }
-            Intent data = new Intent();
-            data.PutExtra("SearchFilterChanged", filterParameterChangedByUser);
-            SetResult(Result.Ok, data);
-            Finish();
-        }
+        
 
         void buttonCategory_Click(object sender, EventArgs e)
         {
@@ -132,7 +113,24 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         public void SetSearchFilter()
         {
             //this method is called from SearchFilterTopTopFragment to tell the activity that user has clicked ok button
-            Toast.MakeText(this,"Ok button Clicked",ToastLength.Long).Show();
+            if (filterParameterChangedByUser)
+            {
+                try
+                {
+                    //commonFilter.MinimumPrice = float.Parse(editTextMinimumPrice.Text);
+                    //commonFilter.MaximumPrice = float.Parse(editTextMaximumPrice.Text);
+                    //commonFilter.OnlyWithPictures = checkBoxOnlyWithPictures.Checked;
+                    //commonFilter.UrgentAdsOnly = checkBoxUrgentAdsOnly.Checked;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+            Intent data = new Intent();
+            data.PutExtra(SearchFilterChangedKey, filterParameterChangedByUser);
+            SetResult(Result.Ok, data);
+            Finish();
         }
     }
 }

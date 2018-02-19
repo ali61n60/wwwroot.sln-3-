@@ -284,14 +284,14 @@
     <Compile Include="Infrastructure\IOC\Bootstrapper.cs" />
     <Compile Include="Interfaces\IMarkAd.cs" />
     <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
-    <Compile Include="Login\ActivityLogin.cs" />
-    <Compile Include="Login\ActivitySignIn.cs" />
+    <Compile Include="Activities\Login\ActivityLogin.cs" />
+    <Compile Include="Activities\Login\ActivitySignIn.cs" />
     <Compile Include="Models\CategorySelection.cs" />
     <Compile Include="Models\ICriteria.cs" />
     <Compile Include="NavigationDrawer\NavActivity.cs" />
     <Compile Include="Network\Network.cs" />
-    <Compile Include="NewAd\ActivityNewAd.cs" />
-    <Compile Include="NewAd\ActivityNewAdTransportation.cs" />
+    <Compile Include="Activities\NewAd\ActivityNewAd.cs" />
+    <Compile Include="Activities\NewAd\ActivityNewAdTransportation.cs" />
     <Compile Include="Notification\ActivityNotification.cs" />
     <Compile Include="Notification\MessageShower.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
@@ -337,8 +337,8 @@
     <Compile Include="Activities\SplashActivity\SplashActivity.cs" />
     <Compile Include="TestDynamicUI\ActivityDynamicUI.cs" />
     <Compile Include="Utility\ScreenUtility .cs" />
-    <Compile Include="ViewServer\ActivityViewServerTest.cs" />
-    <Compile Include="ViewServer\ViewServer.cs" />
+    <Compile Include="Activities\ViewServer\ActivityViewServerTest.cs" />
+    <Compile Include="Activities\ViewServer\ViewServer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="GettingStarted.Xamarin" />

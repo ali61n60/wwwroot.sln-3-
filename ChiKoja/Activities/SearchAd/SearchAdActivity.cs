@@ -3,6 +3,7 @@ using Android.Content;
 using Android.OS;
 using Android.Widget;
 using ChiKoja.Activities.AdDetail;
+using ChiKoja.Activities.SearchAd.SearchFilter;
 using ChiKoja.NavigationDrawer;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
@@ -87,7 +88,7 @@ namespace ChiKoja.Activities.SearchAd
             if (requestCode == SearchFilterRequestCode)
             {
                 if (data == null) return;
-                if (data.GetBooleanExtra("SearchFilterChanged", false))
+                if (data.GetBooleanExtra(SearchFilterActivity.SearchFilterChangedKey, false))
                     _searchAdMain.resetSearchCondition();
             }
             if (requestCode == OrderByRequestCode)
