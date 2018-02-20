@@ -90,11 +90,11 @@ namespace RepositoryStd.Repository.Common
 
         public IQueryable<Advertisement> EnforceStartIndexAndCount(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            int startIndex = ParameterExtractor.ExtractInt(queryParameters, StartIndexKey, StartIndexDefault);
+            int startIndex = Extractor.ExtractInt(queryParameters, StartIndexKey, StartIndexDefault);
             if (startIndex < 0)
                 startIndex = StartIndexDefault;
 
-            int count = ParameterExtractor.ExtractInt(queryParameters, CountKey, CountDefault);
+            int count = Extractor.ExtractInt(queryParameters, CountKey, CountDefault);
             if (count > MaxCount)
                 count = MaxCount;
             else if (count < MinCount)
@@ -126,7 +126,7 @@ namespace RepositoryStd.Repository.Common
 
         private IQueryable<Advertisement> whereClauseInputText(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            string userInputSearchText=ParameterExtractor.ExtractString(queryParameters,SearchTextKey,SearchTextDefault);
+            string userInputSearchText=Extractor.ExtractString(queryParameters,SearchTextKey,SearchTextDefault);
             if (userInputSearchText != SearchTextDefault)
             {
                 list = list.Where(advertisement =>
@@ -139,7 +139,7 @@ namespace RepositoryStd.Repository.Common
 
         private IQueryable<Advertisement> includePrice(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            PriceType priceType = ParameterExtractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
+            PriceType priceType = Extractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
             if (priceType != PriceTypeDefault)
                 list = list.Where(advertisement => advertisement.PriceType == priceType);
             switch (priceType)
@@ -148,13 +148,13 @@ namespace RepositoryStd.Repository.Common
                     list = list.Include(advertisement => advertisement.FixedPrice);
 
                     //MinPrice and MAxPrice
-                    decimal minPrice = ParameterExtractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
+                    decimal minPrice = Extractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
                     if (minPrice < MinPriceDefault)
                         minPrice = MinPriceDefault;
                     if (minPrice != MinPriceDefault)
                         list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount > minPrice);
 
-                    decimal maxPrice = ParameterExtractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
+                    decimal maxPrice = Extractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
                     if (maxPrice > MaxPriceDefault)
                         maxPrice = MaxPriceDefault;
                     if (maxPrice != MaxPriceDefault)
@@ -193,7 +193,7 @@ namespace RepositoryStd.Repository.Common
             AdType userSelectedAdType;
             try
             {
-                userSelectedAdType = (AdType)Enum.Parse(typeof(AdType), ParameterExtractor.ExtractInt
+                userSelectedAdType = (AdType)Enum.Parse(typeof(AdType), Extractor.ExtractInt
                     (queryParameters, Advertisement.AdTypeKey, Advertisement.AdTypeDefauly).ToString());
             }
             catch (Exception ex)
@@ -213,10 +213,10 @@ namespace RepositoryStd.Repository.Common
         public Advertisement GetAdvertisementsFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
             Advertisement ad = new Advertisement();
-            ad.CategoryId = ParameterExtractor.ExtractInt(userInputDictionary, Category.CategoryIdKey, Category.CategoryIdDefault);
-            ad.DistrictId = ParameterExtractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
-            ad.AdTitle = ParameterExtractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
-            ad.AdComments = ParameterExtractor.ExtractString(userInputDictionary, AdCommentKey, AdCommentDefault);
+            ad.CategoryId = Extractor.ExtractInt(userInputDictionary, Category.CategoryIdKey, Category.CategoryIdDefault);
+            ad.DistrictId = Extractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
+            ad.AdTitle = Extractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
+            ad.AdComments = Extractor.ExtractString(userInputDictionary, AdCommentKey, AdCommentDefault);
             ad.AdLink = "ToBeSet";
 
             return ad;
@@ -248,9 +248,9 @@ namespace RepositoryStd.Repository.Common
             {
                 UserId = userId,
                 CategoryId =
-                    ParameterExtractor.ExtractInt(userInputDictionary, Category.CategoryIdKey,Category.CategoryIdDefault),
+                    Extractor.ExtractInt(userInputDictionary, Category.CategoryIdKey,Category.CategoryIdDefault),
                 EmailOrSms = (EmailOrSms) Enum.Parse(typeof(EmailOrSms),
-                    ParameterExtractor.ExtractInt(userInputDictionary, EmailOrSmsKey, EmailOrSmsDefault).ToString()),
+                    Extractor.ExtractInt(userInputDictionary, EmailOrSmsKey, EmailOrSmsDefault).ToString()),
                 RequetsPrivilege = RequetsPrivilege.Normal,
                 RequestInsertDateTime = DateTime.Now
             };
@@ -391,7 +391,7 @@ namespace RepositoryStd.Repository.Common
         private IQueryable<Advertisement> orderByClause(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
             //TODO get int number from user and convert it to enum here
-            OrderBy orderByUserInput =(OrderBy) Enum.Parse(typeof(OrderBy), ParameterExtractor.ExtractInt(queryParameters, OrderByKey,(int) OrderByDefault).ToString());
+            OrderBy orderByUserInput =(OrderBy) Enum.Parse(typeof(OrderBy), Extractor.ExtractInt(queryParameters, OrderByKey,(int) OrderByDefault).ToString());
             switch (orderByUserInput)
             {
                 case OrderBy.PriceAsc:
@@ -408,7 +408,7 @@ namespace RepositoryStd.Repository.Common
         }
         private IQueryable<Advertisement> wherClauseCategoryId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            int firstLevelCategoryId = ParameterExtractor.ExtractInt(queryParameters, Category.CategoryIdKey, Category.CategoryIdDefault);
+            int firstLevelCategoryId = Extractor.ExtractInt(queryParameters, Category.CategoryIdKey, Category.CategoryIdDefault);
             if (firstLevelCategoryId == 0)//root is selected so do not include anything in where clause
             {
                 return list;
@@ -433,7 +433,7 @@ namespace RepositoryStd.Repository.Common
         
         private IQueryable<Advertisement> whereClauseDistrictId(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            List<int> districtList = ParameterExtractor.ExtractDistrictIds(queryParameters, DistrictIdKey, ListDistrctIdDefault);
+            List<int> districtList = Extractor.ExtractDistrictIds(queryParameters, DistrictIdKey, ListDistrctIdDefault);
             if (districtList.Count > 0)
                 list = list.Where(advertisement => districtList.Contains(advertisement.DistrictId));
             return list;

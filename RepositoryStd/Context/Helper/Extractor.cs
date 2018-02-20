@@ -5,7 +5,7 @@ using ModelStd.Advertisements.Price;
 
 namespace RepositoryStd.Context.Helper
 {
-    public class ParameterExtractor
+    public class Extractor
     {
         public static PriceType ExtractPriceType(Dictionary<string, string> inputDictionary, string key, PriceType defaultPriceType)
         {
@@ -15,6 +15,7 @@ namespace RepositoryStd.Context.Helper
 
             return temPriceType;
         }
+
         public static List<int> ExtractDistrictIds(Dictionary<string, string> inputDictionary,string key, List<int> defaultDistrictId)
         {
             List<int> districtIdList = new List<int>();
@@ -44,7 +45,6 @@ namespace RepositoryStd.Context.Helper
             }
             return currentValue;
         }
-
 
         public static int ExtractInt(Dictionary<string, string> queryParameters, string key, int defaultValue)
         {

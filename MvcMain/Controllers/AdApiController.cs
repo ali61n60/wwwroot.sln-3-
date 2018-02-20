@@ -55,6 +55,7 @@ namespace MvcMain.Controllers
     //TODO 1- work on Edit AD by Ad owner
     //TODO 1- work on verifying users email and phone number
 
+    //TODO 2- Break Repository classes into pieces based on search,newAd,LetMeKnow , ...
     //TODO 2- when import a class into another in typescript VS uses require. Make it ti use from
     //TODO 2- study about android app change when server changes
     //TODO 2- use Decorator pattern to log
@@ -141,7 +142,7 @@ namespace MvcMain.Controllers
         {
             string errorCode = "AdApiController.AddAdvertisement";
             ResponseBase response = new ResponseBase();
-            int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
+            int categoryId = Extractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
             IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
             try
             {
@@ -167,7 +168,7 @@ namespace MvcMain.Controllers
         {
             string errorCode = "AdApiController.GetAdvertisementCommon";
             ResponseBase<IList<AdvertisementCommon>> response = new ResponseBase<IList<AdvertisementCommon>>();
-            int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
+            int categoryId = Extractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
             IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
             try
             {
@@ -307,8 +308,8 @@ namespace MvcMain.Controllers
             ResponseBase<string> response = new ResponseBase<string>();
             try
             {
-                string fileNameToBeRemoved = ParameterExtractor.ExtractString(userInput, FileNameToBeRemovedKey, defaultFileName);
-                Guid cuurendNewAdGuid = Guid.Parse(ParameterExtractor.ExtractString(userInput, NewAdGuidKey, new Guid().ToString()));
+                string fileNameToBeRemoved = Extractor.ExtractString(userInput, FileNameToBeRemovedKey, defaultFileName);
+                Guid cuurendNewAdGuid = Guid.Parse(Extractor.ExtractString(userInput, NewAdGuidKey, new Guid().ToString()));
 
                 if (fileNameToBeRemoved != defaultFileName)
                 {

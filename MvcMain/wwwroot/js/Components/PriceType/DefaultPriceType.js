@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var EventDispatcher_1 = require("../../Events/EventDispatcher");
-var DefaultPriceType = (function () {
+var DefaultPriceType = /** @class */ (function () {
     function DefaultPriceType() {
         this.SelectedPriceTypeChangedEvent = new EventDispatcher_1.EventDispatcher();
         this.PriceTypeKey = "PriceType";

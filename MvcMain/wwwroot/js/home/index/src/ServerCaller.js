@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
 //TODO make count optional to user
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller(resultHandler, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;
@@ -18,8 +18,8 @@ var ServerCaller = (function () {
     }
     ServerCaller.prototype.GetAdItemsFromServer = function (userInput) {
         this._currentRequestIndex++;
-        userInput.ParametersDictionary[this.StartIndexKey] = this._start;
-        userInput.ParametersDictionary[this.CountKey] = this._count;
+        userInput.ParametersDictionary[this.StartIndexKey] = this._start; //TODO fill it from index.ts maybe it will be a user asked input
+        userInput.ParametersDictionary[this.CountKey] = this._count; ////TODO fill it from index.ts
         userInput.ParametersDictionary[this.RequestIndexKey] = this._currentRequestIndex;
         this._ajaxCaller.Call(userInput);
     }; //GetAdItemsFromServer

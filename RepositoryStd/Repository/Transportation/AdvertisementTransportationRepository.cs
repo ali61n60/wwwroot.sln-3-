@@ -166,7 +166,7 @@ namespace RepositoryStd.Repository.Transportation
         {
             //TODO check if context is not tracking the ad
             Guid userSentGuid =
-                Guid.Parse(ParameterExtractor.ExtractString(userInputDictionary, "NewAdGuid", new Guid().ToString()));
+                Guid.Parse(Extractor.ExtractString(userInputDictionary, "NewAdGuid", new Guid().ToString()));
             IEnumerable<EntityEntry<Advertisement>> trackingAds= _adDbContext.ChangeTracker.Entries<Advertisement>().Where(entry => entry.Entity.AdId == userSentGuid);
             if (trackingAds.Count() != 0)
             {
@@ -179,7 +179,7 @@ namespace RepositoryStd.Repository.Transportation
             AdAttributeTransportation adAttribute = getAdAttributeTransportationFromUserInputDictionary(userInputDictionary);
 
             ad.AdStatus = AdStatus.Submitted; //submitted TODO use AdvertisementCommon Class to set it from an enum
-            ad.AdId = Guid.Parse(ParameterExtractor.ExtractString(userInputDictionary, "NewAdGuid",new Guid().ToString()));
+            ad.AdId = Guid.Parse(Extractor.ExtractString(userInputDictionary, "NewAdGuid",new Guid().ToString()));
             ad.AdInsertDateTime = DateTime.Now;
             ad.UserId = userId;
             ad.AdNumberOfVisited = 0;//just being added
@@ -265,14 +265,14 @@ namespace RepositoryStd.Repository.Transportation
         private LetMeKnowAttributeTransportaion getLetMeKnowAttributeTransportaionFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
             LetMeKnowAttributeTransportaion tempLetMeKnowAttributeTransportaion=new LetMeKnowAttributeTransportaion();
-            tempLetMeKnowAttributeTransportaion.BrandId =ParameterExtractor.ExtractInt(userInputDictionary, CarBrandIdKey, CarBrandIdDefault);
-            tempLetMeKnowAttributeTransportaion.ModelId =ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
+            tempLetMeKnowAttributeTransportaion.BrandId =Extractor.ExtractInt(userInputDictionary, CarBrandIdKey, CarBrandIdDefault);
+            tempLetMeKnowAttributeTransportaion.ModelId =Extractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
 
             tempLetMeKnowAttributeTransportaion.MakeYearFrom =
-                ParameterExtractor.ExtractInt(userInputDictionary, MakeYearFromKey, MakeYearFromDefault);
+                Extractor.ExtractInt(userInputDictionary, MakeYearFromKey, MakeYearFromDefault);
 
             tempLetMeKnowAttributeTransportaion.MakeYearTo =
-                ParameterExtractor.ExtractInt(userInputDictionary, MakeYearToKey, MakeYearToDefault);
+                Extractor.ExtractInt(userInputDictionary, MakeYearToKey, MakeYearToDefault);
 
             return tempLetMeKnowAttributeTransportaion;
         }
@@ -281,23 +281,23 @@ namespace RepositoryStd.Repository.Transportation
         private AdAttributeTransportation getAdAttributeTransportationFromUserInputDictionary(Dictionary<string, string> userInputDictionary)
         {
             AdAttributeTransportation adAttribute = new AdAttributeTransportation();
-            adAttribute.ModelId = ParameterExtractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
-            adAttribute.MakeYear = ParameterExtractor.ExtractInt(userInputDictionary, MakeYearKey, MakeYearDefault);
-            adAttribute.FuelType =(FuelType)Enum.ToObject(typeof(FuelType),ParameterExtractor.ExtractInt(userInputDictionary, FuelTypeKey, (int)FuelTypeDefault));
-            adAttribute.Mileage = ParameterExtractor.ExtractInt(userInputDictionary, MileageKey, MileageDefault);
-            adAttribute.GearboxType =(GearboxType)Enum.ToObject(typeof(GearboxType), ParameterExtractor.ExtractInt(userInputDictionary, GearboxKey,(int)GearboxDefault));
-            adAttribute.BodyColor =ParameterExtractor.ExtractString(userInputDictionary, BodyColorKey, BodyColorDefault);
-            adAttribute.InternalColor =ParameterExtractor.ExtractString(userInputDictionary, InternalColorKey, InternalColorDefault);
-            adAttribute.BodyStatus =(BodyStatus)Enum.ToObject(typeof(BodyStatus), ParameterExtractor.ExtractInt(userInputDictionary, BodyStatusKey,(int)BodyStatusDefault));
-            adAttribute.CarStatus =(CarStatus)Enum.ToObject(typeof(CarStatus), ParameterExtractor.ExtractInt(userInputDictionary, CarStatusKey,(int)CarStatusDefault));
-            adAttribute.PlateType =(PlateType)Enum.ToObject(typeof(PlateType),ParameterExtractor.ExtractInt(userInputDictionary, PlateTypeKey, (int)PlateTypeDefault));
+            adAttribute.ModelId = Extractor.ExtractInt(userInputDictionary, CarModelIdKey, CarModelIdDefault);
+            adAttribute.MakeYear = Extractor.ExtractInt(userInputDictionary, MakeYearKey, MakeYearDefault);
+            adAttribute.FuelType =(FuelType)Enum.ToObject(typeof(FuelType),Extractor.ExtractInt(userInputDictionary, FuelTypeKey, (int)FuelTypeDefault));
+            adAttribute.Mileage = Extractor.ExtractInt(userInputDictionary, MileageKey, MileageDefault);
+            adAttribute.GearboxType =(GearboxType)Enum.ToObject(typeof(GearboxType), Extractor.ExtractInt(userInputDictionary, GearboxKey,(int)GearboxDefault));
+            adAttribute.BodyColor =Extractor.ExtractString(userInputDictionary, BodyColorKey, BodyColorDefault);
+            adAttribute.InternalColor =Extractor.ExtractString(userInputDictionary, InternalColorKey, InternalColorDefault);
+            adAttribute.BodyStatus =(BodyStatus)Enum.ToObject(typeof(BodyStatus), Extractor.ExtractInt(userInputDictionary, BodyStatusKey,(int)BodyStatusDefault));
+            adAttribute.CarStatus =(CarStatus)Enum.ToObject(typeof(CarStatus), Extractor.ExtractInt(userInputDictionary, CarStatusKey,(int)CarStatusDefault));
+            adAttribute.PlateType =(PlateType)Enum.ToObject(typeof(PlateType),Extractor.ExtractInt(userInputDictionary, PlateTypeKey, (int)PlateTypeDefault));
 
             return adAttribute;
         }
                       
         private IQueryable<Advertisement> wherePlateType(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            PlateType plateType =(PlateType)Enum.ToObject( typeof(PlateType),ParameterExtractor.ExtractInt(queryParameters, PlateTypeKey,(int)PlateTypeDefault));
+            PlateType plateType =(PlateType)Enum.ToObject( typeof(PlateType),Extractor.ExtractInt(queryParameters, PlateTypeKey,(int)PlateTypeDefault));
             if (plateType != PlateTypeDefault)
             {
                 list = list.Where(advertisement =>
@@ -307,7 +307,7 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereCarStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            CarStatus carStatus = (CarStatus)Enum.ToObject(typeof(CarStatus), ParameterExtractor.ExtractInt(queryParameters, CarStatusKey, (int)CarStatusDefault));
+            CarStatus carStatus = (CarStatus)Enum.ToObject(typeof(CarStatus), Extractor.ExtractInt(queryParameters, CarStatusKey, (int)CarStatusDefault));
             
             if (carStatus != CarStatusDefault)
             {
@@ -320,7 +320,7 @@ namespace RepositoryStd.Repository.Transportation
         private IQueryable<Advertisement> whereBodyStatus(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             //TODO get BodyStatus as an integer from user
-            BodyStatus bodyStatus = (BodyStatus)Enum.ToObject(typeof(BodyStatus), ParameterExtractor.ExtractInt(queryParameters, BodyStatusKey, (int)BodyStatusDefault));
+            BodyStatus bodyStatus = (BodyStatus)Enum.ToObject(typeof(BodyStatus), Extractor.ExtractInt(queryParameters, BodyStatusKey, (int)BodyStatusDefault));
             
             if (bodyStatus != BodyStatusDefault)
             {
@@ -331,7 +331,7 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereInternalColor(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            string internalColor = ParameterExtractor.ExtractString(queryParameters, InternalColorKey, InternalColorDefault);
+            string internalColor = Extractor.ExtractString(queryParameters, InternalColorKey, InternalColorDefault);
             if (internalColor != InternalColorDefault)
             {
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.InternalColor == internalColor);
@@ -341,7 +341,7 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereBodyColor(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            string bodyColor = ParameterExtractor.ExtractString(queryParameters, BodyColorKey, BodyColorDefault);
+            string bodyColor = Extractor.ExtractString(queryParameters, BodyColorKey, BodyColorDefault);
             if (bodyColor != BodyColorDefault)
             {
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.BodyColor == bodyColor);
@@ -352,7 +352,7 @@ namespace RepositoryStd.Repository.Transportation
         private IQueryable<Advertisement> whereGearbox(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
             //TODO get gearboxType as an integer from user
-            GearboxType gearboxType = (GearboxType)Enum.ToObject(typeof(GearboxType), ParameterExtractor.ExtractInt(queryParameters, GearboxKey, (int)GearboxDefault));
+            GearboxType gearboxType = (GearboxType)Enum.ToObject(typeof(GearboxType), Extractor.ExtractInt(queryParameters, GearboxKey, (int)GearboxDefault));
             
             if (gearboxType != GearboxDefault)
             {
@@ -362,8 +362,8 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereMileage(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            int mileageFrom = ParameterExtractor.ExtractInt(queryParameters, MileageFromKey, MileageFromDefault);
-            int mileageTo = ParameterExtractor.ExtractInt(queryParameters, MileageToKey, MileageToDefault);
+            int mileageFrom = Extractor.ExtractInt(queryParameters, MileageFromKey, MileageFromDefault);
+            int mileageTo = Extractor.ExtractInt(queryParameters, MileageToKey, MileageToDefault);
 
             if (mileageFrom != MileageFromDefault)
                 list = list.Where(advertisement => advertisement.AdAttributeTransportation.Mileage >= mileageFrom);
@@ -377,7 +377,7 @@ namespace RepositoryStd.Repository.Transportation
         {
 
             //TODO get fuelType as an integer from user
-            FuelType fuelType = (FuelType)Enum.ToObject(typeof(FuelType), ParameterExtractor.ExtractInt(queryParameters, FuelTypeKey, (int)FuelTypeDefault));
+            FuelType fuelType = (FuelType)Enum.ToObject(typeof(FuelType), Extractor.ExtractInt(queryParameters, FuelTypeKey, (int)FuelTypeDefault));
             
             if (fuelType != FuelTypeDefault)
             {
@@ -389,8 +389,8 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereClauseMakeYear(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            int makeYearFrom = ParameterExtractor.ExtractInt(queryParameters, MakeYearFromKey, MakeYearFromDefault);
-            int makeYearTo = ParameterExtractor.ExtractInt(queryParameters, MakeYearToKey, MakeYearToDefault);
+            int makeYearFrom = Extractor.ExtractInt(queryParameters, MakeYearFromKey, MakeYearFromDefault);
+            int makeYearTo = Extractor.ExtractInt(queryParameters, MakeYearToKey, MakeYearToDefault);
 
             if (makeYearFrom != MakeYearFromDefault)
             {
@@ -405,8 +405,8 @@ namespace RepositoryStd.Repository.Transportation
         }
         private IQueryable<Advertisement> whereClauseCarModelAndBrand(Dictionary<string, string> queryParameters, IQueryable<Advertisement> list)
         {
-            int carModelId = ParameterExtractor.ExtractInt(queryParameters, CarModelIdKey, CarModelIdDefault);
-            int brandId = ParameterExtractor.ExtractInt(queryParameters, CarBrandIdKey, CarBrandIdDefault);
+            int carModelId = Extractor.ExtractInt(queryParameters, CarModelIdKey, CarModelIdDefault);
+            int brandId = Extractor.ExtractInt(queryParameters, CarBrandIdKey, CarBrandIdDefault);
 
             if (carModelId != CarModelIdDefault)//when carModel is selected certainly brand is selected
             {
