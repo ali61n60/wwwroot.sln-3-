@@ -6,7 +6,9 @@ using Android.Support.V7.Widget;
 using Android.Text;
 using Android.Views;
 using Android.Widget;
+using ChiKoja.Infrastructure;
 using ChiKoja.Infrastructure.IOC;
+using ModelStd.Db.Ad;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
@@ -16,7 +18,13 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         
         private readonly string PriceTypeKey = "PriceType";
 
-        private ISharedPreferences pref;
+        private readonly string AdTypeKey = "AdType";
+        private readonly AdType AdTypeDefault = AdType.All;
+
+        private readonly string MinimumPriceKey = "MinimumPrice";
+        private readonly string MaximumPriceKey = "MaximumPrice";
+
+        
 
         private Context _context;
         View _rootView;
@@ -30,8 +38,6 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         public SearchFilterCriteriaDefaultFragment()
         {
-            //TODO test it
-            pref = Bootstrapper.container.GetInstance<ISharedPreferences>();
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -113,6 +119,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             
             //userInputDictionary[OrderByKey]=pref.GetInt(OrderByKey)
             //TODO Add PriceType from its fragment
+            //MinPrice
+            //MAxPrice
+           
+            userInputDictionary[AdTypeKey] = AppPreferences.GetSearchPref(AdTypeKey, ((int)AdTypeDefault).ToString());
         }
 
         public override void ClearPreferences()

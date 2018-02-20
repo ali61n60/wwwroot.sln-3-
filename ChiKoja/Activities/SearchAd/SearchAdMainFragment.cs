@@ -26,11 +26,9 @@ namespace ChiKoja.Activities.SearchAd
 
         private readonly string StartIndexKey = "StartIndex";
         private readonly string CountKey = "Count";
-        private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
 
-        private readonly string MinimumPriceKey = "MinimumPrice";
-        private readonly string MaximumPriceKey = "MaximumPrice";
+        
         
 
         private SingleAdArrayAdapter _singleAdArrayAdapter;
@@ -142,7 +140,8 @@ namespace ChiKoja.Activities.SearchAd
             //TODO maybe you should remove items from array adapter
             try
             {
-                _listViewAdCommon.RemoveAllViews();
+                _singleAdArrayAdapter.Clear();
+                _singleAdArrayAdapter.NotifyDataSetChanged();
                 _start = _initalStart;
             }
             catch (Exception ex)
@@ -160,7 +159,7 @@ namespace ChiKoja.Activities.SearchAd
             {
                 _start += response.ResponseData.Length;
                 _singleAdArrayAdapter.AddItemsToList(response.ResponseData);
-                ((SingleAdArrayAdapter)_listViewAdCommon.Adapter).NotifyDataSetChanged();
+                _singleAdArrayAdapter.NotifyDataSetChanged();
             }
             else
                 Toast.MakeText(_context, response.Message, ToastLength.Long).Show();

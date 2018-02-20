@@ -47,6 +47,12 @@
     <string name="PriceAsc">Price Ascending</string>
     <string name="PriceDesc">Price Descending</string>
 
+    <string name="AdType">Ad Type</string>
+    <string name="All">All</string>
+    <string name="ForSale">For Sale</string>
+    <string name="Demand">Demand</string>
+
+
     <string name="Title">Title</string>
     <string name="ServerCall">Server call</string>
     <string name="PleaseLogIn">You are not logged in.Please log in</string>

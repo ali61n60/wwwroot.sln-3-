@@ -34,6 +34,11 @@ namespace ChiKoja.ArrayAdapters.SingleAd
             return _advertisementCommonList[position];
         }
 
+        public override void Clear()
+        {
+            _advertisementCommonList.Clear();
+        }
+
         public override int Count { get { return _advertisementCommonList.Count; } }
 
         public override View GetView(int position, View convertView, ViewGroup parent)

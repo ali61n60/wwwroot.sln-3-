@@ -33,11 +33,18 @@
   <string name="To">تا</string>
   <string name="OnlyWithPictures">فقط عکس دار</string>
   <string name="UrgentAdsOnly">فقط آگهی فوری</string>
+  
   <string name="Sort">مرتب سازی</string>
   <string name="DateAsc">تاریخ صعودی</string>
   <string name="DateDesc">تاریخ نزولی</string>
   <string name="PriceAsc">قیمت صعودی</string>
   <string name="PriceDesc">قیمت نزولی</string>
+
+  <string name="AdType">نوع آگهی</string>
+  <string name="All">همه</string>
+  <string name="ForSale">فروشی</string>
+  <string name="Demand">درخواستی</string>
+  
 
   <string name="MarkAd">نشان کن</string>
   <string name="UnMarkAd">از نشان شده ها حذف کن</string>
