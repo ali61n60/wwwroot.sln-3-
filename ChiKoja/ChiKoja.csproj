@@ -279,7 +279,7 @@
     <Compile Include="CustomViews\MarkAd\MarkAdView.cs" />
     <Compile Include="CustomViews\SingleAdView\ViewGroupUserAd.cs" />
     <Compile Include="Dialog\AlertDialog\AlertDialogActivity.cs" />
-    <Compile Include="GlobalApplication\GlobalApplication.cs" />
+    <Compile Include="GlobalApplication\GlobalApp.cs" />
     <Compile Include="Infrastructure\IOC\AdViewContainer.cs" />
     <Compile Include="Infrastructure\IOC\Bootstrapper.cs" />
     <Compile Include="Infrastructure\AppPreferences.cs" />

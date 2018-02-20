@@ -87,7 +87,7 @@ namespace ChiKoja.Activities.SearchAd
         {
             _buttonSearchAd.Click += async (sender, args) =>
             {
-                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+                GlobalApplication.GlobalApp.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
                 Dictionary<string, string> userInputDictionary = createUserInputDictionary();
                 
                 ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon(userInputDictionary);
@@ -148,7 +148,7 @@ namespace ChiKoja.Activities.SearchAd
 
         private void onSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
         {
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            GlobalApplication.GlobalApp.GetMessageShower().ShowDefaultMessage();
             if (response.Success)
             {
                 _start += response.ResponseData.Length;
@@ -161,7 +161,7 @@ namespace ChiKoja.Activities.SearchAd
 
         private void onSearchAdError(Exception ex)
         {
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            GlobalApplication.GlobalApp.GetMessageShower().ShowDefaultMessage();
             Toast.MakeText(_context, ex.Message, ToastLength.Short).Show();
         }
     }

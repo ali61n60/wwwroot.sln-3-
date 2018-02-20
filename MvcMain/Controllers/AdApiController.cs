@@ -24,6 +24,58 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    // TODO 1- use AsyncTask class for database check and update
+    //Learn Action<T>
+    //Learn more StructureMap IOC and manage localTables
+    //Learn and use UNIT TEST, Integration test, Interaction test, UI test, Acceptance test, Approval test, Telerik test studio
+    //Learn MOCK Framework
+    //Learn and use UML
+    //Learn Source code control programs
+    //Learn ProtoBuffer
+    //Learn multiple server balanceing load
+    //Learn System.Runtime.Caching MemoryCache.Default.Add(...)
+    //Learn Lazy<T> for using lazy loading
+    //Learn Logging Log4net, NLOG, ...
+    //Learn Func<Order, double> Expression<Func<Employee,bool>>
+    //Learn Neti & webrtc
+
+
+    //Create Advertisement in app service ***
+    //TODO -2 Make repository method async
+    //TODO -2 Use Array Adaptor to ViewGroupSingleAD
+    //TODO -2 Make a manner to user input server ip address
+    //TODO use Gateway pattern for web service classes
+    //TODO Add setting section and update localdatabase option in it
+    //TODO when updating database reprot the user how much the process has progressed
+    //TODO Add ShowMarkedAd Activity
+    //TODO In AdDetail check if the ad is marked user could understand it from a visual clue
+    //TODO Add Report ad
+    //TODO Add Sort By Number Of Visit
+    //TODO Add category selection fragment for search AND for new ad
+    //TODO Add new advertisement
+    //TODO Add User Ads
+    //TODO add capability for users to send messages to each other
+    //TODO add expandableListView to Filter activity
+    //TODO convert unnecessary activities into fragments
+
+    //TODO Add notify me for specific items
+    //TODO Add users credit
+    //TODO ActivitySearchAd add "No More Result" when search returns 0 item
+    //TODO ActivitySearchAd add Automatic Search when scrolled result
+    //TODO ActivitySearchAd add Max number of result setter by user
+    //TODO double-check local tableVersion storage and how to manage exception when updation
+    //TODO design category selection view for new ad
+
+    //TODO every call to data layer should check for exception and try to give user retry option
+
+    //BUG messageShower call to server may be lost if after call current activity Die. Try to use a service instead of activity to call
+    //server and manage MessageShower at service layer
+
+    //BUG in category Selection activity when a parent is selected and button select all,with button deselect all is clicked the parent is still selected
+
+
+
+
     //TODO 1- decide to delete or not sharedPreferences content on app start. 
     //TODO 1-think of saving users search
     //TODO 1- Android Color https://material.io/color/#!/?view.left=0&view.right=1&primary.color=bee1ff&secondary.color=6ebbce

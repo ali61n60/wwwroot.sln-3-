@@ -3,6 +3,7 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using ChiKoja.Activities.SearchAd;
+using ChiKoja.Infrastructure;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository.Filter;
@@ -20,17 +21,15 @@ namespace ChiKoja.Activities.SplashActivity
             checkDatabase();
             resetSearchFilter();
         }
+
+        //TODO I do not understand this. It must be run in a background proccess not in async
         private async void checkDatabase()
         {
             Repository.Repository repository = Bootstrapper.container.GetInstance<Repository.Repository>();
-            await repository.ManageDatabaseFile(GlobalApplication.GlobalApplication.GetGlobalApplication(),
-                GlobalApplication.GlobalApplication.GetGlobalApplication().ManageDatabaseRequestCode);
+            await repository.ManageDatabaseFile(GlobalApplication.GlobalApp.GetGlobalApplication(),
+                GlobalApplication.GlobalApp.GetGlobalApplication().ManageDatabaseRequestCode);
         }
-        private void resetSearchFilter()
-        {
-            CommonFilter commonFilter = new CommonFilter();
-            commonFilter.ResetCommonFilter();
-        }
+        
         protected override void OnResume()
         {
             base.OnResume();
@@ -45,6 +44,11 @@ namespace ChiKoja.Activities.SplashActivity
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
             startupWork.Start();
+        }
+
+        private void resetSearchFilter()
+        {
+            AppPreferences.ResetSearchPreferences();
         }
     }
 }

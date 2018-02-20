@@ -60,13 +60,13 @@ namespace ChiKoja.Activities.AdDetail
         {
             AdvertisementTransportation advertisementTransportation = null;
             IAdApi adApi = Bootstrapper.container.GetInstance<IAdApi>();
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
+            GlobalApplication.GlobalApp.GetMessageShower().ShowMessage(Resources.GetString(Resource.String.ServerCall), ShowMessageType.Permanent);
             ResponseBase<AdvertisementCommon> response = await adApi.GetAdDetail(new AdDetailInfo()
             {
                 AdGuid = adGuid,
                 CategoryId = categoryId
             });
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            GlobalApplication.GlobalApp.GetMessageShower().ShowDefaultMessage();
             if (response.Success)
             {
                 try
@@ -82,7 +82,7 @@ namespace ChiKoja.Activities.AdDetail
 
             else
             {
-                GlobalApplication.GlobalApplication.GetMessageShower().ShowMessage(response.Message, ShowMessageType.Permanent);
+                GlobalApplication.GlobalApp.GetMessageShower().ShowMessage(response.Message, ShowMessageType.Permanent);
             }
 
             return advertisementTransportation;

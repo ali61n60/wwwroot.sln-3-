@@ -32,6 +32,49 @@ namespace ChiKoja.Activities.SearchAd
             
         }
 
+        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+
+            if (requestCode == LocationSelectionRequestCode)
+            {
+                if (data == null) return;
+                if (data.GetBooleanExtra("locationSelectionChanged", false))
+                    _searchAdMain.ResetSearchCondition();
+            }
+            if (requestCode == CategorySelectionRequestCode)
+            {
+                if (data == null) return;
+                if (data.GetBooleanExtra("categorySelectionChanged", false))
+                    _searchAdMain.ResetSearchCondition();
+            }
+            if (requestCode == SearchFilterRequestCode)
+            {
+                if (_searchAdMain.LocalSearchPrefChangeNumber != AppPreferences.SearchPrefChangedNumber)
+                {
+                    _searchAdMain.ResetSearchCondition();
+                }
+            }
+            if (requestCode == OrderByRequestCode)
+            {
+                if (data == null) return;
+                if (data.GetBooleanExtra("OrderByChanged", false))
+                    _searchAdMain.ResetSearchCondition();
+            }
+        }
+
+        public void OnSingleAdSelected(AdvertisementCommon adCommon)
+        {
+            //TODO show ad detail to user
+
+            Intent adDetailIntent = new Intent(this, typeof(AdDetailActivity));
+            adDetailIntent.PutExtra(Advertisement.AdGuidKey, adCommon.AdId.ToString());
+            adDetailIntent.PutExtra(Category.CategoryIdKey, adCommon.CategoryId);
+            StartActivity(adDetailIntent);
+
+            Toast.MakeText(this, adCommon.AdId.ToString(), ToastLength.Long).Show();
+        }
+
         private void chechIntentMessage()
         {
             if (Intent.GetBooleanExtra("EXIT", false))
@@ -68,47 +111,6 @@ namespace ChiKoja.Activities.SearchAd
         }
         
 
-        protected override void OnActivityResult(int requestCode, Result resultCode, Intent data)
-        {
-            base.OnActivityResult(requestCode, resultCode, data);
-
-            if (requestCode == LocationSelectionRequestCode)
-            {
-                if (data == null) return;
-                if (data.GetBooleanExtra("locationSelectionChanged", false))
-                    _searchAdMain.ResetSearchCondition();
-            }
-            if (requestCode == CategorySelectionRequestCode)
-            {
-                if (data == null) return;
-                if (data.GetBooleanExtra("categorySelectionChanged", false))
-                    _searchAdMain.ResetSearchCondition();
-            }
-            if (requestCode == SearchFilterRequestCode)
-            {
-                if (_searchAdMain.LocalSearchPrefChangeNumber != AppPreferences.SearchPrefChangedNumber)
-                {
-                    _searchAdMain.ResetSearchCondition();
-                }
-            }
-            if (requestCode == OrderByRequestCode)
-            {
-                if (data == null) return;
-                if (data.GetBooleanExtra("OrderByChanged", false))
-                    _searchAdMain.ResetSearchCondition();
-            }
-        }
-
-        public void OnSingleAdSelected(AdvertisementCommon adCommon)
-        {
-            //TODO show ad detail to user
-            
-            Intent adDetailIntent = new Intent(this, typeof(AdDetailActivity));
-            adDetailIntent.PutExtra(Advertisement.AdGuidKey, adCommon.AdId.ToString());
-            adDetailIntent.PutExtra(Category.CategoryIdKey, adCommon.CategoryId);
-            StartActivity(adDetailIntent);
-            
-            Toast.MakeText(this,adCommon.AdId.ToString(),ToastLength.Long).Show();
-        }
+        
     }
 }

@@ -119,7 +119,7 @@ namespace ChiKoja.SearchAd.UserAd
         public void OnSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)
         {
             
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            GlobalApplication.GlobalApp.GetMessageShower().ShowDefaultMessage();
             LinearLayout.LayoutParams layoutParams =
                 new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MatchParent, ViewGroup.LayoutParams.MatchParent);
             layoutParams.SetMargins(0, 20, 0, 20);
@@ -134,7 +134,7 @@ namespace ChiKoja.SearchAd.UserAd
 
         public void OnSearchAdError(Exception ex)
         {
-            GlobalApplication.GlobalApplication.GetMessageShower().ShowDefaultMessage();
+            GlobalApplication.GlobalApp.GetMessageShower().ShowDefaultMessage();
             Toast.MakeText(ApplicationContext, ex.Message, ToastLength.Short).Show();
         }
     }

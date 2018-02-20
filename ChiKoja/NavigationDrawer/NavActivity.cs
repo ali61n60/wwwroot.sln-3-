@@ -42,7 +42,7 @@ namespace ChiKoja.NavigationDrawer
             _screenUtility = new ScreenUtility(this);
             initializeToolbar();
             initializeNavigationView();
-            GlobalApplication.GlobalApplication.GetMessageShower().CurrentNavActivity = this;
+            GlobalApplication.GlobalApp.GetMessageShower().CurrentNavActivity = this;
         }
 
         private void initializeToolbar()
