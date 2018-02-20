@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Widget;
 using ChiKoja.Activities.AdDetail;
 using ChiKoja.Activities.SearchAd.SearchFilter;
+using ChiKoja.Infrastructure;
 using ChiKoja.NavigationDrawer;
 using ModelStd.Advertisements;
 using ModelStd.Db.Ad;
@@ -19,7 +20,8 @@ namespace ChiKoja.Activities.SearchAd
         private SearchAdFilterFragment _searchAdFilter;
 
         public const int CategorySelectionRequestCode = 2;
-        
+        public const int SearchFilterRequestCode = 3;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -84,9 +86,10 @@ namespace ChiKoja.Activities.SearchAd
             }
             if (requestCode == SearchFilterRequestCode)
             {
-                if (data == null) return;
-                if (data.GetBooleanExtra(SearchFilterActivity.SearchFilterChangedKey, false))
+                if (_searchAdMain.LocalSearchPrefChangeNumber != AppPreferences.SearchPrefChangedNumber)
+                {
                     _searchAdMain.ResetSearchCondition();
+                }
             }
             if (requestCode == OrderByRequestCode)
             {

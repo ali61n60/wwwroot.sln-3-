@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Diagnostics.CodeAnalysis;
 using Android.Content;
 using Android.OS;
 using Android.Support.V7.Widget;
@@ -14,6 +14,7 @@ namespace ChiKoja.Activities.SearchAd
         View _rootView;
         AppCompatButton _buttonFilter;
         
+        [SuppressMessage("ReSharper", "EmptyConstructor")]
         public SearchAdFilterFragment()
         {
         }
@@ -45,7 +46,7 @@ namespace ChiKoja.Activities.SearchAd
             _buttonFilter.Click += (sender, args) =>
             {
                 Intent searchFilterIntent = new Intent(_context, typeof(SearchFilterActivity));
-                StartActivityForResult(searchFilterIntent, NavigationDrawer.NavActivity.SearchFilterRequestCode);
+                Activity.StartActivityForResult(searchFilterIntent, SearchAdActivity.SearchFilterRequestCode);
             };   
         }      
     }

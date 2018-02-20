@@ -16,9 +16,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     [Activity(Label = "ActivitySearchFilter", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class SearchFilterActivity : NavActivity,ISetSearchFilter
     {
-        //TODO store initial values into class variables and check new value against that
         //TODO format edittext to show numbers 12,123
-        public static readonly string SearchFilterChangedKey = "SearchFilterChanged";
 
         private SearchFilterTopTopFragment _searchFilterTopTop;
         private SearchFilterCategorySpecificBaseCriteria _searchFilterCategorySpecificCriteria;
@@ -28,10 +26,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         //category_specific_part
         private CategorySelection _categorySelection;
         
-        private bool filterParameterChangedByUser = false;
-
         
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -82,6 +77,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
             //TODO get user selected category from somewhere
             int categoryId = 0;
+
             _searchFilterCategorySpecificCriteria= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.category_specific_part, _searchFilterCategorySpecificCriteria)
@@ -107,10 +103,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
             //this method is called from SearchFilterTopTopFragment to tell the activity that user has clicked ok button
             _searchFilterCategorySpecificCriteria.PersistUserFilter();
-            
-            Intent data = new Intent();
-            data.PutExtra(SearchFilterChangedKey, filterParameterChangedByUser);
-            SetResult(Result.Ok, data);
+            SetResult(Result.Ok);
             Finish();
         }
     }

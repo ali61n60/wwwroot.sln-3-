@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using ChiKoja.Activities.SearchAd.SearchFilter;
 using ChiKoja.ArrayAdapters.SingleAd;
+using ChiKoja.Infrastructure;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Notification;
 using ChiKoja.Repository;
@@ -20,16 +21,16 @@ namespace ChiKoja.Activities.SearchAd
 {
     public class SearchAdMainFragment : Fragment
     {
-        int _start = 1;
-        int _initalStart = 1;
-        int _count = 15;
+        private int _start = 1;
+        private const int InitalStart = 1;
+        private int _count = 15;
 
-        private readonly string StartIndexKey = "StartIndex";
-        private readonly string CountKey = "Count";
-        private readonly string SearchTextKey = "SearchText";
+        public int LocalSearchPrefChangeNumber { get; private set; }
 
-        
-        
+        private const string StartIndexKey = "StartIndex";
+        private const string CountKey = "Count";
+        private const string SearchTextKey = "SearchText";
+
 
         private SingleAdArrayAdapter _singleAdArrayAdapter;
         private ISingleAdEvents _singleAdEvents;
@@ -137,19 +138,12 @@ namespace ChiKoja.Activities.SearchAd
 
         public void ResetSearchCondition()
         {
-            //TODO maybe you should remove items from array adapter
-            try
-            {
-                _singleAdArrayAdapter.Clear();
-                _singleAdArrayAdapter.NotifyDataSetChanged();
-                _start = _initalStart;
-            }
-            catch (Exception ex)
-            {
-                
-            }
-            
-            
+            _singleAdArrayAdapter.Clear();
+            _singleAdArrayAdapter.NotifyDataSetChanged();
+
+            _start = InitalStart;
+
+            LocalSearchPrefChangeNumber = AppPreferences.SearchPrefChangedNumber;
         }
 
         private void onSerachAdCompleted(ResponseBase<AdvertisementCommon[]> response)

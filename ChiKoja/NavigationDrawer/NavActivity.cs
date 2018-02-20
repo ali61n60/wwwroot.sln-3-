@@ -25,13 +25,12 @@ namespace ChiKoja.NavigationDrawer
     public class NavActivity : AppCompatActivity
     {
         public const int LocationSelectionRequestCode = 1;
-        public const int SearchFilterRequestCode = 3;
         public const int OrderByRequestCode=4;
 
         DrawerLayout drawerLayout;
         private const int navigationGravity = Android.Support.V4.View.GravityCompat.End;
 
-        
+
         V7Toolbar toolbar;
         protected NavigationView NavigationView;
         AppCompatTextView textViewMessage;

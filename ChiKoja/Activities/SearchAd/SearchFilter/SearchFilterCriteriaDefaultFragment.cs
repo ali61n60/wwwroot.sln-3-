@@ -142,7 +142,6 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         public override void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
         {
             //TODO Add OrderBy from its fragment
-            
             //userInputDictionary[OrderByKey]=pref.GetInt(OrderByKey)
             //TODO Add PriceType from its fragment
             //MinPrice

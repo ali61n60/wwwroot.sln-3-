@@ -1,9 +1,10 @@
 ﻿using System;
+using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Support.V4.App;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Fragment = Android.Support.V4.App.Fragment;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
@@ -53,6 +54,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
            _buttonCancel.Click += (sender, args) =>
             {
+                Activity.SetResult(Result.Canceled);
                 Activity.Finish();
             };
 
