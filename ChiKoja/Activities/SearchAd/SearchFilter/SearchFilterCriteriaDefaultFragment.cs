@@ -34,6 +34,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         AppCompatCheckBox _checkBoxOnlyWithPictures;
         AppCompatCheckBox _checkBoxUrgentAdsOnly;
 
+        private RadioButton _radioButtonAdTypeAll;
+        private RadioButton _radioButtonAdTypeOffer;
+        private RadioButton _radioButtonAdTypeDemand;
+
         private bool _filterParameterChangedByUser;
 
         public SearchFilterCriteriaDefaultFragment()
@@ -58,6 +62,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             _editTextMaximumPrice = _rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMaximumPrice);
             _checkBoxOnlyWithPictures = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxOnlyWithPictures);
             _checkBoxUrgentAdsOnly = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
+
+            _radioButtonAdTypeAll = _rootView.FindViewById<RadioButton>(Resource.Id.radioButtonAll);
+            _radioButtonAdTypeOffer = _rootView.FindViewById<RadioButton>(Resource.Id.radioButtonOffer);
+            _radioButtonAdTypeDemand = _rootView.FindViewById<RadioButton>(Resource.Id.radioButtonDemand);
         }
 
         private void initializeEvents()
@@ -97,6 +105,8 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         public override void PersistUserFilter()
         {
+            persistAdType();
+           
             if (_filterParameterChangedByUser)
             {
                 try
@@ -110,6 +120,22 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
                 {
 
                 }
+            }
+        }
+
+        private void persistAdType()
+        {
+            if (_radioButtonAdTypeOffer.Checked)
+            {
+                AppPreferences.SetSearchPref(AdTypeKey,((int)AdType.Offer).ToString());
+            }
+            else if (_radioButtonAdTypeDemand.Checked)
+            {
+                AppPreferences.SetSearchPref(AdTypeKey, ((int)AdType.Demand).ToString());
+            }
+            else
+            {
+                AppPreferences.SetSearchPref(AdTypeKey, ((int)AdType.All).ToString());
             }
         }
 

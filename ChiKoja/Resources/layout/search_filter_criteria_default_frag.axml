@@ -9,7 +9,6 @@
       android:textAppearance="?android:attr/textAppearanceMedium"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_below="@+id/buttonSort"
       android:layout_centerHorizontal="true" />
   <TextView
       android:id="@+id/textViewMinimumPrice"
@@ -18,6 +17,7 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_marginRight="@dimen/default_margin"
+      android:layout_marginEnd="@dimen/default_margin"
       android:layout_below="@id/textViewPrice"
       android:layout_marginBottom="@dimen/default_margin" />
   <EditText
@@ -26,7 +26,8 @@
       android:layout_height="wrap_content"
       android:inputType="number"
       android:layout_alignBaseline="@id/textViewMinimumPrice"
-      android:layout_toRightOf="@id/textViewMinimumPrice" />
+      android:layout_toRightOf="@id/textViewMinimumPrice"
+      android:layout_toEndOf="@id/textViewMinimumPrice"/>
   <TextView
       android:id="@+id/textViewMaximumPrice"
       android:text="@string/To"
@@ -40,6 +41,7 @@
       android:layout_height="wrap_content"
       android:inputType="number"
       android:layout_below="@id/textViewMinimumPrice"
+      android:layout_toEndOf="@id/textViewMaximumPrice"
       android:layout_toRightOf="@id/textViewMaximumPrice"
       android:layout_alignBaseline="@id/textViewMaximumPrice"
       android:layout_alignLeft="@id/editTextMinimumPrice" />
@@ -60,21 +62,19 @@
       android:layout_toRightOf="@id/checkBoxUrgentAdsOnly"
       android:layout_below="@id/editTextMaximumPrice"/>
 
-
-
   <RadioGroup
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignParentStart="true"
       android:layout_alignParentLeft="true"
-      android:layout_below="@id/checkBoxUrgentAdsOnly"       >
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:layout_below="@id/checkBoxUrgentAdsOnly" >
     <TextView
         android:id="@+id/textViewAdType"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioButtonAll"
-        android:layout_alignStart="@+id/radioButtonAll"
-        android:layout_below="@+id/checkBoxUrgentAdsOnly"
+
         android:layout_marginTop="18dp"
         android:text="@string/AdType" />
 
@@ -82,56 +82,24 @@
         android:id="@+id/radioButtonAll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/textViewAdType"
-        android:layout_marginLeft="11dp"
-        android:layout_marginStart="11dp"
         android:layout_marginTop="14dp"
-        android:text="@string/All" />
+        android:text="@string/All"
+        android:checked="true"/>
 
     <RadioButton
-        android:id="@+id/radioButtonForSale"
+        android:id="@+id/radioButtonOffer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioButtonAll"
-        android:layout_alignStart="@+id/radioButtonAll"
-        android:layout_below="@+id/radioButtonAll"
         android:layout_marginTop="14dp"
-        android:text="@string/ForSale" />
+        android:text="@string/Offer" />
 
     <RadioButton
         android:id="@+id/radioButtonDemand"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/radioButtonForSale"
-        android:layout_alignStart="@+id/radioButtonForSale"
-        android:layout_below="@+id/radioButtonForSale"
         android:layout_marginTop="14dp"
         android:text="@string/Demand" />
+
   </RadioGroup>
 
-  <RadioButton
-      android:id="@+id/radioButton4"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_below="@+id/checkBoxOnlyWithPictures"
-      android:layout_marginLeft="19dp"
-      android:layout_marginStart="19dp"
-      android:layout_marginTop="47dp"
-      android:layout_toEndOf="@+id/checkBoxUrgentAdsOnly"
-      android:layout_toRightOf="@+id/checkBoxUrgentAdsOnly"
-      android:text="RadioButton" />
-
-  <RadioButton
-      android:id="@+id/radioButton5"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_alignEnd="@+id/radioButton4"
-      android:layout_alignRight="@+id/radioButton4"
-      android:layout_below="@+id/radioButton4"
-      android:layout_marginTop="16dp"
-      android:text="RadioButton" />
-
-
-</RelativeLayout>
+  </RelativeLayout>
