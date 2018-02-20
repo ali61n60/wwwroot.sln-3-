@@ -47,7 +47,7 @@ namespace MvcMain.Controllers
         {
             string errorCode = "NewAdController/GetNewAdPartialView";
             ResponseBase<string> response = new ResponseBase<string>();
-            int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
+            int categoryId = Extractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
             string viewName = AdViewContainer.GetNewAdPartialViewName(categoryId);
             try
             {

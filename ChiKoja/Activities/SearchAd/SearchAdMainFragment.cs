@@ -108,6 +108,9 @@ namespace ChiKoja.Activities.SearchAd
             userInputDictionary[CountKey] = _count.ToString();
             //TODO Add AdType
             //TODO Add SearchText
+            //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
+            //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
+            //userInputDictionary.Add(districtPair.Key, districtPair.Value);
             CategoryRepository categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
             int selectedCategoryId = categoryRepository.GetSelectedCategoryId();
             userInputDictionary[Category.CategoryIdKey] = selectedCategoryId.ToString();

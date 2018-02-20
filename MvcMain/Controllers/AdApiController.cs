@@ -81,7 +81,7 @@ namespace MvcMain.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly TemperatureRepository _temperatureRepository;
         // RegistrationService registrationService;//TODO put it in Bootstrapper
-        private readonly string numberOfItemsKey = "numberOfItems";
+        
         private readonly string onlyWithPicturesKey = "OnlyWithPictures";
         private readonly string requestIndexKey = "RequestIndex";
 
@@ -176,10 +176,7 @@ namespace MvcMain.Controllers
                 FillFirstImage(response.ResponseData);//get Images
                                                       //TODO create a column (has pictures) in advertisement table and check this filter at database 
                 checkAndCorrectOnlyWithPicturesFilter(response, userInput);
-                Dictionary<string, string> customDictionary = new Dictionary<string, string>
-                {
-                    { numberOfItemsKey, response.ResponseData.Count.ToString() }
-                };
+                Dictionary<string, string> customDictionary = new Dictionary<string, string>();
 
                 response.SetSuccessResponse("OK");
                 response.CustomDictionary = customDictionary;

@@ -68,7 +68,7 @@ namespace MvcMain.Controllers
         {
            string errorCode = "HomeController/GetSearchCriteriaView";
             ResponseBase <string> response=new ResponseBase<string>();
-            int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
+            int categoryId = Extractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
             
             string viewName =AdViewContainer.GetSearchAdPartialViewName(categoryId);
             

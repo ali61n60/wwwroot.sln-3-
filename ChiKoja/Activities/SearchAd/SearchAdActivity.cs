@@ -45,11 +45,11 @@ namespace ChiKoja.Activities.SearchAd
 
         private void addFragments()
         {
-            addMain();
-            addFilter();
+            addMainFrag();
+            addFilterFrag();
         }
 
-        private void addMain()
+        private void addMainFrag()
         {
             _searchAdMain = new SearchAdMainFragment();
             SupportFragmentManager.BeginTransaction()
@@ -57,7 +57,7 @@ namespace ChiKoja.Activities.SearchAd
                 .Commit();
         }
 
-        private void addFilter()
+        private void addFilterFrag()
         {
             _searchAdFilter=new SearchAdFilterFragment();
             SupportFragmentManager.BeginTransaction()

@@ -19,7 +19,6 @@ namespace ChiKoja.Services.Server
         SearchFilterRepository searchFilterRepository;
         
         int _currentRequestIndex = 0;
-        string NumberOfItemsKey = "numberOfItems";
         string RequestIndexKey = "RequestIndex";
         
         private string MinimumPriceKey = "MinimumPrice";
@@ -38,12 +37,6 @@ namespace ChiKoja.Services.Server
         {
             _currentRequestIndex++;
             userInputDictionary[RequestIndexKey] = _currentRequestIndex.ToString();
-            //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
-            //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
-            //userInputDictionary.Add(districtPair.Key, districtPair.Value);
-            
-
-           
             ResponseBase<AdvertisementCommon[]> response=  await ServicesCommon.CallService<AdvertisementCommon[]>("api/AdApi/GetAdvertisementCommon", userInputDictionary);
             return response;
         }

@@ -41,7 +41,7 @@ namespace MvcMain.Controllers
                     return response;
                 }
 
-                int categoryId = ParameterExtractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
+                int categoryId = Extractor.ExtractInt(userInput, Category.CategoryIdKey, Category.CategoryIdDefault);
                 IAdRepository adRepository = _repositoryContainer.GetAdRepository(categoryId);//polymorphyic dispatch
                 await adRepository.AddLetMeKnow(userInput, user.Id);
                 response.SetSuccessResponse("Ok",userInput);
