@@ -271,7 +271,7 @@
     <Compile Include="AnimationTest\ActivityAnimation.cs" />
     <Compile Include="BroadcastReceiver\ActivityBatteryBroadCast.cs" />
     <Compile Include="BroadcastReceiver\ActivityBroadcastReceiverSms.cs" />
-    <Compile Include="Categories\ActivityCategory.cs" />
+    <Compile Include="Activities\Categories\ActivityCategory.cs" />
     <Compile Include="CustomViews\CategoryView\CheckBoxTriStates.cs" />
     <Compile Include="CustomViews\CategoryView\ISingleCategoryView.cs" />
     <Compile Include="CustomViews\CategoryView\SingleCategoryView.cs" />

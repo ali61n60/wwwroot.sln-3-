@@ -4,11 +4,10 @@ using Android.Content;
 using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Widget;
-using ChiKoja.Categories;
+using ChiKoja.Activities.Categories;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Models;
 using ChiKoja.NavigationDrawer;
-using ChiKoja.Repository.Filter;
 
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter

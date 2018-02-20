@@ -13,7 +13,7 @@ using ChiKoja.NavigationDrawer;
 using ChiKoja.Repository;
 using ModelStd.Db.Ad;
 
-namespace ChiKoja.Categories
+namespace ChiKoja.Activities.Categories
 {
     [Activity(Label = "ActivityCategory", Theme = "@style/Theme.Main")]
     public class ActivityCategory : NavActivity
@@ -140,8 +140,8 @@ namespace ChiKoja.Categories
         }
         private void saveSelectedCategoryIdsInRepository()
         {
-            IEnumerable<int> selectedCategoryIds= (from singleCategoryView in _allSingleCategoryViews where singleCategoryView.IsSelected() select singleCategoryView.GetCategory().CategoryId);
-            _categoryRepository.CategoryId=selectedCategoryIds;
+            //IEnumerable<int> selectedCategoryIds= (from singleCategoryView in _allSingleCategoryViews where singleCategoryView.IsSelected() select singleCategoryView.GetCategory().CategoryId);
+           // _categoryRepository.CategoryId=selectedCategoryIds;
         }
         void buttonCancel_Click(object sender, EventArgs e)
         {
@@ -182,12 +182,12 @@ namespace ChiKoja.Categories
         }
         private void setSavedSelectedCategories()
         {
-            IEnumerable<int> selectedCategoryIds = _categoryRepository.CategoryId;
+            //IEnumerable<int> selectedCategoryIds = _categoryRepository.CategoryId;
             initializeAllSingleCategoryView();
-            foreach (int categoryId in selectedCategoryIds)
-            {
-                selectSingleCategoryView(_allSingleCategoryViews, categoryId);
-            }
+            //foreach (int categoryId in selectedCategoryIds)
+            //{
+            //    selectSingleCategoryView(_allSingleCategoryViews, categoryId);
+            //}
         }
         private void initializeAllSingleCategoryView()
         {

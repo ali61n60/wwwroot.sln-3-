@@ -24,10 +24,14 @@ namespace ChiKoja.Activities.SearchAd
         int _initalStart = 1;
         int _count = 15;
 
-        private string StartIndexKey = "StartIndex";
-        private string CountKey = "Count";
+        private readonly string StartIndexKey = "StartIndex";
+        private readonly string CountKey = "Count";
         private readonly string AdTypeKey = "AdType";
         private readonly string SearchTextKey = "SearchText";
+
+        private readonly string MinimumPriceKey = "MinimumPrice";
+        private readonly string MaximumPriceKey = "MaximumPrice";
+        
 
         private SingleAdArrayAdapter _singleAdArrayAdapter;
         private ISingleAdEvents _singleAdEvents;
@@ -106,18 +110,23 @@ namespace ChiKoja.Activities.SearchAd
             Dictionary<string, string> userInputDictionary=new Dictionary<string, string>();
             userInputDictionary[StartIndexKey] = _start.ToString();
             userInputDictionary[CountKey] = _count.ToString();
-            //TODO Add AdType
-            //TODO Add SearchText
-            //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
-            //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
-            //userInputDictionary.Add(districtPair.Key, districtPair.Value);
-            CategoryRepository categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);
+
+            CategoryRepository categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);//TODO inject it
             int selectedCategoryId = categoryRepository.GetSelectedCategoryId();
             userInputDictionary[Category.CategoryIdKey] = selectedCategoryId.ToString();
 
-           //TODO add common parameters
-           //add category specific parameters
-            SearchFilterCategorySpecificBaseCriteria categorySpecificSearchFilterFragment= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(selectedCategoryId);
+            //TODO Add AdType
+            //TODO Add SearchText
+
+            //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
+            //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
+            //userInputDictionary.Add(districtPair.Key, districtPair.Value);
+
+            
+
+            //TODO add common parameters
+            //add category specific parameters
+            SearchFilterCategorySpecificBaseCriteria categorySpecificSearchFilterFragment = AdViewContainer.GetCategorySpecificSearchFilterViewFragment(selectedCategoryId);
             categorySpecificSearchFilterFragment.FillCategorySpecificUserInputSearchFilter(userInputDictionary);
 
             return userInputDictionary;

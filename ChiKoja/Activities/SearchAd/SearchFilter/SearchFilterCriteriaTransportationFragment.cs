@@ -14,5 +14,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
             throw new System.NotImplementedException();
         }
+
+        public override void ClearPreferences()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

@@ -9,7 +9,7 @@ export class DefaultOrderBy implements ICriteria  {
     private readonly OrderBySelectId = "orderBy";
     private readonly OrderByDivId = "orderByDiv";
     private readonly OrderByFixedPriceTemplateId = "orderByFixedPriceTemplate";
-    private readonly OrderByOdersTemplateId = "orderByOdersTemplate";
+    private readonly OrderByOdersTemplateId = "orderByOthersTemplate";
     
     private _searchCriteriaChange: ICriteriaChange;
     

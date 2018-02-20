@@ -21,9 +21,7 @@ namespace ChiKoja.Services.Server
         int _currentRequestIndex = 0;
         string RequestIndexKey = "RequestIndex";
         
-        private string MinimumPriceKey = "MinimumPrice";
-        private string MaximumPriceKey = "MaximumPrice";
-        private string OrderByKey = "OrderBy";
+        
 
 
         public AdApi()
