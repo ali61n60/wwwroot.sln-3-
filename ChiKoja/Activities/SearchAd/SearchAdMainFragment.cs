@@ -39,6 +39,7 @@ namespace ChiKoja.Activities.SearchAd
         View _rootView;
         
         AppCompatButton _buttonSearchAd;
+        private EditText _editTextSearchText;
        
         private ListView _listViewAdCommon;
         
@@ -73,15 +74,14 @@ namespace ChiKoja.Activities.SearchAd
 
         private void initializeFields()
         {
-            _singleAdArrayAdapter = new SingleAdArrayAdapter(_context,
-                Android.Resource.Layout.SimpleListItem1,
-                new List<AdvertisementCommon>());
+            _adApi = Bootstrapper.container.GetInstance<IAdApi>();
 
+            _singleAdArrayAdapter = new SingleAdArrayAdapter(_context,Android.Resource.Layout.SimpleListItem1,new List<AdvertisementCommon>());
             _listViewAdCommon = _rootView.FindViewById<ListView>(Resource.Id.listViewAdCommon);
             _listViewAdCommon.Adapter = _singleAdArrayAdapter;
 
-            _adApi = Bootstrapper.container.GetInstance<IAdApi>();
             _buttonSearchAd = _rootView.FindViewById<AppCompatButton>(Resource.Id.buttonSearch);
+            _editTextSearchText = _rootView.FindViewById<EditText>(Resource.Id.editTextSearchText);
         }
 
         private void initializeEvents()
@@ -103,6 +103,11 @@ namespace ChiKoja.Activities.SearchAd
                 AdvertisementCommon clickedAdCommon = _singleAdArrayAdapter.GetItem(args.Position);
                 _singleAdEvents.OnSingleAdSelected(clickedAdCommon);// inform activity
             };
+
+            _editTextSearchText.TextChanged += (sender, args) =>
+            {
+                ResetSearchCondition();
+            };
         }
 
         private Dictionary<string, string> createUserInputDictionary()
@@ -114,9 +119,9 @@ namespace ChiKoja.Activities.SearchAd
             CategoryRepository categoryRepository = new CategoryRepository(Repository.Repository.DataBasePath);//TODO inject it
             int selectedCategoryId = categoryRepository.GetSelectedCategoryId();
             userInputDictionary[Category.CategoryIdKey] = selectedCategoryId.ToString();
-
-            //TODO Add AdType
-            //TODO Add SearchText
+            userInputDictionary[SearchTextKey] = _editTextSearchText.Text;
+            //TODO Add AdType get it from frag search
+            
 
             //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
             //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
@@ -132,11 +137,19 @@ namespace ChiKoja.Activities.SearchAd
             return userInputDictionary;
         }
 
-        public void resetSearchCondition()
+        public void ResetSearchCondition()
         {
             //TODO maybe you should remove items from array adapter
-            _listViewAdCommon.RemoveAllViews();
-            _start = _initalStart;
+            try
+            {
+                _listViewAdCommon.RemoveAllViews();
+                _start = _initalStart;
+            }
+            catch (Exception ex)
+            {
+                
+            }
+            
             
         }
 

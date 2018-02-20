@@ -33,7 +33,7 @@ namespace RepositoryStd.Repository.Common
         public static readonly PriceType PriceTypeDefault = PriceType.All;
 
         public static readonly string SearchTextKey = "SearchText";
-        public static readonly string SearchTextDefault = "";
+        public static readonly string SearchTextDefault = string.Empty;
 
         public static readonly string MinPriceKey = "MinimumPrice";
         public static readonly decimal MinPriceDefault = -1;
@@ -127,7 +127,7 @@ namespace RepositoryStd.Repository.Common
         private IQueryable<Advertisement> whereClauseInputText(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
             string userInputSearchText=Extractor.ExtractString(queryParameters,SearchTextKey,SearchTextDefault);
-            if (userInputSearchText != SearchTextDefault)
+            if (userInputSearchText!=SearchTextDefault)
             {
                 list = list.Where(advertisement =>
 

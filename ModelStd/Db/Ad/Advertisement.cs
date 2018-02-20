@@ -109,7 +109,7 @@ namespace ModelStd.Db.Ad
             fillAdvertisementPrice(adCommon, ad);
 
 
-            adCommon.AdType = (ad.AdType == Db.Ad.AdType.Offer) ? "ارائه" : "درخواستی";
+            adCommon.AdType = (ad.AdType == AdType.Offer) ? "ارائه" : "درخواستی";
         }
 
         private static void fillAdvertisementPrice(AdvertisementCommon adCommon, Advertisement ad)
@@ -141,13 +141,13 @@ namespace ModelStd.Db.Ad
         {
             switch (adStatus)
             {
-                case Db.Ad.AdStatus.Submitted: return "ثبت شده";
-                case Db.Ad.AdStatus.UnderReview: return "در حال بررسی";
-                case Db.Ad.AdStatus.Approved: return "تایید شده";
-                case Db.Ad.AdStatus.Rejected: return "رد شده";
-                case Db.Ad.AdStatus.Expired: return "منقضی";
-                case Db.Ad.AdStatus.ReSubmitted: return "ثبت دوباره";
-                case Db.Ad.AdStatus.Deleted: return "حذف شده";
+                case AdStatus.Submitted: return "ثبت شده";
+                case AdStatus.UnderReview: return "در حال بررسی";
+                case AdStatus.Approved: return "تایید شده";
+                case AdStatus.Rejected: return "رد شده";
+                case AdStatus.Expired: return "منقضی";
+                case AdStatus.ReSubmitted: return "ثبت دوباره";
+                case AdStatus.Deleted: return "حذف شده";
             }
             return "نا مشخص";
         }

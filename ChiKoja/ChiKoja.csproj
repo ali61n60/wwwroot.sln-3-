@@ -282,6 +282,7 @@
     <Compile Include="GlobalApplication\GlobalApplication.cs" />
     <Compile Include="Infrastructure\IOC\AdViewContainer.cs" />
     <Compile Include="Infrastructure\IOC\Bootstrapper.cs" />
+    <Compile Include="Infrastructure\AppPreferences.cs" />
     <Compile Include="Interfaces\IMarkAd.cs" />
     <Compile Include="LocationSelection\ActivityLocationSelection.cs" />
     <Compile Include="Activities\Login\ActivityLogin.cs" />

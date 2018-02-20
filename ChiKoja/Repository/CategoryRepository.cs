@@ -1,55 +1,36 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-using System.Linq;
 using System.Threading.Tasks;
-using Android.App;
-using Android.Content;
-using Android.Preferences;
+using ChiKoja.Infrastructure;
 using ChiKoja.Services.Server;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
-using ServiceLayer;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.Repository
 {
     public class CategoryRepository:ILocalTable
     {
-        private readonly ISharedPreferences prefs;
+        
         private readonly SqliteConnection connection;
         public int OperationOrder { get; private set; }
 
         private readonly string LocalCategoryDataVersionKey = "LocalCategoryDataVersion";
-        int LocalCategoryDataVersionDefault = -1;
+        private readonly int LocalCategoryDataVersionDefault = -1;
         public int LocalCategoriesTableDataVersion
         {
-            get { return prefs.GetInt(LocalCategoryDataVersionKey, LocalCategoryDataVersionDefault); }
-            set
-            {
-                ISharedPreferencesEditor editor = prefs.Edit();
-                editor.PutInt(LocalCategoryDataVersionKey, value);
-                editor.Commit();
-            }
+            get => int.Parse(AppPreferences.GetDatabasePref(LocalCategoryDataVersionKey,LocalCategoryDataVersionDefault.ToString()));
+            set => AppPreferences.SetDatabasePref(LocalCategoryDataVersionKey, value.ToString());
         }
         
         public int CategoryId
         {
-            get
-            {
-                return prefs.GetInt(Category.CategoryIdKey,Category.CategoryIdDefault);
-            }
-            set
-            {
-                
-                ISharedPreferencesEditor editor = prefs.Edit();
-                editor.PutInt(Category.CategoryIdKey, value);
-                editor.Commit();
-            }
+            get =>int.Parse(AppPreferences.GetSearchPref(Category.CategoryIdKey, Category.CategoryIdDefault.ToString()));
+            set=>AppPreferences.SetSearchPref(Category.CategoryIdKey, value.ToString());
         }
         public CategoryRepository(string databasePath)
         {
             connection = new SqliteConnection("Data Source=" + databasePath);
-            prefs = PreferenceManager.GetDefaultSharedPreferences(Application.Context);
             OperationOrder = 4;
         }
         public async void CompareLocalTableVersionWithServerVersionAndUpdateIfNedded(object locker)
@@ -164,7 +145,7 @@ namespace ChiKoja.Repository
 
         public int GetSelectedCategoryId()
         {
-            return prefs.GetInt(Category.CategoryIdKey,Category.CategoryIdDefault);
+            return int.Parse(AppPreferences.GetSearchPref(Category.CategoryIdKey,Category.CategoryIdDefault.ToString()));
         }
     }
 }

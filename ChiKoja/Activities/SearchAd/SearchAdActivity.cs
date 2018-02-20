@@ -74,25 +74,25 @@ namespace ChiKoja.Activities.SearchAd
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("locationSelectionChanged", false))
-                    _searchAdMain.resetSearchCondition();
+                    _searchAdMain.ResetSearchCondition();
             }
             if (requestCode == CategorySelectionRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("categorySelectionChanged", false))
-                    _searchAdMain.resetSearchCondition();
+                    _searchAdMain.ResetSearchCondition();
             }
             if (requestCode == SearchFilterRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra(SearchFilterActivity.SearchFilterChangedKey, false))
-                    _searchAdMain.resetSearchCondition();
+                    _searchAdMain.ResetSearchCondition();
             }
             if (requestCode == OrderByRequestCode)
             {
                 if (data == null) return;
                 if (data.GetBooleanExtra("OrderByChanged", false))
-                    _searchAdMain.resetSearchCondition();
+                    _searchAdMain.ResetSearchCondition();
             }
         }
 

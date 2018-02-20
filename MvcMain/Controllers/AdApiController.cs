@@ -24,6 +24,8 @@ using RepositoryStd.TepmeratureRepository;
 
 namespace MvcMain.Controllers
 {
+    //TODO 1- decide to delete or not sharedPreferences content on app start. 
+    //TODO 1-think of saving users search
     //TODO 1- Android Color https://material.io/color/#!/?view.left=0&view.right=1&primary.color=bee1ff&secondary.color=6ebbce
     //https://material.io/icons/ , https://www.materialpalette.com/icons
     //TODO 1- Buffer not changing database data and manage rare changes
