@@ -36,20 +36,12 @@ namespace ChiKoja.Activities.SplashActivity
                 });
             }).Wait();
         }
-        protected override void OnResume()
+        protected override async void OnResume()
         {
             base.OnResume();
-
-            Task startupWork = new Task(() =>
-            {
-                Task.Delay(5000);  // Simulate a bit of startup work.
-            });
-            startupWork.ContinueWith(t =>
-            {
-                StartActivity(new Intent(Application.Context, typeof(SearchAdActivity)));
-            }, TaskScheduler.FromCurrentSynchronizationContext());
-
-            startupWork.Start();
+            await Task.Delay(10);//Simulate startup work
+            StartActivity(new Intent(Application.Context, typeof(SearchAdActivity)));
+            
         }
 
         private void resetSearchFilter()

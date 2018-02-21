@@ -12,7 +12,7 @@ using ModelStd.Db.Ad;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
-    public class SearchFilterCriteriaDefaultFragment : SearchFilterCategorySpecificBaseCriteria
+    public class SearchFilterCriteriaDefaultFragment : SearchFilterBaseCriteria
     {      
         private Context _context;
         View _rootView;
@@ -108,7 +108,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             }
         }
 
-        public override void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
+        public override void FillUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
         {
             //TODO Add OrderBy from its fragment
             //userInputDictionary[OrderByKey]=pref.GetInt(OrderByKey)

@@ -10,7 +10,7 @@ using ModelStd.Advertisements.Price;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter.Price
 {
-    class SearchFilterPriceDefaultFragment: SearchFilterCategorySpecificBaseCriteria
+    class SearchFilterPriceDefaultFragment: SearchFilterBaseCriteria
     {
         private Context _context;
         View _rootView;
@@ -53,7 +53,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter.Price
             AppPreferences.SetSearchPref(FixedPrice.MaxPriceKey, _editTextMaximumPrice.Text);
         }
 
-        public override void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
+        public override void FillUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
         {
             userInputDictionary[FixedPrice.MinPriceKey] = AppPreferences.GetSearchPref(FixedPrice.MinPriceKey, FixedPrice.MinPriceDefault.ToString());
             userInputDictionary[FixedPrice.MaxPriceKey] = AppPreferences.GetSearchPref(FixedPrice.MaxPriceKey, FixedPrice.MaxPriceDefault.ToString());

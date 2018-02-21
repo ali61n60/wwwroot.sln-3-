@@ -9,8 +9,8 @@ namespace ChiKoja.Infrastructure.IOC
     public class AdViewContainer
     {
         private static readonly Dictionary<int, AdDetailCategorySpecificBaseFragment> _adDetailFragmentContainer = new Dictionary<int, AdDetailCategorySpecificBaseFragment>();
-        private static readonly Dictionary<int,SearchFilterCategorySpecificBaseCriteria> _searchFilterFragmentContainer=new Dictionary<int, SearchFilterCategorySpecificBaseCriteria>();
-        private static readonly Dictionary<int, SearchFilterCategorySpecificBaseCriteria> _searchFilterPriceContainer=new Dictionary<int, SearchFilterCategorySpecificBaseCriteria>();
+        private static readonly Dictionary<int,SearchFilterBaseCriteria> _searchFilterFragmentContainer=new Dictionary<int, SearchFilterBaseCriteria>();
+        private static readonly Dictionary<int, SearchFilterBaseCriteria> _searchFilterPriceContainer=new Dictionary<int, SearchFilterBaseCriteria>();
 
         static AdViewContainer()
         {
@@ -45,7 +45,7 @@ namespace ChiKoja.Infrastructure.IOC
             return _adDetailFragmentContainer[Category.CategoryIdDefault];
         }
 
-        public static SearchFilterCategorySpecificBaseCriteria GetCategorySpecificSearchFilterViewFragment(int categoryId)
+        public static SearchFilterBaseCriteria GetCategorySpecificSearchFilterViewFragment(int categoryId)
         {
             if (_searchFilterFragmentContainer.ContainsKey(categoryId))
             {
@@ -54,7 +54,7 @@ namespace ChiKoja.Infrastructure.IOC
             return _searchFilterFragmentContainer[Category.CategoryIdDefault];
         }
 
-        public static SearchFilterCategorySpecificBaseCriteria GetSearchFilterPrice(int categoryId)
+        public static SearchFilterBaseCriteria GetSearchFilterPrice(int categoryId)
         {
             if (_searchFilterPriceContainer.ContainsKey(categoryId))
             {

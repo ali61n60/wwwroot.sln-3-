@@ -22,8 +22,8 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         //TODO format edittext to show numbers 12,123
 
         private SearchFilterTopTopFragment _searchFilterTopTop;
-        private SearchFilterCategorySpecificBaseCriteria _searchFilterCategorySpecificCriteria;
-        private SearchFilterCategorySpecificBaseCriteria _searchFilterPrice;
+        private SearchFilterBaseCriteria _searchFilterCriteria;
+        private SearchFilterBaseCriteria _searchFilterPrice;
         private AppCompatButton _buttonCategory;
         private AppCompatButton _buttonSort;
         
@@ -91,9 +91,9 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
             int categoryId =int.Parse(AppPreferences.GetSearchPref(Category.CategoryIdKey, Category.CategoryIdDefault.ToString()));
 
-            _searchFilterCategorySpecificCriteria= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
+            _searchFilterCriteria= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
             SupportFragmentManager.BeginTransaction()
-                .Add(Resource.Id.category_specific_part, _searchFilterCategorySpecificCriteria)
+                .Add(Resource.Id.category_specific_part, _searchFilterCriteria)
                 .Commit();
         }
         
@@ -116,7 +116,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
             //this method is called from SearchFilterTopTopFragment to tell the activity that user has clicked ok button
             _searchFilterPrice.PersistUserFilter();
-            _searchFilterCategorySpecificCriteria.PersistUserFilter();
+            _searchFilterCriteria.PersistUserFilter();
             SetResult(Result.Ok);
             Finish();
         }

@@ -256,7 +256,8 @@
   <ItemGroup>
     <Compile Include="Activities\SearchAd\SearchFilter\ISetSearchFilter.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\Price\SearchFilterPriceDefaultFragment.cs" />
-    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCategorySpecificBaseCriteria.cs" />
+    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterBaseCriteria.cs" />
+    <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCommonFragment.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterTopTopFragment.cs" />
     <Compile Include="Activity1.cs" />
     <Compile Include="Activities\AdDetail\AdDetailActivity.cs" />

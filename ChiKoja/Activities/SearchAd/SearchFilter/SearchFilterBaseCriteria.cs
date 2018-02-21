@@ -11,10 +11,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     //AdTransportaion
     //
 
-    public abstract class SearchFilterCategorySpecificBaseCriteria:Fragment
+    public abstract class SearchFilterBaseCriteria:Fragment
     {
         public abstract void PersistUserFilter();
-        public abstract void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary);
+        public abstract void FillUserInputSearchFilter(Dictionary<string, string> userInputDictionary);
         public abstract void ClearPreferences();
 
     }

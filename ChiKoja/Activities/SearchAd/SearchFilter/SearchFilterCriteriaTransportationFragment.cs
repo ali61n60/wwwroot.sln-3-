@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
-    public class SearchFilterCriteriaTransportationFragment : SearchFilterCategorySpecificBaseCriteria
+    public class SearchFilterCriteriaTransportationFragment : SearchFilterBaseCriteria
     {
         public override void PersistUserFilter()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void FillCategorySpecificUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
+        public override void FillUserInputSearchFilter(Dictionary<string, string> userInputDictionary)
         {
             throw new System.NotImplementedException();
         }
