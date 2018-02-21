@@ -130,8 +130,8 @@ namespace ChiKoja.Activities.SearchAd
 
             //TODO add common parameters
             //add category specific parameters
-            SearchFilterCategorySpecificBaseCriteria categorySpecificSearchFilterFragment = AdViewContainer.GetCategorySpecificSearchFilterViewFragment(selectedCategoryId);
-            categorySpecificSearchFilterFragment.FillCategorySpecificUserInputSearchFilter(userInputDictionary);
+            AdViewContainer.GetSearchFilterPrice(selectedCategoryId).FillCategorySpecificUserInputSearchFilter(userInputDictionary);
+            AdViewContainer.GetCategorySpecificSearchFilterViewFragment(selectedCategoryId).FillCategorySpecificUserInputSearchFilter(userInputDictionary);
 
             return userInputDictionary;
         }

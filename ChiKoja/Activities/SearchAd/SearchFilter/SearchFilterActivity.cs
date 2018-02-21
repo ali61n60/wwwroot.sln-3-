@@ -72,7 +72,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void addTopTop()
         {
-            _searchFilterTopTop new SearchFilterTopTopFragment();
+            _searchFilterTopTop= new SearchFilterTopTopFragment();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.top_top, _searchFilterTopTop)
                 .Commit();
