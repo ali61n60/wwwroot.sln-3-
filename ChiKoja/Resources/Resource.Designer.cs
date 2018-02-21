@@ -3064,8 +3064,8 @@ namespace ChiKoja
 			// aapt resource value: 0x7f030044
 			public const int notification_template_part_time = 2130903108;
 			
-			// aapt resource value: 0x7f030059
-			public const int search_ad = 2130903129;
+			// aapt resource value: 0x7f03005a
+			public const int search_ad = 2130903130;
 			
 			// aapt resource value: 0x7f030045
 			public const int search_ad_act = 2130903109;
@@ -3083,49 +3083,52 @@ namespace ChiKoja
 			public const int search_filter_act = 2130903113;
 			
 			// aapt resource value: 0x7f03004a
-			public const int search_filter_criteria_default_frag = 2130903114;
+			public const int search_filter_common_frag = 2130903114;
 			
 			// aapt resource value: 0x7f03004b
-			public const int search_filter_criteria_transportation_frag = 2130903115;
+			public const int search_filter_criteria_default_frag = 2130903115;
 			
 			// aapt resource value: 0x7f03004c
-			public const int search_filter_price_default_frag = 2130903116;
+			public const int search_filter_criteria_transportation_frag = 2130903116;
 			
 			// aapt resource value: 0x7f03004d
-			public const int search_filter_toptop_frag = 2130903117;
+			public const int search_filter_price_default_frag = 2130903117;
 			
 			// aapt resource value: 0x7f03004e
-			public const int select_dialog_item_material = 2130903118;
+			public const int search_filter_toptop_frag = 2130903118;
 			
 			// aapt resource value: 0x7f03004f
-			public const int select_dialog_multichoice_material = 2130903119;
+			public const int select_dialog_item_material = 2130903119;
 			
 			// aapt resource value: 0x7f030050
-			public const int select_dialog_singlechoice_material = 2130903120;
+			public const int select_dialog_multichoice_material = 2130903120;
 			
 			// aapt resource value: 0x7f030051
-			public const int service_example = 2130903121;
+			public const int select_dialog_singlechoice_material = 2130903121;
 			
 			// aapt resource value: 0x7f030052
-			public const int single_ad_view = 2130903122;
+			public const int service_example = 2130903122;
 			
 			// aapt resource value: 0x7f030053
-			public const int single_category = 2130903123;
+			public const int single_ad_view = 2130903123;
 			
 			// aapt resource value: 0x7f030054
-			public const int single_user_ad = 2130903124;
+			public const int single_category = 2130903124;
 			
 			// aapt resource value: 0x7f030055
-			public const int sort_by = 2130903125;
+			public const int single_user_ad = 2130903125;
 			
 			// aapt resource value: 0x7f030056
-			public const int splash_screen = 2130903126;
+			public const int sort_by = 2130903126;
 			
 			// aapt resource value: 0x7f030057
-			public const int support_simple_spinner_dropdown_item = 2130903127;
+			public const int splash_screen = 2130903127;
 			
 			// aapt resource value: 0x7f030058
-			public const int user_ads = 2130903128;
+			public const int support_simple_spinner_dropdown_item = 2130903128;
+			
+			// aapt resource value: 0x7f030059
+			public const int user_ads = 2130903129;
 			
 			static Layout()
 			{

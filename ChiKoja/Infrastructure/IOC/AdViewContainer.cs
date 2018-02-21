@@ -11,12 +11,14 @@ namespace ChiKoja.Infrastructure.IOC
         private static readonly Dictionary<int, AdDetailCategorySpecificBaseFragment> _adDetailFragmentContainer = new Dictionary<int, AdDetailCategorySpecificBaseFragment>();
         private static readonly Dictionary<int,SearchFilterBaseCriteria> _searchFilterFragmentContainer=new Dictionary<int, SearchFilterBaseCriteria>();
         private static readonly Dictionary<int, SearchFilterBaseCriteria> _searchFilterPriceContainer=new Dictionary<int, SearchFilterBaseCriteria>();
+        private static readonly SearchFilterCommonFragment _searchFilterCommonFragment;
 
         static AdViewContainer()
         {
             RegisterAdDetailFragmentContainer();
             RegisterSearchFilterFragmentContainer();
             RegisterSearchFilterPriceContainer();
+            _searchFilterCommonFragment=new SearchFilterCommonFragment();
         }
 
         private static void RegisterAdDetailFragmentContainer()
@@ -61,6 +63,11 @@ namespace ChiKoja.Infrastructure.IOC
                 return _searchFilterPriceContainer[categoryId];
             }
             return _searchFilterPriceContainer[Category.CategoryIdDefault];
+        }
+
+        public static SearchFilterCommonFragment GetSearchFilterCommon()
+        {
+            return _searchFilterCommonFragment;
         }
     }
 }

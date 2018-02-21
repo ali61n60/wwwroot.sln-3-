@@ -5,7 +5,6 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using ChiKoja.Activities.Categories;
-using ChiKoja.Activities.SearchAd.SearchFilter.Price;
 using ChiKoja.Infrastructure;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Models;
@@ -15,6 +14,11 @@ using ModelStd.Db.Ad;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
+    //TODO Add OrderBy from its fragment
+    //userInputDictionary[OrderByKey]=pref.GetInt(OrderByKey)
+    //TODO Add PriceType from its fragment
+
+
     //this class gets user input filters and stores them in preference storage via commonfilter class and ...
     [Activity(Label = "ActivitySearchFilter", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class SearchFilterActivity : NavActivity,ISetSearchFilter
@@ -22,8 +26,9 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         //TODO format edittext to show numbers 12,123
 
         private SearchFilterTopTopFragment _searchFilterTopTop;
-        private SearchFilterBaseCriteria _searchFilterCriteria;
+        private SearchFilterCommonFragment _searchFilterCommon;
         private SearchFilterBaseCriteria _searchFilterPrice;
+        private SearchFilterBaseCriteria _searchFilterCriteria;
         private AppCompatButton _buttonCategory;
         private AppCompatButton _buttonSort;
         
@@ -60,6 +65,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private void addFragments()
         {
             addTopTop();
+            addCommon();
             addPrice();
             addCategorySpecific(); 
         }
@@ -75,6 +81,15 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             _searchFilterTopTop= new SearchFilterTopTopFragment();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.top_top, _searchFilterTopTop)
+                .Commit();
+        }
+
+        private void addCommon()
+        {
+            _searchFilterCommon = AdViewContainer.GetSearchFilterCommon();
+                
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.common_part, _searchFilterCommon)
                 .Commit();
         }
 
@@ -109,7 +124,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private void buttonSortBy_Click(object sender, EventArgs eventArgs)
         {
             Intent orderByIntent = new Intent(this, typeof(ActivitySortBy));
-            StartActivityForResult(orderByIntent, NavigationDrawer.NavActivity.OrderByRequestCode);
+            StartActivityForResult(orderByIntent, OrderByRequestCode);
         }
 
         public void SetSearchFilter()

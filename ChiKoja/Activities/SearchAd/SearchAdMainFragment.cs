@@ -119,17 +119,16 @@ namespace ChiKoja.Activities.SearchAd
             int selectedCategoryId = categoryRepository.GetSelectedCategoryId();
             userInputDictionary[Category.CategoryIdKey] = selectedCategoryId.ToString();
             userInputDictionary[SearchTextKey] = _editTextSearchText.Text;
-            //TODO Add AdType get it from frag search
             
-
-            //searchFilterRepository.InsertSearchFilters(userInputDictionary);//insert search filter into user input to be sent to server
+            
             //KeyValuePair<string, string> districtPair = districtRepository.GetDistrictDictionary();
             //userInputDictionary.Add(districtPair.Key, districtPair.Value);
 
             
 
-            //TODO add common parameters
+           
             //add category specific parameters
+            AdViewContainer.GetSearchFilterCommon().FillUserInputSearchFilter(userInputDictionary);
             AdViewContainer.GetSearchFilterPrice(selectedCategoryId).FillUserInputSearchFilter(userInputDictionary);
             AdViewContainer.GetCategorySpecificSearchFilterViewFragment(selectedCategoryId).FillUserInputSearchFilter(userInputDictionary);
 

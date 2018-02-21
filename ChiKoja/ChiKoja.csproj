@@ -383,7 +383,9 @@
     <AndroidResource Include="Resources\layout\brand_transportation.axml" />
     <AndroidResource Include="Resources\layout\category.axml" />
     <AndroidResource Include="Resources\layout\contact_info.axml" />
-    <AndroidResource Include="Resources\layout\search_filter_act.axml" />
+    <AndroidResource Include="Resources\layout\search_filter_act.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
     <AndroidResource Include="Resources\layout\layout1.axml" />
     <AndroidResource Include="Resources\layout\search_ad_large_act.axml" />
     <AndroidResource Include="Resources\layout\ad_detail_act.axml">
@@ -423,6 +425,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\search_filter_price_default_frag.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\search_filter_common_frag.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

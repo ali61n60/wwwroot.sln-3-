@@ -33,12 +33,21 @@
         android:textColor="@color/secondaryTextColor"
         android:background="@drawable/shape"/>
     <FrameLayout
-        android:id="@+id/price_part"
+        android:id="@+id/common_part"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@id/buttonSort"
+        android:background="@color/primaryColor"
+        android:minHeight="20dp"/>
+    <FrameLayout
+        android:id="@+id/price_part"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/common_part"
         android:background="@color/primaryColor"
         android:minHeight="20dp"/>
 

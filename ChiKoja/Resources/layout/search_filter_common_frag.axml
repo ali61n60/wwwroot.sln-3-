@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+  <CheckBox
+      android:id="@+id/checkBoxUrgentAdsOnly"
+      android:text="@string/UrgentAdsOnly"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
+
+  <CheckBox
+      android:id="@+id/checkBoxOnlyWithPictures"
+      android:text="@string/OnlyWithPictures"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_toRightOf="@id/checkBoxUrgentAdsOnly"/>
+
+  <RadioGroup
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentStart="true"
+      android:layout_alignParentLeft="true"
+      android:layout_marginLeft="10dp"
+      android:layout_marginStart="10dp"
+      android:layout_below="@id/checkBoxUrgentAdsOnly" >
+    <TextView
+        android:id="@+id/textViewAdType"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="18dp"
+        android:text="@string/AdType" />
+
+    <RadioButton
+        android:id="@+id/radioButtonAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/All"
+        android:checked="true"/>
+
+    <RadioButton
+        android:id="@+id/radioButtonOffer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/Offer" />
+
+    <RadioButton
+        android:id="@+id/radioButtonDemand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:text="@string/Demand" />
+
+  </RadioGroup>
+
+</RelativeLayout>
+
+
+
