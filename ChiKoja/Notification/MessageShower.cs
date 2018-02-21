@@ -8,9 +8,9 @@ namespace ChiKoja.Notification
     {
         private static MessageShower _singleton;
         private Timer _showMessageTimer;
-        int _numberOfShowMessageCall;
-        readonly Context _context;
-        string currentMessage = "";
+        private int _numberOfShowMessageCall;
+        private readonly Context _context;
+        private string currentMessage = "";
         private NavActivity _currentNavActivity;
         public NavActivity CurrentNavActivity
         {
@@ -22,6 +22,7 @@ namespace ChiKoja.Notification
             }
         }
 
+        //Constructor is private. Access an instanse through GetMessageShower method
         private MessageShower(Context context)
         {
             _context = context;

@@ -3,9 +3,7 @@ using System.Threading.Tasks;
 using Android.App;
 using Android.Runtime;
 using Android.Widget;
-using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Notification;
-using Exception = System.Exception;
 using ServiceLayer;
 
 namespace ChiKoja.GlobalApplication
@@ -15,15 +13,15 @@ namespace ChiKoja.GlobalApplication
     {
         private static GlobalApp _singleton;
         private static MessageShower _messageShower;
-        public readonly int ManageDatabaseRequestCode = 1;
-        public static int NumberOfRunningWorkerThread = 0;
-
-        public static GlobalApp GetGlobalApplication()
+        public  const int ManageDatabaseRequestCode = 1;
+        
+        public static GlobalApp GetGlobalApp()
         {
             return _singleton;
         }
 
-        public GlobalApp(IntPtr handle, JniHandleOwnership transfer): base(handle, transfer)
+        //Constructor is private. Access an instanse through GetGlobalApp method
+        private GlobalApp(IntPtr handle, JniHandleOwnership transfer): base(handle, transfer)
         {
             _messageShower = MessageShower.GetMessageShower(this);
         }
@@ -33,31 +31,28 @@ namespace ChiKoja.GlobalApplication
             base.OnCreate();
             _singleton = this;
 
-            AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
-            TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
-            AndroidEnvironment.UnhandledExceptionRaiser += AndroidEnvironment_UnhandledExceptionRaiser;
+            AppDomain.CurrentDomain.UnhandledException += currentDomainOnUnhandledException;
+            TaskScheduler.UnobservedTaskException += taskSchedulerOnUnobservedTaskException;
+            AndroidEnvironment.UnhandledExceptionRaiser += androidEnvironment_UnhandledExceptionRaiser;
         }
         
-
-        
-
-        void AndroidEnvironment_UnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs e)
+        private void androidEnvironment_UnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs e)
         {
-            Toast.MakeText(GetGlobalApplication(), e.Exception.Message + " in Andoid environment", ToastLength.Long).Show();
+            Toast.MakeText(GetGlobalApp(), e.Exception.Message + " in Andoid environment", ToastLength.Long).Show();
             e.Handled = true;
         }
 
-        private static void TaskSchedulerOnUnobservedTaskException
+        private void taskSchedulerOnUnobservedTaskException
             (object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
         {
-            Toast.MakeText(GetGlobalApplication(), unobservedTaskExceptionEventArgs.Exception.Message + " in Task", ToastLength.Long).Show();
+            Toast.MakeText(GetGlobalApp(), unobservedTaskExceptionEventArgs.Exception.Message + " in Task", ToastLength.Long).Show();
             unobservedTaskExceptionEventArgs.SetObserved();
         }
 
-        private static void CurrentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
+        private void currentDomainOnUnhandledException(object sender, UnhandledExceptionEventArgs unhandledExceptionEventArgs)
         {
             Exception ex = (Exception)unhandledExceptionEventArgs.ExceptionObject;
-            Toast.MakeText(GetGlobalApplication(), ex.Message + " in Current Domain", ToastLength.Long).Show();
+            Toast.MakeText(GetGlobalApp(), ex.Message + " in Current Domain", ToastLength.Long).Show();
         }
 
         public void OnSuccess(int requestCode)

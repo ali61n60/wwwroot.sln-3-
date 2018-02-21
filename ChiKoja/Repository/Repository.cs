@@ -13,7 +13,6 @@ using ChiKoja.Services.Server;
 using ModelStd.Services;
 using Mono.Data.Sqlite;
 using ServiceLayer;
-using Environment = System.Environment;
 
 
 namespace ChiKoja.Repository
@@ -107,7 +106,7 @@ namespace ChiKoja.Repository
                 return;
             }
 
-            GlobalApplication.GlobalApplication.GetMessageShower()
+            GlobalApplication.GlobalApp.GetMessageShower()
                 .ShowMessage(Application.Context.Resources.GetString(Resource.String.CheckingDatabase),
                 ShowMessageType.Permanent);
             await ManageDatabaseFileAndData(Application.Context.Resources, callBack, ManageDatabaseRequestCode);

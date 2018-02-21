@@ -6,7 +6,7 @@ using ChiKoja.Activities.SearchAd;
 using ChiKoja.Infrastructure;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.NavigationDrawer;
-using ChiKoja.Repository.Filter;
+
 
 namespace ChiKoja.Activities.SplashActivity
 {
@@ -26,8 +26,8 @@ namespace ChiKoja.Activities.SplashActivity
         private async void checkDatabase()
         {
             Repository.Repository repository = Bootstrapper.container.GetInstance<Repository.Repository>();
-            await repository.ManageDatabaseFile(GlobalApplication.GlobalApp.GetGlobalApplication(),
-                GlobalApplication.GlobalApp.GetGlobalApplication().ManageDatabaseRequestCode);
+            await repository.ManageDatabaseFile(GlobalApplication.GlobalApp.GetGlobalApp(),
+                GlobalApplication.GlobalApp.ManageDatabaseRequestCode);
         }
         
         protected override void OnResume()
