@@ -45,8 +45,7 @@ namespace RepositoryStd.Repository.Common
         public static readonly List<int> ListDistrctIdDefault = new List<int>();
         public static readonly int SingleDistrctIdDefault = 1;
 
-        public static readonly string OrderByKey = "OrderBy";
-        public static readonly OrderBy OrderByDefault = OrderBy.DateAsc;
+       
 
         public static readonly string AdTitleKey = "AdTitle";
         public static readonly string AddTitleDefault = "Default Title";
@@ -194,7 +193,7 @@ namespace RepositoryStd.Repository.Common
             try
             {
                 userSelectedAdType = (AdType)Enum.Parse(typeof(AdType), Extractor.ExtractInt
-                    (queryParameters, Advertisement.AdTypeKey, Advertisement.AdTypeDefauly).ToString());
+                    (queryParameters, Advertisement.AdTypeKey, Advertisement.AdTypeDefault).ToString());
             }
             catch (Exception ex)
             {
@@ -391,7 +390,7 @@ namespace RepositoryStd.Repository.Common
         private IQueryable<Advertisement> orderByClause(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
             //TODO get int number from user and convert it to enum here
-            OrderBy orderByUserInput =(OrderBy) Enum.Parse(typeof(OrderBy), Extractor.ExtractInt(queryParameters, OrderByKey,(int) OrderByDefault).ToString());
+            OrderBy orderByUserInput =(OrderBy) Enum.Parse(typeof(OrderBy), Extractor.ExtractInt(queryParameters,OrderByHelper.OrderByKey,(int)OrderByHelper.OrderByDefault).ToString());
             switch (orderByUserInput)
             {
                 case OrderBy.PriceAsc:

@@ -5,6 +5,7 @@ using Android.Preferences;
 using ChiKoja.Activities.SearchAd.SearchFilter;
 using ChiKoja.Infrastructure.IOC;
 using ModelStd.Db.Ad;
+using ModelStd.Services;
 
 namespace ChiKoja.Repository.Filter
 {
@@ -24,12 +25,7 @@ namespace ChiKoja.Repository.Filter
         private readonly int EmailOthers = 3;
         private readonly int SMSOthers = 4;
 
-        //TODO make orderby an enum and pass int value to server
-        public readonly string OrderByKey = "OrderBy";
-        public const string OrderByDateAsc = "DateAsc";
-        public const string OrderByDateDesc = "DateDesc";
-        public const string OrderByPriceAsc = "PriceAsc";
-        public const string OrderByPriceDesc = "PriceDesc";
+       
 
         public CommonFilter()
         {
@@ -44,7 +40,7 @@ namespace ChiKoja.Repository.Filter
             editor.Remove(MaximumPriceKey);
             editor.Remove(OnlyWithPicturesKey);
             editor.Remove(UrgentAdsOnlyKey);
-            editor.Remove(OrderByKey);
+            editor.Remove(OrderByHelper.OrderByKey);
             editor.Commit();
         }
 
@@ -83,11 +79,11 @@ namespace ChiKoja.Repository.Filter
 
         public string OrderBy
         {
-            get => prefs.GetString(OrderByKey, OrderByDateAsc);
+            get => prefs.GetString(OrderByHelper.OrderByKey, OrderByHelper.OrderByDefault.ToString());
             set
             {
                 ISharedPreferencesEditor editor = prefs.Edit();
-                editor.PutString(OrderByKey, value);
+                editor.PutString(OrderByHelper.OrderByKey, value);
                 editor.Commit();
             }
         }
@@ -140,7 +136,7 @@ namespace ChiKoja.Repository.Filter
 
          private void insertOrderBy(Dictionary<string, string> userInput)
         {
-            userInput[OrderByKey]=OrderBy;
+            userInput[OrderByHelper.OrderByKey]=OrderBy;
         }
 
         public void FillUserInputSearchFilter(Dictionary<string, string> userInputDictionary)

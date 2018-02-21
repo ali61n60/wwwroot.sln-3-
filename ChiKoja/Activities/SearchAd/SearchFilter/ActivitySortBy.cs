@@ -12,6 +12,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
     [Activity(Label = "ActivitySortBy", Theme = "@style/Theme.Main", Icon = "@drawable/icon")]
     public class ActivitySortBy : AppCompatActivity
     {
+        //TODO make orderby an enum and pass int value to server
+        public readonly string OrderByKey = "OrderBy";
+        
+
         CommonFilter commonFilter;
         AppCompatButton buttonReturn;
         AppCompatRadioButton radioButtonDateAsc;
@@ -51,19 +55,19 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             OrderByParameterChangedByUser = true;
             if (radioButtonDateAsc.Checked)
             {
-                commonFilter.OrderBy = CommonFilter.OrderByDateAsc;
+              //  commonFilter.OrderBy = CommonFilter.OrderByDateAsc;
             }
             else if (radioButtonDateDesc.Checked)
             {
-                commonFilter.OrderBy = CommonFilter.OrderByDateDesc;
+              //  commonFilter.OrderBy = CommonFilter.OrderByDateDesc;
             }
             else if(radioButtonPriceAsc.Checked)
             {
-                commonFilter.OrderBy = CommonFilter.OrderByPriceAsc;
+              //  commonFilter.OrderBy = CommonFilter.OrderByPriceAsc;
             }
             else if (radioButtonPriceDesc.Checked)
             {
-                commonFilter.OrderBy = CommonFilter.OrderByPriceDesc;
+               // commonFilter.OrderBy = CommonFilter.OrderByPriceDesc;
             }
         }
 
@@ -77,24 +81,24 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private void updateFieldsFromSavedPreferences()
         {
             string savedOrderBy = commonFilter.OrderBy;
-            switch (savedOrderBy)
-            {
-                case CommonFilter.OrderByDateAsc:
-                    radioButtonDateAsc.Checked = true;
-                    break;
-                case CommonFilter.OrderByDateDesc:
-                    radioButtonDateDesc.Checked = true;
-                    break;
-                case CommonFilter.OrderByPriceAsc:
-                    radioButtonPriceAsc.Checked = true;
-                    break;
-                case  CommonFilter.OrderByPriceDesc:
-                    radioButtonPriceDesc.Checked = true;
-                    break;
-                default:
-                    radioButtonDateAsc.Checked = true;
-                    break;
-            }
+            //switch (savedOrderBy)
+            //{
+            //    case CommonFilter.OrderByDateAsc:
+            //        radioButtonDateAsc.Checked = true;
+            //        break;
+            //    case CommonFilter.OrderByDateDesc:
+            //        radioButtonDateDesc.Checked = true;
+            //        break;
+            //    case CommonFilter.OrderByPriceAsc:
+            //        radioButtonPriceAsc.Checked = true;
+            //        break;
+            //    case  CommonFilter.OrderByPriceDesc:
+            //        radioButtonPriceDesc.Checked = true;
+            //        break;
+            //    default:
+            //        radioButtonDateAsc.Checked = true;
+            //        break;
+            //}
         }
     }
 }

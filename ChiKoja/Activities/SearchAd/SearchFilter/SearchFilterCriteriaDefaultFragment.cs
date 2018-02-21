@@ -13,13 +13,9 @@ using ModelStd.Db.Ad;
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
     public class SearchFilterCriteriaDefaultFragment : SearchFilterCategorySpecificBaseCriteria
-    {
-        private readonly string  OrderByKey = "OrderBy";
+    {      
         
         private readonly string PriceTypeKey = "PriceType";
-
-        private readonly string AdTypeKey = "AdType";
-        private readonly AdType AdTypeDefault = AdType.All;
 
         private readonly string MinimumPriceKey = "MinimumPrice";
         private readonly string MaximumPriceKey = "MaximumPrice";
@@ -127,15 +123,15 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         {
             if (_radioButtonAdTypeOffer.Checked)
             {
-                AppPreferences.SetSearchPref(AdTypeKey,((int)AdType.Offer).ToString());
+                AppPreferences.SetSearchPref(Advertisement.AdTypeKey,((int)AdType.Offer).ToString());
             }
             else if (_radioButtonAdTypeDemand.Checked)
             {
-                AppPreferences.SetSearchPref(AdTypeKey, ((int)AdType.Demand).ToString());
+                AppPreferences.SetSearchPref(Advertisement.AdTypeKey, ((int)AdType.Demand).ToString());
             }
             else
             {
-                AppPreferences.SetSearchPref(AdTypeKey, ((int)AdType.All).ToString());
+                AppPreferences.SetSearchPref(Advertisement.AdTypeKey, ((int)AdType.All).ToString());
             }
         }
 
@@ -147,7 +143,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             //MinPrice
             //MAxPrice
            
-            userInputDictionary[AdTypeKey] = AppPreferences.GetSearchPref(AdTypeKey, ((int)AdTypeDefault).ToString());
+            userInputDictionary[Advertisement.AdTypeKey] = AppPreferences.GetSearchPref(Advertisement.AdTypeKey, Advertisement.AdTypeDefault.ToString());
         }
 
         public override void ClearPreferences()

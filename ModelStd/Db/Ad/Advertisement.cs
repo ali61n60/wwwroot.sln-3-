@@ -81,7 +81,7 @@ namespace ModelStd.Db.Ad
     public partial class Advertisement
     {
         public static readonly string AdTypeKey = "AdType";
-        public static readonly int AdTypeDefauly = 3;
+        public static readonly int AdTypeDefault = (int)AdType.All;
 
         public static readonly string AdGuidKey = "AdGuid";
 

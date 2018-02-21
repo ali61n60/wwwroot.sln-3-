@@ -2,6 +2,9 @@
 {
     public class OrderByHelper
     {
+        public static readonly string OrderByKey = "OrderBy";
+        public static readonly OrderBy OrderByDefault = OrderBy.DateAsc;
+
         public static OrderBy SetOrderByFromString(string orderBy,OrderBy orderByDefault)
         {
             switch (orderBy)
