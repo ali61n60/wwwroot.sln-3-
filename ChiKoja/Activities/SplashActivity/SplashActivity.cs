@@ -17,26 +17,32 @@ namespace ChiKoja.Activities.SplashActivity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.splash_screen);
-           
-            checkDatabase();
+
+            Task.Run(() => checkDatabase());
+
             resetSearchFilter();
         }
 
-        //TODO I do not understand this. It must be run in a background proccess not in async
-        private async void checkDatabase()
+        private void checkDatabase()
         {
-            Repository.Repository repository = Bootstrapper.container.GetInstance<Repository.Repository>();
-            await repository.ManageDatabaseFile(GlobalApplication.GlobalApp.GetGlobalApp(),
-                GlobalApplication.GlobalApp.ManageDatabaseRequestCode);
+            Task.Run(async () =>
+            {
+                Repository.Repository repository = Bootstrapper.container.GetInstance<Repository.Repository>();
+                await repository.ManageDatabaseFile(GlobalApplication.GlobalApp.GetGlobalApp(),
+                    GlobalApplication.GlobalApp.ManageDatabaseRequestCode);
+                RunOnUiThread(() =>
+                {
+
+                });
+            }).Wait();
         }
-        
         protected override void OnResume()
         {
             base.OnResume();
 
             Task startupWork = new Task(() =>
             {
-                Task.Delay(10);  // Simulate a bit of startup work.
+                Task.Delay(5000);  // Simulate a bit of startup work.
             });
             startupWork.ContinueWith(t =>
             {
