@@ -297,8 +297,6 @@
     <Compile Include="Notification\MessageShower.cs" />
     <Compile Include="Repository\CategoryRepository.cs" />
     <Compile Include="Repository\CryptoGraphy\CryptoGraphy.cs" />
-    <Compile Include="Repository\Filter\CommonFilter.cs" />
-    <Compile Include="Repository\Filter\SearchFilterRepository.cs" />
     <Compile Include="Repository\ILocalTable.cs" />
     <Compile Include="Repository\Location\CityRepository.cs" />
     <Compile Include="Repository\Location\DistrictRepository.cs" />
@@ -424,6 +422,7 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Repository\Filter\" />
     <Folder Include="Resources\mipmap-hdpi\" />
     <Folder Include="Resources\mipmap-mdpi\" />
     <Folder Include="Resources\mipmap-xhdpi\" />

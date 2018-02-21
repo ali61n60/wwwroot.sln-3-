@@ -1,8 +1,5 @@
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ChiKoja.Repository;
-using ChiKoja.Repository.Filter;
 using ChiKoja.Repository.Location;
 using ChiKoja.Services.Server.Interfaces;
 using ModelStd.Advertisements;
@@ -16,7 +13,6 @@ namespace ChiKoja.Services.Server
     {
         
         DistrictRepository districtRepository;
-        SearchFilterRepository searchFilterRepository;
         
         int _currentRequestIndex = 0;
         string RequestIndexKey = "RequestIndex";

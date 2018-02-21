@@ -28,29 +28,12 @@ namespace RepositoryStd.Repository.Common
         public static readonly int MinCount = 1;
         public static readonly int MaxCount = 20;
 
-        public static readonly string PriceTypeKey = "PriceType";
-        public static readonly PriceType PriceTypeDefault = PriceType.All;
-
         public static readonly string SearchTextKey = "SearchText";
         public static readonly string SearchTextDefault = string.Empty;
-
-        public static readonly string MinPriceKey = "MinimumPrice";
-        public static readonly decimal MinPriceDefault = -1;
-
-        public static readonly string MaxPriceKey = "MaximumPrice";
-        public static readonly decimal MaxPriceDefault = 1000000000000;
 
         public static readonly string DistrictIdKey = "DistrictId";
         public static readonly List<int> ListDistrctIdDefault = new List<int>();
         public static readonly int SingleDistrctIdDefault = 1;
-
-       
-
-        public static readonly string AdTitleKey = "AdTitle";
-        public static readonly string AddTitleDefault = "Default Title";
-
-        public static readonly string AdCommentKey = "AdComment";
-        public static readonly string AdCommentDefault = "Default Comment";
 
         public static readonly string EmailOrSmsKey = "EmailOrSms";
         public static readonly int EmailOrSmsDefault = 1;
@@ -137,8 +120,8 @@ namespace RepositoryStd.Repository.Common
 
         private IQueryable<Advertisement> includePrice(IQueryable<Advertisement> list, Dictionary<string, string> queryParameters)
         {
-            PriceType priceType = Extractor.ExtractPriceType(queryParameters, PriceTypeKey, PriceTypeDefault);
-            if (priceType != PriceTypeDefault)
+            PriceType priceType = Extractor.ExtractPriceType(queryParameters, FixedPrice.PriceTypeKey, FixedPrice.PriceTypeDefault);
+            if (priceType != FixedPrice.PriceTypeDefault)
                 list = list.Where(advertisement => advertisement.PriceType == priceType);
             switch (priceType)
             {
@@ -146,16 +129,16 @@ namespace RepositoryStd.Repository.Common
                     list = list.Include(advertisement => advertisement.FixedPrice);
 
                     //MinPrice and MAxPrice
-                    decimal minPrice = Extractor.ExtractDecimal(queryParameters, MinPriceKey, MinPriceDefault);
-                    if (minPrice < MinPriceDefault)
-                        minPrice = MinPriceDefault;
-                    if (minPrice != MinPriceDefault)
+                    decimal minPrice = Extractor.ExtractDecimal(queryParameters, FixedPrice.MinPriceKey, FixedPrice.MinPriceDefault);
+                    if (minPrice < FixedPrice.MinPriceDefault)
+                        minPrice = FixedPrice.MinPriceDefault;
+                    if (minPrice != FixedPrice.MinPriceDefault)
                         list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount > minPrice);
 
-                    decimal maxPrice = Extractor.ExtractDecimal(queryParameters, MaxPriceKey, MaxPriceDefault);
-                    if (maxPrice > MaxPriceDefault)
-                        maxPrice = MaxPriceDefault;
-                    if (maxPrice != MaxPriceDefault)
+                    decimal maxPrice = Extractor.ExtractDecimal(queryParameters, FixedPrice.MaxPriceKey, FixedPrice.MaxPriceDefault);
+                    if (maxPrice > FixedPrice.MaxPriceDefault)
+                        maxPrice = FixedPrice.MaxPriceDefault;
+                    if (maxPrice != FixedPrice.MaxPriceDefault)
                         list = list.Where(advertisement => advertisement.FixedPrice.PriceAmount < maxPrice);
 
 
@@ -213,8 +196,8 @@ namespace RepositoryStd.Repository.Common
             Advertisement ad = new Advertisement();
             ad.CategoryId = Extractor.ExtractInt(userInputDictionary, Category.CategoryIdKey, Category.CategoryIdDefault);
             ad.DistrictId = Extractor.ExtractInt(userInputDictionary, DistrictIdKey, SingleDistrctIdDefault);
-            ad.AdTitle = Extractor.ExtractString(userInputDictionary, AdTitleKey, AddTitleDefault);
-            ad.AdComments = Extractor.ExtractString(userInputDictionary, AdCommentKey, AdCommentDefault);
+            ad.AdTitle = Extractor.ExtractString(userInputDictionary, Advertisement.AdTitleKey, Advertisement.AddTitleDefault);
+            ad.AdComments = Extractor.ExtractString(userInputDictionary, Advertisement.AdCommentKey, Advertisement.AdCommentDefault);
             ad.AdLink = "ToBeSet";
 
             return ad;

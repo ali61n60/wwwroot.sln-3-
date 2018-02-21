@@ -5,7 +5,7 @@ using Android.OS;
 using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Widget;
-using ChiKoja.Repository.Filter;
+
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
@@ -16,7 +16,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         public readonly string OrderByKey = "OrderBy";
         
 
-        CommonFilter commonFilter;
+        
         AppCompatButton buttonReturn;
         AppCompatRadioButton radioButtonDateAsc;
         AppCompatRadioButton radioButtonDateDesc;
@@ -37,7 +37,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void initializeFields()
         {
-            commonFilter = new CommonFilter();
+            
             buttonReturn = FindViewById<AppCompatButton>(Resource.Id.buttonReturn);
             buttonReturn.Click += buttonReturn_Click;
             radioButtonDateAsc = FindViewById<AppCompatRadioButton>(Resource.Id.radioButtonDateAsc);
@@ -80,7 +80,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         }
         private void updateFieldsFromSavedPreferences()
         {
-            string savedOrderBy = commonFilter.OrderBy;
+            //string savedOrderBy = commonFilter.OrderBy;
             //switch (savedOrderBy)
             //{
             //    case CommonFilter.OrderByDateAsc:

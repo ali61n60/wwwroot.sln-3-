@@ -7,21 +7,13 @@ using Android.Text;
 using Android.Views;
 using Android.Widget;
 using ChiKoja.Infrastructure;
-using ChiKoja.Infrastructure.IOC;
+using ModelStd.Advertisements.Price;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
 {
     public class SearchFilterCriteriaDefaultFragment : SearchFilterCategorySpecificBaseCriteria
     {      
-        
-        private readonly string PriceTypeKey = "PriceType";
-
-        private readonly string MinimumPriceKey = "MinimumPrice";
-        private readonly string MaximumPriceKey = "MaximumPrice";
-
-        
-
         private Context _context;
         View _rootView;
 
@@ -93,10 +85,10 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void updateFieldsFromSavedPreferences()
         {
-            //editTextMinimumPrice.Text = commonFilter.MinimumPrice.ToString("N0");
-            //editTextMaximumPrice.Text = commonFilter.MaximumPrice.ToString("N0");
-            //checkBoxOnlyWithPictures.Checked = commonFilter.OnlyWithPictures;
-            //checkBoxUrgentAdsOnly.Checked = commonFilter.UrgentAdsOnly;
+            _editTextMinimumPrice.Text =AppPreferences.GetSearchPref(FixedPrice.MinPriceKey,FixedPrice.MinPriceDefault.ToString());
+            _editTextMaximumPrice.Text = AppPreferences.GetSearchPref(FixedPrice.MaxPriceKey, FixedPrice.MaxPriceDefault.ToString());
+            _checkBoxOnlyWithPictures.Checked =bool.Parse(AppPreferences.GetSearchPref(Advertisement.OnlyWithPicturesKey, Advertisement.OnlyWithPicturesDefault.ToString()));
+            _checkBoxUrgentAdsOnly.Checked = bool.Parse(AppPreferences.GetSearchPref(Advertisement.UrgentAdsOnlyKey, Advertisement.UrgentAdsOnlyDefault.ToString()));
         }
 
         public override void PersistUserFilter()

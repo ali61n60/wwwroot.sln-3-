@@ -10,7 +10,6 @@ namespace ModelStd.Advertisements.Price
         PriceType PriceType { get; }
         Guid AdId { get; set; }
         string PriceString { get;}
-       
     }
 
     public enum PriceType

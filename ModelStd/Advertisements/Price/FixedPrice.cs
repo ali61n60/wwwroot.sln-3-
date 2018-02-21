@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Text;
-using ModelStd.Db.Ad;
 
 namespace ModelStd.Advertisements.Price
 {
     [Table("FixedPrices", Schema = "ad")]
-    public class FixedPrice:IPrice
+    public partial class FixedPrice:IPrice
     {
+        
         [Key]
         [Column("adId")]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -28,5 +26,19 @@ namespace ModelStd.Advertisements.Price
         }
 
         public string PriceString => "قیمت" + " : " + PriceAmount.ToString("N0");
+    }
+
+    public partial class FixedPrice
+    {
+        public static readonly string PriceTypeKey = "PriceType";
+        public static readonly PriceType PriceTypeDefault = PriceType.All;
+
+        public static readonly string MinPriceKey = "MinimumPrice";
+        public static readonly decimal MinPriceDefault = -1;
+
+        public static readonly string MaxPriceKey = "MaximumPrice";
+        public static readonly decimal MaxPriceDefault = 1000000000000;
+
+
     }
 }

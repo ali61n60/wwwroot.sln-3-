@@ -85,6 +85,17 @@ namespace ModelStd.Db.Ad
 
         public static readonly string AdGuidKey = "AdGuid";
 
+        public static readonly string AdTitleKey = "AdTitle";
+        public static readonly string AddTitleDefault = "Default Title";
+
+        public static readonly string AdCommentKey = "AdComment";
+        public static readonly string AdCommentDefault = "Default Comment";
+
+        public static readonly string OnlyWithPicturesKey = "OnlyWithPictures";
+        public static readonly bool OnlyWithPicturesDefault = false;
+        public static readonly string UrgentAdsOnlyKey = "UrgentAdsOnly";
+        public static readonly bool UrgentAdsOnlyDefault = false;
+
         public static void FillAdvertisementCommonFromAdvertisement(AdvertisementCommon adCommon, Advertisement ad, AppUser appUser)
         {
             adCommon.AdId = ad.AdId;
