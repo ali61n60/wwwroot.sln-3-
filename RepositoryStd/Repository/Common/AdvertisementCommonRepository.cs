@@ -12,7 +12,6 @@ using ModelStd.Db.Identity;
 using ModelStd.IRepository;
 using ModelStd.Services;
 using RepositoryStd.Context.AD;
-using RepositoryStd.Context.Helper;
 using RepositoryStd.Context.Identity;
 
 namespace RepositoryStd.Repository.Common

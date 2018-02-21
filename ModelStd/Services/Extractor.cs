@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using ModelStd.Advertisements.Price;
 
 
-namespace RepositoryStd.Context.Helper
+namespace ModelStd.Services
 {
     public class Extractor
     {

@@ -7,8 +7,6 @@ using ModelStd.Db.Ad;
 using ModelStd.Services;
 using MvcMain.Infrastructure.IOC;
 using MvcMain.Utilities;
-using RepositoryStd.Context.Helper;
-using RepositoryStd.Repository.Common;
 
 namespace MvcMain.Controllers
 {

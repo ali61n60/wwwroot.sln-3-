@@ -10,7 +10,6 @@ using Microsoft.AspNetCore.Mvc;
 using ModelStd.Advertisements;
 using ModelStd.Services;
 using MvcMain.Infrastructure.Services;
-using RepositoryStd.Context.Helper;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Net.Http.Headers;
 using ModelStd.Db.Ad;
