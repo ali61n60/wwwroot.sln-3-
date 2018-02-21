@@ -5,9 +5,12 @@ using Android.OS;
 using Android.Support.V7.Widget;
 using Android.Widget;
 using ChiKoja.Activities.Categories;
+using ChiKoja.Activities.SearchAd.SearchFilter.Price;
+using ChiKoja.Infrastructure;
 using ChiKoja.Infrastructure.IOC;
 using ChiKoja.Models;
 using ChiKoja.NavigationDrawer;
+using ModelStd.Db.Ad;
 
 
 namespace ChiKoja.Activities.SearchAd.SearchFilter
@@ -20,6 +23,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private SearchFilterTopTopFragment _searchFilterTopTop;
         private SearchFilterCategorySpecificBaseCriteria _searchFilterCategorySpecificCriteria;
+        private SearchFilterCategorySpecificBaseCriteria _searchFilterPrice;
         private AppCompatButton _buttonCategory;
         private AppCompatButton _buttonSort;
         
@@ -56,6 +60,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private void addFragments()
         {
             addTopTop();
+            addPrice();
             addCategorySpecific(); 
         }
 
@@ -67,16 +72,24 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void addTopTop()
         {
-            _searchFilterTopTop=new SearchFilterTopTopFragment();
+            _searchFilterTopTop new SearchFilterTopTopFragment();
             SupportFragmentManager.BeginTransaction()
                 .Add(Resource.Id.top_top, _searchFilterTopTop)
                 .Commit();
         }
 
+        private void addPrice()
+        {
+            int categoryId = int.Parse(AppPreferences.GetSearchPref(Category.CategoryIdKey, Category.CategoryIdDefault.ToString()));
+            _searchFilterPrice = AdViewContainer.GetSearchFilterPrice(categoryId);
+            SupportFragmentManager.BeginTransaction()
+                .Add(Resource.Id.price_part, _searchFilterPrice)
+                .Commit();
+        }
+
         private void addCategorySpecific()
         {
-            //TODO get user selected category from somewhere
-            int categoryId = 0;
+            int categoryId =int.Parse(AppPreferences.GetSearchPref(Category.CategoryIdKey, Category.CategoryIdDefault.ToString()));
 
             _searchFilterCategorySpecificCriteria= AdViewContainer.GetCategorySpecificSearchFilterViewFragment(categoryId);
             SupportFragmentManager.BeginTransaction()
@@ -102,6 +115,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         public void SetSearchFilter()
         {
             //this method is called from SearchFilterTopTopFragment to tell the activity that user has clicked ok button
+            _searchFilterPrice.PersistUserFilter();
             _searchFilterCategorySpecificCriteria.PersistUserFilter();
             SetResult(Result.Ok);
             Finish();

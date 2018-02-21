@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using ChiKoja.Activities.AdDetail;
 using ChiKoja.Activities.SearchAd.SearchFilter;
+using ChiKoja.Activities.SearchAd.SearchFilter.Price;
 using ModelStd.Db.Ad;
 
 namespace ChiKoja.Infrastructure.IOC
@@ -44,6 +45,11 @@ namespace ChiKoja.Infrastructure.IOC
                 return _searchFilterFragmentContainer[categoryId];
             }
             return _searchFilterFragmentContainer[Category.CategoryIdDefault];
+        }
+
+        public static SearchFilterCategorySpecificBaseCriteria GetSearchFilterPrice(int categoryId)
+        {
+            return new SearchFilterPriceDefaultFragment();
         }
     }
 }

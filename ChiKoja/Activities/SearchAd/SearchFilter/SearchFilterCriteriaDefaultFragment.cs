@@ -17,16 +17,13 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         private Context _context;
         View _rootView;
 
-        AppCompatEditText _editTextMinimumPrice;
-        AppCompatEditText _editTextMaximumPrice;
+        
         AppCompatCheckBox _checkBoxOnlyWithPictures;
         AppCompatCheckBox _checkBoxUrgentAdsOnly;
 
         private RadioButton _radioButtonAdTypeAll;
         private RadioButton _radioButtonAdTypeOffer;
         private RadioButton _radioButtonAdTypeDemand;
-
-        private bool _filterParameterChangedByUser;
 
         public SearchFilterCriteriaDefaultFragment()
         {
@@ -46,8 +43,6 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
         
         private void initializeFields()
         {
-            _editTextMinimumPrice = _rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMinimumPrice);
-            _editTextMaximumPrice = _rootView.FindViewById<AppCompatEditText>(Resource.Id.editTextMaximumPrice);
             _checkBoxOnlyWithPictures = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxOnlyWithPictures);
             _checkBoxUrgentAdsOnly = _rootView.FindViewById<AppCompatCheckBox>(Resource.Id.checkBoxUrgentAdsOnly);
 
@@ -58,57 +53,43 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void initializeEvents()
         {
-            _editTextMinimumPrice.TextChanged += editTextsPrice_TextChanged;
-            _editTextMaximumPrice.TextChanged += editTextsPrice_TextChanged;
-            _checkBoxOnlyWithPictures.CheckedChange += checkBoxOnlyWithPictures_CheckedChange;
-            _checkBoxUrgentAdsOnly.CheckedChange += checkBoxUrgentAdsOnly_CheckedChange;
-        }
-
-        void checkBoxUrgentAdsOnly_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            filterParametersChangedByUser();
-        }
-
-        void checkBoxOnlyWithPictures_CheckedChange(object sender, CompoundButton.CheckedChangeEventArgs e)
-        {
-            filterParametersChangedByUser();
-        }
-        private void editTextsPrice_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            filterParametersChangedByUser();
-        }
-
-        private void filterParametersChangedByUser()
-        {
-            _filterParameterChangedByUser = true;
+           
         }
 
         private void updateFieldsFromSavedPreferences()
         {
-            _editTextMinimumPrice.Text =AppPreferences.GetSearchPref(FixedPrice.MinPriceKey,FixedPrice.MinPriceDefault.ToString());
-            _editTextMaximumPrice.Text = AppPreferences.GetSearchPref(FixedPrice.MaxPriceKey, FixedPrice.MaxPriceDefault.ToString());
             _checkBoxOnlyWithPictures.Checked =bool.Parse(AppPreferences.GetSearchPref(Advertisement.OnlyWithPicturesKey, Advertisement.OnlyWithPicturesDefault.ToString()));
             _checkBoxUrgentAdsOnly.Checked = bool.Parse(AppPreferences.GetSearchPref(Advertisement.UrgentAdsOnlyKey, Advertisement.UrgentAdsOnlyDefault.ToString()));
+
+            updateAdType();
+        }
+
+        private void updateAdType()
+        {
+            AdType savedAdType =(AdType) Enum.Parse(typeof(AdType),AppPreferences.GetSearchPref(Advertisement.AdTypeKey, Advertisement.AdTypeDefault.ToString()));
+            switch (savedAdType)
+            {
+                case AdType.All:
+                    _radioButtonAdTypeAll.Checked = true;
+                    break;
+                case AdType.Offer:
+                    _radioButtonAdTypeOffer.Checked = true;
+                    break;
+                case AdType.Demand:
+                    _radioButtonAdTypeDemand.Checked = true;
+                    break;
+                    default:
+                        _radioButtonAdTypeAll.Checked = true;
+                    break;
+            }
         }
 
         public override void PersistUserFilter()
         {
-            persistAdType();
-           
-            if (_filterParameterChangedByUser)
-            {
-                try
-                {
-                    //commonFilter.MinimumPrice = float.Parse(editTextMinimumPrice.Text);
-                    //commonFilter.MaximumPrice = float.Parse(editTextMaximumPrice.Text);
-                    //commonFilter.OnlyWithPictures = checkBoxOnlyWithPictures.Checked;
-                    //commonFilter.UrgentAdsOnly = checkBoxUrgentAdsOnly.Checked;
-                }
-                catch (Exception ex)
-                {
+            AppPreferences.SetSearchPref(Advertisement.OnlyWithPicturesKey,_checkBoxOnlyWithPictures.Checked.ToString());
+            AppPreferences.SetSearchPref(Advertisement.UrgentAdsOnlyKey,_checkBoxUrgentAdsOnly.Checked.ToString());
 
-                }
-            }
+            persistAdType();
         }
 
         private void persistAdType()
@@ -132,10 +113,9 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
             //TODO Add OrderBy from its fragment
             //userInputDictionary[OrderByKey]=pref.GetInt(OrderByKey)
             //TODO Add PriceType from its fragment
-            //MinPrice
-            //MAxPrice
            
             userInputDictionary[Advertisement.AdTypeKey] = AppPreferences.GetSearchPref(Advertisement.AdTypeKey, Advertisement.AdTypeDefault.ToString());
+            
         }
 
         public override void ClearPreferences()

@@ -255,6 +255,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Activities\SearchAd\SearchFilter\ISetSearchFilter.cs" />
+    <Compile Include="Activities\SearchAd\SearchFilter\Price\SearchFilterPriceDefaultFragment.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCategorySpecificBaseCriteria.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterTopTopFragment.cs" />
     <Compile Include="Activity1.cs" />
@@ -312,7 +313,7 @@
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCriteriaDefaultFragment.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterCriteriaTransportationFragment.cs" />
     <Compile Include="Activities\SearchAd\SearchFilter\SearchFilterActivity.cs" />
-    <Compile Include="Activities\SearchAd\SearchFilter\ActivitySortBy.cs" />
+    <Compile Include="Activities\SearchAd\SearchFilter\OrderBy\ActivitySortBy.cs" />
     <Compile Include="Activities\SearchAd\SearchAdMainFragment.cs" />
     <Compile Include="Activities\SearchAd\SearchAdFilterFragment.cs" />
     <Compile Include="Activities\UserAd\ActivityUserAds.cs" />
@@ -418,6 +419,9 @@
       <SubType>Designer</SubType>
     </AndroidResource>
     <AndroidResource Include="Resources\layout\search_filter_toptop_frag.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\search_filter_price_default_frag.axml">
       <SubType>Designer</SubType>
     </AndroidResource>
   </ItemGroup>

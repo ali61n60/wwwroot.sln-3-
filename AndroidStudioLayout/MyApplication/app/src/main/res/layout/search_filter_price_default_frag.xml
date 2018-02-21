@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/textViewPrice"
+        android:text="@string/Price"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true" />
+    <TextView
+        android:id="@+id/textViewMinimumPrice"
+        android:text="@string/From"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/default_margin"
+        android:layout_marginEnd="@dimen/default_margin"
+        android:layout_below="@id/textViewPrice"
+        android:layout_marginBottom="@dimen/default_margin" />
+    <EditText
+        android:id="@+id/editTextMinimumPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_alignBaseline="@id/textViewMinimumPrice"
+        android:layout_toRightOf="@id/textViewMinimumPrice"
+        android:layout_toEndOf="@id/textViewMinimumPrice"/>
+    <TextView
+        android:id="@+id/textViewMaximumPrice"
+        android:text="@string/To"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textViewMinimumPrice" />
+    <EditText
+        android:id="@+id/editTextMaximumPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:layout_below="@id/textViewMinimumPrice"
+        android:layout_toEndOf="@id/textViewMaximumPrice"
+        android:layout_toRightOf="@id/textViewMaximumPrice"
+        android:layout_alignBaseline="@id/textViewMaximumPrice"
+        android:layout_alignLeft="@id/editTextMinimumPrice" />
+
+</RelativeLayout>
