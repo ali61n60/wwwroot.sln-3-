@@ -123,6 +123,7 @@ namespace ChiKoja.Activities.SearchAd.SearchFilter
 
         private void buttonSortBy_Click(object sender, EventArgs eventArgs)
         {
+            //TODO show a dialog and ask user about order by based on selected category and price type chosen by user
             Intent orderByIntent = new Intent(this, typeof(ActivitySortBy));
             StartActivityForResult(orderByIntent, OrderByRequestCode);
         }

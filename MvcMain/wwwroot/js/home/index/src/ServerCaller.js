@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
 //TODO make count optional to user
-var ServerCaller = (function () {
+var ServerCaller = /** @class */ (function () {
     function ServerCaller(resultHandler, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;

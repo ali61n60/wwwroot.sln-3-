@@ -53,6 +53,52 @@ namespace ModelStd.Db.Ad
 
     public partial class AdAttributeTransportation
     {
+        public static readonly string CarModelIdKey = "CarModelId";
+        public static readonly int CarModelIdDefault = 0;
+
+        public static readonly string CarBrandIdKey = "BrandId";
+        public static readonly int CarBrandIdDefault = 0;
+
+        public static readonly string MakeYearFromKey = "MakeYearFrom";
+        public static readonly int MakeYearFromDefault = 0;
+
+        public static readonly string MakeYearToKey = "MakeYearTo";
+        public static readonly int MakeYearToDefault = 1400;
+
+        public static readonly string MakeYearKey = "MakeYear";
+        public static readonly int MakeYearDefault = 0;
+
+        public static readonly string FuelTypeKey = "Fuel";
+        public static readonly FuelType FuelTypeDefault = FuelType.UnSpecified;
+
+        public static readonly string MileageFromKey = "MileageFrom";
+        public static readonly int MileageFromDefault = 0;
+
+        public static readonly string MileageToKey = "MileageTo";
+        public static readonly int MileageToDefault = 100000000;
+
+        public static readonly string MileageKey = "Mileage";
+        public static readonly int MileageDefault = 0;
+
+        public static readonly string GearboxKey = "Gearbox";
+        public static readonly GearboxType GearboxDefault = GearboxType.UnSpecified;
+
+        public static readonly string BodyColorKey = "BodyColor";
+        public static readonly string BodyColorDefault = "UnSpecified";
+
+        public static readonly string InternalColorKey = "InternalColor";
+        public static readonly string InternalColorDefault = "UnSpecified";
+
+        public static readonly string BodyStatusKey = "BodyStatus";
+        public static readonly BodyStatus BodyStatusDefault = BodyStatus.UnSpecified;
+
+        public static readonly string CarStatusKey = "CarStatus";
+        public static readonly CarStatus CarStatusDefault = CarStatus.UnSpecified;
+
+        public static readonly string PlateTypeKey = "PlateType";
+        public static readonly PlateType PlateTypeDefault = PlateType.UnSpecified;
+
+
         public static void FillAdTransportationFromAdvertisement(AdvertisementTransportation adTrans, Advertisement advertisement, AppUser appUser)
         {
             Advertisement.FillAdvertisementCommonFromAdvertisement(adTrans, advertisement, appUser);
