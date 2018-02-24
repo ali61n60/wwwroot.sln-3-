@@ -96,6 +96,7 @@ namespace ModelStd.Db.Ad
         public static readonly CarStatus CarStatusDefault = CarStatus.UnSpecified;
 
         public static readonly string PlateTypeKey = "PlateType";
+
         public static readonly PlateType PlateTypeDefault = PlateType.UnSpecified;
 
 
