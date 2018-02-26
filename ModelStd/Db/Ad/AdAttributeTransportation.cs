@@ -105,7 +105,7 @@ namespace ModelStd.Db.Ad
             Advertisement.FillAdvertisementCommonFromAdvertisement(adTrans, advertisement, appUser);
             adTrans.BodyColor = advertisement.AdAttributeTransportation.BodyColor;
             adTrans.BodyStatus = GetBodyStatusString(advertisement.AdAttributeTransportation.BodyStatus);
-            ;
+            
             adTrans.BrandId = advertisement.AdAttributeTransportation.CarModel.BrandId;
             adTrans.BrandName = advertisement.AdAttributeTransportation.CarModel.Brand.BrandName;
             adTrans.CarStatus = GetCarStatusString(advertisement.AdAttributeTransportation.CarStatus);
