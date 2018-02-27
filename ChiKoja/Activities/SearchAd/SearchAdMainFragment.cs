@@ -93,7 +93,6 @@ namespace ChiKoja.Activities.SearchAd
                 ResponseBase<AdvertisementCommon[]> response = await _adApi.GetAdvertisementCommon(userInputDictionary);
                 if (response.Success)
                     onSerachAdCompleted(response);
-                ;
                 else
                     onSearchAdError(new Exception(response.Message + ", ErrorCode:" + response.ErrorCode));
             };
