@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AjaxCaller_1 = require("../../../Helper/AjaxCaller");
-var LetMeKnowPartialViewLoader = /** @class */ (function () {
+var LetMeKnowPartialViewLoader = (function () {
     function LetMeKnowPartialViewLoader(resultHandler, criteriaChange, letMeKnowCriteria, requestCode) {
         this.RequestIndexKey = "RequestIndex";
         this._currentRequestIndex = 0;
