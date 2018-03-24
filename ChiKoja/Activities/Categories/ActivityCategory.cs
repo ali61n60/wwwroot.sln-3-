@@ -42,8 +42,6 @@ namespace ChiKoja.Activities.Categories
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.category);
-             _categorySelection= (CategorySelection) savedInstanceState.GetSerializable("CategorySelection");
-            _categorySelection.SelectedCategoryId += 10;
             initializeFields();
             setSavedSelectedCategories();
             setOldSelectedCateoryIds();
@@ -232,6 +230,5 @@ namespace ChiKoja.Activities.Categories
                 return 0;
             });
         }
-        
     }
 }

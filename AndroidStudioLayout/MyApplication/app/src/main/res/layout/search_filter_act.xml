@@ -61,8 +61,3 @@
         android:background="@color/primaryColor"
         android:minHeight="20dp"/>
 </RelativeLayout>
-
-
-
-
-
