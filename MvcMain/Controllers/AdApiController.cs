@@ -74,6 +74,7 @@ namespace MvcMain.Controllers
 
 
 
+    //TODO 1-Round-Robin DNS servers to distribute traffic
     //TODO 1- study about Best Web Api startegy and architecture to implement
     //TODO 1- decide to delete or not sharedPreferences content on app start. 
     //TODO 1-think of saving users search
