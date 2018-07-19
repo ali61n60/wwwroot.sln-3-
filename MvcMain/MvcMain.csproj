@@ -185,6 +185,7 @@
   <ItemGroup>
     <Folder Include="Connected Services\" />
     <Folder Include="Documents\" />
+    <Folder Include="Learning\" />
     <Folder Include="Views\Shared\Components\FileUpload\" />
   </ItemGroup>
 

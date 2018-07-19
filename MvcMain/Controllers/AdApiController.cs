@@ -74,7 +74,7 @@ namespace MvcMain.Controllers
 
 
 
-    //TODO 1- study about Best Web Api startegy to implement
+    //TODO 1- study about Best Web Api startegy and architecture to implement
     //TODO 1- decide to delete or not sharedPreferences content on app start. 
     //TODO 1-think of saving users search
     //TODO 1- Android Color https://material.io/color/#!/?view.left=0&view.right=1&primary.color=bee1ff&secondary.color=6ebbce
