@@ -27,7 +27,7 @@ export class Temerature {
 
     constructor() {
         this.initDataPoints();
-        this.draw();
+        //this.draw();
     }
 
     private initDataPoints(): void {
@@ -45,7 +45,7 @@ export class Temerature {
     }
 
     
-    
+    /*
     private draw(): void {
 
         let dgreeChart = new CanvasJS.Chart("degreeContainer",
@@ -130,7 +130,9 @@ export class Temerature {
         humidityChart.render();
         viewPointChart.render();
     }
+    */
 }
+
 
 $(document).ready(() => {
     let temerature = new Temerature();

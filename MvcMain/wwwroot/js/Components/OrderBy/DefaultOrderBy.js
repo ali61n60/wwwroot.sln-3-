@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var DefaultPriceType_1 = require("../PriceType/DefaultPriceType");
-var DefaultOrderBy = (function () {
+var DefaultOrderBy = /** @class */ (function () {
     function DefaultOrderBy() {
         this.OrderByKey = "OrderBy";
         this.OrderBySelectId = "orderBy";
